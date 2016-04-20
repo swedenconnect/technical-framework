@@ -46,9 +46,14 @@ The Swedish eID Framework comprises a Discovery Service that has as its purpose 
 
 ## Updates to the current version of the specifications
 
-TODO
+Updates to the current version of the specification should be performed in the "october-2015-updates" branch except for any changes that need to be performed in the "Updates to the Swedish eID Framework.docx" document.
 
 ## Older versions
 
-TODO
+Older version of the specification are stored in the following branches:
+
++ april-2014 - For the June 2014 release
++ june-2015 - For the June 2015 release
++ october-2015 - For the October 2015 release (this is also the current release/master).
+
 
