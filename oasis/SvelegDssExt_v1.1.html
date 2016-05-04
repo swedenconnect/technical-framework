@@ -1,0 +1,1119 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>DSS Extension for Federated Central Signing Services - Version 1.1</title><link rel="stylesheet" href="file:/Users/stefan/GitHub/technical-framework/oasis/spec-0.5/css/oasis-spec.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><meta name="description" content="This specification defines an esxtension to the OASIS DSS protocol for providing&#xA;                centralized signing services for E-government services within the identity&#xA;                federation for public agencies operated by the Swedish E-identification&#xA;                board."><meta name="cvsinfo" content="Id: spectools-docbook-template-wd03.xml,v 1.4 2010/07/08 12:28:15&#xA;            admin Exp "></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><p class="logo"><a href="http://www.oasis-open.org/"><img src="file:/Users/stefan/GitHub/technical-framework/oasis/spec-0.5/OASISLogo.jpg" alt="OASIS" border="0"></a></p><div><h1 class="title"><a name="d0e3"></a>DSS Extension for Federated Central Signing Services - Version 1.1</h1></div><div><h2>Swedish eID Framework Specification</h2><h2>14 August 2015</h2></div><div></div><div><!-- 
+            $Id: spectools-docbook-template-wd03.xml,v 1.4 2010/07/08 12:28:15
+            admin Exp $
+         --></div><div><dl><dt><span class="loc-heading">
+          Specification URIs:
+        </span></dt></dl><dl><dt><span class="loc-heading">This Version:</span></dt><dd><a href="http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.html">http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.html</a>
+                  (Authoritative)
+                <br><a href="http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.pdf">http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.pdf</a><br><a href="http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.docx">http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.docx</a><br></dd></dl><dl><dt><span class="loc-heading">Previous Version:</span></dt><dd><a href="http://aaa-sec.com/eid2/specification/eid2dssext-1.0.html">http://aaa-sec.com/eid2/specification/eid2dssext-1.0.html</a><br><a href="http://aaa-sec.com/eid2/specification/eid2dssext-1.0.pdf">http://aaa-sec.com/eid2/specification/eid2dssext-1.0.pdf</a><br><a href="http://aaa-sec.com/eid2/specification/eid2dssext-1.0.xml">http://aaa-sec.com/eid2/specification/eid2dssext-1.0.xml</a><br></dd></dl><dl><dt><span class="loc-heading">Latest Version:</span></dt><dd><a href="http://aaa-sec.com/eid2/specification/csig-dss-extension-1.1.html">http://aaa-sec.com/eid2/specification/csig-dss-extension-1.1.html</a>
+                  (Authoritative)
+                <br></dd></dl></div><div></div><div></div><div></div><div></div><div></div><div></div><div><dl><dt><span class="loc-heading">Technical Committee:</span></dt><dd><a href="http://www.elegnamnden.se" target="_top">The Swedish
+                E-identification Board</a></dd></dl></div><div><dl><dt><span class="editor-heading">Editor:</span></dt><dd><span class="firstname">Stefan</span> <span class="surname">Santesson</span>, E-legitimationsn&iuml;&iquest;&frac12;mnden&nbsp;&lt;<a href="mailto:stefan@aaa-sec.com">stefan@aaa-sec.com</a>&gt;</dd></dl></div><div><dl><dt><a name="d0e73"></a><span class="status-heading">Related Work:</span></dt><dd><p>This specification is related to:</p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                        <a href="http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html" target="_top">Digital Signature Service Core Protocols, Elements, and Bindings
+                            Version 1.0</a></p></li></ul></div></dd></dl></div><div><dl><dt><a name="d0e85"></a><span class="status-heading">Declared XML Namespaces:</span></dt><dd><p><a href="http://docs.oasis-open.org/" target="_top">http://docs.oasis-open.org/</a></p></dd></dl></div><div><dl><dt><a name="d0e92"></a><span class="abstract-heading">Abstract:</span></dt><dd><p>This specification defines an esxtension to the OASIS DSS protocol for providing
+                centralized signing services for E-government services within the identity
+                federation for public agencies operated by the Swedish E-identification
+                board.</p></dd></dl></div><div><dl><dt><a name="d0e96"></a><span class="status-heading">Status:</span></dt><dd><p>This specification is published by the Swedish E-identifiaction Board. </p></dd></dl></div><div><hr><h2>Notices</h2><p>Copyright &copy; Swedish E-identification Board 2015. All Rights Reserved.</p><p>This specification is defines an extension to the OASIS DSS protocol. It is
+                provided in OASIS document format in order to allow it to be submitted to OASIS for
+                adoption at a later stage. In it's current version, this specification is developed
+                outside of OASIS technical committees.</p></div></div><hr></div><div class="toc"><h2>Table of Contents</h2><dl><dt><span class="section"><a href="#d0e110">1. Introduction</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e159">1.1. Terminology</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e162">1.1.1.  Key words</a></span></dt><dt><span class="section"><a href="#d0e203">1.1.2. Structure</a></span></dt><dt><span class="section"><a href="#d0e228">1.1.3.  Definitions</a></span></dt></dl></dd><dt><span class="section"><a href="#d0e250">1.2. Normative References</a></span></dt><dt><span class="section"><a href="#d0e397">1.3. Non-Normative References</a></span></dt><dt><span class="section"><a href="#d0e415">1.4. Schema Organization and Namespaces</a></span></dt><dt><span class="section"><a href="#d0e493">1.5. Common Data Types</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e498">1.5.1. String values</a></span></dt><dt><span class="section"><a href="#d0e517">1.5.2. URI Values</a></span></dt><dt><span class="section"><a href="#d0e533">1.5.3. Time Values</a></span></dt><dt><span class="section"><a href="#d0e545">1.5.4. MIME Types for <code class="literal">&lt;dss:TransformedData&gt;</code></a></span></dt></dl></dd></dl></dd><dt><span class="section"><a href="#d0e574">2. Common Protocol Structures</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e579">2.1. Type AnyType</a></span></dt></dl></dd><dt><span class="section"><a href="#d0e594">3. Federated signing DSS Extensions</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e605">3.1. Element &lt;SignRequestExtension&gt;</a></span></dt><dd><dl><dt><span class="section"><a href="#CertRequestPropertiesType">3.1.1. Type CertRequestPropertiesType</a></span></dt><dt><span class="section"><a href="#SignMessageType">3.1.2. Element &lt;SignMessage&gt;</a></span></dt></dl></dd><dt><span class="section"><a href="#eidSignResponseExtension">3.2. Element &lt;SignResponseExtension&gt;</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e1203">3.2.1. Type SignerAssertionInfoType</a></span></dt><dt><span class="section"><a href="#d0e1348">3.2.2. Type CertificateChainType</a></span></dt></dl></dd></dl></dd><dt><span class="section"><a href="#d0e1379">4. Extensions to &lt;dss:InputDocuments&gt; and &lt;dss:SignatureObject&gt; </a></span></dt><dd><dl><dt><span class="section"><a href="#d0e1393">4.1. Element &lt;SignTasks&gt;</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e1442">4.1.1. Element &lt;SignTaskData&gt;</a></span></dt></dl></dd></dl></dd><dt><span class="section"><a href="#d0e1631">5. Signing sign requests and responses</a></span></dt></dl><h3>Appendixes</h3><dl><dt><span class="appendix"><a href="#d0e1658">A. XML Schema</a></span></dt></dl></div><hr><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e110"></a>1.&nbsp;Introduction</h2></div></div></div><p>This specifications defines elements that extends the
+                <code class="literal">&lt;dss:SignRequest&gt;</code> and <code class="literal">&lt;dss:SignResponse&gt;</code>
+            elements of [<a href="#dss" title="[OASIS-DSS]"><span class="abbrev">OASIS-DSS</span></a>].</p><p>One element <code class="literal">&lt;SignRequestExtension&gt;</code> is defined for extending sign
+            requests and one element <code class="literal">&lt;SignResponseExtension&gt;</code> is defined for
+            extending sign responses. The <code class="literal">&lt;SignTasks&gt;</code> element extends the
+            extends <code class="literal">&lt;dss:InputDocuments&gt;</code> of sign requests and
+                <code class="literal">&lt;dss:SignatureObject&gt;</code> of sign responses.</p><p>These extensions to the DSS protocols provide essential protocol elements in a
+            scenario where:</p><div class="itemizedlist"><ul type="disc"><li><p>The user's signature is requested by a service with which the user has an
+                    active session and where this service has authenticated the user using a SAML
+                    assertion</p></li><li><p>The service provider holds the data to be signed</p></li><li><p>The central signing service is requested to authenticate the user with the
+                    same <em class="glossterm">Identity Provider</em> that was used to authenticate the
+                    user to the Service provider.</p></li></ul></div><p>This particular use case is relevant when a user logs in to a service using federated
+            identity, where the user at some point is required to sign some data such as a tax
+            declaration or payment transaction. The user is forwarded to the signing service
+            together with a sign request from the service provider, specifying the information to be
+            signed together with the conditions for signing. After completed signing, the user is
+            returned to the service provider together with a sign response from which the service
+            provider can assemble a complete signed document, signed by the user.</p><p>This scenario requires more information in both sign request and sign response than
+            the original DSS core standard provides and it also requires the capability to let the
+            service provider sign the sign request.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e159"></a>1.1.&nbsp;Terminology</h3></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e162"></a>1.1.1.&nbsp; Key words</h4></div></div></div><p>The key words <em class="glossterm">MUST</em>, <em class="glossterm">MUST NOT</em>,
+                        <em class="glossterm">REQUIRED</em>, <em class="glossterm">SHALL</em>,
+                        <em class="glossterm">SHALL NOT</em>, <em class="glossterm">SHOULD</em>,
+                        <em class="glossterm">SHOULD NOT</em>, <em class="glossterm">RECOMMENDED</em>,
+                        <em class="glossterm">MAY</em>, and <em class="glossterm">OPTIONAL</em> are to be
+                    interpreted as described in [<a href="#rfc2119" title="[RFC 2119]"><span class="abbrev">RFC 2119</span></a>].</p><p>These keywords are capitalized when used to unambiguously specify requirements
+                    over protocol features and behavior that affect the interoperability and
+                    security of implementations.</p><p>When these words are not capitalized, they are meant in their natural-language
+                    sense.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e203"></a>1.1.2.&nbsp;Structure</h4></div></div></div><p>This specification uses the following typographical conventions in text:
+                        <code class="literal">&lt;ThisSpecifictionElements&gt;</code>,
+                        <code class="literal">&lt;ns:ForeignElement&gt;</code>, <code class="literal">Attribute</code>,
+                        <span class="bold"><strong>Datatype</strong></span>,
+                    <code class="literal">OtherCode</code>.</p><p>
+                    </p><pre class="programlisting">
+Listings of DSS schemas appear like this.
+</pre><p>
+                </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e228"></a>1.1.3.&nbsp; Definitions</h4></div></div></div><div class="variablelist"><dl><dt><span class="term">Identity Provider</span></dt><dd><p> An Identity Provider that is assigned to authenticate the
+                                signer</p></dd><dt><span class="term">Signing Service</span></dt><dd><p> A Signing Service that receives sign requests and responds with
+                                sign responses according to this specification.</p></dd><dt><span class="term">Service Provider</span></dt><dd><p> A service that has identified the signer through the user's
+                                Identity Provider and requests that the signer signs some data using
+                                the Central Signing Service.</p></dd></dl></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e250"></a>1.2.&nbsp;Normative References</h3></div></div></div><div class="bibliomixed"><a name="csig-xsd"></a><p class="bibliomixed">[<span class="abbrev">Csig-XSD</span>] 
+                    <span class="title">This specification's DSS Extensions schema</span> (Provided in this
+                    document), August 2015.</p></div><div class="bibliomixed"><a name="dss"></a><p class="bibliomixed">[<span class="abbrev">OASIS-DSS</span>] 
+                    <span class="title">Digital Signature Service Core Protocols, Elements, and Bindings Version
+                        1.0</span>, <span class="citetitle"><em class="citetitle"><a href="http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html" target="_top">http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html</a></em></span>,
+                    OASIS, 11 April 2007.</p></div><div class="bibliomixed"><a name="rfc2119"></a><p class="bibliomixed">[<span class="abbrev">RFC 2119</span>] S. Bradner, <span class="title">Key words for
+                        use in RFCs to Indicate Requirement Levels</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.ietf.org/rfc/rfc2119.txt" target="_top">http://www.ietf.org/rfc/rfc2119.txt</a></em></span>, IETF (Internet
+                    Engineering Task Force) RFC 2119, March 1997.</p></div><div class="bibliomixed"><a name="rfc3986"></a><p class="bibliomixed">[<span class="abbrev">RFC 3986</span>] T. Berners-Lee, R. Fielding, L.
+                    Masinter <span class="title">Uniform Resource Identifier (URI): Generic Syntax</span>,
+                            <span class="citetitle"><em class="citetitle"><a href="http://www.ietf.org/rfc/rfc3986.txt" target="_top">http://www.ietf.org/rfc/rfc3986.txt</a></em></span>, IETF (Internet
+                    Engineering Task Force) RFC 3986, January 2005.</p></div><div class="bibliomixed"><a name="rfc5652"></a><p class="bibliomixed">[<span class="abbrev">RFC 5652</span>] R. Housley <span class="title">Cryptographic
+                        Message Syntax (CMS)</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.ietf.org/rfc/rfc5652.txt" target="_top">http://www.ietf.org/rfc/rfc5652.txt</a></em></span>, IETF (Internet
+                    Engineering Task Force) RFC 5652, September 2009.</p></div><div class="bibliomixed"><a name="rfc5280"></a><p class="bibliomixed">[<span class="abbrev">RFC 5280</span>] Cooper, D., Santesson, S.,
+                    Farrell, S., Boeyen, S., Housley, R., and W. Polk. <span class="title">Internet X.509 Public
+                        Key Infrastructure Certificate and Certificate Revocation List (CRL)
+                        Profile</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.ietf.org/rfc/rfc5280.txt" target="_top">http://www.ietf.org/rfc/rfc5280.txt</a></em></span>, IETF (Internet
+                    Engineering Task Force) RFC 5280, May 2008.</p></div><div class="bibliomixed"><a name="saml"></a><p class="bibliomixed">[<span class="abbrev">SAML2.0</span>] Scott Cantor, John Kemp, Rob
+                    Philpott, Eve Maler <span class="title">Assertions and Protocols for the OASIS Security
+                        Assertion Markup Language (SAML) V2.0</span>, <span class="citetitle"><em class="citetitle"><a href="http://docs.oasis-open.org/security/saml/v2.0/" target="_top">http://docs.oasis-open.org/security/saml/v2.0/</a></em></span>,
+                    OASIS Standard, 15 March 2005.</p></div><div class="bibliomixed"><a name="schema1"></a><p class="bibliomixed">[<span class="abbrev">Schema1</span>] H. S. Thompson et al. <span class="title">XML
+                        Schema Part 1: Structures</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.w3.org/TR/xmlschema-1/" target="_top">http://www.w3.org/TR/xmlschema-1/</a></em></span>, W3C
+                    Recommendation, May 2001.</p></div><div class="bibliomixed"><a name="schema2"></a><p class="bibliomixed">[<span class="abbrev">Schema2</span>] P. V. Biron et al. <span class="title">XML
+                        Schema Part 2: Datatypes. </span>
+                    <span class="citetitle"><em class="citetitle"><a href="http://www.w3.org/TR/xmlschema-2/" target="_top">http://www.w3.org/TR/xmlschema-2/</a>
+                    </em></span>, W3C Recommendation, May 2001.</p></div><div class="bibliomixed"><a name="xades"></a><p class="bibliomixed">[<span class="abbrev">XAdES</span>] 
+                    <span class="title">XML Advanced Electronic Signatures</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.etsi.org/deliver/etsi_ts/101900_101999/101903/01.04.02_60/ts_101903v010402p.pdf" target="_top">http://www.etsi.org/deliver/etsi_ts/101900_101999/101903/01.04.02_60/ts_101903v010402p.pdf</a></em></span>,
+                    ETSI, December 2010.</p></div><div class="bibliomixed"><a name="xml"></a><p class="bibliomixed">[<span class="abbrev">XML</span>] 
+                    <span class="title">Extensible Markup Language (XML) 1.0 (Fifth Edition)</span>,
+                            <span class="citetitle"><em class="citetitle"><a href=" http://www.w3.org/TR/REC-xml/#sec-element-content" target="_top">
+                            http://www.w3.org/TR/REC-xml/#sec-element-content</a></em></span>,
+                    W3C Recommendation 26 November 2008.</p></div><div class="bibliomixed"><a name="xml-ns"></a><p class="bibliomixed">[<span class="abbrev">XML-ns</span>] T. Bray, D. Hollander, A. Layman.
+                        <span class="title">Namespaces in XML</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.w3.org/TR/1999/REC-xml-names-19990114" target="_top">http://www.w3.org/TR/1999/REC-xml-names-19990114</a></em></span>,
+                    W3C Recommendation, January 1999.</p></div><div class="bibliomixed"><a name="xmldsig"></a><p class="bibliomixed">[<span class="abbrev">XMLDSIG</span>] D. Eastlake et al,
+                        <span class="title">XML-Signature Syntax and Processing</span>, <span class="citetitle"><em class="citetitle"><a href="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/" target="_top">http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/</a></em></span>,
+                    W3C Recommendation, February 2002.</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e397"></a>1.3.&nbsp;Non-Normative References</h3></div></div></div><div class="bibliomixed"><a name="w3cchar"></a><p class="bibliomixed">[<span class="abbrev">W3C-CHAR</span>] M. J. D&iuml;&iquest;&frac12;rst. <span class="title">Requirements
+                        for String Identity Matching and String Indexing. </span>
+                    <span class="citetitle"><em class="citetitle"><a href="http://www.w3.org/TR/WD-charreq" target="_top">http://www.w3.org/TR/WD-charreq/</a>
+                    </em></span>, World Wide Web Consortium, July 1998.</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e415"></a>1.4.&nbsp;Schema Organization and Namespaces</h3></div></div></div><p>The structures described in this specification are contained in the XML schema for
+                this protocol [<a href="#csig-xsd" title="[Csig-XSD]"><span class="abbrev">Csig-XSD</span></a>]. All schema listings in the current
+                document are excerpts from the complete XML schema. In the case of a disagreement
+                between the schema file and this document, the complete schema provided in the end
+                of this document takes precedence.</p><p>This schema is associated with the following XML namespace:</p><p>
+                </p><pre class="programlisting">
+http://id.elegnamnden.se/csig/1.1/dss-ext/ns
+</pre><p>
+            </p><p>If a future version of this specification is needed, it will use a different
+                namespace.</p><p>Conventional XML namespace prefixes are used in the schema:</p><div class="itemizedlist"><ul type="disc"><li><p>The prefix <code class="literal">csig:</code> stands for the this specification's
+                        XML schema namespace [<a href="#csig-xsd" title="[Csig-XSD]"><span class="abbrev">Csig-XSD</span></a>].</p></li><li><p>The prefix <code class="literal">dss:</code> stands for the DSS core namespace [<a href="#dss" title="[OASIS-DSS]"><span class="abbrev">OASIS-DSS</span></a>].</p></li><li><p>The prefix <code class="literal">ds:</code> stands for the W3C XML Signature
+                        namespace [<a href="#xmldsig" title="[XMLDSIG]"><span class="abbrev">XMLDSIG</span></a>].</p></li><li><p>The prefix <code class="literal">xs:</code> stands for the W3C XML Schema namespace
+                            [<a href="#schema1" title="[Schema1]"><span class="abbrev">Schema1</span></a>].</p></li><li><p>The prefix <code class="literal">saml:</code> stands for the OASIS SAML Schema
+                        namespace [<a href="#saml" title="[SAML2.0]"><span class="abbrev">SAML2.0</span></a>].</p></li><li><p>The prefix <code class="literal">saml:</code> stands for the ETSI XAdES Schema
+                        namespace [<a href="#xades" title="[XAdES]"><span class="abbrev">XAdES</span></a>].</p></li></ul></div><p>Applications MAY use different namespace prefixes, and MAY use whatever namespace
+                defaulting/scoping conventions they desire, as long as they are compliant with the
+                Namespaces in XML specification [<a href="#xml-ns" title="[XML-ns]"><span class="abbrev">XML-ns</span></a>].</p><p>The following schema fragment defines the XML namespaces and other header
+                information for this specification's core XML schema:</p><p>
+                </p><pre class="programlisting">
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    targetNamespace="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
+    xmlns:csig="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"&gt;
+    &lt;xs:import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
+        schemaLocation="saml-schema-assertion-2.0.xsd"/&gt;
+</pre><p>
+            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e493"></a>1.5.&nbsp;Common Data Types</h3></div></div></div><p>The following sections define how to use and interpret common data types that
+                appear throughout the specification.</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e498"></a>1.5.1.&nbsp;String values</h4></div></div></div><p>All string values have the type <span class="bold"><strong>xs:string</strong></span>, which is built
+                    in to the W3C XML Schema Datatypes specification [<a href="#schema2" title="[Schema2]"><span class="abbrev">Schema2</span></a>].
+                    Unless otherwise noted in this specification or particular profiles, all strings
+                    in this specification MUST consist of at least one non-whitespace character
+                    (whitespace is defined in the XML Recommendation [<a href="#xml" title="[XML]"><span class="abbrev">XML</span></a>] Section
+                    2.3).</p><p>Unless otherwise noted in this specification, all elements that have the XML
+                    Schema <span class="bold"><strong>xs:string</strong></span> type, or a type derived from
+                    that, MUST be compared using an exact binary comparison. In particular,
+                    implementations MUST NOT depend on caseinsensitive string comparisons,
+                    normalization or trimming of whitespace, or conversion of locale-specific
+                    formats such as numbers or currency. This requirement is intended to conform to
+                    the W3C working-draft Requirements for String Identity, Matching, and String
+                    Indexing [<a href="#w3cchar" title="[W3C-CHAR]"><span class="abbrev">W3C-CHAR</span></a>].</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e517"></a>1.5.2.&nbsp;URI Values</h4></div></div></div><p>All SAML URI reference values have the type <span class="bold"><strong>xs:anyURI</strong></span>, which is built in to the W3C XML Schema Datatypes
+                    specification [<a href="#schema2" title="[Schema2]"><span class="abbrev">Schema2</span></a>].</p><p>Unless otherwise indicated in this specification, all URI reference values
+                    used within defined elements or attributes MUST consist of at least one
+                    non-whitespace character, and are REQUIRED to be absolute [<a href="#rfc3986" title="[RFC 3986]"><span class="abbrev">RFC 3986</span></a>].</p><p>Note that this specification makes use of URI references as identifiers, such
+                    as status codes, format types, attribute and system entity names, etc. In such
+                    cases, it is essential that the values be both unique and consistent, such that
+                    the same URI is never used at different times to represent different underlying
+                    information.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e533"></a>1.5.3.&nbsp;Time Values</h4></div></div></div><p>All time values have the type <span class="bold"><strong>xs:dateTime</strong></span>,
+                    which is built in to the W3C XML Schema Datatypes specification [<a href="#schema2" title="[Schema2]"><span class="abbrev">Schema2</span></a>], and MUST be expressed in UTC form, with no time zone
+                    component.</p><p>Implementations SHOULD NOT rely on time resolution finer than milliseconds.
+                    Implementations MUST NOT generate time instants that specify leap
+                    seconds.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e545"></a>1.5.4.&nbsp;MIME Types for <code class="literal">&lt;dss:TransformedData&gt;</code></h4></div></div></div><p>The following MIME type is defined for transformed data included in a
+                        <code class="literal">&lt;dss:Base64Data&gt;</code> element within a
+                        <code class="literal">&lt;dss:TransformedData&gt;</code> element in a
+                        <code class="literal">&lt;dss:SignRequest&gt;</code>.</p><div class="glosslist"><dl><dt><span class="bold"><strong>application/cms-signed-attributes</strong></span></dt><dd><p>This MIME type identifies that the data contained in the
+                                        <code class="literal">&lt;dss:Base64Data&gt;</code> element, is a DER
+                                    encoded CMS signed attributes structure [<a href="#rfc5652" title="[RFC 5652]"><span class="abbrev">RFC 5652</span></a>]. This data is useful when signing a PDF document in cases
+                                    where the whole PDF document is not included in the request. The
+                                    signature on a PDF document is generated by signing the hash of
+                                    a CMS signed attributes structure representing the PDF document
+                                    to be signed. These signed attributes includes data that a
+                                    Signing Service may want to check before signing, such as the
+                                    claimed signing time.</p></dd></dl></div></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e574"></a>2.&nbsp;Common Protocol Structures</h2></div></div></div><p>The following sections describe XML structures and types that are used in multiple
+            places.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e579"></a>2.1.&nbsp;Type AnyType</h3></div></div></div><p>The <span class="bold"><strong>AnyType</strong></span> complex type allows arbitrary XML
+                element content within an element of this type (see section 3.2.1 Element Content
+                    [<a href="#xml" title="[XML]"><span class="abbrev">XML</span></a>]).</p><p>
+                </p><pre class="programlisting">
+    &lt;xs:complexType name="AnyType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+            </p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e594"></a>3.&nbsp;Federated signing DSS Extensions</h2></div></div></div><p>This section defines elements that extends the <code class="literal">&lt;dss:SignRequest&gt;</code>
+            and <code class="literal">&lt;dss:SignResponse&gt;</code> elements of the DSS Signing
+            Protocol.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e605"></a>3.1.&nbsp;Element &lt;SignRequestExtension&gt;</h3></div></div></div><p>The <code class="literal">&lt;SignRequestExtension&gt;</code> element allows a requesting
+                service to add essential sign request information to a DSS Sign request. When
+                present, this element MUST be included in the
+                    <code class="literal">&lt;dss:OptionalInputs&gt;</code> element in a DSS Sign Request. This
+                element's <span class="bold"><strong>SignRequestExtensionType</strong></span> complex type
+                includes the following attributes and elements:</p><div class="glosslist"><dl><dt><code class="literal">Version</code> [Optional] (Default
+                            "<code class="literal">1.1</code>")</dt><dd><p>The version of this specification. If absent, the version value
+                            defaults to "1.1". This attribute provides means for the receiving
+                            service to determine the expected syntax of the request based on the
+                            protocol version.</p></dd><dt><code class="literal">&lt;RequestTime&gt;</code> [Required]</dt><dd><p>The time when this request was created. </p></dd><dt><code class="literal">&lt;saml:Conditions&gt;</code> [Required]</dt><dd><p>Conditions that MUST be evaluated when assessing the validity of
+                            and/or when using the Sign Request. See Section 2.5 of [<a href="#saml" title="[SAML2.0]"><span class="abbrev">SAML2.0</span></a>]for additional information on how to evaluate
+                            conditions.</p><p>This element MUST include the attributes NotBefore and NotOnOrAfter
+                            and MUST include the element
+                                <code class="literal">&lt;saml:AudienceRestriction&gt;</code> which in turn MUST
+                            contain one <code class="literal">&lt;saml:Audience&gt;</code> element, specifying
+                            the return URL for any resulting Sign Response message.</p></dd><dt><code class="literal">&lt;Signer&gt;</code> [Optional]</dt><dd><p>The identity of the signer expressed as a sequence of SAML attributes
+                            using the <span class="bold"><strong>saml:AttributeStatementType</strong></span>
+                            complex type. If this element is present, then the Signing Service MUST
+                            verify that the authenticated identity of the signer is consistent with
+                            the attributes in this element.</p></dd><dt><code class="literal">&lt;IdentityProvider&gt;</code> [Required]</dt><dd><p>The SAML EntityID of the Identity Provider that MUST be used to
+                            authenticate the signer before signing. The EntitID value is specified
+                            using the <span class="bold"><strong>saml:NameIDType</strong></span> complex type
+                            and MUST include a <code class="literal">Format</code> attribute with the value
+                                <code class="literal">urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>.</p></dd><dt><code class="literal">&lt;SignRequester&gt;</code> [Required]</dt><dd><p>The SAML EntityID of the service that sends this request to the
+                            Signing Service. The EntityID value is specified using the <span class="bold"><strong>saml:NameIDType</strong></span> complex type and MUST include
+                            a <code class="literal">Format</code> attribute with the value
+                                <code class="literal">urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>.</p></dd><dt><code class="literal">&lt;SignService&gt;</code> [Required]</dt><dd><p>The SAML EntityID of the service to which this Sign Request is sent.
+                            The EntityID value is specified using the <span class="bold"><strong>saml:NameIDType</strong></span> complex type and MUST include a
+                                <code class="literal">Format</code> attribute with the value
+                                <code class="literal">urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>.</p></dd><dt><code class="literal">&lt;RequestedSignatureAlgorithm&gt;</code>
+                        [Optional]</dt><dd><p>An identifier of the signature algorithm the requesting service
+                            prefers when generating the requested signature.</p></dd><dt><code class="literal">&lt;SignMessage&gt;</code> [Optional]</dt><dd><p>Optional sign message with information to the signer about the
+                            reguested signature.</p></dd><dt><code class="literal">&lt;CertRequestProperties&gt;</code> [Optional]</dt><dd><p>An optional set of requested properties of the signature certificate
+                            that is generated as part of the signature process.</p></dd><dt><code class="literal">&lt;OtherRequestInfo&gt;</code> [Optional]</dt><dd><p>Any additional inputs to the request extension. </p></dd></dl></div><p>The following schema fragment defines the
+                    <code class="literal">&lt;SignRequestExtension&gt;</code> element and its <span class="bold"><strong>SignRequestExtensionType</strong></span> complex type:</p><p>
+                </p><pre class="programlisting">
+    &lt;xs:element name="SignRequestExtension" type="csig:SignRequestExtensionType"/&gt;
+    &lt;xs:complexType name="SignRequestExtensionType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:RequestTime"/&gt;
+            &lt;xs:element ref="saml:Conditions"/&gt;
+            &lt;xs:element ref="csig:Signer" minOccurs="0"/&gt;
+            &lt;xs:element ref="csig:IdentityProvider"/&gt;
+            &lt;xs:element ref="csig:SignRequester"/&gt;
+            &lt;xs:element ref="csig:SignService"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:RequestedSignatureAlgorithm"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:CertRequestProperties"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:SignMessage" maxOccurs="unbounded"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherRequestInfo"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="Version" type="xs:string" use="optional" default="1.1"/&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+            </p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="CertRequestPropertiesType"></a>3.1.1.&nbsp;Type CertRequestPropertiesType</h4></div></div></div><p>The <span class="bold"><strong>CertRequestPropertiesType</strong></span> complex type is
+                    used to specify requested properties of the signature certificate that is
+                    associated with the generated signature.</p><p>The <span class="bold"><strong>CertRequestPropertiesType</strong></span> complex type
+                    has the following attributes and elements:</p><div class="glosslist"><dl><dt><code class="literal">CertType</code> [Default "PKC"]</dt><dd><p>An enumeration of certificate types, default "PKC". The supported
+                                values are "PKC", "QC" and "QC/SSCD". "QC" means that the
+                                certificate is requested to be a Qualified Certificate according to
+                                legal definitions in national law governing the issuer. "QC/SSCD"
+                                means a Qualified Certificate where the private key is declared to
+                                be residing within a Secure Signature Creation Device according to
+                                national law. "PKC" (Public Key Certificate) means a certificate
+                                that is not a Qualified Certificate.</p></dd><dt><code class="literal">&lt;saml:AuthnContextClassRef&gt;</code>
+                            [Optional]</dt><dd><p>A URI identifying the requested level of assurance that
+                                authentication of the signature certificate subject MUST comply with
+                                in order to complete signing and certificate issuance. A Signing
+                                Service MUST NOT issue signature certificates and generate the
+                                requested signature unless the authentication process used to
+                                authenticate the requested signer meets the requested level of
+                                assurance expressed in this element. If this element is absent, the
+                                locally configured policy of the Signing Service is assumed.</p></dd><dt><code class="literal">&lt;RequestedCertAttributes&gt;</code>
+                            [Optional]</dt><dd><p>Element holding a SAML Entity ID of an Attribute Authority that
+                                MAY be used to obtain an attribute value for the requested
+                                attribute. The EntityID value is specified using the <span class="bold"><strong>saml:NameIDType</strong></span> complex type and MUST
+                                include a <code class="literal">Format</code> attribute with the value
+                                    <code class="literal">urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>.</p></dd><dt><code class="literal">&lt;OtherProperties&gt;</code> [Optional]</dt><dd><p>Other requested properties of the signature certificate.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>CertRequestPropertiesType</strong></span> complex type:</p><pre class="programlisting">
+    &lt;xs:complexType name="CertRequestPropertiesType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element minOccurs="0" ref="saml:AuthnContextClassRef"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:RequestedCertAttributes"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherProperties"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute default="PKC" name="CertType"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="PKC"/&gt;
+                    &lt;xs:enumeration value="QC"/&gt;
+                    &lt;xs:enumeration value="QC/SSCD"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:element name="RequestedCertAttributes"
+        type="csig:RequestedAttributesType"/&gt;
+    &lt;xs:element name="OtherProperties" type="csig:AnyType"/&gt;
+</pre><div class="section" lang="en"><div class="titlepage"><div><div><h5 class="title"><a name="requestedAttributesType"></a>3.1.1.1.&nbsp;Type RequestedAttributesType</h5></div></div></div><p>The <span class="bold"><strong>RequestedAttributesType</strong></span> complex type
+                        is used to represent requests for subject attributes in a signer certificate
+                        that is associated with the signer of the generated signature as a result of
+                        the sign request. This protocol is designed to accommodate the scenario
+                        where the Signing Service generates the signer key and the signer
+                        certificate at the time of signing and where the Signing Service collects
+                        the user's attributes from a SAML assertion. However, this element can also
+                        be used as a requirement for attributes in existing certificates, where the
+                        Signing Service can determine if the existing signing certificate matches
+                        the requirements of the requesting service.</p><p>The <span class="bold"><strong>RequestedAttributesType</strong></span> has the
+                        following element:</p><div class="glosslist"><dl><dt><code class="literal">&lt;RequestedCertAttribute&gt;</code> [One or
+                                    More]</dt><dd><p>Information of type <span class="bold"><strong>MappedAttributeType</strong></span> about a requested
+                                        certificate attribute.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>RequestedAttributesType</strong></span> complex type:</p><p>
+                        </p><pre class="programlisting">
+    &lt;xs:complexType name="RequestedAttributesType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" minOccurs="1"
+                name="RequestedCertAttribute"
+                type="csig:MappedAttributeType"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+                    </p><p>The <span class="bold"><strong>MappedAttributeType</strong></span> complex type has
+                        the following elements and attributes:</p><div class="glosslist"><dl><dt><code class="literal">CertAttributeRef</code> [Optional]</dt><dd><p>A reference to the certificate attribute or name type where
+                                    the requester wants to store this attribute value. The
+                                    information in this attribute depends on the selected
+                                        <code class="literal">CertNameType</code> attribute value. If the
+                                        <code class="literal">CertNameType</code> is "<span class="bold"><strong>rdn</strong></span>" or "<span class="bold"><strong>sda</strong></span>",
+                                    then this attribute MUST contain a string representation of an
+                                    object identifier (OID). If the <code class="literal">CertNameType</code>
+                                    is "<span class="bold"><strong>san</strong></span>" (Subject Alternative
+                                    Name) and the target name is a GeneralName, then this attribute
+                                    MUST hold a string representation of the tag value of the target
+                                    GeneralName type, e.g. "1" for rfc822Name (E-mail) or "2" for
+                                    dNSName. If the <code class="literal">CertNameType</code> is "<span class="bold"><strong>san</strong></span>" and the target name form is an
+                                    OtherName, then this attribute value MUST include a string
+                                    representation of the object identifier of the target OtherName
+                                    form.</p><p>Representation of an OID as a string in this attribute MUST
+                                    consist of a sequence of integers delimited by a dot. This
+                                    string MUST not contain white space or line breaks. Example:
+                                    "2.5.4.32". </p></dd><dt><code class="literal">CertNameType</code> [Optional]</dt><dd><p>An enumeration of the target name form for storing the
+                                    associated SAML attribute value in the certificate. The
+                                    available values are "rdn" for storing the attribute value as an
+                                    attribute in a Relative Distinguished Name in the subject field
+                                    of the certificate, "san" for storing the attribute value in a
+                                    subject alternative name extension and "sda" for storing the
+                                    attribute value in a subject directory attribute extension. The
+                                    default value for this attribute is "rdn".</p></dd><dt><code class="literal">FriendlyName</code> [Optional]</dt><dd><p>An optional friendly name of the subject attribute, e.g.
+                                    "givenName". Note that this name does not need to map to any
+                                    particular naming convention and its value MUST NOT be used by
+                                    the Signing Service for attribute type mapping. This name is
+                                    present for display purposes only.</p></dd><dt><code class="literal">DefaultValue</code> [Optional]</dt><dd><p>An optional default value for the requested attribute. This
+                                    value MAY be used by the Signing Service if no authoritative
+                                    value for the attribute can be obtained when the Signing Service
+                                    authenticates the user. This value MUST NOT be used by the
+                                    Signing Service unless this value is consistent with a defined
+                                    policy at the Signing Service. A typical valid use of this
+                                    attribute is to hold a default countryName attribute value that
+                                    matches a set of allowed countryName values. By accepting the
+                                    default attribute value provided in this attribute, the Signing
+                                    Service accept the requesting service as an authoritative source
+                                    for this particular requested attribute.</p></dd><dt><code class="literal">Required</code> [Optional] (Default
+                                false)</dt><dd><p>If this attribute is set to true, the Signing Service MUST
+                                    ensure that the signing certificate contains a subject attribute
+                                    of the requested type, or else the Signing Service MUST NOT
+                                    generate the requested signature.</p></dd><dt><code class="literal">&lt;AttributeAuthority&gt;</code> [Zero or
+                                More]</dt><dd><p>Element holding an Entity ID of an Attribute Authority that
+                                    MAY be used to obtain an attribute value for the requested
+                                    attribute. The EntityID value is specified using the <span class="bold"><strong>saml:NameIDType</strong></span> complex type and MUST
+                                    include a <code class="literal">Format</code> attribute with the value
+                                        <code class="literal">urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>.</p></dd><dt><code class="literal">&lt;SamlAttributeName&gt;</code> [Zero or
+                                More]</dt><dd><p>Element of type <span class="bold"><strong>PreferredSAMLAttributeNameType</strong></span> complex type
+                                    holding a name of a SAML subject attribute that is allowed to
+                                    provide the content value for the requested certificate
+                                    attribute.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>MappedAttributeType</strong></span> complex type:</p><pre class="programlisting">
+    &lt;xs:complexType name="MappedAttributeType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" minOccurs="0"
+                name="AttributeAuthority" type="saml:NameIDType"/&gt;
+            &lt;xs:element maxOccurs="unbounded" minOccurs="0"
+                name="SamlAttributeName"
+                type="csig:PreferredSAMLAttributeNameType"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="CertAttributeRef" type="xs:string" use="optional"/&gt;
+        &lt;xs:attribute name="CertNameType" default="rdn" use="optional"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="rdn"/&gt;
+                    &lt;xs:enumeration value="san"/&gt;
+                    &lt;xs:enumeration value="sda"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name="FriendlyName" type="xs:string"/&gt;
+        &lt;xs:attribute name="DefaultValue" type="xs:string"/&gt;
+        &lt;xs:attribute name="Required" type="xs:boolean" default="false"/&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>The <span class="bold"><strong>PreferredSAMLAttributeNameType</strong></span>
+                        complex type holds a string value of a SAML attribute name. This attribute
+                        name SHALL be mapped against attribute names in
+                            <code class="literal">&lt;saml:Attribute&gt;</code> elements representing the subject
+                        in a SAML assertion that is used to authenticate the signer. </p><p>The <span class="bold"><strong>PreferredSAMLAttributeNameType</strong></span>
+                        complex type has the following attribute:</p><div class="glosslist"><dl><dt><code class="literal">Order</code> [Optional]</dt><dd><p>An integer specifying the order of preference of this SAML
+                                        attribute. If more than one SAML attribute is listed, the
+                                        SAML attribute with the lowest <code class="literal">order</code>
+                                        integer value that is present as a subject attribute in the
+                                        SAML assertion, SHALL be used. SAML attributes with an
+                                        absent <code class="literal">order</code> attribute SHALL be treated
+                                        as having an order value of 0. Multiple SAML attributes with
+                                        an identical <code class="literal">order</code> attribute values SHALL
+                                        be treated as having equal priority.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>PreferredSAMLAttributeNameType</strong></span> complex type:</p><p>
+                        </p><pre class="programlisting">
+    &lt;xs:complexType name="PreferredSAMLAttributeNameType"&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base="xs:string"&gt;
+                &lt;xs:attribute name="Order" type="xs:int" default="0"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+                    </p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="SignMessageType"></a>3.1.2.&nbsp;Element &lt;SignMessage&gt;</h4></div></div></div><p>The <code class="literal">&lt;SignMessage&gt;</code> element holds a message to the signer
+                    with information about what is being signed. The sign message is provided either
+                    in plain text using the <code class="literal">&lt;Message&gt;</code> child element or as an
+                    encrypted message using the <code class="literal">&lt;EncryptedMessage&gt;</code> child
+                    element. This element's <span class="bold"><strong>SignMessageType</strong></span> complex
+                    type includes the following attributes and elements:</p><div class="glosslist"><dl><dt><code class="literal">MustShow</code> [Optional] (Default
+                                "<code class="literal">false</code>")</dt><dd><p>When this attribute is set to <code class="literal">true</code> then the
+                                requested signature MUST NOT be created unless this message has been
+                                displayed and accepted by the signer. The defalut is
+                                    <code class="literal">false</code>.</p></dd><dt><code class="literal">DisplayEntity</code> [Optional] </dt><dd><p>The EntityID of the entity responsible for displaying the sign
+                                message to the signer. When the sign message is encrypted, then this
+                                entity is also the holder of the private decryption key necessary to
+                                decrypt the sign message.</p></dd><dt><code class="literal">MimeType</code> [Optional] (Default
+                                "<code class="literal">text</code>")</dt><dd><p>The mime type defining the message format. This is an enumeration
+                                of the valid attribute values <code class="literal">text</code> (plain text),
+                                    <code class="literal">text/html</code> (html) or
+                                    <code class="literal">text/markdown</code> (markdown). This specification
+                                does not specify any particular restrictions on the provided message
+                                but it is RECOMMENDED that sign message content is restricted to a
+                                limited set of valid tags and attributes, and that the display
+                                entity performs filtering to enforce these restrictions before
+                                displaying the message. The means through which parties agree on
+                                such restrictions are outside the scope of this specification, but
+                                one valid option to communicate such restrictions could be through
+                                federation metadata. </p></dd><dt><code class="literal">&lt;Message&gt;</code> [Choice] </dt><dd><p>The base64 encoded sign message in unencrypted form. The message
+                                MUST be encoded using UTF-8.</p></dd><dt><code class="literal">&lt;EncryptedMessage&gt;</code> [Choice] </dt><dd><p>An encrypted &lt;Mesage&gt; element. Either a
+                                    <code class="literal">&lt;Message&gt;</code> or an
+                                    <code class="literal">&lt;EncryptedMessage&gt;</code> element MUST be
+                                present.</p></dd></dl></div><p>The following schema fragment defines the <code class="literal">&lt;SignMessage&gt;</code>
+                    element and the <span class="bold"><strong>SignMessageType</strong></span> complex
+                    type:</p><pre class="programlisting">
+        &lt;xs:complexType name="SignMessageType"&gt;
+        &lt;xs:choice&gt;
+            &lt;xs:element ref="csig:Message"/&gt;
+            &lt;xs:element ref="csig:EncryptedMessage"/&gt;
+        &lt;/xs:choice&gt;
+        &lt;xs:attribute name="MustShow" type="xs:boolean" default="false"/&gt;
+        &lt;xs:attribute name="DisplayEntity" type="xs:anyURI"/&gt;
+        &lt;xs:attribute name="MimeType" default="text"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="text/html"/&gt;
+                    &lt;xs:enumeration value="text"/&gt;
+                    &lt;xs:enumeration value="text/markdown"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:anyAttribute namespace="##other" processContents="lax"/&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:element name="Message" type="xs:base64Binary"/&gt;
+    &lt;xs:element name="EncryptedMessage" type="saml:EncryptedElementType"/&gt;
+</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="eidSignResponseExtension"></a>3.2.&nbsp;Element &lt;SignResponseExtension&gt;</h3></div></div></div><p>The <code class="literal">&lt;SignResponseExtension&gt;</code> element is an extension point
+                that allows a requesting service to add essential sign response information to the
+                sign response. When present, this element MUST be included in the
+                    <code class="literal">&lt;dss:OptionalOutputs&gt;</code> element in a
+                    <code class="literal">&lt;dss:SignResponse&gt;</code> element.</p><p>This element's <span class="bold"><strong>SignResponseExtensionType</strong></span> complex
+                type includes the following attributes and elements:</p><div class="glosslist"><dl><dt><code class="literal">Version</code> [Optional] (Default
+                            "<code class="literal">1.1</code>")</dt><dd><p>The version of this specification. If absent, the version value
+                            defaults to "1.0". This attribute provides means for the receiving
+                            service to determine the expected syntax of the response based on the
+                            protocol version.</p></dd><dt><code class="literal">&lt;ResponseTime&gt;</code> [Required]</dt><dd><p>The time when the sign response was created.</p></dd><dt><code class="literal">&lt;Request&gt;</code> [Optional]</dt><dd><p>A base64 encoded signed <code class="literal">&lt;dss:SignRequest&gt;</code>
+                            element that hods the request related to this sign response. This
+                            element MUST be present if signing was successful.</p></dd><dt><code class="literal">&lt;SignerAssertionInfo&gt;</code> [Optional]</dt><dd><p>An element of type <span class="bold"><strong>SignerAssertionInfoType</strong></span> holding information about how
+                            the signer was authenticated by the sign service as well as information
+                            about subject attribute values present in the SAML assertion
+                            authenticating the signer, which was incorporated into the signer
+                            certificate. This element MUST be present if signing was
+                            successful.</p></dd><dt><code class="literal">&lt;SignatureCertificateChain&gt;</code>
+                        [Optional]</dt><dd><p>An element of type <span class="bold"><strong>CertificateChainType</strong></span> holding the signer certificate as
+                            well as other certificates that may be used to validate the signature.
+                            This element MUST be present if signing was successful and MUST contain
+                            all certificates that are necessary to compile a complete and functional
+                            signed document. Certificates in
+                                <code class="literal">&lt;SignatureCertificateChain&gt;</code> MUST be provided
+                            in sequence with the signature certificate first followed by any CA
+                            certificates that can be used to verify the previous certificate in the
+                            sequence, ending with a self-signed root certificate.</p></dd><dt><code class="literal">&lt;OtherResponseInfo&gt;</code> [Optional]</dt><dd><p>Optional sign response elements of type <span class="bold"><strong>AnyType</strong></span>.</p></dd></dl></div><p>The following schema fragment defines the
+                    <code class="literal">&lt;SignResponseExtension&gt;</code> element and the <span class="bold"><strong>SignResponseExtensionType</strong></span> complex type:</p><p>
+                </p><pre class="programlisting">
+    &lt;xs:element name="SignResponseExtension"
+        type="csig:SignResponseExtensionType"/&gt;
+    &lt;xs:complexType name="SignResponseExtensionType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:ResponseTime"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:Request"/&gt;
+            &lt;xs:element maxOccurs="1" minOccurs="0"
+                ref="csig:SignerAssertionInfo"/&gt;
+            &lt;xs:element minOccurs="0"
+                ref="csig:SignatureCertificateChain"/&gt;
+            &lt;xs:element minOccurs="0"
+                ref="csig:OtherResponseInfo"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="Version" type="xs:string"
+            default="1.1"/&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:element name="ResponseTime" type="xs:dateTime"/&gt;
+    &lt;xs:element name="Request" type="xs:base64Binary"/&gt;
+    &lt;xs:element name="SignerAssertionInfo"
+        type="csig:SignerAssertionInfoType"/&gt;
+    &lt;xs:element name="SignatureCertificateChain"
+        type="csig:CertificateChainType"/&gt;
+    &lt;xs:element name="OtherResponseInfo" type="csig:AnyType"/&gt;
+</pre><p>
+            </p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1203"></a>3.2.1.&nbsp;Type SignerAssertionInfoType</h4></div></div></div><p>The <span class="bold"><strong>SignerAssertionInfoType</strong></span> complex type has
+                    the following elements:</p><div class="glosslist"><dl><dt><code class="literal">&lt;ContextInfo&gt;</code> [Required]</dt><dd><p>This element of type <span class="bold"><strong>ContextInfoType</strong></span> holds information about SAML
+                                authentication context related to signer authentication through a
+                                SAML assertion.</p></dd><dt><code class="literal">&lt;saml:AttributeStatement&gt;</code>
+                            [Required]</dt><dd><p>This element of type <span class="bold"><strong>saml:AttributeStatementType</strong></span> (see [<a href="#saml" title="[SAML2.0]"><span class="abbrev">SAML2.0</span></a>]) holds subject attributes obtained from the
+                                SAML assertion used to authenticate the signer at the Signing
+                                Service. For integrity reasons, this element SHOULD only provide
+                                information about SAML attribute values that maps to subject
+                                identity information in the signer's certificate.</p></dd><dt><code class="literal">&lt;SamlAssertions&gt;</code> [Zero or More]</dt><dd><p>Any number of relevant SAML assertions that was relevant for
+                                authenticating the signer and signer's identity attributes at the
+                                Signing Service.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>SignerAssertionInfoType</strong></span> complex type:</p><p>
+                    </p><pre class="programlisting">
+    &lt;xs:complexType name="SignerAssertionInfoType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:ContextInfo"/&gt;
+            &lt;xs:element ref="saml:AttributeStatement"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:SamlAssertions"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:element name="ContextInfo" type="csig:ContextInfoType"/&gt;
+    &lt;xs:element name="SamlAssertions" type="csig:SAMLAssertionsType"/&gt;
+</pre><p>
+                </p><div class="section" lang="en"><div class="titlepage"><div><div><h5 class="title"><a name="d0e1254"></a>3.2.1.1.&nbsp;Type ContextInfoType</h5></div></div></div><p>The <span class="bold"><strong>ContextInfoType</strong></span> complex type has the
+                        following elements:</p><div class="glosslist"><dl><dt><code class="literal">&lt;IdentityProvider&gt;</code>[Required]</dt><dd><p>The EntityID of the Identity Provider that authenticated the
+                                    signer to the Signing Service.</p></dd><dt><code class="literal">&lt;AuthenticationInstant&gt;</code>
+                                [Required]</dt><dd><p>The time when the Signing Service authenticated the
+                                    signer.</p></dd><dt><code class="literal">&lt;saml:AuthnContextClassRef&gt;</code>
+                                [Required]</dt><dd><p>A URI reference to the authentication context class (see [<a href="#saml" title="[SAML2.0]"><span class="abbrev">SAML2.0</span></a>]).</p></dd><dt><code class="literal">&lt;ServiceID&gt;</code> [Optional]</dt><dd><p>An arbitrary identifier of the instance of the Signing Service
+                                    that authenticated the signer.</p></dd><dt><code class="literal">&lt;AuthType&gt;</code> [Optional]</dt><dd><p>An arbitrary identifier of the service used by the Signing
+                                    Service to authenticate the signer (e.g. "shibboleth".) </p></dd><dt><code class="literal">&lt;AssertionRef&gt;</code> [Optional]</dt><dd><p>A reference to the assertion used to identify the signer. This
+                                    MAY be the <code class="literal">ID</code> attribute of a
+                                        <code class="literal">&lt;saml:Assertion&gt;</code> element but MAY also
+                                    be any other reference that can be used to locate and identify
+                                    the assertion. </p></dd></dl></div><p>
+                        </p><pre class="programlisting">
+    &lt;xs:complexType name="ContextInfoType"&gt;
+        &lt;xs:sequence maxOccurs="1" minOccurs="0"&gt;
+            &lt;xs:element name="IdentityProvider" type="saml:NameIDType"/&gt;
+            &lt;xs:element name="AuthenticationInstant" type="xs:dateTime"/&gt;
+            &lt;xs:element ref="saml:AuthnContextClassRef"/&gt;
+            &lt;xs:element minOccurs="0" name="ServiceID" type="xs:string"/&gt;
+            &lt;xs:element minOccurs="0" name="AuthType" type="xs:string"/&gt;
+            &lt;xs:element minOccurs="0" name="AssertionRef" type="xs:string"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+                    </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h5 class="title"><a name="d0e1324"></a>3.2.1.2.&nbsp;Type SAMLAssertionsType</h5></div></div></div><p>The <span class="bold"><strong>SAMLAssertionsType</strong></span> is used to store
+                        the bytes of an arbitrary number of SAML assertions (see [<a href="#saml" title="[SAML2.0]"><span class="abbrev">SAML2.0</span></a>]). This complex type has the following elements: </p><div class="glosslist"><dl><dt><code class="literal">&lt;Assertion&gt;</code>[One or More]</dt><dd><p>One or more SAML assertions represented by the bytes of each
+                                    assertion. Assertions are stored as byte data to ensure that the
+                                    signature on each assertion can be validated. Assertions stored
+                                    in this element MUST retain its original canonical format so
+                                    that any signature on the assertion can be validated.</p></dd></dl></div><p>
+                        </p><pre class="programlisting">
+    &lt;xs:complexType name="SAMLAssertionsType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" name="Assertion"
+                type="xs:base64Binary"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+                    </p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1348"></a>3.2.2.&nbsp;Type CertificateChainType</h4></div></div></div><p>This complex type can be used to hold a sequence of X.509 certificates.
+                    Certificates MUST be provided in sequence with the end-entity certificate first
+                    in the sequence followed by any CA certificates that can be used to verify the
+                    previous certificate in the sequence, ending with a self signed root
+                    certificate.</p><p>The <span class="bold"><strong>CertificateChainType</strong></span> complex type has the
+                    following elements:</p><div class="glosslist"><dl><dt><code class="literal">&lt;X509Certificate&gt;</code> [One or More]</dt><dd><p>An X.509 certificate [<a href="#rfc5280" title="[RFC 5280]"><span class="abbrev">RFC 5280</span></a>] that is part of a
+                                certificate chain that can be used to verify the generated
+                                signature. The certificate SHALL be represented as a base64Binary of
+                                the DER encoded certificate.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>CertificateChainType</strong></span> complex type:</p><p>
+                    </p><pre class="programlisting">
+    &lt;xs:complexType name="CertificateChainType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" name="X509Certificate"
+                type="xs:base64Binary"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+</pre><p>
+                </p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e1379"></a>4.&nbsp;Extensions to &lt;dss:InputDocuments&gt; and &lt;dss:SignatureObject&gt; </h2></div></div></div><p>This section defines elements that extends the
+                <code class="literal">&lt;dss:InputDocuments&gt;</code> element of DSS sign requests and the
+                <code class="literal">&lt;dss:SignatureObject&gt;</code> element of DSS sign responses by
+            inclusion in their respective <code class="literal">&lt;dss:Other&gt;</code> element.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e1393"></a>4.1.&nbsp;Element &lt;SignTasks&gt;</h3></div></div></div><p>The <code class="literal">&lt;SignTasks&gt;</code> element, when present, MUST appear either in
+                the <code class="literal">&lt;dss:Other&gt;</code> element of the
+                    <code class="literal">&lt;dss:InputDocuments&gt;</code> element of a sign request or in the
+                    <code class="literal">&lt;dss:Other&gt;</code> element of the
+                    <code class="literal">&lt;dss:SignatureObject&gt;</code> element of a sign response.</p><p>This element holds information about sign tasks that are requested in a sign
+                request and returned in a sign response. If information about a sign task is
+                provided using this element in a sign request, then the corresponding signature
+                result data MUST also be provided using this element in the sign response.</p><p>This element's <span class="bold"><strong>SignTasksType</strong></span> complex type
+                includes the following attributes and elements:</p><div class="glosslist"><dl><dt><code class="literal">&lt;SignTaskData&gt;</code> [One or More]</dt><dd><p>Input and output data associated with a sign task. A request MAY
+                            contain several instances of this element. When multiple instances of
+                            this element are present in the request, this means that the Signing
+                            Service is requested to generate multiple signatures (one for each
+                                <code class="literal">&lt;SignTaskData&gt;</code> element) using the same signing
+                            key and signature certificate. This allows batch signing of several
+                            different documents in the same signing instance or creation of multiple
+                            signatures on the same document such as signing XML content of a PDF
+                            document with an XML signature, while signing the rest of the document
+                            with a PDF signature.</p></dd></dl></div><p>The following schema fragment defines the <code class="literal">&lt;SignTasks&gt;</code>
+                element and its <span class="bold"><strong>SignTasksType</strong></span> complex type:</p><pre class="programlisting">
+    &lt;xs:element name="SignTasks" type="csig:SignTasksType"/&gt;
+    &lt;xs:complexType name="SignTasksType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" ref="csig:SignTaskData"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:element name="SignTaskData" type="csig:SignTaskDataType"/&gt;
+</pre><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1442"></a>4.1.1.&nbsp;Element &lt;SignTaskData&gt;</h4></div></div></div><p>When present in a sign request, this element provides input data to a
+                    signature generation process. When present in a sign response, this element
+                    provides the corresponding signature result data. When a request provides input
+                    data using this type of element, then an element of this type MUST also be used
+                    to return the corresponding signature result data.</p><p>This element's <span class="bold"><strong>SignTaskDataType</strong></span> complex type
+                    includes the following attributes and elements:</p><div class="glosslist"><dl><dt><code class="literal">SignTaskId</code> [Optional]</dt><dd><p>An identifier of the signature task that is represented by this
+                                element. If the request contains multiple instances of
+                                    <code class="literal">&lt;SignTaskData&gt;</code> representing separate sign
+                                tasks, then each instance of the element MUST have a
+                                    <code class="literal">SignatureId</code> attribute value that is unique
+                                among all sign tasks in the sign request. When this attribute is
+                                present, the same attribute value MUST be returned in the
+                                corresponding <code class="literal">&lt;SignTaskData&gt;</code> element in the
+                                response that holds corresponding signature result data.</p></dd><dt><code class="literal">SigType</code> [Required]</dt><dd><p>Enumerated identifier of the type of signature format the
+                                canonicalized signed information octets in the
+                                    <code class="literal">&lt;ToBeSignedBytes&gt;</code> element are associated
+                                with. This MUST be one of the enumerated values "XML", "PDF", "CMS"
+                                of "ASiC".</p></dd><dt><code class="literal">AdESType</code> [Optional]</dt><dd><p>Specifies the type of AdES signature. BES means that the signing
+                                certificate hash must be covered by the signature. EPES means that
+                                the signing certificate hash and a signature policy identifier must
+                                be covered by the signature.</p></dd><dt><code class="literal">ProcessingRules</code> [Optional]</dt><dd><p>A URI identifying one or more processing rules that the Signing
+                                Service MUST apply when processing and using the provided signed
+                                information octets. The Signing Service MUST NOT process and
+                                complete the signature request if this attribute contains a URI that
+                                is not recognized by the Signing Service. When this attribute is
+                                present in the sign response, it represents a statement by the
+                                Signing Service that the identified processing rule was successfully
+                                executed.</p></dd><dt><code class="literal">&lt;ToBeSignedBytes&gt;</code> [Required]</dt><dd><p>The bytes to be hashed and signed when generating the requested
+                                signature. For an XML signature this MUST be the canonicalized
+                                octets of a <code class="literal">&lt;dss:SignedInfo&gt;</code> element. For a
+                                PDF signature this MUST be the octets of the DER encoded SignedAttrs
+                                value (signed attributes). If this data was altered by the signature
+                                process, for example as a result of changing a signing time
+                                attribute in PDF SignedAttrs, or as a result of adding a reference
+                                to a hash of the signature certificate in an XAdES signature, the
+                                altered data MUST be returned in the sign response using this
+                                element.</p></dd><dt><code class="literal">&lt;AdESObject&gt;</code> [Optional]</dt><dd><p>An element of type <span class="bold"><strong>AdESObjectType</strong></span>
+                                complex type holding data to support generation of a signature
+                                according to any of the ETSI Advanced Electronic Signature (AdES)
+                                standard formats.</p></dd><dt><code class="literal">&lt;Base64Signature&gt;</code> [Optional]</dt><dd><p>The output signature value of the signature creation process
+                                associated with this sign task. This element's optional
+                                    <code class="literal">Type</code> attribute, if present, SHALL contain a
+                                URI indicating the signature algorithm that was used to generate the
+                                signature value.</p></dd><dt><code class="literal">&lt;OtherSignTaskData&gt;</code> [Optional]</dt><dd><p>Other input or output data elements associated with the sign
+                                task.</p></dd></dl></div><p>The following schema fragment defines the <code class="literal">&lt;SignTaskData&gt;</code>
+                    element and its <span class="bold"><strong>SignTaskDataType</strong></span> complex
+                    type:</p><pre class="programlisting">
+    &lt;xs:element name="SignTaskData" type="csig:SignTaskDataType"/&gt;
+    &lt;xs:complexType name="SignTaskDataType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:ToBeSignedBytes"/&gt;
+            &lt;xs:element maxOccurs="1" minOccurs="0" ref="csig:AdESObject"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:Base64Signature"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherSignTaskData"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="SignTaskId" type="xs:string"/&gt;
+        &lt;xs:attribute name="SigType" use="required"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="XML"/&gt;
+                    &lt;xs:enumeration value="PDF"/&gt;
+                    &lt;xs:enumeration value="CMS"/&gt;
+                    &lt;xs:enumeration value="ASiC"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute default="None" name="AdESType"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="None"/&gt;
+                    &lt;xs:enumeration value="BES"/&gt;
+                    &lt;xs:enumeration value="EPES"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name="ProcessingRules" type="xs:anyURI" use="optional"/&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:element name="ToBeSignedBytes" type="xs:base64Binary"/&gt;
+    &lt;xs:element name="AdESObject" type="csig:AdESObjectType"/&gt;
+    &lt;xs:element name="Base64Signature" type="csig:Base64SignatureType"/&gt;
+    &lt;xs:element name="OtherSignTaskData" type="csig:AnyType"/&gt;
+</pre><div class="section" lang="en"><div class="titlepage"><div><div><h5 class="title"><a name="d0e1548"></a>4.1.1.1.&nbsp;Type AdESObjectType</h5></div></div></div><p>The <span class="bold"><strong>AdESObjectType</strong></span> complex type holds a
+                        base64 encoded object that is referenced from the signature and which
+                        content has to be modified as part of the certificate and signature
+                        generation process. Handling of this data as in the signature generation
+                        process MAY be affected by rules identifyed by the
+                            <code class="literal">ProcessingRules</code>, <code class="literal">SigType</code> and
+                            <code class="literal">AdESType</code> attributes of the parent
+                            <code class="literal">&lt;SignatureInputObjects&gt;</code> elements. </p><p>This complex type has the following elements:</p><div class="glosslist"><dl><dt><code class="literal">&lt;SignatureId&gt;</code>
+                                    [Optional]</dt><dd><p>An optional identifier of the signature. When the
+                                        requested signature is a XAdES signature, this is the value
+                                        of the Id attribute of the
+                                            <code class="literal">&lt;ds:Signature&gt;</code> element. of the
+                                        resulting signature, which is used to construct the
+                                            <code class="literal">Target</code> attribute of the
+                                            <code class="literal">&lt;xades:QualifyingProperties&gt;</code>
+                                        element. </p></dd><dt><code class="literal">&lt;AdESObjectBytes&gt;</code>
+                                    [Optional]</dt><dd><p>A base64 encoded object that is referenced from the
+                                        signature and which content has to be modified as part of
+                                        the certificate and signature generation process. The type
+                                        of data in the base64 encoded bytes and the rules of
+                                        handling of this data as in the signature generation process
+                                        is determined through the
+                                        <code class="literal">ProcessingRules</code>,
+                                            <code class="literal">SigType</code> and
+                                            <code class="literal">AdESType</code> attributes of the parent
+                                            <code class="literal">&lt;SignatureInputObjects&gt;</code> elements.
+                                        When the signature type is XAdES, then this is the bytes of
+                                        the <code class="literal">&lt;ds:Object&gt;</code> element that holds the
+                                            <code class="literal">&lt;xades:QualifyingProperties&gt;</code>
+                                        element of the signature where the hash of the signature
+                                        certificate will be placed.</p><p>When this element is present in the request, it forms a
+                                        base for construction of this object in the signature
+                                        process. </p></dd><dt><code class="literal">&lt;OtherAdESData&gt;</code>
+                                    [Optional]</dt><dd><p>Other input data related to the AdES signature generation
+                                        process.</p></dd></dl></div><p>The following schema fragment defines the <span class="bold"><strong>AdESObjectType</strong></span> complex type</p><pre class="programlisting">
+    &lt;xs:complexType name="AdESObjectType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element minOccurs="0" name="SignatureId" type="xs:string"/&gt;
+            &lt;xs:element minOccurs="0" name="AdESObjectBytes"
+                type="xs:base64Binary"/&gt;
+            &lt;xs:element minOccurs="0" name="OtherAdESData" type="csig:AnyType"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+</pre></div></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e1631"></a>5.&nbsp;Signing sign requests and responses</h2></div></div></div><p>This specification supports a scenario where a requesting service requests the signer
+            to sign some data and where the same requesting service receives the signature from the
+            Signing Service. In this scenario the requesting service acts as the presenter of
+            information to be signed to the signer. Implementers of this specification MUST sign
+            requests and responses for signature creation to protect against spoofing and
+            substitution attacks. If a hash of the document to be signed is replaced in a sign
+            request, the signer may end up signing something completely different than what the
+            requesting service presented to the signer.</p><p>When a <code class="literal">&lt;dss:SignRequest&gt;</code> is signed, the signature of that
+            request MUST be placed as the last child element in the
+                <code class="literal">&lt;dss:OptionalInputs&gt;</code> element. The Signing Service MUST check
+            this signature and MUST check that the signature covers all data in the
+                <code class="literal">&lt;dss:SignRequest&gt;</code> element (except for the signature
+            itself).</p><p>When a <code class="literal">&lt;dss:SignResponse&gt;</code> is signed, the signature of that
+            response MUST be placed as the last child element in the
+                <code class="literal">&lt;dss:OptionalOutputs&gt;</code> element. The Signing Service MUST check
+            this signature and MUST check that the signature covers all data in the
+                <code class="literal">&lt;dss:SignResponse&gt;</code> element (except for the signature
+            itself)</p></div><div class="appendix" lang="en"><h2 class="title" style="clear: both"><a name="d0e1658"></a>Appendix A.&nbsp;XML Schema</h2><p>This section provides the full XML Schema declaration for the DSS protocol extension
+            defined in this document. In case of differences between the XML Schema in this appendix
+            and XML Scema fragments in the sections above, the XML Schema in this appendix is the
+            normative one.</p><pre class="programlisting">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    targetNamespace="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
+    xmlns:csig="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"&gt;
+    &lt;xs:import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
+        schemaLocation="saml-schema-assertion-2.0.xsd"/&gt;
+    &lt;xs:element name="SignRequestExtension" type="csig:SignRequestExtensionType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Extension to an OASIS DSS SignRequest, providing additional
+information about a sign request. This element extends the
+dss:OptionalInputs element of a dss:SignRequest.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="SignResponseExtension" type="csig:SignResponseExtensionType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Extension to an OASIS DSS SignResponse, providing additional information
+about a sign response. This element extends the dss:OptionalOutput element
+of a dss:SignResponse.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="SignTasks" type="csig:SignTasksType"/&gt;
+    &lt;xs:element name="SignTaskData" type="csig:SignTaskDataType"/&gt;
+    &lt;xs:element name="RequestTime" type="xs:dateTime"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Time when the request was created&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="Signer" type="saml:AttributeStatementType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The identity of the signer expressed as a sequence of SAML attributes
+using the AttributesType complex type.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="IdentityProvider" type="saml:NameIDType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The SAML EntityID of the Identity Provider that MUST be used to
+authenticate the signer before signing. The EntitID value is specified
+using the saml:NameIDType complex type and MUST include a Format
+attribute with the value urn:oasis:names:tc:SAML:2.0:nameid-format:entity.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="SignRequester" type="saml:NameIDType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The SAML EntityID of the service that sends this request to the signing service.
+The EntityID value is specified using the saml:NameIDType complex type and MUST
+include a Format attribute with the value
+urn:oasis:names:tc:SAML:2.0:nameid-format:entity.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="SignService" type="saml:NameIDType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The SAML EntityID of the service to which this Sign Request is sent.
+The EntityID value is specified using the saml:NameIDType complex type
+and MUST include a Format attribute with the value
+urn:oasis:names:tc:SAML:2.0:nameid-format:entity.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="RequestedSignatureAlgorithm" type="xs:anyURI"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;An identifier of the signature algorithm the requesting service prefers
+when generating the requested signature.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="CertRequestProperties" type="csig:CertRequestPropertiesType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The requested properties of the signature certificate being issued by the
+signature service.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="RequestedCertAttributes" type="csig:RequestedAttributesType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;An optional set of requested attributes that the requesting service prefers
+or requires in the subject name of the generated signing certificate.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="OtherProperties" type="csig:AnyType"/&gt;
+    &lt;xs:element name="SignMessage" type="csig:SignMessageType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Sign message included as a choice of a Base64 encoded string or an ecrypted sign message.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="Message" type="xs:base64Binary"/&gt;
+    &lt;xs:element name="EncryptedMessage" type="saml:EncryptedElementType"/&gt;
+    &lt;xs:element name="OtherRequestInfo" type="csig:AnyType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Any additional inputs to the request extension.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="ResponseTime" type="xs:dateTime"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The time when the sign response was created.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="Request" type="xs:base64Binary"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;An element of type EncodedRequestType with base64Binary base type, holding
+a representation of a complete and signed dss:SignRequest element that is
+related to this sign response. This element MUST be present if signing was
+successful.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="SignerAssertionInfo" type="csig:SignerAssertionInfoType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;An element of type SignerAssertionInfoType holding information about how
+the signer was authenticated by the sign service as well as information
+about subject attribute values present in the SAML assertion authenticating
+the signer, which was incorporated into the signer certificate. This element
+MUST be present if signing was successful.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="ContextInfo" type="csig:ContextInfoType"/&gt;
+    &lt;xs:element name="SamlAssertions" type="csig:SAMLAssertionsType"/&gt;
+    &lt;xs:element name="SignatureCertificateChain" type="csig:CertificateChainType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;An element of type CertificateChainType holding the signer certificate as
+well as other certificates that may be used to validate the signature. This
+element MUST be present if signing was successful and MUST contain all
+certificate that are necessary to compile a complete and functional signed
+document.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="OtherResponseInfo" type="csig:AnyType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Optional sign response elements of type AnyType.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="ToBeSignedBytes" type="xs:base64Binary"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The octets that are hashed and signed when generating the signture. For
+PDF and common modes of CMS this is the DER encoded SignedAttributess field.
+For XML this is the canonicalized SignedInfo octets.&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="AdESObject" type="csig:AdESObjectType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Information in support of AdES signature creation&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="Base64Signature" type="csig:Base64SignatureType"&gt;
+        &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Result signature bytes&lt;/xs:documentation&gt;
+        &lt;/xs:annotation&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name="OtherSignTaskData" type="csig:AnyType"/&gt;
+    &lt;xs:complexType name="SignRequestExtensionType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:RequestTime"/&gt;
+            &lt;xs:element ref="saml:Conditions"&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;Conditions that MUST be evaluated when assessing the validity of and/or
+when using the Sign Request. See Section 2.5 of [SAML2.0]for additional
+information on how to evaluate conditions.
+
+This element MUST include the attributes NotBefore and NotOnOrAfter and
+MUST include the element saml:AudienceRestriction which in turn MUST
+contain one saml:Audience element, specifying the return URL for any
+resulting Sign Response message.&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element ref="csig:Signer" minOccurs="0"/&gt;
+            &lt;xs:element ref="csig:IdentityProvider"/&gt;
+            &lt;xs:element ref="csig:SignRequester"/&gt;
+            &lt;xs:element ref="csig:SignService"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:RequestedSignatureAlgorithm"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:CertRequestProperties"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:SignMessage" maxOccurs="1"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherRequestInfo"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="Version" type="xs:string" use="optional" default="1.1"&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;The version of this specification. If absent, the version value defaults to "1.0".
+This attribute provide means for the receiving service to determine the
+expected syntax of the response based on protocol version.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="SignResponseExtensionType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:ResponseTime"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:Request"/&gt;
+            &lt;xs:element maxOccurs="1" minOccurs="0" ref="csig:SignerAssertionInfo"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:SignatureCertificateChain"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherResponseInfo"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="Version" type="xs:string" default="1.1"&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;The version of this specification. If absent, the version value defaults to "1.0".
+This attribute provide means for the receiving service to determine the
+expected syntax of the response based on protocol version.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="CertificateChainType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" name="X509Certificate" type="xs:base64Binary"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="MappedAttributeType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" minOccurs="0" name="AttributeAuthority"
+                type="saml:NameIDType"/&gt;
+            &lt;xs:element maxOccurs="unbounded" minOccurs="0" name="SamlAttributeName"
+                type="csig:PreferredSAMLAttributeNameType"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="CertAttributeRef" type="xs:string" use="optional"/&gt;
+        &lt;xs:attribute name="CertNameType" default="rdn" use="optional"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="rdn"/&gt;
+                    &lt;xs:enumeration value="san"/&gt;
+                    &lt;xs:enumeration value="sda"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name="FriendlyName" type="xs:string"/&gt;
+        &lt;xs:attribute name="DefaultValue" type="xs:string"/&gt;
+        &lt;xs:attribute name="Required" type="xs:boolean" default="false"/&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="RequestedAttributesType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" minOccurs="1" name="RequestedCertAttribute"
+                type="csig:MappedAttributeType"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="AnyType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="SAMLAssertionsType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" name="Assertion" type="xs:base64Binary"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="PreferredSAMLAttributeNameType"&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base="xs:string"&gt;
+                &lt;xs:attribute name="Order" type="xs:int" default="0"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="SignTasksType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element maxOccurs="unbounded" ref="csig:SignTaskData"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="SignTaskDataType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:ToBeSignedBytes"/&gt;
+            &lt;xs:element maxOccurs="1" minOccurs="0" ref="csig:AdESObject"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:Base64Signature"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherSignTaskData"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute name="SignTaskId" type="xs:string"&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;A distinguishing id of this sign task which is used to distinguish between
+multiple sign tasks in the same request&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name="SigType" use="required"&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;Enumeration of the type of signature the canonical signed information is
+associated with.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="XML"/&gt;
+                    &lt;xs:enumeration value="PDF"/&gt;
+                    &lt;xs:enumeration value="CMS"/&gt;
+                    &lt;xs:enumeration value="ASiC"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute default="None" name="AdESType"&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;Specifies the type of AdES signature. BES means that the signing certificate
+hash must be covered by the signature. EPES means that the signing
+certificate hash and a signature policy identifier must be covered by
+the signature.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="None"/&gt;
+                    &lt;xs:enumeration value="BES"/&gt;
+                    &lt;xs:enumeration value="EPES"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute name="ProcessingRules" type="xs:anyURI" use="optional"&gt;
+            &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;An identifier for processing rules that must be executed by the signature
+service when processing data in this element.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="AdESObjectType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element minOccurs="0" name="SignatureId" type="xs:string"/&gt;
+            &lt;xs:element minOccurs="0" name="AdESObjectBytes" type="xs:base64Binary"/&gt;
+            &lt;xs:element minOccurs="0" name="OtherAdESData" type="csig:AnyType"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="CertRequestPropertiesType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element minOccurs="0" ref="saml:AuthnContextClassRef"&gt;
+                &lt;xs:annotation&gt;
+                    &lt;xs:documentation&gt;The a URI reference to the requested level of assurance with which the
+certificate subject should be authenticated.&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element minOccurs="0" ref="csig:RequestedCertAttributes"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:OtherProperties"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute default="PKC" name="CertType"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="PKC"/&gt;
+                    &lt;xs:enumeration value="QC"/&gt;
+                    &lt;xs:enumeration value="QC/SSCD"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="SignerAssertionInfoType"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element ref="csig:ContextInfo"/&gt;
+            &lt;xs:element ref="saml:AttributeStatement"/&gt;
+            &lt;xs:element minOccurs="0" ref="csig:SamlAssertions"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="ContextInfoType"&gt;
+        &lt;xs:sequence maxOccurs="1" minOccurs="0"&gt;
+            &lt;xs:element name="IdentityProvider" type="saml:NameIDType"/&gt;
+            &lt;xs:element name="AuthenticationInstant" type="xs:dateTime"/&gt;
+            &lt;xs:element ref="saml:AuthnContextClassRef"/&gt;
+            &lt;xs:element minOccurs="0" name="ServiceID" type="xs:string"/&gt;
+            &lt;xs:element minOccurs="0" name="AuthType" type="xs:string"/&gt;
+            &lt;xs:element minOccurs="0" name="AssertionRef" type="xs:string"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="Base64SignatureType"&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base="xs:base64Binary"&gt;
+                &lt;xs:attribute name="Type" type="xs:anyURI"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:complexType name="SignMessageType"&gt;
+        &lt;xs:choice&gt;
+            &lt;xs:element ref="csig:Message"/&gt;
+            &lt;xs:element ref="csig:EncryptedMessage"/&gt;
+        &lt;/xs:choice&gt;
+        &lt;xs:attribute name="MustShow" type="xs:boolean" default="false"/&gt;
+        &lt;xs:attribute name="DisplayEntity" type="xs:anyURI"/&gt;
+        &lt;xs:attribute name="MimeType" default="text"&gt;
+            &lt;xs:simpleType&gt;
+                &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:enumeration value="text/html"/&gt;
+                    &lt;xs:enumeration value="text"/&gt;
+                    &lt;xs:enumeration value="text/markdown"/&gt;
+                &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:anyAttribute namespace="##other" processContents="lax"/&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;
+</pre></div></div></body></html>

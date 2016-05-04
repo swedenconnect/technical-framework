@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--   
+For online publishing use:
+<?xml-stylesheet type="text/xsl" 
+href="http://docs.oasis-open.org/templates/DocBook/spec-0.5/stylesheets/oasis-specification-html.xsl"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" 
+
+For offline publishing use:
+<?xml-stylesheet type="text/xsl" 
+href="file:///z:/oasis/spec-0.5/stylesheets/oasis-specification-html-offline.xsl"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"file:///z:/oasis/spec-0.5/docbook/docbookx.dtd" 
+-->
+<?xml-stylesheet type="text/xsl" 
+href="file:///z:/oasis/spec-0.5/stylesheets/oasis-specification-html-offline.xsl"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"file:///z:/oasis/spec-0.5/docbook/docbookx.dtd" 
+[
+<!--the document properties-->
+<!ENTITY name "spectools-docbook-template">
+<!ENTITY pversion "0.4">
+<!ENTITY version "0.5">
+<!ENTITY stage "wd03">
+<!ENTITY standard "{stage and revision}">
+<!ENTITY this-loc   "http://docs.oasis-open.org/templates/DocBook/spec-&version;/template">
+<!ENTITY previous-loc "http://docs.oasis-open.org/templates/DocBook/spec-&pversion;/template">
+<!ENTITY latest-loc   "http://docs.oasis-open.org/templates/DocBook/oasis-specification/template">
+<!ENTITY pubdate "{8 July 2010}">
+]>
+<article status="&standard;">
+
+<articleinfo>
+
+<title>{Specification Title Version X.X}</title>
+
+<releaseinfo role="cvs">
+<?nospell-start?>$Id: spectools-docbook-template-wd03.xml,v 1.4 2010/07/08 12:28:15 admin Exp $<?nospell-end?>
+</releaseinfo>
+
+<productname>&name;</productname>
+<productnumber>&stage;</productnumber>
+
+<releaseinfo role="OASIS-specification-this-authoritative">&this-loc;/&name;-&stage;.html</releaseinfo>
+<releaseinfo role="OASIS-specification-this">&this-loc;/&name;-&stage;.pdf</releaseinfo>
+<releaseinfo role="OASIS-specification-this">&this-loc;/&name;-&stage;.xml</releaseinfo>
+
+<releaseinfo role="OASIS-specification-previous">&previous-loc;/&name;.html</releaseinfo>
+<releaseinfo role="OASIS-specification-previous">&previous-loc;/&name;.pdf</releaseinfo>
+<releaseinfo role="OASIS-specification-previous">&previous-loc;/&name;.xml</releaseinfo>
+
+<releaseinfo role="OASIS-specification-latest-authoritative">&latest-loc;/&name;.html</releaseinfo>
+<releaseinfo role="OASIS-specification-latest">&latest-loc;/&name;.pdf</releaseinfo>
+<releaseinfo role="OASIS-specification-latest">&latest-loc;/&name;.xml</releaseinfo>
+<?nospell-end?>
+<releaseinfo role="committee"><ulink url="http://www.oasis-open.org/committees/">OASIS {official name of technical committee} TC</ulink></releaseinfo>
+
+<authorgroup>
+<editor>
+  <firstname>{Jane}</firstname><surname>{Doe}</surname>
+  <affiliation>
+    <orgname>{Example Corporation}</orgname>
+    <address><email>{jane.doe@example.com}</email></address>
+  </affiliation>
+</editor>
+<author>
+  <firstname>{John}</firstname><surname>{Able}</surname>
+  <affiliation>
+    <orgname>{Other Example Corporation}</orgname>
+  </affiliation>
+</author>
+<othercredit>
+  <firstname>{Mary}</firstname><surname>{Baker}</surname>
+  <affiliation>
+    <address><email>{mary.baker@example.com}</email></address>
+  </affiliation>
+</othercredit>
+<othercredit>
+  <firstname>{James}</firstname><surname>{Butcher}</surname>
+  <affiliation>
+    <address><email>{james.butcher@example.com}</email></address>
+  </affiliation>
+</othercredit>
+</authorgroup>
+
+<pubdate>&pubdate;</pubdate>
+
+<copyright><year>2010</year>
+<holder>OASIS Open, Inc. All Rights Reserved.</holder></copyright>
+
+<legalnotice role="related"><title>Related Work</title>
+<para>This specification replaces or supersedes:</para>
+<itemizedlist spacing="compact">
+<listitem><para>
+{specification replaced by this standard}</para>
+</listitem>
+<listitem><para>
+{specification replaced by this standard}
+</para>
+</listitem>
+</itemizedlist>
+<para>This specification is related to:</para>
+<itemizedlist spacing="compact">
+<listitem><para>
+{related specifications}</para>
+</listitem>
+<listitem><para>
+{related specifications}</para>
+</listitem>
+</itemizedlist>
+</legalnotice>
+
+
+<legalnotice role="namespaces"><title>Declared XML Namespaces</title>
+<para><ulink url="http://docs.oasis-open.org/">http://docs.oasis-open.org/</ulink></para>
+
+</legalnotice>
+
+<abstract>
+<para>{This specification defines...}</para>
+</abstract>
+
+<legalnotice role="status"><title>Status</title>
+
+<para>{Describe the status and stability of the specification here.}</para>
+
+<para>This document was last revised or approved by the {TC name | membership of OASIS} on the above date. The level of approval is also listed above. Check the current location noted above for possible later revisions of this document. This document is updated periodically on no particular schedule.</para>
+<para>Technical Committee members should send comments on this specification to the Technical Committee's email list. Others should send comments to the Technical Committee by using the "Send A Comment" button on the Technical Committee's web page at <ulink url="http://www.oasis-open.org/committees/{short name}">http://www.oasis-open.org/committees/{short name}</ulink>.</para>
+<para>For information on whether any patents have been disclosed that may be essential to implementing this specification, and any offers of patent licensing terms, please refer to the Intellectual Property Rights section of the Technical Committee web page (<ulink url="http://www.oasis-open.org/committees/{TC short name}ipr.php">http://www.oasis-open.org/committees/{TC short name}ipr.php</ulink>).</para>
+<para>The non-normative errata page for this specification is located at <ulink url="http://www.oasis-open.org/committees/{TC short name}">http://www.oasis-open.org/committees/{TC short name}</ulink>.</para>
+</legalnotice>
+
+<legalnotice role="notices"><title>Notices</title>
+<para>Copyright &#169; OASIS&#174; Open 2010. All Rights Reserved. 
+</para>
+<para>All capitalized terms in the following text have the meanings assigned to them in the OASIS Intellectual Property Rights Policy (the "OASIS IPR Policy"). The full Policy may be found at the OASIS website.</para>
+<para>This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published, and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this section are included on all such copies and derivative works. However, this document itself may not be modified in any way, including by removing the copyright notice or references to OASIS, except as needed for the purpose of developing any document or deliverable produced by an OASIS Technical Committee (in which case the rules applicable to copyrights, as set forth in the OASIS IPR Policy, must be followed) or as required to translate it into languages other than English.</para> 
+<para>The limited permissions granted above are perpetual and will not be revoked by OASIS or its successors or assigns.</para>
+<para>This document and the information contained herein is provided on an "AS IS" basis and OASIS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY OWNERSHIP RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.</para> 
+<para>OASIS requests that any OASIS Party or any other party that believes it has patent claims that would necessarily be infringed by implementations of this OASIS Committee Specification or OASIS Standard, to notify OASIS TC Administrator and provide an indication of its willingness to grant patent licenses to such patent claims in a manner consistent with the IPR Mode of the OASIS Technical Committee that produced this specification.</para>
+<para>OASIS invites any party to contact the OASIS TC Administrator if it is aware of a claim of ownership of any patent claims that would necessarily be infringed by implementations of this specification by a patent holder that is not willing to provide a license to such patent claims in a manner consistent with the IPR Mode of the OASIS Technical Committee that produced this specification. OASIS may include such claims on its website, but disclaims any obligation to do so.</para>
+<para>OASIS takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this document or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any effort to identify any such rights. Information on OASIS' procedures with respect to rights in any document or deliverable produced by an OASIS Technical Committee can be found on the OASIS website. Copies of claims of rights made available for publication and any assurances of licenses to be made available, or the result of an attempt made to obtain a general license or permission for the use of such proprietary rights by implementers or users of this OASIS Committee Specification or OASIS Standard, can be obtained from the OASIS TC Administrator. OASIS makes no representation that any information or list of intellectual property rights will at any time be complete, or that any claims in such list are, in fact, Essential Claims.</para>
+<para>The name "OASIS" is a trademark of <ulink url="http://www.oasis-open.org">OASIS</ulink>, the owner and developer of this specification, and should be used only to refer to the organization and its official outputs. OASIS welcomes reference to, and implementation and use of, specifications, while reserving the right to enforce its marks against misleading uses. Please see <ulink url="http://www.oasis-open.org/who/trademark.php">http://www.oasis-open.org/who/trademark.php</ulink> for above guidance.</para>
+</legalnotice>
+
+</articleinfo>
+
+<section>
+<title>Introduction</title>
+
+<para>This is a pro-forma XML instance of the DocBook <xref linkend="docbook"/> vocabulary illustrating the components of an OASIS standards-related document.  This XML file also includes the use of XML stylesheet association <xref linkend="xml-assoc"/>.</para>
+<para>The markup is suitable for publishing according to OASIS conventions by using the available OASIS Specification Publishing in DocBook XML stylesheets <xref linkend="oasis-spec"/>.  Please review the publishing information for details on the environment and this template.</para>
+<para>All text is normative unless otherwise labeled.</para>
+
+<section><title>Terminology</title>
+
+<section>
+<title>
+Key words</title>
+<para>The key words <glossterm>must</glossterm>, <glossterm>must
+not</glossterm>, <glossterm>required</glossterm>,
+<glossterm>shall</glossterm>, <glossterm>shall not</glossterm>,
+<glossterm>should</glossterm>, <glossterm>should not</glossterm>,
+<glossterm>recommended</glossterm>, <glossterm>may</glossterm>, and
+<glossterm>optional</glossterm> are to be
+interpreted as described in <xref linkend="rfc2119"/>. Note that for
+reasons of style, these words are not capitalized in this
+document.</para>
+</section>
+
+<section>
+<title>
+Definitions</title>
+<variablelist>
+<varlistentry>
+<term>
+term</term>
+<listitem><para>
+Definition</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>
+term</term>
+<listitem><para>
+Definition</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</section>
+
+<section>
+<title>
+Key concepts</title>
+<variablelist>
+<varlistentry><term>
+concept</term>
+<listitem><para>
+Definition</para>
+</listitem>
+</varlistentry>
+<varlistentry><term>
+concept</term>
+<listitem><para>
+Definition</para>
+</listitem>
+</varlistentry>
+<varlistentry><term>
+concept</term>
+<listitem><para>
+Definition</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</section>
+
+</section>
+<section>
+<title>Normative References</title>
+
+<!--note that at least one paragraph (and it can be empty) is needed to satisfy the DocBook document model-->
+<para></para>
+
+<bibliography><title></title>
+
+<bibliomixed id="docbook"><abbrev>DocBook</abbrev>OASIS Committee Draft 4.4 <title>DocBook XML</title>
+17 January 2005
+<citetitle><ulink url="http://www.docbook.org/specs/cd-docbook-docbook-4.4.html">http://www.docbook.org/specs/cd-docbook-docbook-4.4.html</ulink></citetitle></bibliomixed>
+
+<bibliomixed id="rfc2119"><abbrev>RFC 2119</abbrev>S. Bradner,
+<title>Key words for use in RFCs to Indicate Requirement Levels</title>,
+<citetitle><ulink url="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</ulink></citetitle>
+IETF (Internet Engineering Task Force) RFC 2119, March 1997.</bibliomixed>
+
+</bibliography>
+
+</section>
+<section>
+<title>Non-Normative References</title>
+
+<!--note that at least one paragraph (and it can be empty) is needed to satisfy the DocBook document model-->
+<para></para>
+
+<bibliography><title></title>
+
+<bibliomixed id="oasis-spec"><abbrev>oasis-spec</abbrev>OASIS Working Draft 0.5 <title>OASIS Specification Publishing in DocBook XML</title>
+8 July 2010
+<citetitle><ulink url="http://docs.oasis-open.org/templates/DocBook/spec-0.5/oasis-specification-0.5.html">http://docs.oasis-open.org/templates/DocBook/spec-0.5/oasis-specification-0.5.html</ulink></citetitle></bibliomixed>
+
+<bibliomixed id="xml-assoc"><abbrev>xml-assoc</abbrev>James Clark
+<title>Associating Style Sheets with XML documents
+Version 1.0</title>,
+<citetitle><ulink url="http://www.w3.org/1999/06/REC-xml-stylesheet-19990629">http://www.w3.org/1999/06/REC-xml-stylesheet-19990629</ulink></citetitle>
+W3C Recommendation 29 June 1999.</bibliomixed>
+
+</bibliography>
+</section>
+</section>
+<section>
+<title>Section Title</title>
+<para>The body of the standard goes here.</para>
+<para>This level goes into the table of contents.</para>
+<section>
+<title>Sub-section Title</title>
+<para>This level goes into the table of contents.</para>
+<section>
+<title>Sub-sub-section Title</title>
+<para>This level goes into the table of contents.</para>
+<section>
+<title>Sub-sub-sub-section Title</title>
+<para>This level and others do not go into the table of contents.</para>
+<section>
+<title>Sub-sub-sub-sub-section Title</title>
+<para>This level and others do not go into the table of contents.</para>
+</section>
+</section>
+</section>
+</section>
+</section>
+
+<section>
+<title>Conformance</title>
+<para>The last section contains the conformance clauses/statements.</para>
+</section>
+
+<appendix>
+<title>Normative Annex</title>
+<para>Normative appendices are not marked as non-normative using an attribute.</para>
+</appendix>
+
+<appendix role="non-normative">
+<title>Non-normative Annex</title>
+<para>Non-normative appendices are marked as such using an attribute.</para>
+</appendix>
+
+<appendix role="non-normative">
+<title>Acknowledgements</title>
+<para>In a typical OASIS work product one might wish to list committee participants in a non-normative annex (markup shown above in the normative annex example) using wording along the line of "The following individuals have participated in the creation of this specification and are gratefully acknowledged:"</para>
+
+<itemizedlist spacing="compact">
+<listitem><para>Mary Baker, Associate Member</para></listitem>
+<listitem><para>Jane Doe, Example Corporation Member</para></listitem>
+<listitem><para>John Able, Other Example Corporation Member</para></listitem>
+</itemizedlist>
+
+<para>Note that the itemized list uses <sgmltag>spacing="compact"</sgmltag> to remove the space between list items in the printed result, not the HTML result).</para>
+
+</appendix>
+
+<appendix id="a.revhistory" role="non-normative">
+<title>Revision History</title>
+
+<para>
+[optional; should NOT be included in OASIS standards]
+</para>
+<para>
+<revhistory>
+<revision>
+<revnumber>0.5</revnumber>
+<date>8 July 2010</date>
+<authorinitials>gkh</authorinitials>
+<revremark>New template structure and filename conventions; mimic latest XHTML template</revremark>
+</revision>
+<revision>
+<revnumber>0.4</revnumber>
+<date>03 Feb 2006</date>
+<authorinitials>gkh</authorinitials>
+<revremark>New IPR and use of revised 0.4 specification publishing environment; mimic latest Word and Open Office templates</revremark>
+</revision>
+<revision>
+<revnumber>03</revnumber>
+<date>15 Aug 2002</date>
+<authorinitials>ndw</authorinitials>
+<revremark>Changed copyright holder.</revremark>
+</revision>
+<revision>
+<revnumber>02</revnumber>
+<date>28 May 2002</date>
+<authorinitials>ndw</authorinitials>
+<revremark>Added IPR section.</revremark>
+</revision>
+<revision>
+<revnumber>01</revnumber>
+<date>26 Apr 2002</date>
+<authorinitials>ndw</authorinitials>
+<revremark>Reworked after conversations with Eve.</revremark>
+</revision>
+<revision>
+<revnumber>00</revnumber>
+<date>25 Apr 2002</date>
+<authorinitials>ndw</authorinitials>
+<revremark>First draft.</revremark>
+</revision>
+</revhistory>
+</para>
+
+</appendix>
+
+</article>
+<?nospell-end?>
+
