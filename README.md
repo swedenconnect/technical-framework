@@ -50,15 +50,18 @@ Updates to the current version of the specification should be performed in the "
 
 #### Rules for updating specifications
 
-- Only work in the **tracked-changes** directory and make sure that MS Word's "Track changes" feature is turned on.
+- When editing a file make sure that MS Word's "Track changes" feature is turned on.
 
 - For each update to a specification that has any real meaning also make a note about it in the "Changes between versions" section of the specification.
+
 - For each specification being updated make sure that its version is reflected in versions.md.
-- Before a pull request (or commit and push) do the following:
-  
-  + Make sure there are no misspellings or typos.
-  + Update the date on the first page of each specification that has been updated.
-  + Copy each modified file from the **tracked-changes** directory to its parent directory and change that files "highlight changes"-settings so that no changes are visible on screen or on printed documents. The reason for this is that the main directory of the branch should contain more readable specifications intended for public viewing.
+
+- Leave the **tracked-changes** directory empty until a merge to master is made (i.e., when a new version of the Technical Framework is released).
+
+- Before a merge to master (release), do the following:
+
+  + Copy all files to the **tracked changes** directory.
+  + For each specification in the main directory, go through it and approve all changes and then turn of "highlight changes".
   
 - If changes are made to the OASIS-document, make sure to generate a word file named `ELN-0609 - Bilaga Tekniskt ramverk - DSS Extension for Federated Signing Services.docx` before pushing an update to the remote repo.
   
