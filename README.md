@@ -53,6 +53,7 @@ Updates to the current version of the specification should be performed in the "
 - Only work in the **tracked-changes** directory and make sure that MS Word's "Track changes" feature is turned on.
 
 - For each update to a specification that has any real meaning also make a note about it in the "Changes between versions" section of the specification.
+- For each specification being updated make sure that its version is reflected in versions.md.
 - Before a pull request (or commit and push) do the following:
   
   + Make sure there are no misspellings or typos.
