@@ -52,8 +52,8 @@ Updates to the current version of the specification should be performed in the "
 
 Older version of the specification are stored in the following branches:
 
-+ april-2014 - For the June 2014 release
-+ june-2015 - For the June 2015 release
++ june-2014 - For the June 2014 release
++ april-2015 - For the April 2015 release
 + october-2015 - For the October 2015 release (this is also the current release/master).
 
 
