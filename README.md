@@ -48,6 +48,20 @@ The Swedish eID Framework comprises a Discovery Service that has as its purpose 
 
 Updates to the current version of the specification should be performed in the "october-2015-updates" branch except for any changes that need to be performed in the "Updates to the Swedish eID Framework.docx" document.
 
+#### Rules for updating specifications
+
+- Only work in the **tracked-changes** directory and make sure that MS Word's "Track changes" feature is turned on.
+
+- For each update to a specification that has any real meaning also make a note about it in the "Changes between versions" section of the specification.
+- Before a pull request (or commit and push) do the following:
+  
+  + Make sure there are no misspellings or typos.
+  + Update the date on the first page of each specification that has been updated.
+  + Copy each modified file from the **tracked-changes** directory to its parent directory and change that files "highlight changes"-settings so that no changes are visible on screen or on printed documents. The reason for this is that the main directory of the branch should contain more readable specifications intended for public viewing.
+  
+- If changes are made to the OASIS-document, make sure to generate a word file named `ELN-0609 - Bilaga Tekniskt ramverk - DSS Extension for Federated Signing Services.docx` before pushing an update to the remote repo.
+  
+
 ## Older versions
 
 Older version of the specification are stored in the following branches:
