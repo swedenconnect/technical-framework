@@ -25,3 +25,11 @@ I princip räcker det med ProvisionalId (+ quality), samt namn och födelsedatum
 
 Och alltså inte berika intyg med ProvisionalID (och personnummer). Är detta ett relevant use-case?Är ett sådant ”attribute set” relevant?
 
+
+### Ska vi införa ett attribut för notified/non-notified?
+
+Denna information får vi inte från eIDAS, men vi kanske kan upprätthålla ett register som håller denna information.
+
+Måste tas upp med expertgruppen igen.
+
+
