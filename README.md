@@ -4,11 +4,13 @@ This repository comprises the specifications of the Swedish eID Framework.
 
 ## About
 
-The specifications in this branch (october-2015-updates) are draft updates to the latest official release of the Swedish eID Framework (found in the master branch and in the [releases](https://github.com/elegnamnden/technical-framework/releases) section of this repository.
+The specifications in this branch (october-2015-updates) are draft updates to the latest official release of the Swedish eID Framework (found in the master branch and in the [releases](https://github.com/elegnamnden/technical-framework/releases) section of this repository).
 
 The changes made to the specifications aim to integrate the eIDAS Framework into the Swedish eID Framework. Read more about eIDAS and the Swedish eID Framework on the [eIDAS Wiki](https://github.com/elegnamnden/eidas/wiki).
 
 ### Draft releases
+
+* [Draft release 2016-08-30](https://github.com/elegnamnden/technical-framework/releases/tag/20160830-draft-release)
 
 ### Feedback
 
@@ -58,7 +60,9 @@ The Swedish eID Framework comprises a Discovery Service that has as its purpose 
 
 #### eIDAS Constructed Attribute Specification for the Swedish eID Framework
 
-This document extends “Attribute Specification for the Swedish eID Framework”, providing specifications for constructed attributes.The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes) delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
+This document extends “Attribute Specification for the Swedish eID Framework”, providing specifications for constructed attributes.
+
+The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes) delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
 
 ## Updates to the current version of the specifications
 
