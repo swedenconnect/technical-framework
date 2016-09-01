@@ -21,9 +21,13 @@ Ponera att en myndighet accepterar eIDAS-inloggningar, men att myndigheten redan
 
 I princip räcker det med ProvisionalId (+ quality), samt namn och födelsedatum, och ev. personnummer/samordningsnummer, för en myndighet. Hur ställer vi oss att skicka med alla eIDAS-attribut också? Måste vi det? Kan en myndighet välja att bara få ”minimum set”, eller måste vi skicka på dem allt?
 
+Svar: Det blir onödigt krångligt att upprätthålla olika attributprofiler för samma typ av legitimering. Slutsatsen är att vi inkluderar "allt vi får + svenska tillägg och representationer" i intygen. Sedan är det upp till konsumenten att plocka ut relevanta attribut.
+
 ### Bara vidarebefordra eIDAS-attributen?
 
 Och alltså inte berika intyg med ProvisionalID (och personnummer). Är detta ett relevant use-case?Är ett sådant ”attribute set” relevant?
+
+Svar: För enkelhetens skull har vi **en** attributprofil för "eIDAS natural person". Se föregående svar.
 
 
 ### Ska vi införa ett attribut för notified/non-notified?
@@ -31,5 +35,7 @@ Och alltså inte berika intyg med ProvisionalID (och personnummer). Är detta et
 Denna information får vi inte från eIDAS, men vi kanske kan upprätthålla ett register som håller denna information.
 
 Måste tas upp med expertgruppen igen.
+
+> I gällande utkast använder vi URI:er som skickas i RequestedAuthenticationContext samt tas emot som ett AuthenticationContext. Dessa URI:er speglar eIDAS tillitsnivåer med tillägget att "notified" kan specificeras.
 
 
