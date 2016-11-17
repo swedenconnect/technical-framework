@@ -10,6 +10,7 @@ The changes made to the specifications aim to integrate the eIDAS Framework into
 
 ### Draft releases
 
+* [Draft release 2016-11-16](https://github.com/elegnamnden/technical-framework/releases/tag/20161116-draft-release)
 * [Draft release 2016-08-30](https://github.com/elegnamnden/technical-framework/releases/tag/20160830-draft-release)
 
 ### Feedback
