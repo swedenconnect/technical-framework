@@ -12,7 +12,7 @@
  ELN-0607 - Bilaga Tekniskt ramverk - Implementation Profile for using DSS in Central Signing Services.docx | 1.1
  ELN-0608 - Bilaga Tekniskt ramverk - Certificate Profile for Central Signing Services.docx | 1.0
  ELN-0609 - Bilaga Tekniskt ramverk - DSS Extension for Federated Signing Services.docx | 1.1
- ELN-0610 - Bilaga Tekniskt ramverk - Discovery within the Swedish eID Framework.docx | 1.1
+ ~~ELN-0610 - Bilaga Tekniskt ramverk - Discovery within the Swedish eID Framework.docx~~ | ~~1.1~~
  ELN-0611 - Bilaga Tekniskt ramverk - eIDAS Attribute Mapping Specification for the Swedish eID Framework | 1.0 (draft)
  
 ### Current version of update document ###

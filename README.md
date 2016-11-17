@@ -56,7 +56,11 @@ This specifications defines elements that extends the `<dss:SignRequest>` and `<
 
 #### Discovery within the Swedish eID Framework
 
-The Swedish eID Framework comprises a Discovery Service that has as its purpose to supply Service Providers with user selected Identity Providers for authentication within the federation. This specifications defines how discovery is implemented.
+Current version is deprecated. Currently the Swedish eID Framework does not impose any requirements on how service discovery should be performed.
+
+Work is ongoing to present an updated specification for discovery.
+
+> The Swedish eID Framework comprises a Discovery Service that has as i<ts purpose to supply Service Providers with user selected Identity Providers for authentication within the federation. This specifications defines how discovery is implemented.
 
 #### eIDAS Constructed Attribute Specification for the Swedish eID Framework
 
