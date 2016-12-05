@@ -4,6 +4,10 @@ This repository comprises the specifications of the Swedish eID Framework.
 
 > Also see the [october-2015-updates](https://github.com/elegnamnden/technical-framework/tree/october-2015-updates) branch for draft specifications of the currently released version (the master branch).
 
+## Feedback and Questions
+
+Use the [Issues](https://github.com/elegnamnden/technical-framework/issues) section to ask questions or start a new discussion thread.
+
 ## Contents
 
 The master branch of the repository contains the currently active specifications.
