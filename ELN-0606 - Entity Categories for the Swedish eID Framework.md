@@ -2,9 +2,10 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.4 - 2015-10-05
+### Version 1.5 - 2016-11-16
+#### *Draft version*
 
-*ELN-0606*
+*ELN-0606-v1.5*
 
 ---
 
@@ -12,31 +13,33 @@
 
 1. [**Introduction**](#introduction)
 
-  1.1. [Requirements Notation](#requirements-notation)
+    1.1. [Requirements Notation](#requirements-notation)
 
-  1.2. [References to SAML 2.0 Standards and Profiles](#references-to-saml)
+    1.2. [References to SAML 2.0 Standards and Profiles](#references-to-saml-20-standards-and-profiles)
 
-  1.3. [Consuming and Providing Services](#consuming-and-providing-services)
+    1.3. [Consuming and Providing Services](#consuming-and-providing-services)
 
-  1.4. [Use in Discovery Services](#use-in-discovery-services)
+    1.4. [Use in Discovery](#use-in-discovery)
 
-  1.5. [Representation of Entity Categories in Metadata](#representation)
+    1.5. [Representation of Entity Categories in Metadata](#representation-of-entity-categories-in-metadata)
 
 2. [**Definitions for Service Entity Categories**](#definitions-for-service-entity-categories)
 
-  2.1. [loa3-pnr](#loa3-pnr)
+    2.1. [loa3-pnr](#loa3-pnr)
 
-  2.2. [loa2-pnr](#loa2-pnr)
+    2.2. [loa2-pnr](#loa2-pnr)
 
-  2.3. [loa4-pnr](#loa4-pnr)
+    2.3. [loa4-pnr](#loa4-pnr)
+
+    2.4. [eidas-naturalperson](#eidas-naturalperson)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
-  3.1. [mobile-auth](#mobile-auth)
+    3.1. [mobile-auth](#mobile-auth)
 
 4. [**Definitions for Service Type Entity Categories**](#definitions-for-service-type-entity-categories)
 
-  4.1. [sigservice](#sigservice)
+    4.1. [sigservice](#sigservice)
 
 5. [**References**](#references)
 
@@ -102,7 +105,7 @@ identity. Deviating may limit a deployment's ability to technically
 interoperate without additional negotiation, and should be undertaken
 with caution.
 
-<a name="references-to-saml"></a>
+<a name="references-to-saml-20-standards-and-profiles"></a>
 ### 1.2. References to SAML 2.0 Standards and Profiles
 
 When referring to elements from the SAML 2.0 core specification
@@ -150,21 +153,20 @@ These differences are outlined in the following table:
 | **Service Property** | Represents a property of this service. | Represents the ability to deliver assertions to a consuming service that has the declared property. | All properties declared by the consuming service MUST be declared by the providing service. |
 | **Service Type** | Declares the type of service provided by this consuming service. | Not applicable. | No matching rule. |
 
-<a name="use-in-discovery-services"></a>
-### 1.4. Use in Discovery Services
+<a name="use-in-discovery"></a>
+### 1.4. Use in Discovery
 
 Entity Categories in metadata are declarations of requirements and
-capabilities of Service Providers and Identity Providers. The Discovery
-Service for the federation makes use of these declared Entity Categories
-when performing filtering, i.e., when deciding which Identity Providers
-to present for the end-user when the Service Provider directs he or she
-to the Discovery Service. The filtering algorithm is very simple:
+capabilities of Service Providers and Identity Providers. A discovery
+process may make use of these declared Entity Categories when performing
+filtering, i.e., when deciding which Identity Providers to present for
+the end-user. The filtering algorithm is very simple:
 
 For a Service Provider requesting discovery its metadata entry is
 scanned for Entity Category identifiers of the type Service Entity
 Category and Service Property. The algorithm then iterates over all
 Identity Providers found in the metadata repository for the
-federation. The Discovery Service SHOULD display Identity Providers as
+federation. The discovery process SHOULD display Identity Providers as
 a plausible choice, if and only if, they have declared;
 
 -   at least one of the Service Entity Category identifiers declared by
@@ -173,10 +175,7 @@ a plausible choice, if and only if, they have declared;
 -   all of the Service Property identifiers declared by the Service
     Provider.
 
-See \[EidDiscovery\] for an elaboration of the Discovery Service
-matching logic.
-
-<a name="representation"></a>
+<a name="representation-of-entity-categories-in-metadata"></a>
 ### 1.5. Representation of Entity Categories in Metadata
 
 Entity categories defined in this document are placed in an entity’s
@@ -290,6 +289,21 @@ declared a particular service entity category.
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
 > Natural Personal Identity with Civic Registration Number (personnummer)
 
+<a name="eidas-naturalperson"></a>
+### 2.4. eidas-naturalperson
+
+**URL**: `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson`
+
+**Description**: User authentication according to any of the eIDAS assurance levels and attribute release according to “eIDAS Natural Person Attribute Set” (ELN-AP-eIDAS-NatPer-01).
+
+**LoA-identifier**:   Not applicable
+> It does not make sense to specify the level of assurance for a Service
+> Entity Categories intended for eIDAS since this information is not known
+> to the Swedish eIDAS-node.
+
+**Attribute requirements**: ELN-AP-eIDAS-NatPer-01 (`http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`)
+> eIDAS Natural Person Attribute Set
+
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
 
@@ -317,11 +331,11 @@ Note that an Identity Provider may of course support authentication for
 both desktop and mobile users. In these cases the service must be able
 to display end user interfaces for both types of clients.
 
-The Discovery Service will use this Service Property when performing
-filtering of Identity Providers to display, as described in [1.4](#use-in-discovery-services), “[Use in
-Discovery Services](#use-in-discovery-services)”. This means that a consuming service may include the
-mobile-auth category in its metadata in order to have the Discovery
-Service especially displaying Identity Providers that offer
+A discovery process will use this Service Property when performing
+filtering of possible Identity Providers, as described in [1.4](#use-in-discovery-services), “[Use in
+Discovery](#use-in-discovery-services)”. This means that a consuming service may include the
+mobile-auth category in its metadata in order to have the discovery
+process especially displaying Identity Providers that offer
 authentication using mobile devices.
 
 See \[EidDiscovery\] for a more extensive explanation of the use of the
@@ -346,52 +360,48 @@ All Service Type identifiers are prefixed with
 <a name="references"></a>
 ## 5. References
 
-<a name="rfc2119"></a>**\[RFC2119\]**
-
+**\[RFC2119\]**
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
 
-<a name="saml2core"></a>**\[SAML2Core\]**
-
+**\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
-<a name="saml2meta"></a>**\[SAML2Meta\]**
-
+**\[SAML2Meta\]**
 > [OASIS Standard, Metadata for the OASIS Security Assertion Markup
 > Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)
 
-<a name="saml2metaattr"></a>**\[SAML2MetaAttr\]**
-
+**\[SAML2MetaAttr\]**
 > [OASIS Committee Specification, SAML V2.0 Metadata Extension for
 > Entity Attributes Version 1.0, August
 > 2009.](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)
 
-<a name="entcat"></a>**\[EntCat\]**
-
+**\[EntCat\]**
 > [The Entity Category SAML Entity Metadata Attribute Type, March
 > 2012.](http://macedir.org/entity-category/)
 
-<a name="eidtillit"></a>**\[EidTillit\]**
-
+**\[EidTillit\]**
 > Tillitsramverk för Svensk E-legitimation.
 
-<a name="eidregistry"></a>**\[EidRegistry\]**
-
+**\[EidRegistry\]**
 > Registry for identifiers assigned by the Swedish e-identification board.
 
-<a name="eidattributes"></a>**\[EidAttributes\]**
-
+**\[EidAttributes\]**
 > Attribute Specification for the Swedish eID Framework.
-
-<a name="eiddiscovery"></a>**\[EidDiscovery\]**
-
-> Discovery within the Swedish eID Framework.
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
+
+**Changes between version 1.4 and version 1.5:**
+
+-   Introduced the Service Entity Category “eidas-naturalperson”
+    (section 2.4) for support of authentication against the eIDAS
+    Framework.
+
+-   Minor changes regarding discovery.
 
 **Changes between version 1.3 and version 1.4:**
 

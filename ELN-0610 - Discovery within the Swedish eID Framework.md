@@ -2,8 +2,12 @@
 
 # Discovery within the Swedish eID Framework
 
-### Version 1.1 - 2015-05-06
-*ELN-0610-v1.1*
+### <del>Version 1.1 - 2015-05-06</del>
+<del>*ELN-0610-v1.1*</del>
+
+---
+
+###  The current version of this specification has been deprecated and is no longer part of the Swedish eID Framework. An updated version of this specification may be introduced to future versions of the Swedish eID Framework.
 
 ---
 

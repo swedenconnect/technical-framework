@@ -2,9 +2,10 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.3 - 2015-10-05
+### Version 1.4 - 2016-11-16 
+#### *Draft version*
 
-*ELN-0602-v1.3*
+*ELN-0602-v1.4*
 
 ---
 
@@ -12,21 +13,21 @@
 
 1. [**Introduction**](#introduction)
 
-  1.1. [Requirements Notation](#requirements-notation)
+    1.1. [Requirements Notation](#requirements-notation)
 
-  1.2. [References to SAML 2.0 Standards and Profiles](#references-to-saml-20-standards-and-profiles)
+    1.2. [References to SAML 2.0 Standards and Profiles](#references-to-saml-2.0-standards-and-profiles)
 
 2. [**Metadata and Trust Management**](#metadata-and-trust-management)
 
-  2.1. [Requirements for Metadata Content](#requirements-for-metadata-content)
+    2.1. [Requirements for Metadata Content](#requirements-for-metadata-content)
 
-  2.1.1. [Generic](#generic)
+    2.1.1. [Generic](#generic)
 
-  2.1.2. [Service Providers](#service-providers)
+    2.1.2. [Service Providers](#service-providers)
 
-  2.1.3 [Identity Providers](#identity-providers)
+    2.1.3. [Identity Providers](#identity-providers)
 
-  2.1.4. [Signature Service](#signature-service)
+    2.1.4. [Signature Service](#signature-service)
 
 3. [**Name Identifiers**](#name-identifiers)
 
@@ -34,55 +35,55 @@
 
 5. [**Authentication Requests**](#authentication-requests)
 
-  5.1. [Discovery](#discovery)
+    5.1. [Discovery](#discovery)
 
-  5.2. [Binding and Security Requirements](#binding-and-security-requirements)
+    5.2. [Binding and Security Requirements](#binding-and-security-requirements)
 
-  5.3. [Message Content](#request-message-content)
+    5.3. [Message Content](#message-content)
 
-  5.4. [Processing Requirements](#request-processing-requirements)
+    5.4. [Processing Requirements](#processing-requirements)
 
-  5.4.1. [Validation of Destination](#validation-of-destination)
+    5.4.1. [Validation of Destination](#validation-of-destination)
 
-  5.4.2. [Validation of Assertion Consumer Addresses](#validation-of-assertion-consumer-addresses)
+    5.4.2. [Validation of Assertion Consumer Addresses](#validation-of-assertion-consumer-addresses)
 
-  5.4.3. [Identity Provider User Interface](#identity-provider-user-interface)
+    5.4.3. [Identity Provider User Interface](#identity-provider-user-interface)
 
-  5.4.4. [Authentication Context and Level of Assurance Handling](#authentication-context-and-level-of-assurance-handling)
+    5.4.4. [Authentication Context and Level of Assurance Handling](#authentication-context-and-level-of-assurance-handling)
 
-  5.4.5. [Single Sign On Processing](#single-sign-on-processing)
+    5.4.5. [Single Sign On Processing](#single-sign-on-processing)
 
 6. [**Authentication Responses**](#authentication-responses)
 
-  6.1. [Security Requirements](#security-requirements)
+    6.1. [Security Requirements](#security-requirements)
 
-  6.2. [Message Content](#response-message-content)
+    6.2. [Message Content](#message-content)
 
-  6.2.1. [Attribute Release Rules](#attribute-release-rules)
+    6.2.1. [Attribute Release Rules](#attribute-release-rules)
 
-  6.3. [Processing Requirements](#response-processing-requirements)
+    6.3. [Processing Requirements](#processing-requirements)
 
-  6.3.1. [Signature Validation](#signature-validation)
+    6.3.1. [Signature Validation](#signature-validation)
 
-  6.3.2. [Subject Confirmation](#subject-confirmation)
+    6.3.2. [Subject Confirmation](#subject-confirmation)
 
-  6.3.3. [Conditions](#conditions)
+    6.3.3. [Conditions](#conditions)
 
-  6.3.4. [The Authentication Statement](#the-authentication-statement)
+    6.3.4. [The Authentication Statement](#the-authentication-statement)
 
-  6.3.5. [General Security Validation](#general-security-validation)
+    6.3.5. [General Security Validation](#general-security-validation)
 
-  6.4. [Error Responses](#error-responses)
+    6.4. [Error Responses](#error-responses)
 
 7. [**Authentication for Signature**](#authentication-for-signature)
 
-  7.1. [Authentication Context URIs for Signature Services](#authentication-context-uris-for-signature-services)
+    7.1. [Authentication Context URIs for Signature Services](#authentication-context-uris-for-signature-services)
 
-  7.2. [Authentication Requests](#sign-authentication-requests)
+    7.2. [Authentication Requests](#authentication-requests)
 
-  7.2.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
+    7.2.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
 
-  7.3. [Authentication Responses](#sign-authentication-responses)
+    7.3. [Authentication Responses](#authentication-responses)
 
 8. [**Normative References**](#normative-references)
 
@@ -136,7 +137,7 @@ identity. Deviating may limit a deployment's ability to technically
 interoperate without additional negotiation, and should be undertaken
 with caution.
 
-<a name="references-to-saml-20-standards-and-profiles"></a>
+<a name="references-to-saml-2.0-standards-and-profiles"></a>
 ### 1.2. References to SAML 2.0 Standards and Profiles
 
 When referring to elements from the SAML 2.0 core specification
@@ -160,13 +161,6 @@ the following syntax is used:
 
 -   `<mdattr:Element>` – for elements defined in
     \[[SAML2MetaAttr](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)\].
-
-When referring to elements from the Identity Provider Discovery Service
-Protocol and Profile
-\[[IdPDisco](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)\],
-the following syntax is used:
-
--   `<idpdisc:DiscoveryResponse>`
 
 When referring to elements from the W3C XML Signature namespace
 (`http://www.w3.org/2000/09/xmldsig\#`) the following syntax is used:
@@ -322,7 +316,7 @@ represented with the language attribute `en` (English).
 
 An Identity Provider MAY require authentication request messages to be
 signed. This is indicated by assigning the
-`WantAuthnRequestsSigned attribute` of the `<md:IDPSSPDescriptor>`
+`WantAuthnRequestsSigned` attribute of the `<md:IDPSSPDescriptor>`
 element to a value of `true`. See further section E7, “Metadata for
 Agreeing to Sign Authentication Requests”, of \[[SAML v2.0 Errata
 05](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html)\].
@@ -402,7 +396,7 @@ SAML 2.0 messages or assertions SHOULD be limited to a single child text
 node.
 
 For requirements regarding attribute inclusion in SAML assertions, see
-[section 6.2.1](#attribute-release-rules), "[Attribute Release Rules](#attribute-release-rules)", below.
+section [6.2.1](#attribute-release-rules), “[Attribute Release Rules](#attribute-release-rules)”, below.
 
 <a name="authentication-requests"></a>
 ## 5. Authentication Requests
@@ -410,20 +404,10 @@ For requirements regarding attribute inclusion in SAML assertions, see
 <a name="discovery"></a>
 ### 5.1. Discovery
 
-The federation for Swedish eID uses a central discovery service as
-specified in Identity Provider Discovery Service Protocol Profile
-\[[IdPDisco](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)\].
-A Service Provider is not obliged to use the central discovery service
-and MAY instead implement discovery using an integrated technique as
-described in \[EidDisco\].
-
-A Service Provider SHOULD use either the central discovery service or
-the integrated discovery techniques as described in \[EidDisco\].
-
-Service Providers making use of the central discovery service MUST be
-able to handle empty responses for the cases where no Identity Provider
-was chosen. In these cases an error message should be displayed for the
-end user.
+Currently, this deployment profile does not impose any requirements of
+how the process of discovery is implemented by Service Providers wishing
+to display user interfaces for selection of Identity Providers for end
+users.
 
 <a name="binding-and-security-requirements"></a>
 ### 5.2. Binding and Security Requirements
@@ -466,12 +450,12 @@ For the HTTP-POST binding the `<saml2p:AuthnRequest>` element MUST
 be signed using a `<ds:Signature>` element within the
 `<saml2:AuthnRequest>`.
 
-<a name="request-message-content"></a>
+<a name="message-content"></a>
 ### 5.3. Message Content
 
 \[[SAML2Int](http://saml2int.org/profile/current/)\] specifies that a
-`<saml2p:AuthnRequest>` message MUST contain an
-AssertionConsumerServiceURL attribute identifying the desired response
+`<saml2p:AuthnRequest>` message SHOULD contain an
+`AssertionConsumerServiceURL` attribute identifying the desired response
 location. The Service Provider MUST NOT use any other values for this
 attribute than those listed in its metadata record as
 `<md:AssertionConsumerService>` elements for the HTTP-POST binding
@@ -484,15 +468,22 @@ user agent to deliver the request. This is useful to prevent malicious
 forwarding of signed requests from being accepted by unintended Identity
 Providers.
 
-A Service Provider SHOULD explicitly specify the requested
-authentication context, representing a defined Level of Assurance, under
-which the authentication process should be performed by including an
-authentication context URI <sup>\[1\]</sup> as a value to the
-`<saml2:AuthnContextClassRef>` element that is part of the
-`<saml2p:RequestedAuthnContext>` element. A present
-`<saml2p:RequestedAuthnContext>` element MUST specify exact matching
-by means of either an absent Comparison attribute or a Comparison
-attribute with the value set to exact.
+A Service Provider SHOULD explicitly specify one requested
+authentication context element (`<saml2p:RequestedAuthnContext>`),
+containing one or more `<saml2:AuthnContextClassRef>` elements that
+each contains an authentication context URI<sup>1</sup> representing a defined
+Level of Assurance under which the authentication process should be
+performed.
+
+A present `<saml2p:RequestedAuthnContext>` element MUST specify
+exact matching by means of either an absent `Comparison` attribute or a
+`Comparison` attribute with the value set to `exact`. This means that the
+Identity Provider is forced to return an assertion with exactly one of
+the requested `<saml2:AuthnContextClassRef>` in the request as the
+declared `<saml2:AuthnContext>`, or return an error response. If the
+Service Provider requires the Identity Provider to return specifically
+one out of a selection of acceptable authentication context URIs, then
+all of these URIs MUST be included in the request.
 
 The requested authentication context SHOULD be consistent with at least
 one of the service entity categories \[EidEntCat\] declared in the
@@ -508,6 +499,19 @@ Service Provider’s metadata entry. See further [section 5.4.4](#authentication
 requested Level of Assurance is included in an authentication request
 message.*
 
+```
+<saml2p:RequestedAuthnContext Comparison="exact">
+  <saml2:AuthnContextClassRef>http://id.elegnamnden.se/loa/1.0/loa3</saml2:AuthnContextClassRef>
+  <saml2:AuthnContextClassRef>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</saml2:AuthnContextClassRef>
+</saml2p:RequestedAuthnContext>
+```
+
+*Example of how several Authentication Context URIs are included in an
+authentication request message. In this case, the Service Provider
+states that it requests the authentication to be performed according to
+either the LoA3 URI defined within the Swedish eID Framework or the
+substantial level for notified eIDs defined within the eIDAS Framework.*
+
 Identity Providers conformant with this profile MUST support the
 `ForceAuthn` and `IsPassive` attributes received in
 `<saml2p:AuthnRequest>` messages.
@@ -519,7 +523,7 @@ to avoid accidental SSO.
 
 > \[1\]: See section 3.1.1 of \[EidRegistry\].
 
-<a name="request-processing-requirements"></a>
+<a name="processing-requirements"></a>
 ### 5.4. Processing Requirements
 
 <a name="validation-of-destination"></a>
@@ -532,11 +536,19 @@ consistent with URLs configured in the Identity Provider’s metadata.
 <a name="validation-of-assertion-consumer-addresses"></a>
 #### 5.4.2. Validation of Assertion Consumer Addresses
 
-The value of the `AssertionConsumerServiceURL` attribute of the
-`<saml2p:AuthnRequest>` message MUST be verified to be consistent
-with one of the `<md:AssertionConsumerService>` elements having the
-HTTP-POST binding found in the Service Provider’s metadata entry. If
-this is not the case, the request must be rejected.
+If the `AssertionConsumerServiceURL` attribute is present in the
+`<saml2p:AuthnRequest>` message, its value MUST be verified to be
+consistent with one of the `<md:AssertionConsumerService>` elements
+having the HTTP-POST binding found in the Service Provider’s metadata
+entry. If this is not the case, the request must be rejected.
+
+If the attribute is not present in the `<saml2p:AuthnRequest>`
+message, the Identity Provider MUST obtain the desired response location
+from the Service Provider’s metadata entry. This location is found in an
+`<md:AssertionConsumerService>` element with HTTP-POST binding that
+is marked as default (has the `isDefault` attribute set), or if no element
+has the `isDefault` attribute set, the one with the lowest index value
+(see section 2.4.4.1 of \[SAML2Meta\]).
 
 Section 8.2 of \[[SAML2Int](http://saml2int.org/profile/current/)\]
 specifies how comparisons between the `AssertionConsumerServiceURL` value
@@ -558,29 +570,29 @@ and the `<mdui:Description>` elements.
 #### 5.4.4. Authentication Context and Level of Assurance Handling
 
 This framework defines a number of authentication context identifiers
-(URIs), where each such identifier specifies a defined Level of Assertion
+(URI), where each such identifier specifies a defined Level of Assertion
 and may define specific requirements on the authentication process.
 There can be multiple authentication context URIs representing the same
 Level of Assertion, but one authentication context URI always identifies
 one defined Level of Assurance. For example, requests for authentication
 from a Signature Service that requires a sign message to be displayed as
 part of the authentication process will request a different
-authentication context URI (see [section 7](#authentication-for-signature))
-than a typical Service Provider just requesting authentication of a user, even if the requested Level of Assurance is the same.
+authentication context URI (see [section 7](#authentication-for-signature)) than a typical Service
+Provider just requesting authentication of a user, even if the requested
+Level of Assurance is the same.
 
-Identity Providers SHALL exclusively use the requested authentication
-context in `<saml2p:AuthnRequest>` in the
+Identity Providers SHALL exclusively use one of the requested
+authentication contexts in `<saml2p:AuthnRequest>` in the
 `<saml2:AuthnContextClassRef>` element under the
-`<saml2p:RequestedAuthnContext>` element, to determine the requested
-authentication process and Level of Assurance. The Identity Provider
-SHALL respond with an error `<saml2p:StatusCode>` with the value
-`urn:oasis:names:tc:SAML:2.0:status:Requester`
+`<saml2p:RequestedAuthnContext>` element, when present, to determine
+the requested authentication process and Level of Assurance. The
+Identity Provider SHALL respond with an error `<saml2p:StatusCode>`
+with the value `urn:oasis:names:tc:SAML:2.0:status:Requester`
 \[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\]
-if the requested authentication context is not supported. If no
-requested authentication context is present in the
-`<saml2p:AuthnRequest>`, the Identity Provider MAY return the result
-of a default authentication process that is consistent with the Identity
-Providers metadata.
+if no requested authentication context is supported. If no requested
+authentication context is present in the `<saml2p:AuthnRequest>`,
+the Identity Provider MAY return the result of a default authentication
+process that is consistent with the Identity Providers metadata.
 
 **Note**: The Identity Provider does not have to consider the service
 entity categories (\[EidEntCat\]) declared in the Service Provider’s
@@ -640,9 +652,9 @@ The `<saml2:Assertion>` element issued by the Identity Provider MAY
 be signed using a `<ds:Signature>` element within the
 `<saml2:Assertion>`. If a Service Provider requires signed
 assertions, by assigning the `WantAssertionsSigned` attribute of its
-metadata record (see [chapter 2.1.2](#service-providers)), the Identity
-Provider MUST sign assertions issued to this Service Provider (as well
-as the response message as stated above).
+metadata record (see [chapter 2.1.2](#service-providers)), the Identity Provider MUST sign
+assertions issued to this Service Provider (as well as the response
+message as stated above).
 
 Identity Providers SHALL utilize XML Encryption and return a
 `<saml2:EncryptedAssertion>` element in the `<saml2p:Response>`
@@ -654,13 +666,13 @@ Service Providers SHOULD NOT accept unsolicited `<saml2p:Response>`
 messages (i.e., responses that are not the result of an earlier
 `<saml2p:AuthnRequest>` message). Service Providers that do accept
 unsolicited response messages MUST ensure, by other means, that the
-security and processing requirements of this profile ([section 6.3](#response-processing-requirements)) can
+security and processing requirements of this profile ([section 6.3](#processing-requirements)) can
 be fully satisfied. \[[SAML2Int](http://saml2int.org/profile/current/)\]
 allows the use of unsolicited responses, but this profile has more
 strict security and processing requirements that make the use of
 unsolicited responses violate these requirements.
 
-<a name="response-message-content"></a>
+<a name="message-content"></a>
 ### 6.2. Message Content
 
 The `<saml2:Response>` message MUST contain an `<saml2:Issuer>`
@@ -697,8 +709,7 @@ following:
 -   An `InResponseTo` attribute matching the request’s ID.
 
 -   A `Recipient` attribute containing the Service Provider’s assertion
-    consumer service URL (see sections [5.3](#request-message-content)
-    and [5.4.1](#validation-of-destination)).
+    consumer service URL (see sections [5.3](#message-content) and [5.4.1](#validation-of-destination)).
 
 -   A `NotOnOrAfter` attribute containing a time instant at which the
     subject no longer can be confirmed.
@@ -764,7 +775,7 @@ Provider is capable of providing necessary attributes before sending a
 request and to verify that it received all attributes necessary for
 providing a requested service. Checks whether an Identity Provider is
 capable of fulfilling the needs of a Service Provider can be done either
-by relying on a Discovery Service to filter out non-conformant Identity
+by relying on a discovery process to filter out non-conformant Identity
 Providers, and/or by examining the metadata of Identity providers. An
 Identity Provider receiving a request for more attributes than it can
 provide SHOULD return an assertion with the attributes it can provide
@@ -773,7 +784,7 @@ Service Provider to decide how to proceed, e.g., by denying service to
 the authenticated user, provide limited services or to use other
 resources to collect necessary attributes.
 
-<a name="response-processing-requirements"></a>
+<a name="processing-requirements"></a>
 ### 6.3. Processing Requirements
 
 This profile mandates a correct processing of a `<saml2p:Response>`
@@ -794,7 +805,7 @@ fails MUST lead to that the Service Provider rejects the response
 message and does not use the assertion.
 
 Some of the processing requirements below are defined in order to
-protect from MITM- or MITB-attacks <sup>\[2\]</sup> were unsigned authentication
+protect from MITM- or MITB-attacks<sup>2</sup> were unsigned authentication
 requests may be changed before being sent to the Identity Provider.
 However, a Service Provider MUST implement all of the specified
 processing requirements even if it sends signed authentication request
@@ -826,8 +837,10 @@ secure context containing corresponding information from the request
 The `Recipient` attribute from the bearer
 `<saml2:SubjectConfirmationData>` element MUST match the location to
 which the `<saml2p:Response>` message was delivered **and** match
-value the `AssertionConsumerServiceURL` attribute included in the request
-message.
+the value the `AssertionConsumerServiceURL` attribute included in the
+request message, or if this attribute was not provided in the request
+message, the default response location specified in the Service
+Provider’s metadata entry, as described in [section 5.4.2](#validation-of-assertion-consumer-addresses).
 
 The time from the `NotOnOrAfter` attribute from the bearer
 `<saml2:SubjectConfirmationData>` MUST NOT have passed compared with
@@ -864,7 +877,8 @@ contains a `<saml2:AuthnContext>` element that holds a
 `<saml2:AuthnContextClassRef>` element having as its value the
 authentication context URI indicating under which Level of Assurance the
 authentication was performed. The Level of Assurance declared in the
-assertion MUST be equal to, or stronger <sup>\[3\]</sup> than, the Level of Assurance requested by the Service Provider.
+assertion MUST be equal to, or stronger<sup>3</sup> than, the Level of Assurance
+requested by the Service Provider.
 
 > \[3\]: A stronger Level of Assurance identifier is simply a LoA having a higher value than what it is compared with, i.e., `http://id.elegnamnden.se/loa/1.0/loa4` is stronger than `http://id.elegnamnden.se/loa/1.0/loa3`.
 
@@ -878,7 +892,7 @@ of the `<saml2:Conditions>` element).
 
 In order to prevent stolen assertions and user impersonation, the
 Service Provider SHOULD implement a validation that rejects an assertion
-if the time given it its `IssueInstant` attribute compared to the time
+if the time given it its IssueInstant attribute compared to the time
 when the response message is received is too great. This time is
 typically on the order of seconds, and limits the time window when a
 stolen assertion could be used.
@@ -898,9 +912,10 @@ assertions in the `<saml2p:Response>` message.
 An Identity Provider conformant with this profile SHOULD NOT make use of
 any other `<saml2p:StatusCode>` values than those specified in
 section 3.2.2.2 of
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\],
-and the top-level `<saml2p:StatusCode>` value may only be one of the
-following error identifiers:
+\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\]
+except for the cancel status as described below. The top-level
+`<saml2p:StatusCode>` value may only be one of the following error
+identifiers:
 
 -   `urn:oasis:names:tc:SAML:2.0:status:Requester` – The request could not
     be performed due to an error on the part of the Service Provider.
@@ -911,6 +926,10 @@ following error identifiers:
 -   `urn:oasis:names:tc:SAML:2.0:status:VersionMismatch` – The Identity
     Provider could not process the request because the version of the
     request message was incorrect.
+
+If the user cancels an authentication process the Identity Provider
+SHOULD indicate this by assigning the second-level status code to
+`http://id.elegnamnden.se/status/1.0/cancel`.
 
 If an Identity Provider displays information describing an error in its
 user interface it MUST also offer ways for the end user to confirm this
@@ -926,8 +945,8 @@ Provider according to the HTTP POST binding
 “DSS Extension for Federated Central Signing Services”, \[EidDSS\],
 defines an extension to the OASIS DSS protocol for providing centralized
 Signature Services within the Swedish eID Framework. This specification
-defines the communication between a *Signature Requestor* <sup>\[4\]</sup>
-and a Signature Service, but does not cover SAML specific requirements
+defines the communication between a *Signature Requestor*<sup>4</sup> and a
+Signature Service, but does not cover SAML specific requirements
 regarding the user authentication phase that is part of the signature
 process.
 
@@ -942,18 +961,28 @@ these requirements for the “authentication for signature” process.
 <a name="authentication-context-uris-for-signature-services"></a>
 ### 7.1. Authentication Context URIs for Signature Services
 
-The Swedish eID Framework defines three additional authentication
-context URIs to be used in `<saml2p:AuthnRequest>` and
-`<saml2:Assertion>` elements during “authentication for signature”.
-These authentication context URIs are applicable when the Identity
-Provider is required to display a sign message as part of the
-authentication process. These URIs are:
+The Swedish eID Framework defines additional authentication context URIs
+to be used in `<saml2p:AuthnRequest>` and `<saml2:Assertion>`
+elements during “authentication for signature”. These authentication
+context URIs are applicable when the Identity Provider is required to
+display a sign message as part of the authentication process. These URIs
+are:
 
 -   `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage`
 
 -   `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage`
 
 -   `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage`
+
+-   `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm`
+
+-   `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm`
+
+-   `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm`
+
+-   `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm`
+
+-   `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm`
 
 These URIs extend the corresponding authentication context URIs used to
 represent Level of Assurance identifiers (see section 3.1.1 of
@@ -963,7 +992,7 @@ URIs. The URIs listed above are only used when there is an explicit
 requirement for the Identity Provider to display a sign message provided
 in the authentication request.
 
-<a name="sign-authentication-requests"></a>
+<a name="authentication-requests"></a>
 ### 7.2. Authentication Requests
 
 Authentication requests from a Signature Service SHALL meet the
@@ -978,7 +1007,7 @@ following requirements:
 
 An Identity Provider that accepts an `<saml2p:AuthnRequest>` message
 from a Service Provider that has indicated that it is a Signature
-Service <sup>\[5\]</sup> MUST provide a user interface that is indicating that the
+Service<sup>5</sup> MUST provide a user interface that is indicating that the
 end user is performing a signature.
 
 > \[5\]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the `http://id.elegnamnden.se/st/1.0/sigservice` URI as a service type entity category in its metadata (see [2.1.4](#signature-service)).
@@ -1002,14 +1031,13 @@ If the `SignMessage` element from the signature request includes a
 `MustShow` attribute with the value `true`, the Signature Service MUST
 require that the provided sign message is displayed by the Identity
 Provider, by including an authentication context URI (as defined in
-[section 7.1](#authentication-context-uris-for-signature-services) above)
-to the `<saml2:AuthnContextClassRef>` element
+[section 7.1](#authentication-context-uris-for-signature-services) above) to the `<saml2:AuthnContextClassRef>` element
 that is part of the `<saml2p:RequestedAuthnContext>` element of the
 `<saml2p:AuthnRequest>` message.
 
 Identity Providers SHALL advertise supported authentication contexts
 defined by the URIs listed in [section 7.1](#authentication-context-uris-for-signature-services), by including the URIs of
-supported authentication contexts as `EntityAttributes` of the type
+supported authentication contexts as EntityAttributes of the type
 `urn:oasis:names:tc:SAML:attribute:assurance-certification` in its
 metadata.
 
@@ -1030,7 +1058,7 @@ metadata.
 authentication (including support for displaying of sign messages).*
 
 Identity Providers processing a request with a requested authentication
-context identified by any of the URIs listed in [7.1](#authentication-context-uris-for-signature-services) SHALL meet the
+context identified by any of the URIs listed in 7.1 SHALL meet the
 following requirements (in addition to other general requirements
 associated with requests from signature services:
 
@@ -1041,14 +1069,14 @@ associated with requests from signature services:
 
 -   The Identity Provider MUST display the sign message to the user in a
     manner that is consistent with the data format of the sign message.
-    If necessary the Identity Provider MUST process defined filtering
+    If necessary, the Identity Provider MUST process defined filtering
     rules on the message. If the present message format is not supported
     or the sign message for any reason cannot be displayed in a proper
     manner, the Identity Provider must return an error response.
 
 -   If authentication and sign message confirmation by the user was
     successful, the Identity Provider MUST include the authentication
-    context URI from the list in [7.1](#authentication-context-uris-for-signature-services) in the assertion that is consistent
+    context URI from the list in 7.1 in the assertion that is consistent
     with the authentication context requested in the authentication
     request.
 
@@ -1058,7 +1086,7 @@ associated with requests from signature services:
     even if the request has no present `ForceAuthn` attribute or includes
     a `ForceAuthn` attribute set to the value `false`.
 
-<a name="sign-authentication-responses"></a>
+<a name="authentication-responses"></a>
 ### 7.3. Authentication Responses
 
 By including an authentication context URI listed in [section 7.1](#authentication-context-uris-for-signature-services) (sign
@@ -1067,7 +1095,7 @@ message URI) in SAML assertion under the
 `<saml2:AuthnStatement>` element in the response, the Identity
 Provider asserts that it has successfully displayed the sign message
 received in the request for the user and that the user has accepted to
-sign under the context of this sign message <sup>\[6\]</sup>.
+sign under the context of this sign message<sup>6</sup>.
 
 An Identity Provider MUST NOT return an authentication context URI in an
 assertion, other than those listed in [section 7.1](#authentication-context-uris-for-signature-services), if the request
@@ -1096,7 +1124,7 @@ response with the status code
 > Assertion Markup Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
-**\[SAML v2.0 Errata 05\]**
+**\[SAML v2.0 Errata 05\]\**
 > [SAML Version 2.0 Errata 05. 01 May 2012. OASIS Approved
 > Errata](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html).
 
@@ -1147,6 +1175,10 @@ response with the status code
 > Protocol and Profile, March
 > 2008.](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)
 
+**\[EidRegistry\]**
+> Registry for identifiers assigned by the Swedish e-identification
+> board.
+
 **\[EidAttributes\]**
 > Attribute Specification for the Swedish eID Framework.
 
@@ -1155,9 +1187,6 @@ response with the status code
 
 **\[EidEntCat\]**
 > Entity Categories for the Swedish eID Framework.
-
-**\[EidDisco\]**
-> Discovery within the Swedish eID Framework.
 
 **\[EidDSS\]**
 > DSS Extension for Federated Central Signing Services - Version 1.1.
@@ -1169,10 +1198,41 @@ response with the status code
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
 
+**Changes between version 1.3 and version 1.4:**
+
+-   Version 1.3 of this profile stated that a
+    `<saml2p:AuthnRequest>` message MUST contain an
+    `AssertionConsumerServiceURL` attribute identifying the desired
+    response location. It has shown that this requirement aggravates
+    interoperability since some of the major providers of Service
+    Provider software do not fully support this attribute. Furthermore,
+    the requirement does increase security since an Identity Provider
+    may only post response messages to locations registered in the
+    `<md:AssertionConsumerService>` elements of the Service Provider
+    metadata entry. Therefore, chapter 5.3, “Message Content”, has been
+    changed to state that the `<saml2p:AuthnRequest>` message SHOULD
+    contain an `AssertionConsumerServiceURL` attribute. Changes have also
+    been made to sections 5.4.2 and 6.3.2 where processing requirements
+    were updated.
+
+-   In section 5.3, a clarification regarding specifying more than one
+    authentication context URI was made.
+
+-   In section 7.1, a set of authentication context URIs for the eIDAS
+    Framework was added.
+
+-   In section 6.4, the requirement to use the sub-level status code
+    `http://id.elegnamnden.se/status/1.0/cancel` was added. This status
+    should be used to indicate a cancelled operation.
+
+-   The specification for “Discovery within the Swedish eID Framework”
+    has been deprecated and requirements referring to this document have
+    been updated.
+
 **Changes between version 1.2 and version 1.3:**
 
 -   This profile now extends a newer version of the SAML2Int Deployment
-    Profile (see [http://saml2int.org/profile/current/](http://saml2int.org/profile/current/)).
+    Profile (see <http://saml2int.org/profile/current/>).
 
 -   Clarifications on how entity categories are represented in metadata
     were made to chapters: 2.1.2, 2.1.3, and 2.1.4.
@@ -1182,7 +1242,7 @@ response with the status code
     be signed, as compared to the previous version where the signature
     requirement was put on `<saml2:Assertion>` elements.
 
--   In chapter 6.2, it is now specified that an `Address` attribute MUST
+-   In chapter 6.2, it is now specified that an Address attribute MUST
     be part of the `<saml2:SubjectConfirmationData>` element. The
     previous version stated SHOULD.
 
@@ -1214,7 +1274,7 @@ response with the status code
 **Changes between version 1.1 and version 1.2:**
 
 -   This profile now explicitly defines requirements for the use of
-    signed authentication request messages, see sections 2.1 and 5.2.
+    signed authentication request messages, see sections 2.1and 5.2.
 
 -   This profile now allows the HTTP-POST binding to be used for sending
     authentication request messages (see chapter 5.2, “Binding and
@@ -1224,10 +1284,11 @@ response with the status code
 -   In chapter 5.4, additional processing requirements for received
     authentication requests were added or changed. These include:
 
-    -   Validation of assertion consumer addresses (5.4.1).
-    -   Clarifications to chapter 5.4.4.
-    -   Single Sign On processing (5.4.5).
+-   Validation of assertion consumer addresses (5.4.1).
 
+-   Clarifications to chapter 5.4.4.
+
+-   Single Sign On processing (5.4.5).
 
 -   This profile now states that “Unsolicited response” messages are not
     accepted by Service Providers due to security reasons, see chapter
@@ -1236,13 +1297,14 @@ response with the status code
 -   Changes and additions in chapter 6.2, “Message Content”, for
     responses including:
 
-    -   Clarifications about the usage of the `AuthnInstant` attribute of the
+-   Clarifications about the usage of the `AuthnInstant` attribute of the
     `<saml2:AuthnStatement>` element.
-    -   Specifications of the use of `<saml2:SubjectConfirmation>` in
-    assertions.
-    -   Clarifications on the use of audience restrictions and assertion
-    validity.
 
+-   Specifications of the use of `<saml2:SubjectConfirmation>` in
+    assertions.
+
+-   Clarifications on the use of audience restrictions and assertion
+    validity.
 
 -   Chapter 6.3, “Processing Requirements”, was added. This chapter
     contains specifications and requirements of how a response message
@@ -1263,3 +1325,4 @@ response with the status code
     provided.
 
 -   Some faulty references were corrected.
+

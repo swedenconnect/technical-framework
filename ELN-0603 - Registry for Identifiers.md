@@ -2,8 +2,10 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.3 - 2015-10-05
-*ELN-0603-v1.3*
+### Version 1.4 - 2016-11-16
+#### *Draft version*
+
+*ELN-0603-v1.4*
 
 ---
 
@@ -19,35 +21,35 @@
 
 3. [**Assigned Identifiers**](#assigned-identifiers)
 
-  3.1. [URL Identifiers](#url-identifiers)
+    3.1. [URL Identifiers](#url-identifiers)
 
-  3.1.1. [Authentication Context URIs](#authentication-context-uris)
+    3.1.1. [Authentication Context URIs](#authentication-context-uris)
 
-  3.1.2. [Attribute Sets](#attribute-sets)
+    3.1.2. [Attribute Sets](#attribute-sets)
 
-  3.1.3. [Entity Category Identifiers](#entity-category-identifiers)
+    3.1.3. [Entity Category Identifiers](#entity-category-identifiers)
 
-  3.1.3.1. [Service Entity Categories](#service-entity-categories)
-  
-  3.1.3.2. [Entity Categories for Service Properties](#entity-categories-for-service-properties)
+    3.1.3.1. [Service Entity Categories](#service-entity-categories)
 
-  3.1.3.3. [Entity Categories for Service Type](#entity-categories-for-service-type)
+    3.1.3.2. [Entity Categories for Service Properties](#entity-categories-for-service-properties)
 
-  3.1.4. [Central Signing](#central-signing)
+    3.1.3.3. [Entity Categories for Service Type](#entity-categories-for-service-type)
 
-  3.1.5. [Authentication Context](#authentication-context)
+    3.1.4. [SAML Protocol Status Codes](#saml-protocol-status-codes)
 
-  3.1.6. [Sign Response Status Codes](#sign-response-status-codes)
+    3.1.5. [Central Signing](#central-signing)
 
-  3.2. [OID Identifiers](#oid-identifiers2)
+    3.1.6. [Authentication Context](#authentication-context)
 
-  3.2.1. [ASN.1 Declarations](#asn1-declarations)
+    3.1.7. [Sign Response Status Codes](#sign-response-status-codes)
+
+    3.2. [OID Identifiers](#oid-identifiers)
+
+    3.2.1. [ASN.1 Declarations](#asn1-declarations)
 
 4. [**References**](#references)
 
 5. [**Changes between versions**](#changes-between-versions)
-
----
 
 <a name="background"></a>
 ## 1. Background
@@ -152,6 +154,7 @@ The following category codes are defined:
 | **st** | Service Type. Specific entity category identifiers for defined types of services in the federation. |
 | **csig** | Central Signing Service – Identifiers used by the central signing service infrastructure. |
 | **auth-cont** | Authentication context information schema. |
+| **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
 | **ns** | XML Schema namespaces. |
 
@@ -163,11 +166,38 @@ Authentication Context URIs representing assurance levels
 Framework (Tillitsramverket för Svensk e-legitimation).
 
 | **URL** | **Object** | **Reference** |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1 | **\[TillitRamv\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2 | **\[TillitRamv\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3 | **\[TillitRamv\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4 | **\[TillitRamv\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-high` | Authentication accordance to eIDAS assurance level high | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` | Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified | **\[eIDAS\]**
+
+**NOTE:** eIDAS assurance levels low, substantial and high have the
+following AuthnContextClassRef URI:s defined by the EU commission:
+
+-   `http://eidas.europa.eu/LoA/low`
+
+-   `http://eidas.europa.eu/LoA/substantial`
+
+-   `http://eidas.europa.eu/LoA/high`
+
+The eIDAS technical specifications are currently unclear regarding how
+to specify requirements for notified eID and how to communicate to a
+Service Provider whether a notified eID was used. The URI:s defined
+above for eIDAS assurance level low, substantial and high are
+equivalent to the commission defined URI:s but adds specifically
+defined rules for notified eID.
+
+For example, the URI `http://id.elegnamnden.se/loa/1.0/eidas-sub` is
+valid for eIDAS assurance level substantial for both notified and non
+notified eIDs, `while http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` is
+only valid for eIDAS assurance level substantial if the eID used to
+authenticate the user is notified according to the eIDAS regulation.
 
 Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
@@ -179,6 +209,11 @@ message that must be displayed to the user (see section 7 of
 | `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage` | Authentication according to assurance level 4 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial with extended requirements for displaying signature messages. | \[**DeployProf**\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[**DeployProf**\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm` | Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | **\[DeployProf\]** |
 
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
@@ -192,6 +227,7 @@ Specification for the Swedish eID Framework.
 | ELN-AP-NaturalPerson-01 | `http://id.elegnamnden.se/ap/1.0/natural-person-01` | Personal identity without civic registration number attribute set. | **\[AttrProf\]** |
 | ELN-AP-Pnr-01 | `http://id.elegnamnden.se/ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | **\[AttrProf\]** |
 | ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/ap/1.0/org-person-01` | Organizational identity attribute set. | **\[AttrProf\]** |
+| ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | **\[AttrProf\]** |
 
 <a name="entity-category-identifiers"></a>
 #### 3.1.3. Entity Category Identifiers
@@ -208,9 +244,7 @@ Identifiers for entity categories representing alternative sets of requirements.
 | `http://id.elegnamnden.se/ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
 | `http://id.elegnamnden.se/ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
 | `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/ec/1.0/loa2-int` | Reserved for Service consuming/providing assertions based on assurance level 2, implementing the attribute set international authentication using foreign eID over an eIDAS node. | |
-| `http://id.elegnamnden.se/ec/1.0/loa3-int` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set international authentication using foreign eID over an eIDAS node. | |
-| `http://id.elegnamnden.se/ec/1.0/loa4-int` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set international authentication using foreign eID over an eIDAS node. | |  |
+| `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | **\[EntityCat\]** |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -230,8 +264,19 @@ Identifiers for defined service types.
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/st/1.0/sigservice` | Electronic signature service | **\[EntityCat\]** |
 
+<a name="saml-protocol-status-codes"></a>
+#### 3.1.4. SAML Protocol Status Codes
+
+Status code identifiers for use in SAML Response messages. The list
+below extends the list of second-level status codes defined in section
+3.2.2.2 of \[SAML2Core\].
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.elegnamnden.se/status/1.0/cancel` | Status code representing a cancelled operation | **\[DeployProf\]** |
+
 <a name="central-signing"></a>
-#### 3.1.4. Central Signing
+#### 3.1.5. Central Signing
 
 Identifiers used in the protocol for requesting services form a central signing service.
 
@@ -243,16 +288,16 @@ Identifiers used in the protocol for requesting services form a central signing 
 | `http://id.elegnamnden.se/csig/1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | **\[CSignProf\]** |
 
 <a name="authentication-context"></a>
-#### 3.1.5. Authentication Context
+#### 3.1.6. Authentication Context
 
-Identifiers associated with the Authentication Context X.509 extension.
+Identifiers associated with the Authentication Context X.509 extension
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema name space for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | **\[AuthContExt\]** |
 
 <a name="sign-response-status-codes"></a>
-#### 3.1.6. Sign Response Status Codes
+#### 3.1.7. Sign Response Status Codes
 
 Status code identifiers for the DSS Extension for SAML based Central Signing service. The following identifiers provide defined status codes
 for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign response message according to the OASIS standard
@@ -265,7 +310,7 @@ for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign r
 | `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | **\[OASIS-DSS\]** |
 | `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[OASIS-DSS\]** |
 
-<a name="oid-identifiers2"></a>
+<a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
 
 Defined categories:
@@ -287,8 +332,15 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | 1.2.752.201.3.1 | Organization Affiliation Attribute | **\[AttrProf\]** |
 | 1.2.752.201.3.2 | Transaction Identifier | **\[AttrProf\]** |
 | 1.2.752.201.3.3 | Authentication Context Parameters | **\[AttrProf\]** |
-| 1.2.752.201.3.4 | Provisional ID | |                      
-| 1.2.752.201.3.5 | Provisional ID quality indicator | | |
+| 1.2.752.201.3.4 | Provisional ID | **\[AttrProf\]** |
+| 1.2.752.201.3.5 | Provisional ID Persistence Indicator | **\[AttrProf\]** |
+| 1.2.752.201.3.6 | Personal Identity Number Binding URI | **\[AttrProf\]** |
+| 1.2.752.201.3.7 | eIDAS Person Identifier | **\[AttrProf\]** |
+| 1.2.752.201.3.8 | Birth name | **\[AttrProf\]** |
+| 1.2.752.201.3.9 | eIDAS Natural Person Address | **\[AttrProf\]** |
+| 1.2.752.201.3.10 | User Certificate | **\[AttrProf\]** |
+| 1.2.752.201.3.11 | User Signature | **\[AttrProf\]** |
+| 1.2.752.201.3.12 | Signature Activation Data | **\[AttrProf\]** |
 
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
@@ -317,8 +369,15 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-org-affiliation      OBJECT IDENTIFIER ::= { id-attr 1 }    -- Organizational affiliation
     id-attr-transaction-id       OBJECT IDENTIFIER ::= { id-attr 2 }    -- Transaction identifier
     id-attr-auth-context-params  OBJECT IDENTIFIER ::= { id-attr 3 }    -- Authentication context parameters
-    id-attr-pid                  OBJECT IDENTIFIER ::= { id-attr 4 }    -- Provisional ID
-    id-attr-pid-quality          OBJECT IDENTIFIER ::= { id-attr 5 }    -- Provisional ID quality indicator
+    id-attr-prid                 OBJECT IDENTIFIER ::= { id-attr 4 }    -- Provisional ID
+    id-attr-prid-persistence     OBJECT IDENTIFIER ::= { id-attr 5 }    -- Provisional ID persistence indicator
+    id-attr-pnr-binding          OBJECT IDENTIFIER ::= { id-attr 6 }    -- Personal Identity Number binding URI
+    id-attr-eidas-pid            OBJECT IDENTIFIER ::= { id-attr 7 }    -- eIDAS Person Identifier
+    id-attr-birth-name           OBJECT IDENTIFIER ::= { id-attr 8 }    -- Birth name    
+    id-attr-eidas-np-address     OBJECT IDENTIFIER ::= { id-attr 9 }    -- eIDAS Natural Person Address    
+    id-attr-user-certificate     OBJECT IDENTIFIER ::= { id-attr 10 }   -- User certificate    
+    id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature    
+    id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     
     -- E-legnamnden QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
@@ -330,6 +389,10 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 <a name="references"></a>
 ## 4. References
 
+**\[SAML2Core\]**
+> [OASIS Standard, Assertions and Protocols for the OASIS Security
+> Assertion Markup Language (SAML) V2.0, March 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
+
 **\[OASIS-DSS\]**
 > [Digital Signature Service Core Protocols, Elements, and Bindings
 > Version
@@ -339,8 +402,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > Tillitsramverk för Svensk E-legitimation.
 
 **\[AuthContExt\]**
-> Authentication Context Certificate Extension Draft 08, February 13,
-> 2015.
+> [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
 **\[DeployProf\]**
 > Deployment Profile for the Swedish eID Framework.
@@ -356,10 +418,28 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > Services.
 
 **\[AttrProf\]**
-Attribute Specification for the Swedish eID Framework.
+> Attribute Specification for the Swedish eID Framework.
+
+**\[eIDAS\]**
+> REGULATION (EU) No 910/2014 OF THE EUROPEAN PARLIAMENT AND OF THE
+> COUNCIL of 23 July 2014 on electronic identification and trust
+> services for electronic transactions in the internal market and
+> repealing Directive 1999/93/EC. Including implementation acts of the
+> regulation and associated technical specifications.
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.3 and version 1.4:**
+
+-   Attributes and URI:s for the eIDAS Framework was added.
+
+-   Added the SAML status code identifier
+    `http://id.elegnamnden.se/status/1.0/cancel` to be used in SAML
+    Response messages to indicate a cancelled operation.
+
+-   Added attribute definitions for “Birth name”, “User certificate”,
+    “User signature” and “Signature activation data”. See chapter 3.2.
 
 **Changes between version 1.2 and version 1.3:**
 
