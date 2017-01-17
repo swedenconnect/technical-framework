@@ -12,8 +12,8 @@
 | [ELN-0607 - Implementation Profile for using DSS in Central Signing Services](ELN-0607%20-%20Implementation%20Profile%20for%20using%20DSS%20in%20Central%20Signing%20Services.md) | 1.1 |
 | [ELN-0608 - Certificate Profile for Central Signing Services](ELN-0608%20-%20Certificate%20Profile%20for%20Central%20Signing%20Services.md) | 1.0 |
 | [ELN-0609 - DSS Extension for Federated Signing Services](ELN-0609%20-%20DSS%20Extension%20for%20Federated%20Signing%20Services.md) | 1.1 |
-| ~~ELN-0610 - Discovery within the Swedish eID Framework | ~~1.1~~ |
-| ELN-0611 - eIDAS Attribute Mapping Specification for the Swedish eID Framework | 1.0 (draft) |
+| ~~ELN-0610 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
+| [ELN-0611 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](ELN-0611%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.0 (draft) |
 
 ### Current version of update document ###
 
