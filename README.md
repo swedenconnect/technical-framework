@@ -1,12 +1,18 @@
-# Technical Specifications for the Swedish eID Framework #
+<img src="http://eidasweb.se/home/img/e-log_transp_cut.png"></img>
+
+# Technical Specifications for the Swedish eID Framework
 
 This repository comprises the specifications of the Swedish eID Framework.
 
 > Also see the [october-2015-updates](https://github.com/elegnamnden/technical-framework/tree/october-2015-updates) branch for draft specifications of the currently released version (the master branch).
 
-## Feedback and Questions
+### Feedback and Questions
 
-Use the [Issues](https://github.com/elegnamnden/technical-framework/issues) section to ask questions or start a new discussion thread.
+If you have feedback or questions regarding the Technical Framework make a post to the "Tekniskt ramverk"-thread on <https://forum.eidasweb.se>.
+
+### Releases 
+
+For official and draft releases of the Swedish eID Framework, see the [releases section](https://github.com/elegnamnden/technical-framework/releases).
 
 ## Contents
 
@@ -50,9 +56,15 @@ This specifications defines elements that extends the `<dss:SignRequest>` and `<
 
 The Swedish eID Framework comprises a Discovery Service that has as its purpose to supply Service Providers with user selected Identity Providers for authentication within the federation. This specifications defines how discovery is implemented.
 
-## Updates to the current version of the specifications
+---
 
-Updates to the current version of the specification should be performed in the [october-2015-updates](https://github.com/elegnamnden/technical-framework/tree/october-2015-updates) branch except for any changes that need to be performed in the "Updates to the Swedish eID Framework.docx" document.
+### Updates to the current version of the specifications
+
+Recommended updates to the current versions are published in the "Updates to the Swedish eID Framework.md" document.
+
+### Draft version of the specifications
+
+The next version of the Swedish eID Framework is being developed in the [october-2015-updates](https://github.com/elegnamnden/technical-framework/tree/october-2015-updates) branch.
 
 ## Older versions
 
