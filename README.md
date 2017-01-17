@@ -87,7 +87,7 @@ This document extends â€œAttribute Specification for the Swedish eID Frameworkâ€
 
 The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes) delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
 
-> [ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework]()
+> [ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework](ELN-0611%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
 
 ---
 
