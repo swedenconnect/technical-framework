@@ -13,56 +13,56 @@
 
 1. [**Introduktion**](#introduktion)
 
-    1.1. [Översikt](#översikt)
+    1.1. [Översikt](#oeversikt)
 
-    1.2. [Tillitsramverk och säkerhetsnivåer](#tillitsramverk-och-säkerhetsnivåer)
+    1.2. [Tillitsramverk och säkerhetsnivåer](#tillitsramverk-och-saekerhetsnivaaer)
 
-    1.3. [Tjänst för insamling, administration och publicering av metadata](#tjänst-för-insamling,-administration-och-publicering-av-metadata)
+    1.3. [Tjänst för insamling, administration och publicering av metadata](#tjaenst-foer-insamling,-administration-och-publicering-av-metadata)
 
-    1.4. [Anvisningstjänst](#anvisningstjänst)
+    1.4. [Anvisningstjänst](#anvisningstjaenst)
 
-    1.5. [Integration hos förlitande part](#integration-hos-förlitande-part)
+    1.5. [Integration hos förlitande part](#integration-hos-foerlitande-part)
 
     1.6. [Underskrift](#underskrift)
 
-    1.7. [E-legitimationsnämndens tekniska ramverk och eIDAS](#e-legitimationsnämndens-tekniska-ramverk-och-eidas)
+    1.7. [E-legitimationsnämndens tekniska ramverk och eIDAS](#e-legitimationsnaemndens-tekniska-ramverk-och-eidas)
 
-    1.7.1. [Autentiseringar med utländska e-legitimationer](#autentiseringar-med-utländska-e-legitimationer)
+    1.7.1. [Autentiseringar med utländska e-legitimationer](#autentiseringar-med-utlaendska-e-legitimationer)
 
-    1.7.2. [Underskrifter med utländska e-legitimationer](#underskrifter-med-utländska-e-legitimationer)
+    1.7.2. [Underskrifter med utländska e-legitimationer](#underskrifter-med-utlaendska-e-legitimationer)
 
     1.7.3. [Hantering av identiteter](#hantering-av-identiteter)
 
-    1.7.4. [När svenska e-legitimationer används i utländska e-tjänster](#när-svenska-e-legitimationer-används-i-utländska-e-tjänster)
+    1.7.4. [När svenska e-legitimationer används i utländska e-tjänster](#naer-svenska-e-legitimationer-anvaends-i-utlaendska-e-tjaenster)
 
 2. [**Tekniska specifikationer**](#tekniska-specifikationer)
 
     2.1. [SAML-profiler](#saml-profiler)
 
-    2.1.1. [Specifikationer för anvisning (Discovery)](#specifikationer-för-anvisning-(discovery))
+    2.1.1. [Specifikationer för anvisning (Discovery)](#specifikationer-foer-anvisning-(discovery))
 
-    2.2. [Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk](#specifikationer-för-identitetsfederationer-som-följer-e-legitimationsnämndens-tekniska-ramverk)
+    2.2. [Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk](#specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk)
 
-    2.2.1. [Register för identifierare definierade av E-legitimationsnämnden](#register-för-identifierare-definierade-av-e-legitimationsnämnden)
+    2.2.1. [Register för identifierare definierade av E-legitimationsnämnden](#register-foer-identifierare-definierade-av-e-legitimationsnaemnden)
 
     2.2.2. [Attributspecifikation](#attributspecifikation)
 
     2.2.3. [Specifikationer av entitetskategorier](#specifikationer-av-entitetskategorier)
 
-    2.3. [Specifikationer för Underskriftstjänst](#specifikationer-för-underskriftstjänst)
+    2.3. [Specifikationer för Underskriftstjänst](#specifikationer-foer-underskriftstjaenst)
 
 3. [**Referenslista**](#referenslista)
 
-    3.1. [E-legitimationsnämnden](#e-legitimationsnämnden)
+    3.1. [E-legitimationsnämnden](#e-legitimationsnaemnden)
 
-    3.2. [Övriga referenser](#övriga-referenser)
+    3.2. [Övriga referenser](#oevriga-referenser)
 
-4. [**Ändringar mellan versioner**](#ändringar-mellan-versioner)
+4. [**Ändringar mellan versioner**](#aendringar-mellan-versioner)
 
 <a name="introduktion"></a>
 ## 1. Introduktion
 
-<a name="översikt"></a>
+<a name="oeversikt"></a>
 ### 1.1. Översikt
 
 E-legitimationsnämndens tekniska ramverk är anpassat för
@@ -107,7 +107,7 @@ engångslösenord).
 Figur 1: *Illustration av kommunikationen mellan de olika tjänsterna inom
 en identitetsfederation.*
 
-<a name="tillitsramverk-och-säkerhetsnivåer"></a>
+<a name="tillitsramverk-och-saekerhetsnivaaer"></a>
 ### 1.2. Tillitsramverk och säkerhetsnivåer
 
 Grunden för vilken säkerhetsnivå som tillämpas när en användare
@@ -132,7 +132,7 @@ efterfrågade tillitsnivån, detta innefattar bl.a.
 
 -   Krav på fastställande av den e-legitimationssökandens identitet.
 
-<a name="tjänst-för-insamling,-administration-och-publicering-av-metadata"></a>
+<a name="tjaenst-foer-insamling,-administration-och-publicering-av-metadata"></a>
 ### 1.3. Tjänst för insamling, administration och publicering av metadata
 
 En SAML-federation tillhandahåller information om federationens
@@ -168,7 +168,7 @@ infrastruktur baserad på ett centralt federationsregister förutsätter
 att registret uppdateras kontinuerligt samt att federationsmedlemmarna
 alltid använder den senaste versionen av filen.
 
-<a name="anvisningstjänst"></a>
+<a name="anvisningstjaenst"></a>
 ### 1.4. Anvisningstjänst
 
 I en identitetsfederation är det möjligt att erbjuda och konsumera en
@@ -186,7 +186,7 @@ som gör sitt val och användaren, tillsammans med dennes val, styrs
 tillbaka till e-tjänsten som nu vet till vilken legitimeringstjänst
 användaren ska skickas för legitimering.
 
-<a name="integration-hos-förlitande-part"></a>
+<a name="integration-hos-foerlitande-part"></a>
 ### 1.5. Integration hos förlitande part
 
 Förlitandeparter, t.ex. e-tjänster, integrerar mot legitimeringstjänster
@@ -227,7 +227,7 @@ Användarens elektroniska signatur och tillhörande signeringscertifikat
 skapas av underskriftstjänsten efter det att användaren accepterat att
 skriva under genom att legitimera sig mot underskriftstjänsten.
 
-<a name="e-legitimationsnämndens-tekniska-ramverk-och-eidas"></a>
+<a name="e-legitimationsnaemndens-tekniska-ramverk-och-eidas"></a>
 ### 1.7. E-legitimationsnämndens tekniska ramverk och eIDAS
 
 EU-förordningen ([910/2014](http://eur-lex.europa.eu/legal-content/SV/TXT/PDF/?uri=CELEX:32014R0910&from=EN)) om elektronisk identifiering och betrodda
@@ -237,7 +237,7 @@ offentlig svensk e-tjänst baserat på vissa regler skall kunna acceptera
 en inloggning som utförs med en e-legitimation utställd i ett annat
 land.
 
-<a name="autentiseringar-med-utländska-e-legitimationer"></a>
+<a name="autentiseringar-med-utlaendska-e-legitimationer"></a>
 #### 1.7.1. Autentiseringar med utländska e-legitimationer
 
 De tekniska specifikationerna för eIDAS bygger, såsom
@@ -314,7 +314,7 @@ i kapitlet 1.7.3 nedan.
 
 > \[1\]: Egentligen väljer användaren till vilken ”eIDAS Proxy-tjänst” som begäran ska skickas vidare till. Detta är beroende landstillhörigheten för användarens e-legitimationsutfärdare.
 
-<a name="underskrifter-med-utländska-e-legitimationer"></a>
+<a name="underskrifter-med-utlaendska-e-legitimationer"></a>
 #### 1.7.2. Underskrifter med utländska e-legitimationer
 
 Inom ramen för detta tekniska ramverk tillämpas en modell för
@@ -399,7 +399,7 @@ i det identitetsintyg som skickas till e-tjänsten.
 
 > \[2\]: Om en sådan kommer att finnas i enlighet med Skatteverkets förslag till regeringen i oktober 2016.
 
-<a name="när-svenska-e-legitimationer-används-i-utländska-e-tjänster"></a>
+<a name="naer-svenska-e-legitimationer-anvaends-i-utlaendska-e-tjaenster"></a>
 #### 1.7.4. När svenska e-legitimationer används i utländska e-tjänster
 
 *Kommer att kompletteras* *senare.*
@@ -429,7 +429,7 @@ kring följande SAML-profiler:
     ”SAML2int profile – SAML 2.0 Interoperability Profile”
     \[[SAML2Int](http://saml2int.org/profile/current/)\].
 
-<a name="specifikationer-för-anvisning-(discovery)"></a>
+<a name="specifikationer-foer-anvisning-(discovery)"></a>
 #### 2.1.1. Specifikationer för anvisning (Discovery)
 
 Den specifikation, \[EidDiscovery\], som gällt i tidigare versioner av
@@ -441,10 +441,10 @@ legitimeringstjänst inte längre gäller.
 E-legitimationsnämnden planerar att utkomma med en uppdaterad
 specifikation rörande anvisning i kommande utkast av tekniskt ramverk.
 
-<a name="specifikationer-för-identitetsfederationer-som-följer-e-legitimationsnämndens-tekniska-ramverk"></a>
+<a name="specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk"></a>
 ### 2.2. Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk
 
-<a name="register-för-identifierare-definierade-av-e-legitimationsnämnden"></a>
+<a name="register-foer-identifierare-definierade-av-e-legitimationsnaemnden"></a>
 #### 2.2.1. Register för identifierare definierade av E-legitimationsnämnden
 
 Implementering av en infrastruktur för Svensk e-legitimation kräver
@@ -488,7 +488,7 @@ Dokumentet ”Entity Categories for the Swedish eID Framework”
 \[EidEntCat\] specificerar de entitetskategorier som definieras av
 E-legitimationsnämnden och beskriver dess betydelse.
 
-<a name="specifikationer-för-underskriftstjänst"></a>
+<a name="specifikationer-foer-underskriftstjaenst"></a>
 ### 2.3. Specifikationer för Underskriftstjänst
 
 Detta stycke innehåller referenser till de dokument vilka definierar
@@ -513,7 +513,7 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 <a name="referenslista"></a>
 ## 3. Referenslista
 
-<a name="e-legitimationsnämnden"></a>
+<a name="e-legitimationsnaemnden"></a>
 ### 3.1. E-legitimationsnämnden
 
 **\[EidTillit\]**
@@ -550,7 +550,7 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 > Certificate profile for certificates issued by Central Signing
 > services.
 
-<a name="övriga-referenser"></a>
+<a name="oevriga-referenser"></a>
 ### 3.2. Övriga referenser
 
 **\[eGov2\]**
@@ -575,7 +575,7 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 **\[AuthContext\]**
 > [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
-<a name="ändringar-mellan-versioner"></a>
+<a name="aendringar-mellan-versioner"></a>
 ## 4. Ändringar mellan versioner
 
 **Ändringar mellan version 1.4 och version 1.5:**
