@@ -1,4 +1,4 @@
-<img src="http://eidasweb.se/home/img/e-log_transp_cut.png"></img>
+<img src="img/eln-logo.png"></img>
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
@@ -319,7 +319,7 @@ following process to determine which `AuthnContextClassRef` URI to include
 in the `AuthnRequest` sent to the Identity Provider when authenticating
 the user for signing:
 
-<img src="http://eidasweb.se/home/techfwrk/dssprof-sign-msg-flow.png"></img>
+<img src="img/dssprof-sign-msg-flow.png"></img>
 
 The input data for the process is:
 
@@ -542,7 +542,7 @@ Service and the Signing Service with the user acting as an intermediary
 through a user agent (typically a web browser) according to the
 following message flow:
 
-<img src="http://eidasweb.se/home/techfwrk/dssprof-msg-exch-model.png"></img>
+<img src="img/dssprof-msg-exch-model.png"></img>
 
 
 1.  The user agent initiates the signing process by an HTTP request to

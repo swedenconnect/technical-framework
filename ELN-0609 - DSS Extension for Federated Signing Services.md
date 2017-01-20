@@ -1,4 +1,4 @@
-<img src="http://eidasweb.se/home/img/e-log_transp_cut.png"></img>
+<img src="img/eln-logo.png"></img>
 
 # DSS Extension for Federated Central Signing Services - Version 1.1
 ## Swedish eID Framework Specification - 14 August 2015

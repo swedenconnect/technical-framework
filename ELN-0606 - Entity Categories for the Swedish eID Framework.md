@@ -1,4 +1,4 @@
-<img src="http://eidasweb.se/home/img/e-log_transp_cut.png"></img>
+<img src="img/eln-logo.png"></img>
 
 # Entity Categories for the Swedish eID Framework
 
