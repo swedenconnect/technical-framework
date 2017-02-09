@@ -1,6 +1,6 @@
 <img src="img/eln-logo.png"></img>
 
-# Profile for BankID Identity Providers within the Swedish eID Framework
+# Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
 ### Version 1.0 - 2017-02-01 
 #### *Draft version*
