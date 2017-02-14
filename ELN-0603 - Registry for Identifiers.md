@@ -245,6 +245,7 @@ Identifiers for entity categories representing alternative sets of requirements.
 | `http://id.elegnamnden.se/ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
 | `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
 | `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | **\[EntityCat\]** |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -263,6 +264,8 @@ Identifiers for defined service types.
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/st/1.0/sigservice` | Electronic signature service | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/st/1.0/public-sector-sp` | Public sector Service Provider | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/st/1.0/private-sector-sp` | Private sector Service Provider | **\[EntityCat\]** |
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
@@ -440,6 +443,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 -   Added attribute definitions for “Birth name”, “User certificate”,
     “User signature” and “Signature activation data”. See chapter 3.2.
+    
+-  Added the Service Type Entity Categories `http://id.elegnamnden.se/st/1.0/public-sector-sp` and `http://id.elegnamnden.se/st/1.0/private-sector-sp` to section 3.1.3.3.
 
 **Changes between version 1.2 and version 1.3:**
 
