@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.4 - 2016-11-16
+### Version 1.4 - 2017-02-13
 #### *Draft version*
 
 *ELN-0603-v1.4*
@@ -344,6 +344,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | 1.2.752.201.3.10 | User Certificate | **\[AttrProf\]** |
 | 1.2.752.201.3.11 | User Signature | **\[AttrProf\]** |
 | 1.2.752.201.3.12 | Signature Activation Data | **\[AttrProf\]** |
+| 1.2.752.201.3.13 | Authentication Server Signature | **\[AttrProf\]** |
 
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
@@ -381,6 +382,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-user-certificate     OBJECT IDENTIFIER ::= { id-attr 10 }   -- User certificate    
     id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature    
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
+    id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     
     -- E-legnamnden QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
@@ -442,7 +444,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     Response messages to indicate a cancelled operation.
 
 -   Added attribute definitions for “Birth name”, “User certificate”,
-    “User signature” and “Signature activation data”. See chapter 3.2.
+    “User signature”, "Authentication Server Signature" and “Signature activation data”. See chapter 3.2.
     
 -  Added the Service Type Entity Categories `http://id.elegnamnden.se/st/1.0/public-sector-sp` and `http://id.elegnamnden.se/st/1.0/private-sector-sp` to section 3.1.3.3.
 

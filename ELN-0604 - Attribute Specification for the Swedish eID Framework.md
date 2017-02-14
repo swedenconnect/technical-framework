@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.4 - 2016-11-16
+### Version 1.4 - 2017-02-13
 #### *Draft version*
 
 *ELN-0604-v1.4*
@@ -43,7 +43,7 @@
 
     3.2.1. [The authContextParams Attribute](#the-authcontextparams-attribute)
 
-    3.2.2. [The userCertificate and userSignature Attributes](#the-usercertificate-and-usersignature-attributes)
+    3.2.2. [The userCertificate, userSignature and authServerSignature Attributes](#the-usercertificate-and-usersignature-attributes)
 
     3.2.3. [The sad Attribute](#the-sad-attribute)
 
@@ -299,11 +299,12 @@ The following attributes are defined for use within the attribute profile for th
 | transactionIdentifier | urn:oid:1.2.752.201.3.2 | Transaction identifier | Transaction identifier for an event, e.g. an authentication process. | NO | *9878HJ6687 (arbitrary string)* |
 | authContextParams | urn:oid:1.2.752.201.3.3 | Authentication Context Parameters. | Key-value pairs from an authentication process. Defined by issuing entity. | NO | See [section 3.2.1](#the-authcontextparams-attribute) below. |
 | userCertificate | urn:oid:1.2.752.201.3.10 | User certificate | Base64-encoding of a user certificate. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
-| userSignature | urn:oid:1.2.752.201.3.11 | User signature | Base64-encoding of a signa-ture object applied by the user. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
+| userSignature | urn:oid:1.2.752.201.3.11 | User signature | Base64-encoding of a signature object applied by the user. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
+| authServerSignature | urn:oid:1.2.752.201.3.13 | Authentication server signature | Base64-encoding of a authentication server signature. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
 | sad | urn:oid:1.2.752.201.3.12 | Signature activation data | Signature activation data required by signature services. | NO | See [section 3.2.3](#the-sad-attribute) below. |
 | prid | urn:oid:1.2.752.201.3.4 | Provisional identifier | Unique identifier for an authentication performed against the eIDAS Framework. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | NO:5068907693 |
 | pridPersistence | urn:oid:1.2.752.201.3.5 | Provisional identifier persistence indicator | Indicator for the expected persistence of the prid attribute. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | A |
-| personalIdentityNumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdenti-tyNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.org.se/presentedInPerson |
+| personalIdentityNumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.org.se/presentedInPerson |
 | eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | NO | ES/AT/02635542Y (Spanish eID number for an Austrian SP) || eidasNaturalPersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | NO | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
 
 All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the `xs:string` data type. Certain attributes such as `mail`, `personalIdentityNumber`, `organizationIdentifier`, `telephoneNumber` and `mobile` use a restricted character set according to its defined usage within this specification.
@@ -353,7 +354,7 @@ Below follows an example of how the authContextParams attribute is populated wit
     ...
 
 <a name="the-usercertificate-and-usersignature-attributes"></a>
-#### 3.2.2. The userCertificate and userSignature Attributes
+#### 3.2.2. The userCertificate, userSignature and authServerSignature Attributes
 
 Identity Providers that implement a PKI-based authentication method may
 make use of the `userCertificate` and `userSignature` attributes.
@@ -364,6 +365,8 @@ the X.509 certificate presented by the subject during authentication.
 The `userSignature` attribute contains a base64-encoding of a signature
 object that was created by the subject during the authentication<sup>4</sup>
 process.
+
+The `authServerSignature` may be included in assertions in cases where there are requirements to include a digitally signed proof from the authentication server at which the end user authenticated. This is mainly useful in cases where the SAML Identity Provider delegates end user authentication to a subordinate authentication server.
 
 > \[4\]: Note that an authentication process, may be “authentication for signature” as specified in section 7 of \[EidDeployProf\].
 
@@ -617,7 +620,7 @@ following attribute:
     as an `xs:string` type on the format YYYY-MM-DD, instead of the
     `xs:date` type.
 
--   Attributes `userCertificate`, `userSignature` and `sad` were added.
+-   Attributes `userCertificate`, `userSignature`, `authServerSignature` and `sad` were added.
 
 **Changes between version 1.2 and version 1.3:**
 
