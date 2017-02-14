@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.5 - 2016-11-16
+### Version 1.5 - 2017-02-13
 #### *Draft version*
 
 *ELN-0606-v1.5*
@@ -32,6 +32,8 @@
     2.3. [loa4-pnr](#loa4-pnr)
 
     2.4. [eidas-naturalperson](#eidas-naturalperson)
+    
+    2.5. [eidas-pnr-delivery](#eidas-pnr-delivery)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
@@ -40,6 +42,10 @@
 4. [**Definitions for Service Type Entity Categories**](#definitions-for-service-type-entity-categories)
 
     4.1. [sigservice](#sigservice)
+
+    4.2. [public-sector-sp](#public-sector-sp)
+    
+    4.3. [private-sector-sp](#private-sector-sp)
 
 5. [**References**](#references)
 
@@ -244,14 +250,39 @@ the requesting service to determine how to provide a service once a
 request is received.
 
 Service Providers MAY also override certain requirements in specific
-requests. For example, a Service Provider declaring a Service Entity
-Category that indicates that it will request authentication according
+requests. For example, a Service Provider declaring a service entity
+category that indicates that it will request authentication according
 to level of assurance 3, MAY still send an authentication request
 specifying another level of assurance. Any legal or other regulatory
 obligations that influences this matter is outside the scope of this
 document. One such obligation could be that release of certain
 sensitive attributes MUST NOT be done unless the Service Provider has
 declared a particular service entity category.
+
+**Note**: The service entity categories defined in this section are "universal", meaning 
+that an Identity Provider MUST NOT impose any other requirements, other than those 
+defined by a particular entity category, to serve a request. Typically, if an Identity Provider
+deliver assertions according to the "loa3-pnr" category, but limited to Service Providers that 
+it has business agreements with, it is not allowed to include the "loa3-pnr" category in the
+Identity Provider metadata since this category is "universal" within the federation. 
+
+Identity Providers that do not offer its services to all Service Providers within the federation
+MUST NOT use the universally defined service entity categories defined in this section.
+Instead they should create, or apply for<sup>1</sup>, a dedicated category that extends
+the meaning of the universal category.
+
+***Example***: 
+Suppose that the Identity Provider X delivers assertions according to service entity category
+"loa3-pnr" (as described below), but only to relying parties to which it has a business
+agreement with. In order to facilitate the matching rules for discovery 
+(see [section 1.4](#use-in-discovery-services) above) the service entity category, 
+"loa3-pnr-X", is introduced. It has the same meaning as "loa3-pnr" with the additional
+requirement that there must exist a bilateral agreement between a Service Provider and
+Identity Provider X. This URI for this new service entity category should now be included 
+in the metadata for the Identity Provider, och in metadata for the Service Providers that 
+have an agreement with the Identity Provider.
+
+> \[1\]: This should be done in co-operation with the federation operator.
 
 <a name="loa3-pnr"></a>
 ### 2.1. loa3-pnr
@@ -270,7 +301,7 @@ declared a particular service entity category.
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa2-pnr`
 
-**Description**: User authentication according to assurance level 2 \[EidTillit\]and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 2 \[EidTillit\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
 
@@ -303,6 +334,23 @@ declared a particular service entity category.
 
 **Attribute requirements**: ELN-AP-eIDAS-NatPer-01 (`http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`)
 > eIDAS Natural Person Attribute Set
+
+<a name="eidas-pnr-delivery"></a>
+### 2.5. eidas-pnr-delivery
+
+**URL**: `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery`
+
+**Description**: Special purpose service entity category intended for Identity Providers that deliver assertions to Service Providers within the eIDAS federation (via the Swedish eIDAS Proxy Service).
+
+No Service Providers other than the Swedish eIDAS Proxy Service should make use of this entity category.
+
+Note that the Identity Providers release attributes according to the "Natural Personal Identity with Civic Registration Number" attribute set. It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
+
+**LoA-identifier**: Not applicable
+> An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[EidRegistry\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[EidDeploy\].
+
+**Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
+> Natural Personal Identity with Civic Registration Number (personnummer)
 
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
@@ -355,7 +403,22 @@ All Service Type identifiers are prefixed with
 ### 4.1. sigservice
 
 **URL**: `http://id.elegnamnden.se/st/1.0/sigservice`
+
 **Description**:  A service type for a Service Provider that provides electronic signature services within the Swedish eID framework.
+
+<a name="public-sector-sp"></a>
+### 4.2. public-sector-sp
+
+**URL**: `http://id.elegnamnden.se/st/1.0/public-sector-sp`
+
+**Description**: A service type that indicates that an Service Provider is a "public sector" SP.    This category MUST be used by public sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
+
+<a name="private-sector-sp"></a>
+### 4.3. private-sector-sp
+
+**URL**: `http://id.elegnamnden.se/st/1.0/private-sector-sp`
+
+**Description**: A service type that indicates that an Service Provider is a "private sector" SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
 
 <a name="references"></a>
 ## 5. References
@@ -386,6 +449,9 @@ All Service Type identifiers are prefixed with
 **\[EidTillit\]**
 > Tillitsramverk för Svensk E-legitimation.
 
+**\[EidDeploy\]**
+> Deployment Profile for the Swedish eID Framework.
+
 **\[EidRegistry\]**
 > Registry for identifiers assigned by the Swedish e-identification board.
 
@@ -400,8 +466,14 @@ All Service Type identifiers are prefixed with
 -   Introduced the Service Entity Category “eidas-naturalperson”
     (section 2.4) for support of authentication against the eIDAS
     Framework.
+    
+- Introduced the Service Entity Category "eidas-pnr-delivery" (section 2.5) for use by Swedish Identity Providers delivering assertions to Service Providers within the eIDAS federation.
+    
+-   Added the Service Type Entity Categories "public-sector-sp" and "private-sector-sp" to section 4.
 
 -   Minor changes regarding discovery.
+
+-   Added explanatory text in chapter 2 about universal service entity categories.
 
 **Changes between version 1.3 and version 1.4:**
 
