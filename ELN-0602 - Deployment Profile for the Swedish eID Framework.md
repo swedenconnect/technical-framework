@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.4 - 2016-11-16 
+### Version 1.4 - 2017-02-13 
 #### *Draft version*
 
 *ELN-0602-v1.4*
@@ -913,7 +913,7 @@ An Identity Provider conformant with this profile SHOULD NOT make use of
 any other `<saml2p:StatusCode>` values than those specified in
 section 3.2.2.2 of
 \[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\]
-except for the cancel status as described below. The top-level
+or in section 3.1.4 of \[EidRegistry\]. The top-level
 `<saml2p:StatusCode>` value may only be one of the following error
 identifiers:
 
@@ -934,10 +934,12 @@ SHOULD indicate this by assigning the second-level status code to
 If an Identity Provider displays information describing an error in its
 user interface it MUST also offer ways for the end user to confirm this
 information (for example, by including an OK-button). When the end user
-confirms taking part of the information (i.e., clicks on the OK-button),
+acknowledges taking part of the information (i.e., clicks on the OK-button),
 the `<saml2p:Response>` message is posted back to the Service
 Provider according to the HTTP POST binding
 \[[SAML2Bind](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)\].
+
+If an Identity Provider detects suspicious fraudulent behaviour or if any of its security checks alerts a (possible) fraud, the Identity Provider MUST NOT issue an assertion but instead display an error message. After the end user confirms this error message, the error message posted back to the Service Provider SHOULD contain a second-level status code set to `http://id.elegnamnden.se/status/1.0/fraud` or `http://id.elegnamnden.se/status/1.0/possibleFraud` (depending on whether the Identity Provider aborted the authentication due to a determined or suspected fraud).
 
 <a name="authentication-for-signature"></a>
 ## 7. Authentication for Signature
@@ -1224,6 +1226,8 @@ response with the status code
 -   In section 6.4, the requirement to use the sub-level status code
     `http://id.elegnamnden.se/status/1.0/cancel` was added. This status
     should be used to indicate a cancelled operation.
+    
+- In section 6.4, the status codes `http://id.elegnamnden.se/status/1.0/fraud` and `http://id.elegnamnden.se/status/1.0/possibleFraud` were introduced. Their purpose is to alert (suspected) fraudulent behaviour.
 
 -   The specification for “Discovery within the Swedish eID Framework”
     has been deprecated and requirements referring to this document have

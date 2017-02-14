@@ -276,7 +276,9 @@ below extends the list of second-level status codes defined in section
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/status/1.0/cancel` | Status code representing a cancelled operation | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/status/1.0/cancel` | Status code representing a cancelled operation. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/status/1.0/fraud` | Status code indicating a fraudulent request. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/status/1.0/possibleFraud` | Status code indicating a possible fraudulent request. | **\[DeployProf\]** |
 
 <a name="central-signing"></a>
 #### 3.1.5. Central Signing
@@ -439,9 +441,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 -   Attributes and URI:s for the eIDAS Framework was added.
 
--   Added the SAML status code identifier
-    `http://id.elegnamnden.se/status/1.0/cancel` to be used in SAML
+-   The SAML status code identifier
+    `http://id.elegnamnden.se/status/1.0/cancel` was added to be used in SAML
     Response messages to indicate a cancelled operation.
+    
+- Added the SAML status code identifiers `http://id.elegnamnden.se/status/1.0/fraud` and `http://id.elegnamnden.se/status/1.0/possibleFraud` were added to be used in SAML Response messages to alert fraudulent requests.
 
 -   Added attribute definitions for “Birth name”, “User certificate”,
     “User signature”, "Authentication Server Signature" and “Signature activation data”. See chapter 3.2.
