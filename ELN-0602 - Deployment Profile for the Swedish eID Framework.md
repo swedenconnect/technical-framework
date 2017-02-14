@@ -57,11 +57,11 @@
 
     6.1. [Security Requirements](#security-requirements)
 
-    6.2. [Message Content](#message-content)
+    6.2. [Message Content](#message-content2)
 
     6.2.1. [Attribute Release Rules](#attribute-release-rules)
 
-    6.3. [Processing Requirements](#processing-requirements)
+    6.3. [Processing Requirements](#processing-requirements2)
 
     6.3.1. [Signature Validation](#signature-validation)
 
@@ -672,7 +672,7 @@ allows the use of unsolicited responses, but this profile has more
 strict security and processing requirements that make the use of
 unsolicited responses violate these requirements.
 
-<a name="message-content"></a>
+<a name="message-content2"></a>
 ### 6.2. Message Content
 
 The `<saml2:Response>` message MUST contain an `<saml2:Issuer>`
@@ -784,7 +784,7 @@ Service Provider to decide how to proceed, e.g., by denying service to
 the authenticated user, provide limited services or to use other
 resources to collect necessary attributes.
 
-<a name="processing-requirements"></a>
+<a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
 
 This profile mandates a correct processing of a `<saml2p:Response>`
