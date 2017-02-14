@@ -2,7 +2,7 @@
 
 # E-legitimationsnämndens Tekniska ramverk
 
-### Version: 1.5 - 2016-11-16
+### Version: 1.5 - 2017-02-14
 #### *Utkast*
 
 *ELN-0600-v1.5*
@@ -33,7 +33,7 @@
 
     1.7.3. [Hantering av identiteter](#hantering-av-identiteter)
 
-    1.7.4. [När svenska e-legitimationer används i utländska e-tjänster](#naer-svenska-e-legitimationer-anvaends-i-utlaendska-e-tjaenster)
+    1.7.4. [Svenska e-legitimationer i utländska e-tjänster](#svenska-e-legitimationer-i-utlaendska-e-tjaenster)
 
 2. [**Tekniska specifikationer**](#tekniska-specifikationer)
 
@@ -245,10 +245,10 @@ E-legitimationsnämndens tekniska ramverk, på SAML-standarder, och även
 om likheterna är många finns även skillnader i dessa specifikationer. En
 svensk e-tjänst ska dock inte förhålla sig direkt till eIDAS tekniska
 specifikationer. Nedanstående bild illustrerar hur
-E-legitimationsnämndens eIDAS-nod (eIDAS-connector) agerar som en brygga
+E-legitimationsnämndens eIDAS-nod (*eIDAS-connector*) agerar som en brygga
 mellan andra länder och en svensk federation då en person autentiseras
 med en utländsk e-legitimation mot en svensk e-tjänst.
-E-legitimationsnämndens eIDAS-nod kommer att följa detta tekniska
+E-legitimationsnämndens eIDAS-nod följer E-legitimationsnämndens tekniska
 ramverk.
 
 ![](img/eidas-flow.jpg)
@@ -263,9 +263,9 @@ Flödet är enligt följande:
     i eIDAS-fallet väljer.
 
 3.  E-tjänsten skapar en legitimeringsbegäran enligt detta tekniska
-    ramverk och styr användaren till den svenska eIDAS-noden (connector)
+    ramverk och styr användaren till den svenska eIDAS-noden (*connector*)
     som E-legitimationsnämnden ansvarar för. eIDAS-noden uppträder som
-    en legitimeringstjänst (Identity Provider) i federationen/-erna in
+    en legitimeringstjänst (*Identity Provider*) i federationen/-erna in
     mot svenska förlitande parter vilket innebär att kommunikation med
     denna tjänst utförs på samma sätt som mot övriga
     legitimeringstjänster inom federationer som följer
@@ -281,10 +281,10 @@ Flödet är enligt följande:
     land tar detta lands teknik för autentisering över. Inte alla länder
     inom eIDAS använder SAML för autentisering, men om så var fallet i
     vårt exempel skulle användaren styras vidare till en
-    legitimeringstjänst (Identity Provider), och innan dess kanske även
+    legitimeringstjänst (*Identity Provider*), och innan dess kanske även
     en anvisningstjänst för val av legitimeringstjänst.
 
-6.  Då en autentisering utförts skapas ett intyg (Assertion) enligt
+6.  Då en autentisering utförts skapas ett intyg (*Assertion*) enligt
     eIDAS specifikationer. Detta intyg innehåller bl.a. eIDAS-specifika
     attribut som identifierar användaren.
 
@@ -399,10 +399,17 @@ i det identitetsintyg som skickas till e-tjänsten.
 
 > \[2\]: Om en sådan kommer att finnas i enlighet med Skatteverkets förslag till regeringen i oktober 2016.
 
-<a name="naer-svenska-e-legitimationer-anvaends-i-utlaendska-e-tjaenster"></a>
-#### 1.7.4. När svenska e-legitimationer används i utländska e-tjänster
+<a name="svenska-e-legitimationer-i-utlaendska-e-tjaenster"></a>
+#### 1.7.4. Svenska e-legitimationer i utländska e-tjänster
 
-*Kommer att kompletteras* *senare.*
+Sverige har möjlighet att anmäla svenska e-legitimationer på tillitsnivå låg (low), väsentlig (substantial) och hög (high) enligt eIDAS. Det finns en politisk vilja i Sverige att låta innehavare av svenska e-legitimationer logga in i utländska tjänster.
+ 
+En begäran om legitimering från en utländsk e-tjänst ställs till E-legitimationsnämndens eIDAS-nod (Proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
+I den svenska eIDAS-noden väljer användaren med vilken svensk e-legitimation denne önskar autentisera sig, varpå en legitimeringsbegäran till den legitimeringstjänst (*Identity Provider*) som hanterar vald e-legitimation skickas. Denna begäran är utformad enligt E-legitimationsnämndens tekniska ramverk vilket innebär att en svensk legitimeringstjänst inte behöver förhålla sig till eIDAS tekniska specifikationer.
+
+Användaren autentiseras hos den svenska legitimeringstjänsten och ett identitetsintyg ställs ut (enligt E-legitimationsnämndens tekniska ramverk). Detta intyg mottas av den svenska eIDAS Proxy-tjänsten och omvandlas till ett intyg enligt eIDAS specifikationer innan det skickas vidare till den utländska eIDAS-connectorn och därpå till den anropande e-tjänsten (*Service Provider*).
+ 
+När en svensk e-legitimation används för inloggning utomlands har Sverige möjlighet att skicka med antingen det svenska personnumret som personidentitetsbegrepp, eller en pseudonym. Denna fråga och andra villkor för att använda svenska e-legitimationer i utländska e-tjänster utreds under 2017 i en offentlig utredning ([N 2016:01 Utredningen om effektiv styrning av nationella digitala tjänster](http://www.sou.gov.se/n-201601-utredningen-om-effektiv-styrning-av-nationella-digitala-tjanster-i-en-samverkande-forvaltning/)), som ska redovisas till regeringen 2017-12-31.
 
 <a name="tekniska-specifikationer"></a>
 ## 2. Tekniska specifikationer
