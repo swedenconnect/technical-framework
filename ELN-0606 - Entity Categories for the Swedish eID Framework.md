@@ -216,60 +216,14 @@ single entity category attribute.
 This section contains a listing of all Service Entity Categories that
 are defined within the framework for Swedish eID.
 
-Service entity category requirements are typically a combination of, but
-not limited to, the following types of requirements:
-
--   Level of assurance (LoA) attributes as specified in \[EidRegistry\].
-
-  -   Indicating that only services conforming to at least the specified
-    level of assurance have the capability to satisfy the security
-    requirements of the Service Provider. An Identity Provider declaring
-    this Service Entity Category MUST be able to provide this level of
-    assurance.
-
--   Attributes as specified in \[EidAttributes\].
-
-  -   Indicating that only services that implement attribute release
-    according to the identified attribute set have the capability to
-    satisfy the minimum attribute requirements of the Service Provider.
-    An Identity Provider declaring this Service Entity Category MUST be
-    able to provide these attributes.
-
-All Assertion Requirements identifiers are prefixed with
+All service entity category identifiers are prefixed with
 **`http://id.elegnamnden.se/ec`**.
 
-**Note**: The main purpose of Service Entity Categories is for service
-matching before sending a request to a service in order to prevent
-requests from being sent to a service that will not be able to send a
-useful response (see [section 1.4](#use-in-discovery-services) above). The technical obligation of the
-providing service is limited to provide services according to its own
-declared service entity category regardless of which service entity
-category that has been declared by the requesting service. The providing
-service MAY or MAY NOT need to inspect the service entity category of
-the requesting service to determine how to provide a service once a
-request is received.
+A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions includes requirements on level of assurance (LoA) and requirements on mandatory attributes.
 
-Service Providers MAY also override certain requirements in specific
-requests. For example, a Service Provider declaring a service entity
-category that indicates that it will request authentication according
-to level of assurance 3, MAY still send an authentication request
-specifying another level of assurance. Any legal or other regulatory
-obligations that influences this matter is outside the scope of this
-document. One such obligation could be that release of certain
-sensitive attributes MUST NOT be done unless the Service Provider has
-declared a particular service entity category.
+**Note**: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
 
-**Note**: The service entity categories defined in this section are "universal", meaning 
-that an Identity Provider MUST NOT impose any other requirements, other than those 
-defined by a particular entity category, to serve a request. Typically, if an Identity Provider
-deliver assertions according to the "loa3-pnr" category, but limited to Service Providers that 
-it has business agreements with, it is not allowed to include the "loa3-pnr" category in the
-Identity Provider metadata since this category is "universal" within the federation. 
-
-Identity Providers that do not offer its services to all Service Providers within the federation
-MUST NOT use the universally defined service entity categories defined in this section.
-Instead they should create, or apply for<sup>1</sup>, a dedicated category that extends
-the meaning of the universal category.
+**Note**: The service entity category may serve as a means to restrict a providing service to only those service providers that has made a deliberate choice to accept the providing service. This is achieved if an Identity Provider only lists a privately defined service entity category in its metadata which is understood and accepted by just a subset of all service providers. Each service provider can then make this Identity Provider selectable (matching its own service) by including this private service entity category in its metadata.
 
 ***Example***: 
 Suppose that the Identity Provider X delivers assertions according to service entity category
@@ -281,8 +235,6 @@ requirement that there must exist a bilateral agreement between a Service Provid
 Identity Provider X. This URI for this new service entity category should now be included 
 in the metadata for the Identity Provider, och in metadata for the Service Providers that 
 have an agreement with the Identity Provider.
-
-> \[1\]: This should be done in co-operation with the federation operator.
 
 <a name="loa3-pnr"></a>
 ### 2.1. loa3-pnr
@@ -340,9 +292,7 @@ have an agreement with the Identity Provider.
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery`
 
-**Description**: Special purpose service entity category intended for Identity Providers that deliver assertions to Service Providers within the eIDAS federation (via the Swedish eIDAS Proxy Service).
-
-No Service Providers other than the Swedish eIDAS Proxy Service should make use of this entity category.
+**Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This eneity category MUST NOT be set by any entity other than Identity Provides providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
 
 Note that the Identity Providers release attributes according to the "Natural Personal Identity with Civic Registration Number" attribute set. It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 
