@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.5 - 2017-02-13
+### Version 1.5 - 2017-02-17
 #### *Draft version*
 
 *ELN-0606-v1.5*
@@ -219,7 +219,7 @@ are defined within the framework for Swedish eID.
 All service entity category identifiers are prefixed with
 **`http://id.elegnamnden.se/ec`**.
 
-A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions includes requirements on level of assurance (LoA) and requirements on mandatory attributes.
+A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes.
 
 **Note**: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
 
@@ -292,7 +292,7 @@ have an agreement with the Identity Provider.
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery`
 
-**Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This eneity category MUST NOT be set by any entity other than Identity Provides providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
+**Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
 
 Note that the Identity Providers release attributes according to the "Natural Personal Identity with Civic Registration Number" attribute set. It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 
@@ -423,7 +423,7 @@ All Service Type identifiers are prefixed with
 
 -   Minor changes regarding discovery.
 
--   Added explanatory text in chapter 2 about universal service entity categories.
+-   Updates to explanatory text in chapter 2 about usage of service entity categories.
 
 **Changes between version 1.3 and version 1.4:**
 
