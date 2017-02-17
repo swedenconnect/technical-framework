@@ -223,7 +223,7 @@ A service entity category identifies an arbitrary set of requirements and condit
 
 **Note**: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
 
-**Note**: The service entity category may serve as a means to restrict a providing service to only those service providers that has made a deliberate choice to accept the providing service. This is achieved if an Identity Provider only lists a privately defined service entity category in its metadata which is understood and accepted by just a subset of all service providers. Each service provider can then make this Identity Provider selectable (matching its own service) by including this private service entity category in its metadata.
+**Note**: The service entity category may serve as a means to restrict a providing service to only those Service Providers that has made a deliberate choice to accept the providing service. This is achieved if an Identity Provider only lists a privately defined service entity category in its metadata which is understood and accepted by just a subset of all service providers. Each Service Provider can then make this Identity Provider selectable (matching its own service) by including this private service entity category in its metadata.
 
 ***Example***: 
 Suppose that the Identity Provider X delivers assertions according to service entity category
@@ -233,7 +233,7 @@ agreement with. In order to facilitate the matching rules for discovery
 "loa3-pnr-X", is introduced. It has the same meaning as "loa3-pnr" with the additional
 requirement that there must exist a bilateral agreement between a Service Provider and
 Identity Provider X. This URI for this new service entity category should now be included 
-in the metadata for the Identity Provider, och in metadata for the Service Providers that 
+in the metadata for the Identity Provider, and in metadata for the Service Providers that 
 have an agreement with the Identity Provider.
 
 <a name="loa3-pnr"></a>
