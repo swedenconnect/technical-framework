@@ -422,7 +422,9 @@ the user agent, MUST be protected by TLS/SSL
 Provider using the HTTP-REDIRECT binding. This profile will also allow
 the usage of the HTTP-POST binding for sending
 `<saml2p:AuthnRequest>` messages (see section 3.5 of
-\[[SAML2Bind](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)\]).
+\[[SAML2Bind](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)\]),
+meaning that Identity Providers conformant with this profile MUST support
+the HTTP-POST binding.
 
 An Identity Provider that requires `<saml2p:AuthnRequest>` messages
 to be signed MUST not accept messages that are not signed, or where the
@@ -1232,6 +1234,9 @@ response with the status code
 -   The specification for “Discovery within the Swedish eID Framework”
     has been deprecated and requirements referring to this document have
     been updated.
+    
+- A clarification to section 5.2 was made stating that conformant
+  Identity Providers MUST support the HTTP-POST binding.
 
 **Changes between version 1.2 and version 1.3:**
 
