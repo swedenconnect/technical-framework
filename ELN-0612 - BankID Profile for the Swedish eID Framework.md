@@ -2,7 +2,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.0 - 2017-02-01 
+### Version 1.0 - 2017-02-14
 #### *Draft version*
 
 *ELN-0612-v1.0*
@@ -16,15 +16,14 @@
 <a name="introduction"></a>
 ## 1. Introduction
 
-This profile defines how a SAML Identity Provider that offers authentication using the Swedish BankID technology should implement its services to be compliant with the Swedish eID Framework specifications.
+This profile defines how a SAML Identity Provider that offers authentication using the Swedish BankID technology should implement its services to be compliant with the Swedish eID Framework.
 
 The BankID interface for authentication and signature, the Relying Party Interface, is described in the "BankID Relying Party Guidelines", \[[BankID_Spec](#bankid_spec)\], specification. This specification MUST be fully implemented and supported by BankID Identity Providers compliant
 with the Swedish eID Framework specifications.
 
-This deployment profile extends the "Deployment Profile for the Swedish eID Framework", 
+This profile extends the "Deployment Profile for the Swedish eID Framework", 
 \[[EidProfile](#eid-profile)\], with requirements and recommendations for Service Providers 
-using BankID via a SAML Identity Provider and for Identity Providers offering BankID authentication
-and signature services.
+using BankID via a compliant Identity Provider and for Identity Providers offering BankID authentication and signature services.
 
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
@@ -60,77 +59,194 @@ the following syntax is used:
 
 -   `<mdattr:Element>` – for elements defined in \[[SAML2MetaAttr](#saml2metaattr)\].
 
-## 2. Usage of BankID
+### 1.3. BankID Methods and Applications
 
-### 2.2. BankID Methods and Applications
-
-Currently, there are three flavours of BankID:
+There are three flavours of BankID:
 
 * Mobile BankID - End users use the "BankID app" on their mobile devices to authenticate or perform a signature. In these cases the user certificate is stored in the app and protected by a personal code.
-* "BankID on file" - End users use the desktop program "BankID Security Application" to authenticate or perform a signature. The user certificate is stored in a file on the computer and is protected by the user password.
-* "BankID on card" - End users make use of the same desktop program as described above, but the certificate is placed on a smart card. The user private key is unlocked using the PIN-pad on the smart card reader.
+* BankID on file - End users use the desktop program "BankID Security Application" to authenticate or perform a signature. The user certificate is stored in a file on the computer and is protected by the user password.
+* BankID on card - End users make use of the same desktop program as described above, but the certificate is placed on a smart card. The user private key is unlocked using the PIN-pad on the smart card reader.
 
-The three above methods are all "BankID", but historically relying parties have made a difference between "Mobile BankID" and "BankID" (the original desktop version). 
-> More about "this device" and "other device" ...
+The three above methods are all "BankID", but historically, relying parties have made a difference between "Mobile BankID" and "BankID" (the original desktop version).
 
-### 2.1. The Relying Party Interface
+<a name="representation-as-identity-providers"></a>
+#### 1.3.1. Representation as Identity Providers
 
-### 2.3. Representation as Identity Providers
+An actor offering BankID authentication can choose to represent its services as **one** BankID Identity Provider supporting all different BankID methods, or to expose **several** Identity Provider instances, one for each BankID method. 
 
-> Discussion whether there should be separate IdP:s for BankID and Mobile BankID, or even "BankID on card".
-> This profile should allow either of the following:
-> 
-> * Each BankID "method" is its own IdP, or,
-> * One BankID IdP that supports all methods.
+Services that support all methods within one Identity Provider instance usually displays a question to the user before authentication starts, where the user chooses between "Using BankID on this device or another device". In an environment where a discovery service (or similar) is being used, this means that the user has to make two choices before the actual authentication process starts; first at the discovery service where the user selects "BankID" and then at the BankID Identity Provider where the user selects the type of BankID authentication to use.
 
-<a name="metadata"></a>
-## 2. Metadata
+It is RECOMMENDED that BankID services are split into separate Identity Providers for each supported BankID method. The reasons for this are the above argument about discovery, but also the fact that a Service Provider should be able to select which type of authentication that is required (for example, Mobile BankID may be accepted but not BankID on file). 
 
-### 2.1. BankID Identity Provider
+<a name="recommended-limitations"></a>
+#### 1.3.2. Recommended Limitations
 
-### 2.2. Service Providers using BankID
+A BankID operation can be performed using either the BankID client (app or desktop program) on "this" device, or "another" device, where "this" means that the end user initiates the operation from the same device (computer, tablet or mobile phone) as the device that contains the user's BankID and "another" device means that the BankID is located on another device.
 
-> An SP needs to explicitly require release of BankID-specific attributes.
+Section [1.3.1](#representation-as-identity-providers) above recommends to use separate Identity Providers for the different BankID methods. In this case the Identity Provider does not ask the user whether BankID should be used on "this" device or "another" device. Instead, the user has already selected the type of BankID he or she wants to use as part of the discovery process.
 
-### 2.3. Signature Services using BankID
+The table below states the RECOMMENDED support and behaviour for separate BankID Identity Providers. 
 
-## 3. Authentication
+| Identity Provider | Desktop | Mobile Phone | Tablet |
+| :--- | :--- | :--- | :--- |
+| Mobile BankID | Start BankID on other device<sup>1</sup> (mobile phone or tablet). | Start BankID on the same device<sup>2</sup>. | Prompt the user to ask whether to start BankID on the tablet or on another device<sup>3</sup> (mobile phone). |
+| BankID on file (*or on card*) | Start BankID on the same device<sup>4</sup>. | Not supported<sup>5</sup>. | Not supported<sup>6</sup>. |
 
-### 3.1. Selection of BankID
+1. The user initiates a BankID operation from his or hers desktop computer and selects to use Mobile BankID. In this case the Mobile BankID app is started on another device (since Mobile BankID does not exist on desktop computers).
+2. The user initiates a BankID operation from his or hers mobile phone and selects to use Mobile BankID. In this case the BankID app is started on the same device. It is highly unlikely that a user uses one mobile phone to visit a service and wants to use his or hers BankID on another device.
+3. The user initiates a BankID operation from his or hers tablet and selects to use Mobile BankID. In this case the recommendation is to prompt the user to ask whether the Mobile BankID app should be automatically started on the tablet, or if the user wishes to use BankID on another device (probably a mobile phone). The reason for this recommendation is that most users have a BankID on their mobile phones, but not necessarily on their tablets.
+4. The user initiates a BankID operation from his or hers desktop computer and selects to use BankID on file. The BankID Security Application is started on the same computer. It is not a likely use case to use one computer to connect to the service and another one for BankID.
+5. This case should not be supported. 
+6. This case should not be supported.
 
-> Discovery within the IdP or before hand.
+Note: Items 4-6 above also apply to BankID on card. A service MAY choose to implement BankID on file and BankID on card as separate Identity Providers or as one Identity Provider instance.
 
-### 3.2. Authentication Requests
+For Identity Providers implementing BankID support in **one** Identity Provider instance it is RECOMMENDED to make the assumption that the BankID app should be started on the same device if the user connects via a mobile phone. 
 
-> An `AuthnRequest` needs to be signed.
+<a name="attributes"></a>
+## 2. Attributes
 
-### 3.3. Authentication Responses
+An BankID Identity Provider use the BankID Relying Party API, as described in \[[BankID_Spec](#bankid_spec)\], to communicate with the BankID-server when providing its services to end users. When a BankID-operation has completed successfully, the Identity Provider (the BankID Relying Party) invokes the `Collect`-method to obtain the result from the operation.
 
-#### 3.4. Attribute release
+The table [below](#attribute-transformation) contains attribute transformation mappings between attributes from a `Collect`-method response as described in section 12.8 of \[[BankID_Spec](#bankid_spec)\] and attributes defined within the Swedish eID Framework as defined in \[[EidAttributes](#eid-attributes)\].
 
-> Extends "Natural Personal Identity with Civic Registration Number", `http://id.elegnamnden.se/ap/1.0/pnr-01`.
+An Identity Provider should not necessarily release all transformed attributes received from the BankID-server to the Service Provider. See further section XXX, "Attribute Release".
 
-## 5. Signatures (Authentication for Signature)
+<a name="attribute-transformation"></a>
+### 2.1. Attribute Transformation
 
-An Identity Provider conforming to the Swedish eID Framework is obliged to handle requests received from Signature Services as described in section 7, “Authentication for Signature”, of \[[EidProfile](#eid-profile)\]. This section further specifies how a BankID Identity Provider should support “authentication for signature”.A BankID Identity Provider that receives an `<saml2p:AuthnRequest>` message from a Signature Service MUST initiate a BankID signature operation.
+| BankID attribute | SAML Attribute | Description |
+| :--- | :--- | :--- |
+| `orderRef` | transactionIdentifier<br />`urn:oid:1.2.752.201.3.2` | The BankID order reference received from a BankID `Auth`- or `Sign`-method invocation. This parameter is supplied as an input parameter to the `Collect`-call and is the unique transaction identifier for the BankID-operation. |
+| `userInfo.personalNumber` | personalIdentityNumber<br />`urn:oid:1.2.752.29.4.13` | Swedish ”personnummer”. 12 digits without hyphen. |
+| `userInfo.givenName` | givenName<br />`urn:oid:2.5.4.42` | User's given name. |
+| `userInfo.surname` | sn<br />`urn:oid:2.5.4.4` | User's surname. |
+| `userInfo.name` | displayName<br />`urn:oid:2.16.840.1.113730.3.1.241` | User's given name and surname. |
+| `userInfo.notBefore` | *bankidNotBefore* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | Start of validity of user's BankID.<br />No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidNotBefore*, see [2.1.1](#the-authcontextparams-attribute) below. |
+| `userInfo.notAfter` | *bankidNotAfter* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | End of validity of user's BankID.<br />No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidNotAfter*, see [2.1.1](#the-authcontextparams-attribute) below. |
+| `userInfo.ipAddress` | *bankidUserAgentAddress* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | The IP-address of the user agent presented to the BankID server. In cases where a user uses BankID "on another device" this address may not be the same as the web user agent. No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidUserAgentAddress*, see [2.1.1](#the-authcontextparams-attribute) below. |
+| `signature` | userSignature<br />`urn:oid:1.2.752.201.3.11` | The signature applied by the user as part of the authentication/signature process. |
+| `ocspResponse` | authServerSignature<br />`urn:oid:1.2.752.201.3.13` | The OCSP response signed by the BankID issuer that proves that the user BankID was checked for revocation. |
 
-### 5.1. Displaying of Signature Message
+<a name="the-authcontextparams-attribute"></a>
+#### 2.1.1. The authContextParams Attribute
 
-The BankID client (App or desktop program) comprises a text box in which the signature message is displayed for the user. 
-A BankID Identity Provider SHOULD NOT display the signature message in any other way than 
-in this text box. The message is passed to the BankID server using the `userVisibleData` parameter according to section 12.2.1 of \[[BankID_Spec](#bankid_spec)\].
+The `authContextParams` attribute, see section 3.2.1 of \[[EidAttributes](#eid-attributes)\], is a general purpose attribute to be used when non-standardized authentication data is to be transfered in a SAML assertion. 
 
-If the `<saml2p:AuthnRequest>` message contains a `SignMessage` extension, the contents of this message should be displayed for the user in the BankID signature text box.A BankID Identity Provider MUST only process `SignMessage` elements having their `MimeType` attribute set to `text`<sup>1</sup> . For any other values (`text/html` or `text/markdown`), the Identity Provider MUST respond with an error.If the `<saml2p:AuthnRequest>` message does not contain a `SignMessage` extension, the Identity Provider MUST make use of a default signature message. How this message is constructed is the responsibility of the Identity Provider, but it MUST be obvious for the user who is the requesting party, i.e., the Service Provider that has ordered the signature operation<sup>2</sup>.> \[1\]: If the `MimeType` attribute is not set, `text` is the default value.
+The attribute is used by attribute providers to release data from an authentication process that has no attribute definition of its own. Thus, should the BankID attributes `userInfo.notBefore`, `userInfo.notAfter` and `userInfo.ipAddress` be transformed and included into an assertion, they would have to be placed as key-value pairs of the `authContextParams` attribute as the example below.
+
+    <saml2:Attribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+                               FriendlyName="authContextParams"
+                               Name="urn:oid:1.2.752.201.3.3"
+                               NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+      <saml2:AttributeValue xsi:type="xs:string">
+        bankidNotBefore=2016-05-30T09%3A30%3A10Z;bankidNotAfter=2018-05-30T09%3A30%3A10Z;bankidUserAgentAddress=85.229.202.232
+      </saml2:AttributeValue>
+    </saml2:Attribute>
+
+The example above represents the following BankID attributes and values:
+
+* `userInfo.notBefore` = 2016-05-30T09-30-10Z
+* `userInfo.notAfter` = 2018-05-30T09-30-10Z
+* `userInfo.ipAddress` = 85.229.202.232
+
+<a name="identity-provider-user-interface"></a>
+## 3. Identity Provider User Interface
+
+This profile does not state any requirements on how the user interface for an Identity Provider implementing BankID services should be implemented other than the statements listed in the sub sections below.
+
+<a name="general-requirements"></a>
+### 3.1. General Requirements
+
+The user interface for a BankID Identity Provider SHOULD use the recommended user and error messages as defined in sections 5, "Recommended User Messages", and 10, "Recommended Terminology", of \[[BankID_Spec](#bankid_spec)\].
+
+The user interface for a BankID Identity Provider MUST display information about the Service Provider that sent the request. It is RECOMMENDED that this information is obtained from the `<mdui:UIInfo>` element from the Service Provider's metadata entry.
+
+It MUST be clear to the whether an authentication or a signature process is ongoing. 
+
+When an error occurs during an authentication or signature operation, the Identity Provider MUST display an error message that can be easily understood by the end user, and offer the possibility to acknowledge the error so that an error response may be posted back to the requesting Service Provider (as specified in section 6.4, "Error Responses", of \[[EidProfile](#eid-profile)\]).
+
+<a name="automatic-start-of-bankid-client"></a>
+### 3.2. Automatic Start of BankID Client
+
+When an operation is initiated where the BankID client (app or desktop program) is on the same device as the user agent (web browser) the Identity Provider SHOULD attempt to "auto start" the BankID client as described in \[[BankID_Spec](#bankid_spec)\].  
+
+For the above cases where the BankID client is automatically started from the Identity Provider, the Identity Provider user interface SHOULD NOT ask for the user's personal identity number. This information is available in the "BankID app" or "BankID Security Application".
+ 
+<a name="prompting-for-personal-identity-number"></a>
+### 3.3. Prompting for Personal Identity Number (personnummer)
+
+When the BankID client (app or desktop) is not on the same device as the user agent (web browser) that initiates an authentication process the Identity Provider needs to obtain the user's personal identity number (personnummer) in order to initiate an BankID authentication. 
+
+> TODO: Write about saving the number in the user agent.
+
+### 3.4. Avoiding Dangling BankID Sessions
+
+> TODO: Do not display cancel button in UI when the App is started.
+
+<a name="authentication-requests"></a>
+## 4. Authentication Requests
+
+<a name="binding-and-security-requirements"></a>
+### 4.1. Binding and Security Requirements
+
+An Identity Provider conformant with this profile MUST require `<saml2p:AuthnRequest>` messages to be signed (by indicating this in its metadata, see X.X, ""). Thus, the Identity Provider MUST not accept messages that are not signed, or where the verification of the signature fails. In these cases the Identity Provider MUST respond with an error.
+
+<a name="authentication-for-signature"></a>
+### 4.2. Authentication for Signature
+
+An Identity Provider conforming to the Swedish eID Framework is obliged to handle requests received from Signature Services as described in section 7, “Authentication for Signature”, of \[[EidProfile](#eid-profile)\]. This section further specifies how a BankID Identity Provider should support “authentication for signature”.A BankID Identity Provider that receives an `<saml2p:AuthnRequest>` message from a Signature Service MUST initiate a BankID **signature** operation. It MUST NOT initiate a BankID authentication operation for several reasons: 
+
+* the user interface in the BankID client (app or Desktop program) during authentication indicates that the user is logging on (and not signing which is the case when a request from a Signature Service is being processed), 
+* the user expects to be displayed a text describing what he or she is signing,
+* and most importantly, BankID is PKI-based and has support for signing using a non-repudiation key, so there is no reason not to use this function.
+
+The BankID client (App or desktop program) comprises a text box in which the signature message is displayed for the user. A BankID Identity Provider MUST NOT display the signature message in any other way than in this text box. How the signature message is assigned is specified below.
+
+<a name="input-to-bankid-signing"></a>
+#### 4.2.1. Input to BankID Signing
+
+An Identity Provider that processes an `<saml2p:AuthnRequest>` from a Signature Service is not given the actual data that is being signed by the user via the Signature Service. However, in order to invoke the BankID signature function, the Identity Provider must supply the BankID-server with data to be signed. This section specifies the input to the BankID signature operation.
+
+The "To-be-signed" data that is passed as input the the BankID `Sign`-method is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (section 12.2.1 of \[[BankID_Spec](#bankid_spec)\]).
+
+##### 4.2.1.1. userVisibleData - Signature Message
+
+The `Sign`-method parameter `userVisibleData` holds data that will be signed by the user but it is also displayed in the BankID application text box.
+
+If the `<saml2p:AuthnRequest>` message contains a `SignMessage` extension, the contents of this message MUST be assigned to the `userVisibleData` parameter (after necessary encoding).
+
+A BankID Identity Provider MUST only process `SignMessage` elements having their `MimeType` attribute set to `text`<sup>1</sup> . For any other values (`text/html` or `text/markdown`), the Identity Provider MUST respond with an error.If the `<saml2p:AuthnRequest>` message does not contain a `SignMessage` extension, the Identity Provider MUST assign a sensible default signature message to the `userVisibleData` parameter. How this message is constructed is the responsibility of the Identity Provider, but it MUST be obvious for the user who is the requesting party, i.e., the Service Provider that has ordered the signature operation<sup>2</sup>.
+> \[1\]: If the `MimeType` attribute is not set, `text` is the default value.
 > 
 > \[2\]: For this purpose, the `<mdui:DisplayName>` element of the Signature Service’s metadata entry, is a good and generic choice.  
 
-## 6. Non-functional Requirements
+##### 4.2.1.2. userNonVisibleData
 
-## 7. Recommendations
+In order to produce a BankID signature that contains a connection to the `<saml2p:AuthnRequest>` message that initiated this signature, a BankID Identity Provider compliant to this profile MUST assign the  `userNonVisibleData` parameter with data that uniquely binds the signature to the `<saml2p:AuthnRequest>` message.
 
-### 7.1. User Interface Recommendations
+It is RECOMMENDED that the following function is used to produce this unique binding:
 
-## 8. References
+    Base64Encode("entityID=" + URLEncode(<entityID of SP>) + ";" + "authnRequestID=" + URLEncode(<ID of AuthnRequest>))
+    
+#### 4.2.2. Mobile BankID and the personNumber attribute
+
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. This information can not be passed in the `<saml2p:AuthnRequest>` message sent from the Signatur Service since there are no standard way of sending this kind of request data. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section XX above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+
+> \[1\]: Almost all use cases where a user signs data is preceded by a login (authentication).
+
+<a name="authentication-responses"></a>
+## 5. Authentication Responses
+
+### 5.X. Error Responses
+
+BankID cancel -> send error status (cancel)
+
+<a name="metadata"></a>
+## 6. Metadata
+
+<a name="references"></a>
+## 7. References
 
 <a name="rfc2119"></a>
 **\[RFC2119\]**
@@ -165,4 +281,7 @@ If the `<saml2p:AuthnRequest>` message contains a `SignMessage` extension, the c
 **\[EidProfile\]**
 > Deployment Profile for the Swedish eID Framework.
 
+<a name="eid-attributes"></a>
+**\[EidAttributes\]**
+> Attribute Specification for the Swedish eID Framework.
 
