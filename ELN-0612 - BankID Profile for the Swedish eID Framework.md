@@ -167,20 +167,22 @@ It MUST be clear to the whether an authentication or a signature process is ongo
 When an error occurs during an authentication or signature operation, the Identity Provider MUST display an error message that can be easily understood by the end user, and offer the possibility to acknowledge the error so that an error response may be posted back to the requesting Service Provider (as specified in section 6.4, "Error Responses", of \[[EidProfile](#eid-profile)\]).
 
 <a name="automatic-start-of-bankid-client"></a>
-### 3.2. Automatic Start of BankID Client
+### 3.2. Automatic Start of the BankID Client
 
 When an operation is initiated where the BankID client (app or desktop program) is on the same device as the user agent (web browser) the Identity Provider SHOULD attempt to "auto start" the BankID client as described in \[[BankID_Spec](#bankid_spec)\].  
 
 For the above cases where the BankID client is automatically started from the Identity Provider, the Identity Provider user interface SHOULD NOT ask for the user's personal identity number. This information is available in the "BankID app" or "BankID Security Application".
+
+Auto starting the BankID app from a mobile device requires the built-in web browser to be used to guarantee full support, see section 3.1 of \[[BankID_Spec](#bankid_spec)\]. If the Identity Provider detects that the user is not using the platform's default browser it SHOULD ask the user to start the BankID app manually (and before that enter the personal identity number).
  
 <a name="prompting-for-personal-identity-number"></a>
 ### 3.3. Prompting for Personal Identity Number (personnummer)
 
-When the BankID client (app or desktop) is not on the same device as the user agent (web browser) that initiates an authentication process the Identity Provider needs to obtain the user's personal identity number (personnummer) in order to initiate an BankID authentication. 
+When the user agent (web browser) and the BankID client (app or desktop) is not on the same device the Identity Provider prompts the user for his or hers personal identity number (personnummer) in order to initiate an BankID authentication. It is RECOMMENDED that the personal identity number is saved in the user's web browser session storage (in a session cookie or more preferably using the HTML5 sessionStorage object). The reason for this is that if the user performs a signature operation after authenticating he or she does not expect to have to enter the personal identity number again.
 
-> TODO: Write about saving the number in the user agent.
+See also section [4.2.2](#mobile-bankid-and-the-personnumber-attribute), "[Mobile BankID and the personNumber attribute](#mobile-bankid-and-the-personnumber-attribute)".
 
-### 3.4. Avoiding Dangling BankID Sessions
+### 3.4. Cancelling an Operation
 
 > TODO: Do not display cancel button in UI when the App is started.
 
@@ -210,6 +212,7 @@ An Identity Provider that processes an `<saml2p:AuthnRequest>` from a Signature 
 
 The "To-be-signed" data that is passed as input the the BankID `Sign`-method is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (section 12.2.1 of \[[BankID_Spec](#bankid_spec)\]).
 
+<a name="uservisibledata"></a>
 ##### 4.2.1.1. userVisibleData - Signature Message
 
 The `Sign`-method parameter `userVisibleData` holds data that will be signed by the user but it is also displayed in the BankID application text box.
@@ -221,6 +224,7 @@ A BankID Identity Provider MUST only process `SignMessage` elements having their
 > 
 > \[2\]: For this purpose, the `<mdui:DisplayName>` element of the Signature Service’s metadata entry, is a good and generic choice.  
 
+<a name="usernonvisibledata"></a>
 ##### 4.2.1.2. userNonVisibleData
 
 In order to produce a BankID signature that contains a connection to the `<saml2p:AuthnRequest>` message that initiated this signature, a BankID Identity Provider compliant to this profile MUST assign the  `userNonVisibleData` parameter with data that uniquely binds the signature to the `<saml2p:AuthnRequest>` message.
@@ -229,9 +233,10 @@ It is RECOMMENDED that the following function is used to produce this unique bin
 
     Base64Encode("entityID=" + URLEncode(<entityID of SP>) + ";" + "authnRequestID=" + URLEncode(<ID of AuthnRequest>))
     
+<a name="mobile-bankid-and-the-personnumber-attribute"></a>
 #### 4.2.2. Mobile BankID and the personNumber attribute
 
-When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. This information can not be passed in the `<saml2p:AuthnRequest>` message sent from the Signatur Service since there are no standard way of sending this kind of request data. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section XX above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. This information can not be passed in the `<saml2p:AuthnRequest>` message sent from the Signatur Service since there are no standard way of sending this kind of request data. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
 
 > \[1\]: Almost all use cases where a user signs data is preceded by a login (authentication).
 
