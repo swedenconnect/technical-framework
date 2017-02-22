@@ -184,7 +184,9 @@ See also section [4.2.2](#mobile-bankid-and-the-personnumber-attribute), "[Mobil
 
 ### 3.4. Cancelling an Operation
 
-> TODO: Do not display cancel button in UI when the App is started.
+A BankID Identity Provider SHOULD include a Cancel-button in the user interface enabling the possibility for the user to cancel the BankID operation. 
+
+In cases where the BankID app is on another device than the user agent and the Identity Provider has received notification from the BankID-server that the app has been started by the user, it is RECOMMENDED that the Cancel-button in the Identity Provider user interface is hidden or disabled. The reason for this is that the BankID app itself has a Cancel-button, and if the user cancels the operation using the Cancel-button in the Identity Provider user interface instead of in the app itself, the app will be left dangling until it times out and during that time the user mey be prevented from using its BankID.
 
 <a name="authentication-requests"></a>
 ## 4. Authentication Requests
@@ -243,7 +245,14 @@ When Mobile BankID is being used to sign data and the user has initiated the sig
 <a name="authentication-responses"></a>
 ## 5. Authentication Responses
 
-### 5.X. Error Responses
+<a name="attribute-release-rules"></a>
+### 5.1. Attribute Release Rules
+
+Section [2.1](#attribute-transformation), "[Attribute Transformation](#attribute-transformation)", specifies how BankID attributes should be transformed into SAML attributes defined in \[[EidAttributes](#eid-attributes)\]. However, it does not specify the attribute release rules stating which attributes that are to be released based on a particular request.
+
+A BankID Identity Provider compliant to the Swedish eID Framework MUST honor the attribute release rules specified in section 6.2.1, "Attribute Release Rules", of \[[EidProfile](#eid-profile)\]. 
+
+### 5.2. Error Responses
 
 BankID cancel -> send error status (cancel)
 
