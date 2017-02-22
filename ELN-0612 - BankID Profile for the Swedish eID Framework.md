@@ -11,6 +11,64 @@
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
+
+    1.1. [Requirements Notation](#requirements-notation)
+
+    1.2. [References to SAML 2.0 Standards and Profiles](#references-to-saml-20-standards-and-profiles)
+
+    1.3. [BankID Methods and Applications](#bankid-methods-and-applications)
+
+    1.3.1. [Representation as Identity Providers](#representation-as-identity-providers)
+
+    1.3.2. [Recommended Limitations](#recommended-limitations)
+
+2. [**Attributes**](#attributes)
+
+    2.1. [Attribute Transformation](#attribute-transformation)
+
+    2.1.1. [The authContextParams Attribute](#the-authcontextparams-attribute)
+
+3. [**Identity Provider User Interface**](#identity-provider-user-interface)
+
+    3.1. [General Requirements](#general-requirements)
+
+    3.2. [Automatic Start of the BankID Client](#automatic-start-of-bankid-client)
+
+    3.3. [Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)
+
+    3.4. [Cancelling an Operation](#cancelling-an-operation)
+
+4. [**Authentication Requests**](#authentication-requests)
+
+    4.1. [Binding and Security Requirements](#binding-and-security-requirements)
+
+    4.2. [Authentication for Signature](#authentication-for-signature)
+
+    4.2.1. [Input to BankID Signing](#input-to-bankid-signing)
+
+    4.2.1.1. [userVisibleData - Signature Message](#uservisibledata)
+
+    4.2.1.2. [userNonVisibleData](#usernonvisibledata)
+
+    4.2.2. [Mobile BankID and the personNumber attribute](#mobile-bankid-and-the-personnumber-attribute)
+
+5. [**Authentication Responses**](#authentication-responses)
+
+    5.1. [Attribute Release Rules](#attribute-release-rules)
+
+    5.2. [Error Responses](#error-responses)
+
+6. [**Metadata**](#metadata)
+
+    6.1. [Service Providers](#service-providers)
+
+    6.2. [Identity Providers](#identity-providers)
+
+    6.3. [Signature Services](#signature-services)
+
+7. [**References**](#references)
+
 ---
 
 <a name="introduction"></a>
@@ -56,6 +114,7 @@ the following syntax is used:
 
 -   `<mdattr:Element>` – for elements defined in \[[SAML2MetaAttr](#saml2metaattr)\].
 
+<a name="bankid-methods-and-applications"></a>
 ### 1.3. BankID Methods and Applications
 
 There are three types of BankID:
