@@ -137,11 +137,7 @@ It is RECOMMENDED that BankID services are split into separate Identity Provider
 <a name="recommended-limitations"></a>
 #### 1.3.2. Recommended Limitations
 
-A BankID operation can be performed using either the BankID client (app or desktop program) on "this" device, or "another" device, where "this" means that the end user initiates the operation from the same device (computer, tablet or mobile phone) as the device that contains the user's BankID and "another" device means that the BankID is located on another device.
-
-Section [1.3.1](#representation-as-identity-providers) above recommends to use separate Identity Providers for the different BankID methods. In this case the Identity Provider does not ask the user whether BankID should be used on "this" device or "another" device. Instead, the user has already selected the type of BankID he or she wants to use as part of the discovery process.
-
-The table below states the RECOMMENDED support and behaviour for separate BankID Identity Providers. 
+The table below states the RECOMMENDED support and behaviour when support for BankID is implemented using separate Identity Providers (as recommended in section [1.3.1](#representation-as-identity-providers) above). 
 
 | Identity Provider | Desktop | Mobile Phone | Tablet |
 | :--- | :--- | :--- | :--- |
@@ -204,6 +200,8 @@ The example above represents the following BankID attributes and values:
 * `userInfo.notBefore` = 2016-05-30T09-30-10Z
 * `userInfo.notAfter` = 2018-05-30T09-30-10Z
 * `userInfo.ipAddress` = 85.229.202.232
+
+> The format for the notBefore and notAfter attributes should be the representation as given by the XML type `xs:dateTime`.
 
 <a name="identity-provider-user-interface"></a>
 ## 3. Identity Provider User Interface
