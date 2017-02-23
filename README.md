@@ -89,6 +89,12 @@ The concept of constructed attributes is introduced in Swedish national authenti
 
 > [ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework](ELN-0611%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
 
+#### Implementation Profile for BankID Identity Providers within the Swedish eID Framework
+
+Implementation profile for Identity Providers implementing BankID support.
+
+> [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
+
 ---
 
 ### Updates to the current version of the specifications
