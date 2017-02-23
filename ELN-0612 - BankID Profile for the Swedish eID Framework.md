@@ -307,6 +307,7 @@ Section [2.1](#attribute-transformation), "[Attribute Transformation](#attribute
 A BankID Identity Provider compliant to the Swedish eID Framework MUST honor the attribute release rules specified in section 6.2.1, "Attribute Release Rules", of \[[EidProfile](#eid-profile)\]. This section further extends these rules with the following:
 
 * A BankID Identity Provider SHOULD include the `transactionIdentifier`-attribute (a mapping of the BankID `orderRef`-attribute) in the `<saml2:AttributeStatement>` element independently of which attribute set that is requested. This attribute links the BankID operation to the assertion.
+* It is RECOMMENDED that a BankID Identity Provider includes the `userSignature`-attribute (containing the BankID signature) in the `<saml2:AttributeStatement>` element when a BankID signature operation has been performed.
 * Unless explicitly required<sup>1</sup> by the Service Provider the Identity Provider SHOULD NOT release any other attributes than those specified by the current attribute set(s)<sup>2</sup>.
 
 > \[1\]: A Service Provider explicitly requests attributes by declaring them as requested attributes in the `<md:AttributeConsumingService>` element of the Service Provider's metadata entry. See section [6.1](#service-providers).
