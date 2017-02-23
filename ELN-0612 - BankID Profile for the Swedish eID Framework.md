@@ -146,16 +146,15 @@ The table below states the RECOMMENDED support and behaviour for separate BankID
 | Identity Provider | Desktop | Mobile Phone | Tablet |
 | :--- | :--- | :--- | :--- |
 | Mobile BankID | Start BankID on other device<sup>1</sup> (mobile phone or tablet). | Start BankID on the same device<sup>2</sup>. | Prompt the user to ask whether to start BankID on the tablet or on another device<sup>3</sup> (mobile phone). |
-| BankID on file (*or on card*) | Start BankID on the same device<sup>4</sup>. | Not supported<sup>5</sup>. | Not supported<sup>6</sup>. |
+| BankID on file (*or on card*) | Start BankID on the same device<sup>4</sup>. | Not supported<sup>5</sup>. | Not supported<sup>5</sup>. |
 
 1. The user initiates a BankID operation from his or hers desktop computer and selects to use Mobile BankID. In this case the Mobile BankID app is started on another device (since Mobile BankID does not exist on desktop computers).
 2. The user initiates a BankID operation from his or hers mobile phone and selects to use Mobile BankID. In this case the BankID app is started on the same device. It is highly unlikely that a user uses one mobile phone to visit a service and wants to use his or hers BankID on another device.
 3. The user initiates a BankID operation from his or hers tablet and selects to use Mobile BankID. In this case the recommendation is to prompt the user to ask whether the Mobile BankID app should be automatically started on the tablet, or if the user wishes to use BankID on another device (probably a mobile phone). The reason for this recommendation is that most users have a BankID on their mobile phones, but not necessarily on their tablets.
 4. The user initiates a BankID operation from his or hers desktop computer and selects to use BankID on file. The BankID Security Application is started on the same computer. It is not a likely use case to use one computer to connect to the service and another one for BankID.
-5. This case should not be supported. 
-6. This case should not be supported.
+5. This case should not be supported. If the user selects "BankID on file" from a mobile phone or tablet,  the Identity Provider should display an error message stating that Mobile BankID should be used instead and post an error response back to the Service Provider.
 
-Note: Items 4-6 above also apply to BankID on card. A service MAY choose to implement BankID on file and BankID on card as separate Identity Providers or as one Identity Provider instance.
+Note: Items 4 and 5 above also apply to BankID on card. A service MAY choose to implement BankID on file and BankID on card as separate Identity Providers or as one Identity Provider instance.
 
 For Identity Providers implementing BankID support in **one** Identity Provider instance it is RECOMMENDED to make the assumption that the BankID app should be started on the same device if the user connects via a mobile phone. 
 
