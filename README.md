@@ -20,6 +20,7 @@ For official and draft releases of the Swedish eID Framework, see the [releases 
 
 ##### Draft releases since October 2015
 
+* [Draft release 2017-02-24](https://github.com/elegnamnden/technical-framework/releases/tag/20170224-draft-release)
 * [Draft release 2016-11-16](https://github.com/elegnamnden/technical-framework/releases/tag/20161116-draft-release)
 * [Draft release 2016-08-30](https://github.com/elegnamnden/technical-framework/releases/tag/20160830-draft-release)
 
