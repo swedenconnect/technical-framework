@@ -27,6 +27,8 @@
 
     2.3.2. [Algorithm: colresist-eIDAS](#algorithm-colresist-eidas)
 
+    2.3.3. [Algorithm: special-characters-eIDAS](#special-characters-eidas)
+
     2.4. [Algorithm Selection and Resulting pridPersistence Value](#algorithm-selection-and-resulting-pridpersistence-value)
 
 3. [**References**](#references)
@@ -302,6 +304,39 @@ DE/SE/(1952 12 14-1122) | DE:19521214-1122
 19521214-1122 | NULL (Failed: Leading 6 character format error)
 DE/SE/1234567890123456789012345678901 | DE:1hc3tpoleczqu3t8jz2995k2rq7nt8
 
+<a name="special-characters-eidas"></a>
+#### 2.3.3. Algorithm: special-characters-eIDAS
+
+The default-eIDAS and the colresist-eIDAS algoritms are suitable when the base identifier from the authenticating country is constructed from digits and basic case-insensitive characters. These algoritms do not work on identifiers constructed as a Base64 string of binary data, such as a hash of another identifier.
+
+The present algoritm is intended to be used where the base identifier contains case-sensitive characters and where characters other than a-z and 0-9 are used to add entropy to the identifier.
+
+**Name:** `special-characters-eIDAS`
+
+**Input values**:  Identical to `default-eIDAS`.
+
+**Calculated values**: Identical to `default-eIDAS` with the exception that `normalizedID` is not calculated and used.
+
+**Result**:
+> Return the string representation of the first 30 radix 36 digits of the SHA256 hash of the UTF-8 encoded bytes of `strippedID`.
+
+**Exceptions**: 
+>
+> If the following conditions occur in the process, prid generation fails:
+
+1.  Leading 6 characters of PersonIdentifier does not match regexp `^[A-Za-z]{2}[\/](SE|se)[\/]$`
+2.  `strippedID` &lt; 16 characters.
+
+
+**Collision resistance:** Identical to `colresist-eIDAS`.
+
+**Examples:**
+
+PersonIdentifier | Resulting prid
+--- | ---
+AT/SE/Zk2ME2pjxwzQOjVeFGeqSIage34= | AT:50bwytdle2mzexopcolmdhmhznihms
+
+
 <a name="algorithm-selection-and-resulting-pridpersistence-value"></a>
 ### 2.4. Algorithm Selection and Resulting pridPersistence Value
 
@@ -474,6 +509,36 @@ public class PridGenColResistEidas {
     }
 }
 ```
+
+**special-characters-eIDAS**
+
+```
+public class PridGenBase64Eidas implements PridGenerator {
+    private static final String personIdentifierPrifixRegexp = "^[A-Za-z]{2}[\\/](SE|se)[\\/]";
+    @Override
+    public String getPridIdentifierComponent(String personIdentifier) {
+        if (personIdentifier == null) {
+            return null;
+        }
+        if (!personIdentifier.substring(0, 6).matches(personIdentifierPrifixRegexp)) {
+            return null;
+        }        
+        //Get ID component without whitespace and non-printable characters
+        String strippedID = personIdentifier.substring(6).replaceAll("\\s+", "");
+        if (strippedID.length() < 16) {
+            return null;
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(strippedID.getBytes(Charset.forName("UTF-8")));
+            return new BigInteger(1, digest).toString(36).substring(0, 30);
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+    }
+}
+```
+
 
 
 [^1]: Birthday paradox approximation p(*n*) ≈ *n*\^2 / 2*m*, where
