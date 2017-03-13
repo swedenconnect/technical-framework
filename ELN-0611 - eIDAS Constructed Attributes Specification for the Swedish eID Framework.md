@@ -2,7 +2,7 @@
 
 # eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
-### Version 1.0 - 2016-08-30
+### Version 1.0 - 2017-03-13
 #### *Draft version*
 
 *ELN-0611-v1.0*
