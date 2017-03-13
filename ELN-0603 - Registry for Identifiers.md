@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.4 - 2017-02-13
+### Version 1.4 - 2017-03-13
 #### *Draft version*
 
 *ELN-0603-v1.4*
@@ -310,10 +310,11 @@ for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign r
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the signature request has expired. | **\[OASIS-DSS\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request. | **\[OASIS-DSS\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | **\[OASIS-DSS\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[OASIS-DSS\]** |
+| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the signature request has expired. | **\[CSignProf\]** |
+| `http://id.elegnamnden.se/sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request. | **\[CSignProf\]** |
+| `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | **\[CSignProf\]** |
+| `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[CSignProf\]** |
+| `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | **\[CSignProf\]** |
 
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
@@ -472,7 +473,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 -   The status code identifier
     `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` was added
-    to section 3.1.6.
+    to section 3.1.6 and the signature response status code `http://id.elegnamnden.se/sig-status/1.0/user-cancel` was added to section 3.1.7.
 
 **Changes between version 1.1 and version 1.2:**
 

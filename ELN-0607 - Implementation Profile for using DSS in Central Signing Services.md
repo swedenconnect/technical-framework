@@ -2,9 +2,10 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.1 - 2015-10-05
+### Version 1.2 - 2017-03-13
+#### *Draft version*
 
-*ELN-0607-v1.1*
+*ELN-0607-v1.2*
 
 ---
 
@@ -466,7 +467,7 @@ the `<dss:ResultMajor>` value
 signature creation.
 
 With the exception above, the response values defined in section 2.6 of
-the DSS standard, amended by status identifiers defined in section 3.1.5
+the DSS standard, amended by status identifiers defined in section 3.1.7
 of \[[Eid-Registry](#eid-registry)\], SHOULD be used.
 
 <a name="generated-signature"></a>
@@ -691,9 +692,12 @@ EidSignResponse | Base64 encoded sign response.
 <a name="saml2bind"></a>**[SAML2Bind]**
 > [OASIS Standard, Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0, March 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)
 
-
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.1 and version 1.2:**
+
+- In section 2.2.2, a reference to section 3.1.5 in \[Eid-Registry\] was changed to section 3.1.7.
 
 **Changes between version 1.0 and version 1.1:**
 
