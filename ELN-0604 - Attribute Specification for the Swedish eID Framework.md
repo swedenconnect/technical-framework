@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.4 - 2017-02-13
+### Version 1.4 - 2017-03-13
 #### *Draft version*
 
 *ELN-0604-v1.4*
@@ -220,7 +220,7 @@ Framework.
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
-| **REQUIRED**<sup>2</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) |
+| **REQUIRED**<sup>2</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `transactionIdentifier` (ID of assertion issued by the member state node)<sup>4</sup> |
 | **REQUIRED**<br />(if available)<sup>3</sup> | `birthName` (Birth name) <br /> `placeOfBirth` (Place of birth) <br /> `eidasNaturalPersonAddress` (Address for natural person) <br /> `gender` (Gender) |
 | **RECOMMENDED** | `personalIdentityNumber` (National civic registration number) <br /> `personalIdentityNumberBinding` (National civic registration number Binding URI) |
 **Typical use**: In an attribute release policy implemented by an eIDAS
@@ -236,7 +236,7 @@ between eIDAS attributes and an Swedish identity number (see [section
 The eIDAS attribute set comprises of “added” and “converted” attributes.
 
 **Added attributes**: Attributes that are not provided by the member
-state node, but added by the\
+state node, but added by the
 Swedish eIDAS node in order to provide additional information about
 the authenticated subject obtained from relevant domestic attribute
 sources. The `prid`, `pridPersistence` and `personalIdentityNumber`
@@ -258,6 +258,8 @@ examples of “converted attributes”.
 > \[2\]: Attributes “added” by the Swedish eID node and converted attributes for the mandatory attributes of the eIDAS minimum data set for natural persons.
 
 > \[3\]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.
+
+> \[4\]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the `<saml2:AuthenticatingAuthority>` element of an assertion) give a reference to the original assertion and authentication process.
 
 <a name="eidas-legal-person-attribute-set"></a>
 ### 2.6. eIDAS Legal Person Attribute Set

@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.4 - 2017-02-13 
+### Version 1.4 - 2017-03-13 
 #### *Draft version*
 
 *ELN-0602-v1.4*
@@ -742,15 +742,27 @@ placed under the `<saml2:AuthnStatement>` element as the value of an
 
 ```
 <saml2:AuthnStatement AuthnInstant="2013-03-15T09:22:00" SessionIndex="b07b804c-7c29-ea16-7300-4f3d6f7928ac">
-  <saml2:AuthnContext>`
+  <saml2:AuthnContext>
     <saml2:AuthnContextClassRef>http://id.elegnamnden.se/loa/1.0/loa3</saml2:AuthnContextClassRef>
     ...
-  </saml2:AuthnContext>`
-</saml2:AuthnStatement>`
+  </saml2:AuthnContext>
+</saml2:AuthnStatement>
 ```
 
 *Example of how an Authentication Context URI identifier representing a
 Level of Assurance is included in an authentication statement.*
+
+An Identity Provider that acts as a proxy for other Identity Providers SHOULD include the `<saml2:AuthenticatingAuthority>` element under the `<saml2:AuthnContext>` element. This element will contain the entityID of the Identity Provider that was involved in authenticating the principal.
+
+```
+<saml2:AuthnStatement AuthnInstant="2013-03-15T09:22:00" SessionIndex="b07b804c-7c29-ea16-7300-4f3d6f7928ac">
+  <saml2:AuthnContext>
+    ...
+    <saml2:AuthenticatingAuthority>http://idp.company.com/auth</saml2:AuthenticatingAuthority>
+  </saml2:AuthnContext>
+</saml2:AuthnStatement>
+```
+*Example of how the entityID of an Identity Provider that provided the authentication for the principal is included in an authentication statement.*
 
 <a name="attribute-release-rules"></a>
 #### 6.2.1. Attribute Release Rules
@@ -1237,6 +1249,8 @@ response with the status code
     
 - A clarification to section 5.2 was made stating that conformant
   Identity Providers MUST support the HTTP-POST binding.
+  
+- Section 6.2 was updated with requirements for proxy-IdP:s that are expected to include the `<saml2:AuthenticatingAuthority>` element holding the entityID of the Identity Provider that provided the authentication of the principal.
 
 **Changes between version 1.2 and version 1.3:**
 
