@@ -1,0 +1,10 @@
+<ibexconfig>
+  <font name="sans-serif" file="c:\Windows\Fonts\arial.ttf"/>
+  <font name="arial" file="c:\Windows\Fonts\arial.ttf"/>
+  <font name="arial" italic="true" file="c:\Windows\Fonts\ariali.ttf"/>
+  <font name="arial" bold="true" file="c:\Windows\Fonts\arialbd.ttf"/>
+  <font name="times new roman" file="c:\Windows\Fonts\times.ttf"/>
+  <font name="arial narrow" file="c:\Windows\Fonts\arialn.ttf"/>
+  <font name="folio condensed bt" file="c:\Windows\Fonts\tt0854m_.ttf"/>
+  <font name="monospace" file="c:\Windows\Fonts\cour.ttf"/>
+</ibexconfig>

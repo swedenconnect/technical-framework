@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--   
+<!--
 For online publishing use:
-<?xml-stylesheet type="text/xsl" 
+<?xml-stylesheet type="text/xsl"
 href="http://docs.oasis-open.org/templates/DocBook/spec-0.5/stylesheets/oasis-specification-html.xsl"?>
 <!DOCTYPE article
   PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
-"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" 
-
-For offline publishing use:
-<?xml-stylesheet type="text/xsl" 
-href="file:///z:/oasis/spec-0.5/stylesheets/oasis-specification-html-offline.xsl"?>
-<!DOCTYPE article
-  PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
-"file:///z:/oasis/spec-0.5/docbook/docbookx.dtd" 
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
 -->
-<?xml-stylesheet type="text/xsl" 
-href="file:///Library/Oasis/spec-0.5/stylesheets/oasis-specification-html-offline.xsl"?>
+<?xml-stylesheet type="text/xsl"
+href="spec-0.5/stylesheets/oasis-specification-html-offline.xsl"?>
 <!DOCTYPE article
   PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
-"file:///Library/Oasis/spec-0.5/docbook/docbookx.dtd" 
+"spec-0.5/docbook/docbookx.dtd" 
 [
 <!--the document properties-->
 <!ENTITY name "csig-dss-extension">
@@ -44,14 +37,14 @@ href="file:///Library/Oasis/spec-0.5/stylesheets/oasis-specification-html-offlin
         <releaseinfo role="OASIS-specification-this-authoritative">&this-loc;/&name;-&version;.html</releaseinfo>
         <releaseinfo role="OASIS-specification-this">&this-loc;/&name;-&version;.pdf</releaseinfo>
         <releaseinfo role="OASIS-specification-this">&this-loc;/&name;-&version;.docx</releaseinfo>
- 
+
         <releaseinfo role="OASIS-specification-previous">&previous-loc;.html</releaseinfo>
         <releaseinfo role="OASIS-specification-previous">&previous-loc;.pdf</releaseinfo>
         <releaseinfo role="OASIS-specification-previous">&previous-loc;.xml</releaseinfo>
-        
+
         <releaseinfo role="OASIS-specification-latest-authoritative">&latest-loc;/&name;-&version;.html</releaseinfo>
 
-<!--              
+<!--
         <releaseinfo role="OASIS-specification-latest">&latest-loc;/&name;.pdf</releaseinfo>
         <releaseinfo role="OASIS-specification-latest">&latest-loc;/&name;.xml</releaseinfo>
 -->
@@ -63,7 +56,7 @@ href="file:///Library/Oasis/spec-0.5/stylesheets/oasis-specification-html-offlin
                 <firstname>Stefan</firstname>
                 <surname>Santesson</surname>
                 <affiliation>
-                    <orgname>E-legitimationsnämnden</orgname>
+                    <orgname>E-legitimationsnï¿½mnden</orgname>
                     <address><email>stefan@aaa-sec.com</email></address>
                 </affiliation>
             </editor>
@@ -284,7 +277,7 @@ Listings of DSS schemas appear like this.
             <para/>
             <bibliography>
                 <title/>
-                <bibliomixed id="w3cchar"><abbrev>W3C-CHAR</abbrev>M. J. Dürst. <title>Requirements
+                <bibliomixed id="w3cchar"><abbrev>W3C-CHAR</abbrev>M. J. Dï¿½rst. <title>Requirements
                         for String Identity Matching and String Indexing. </title>
                     <citetitle><ulink url="http://www.w3.org/TR/WD-charreq"
                             >http://www.w3.org/TR/WD-charreq/</ulink>
@@ -1538,15 +1531,15 @@ http://id.elegnamnden.se/csig/1.1/dss-ext/ns
         schemaLocation="saml-schema-assertion-2.0.xsd"/>
     <xs:element name="SignRequestExtension" type="csig:SignRequestExtensionType">
         <xs:annotation>
-            <xs:documentation>Extension to an OASIS DSS SignRequest, providing additional 
-information about a sign request. This element extends the 
+            <xs:documentation>Extension to an OASIS DSS SignRequest, providing additional
+information about a sign request. This element extends the
 dss:OptionalInputs element of a dss:SignRequest.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="SignResponseExtension" type="csig:SignResponseExtensionType">
         <xs:annotation>
-            <xs:documentation>Extension to an OASIS DSS SignResponse, providing additional information 
-about a sign response. This element extends the dss:OptionalOutput element 
+            <xs:documentation>Extension to an OASIS DSS SignResponse, providing additional information
+about a sign response. This element extends the dss:OptionalOutput element
 of a dss:SignResponse.</xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1559,49 +1552,49 @@ of a dss:SignResponse.</xs:documentation>
     </xs:element>
     <xs:element name="Signer" type="saml:AttributeStatementType">
         <xs:annotation>
-            <xs:documentation>The identity of the signer expressed as a sequence of SAML attributes 
+            <xs:documentation>The identity of the signer expressed as a sequence of SAML attributes
 using the AttributesType complex type.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="IdentityProvider" type="saml:NameIDType">
         <xs:annotation>
-            <xs:documentation>The SAML EntityID of the Identity Provider that MUST be used to 
-authenticate the signer before signing. The EntitID value is specified 
-using the saml:NameIDType complex type and MUST include a Format 
+            <xs:documentation>The SAML EntityID of the Identity Provider that MUST be used to
+authenticate the signer before signing. The EntitID value is specified
+using the saml:NameIDType complex type and MUST include a Format
 attribute with the value urn:oasis:names:tc:SAML:2.0:nameid-format:entity.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="SignRequester" type="saml:NameIDType">
         <xs:annotation>
-            <xs:documentation>The SAML EntityID of the service that sends this request to the signing service. 
-The EntityID value is specified using the saml:NameIDType complex type and MUST 
-include a Format attribute with the value 
+            <xs:documentation>The SAML EntityID of the service that sends this request to the signing service.
+The EntityID value is specified using the saml:NameIDType complex type and MUST
+include a Format attribute with the value
 urn:oasis:names:tc:SAML:2.0:nameid-format:entity.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="SignService" type="saml:NameIDType">
         <xs:annotation>
-            <xs:documentation>The SAML EntityID of the service to which this Sign Request is sent. 
-The EntityID value is specified using the saml:NameIDType complex type 
-and MUST include a Format attribute with the value 
+            <xs:documentation>The SAML EntityID of the service to which this Sign Request is sent.
+The EntityID value is specified using the saml:NameIDType complex type
+and MUST include a Format attribute with the value
 urn:oasis:names:tc:SAML:2.0:nameid-format:entity.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="RequestedSignatureAlgorithm" type="xs:anyURI">
         <xs:annotation>
-            <xs:documentation>An identifier of the signature algorithm the requesting service prefers 
+            <xs:documentation>An identifier of the signature algorithm the requesting service prefers
 when generating the requested signature.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="CertRequestProperties" type="csig:CertRequestPropertiesType">
         <xs:annotation>
-            <xs:documentation>The requested properties of the signature certificate being issued by the 
+            <xs:documentation>The requested properties of the signature certificate being issued by the
 signature service.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="RequestedCertAttributes" type="csig:RequestedAttributesType">
         <xs:annotation>
-            <xs:documentation>An optional set of requested attributes that the requesting service prefers 
+            <xs:documentation>An optional set of requested attributes that the requesting service prefers
 or requires in the subject name of the generated signing certificate.</xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1625,18 +1618,18 @@ or requires in the subject name of the generated signing certificate.</xs:docume
     </xs:element>
     <xs:element name="Request" type="xs:base64Binary">
         <xs:annotation>
-            <xs:documentation>An element of type EncodedRequestType with base64Binary base type, holding 
-a representation of a complete and signed dss:SignRequest element that is 
-related to this sign response. This element MUST be present if signing was 
+            <xs:documentation>An element of type EncodedRequestType with base64Binary base type, holding
+a representation of a complete and signed dss:SignRequest element that is
+related to this sign response. This element MUST be present if signing was
 successful.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="SignerAssertionInfo" type="csig:SignerAssertionInfoType">
         <xs:annotation>
-            <xs:documentation>An element of type SignerAssertionInfoType holding information about how 
-the signer was authenticated by the sign service as well as information 
-about subject attribute values present in the SAML assertion authenticating 
-the signer, which was incorporated into the signer certificate. This element 
+            <xs:documentation>An element of type SignerAssertionInfoType holding information about how
+the signer was authenticated by the sign service as well as information
+about subject attribute values present in the SAML assertion authenticating
+the signer, which was incorporated into the signer certificate. This element
 MUST be present if signing was successful.</xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1644,10 +1637,10 @@ MUST be present if signing was successful.</xs:documentation>
     <xs:element name="SamlAssertions" type="csig:SAMLAssertionsType"/>
     <xs:element name="SignatureCertificateChain" type="csig:CertificateChainType">
         <xs:annotation>
-            <xs:documentation>An element of type CertificateChainType holding the signer certificate as 
-well as other certificates that may be used to validate the signature. This 
-element MUST be present if signing was successful and MUST contain all 
-certificate that are necessary to compile a complete and functional signed 
+            <xs:documentation>An element of type CertificateChainType holding the signer certificate as
+well as other certificates that may be used to validate the signature. This
+element MUST be present if signing was successful and MUST contain all
+certificate that are necessary to compile a complete and functional signed
 document.</xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1658,8 +1651,8 @@ document.</xs:documentation>
     </xs:element>
     <xs:element name="ToBeSignedBytes" type="xs:base64Binary">
         <xs:annotation>
-            <xs:documentation>The octets that are hashed and signed when generating the signture. For 
-PDF and common modes of CMS this is the DER encoded SignedAttributess field. 
+            <xs:documentation>The octets that are hashed and signed when generating the signture. For
+PDF and common modes of CMS this is the DER encoded SignedAttributess field.
 For XML this is the canonicalized SignedInfo octets.</xs:documentation>
         </xs:annotation>
     </xs:element>
@@ -1679,13 +1672,13 @@ For XML this is the canonicalized SignedInfo octets.</xs:documentation>
             <xs:element ref="csig:RequestTime"/>
             <xs:element ref="saml:Conditions">
                 <xs:annotation>
-                    <xs:documentation>Conditions that MUST be evaluated when assessing the validity of and/or 
-when using the Sign Request. See Section 2.5 of [SAML2.0]for additional 
+                    <xs:documentation>Conditions that MUST be evaluated when assessing the validity of and/or
+when using the Sign Request. See Section 2.5 of [SAML2.0]for additional
 information on how to evaluate conditions.
 
-This element MUST include the attributes NotBefore and NotOnOrAfter and 
-MUST include the element saml:AudienceRestriction which in turn MUST 
-contain one saml:Audience element, specifying the return URL for any 
+This element MUST include the attributes NotBefore and NotOnOrAfter and
+MUST include the element saml:AudienceRestriction which in turn MUST
+contain one saml:Audience element, specifying the return URL for any
 resulting Sign Response message.</xs:documentation>
                 </xs:annotation>
             </xs:element>
@@ -1700,8 +1693,8 @@ resulting Sign Response message.</xs:documentation>
         </xs:sequence>
         <xs:attribute name="Version" type="xs:string" use="optional" default="1.1">
             <xs:annotation>
-                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0". 
-This attribute provide means for the receiving service to determine the 
+                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0".
+This attribute provide means for the receiving service to determine the
 expected syntax of the response based on protocol version.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
@@ -1716,8 +1709,8 @@ expected syntax of the response based on protocol version.</xs:documentation>
         </xs:sequence>
         <xs:attribute name="Version" type="xs:string" default="1.1">
             <xs:annotation>
-                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0". 
-This attribute provide means for the receiving service to determine the 
+                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0".
+This attribute provide means for the receiving service to determine the
 expected syntax of the response based on protocol version.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
@@ -1785,7 +1778,7 @@ expected syntax of the response based on protocol version.</xs:documentation>
         </xs:sequence>
         <xs:attribute name="SignTaskId" type="xs:string">
             <xs:annotation>
-                <xs:documentation>A distinguishing id of this sign task which is used to distinguish between 
+                <xs:documentation>A distinguishing id of this sign task which is used to distinguish between
 multiple sign tasks in the same request</xs:documentation>
             </xs:annotation>
         </xs:attribute>
@@ -1806,8 +1799,8 @@ associated with.</xs:documentation>
         <xs:attribute default="None" name="AdESType">
             <xs:annotation>
                 <xs:documentation>Specifies the type of AdES signature. BES means that the signing certificate
-hash must be covered by the signature. EPES means that the signing 
-certificate hash and a signature policy identifier must be covered by 
+hash must be covered by the signature. EPES means that the signing
+certificate hash and a signature policy identifier must be covered by
 the signature.</xs:documentation>
             </xs:annotation>
             <xs:simpleType>
@@ -1820,7 +1813,7 @@ the signature.</xs:documentation>
         </xs:attribute>
         <xs:attribute name="ProcessingRules" type="xs:anyURI" use="optional">
             <xs:annotation>
-                <xs:documentation>An identifier for processing rules that must be executed by the signature 
+                <xs:documentation>An identifier for processing rules that must be executed by the signature
 service when processing data in this element.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
@@ -1836,7 +1829,7 @@ service when processing data in this element.</xs:documentation>
         <xs:sequence>
             <xs:element minOccurs="0" ref="saml:AuthnContextClassRef">
                 <xs:annotation>
-                    <xs:documentation>The a URI reference to the requested level of assurance with which the 
+                    <xs:documentation>The a URI reference to the requested level of assurance with which the
 certificate subject should be authenticated.</xs:documentation>
                 </xs:annotation>
             </xs:element>
