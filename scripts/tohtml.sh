@@ -73,7 +73,6 @@ fi
 #
 # Use the correct page layout
 #
-echo $ORIENTATION
 cp ${INSTALL_DIR}/github-layout/page-${ORIENTATION}.html ${INSTALL_DIR}/github-layout/page.html
  
 
