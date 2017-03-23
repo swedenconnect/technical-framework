@@ -147,19 +147,19 @@ assertion.
 <a name="rfc2119"></a>**[RFC2119]**
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
-> Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
+> Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="rfc3739"></a>**[RFC3739]**
 
-> Santesson, S., Nystrom, M., and T. Polk, "Internet X.509 Public Key
-> Infrastructure: Qualified Certificates Profile", RFC\\03739, March
-> 2004.
+> [Santesson, S., Nystrom, M., and T. Polk, "Internet X.509 Public Key
+> Infrastructure: Qualified Certificates Profile", RFC 3739, March
+> 2004](https://www.ietf.org/rfc/rfc3739.txt).
 
 <a name="rfc5280"></a>**[RFC5280]**
 
-> Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
+> [Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
 > W. Polk, "Internet X.509 Public Key Infrastructure Certificate and
-> Certificate Revocation List (CRL) Profile", RFC\\05280, May 2008.
+> Certificate Revocation List (CRL) Profile", RFC 5280, May 2008](https://www.ietf.org/rfc/rfc5280.txt).
 
 <a name="eu-qc"></a>**[EU-QC]**
 
@@ -184,5 +184,5 @@ assertion.
 
 <a name="skv707"></a>**[SKV707]**
 
-> [Skatteverket, SKV 707 utgåva 2, Samordningsnummer, October
-> 2006.](http://www.skatteverket.se/download/18.3dfca4f410f4fc63c86800016382/70702.pdf)
+> [Skatteverket, SKV 707, Utgåva 2,
+> Samordningsnummer.](http://www.vgregion.se/upload/PVSB/Tj%E4nsteID/Samordningsnummer%20skatteverket.pdf)

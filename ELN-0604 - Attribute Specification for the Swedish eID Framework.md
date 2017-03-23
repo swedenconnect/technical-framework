@@ -278,9 +278,9 @@ The following attributes are defined for use within the attribute profile for th
 | :--- | :--- | :--- | :--- | :---: | :--- |
 | sn | urn:oid:2.5.4.4 | Surname | Registered surname. | NO | Lindeman |
 | givenName | urn:oid:2.5.4.42 | Given Name | Registered given name. | NO | Valfrid |
-| displayName | urn:oid:2.16.840.1.113730.3.1.241 | Display Name | A name in any preferred presentation format. | NO | Valfrid Lindeman |
+| displayName | urn:oid:2.16.840.1.<br/>113730.3.1.241 | Display Name | A name in any preferred presentation format. | NO | Valfrid Lindeman |
 | gender | urn:oid:1.3.6.1.5.5.7.9.3 | Gender | A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender. | NO | M |
-| personalIdentityNumber | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf) and [SKV 707](http://www.skatteverket.se/download/18.3dfca4f410f4fc63c86800016382/70702.pdf). 12 digits without hyphen. | NO | 195006262546 |
+| personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf) and [SKV 707](http://www.skatteverket.se/download/18.3dfca4f410f4fc63c86800016382/70702.pdf). 12 digits without hyphen. | NO | 195006262546 |
 | dateOfBirth | urn:oid:1.3.6.1.5.5.7.9.1 | Date of birth | Date of birth expressed using the format YYYY-MM-DD. | NO | 1950-06-26 |
 | birthName | urn:oid:1.2.752.201.3.8 | Name at the time of birth | Full name of a person at birth. | NO | Valfrid Danielsson |
 | street | urn:oid:2.5.4.9 | Street address | Street address. | NO | Mosebacke torg 3 |
@@ -292,8 +292,8 @@ The following attributes are defined for use within the attribute profile for th
 | countryOfCitizenship | urn:oid:1.3.6.1.5.5.7.9.4 | Country of citizenship | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing a country of citizenship. | YES | SE |
 | countryOfResidence | urn:oid:1.3.6.1.5.5.7.9.5 | Country of Residence | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing the country of residence. | NO | SE |
 | telephoneNumber | urn:oid:2.5.4.20 | Telephone number | Telephone number. | YES | +46890510 |
-| mobile | urn:oid:0.9.2342.19200300.100.1.41 | Mobile number | Mobile number. | YES | +46703419886 |
-| mail | urn:oid:0.9.2342.19200300.100.1.3 | E-mail address | E-mail address. | YES | vfl@mosebackemonarki.se |
+| mobile | urn:oid:0.9.2342.<br/>19200300.100.1.41 | Mobile number | Mobile number. | YES | +46703419886 |
+| mail | urn:oid:0.9.2342.<br/>19200300.100.1.3 | E-mail address | E-mail address. | YES | vfl@mosebackemonarki.se |
 | o | urn:oid:2.5.4.10 | Organization name | Registered organization name. | NO | Skatteverket |
 | ou | urn:oid:2.5.4.11 | Organizational unit name | Organizational unit name. | YES | IT-Avdelningen |
 | organizationIdentifier | urn:oid:2.5.4.97 | Organizational identifier code | Swedish “organisationsnummer” according to [SKV 709](http://www.skatteverket.se/download/18.70ac421612e2a997f85800040302/70909svartvit.pdf). 10 digits without hyphen. | NO | 5562265719 |
@@ -306,8 +306,8 @@ The following attributes are defined for use within the attribute profile for th
 | sad | urn:oid:1.2.752.201.3.12 | Signature activation data | Signature activation data required by signature services. | NO | See [section 3.2.3](#the-sad-attribute) below. |
 | prid | urn:oid:1.2.752.201.3.4 | Provisional identifier | Unique identifier for an authentication performed against the eIDAS Framework. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | NO:5068907693 |
 | pridPersistence | urn:oid:1.2.752.201.3.5 | Provisional identifier persistence indicator | Indicator for the expected persistence of the prid attribute. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | A |
-| personalIdentityNumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.org.se/presentedInPerson |
-| eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | NO | ES/AT/02635542Y (Spanish eID number for an Austrian SP) || eidasNaturalPersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | NO | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
+| personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.org.se/presentedInPerson |
+| eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | NO | ES/AT/02635542Y (Spanish eID number for an Austrian SP) || eidasNatural-<br/>PersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | NO | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
 
 All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the `xs:string` data type. Certain attributes such as `mail`, `personalIdentityNumber`, `organizationIdentifier`, `telephoneNumber` and `mobile` use a restricted character set according to its defined usage within this specification.
 

@@ -293,14 +293,14 @@ declared in the `MimeType` attribute.
 For messages in HTML format, the message MUST NOT contain tags and
 attributes for each tag other than those listed in the following table:
 
-HTML Tags | Type | Allowed attributes
---- | --- | ---
-h1, h2, h3, h4 | Headings | style
-div, span, p | Section | style
-table, tr, td | Table | style
-b, strong | Highlight | style
-i, u, br | Format      
-ol, ul, li | List        
+| HTML Tags | Type | Allowed attributes |
+| --- | --- | --- |
+| h1, h2, h3, h4 | Headings | style |
+| div, span, p | Section | style |
+| table, tr, td | Table | style |
+| b, strong | Highlight | style |
+| i, u, br | Format | &nbsp; |
+| ol, ul, li | List | &nbsp; | 
 
 Allowed HTML entities for character replacement SHALL be restricted to
 `amp`, `gt`, `lt`, `quot` and `nbsp` (in the form `&entity-name;`).

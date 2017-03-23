@@ -17,9 +17,9 @@
 
 2. [**Provisional Identifier**](#provisional-identifier)
 
-    2.1. [Provisional Identifier (prid) Attribute](#provisional-identifier-(prid)-attribute)
+    2.1. [Provisional Identifier (prid) Attribute](#provisional-identifier-prid-attribute)
 
-    2.2. [Provisional Identifier Persistence Indicator (pridPersistence) Attribute](#provisional-identifier-persistence-indicator-(pridpersistence)-attribute)
+    2.2. [Provisional Identifier Persistence Indicator (pridPersistence) Attribute](#provisional-identifier-persistence-indicator-pridpersistence-attribute)
 
     2.3. [Algorithms](#algorithms)
 
@@ -37,7 +37,7 @@ Appendix A. [**Countries with pridPersistence of class A**](#countries-with-prid
 
 Appendix B. [**Countries with pridPersistence of class B**](#countries-with-pridpersistence-of-class-b)
 
-Appendix C. [**PRID Algorithm implementations (Java)**](#prid-algorithm-implementations-(java))
+Appendix C. [**PRID Algorithm implementations (Java)**](#prid-algorithm-implementations-java)
 
 
 <a name="introduction"></a>
@@ -91,7 +91,7 @@ generation algorithm.
 This document defines a set of `prid` algorithms, when to use each
 algorithm and the resulting `pridPersistence` value.
 
-<a name="provisional-identifier-(prid)-attribute"></a>
+<a name="provisional-identifier-prid-attribute"></a>
 ### 2.1. Provisional Identifier (prid) Attribute
 
 The provisional identifier (`prid`) attribute is a SAML attribute
@@ -134,7 +134,7 @@ resulting ID MUST have at least 8 characters that are not a hyphen
 character, for example, the character sequence “1-2-3-4-56” is not
 allowed as it only holds 6 distinguishing ID characters.
 
-<a name="provisional-identifier-persistence-indicator-(pridpersistence)-attribute"></a>
+<a name="provisional-identifier-persistence-indicator-pridpersistence-attribute"></a>
 ### 2.2. Provisional Identifier Persistence Indicator (pridPersistence) Attribute
 ------------------------------------------------------------------------
 
@@ -156,11 +156,11 @@ following data:
 
 **Value definitions:**
 
-Value | Defined meaning
---- | ---
-A | Persistence over time is expected to be comparable or better than a Swedish national ID number (personnummer). This means that the identifier typically is stable throughout the lifetime of the subject and is typically preserved even if the subject changes address, name or civil status.
-B | Persistence over time is expected to be relatively stable, but lower than a Swedish national ID number (personnummer). This means that the identifier typically remains unchanged as long as the person does not change address, name or civil status. Such or similar event may cause the identifier to change but the identifier will not change just because the subject gets a new eID (electronic identification means) or changes eID provider.
-C | No expectations regarding persistence over time. The identifier may change if the subject changes eID or eID provider.
+| Value | Defined meaning |
+| :--- | :--- |
+| A | Persistence over time is expected to be comparable or better than a Swedish national ID number (personnummer). This means that the identifier typically is stable throughout the lifetime of the subject and is typically preserved even if the subject changes address, name or civil status. |
+| B | Persistence over time is expected to be relatively stable, but lower than a Swedish national ID number (personnummer). This means that the identifier typically remains unchanged as long as the person does not change address, name or civil status. Such or similar event may cause the identifier to change but the identifier will not change just because the subject gets a new eID (electronic identification means) or changes eID provider. |
+| C | No expectations regarding persistence over time. The identifier may change if the subject changes eID or eID provider. |
 
 <a name="algorithms"></a>
 ### 2.3. Algorithms
@@ -174,24 +174,27 @@ characters following the “:” (colon) character in the `prid`.
 
 **Name:** `default-eIDAS`
 
+**Input values**:
 
-Input values | Description
---- | ---
-eidasID | The identifier string value from the eIDAS PersonIdentifier attribute from the attribute source (identified by the attribute name `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier`.
+* `eidasID` - The identifier string value from the eIDAS PersonIdentifier attribute from the attribute source (identified by the attribute name `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier`.
 
+**Calculated values**:
 
+* `strippedID` = `eidasID` after:
+	1. removing the 6 leading characters matching the regular expression `^[A-Za-z]{2}[\/](SE\|se)[\/]`  (e.g., ”NO/SE/”), and; 
+	2. removing any white space and non-printable characters.
 
-Calculated values | Description
---- | ---
-`strippedID` | `eidasID` after `1)`  removing the 6 leading characters matching the regular expression `^[A-Za-z]{2}[\/](SE\|se)[\/]`  (e.g., ”NO/SE/”), and; `2)` removing any white space and non-printable characters. 
-`normalizedID` | `strippedID` converted according to the following steps: `1)`  Converting all upper case letters \[A-Z\] to lower case. and `2)`  Replacing with a single “-“ character, all sequences of characters of length (1…n) that does not contain \[0-9\] or \[a-z\]. and `3)`  Remove any leading or trailing “-“ characters.
+* `normalizedID` = `strippedID` converted according to the following steps: 
+	1. converting all upper case letters \[A-Z\] to lower case, and, 
+	2. replacing with a single “-“ character, all sequences of characters of length (1…n) that does not contain \[0-9\] or \[a-z\], and,
+	3. remove any leading or trailing “-“ characters.
 
 **Result**:
 
 If length of `normalizedID` &lt; 10 characters:
 > Return `normalizedID` padded with leading “0” (zero) characters until
 > length = 10 characters.
->
+
 
 If length of `normalizedID` 10 - 30 characters:
 > Return `normalizedID`
@@ -201,7 +204,7 @@ If length of `normalizedID` &gt; 30 characters**:**
 > the SHA256 hash of the UTF-8 encoded bytes of `strippedID`.
 
 **Exceptions**:
->
+
 > If the following conditions occur in the process, prid generation
 > fails:
 
@@ -224,7 +227,7 @@ concatenated SHA-2 hash value. The collision probability for such
 identifier among 2 users is 1 in 1,25 \* 10\^36 (Calculated as 16\^30 –
 16\^29 since first digit can not be 0). For a population of 100 million
 people the probability of a collision is approximately 1 in 2.5 \*
-10\^20 or 1 in 250 trillion countries of that population size[^1].
+10\^20 or 1 in 250 trillion countries of that population size<sup>[1](#footnote1)</sup>.
 
 Countries typically do not use ID attributes that exceed 30 characters
 in size, but it cannot be ruled out that some countries will generate an
@@ -243,17 +246,17 @@ collision resistance, the algorithm colresist-eIDAS should be used.
 
 **Examples:**
 
-PersonIdentifier | Resulting prid
---- | ---
-NO/SE/05068907693 | NO:05068907693
-DK/SE/09208-2002-2-194967071622 | DK:09208-2002-2-194967071622
-UK/DK/1234567890 | UK:NULL (Failed: target country is not SE)
-DE/SE/\#12345-3456//ABC | DE:12345-3456-abc
-DE/SE/aErf\#(EAd9) | DE:0aerf-ead9
-de/se/aErf\#(EAd) | NULL (Failed: Less than 8 ID characters)
-DE/SE/(1952 12 14-1122) | DE:19521214-1122
-19521214-1122 | NULL (Failed: Leading 6 character format error)
-DE/SE/1234567890123456789012345678901 | DE:3b7184c0ceaf76a9607a31e4e1f87f
+| PersonIdentifier | Resulting prid |
+| :--- | :--- |
+| NO/SE/05068907693 | NO:05068907693 |
+| DK/SE/09208-2002-2-194967071622 | DK:09208-2002-2-194967071622 |
+| UK/DK/1234567890 | UK:NULL (Failed: target country is not SE) |
+| DE/SE/\#12345-3456//ABC | DE:12345-3456-abc |
+| DE/SE/aErf\#(EAd9) | DE:0aerf-ead9 |
+| de/se/aErf\#(EAd) | NULL (Failed: Less than 8 ID characters) |
+| DE/SE/(1952 12 14-1122) | DE:19521214-1122 |
+| 19521214-1122 | NULL (Failed: Leading 6 character format error) |
+| DE/SE/1234567890123456789012345678901 | DE:3b7184c0ceaf76a9607a31e4e1f87f |
 
 <a name="algorithm-colresist-eidas"></a>
 #### 2.3.2. Algorithm: colresist-eIDAS
@@ -261,10 +264,9 @@ DE/SE/1234567890123456789012345678901 | DE:3b7184c0ceaf76a9607a31e4e1f87f
 This algorithm is identical to default-eIDAS except that the hashed
 expression of the ID in case the normalized ID exceeds 30 characters,
 has higher collision resistance by expressing the ID in radix 36 instead
-of radix 16 (Hexadecimal) [^2].
+of radix 16 (Hexadecimal)<sup>[2](#footnote2)</sup>.
 
 **Name:** `colresist-eIDAS`
-
 
 **Input values**: Identical to `default-eIDAS`
 
@@ -292,17 +294,17 @@ approximately 1 in 10\^31.
 
 **Examples:**
 
-PersonIdentifier | Resulting prid
---- | ---
-NO/SE/05068907693 | NO:05068907693
-DK/SE/09208-2002-2-194967071622 | DK:09208-2002-2-194967071622
-UK/DK/1234567890 | UK:NULL (Failed: target country is not SE)
-DE/SE/\#12345-3456//ABC | DE:12345-3456-abc
-DE/SE/aErf\#(EAd9) | DE:0aerf-ead9
-de/se/aErf\#(EAd) | NULL (Failed: Less than 8 ID characters)
-DE/SE/(1952 12 14-1122) | DE:19521214-1122
-19521214-1122 | NULL (Failed: Leading 6 character format error)
-DE/SE/1234567890123456789012345678901 | DE:1hc3tpoleczqu3t8jz2995k2rq7nt8
+| PersonIdentifier | Resulting prid |
+| :--- | :--- |
+| NO/SE/05068907693 | NO:05068907693 |
+| DK/SE/09208-2002-2-194967071622 | DK:09208-2002-2-194967071622 |
+| UK/DK/1234567890 | UK:NULL (Failed: target country is not SE) |
+| DE/SE/\#12345-3456//ABC | DE:12345-3456-abc |
+| DE/SE/aErf\#(EAd9) | DE:0aerf-ead9 |
+| de/se/aErf\#(EAd) | NULL (Failed: Less than 8 ID characters) |
+| DE/SE/(1952 12 14-1122) | DE:19521214-1122 |
+| 19521214-1122 | NULL (Failed: Leading 6 character format error) |
+| DE/SE/1234567890123456789012345678901 | DE:1hc3tpoleczqu3t8jz2995k2rq7nt8 |
 
 <a name="special-characters-eidas"></a>
 #### 2.3.3. Algorithm: special-characters-eIDAS
@@ -321,7 +323,7 @@ The present algoritm is intended to be used where the base identifier contains c
 > Return the string representation of the first 30 radix 36 digits of the SHA256 hash of the UTF-8 encoded bytes of `strippedID`.
 
 **Exceptions**: 
->
+
 > If the following conditions occur in the process, prid generation fails:
 
 1.  Leading 6 characters of PersonIdentifier does not match regexp `^[A-Za-z]{2}[\/](SE|se)[\/]$`
@@ -332,10 +334,9 @@ The present algoritm is intended to be used where the base identifier contains c
 
 **Examples:**
 
-PersonIdentifier | Resulting prid
---- | ---
-AT/SE/Zk2ME2pjxwzQOjVeFGeqSIage34= | AT:50bwytdle2mzexopcolmdhmhznihms
-
+| PersonIdentifier | Resulting prid |
+| :--- | :--- |
+| AT/SE/Zk2ME2pjxwzQOjVeFGeqSIage34= | AT:50bwytdle2mzexopcolmdhmhznihms |
 
 <a name="algorithm-selection-and-resulting-pridpersistence-value"></a>
 ### 2.4. Algorithm Selection and Resulting pridPersistence Value
@@ -348,27 +349,28 @@ the matching rules is selected.
 If the present conditions do not match any of the listed rules, then
 prid generation fails.
 
-Rule 1 | Description
---- | ---
-Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service).
-Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute.
-Matching rule 3 | Attributes provided by any of the countries listed in Appendix A
-Selected algorithm | `default-eIDAS`
-pridPersistence value | A
+| Rule 1 | Description |
+| :--- | :--- |
+| Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service). |
+| Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute. |
+| Matching rule 3 | Attributes provided by any of the countries listed in Appendix A. |
+| Selected algorithm | `default-eIDAS` |
+| pridPersistence value | A |
 
-Rule 2 | Description
---- | ---
-Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service).
-Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute.
-Matching rule 3 | Attributes provided by any of the countries listed in Appendix B
-Selected algorithm | `default-eIDAS`
-pridPersistence value | B
+| Rule 2 | Description |
+| :--- | :--- |
+| Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service). |
+| Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute. |
+| Matching rule 3 | Attributes provided by any of the countries listed in Appendix B. |
+| Selected algorithm | `default-eIDAS` |
+| pridPersistence value | B |
 
-Rule 3 | Description
-Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service).
-Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute.
-Selected algorithm | `default-eIDAS`
-pridPersistence value | C
+| Rule 3 | Description |
+| :--- | :--- |
+| Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service). |
+| Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute. |
+| Selected algorithm | `default-eIDAS` |
+| pridPersistence value | C |
 
 <a name="references"></a>
 ## 3. References
@@ -411,11 +413,11 @@ Profile](https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_pr
 The following countries provide an eIDAS PersonIdentifier attribute that
 has been determined to match pridPersistence level A:
 
-ISO 3166 | Name
---- | ---
-DK | Denmark
-NO | Norway
-SE | Sweden
+| ISO 3166 | Name |
+| :--- | :--- |
+| DK | Denmark |
+| NO | Norway |
+| SE | Sweden |
 
 <a name="countries-with-pridpersistence-of-class-b"></a>
 ## Appendix B. Countries with pridPersistence of class B
@@ -423,11 +425,11 @@ SE | Sweden
 The following countries provide an eIDAS PersonIdentifier attribute that
 has been determined to match pridPersistence level B:
 
-ISO 3166 | Name
---- | ---
-DE | Germany
+| ISO 3166 | Name |
+| :--- | :--- |
+| DE | Germany |
 
-<a name="prid-algorithm-implementations-(java)"></a>
+<a name="prid-algorithm-implementations-java"></a>
 ## Appendix C. PRID Algorithm implementations (Java)
 
 **default-eIDAS**
@@ -540,11 +542,12 @@ public class PridGenBase64Eidas implements PridGenerator {
 ```
 
 
-
-[^1]: Birthday paradox approximation p(*n*) ≈ *n*\^2 / 2*m*, where
+<a name="footnote1"></a>
+\[1\]: Birthday paradox approximation p(*n*) ≈ *n*\^2 / 2*m*, where
     p(*n*) is the collision probability, *n* is the number of people and
     *m* is the number of possible ID combinations.
 
-[^2]: Radix 36 express values ranging from 0 to 36 through a single
+<a name="footnote2"></a>
+\[2\]: Radix 36 express values ranging from 0 to 36 through a single
     character using the symbols ”0123456789abcdefghijklmnopqrstuvwxyz”
     in the presented order.
