@@ -79,11 +79,11 @@
 
     7.1. [Authentication Context URIs for Signature Services](#authentication-context-uris-for-signature-services)
 
-    7.2. [Authentication Requests](#authentication-requests)
+    7.2. [Authentication Requests](#authentication-requests2)
 
     7.2.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
 
-    7.3. [Authentication Responses](#authentication-responses)
+    7.3. [Authentication Responses](#authentication-responses2)
 
 8. [**Normative References**](#normative-references)
 
@@ -316,7 +316,7 @@ represented with the language attribute `en` (English).
 
 An Identity Provider MAY require authentication request messages to be
 signed. This is indicated by assigning the
-`WantAuthnRequestsSigned` attribute of the `<md:IDPSSPDescriptor>`
+`WantAuthnRequestsSigned` attribute of the `<md:IDPSSPDescriptor>`
 element to a value of `true`. See further section E7, “Metadata for
 Agreeing to Sign Authentication Requests”, of \[[SAML v2.0 Errata
 05](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html)\].
@@ -1008,7 +1008,7 @@ URIs. The URIs listed above are only used when there is an explicit
 requirement for the Identity Provider to display a sign message provided
 in the authentication request.
 
-<a name="authentication-requests"></a>
+<a name="authentication-requests2"></a>
 ### 7.2. Authentication Requests
 
 Authentication requests from a Signature Service SHALL meet the
@@ -1102,7 +1102,7 @@ associated with requests from signature services:
     even if the request has no present `ForceAuthn` attribute or includes
     a `ForceAuthn` attribute set to the value `false`.
 
-<a name="authentication-responses"></a>
+<a name="authentication-responses2"></a>
 ### 7.3. Authentication Responses
 
 By including an authentication context URI listed in [section 7.1](#authentication-context-uris-for-signature-services) (sign
@@ -1122,7 +1122,7 @@ MUST be displayed, then the Identity Provider MUST return an error
 response with the status code
 `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
-> \[6\]: As defined in [section 5.3](#request-message-content), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
+> \[6\]: As defined in [section 5.3](#message-content), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
 
 <a name="normative-references"></a>
 ## 8. Normative References
