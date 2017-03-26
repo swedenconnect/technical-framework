@@ -2,8 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.4 - 2017-03-13
-#### *Draft version*
+### Version 1.4 - 2017-03-28
 
 *ELN-0603-v1.4*
 
@@ -407,26 +406,26 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > 1.0.](http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html)
 
 **\[TillitRamv\]**
-> Tillitsramverk för Svensk E-legitimation.
+> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[AuthContExt\]**
 > [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
 **\[DeployProf\]**
-> Deployment Profile for the Swedish eID Framework.
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 **\[EntityCat\]**
-> Entity Categories for the Swedish eID Framework.
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 **\[CSignProt\]**
-> DSS Extension for Federated Central Signing Services.
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 **\[CSignProf\]**
-> Implementation Profile for Using OASIS DSS in Central Signing
-> Services.
+> [Implementation Profile for Using OASIS DSS in Central Signing
+> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 **\[AttrProf\]**
-> Attribute Specification for the Swedish eID Framework.
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[eIDAS\]**
 > REGULATION (EU) No 910/2014 OF THE EUROPEAN PARLIAMENT AND OF THE

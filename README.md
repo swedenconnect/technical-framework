@@ -6,9 +6,7 @@ This repository comprises the specifications of the Swedish eID Framework.
 
 ### About
 
-The specifications in this branch (october-2015-updates) are draft updates to the latest official release of the Swedish eID Framework (found in the master branch and in the [releases](https://github.com/elegnamnden/technical-framework/releases) section of this repository).
-
-The changes made to the specifications aim to integrate the eIDAS Framework into the Swedish eID Framework. Read more about eIDAS and the Swedish eID Framework on the [eIDAS Wiki](https://github.com/elegnamnden/eidas/wiki).
+The specifications in this branch comprises the latest official release of the Swedish eID Framework. Updates to this version can be found in the [master](https://github.com/elegnamnden/technical-framework/tree/master) branch.
 
 ### Feedback and Questions
 
@@ -18,11 +16,7 @@ If you have feedback or questions regarding the Technical Framework make a post 
 
 For official and draft releases of the Swedish eID Framework, see the [releases section](https://github.com/elegnamnden/technical-framework/releases).
 
-##### Draft releases since October 2015
-
-* [Draft release 2017-02-24](https://github.com/elegnamnden/technical-framework/releases/tag/20170224-draft-release)
-* [Draft release 2016-11-16](https://github.com/elegnamnden/technical-framework/releases/tag/20161116-draft-release)
-* [Draft release 2016-08-30](https://github.com/elegnamnden/technical-framework/releases/tag/20160830-draft-release)
+The releases can also be found under <http://elegnamnden.github.io/technical-framework/>.
 
 ## Contents
 
@@ -100,7 +94,7 @@ Implementation profile for Identity Providers implementing BankID support.
 
 ### Updates to the current version of the specifications
 
-Recommended updates to the current versions are published in the "[Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md)" document.
+Currently, no recommended updates to the current version of the framework exists.
 
 ## Older versions
 
@@ -108,5 +102,4 @@ Older version of the specification are stored in the following branches:
 
 + june-2014 - For the June 2014 release
 + april-2015 - For the April 2015 release
-+ october-2015 - For the October 2015 release (this is also the current release/master).
-
++ october-2015 - For the October 2015 release

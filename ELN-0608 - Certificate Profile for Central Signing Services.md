@@ -174,8 +174,7 @@ assertion.
 
 <a name="authcont"></a>**[AuthCont]**
 
-> Authentication Context Certificate Extension
-> (<http://tools.ietf.org/html/draft-santesson-auth-context-extension>)
+> [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773)
 
 <a name="skv704"></a>**[SKV704]**
 

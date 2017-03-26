@@ -2,8 +2,7 @@
 
 # eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
-### Version 1.0 - 2017-03-13
-#### *Draft version*
+### Version 1.0 - 2017-03-28
 
 *ELN-0611-v1.0*
 
@@ -378,13 +377,13 @@ prid generation fails.
 <a name="rfc2119"></a>**[RFC2119]**
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
-> Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
+> Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="saml2core"></a>**[SAML2Core]**
 
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
-> 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
+> 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
 <a name="saml-xsd"></a>**[SAML-XSD]**
 
@@ -399,13 +398,12 @@ prid generation fails.
 
 <a name="eidattributes"></a>**[EidAttributes]**
 
-Attribute Specification for the Swedish eID Framework.
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas-attr"></a>**[eIDAS-Attr]**
 
-[eIDAS SAML Attribute
-Profile](https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_profile_v1.0_2.pdf),
-22 June 2015.
+> [eIDAS SAML Attribute
+Profile, 22 June 2015](https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_profile_v1.0_2.pdf).
 
 <a name="countries-with-pridpersistence-of-class-a"></a>
 ## Appendix A. Countries with pridPersistence of class A

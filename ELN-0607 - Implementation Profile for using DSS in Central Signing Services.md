@@ -2,8 +2,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.2 - 2017-03-13
-#### *Draft version*
+### Version 1.2 - 2017-03-28
 
 *ELN-0607-v1.2*
 
@@ -663,16 +662,16 @@ EidSignResponse | Base64 encoded sign response.
 ### 4.1. Normative References
 
 <a name="eid-profile"></a>**[Eid-Profile]**
->Deployment Profile for the Swedish eID Framework, ELN-0607
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="rfc2119"></a>**[RFC2119]**
 >[Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
 
 <a name="dss-ext"></a>**[DSS-Ext]**
-> DSS Extension for Federated Central Signing Services (ELN-0609) - Version 1.1.
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="dss"></a>**[DSS]**
-> OASIS Standard - Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007.
+> [OASIS Standard - Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007](https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html).
 
 <a name="saml-xsd"></a>**[SAML-XSD]**
 > S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005. Document ID: saml-schema-assertion-2.0. See <http://www.oasisopen.org/committees/security/>.
@@ -684,7 +683,8 @@ EidSignResponse | Base64 encoded sign response.
 > XML Signature Schema. World Wide Web Consortium. See <http://www.w3.org/TR/2000/CR-xmldsig-core-20001031/xmldsig-coreschema.xsd>.
 
 <a name="eid-registry"></a>**[Eid-Registry]**
-> Registry for identifiers assigned by the Swedish e-identification board.
+> [Registry for identifiers assigned by the Swedish e-identification
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="informative-references"></a>
 ### 4.2. Informative References
