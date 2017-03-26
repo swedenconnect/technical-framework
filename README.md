@@ -6,7 +6,8 @@ This repository comprises the specifications of the Swedish eID Framework.
 
 ### About
 
-The specifications in this branch comprises the latest official release of the Swedish eID Framework. Updates to this version can be found in the [master](https://github.com/elegnamnden/technical-framework/tree/master) branch.
+The specifications in this branch is the latest development of the Swedish eID Framework. The latest official release
+can be found in the [march-2017 branch](https://github.com/elegnamnden/technical-framework/tree/march-2017).
 
 ### Feedback and Questions
 
