@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certificate profile for certificates issued by Central Signing services</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
+<h1 id="certificate-profile-for-certificates-issued-by-central-signing-services">Certificate profile for certificates issued by Central Signing services</h1>
+<h3 id="version-1.0---2013-10-30">Version 1.0 - 2013-10-30</h3>
+<p><em>ELN-0608-v1.0</em></p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirement-key-words">Requirement key words</a></p>
+<p> 1.2. <a href="#xml-name-space-references">XML name space references</a></p>
+<p> 1.3. <a href="#structure">Structure</a></p>
+</li>
+<li><p><a href="#certificate-profile"><strong>Certificate Profile</strong></a></p>
+<p> 2.1. <a href="#standards">Standards</a></p>
+<p> 2.2. <a href="#qualified-and-pkc-certificates">Qualified and PKC Certificates</a></p>
+<p> 2.3. <a href="#certificate-content">Certificate content</a></p>
+<p> 2.3.1. <a href="#subject-attributes-and-name-forms">Subject attributes and name forms</a></p>
+<p> 2.3.2. <a href="#authentication-context-and-attribute-mapping">Authentication Context and Attribute mapping</a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+</ol>
+<p><a name="introduction"></a></p>
+<h2 id="1.-introduction">1. Introduction</h2>
+<p>This document specifies a certificate profile for certificates issued by
+a signature service within the infrastructure for “Svensk
+E-legitimation”.</p>
+<p><a name="requirement-key-words"></a></p>
+<h3 id="1.1.-requirement-key-words">1.1. Requirement key words</h3>
+<p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>,
+<strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>,
+<strong>MAY</strong>, and <strong>OPTIONAL</strong> are to be interpreted as described in
+[<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify
+requirements over protocol features and behavior that affect the
+interoperability and security of implementations. When these words are
+not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="xml-name-space-references"></a></p>
+<h3 id="1.2.-xml-name-space-references">1.2. XML name space references</h3>
+<p>The prefix <strong>saci:</strong> stands for the SAML Authentication Context
+Information XML Schema namespace
+(<code>http://id.elegnamnden.se/auth-cont/1.0/saci</code>).</p>
+<p><a name="structure"></a></p>
+<h3 id="1.3.-structure">1.3. Structure</h3>
+<p>This specification uses the following typographical conventions in text:
+<code>&lt;Eid2Element&gt;</code>, <code>&lt;ns:ForeignElement&gt;</code>, <code>Attribute</code>, <strong>Datatype</strong>,
+<code>OtherCode</code>.</p>
+<p><a name="certificate-profile"></a></p>
+<h2 id="2.-certificate-profile">2. Certificate Profile</h2>
+<p><a name="standards"></a></p>
+<h3 id="2.1.-standards">2.1. Standards</h3>
+<p>The following standards provides normative requirements for this
+certificate profile:</p>
+<table>
+<thead>
+<tr>
+<th>Standard</th>
+<th>Function</th>
+<th>Referens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RFC 5280</td>
+<td>Main certificate standard</td>
+<td>[<a href="#rfc5280">RFC5280</a>]</td>
+</tr>
+<tr>
+<td>RFC 3739</td>
+<td>Main certificate profile for Qualified Certificates</td>
+<td>[<a href="#rfc3739">RFC3739</a>]</td>
+</tr>
+<tr>
+<td>EN 319 412-5</td>
+<td>EU profile of RFC 3739 providing defined data structures for issuing Qualified Certificate in accordance with the EU electronic signature directive [EUSig].</td>
+<td>[<a href="#eu-qc">EU-QC</a>]</td>
+</tr>
+<tr>
+<td>TS 102 280</td>
+<td>EU interoperability profile for certificates issued to Natural Persons.</td>
+<td>[<a href="#eu-interop">EU-INTEROP</a>]</td>
+</tr>
+</tbody>
+</table>
+<p><a name="qualified-and-pkc-certificates"></a></p>
+<h3 id="2.2.-qualified-and-pkc-certificates">2.2. Qualified and PKC Certificates</h3>
+<p>This profile supports both Qualified Certificates as well as
+certificates that are not Qualified Certificates, here named PKC
+certificates (Public Key Certificates).</p>
+<p>The same profile requirements apply for both Qualified Certificates and
+for PKC certificates unless a requirement is explicitly related to only
+Qualified Certificates.</p>
+<p><a name="certificate-content"></a></p>
+<h3 id="2.3.-certificate-content">2.3. Certificate content</h3>
+<p>All certificates SHALL be fully compliant with  [<a href="#rfc5280">RFC5280</a>], [<a href="#rfc3739">RFC3739</a>]
+and [<a href="#eu-interop">EU-INTEROP</a>]. All Qualified Certificates SHALL also be fully
+compliant with [<a href="#eu-qc">EU-QC</a>].</p>
+<p>Qualified Certificates SHALL implement the “Statement regarding location
+of Policy Disclosure Statements” (PDS) as specified in section 5.2.4 of
+[<a href="#eu-qc">EU-QC</a>].</p>
+<p><a name="subject-attributes-and-name-forms"></a></p>
+<h4 id="2.3.1.-subject-attributes-and-name-forms">2.3.1. Subject attributes and name forms</h4>
+<p>Subject name attributes and other name forms in the certificate SHALL
+comply with [<a href="#rfc3739">RFC3739</a>].</p>
+<p>The following specific certificate subject name conventions SHALL be
+met:</p>
+<table>
+<thead>
+<tr>
+<th>Subject data</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Swedish “personnummer”</td>
+<td>Swedish “personnummer” obtained from a SAML assertion using the attribute with OID 1.2.752.29.4.13, SHALL be stored in a serialNumber attribute (OID 2.5.4.5) in the subject field. The data SHALL be composed according to [<a href="#skv704">SKV704</a>]</td>
+</tr>
+<tr>
+<td>Swedish “samordningsnummer”</td>
+<td>Swedish “samordningsnummer” obtained from a SAML assertion using the attribute with OID 1.2.752.29.4.13, SHALL be stored in a serialNumber attribute (OID 2.5.4.5) in the subject field. The data SHALL be composed according to [<a href="#skv707">SKV707</a>].</td>
+</tr>
+<tr>
+<td>E-mail address</td>
+<td>E-mail address, when present, SHALL be stored in a Subject Alternative Name extension as an rfc822Name.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="authentication-context-and-attribute-mapping"></a></p>
+<h4 id="2.3.2.-authentication-context-and-attribute-mapping">2.3.2. Authentication Context and Attribute mapping</h4>
+<p>Certificates MUST include an <code>AuthContextExtension</code> according to
+[<a href="#authcont">AuthCont</a>]. This extension SHALL include one SAML Authentication
+Context Information element identified by the XML schema name space
+identifier:</p>
+<blockquote>
+<p><code>http://id.elegnamnden.se/auth-cont/1.0/saci</code></p>
+</blockquote>
+<p>The <code>&lt;saci:SAMLAuthContext&gt;</code> element SHALL contain both an
+<code>&lt;saci:AuthContextInfo&gt;</code> element as well as an
+<code>&lt;saci:IdAttributes&gt;</code> element.</p>
+<p>The <code>&lt;saci:IdAttributes&gt;</code> element SHALL contain one
+<code>&lt;saci:AttributeMapping&gt;</code> element for each subject attribute or
+other name form that was obtained from a SAML attribute in the SAML
+assertion used to authenticate the signer as part of the signature
+creation process. Each <code>&lt;saci:AttributeMapping&gt;</code> element SHALL
+provide the <code>&lt;saml:AttributeValue&gt;</code> that were obtained from the SAML
+assertion.</p>
+<p><a name="normative-references"></a></p>
+<h2 id="3.-normative-references">3. Normative References</h2>
+<p><a name="rfc2119"></a><strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
+Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="rfc3739"></a><strong>[RFC3739]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc3739.txt">Santesson, S., Nystrom, M., and T. Polk, &quot;Internet X.509 Public Key
+Infrastructure: Qualified Certificates Profile&quot;, RFC 3739, March
+2004</a>.</p>
+</blockquote>
+<p><a name="rfc5280"></a><strong>[RFC5280]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc5280.txt">Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
+W. Polk, &quot;Internet X.509 Public Key Infrastructure Certificate and
+Certificate Revocation List (CRL) Profile&quot;, RFC 5280, May 2008</a>.</p>
+</blockquote>
+<p><a name="eu-qc"></a><strong>[EU-QC]</strong></p>
+<blockquote>
+<p>“Electronic Signatures and Infrastructures (ESI); Profiles for Trust
+Service Providers issuing certificates; Part 5: Extension for
+Qualified Certificate profile”, ETSI TS 319 412-5 V1.1.1, Jan 2013.</p>
+</blockquote>
+<p><a name="eu-interop"></a><strong>[EU-INTEROP]</strong></p>
+<blockquote>
+<p>“X.509 V.3 Certificate Profile for Certificates Issued to Natural
+Persons”, ETSI TS 102 280 V1.1.1, March 2004.</p>
+</blockquote>
+<p><a name="authcont"></a><strong>[AuthCont]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7773">RFC-7773: Authentication Context Certificate Extension</a></p>
+</blockquote>
+<p><a name="skv704"></a><strong>[SKV704]</strong></p>
+<blockquote>
+<p><a href="http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf">Skatteverket, SKV 704 utgåva 8, Personnummer, September
+2007.</a></p>
+</blockquote>
+<p><a name="skv707"></a><strong>[SKV707]</strong></p>
+<blockquote>
+<p><a href="http://www.vgregion.se/upload/PVSB/Tj%E4nsteID/Samordningsnummer%20skatteverket.pdf">Skatteverket, SKV 707, Utgåva 2,
+Samordningsnummer.</a></p>
+</blockquote>
+    </article>
+  </body>
+</html>
