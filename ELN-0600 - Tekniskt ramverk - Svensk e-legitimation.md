@@ -2,8 +2,7 @@
 
 # E-legitimationsnämndens Tekniska ramverk
 
-### Version: 1.5 - 2017-02-14
-#### *Utkast*
+### Version: 1.5 - 2017-03-28
 
 *ELN-0600-v1.5*
 
@@ -524,38 +523,38 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 ### 3.1. E-legitimationsnämnden
 
 **\[EidTillit\]**
-> Tillitsramverk för Svensk E-legitimation.
+> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[EidProfile\]**
-> Deployment Profile for the Swedish eID Framework.
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 **\[EidRegistry\]**
-> Registry for identifiers assigned by the Swedish e-identification
-> board.
+> [Registry for identifiers assigned by the Swedish e-identification
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
 **\[EidAttributes\]**
-> Attribute Specification for the Swedish eID Framework.
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[EidConstrAttributes\]**
-> eIDAS Constructed Attributes Specification for the Swedish eID
-> Framework.
+> [eIDAS Constructed Attributes Specification for the Swedish eID
+> Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[EidEntCat\]**
-> Entity Categories for the Swedish eID Framework.
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 **\[EidDiscovery\]**
 > Discovery within the Swedish eID Framework. (Ej längre giltigt).
 
 **\[EidDSSProfile\]**
-> Implementation Profile for Using OASIS DSS in Central Signing
-> Services.
+> [Implementation Profile for Using OASIS DSS in Central Signing
+> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 **\[EidDSSExt\]**
-> DSS Extension for Federated Central Signing Services.
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 **\[EidCertProf\]**
-> Certificate profile for certificates issued by Central Signing
-> services.
+> [Certificate profile for certificates issued by Central Signing
+> services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html).
 
 <a name="oevriga-referenser"></a>
 ### 3.2. Övriga referenser
@@ -570,9 +569,8 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 > Profile](http://saml2int.org/profile/current/).
 
 **\[IdpDisco\]**
-> [OASIS Committee Specification, Identity Provider Discovery Service
-> Protocol and Profile, March
-> 2008.](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)
+> [OASIS Committee Specification, Identity Provider Discovery Service Protocol and Profile, March
+> 2008](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf).
 
 **\[DSS\]**
 > [OASIS Standard – Digital Signature Service Core Protocols, Elements,

@@ -2,8 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.4 - 2017-03-13
-#### *Draft version*
+### Version 1.4 - 2017-03-28
 
 *ELN-0604-v1.4*
 
@@ -264,7 +263,7 @@ examples of “converted attributes”.
 <a name="eidas-legal-person-attribute-set"></a>
 ### 2.6. eIDAS Legal Person Attribute Set
 
-To be defined.
+Will be defined in future versions of this specification.
 
 <a name="attribute-definitions"></a>
 ## 3. Attribute Definitions
@@ -566,7 +565,7 @@ following attribute:
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
-> 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
+> 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
 **\[SKV704\]**
 > [Skatteverket, SKV 704 Utgåva 8,
@@ -590,18 +589,18 @@ following attribute:
 > subdivisions Part 1: Country codes, ISO standard, ISO 3166-1.
 
 **\[TillitRamv\]**
-> Tillitsramverk för Svensk E-legitimation.
+> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[EidDeployProf\]**
-> Deployment Profile for the Swedish eID Framework.
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 **\[ConstructedAttr\]**
 
-> eIDAS Constructed Attributes Specification for the Swedish eID
-> Framework.
+> [eIDAS Constructed Attributes Specification for the Swedish eID
+> Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[eIDAS\_Attr\]**
-> eIDAS SAML Attribute Profile, 22 June 2015.
+> [eIDAS SAML Attribute Profile, 22 June 2015](https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_profile_v1.0_2.pdf).
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions

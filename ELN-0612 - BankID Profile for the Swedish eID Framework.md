@@ -2,8 +2,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.0 - 2017-02-14
-#### *Draft version*
+### Version 1.0 - 2017-03-28
 
 *ELN-0612-v1.0*
 
@@ -411,9 +410,9 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="eid-profile"></a>
 **\[EidProfile\]**
-> Deployment Profile for the Swedish eID Framework.
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eid-attributes"></a>
 **\[EidAttributes\]**
-> Attribute Specification for the Swedish eID Framework.
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 

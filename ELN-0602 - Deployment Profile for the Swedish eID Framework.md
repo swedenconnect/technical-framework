@@ -2,8 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.4 - 2017-03-13 
-#### *Draft version*
+### Version 1.4 - 2017-03-28
 
 *ELN-0602-v1.4*
 
@@ -1140,7 +1139,7 @@ response with the status code
 > Assertion Markup Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
-**\[SAML v2.0 Errata 05\]\**
+**\[SAML v2.0 Errata 05\]**
 > [SAML Version 2.0 Errata 05. 01 May 2012. OASIS Approved
 > Errata](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html).
 
@@ -1169,47 +1168,46 @@ response with the status code
 > 2010](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-assurance-profile.html).
 
 **\[MetaIOP\]**
-> [OASIS Committee Specification, SAML V2.0 Metadata Interoperability
-> Profile Version 1.0, August 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-iop.pdf).
+> [OASIS Committee Specification, SAML V2.0 Metadata Interoperability Profile Version 1.0, August 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-iop.pdf).
 
 **\[SAML2MetaUI\]**
 > [OASIS Draft, SAML V2.0 Metadata Extensions for Login and Discovery
 > User Interface Version 1.0, September
-> 2010.](https://www.oasis-open.org/committees/download.php/39441/draft-sstc-saml-metadata-ui-03.pdf)
+> 2010](https://www.oasis-open.org/committees/download.php/39441/draft-sstc-saml-metadata-ui-03.pdf).
 
 **\[SAML2MetaAttr\]**
 > [OASIS Committee Specification, SAML V2.0 Metadata Extension for
 > Entity Attributes Version 1.0, August
-> 2009.](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)
+> 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html).
 
 **\[EntCat\]**
 > [The Entity Category SAML Entity Metadata Attribute Type, March
-> 2012.](http://macedir.org/entity-category/)
+> 2012](http://macedir.org/entity-category/).
 
 **\[IdpDisco\]**
 > [OASIS Committee Specification, Identity Provider Discovery Service
 > Protocol and Profile, March
-> 2008.](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)
+> 2008](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf).
 
 **\[EidRegistry\]**
-> Registry for identifiers assigned by the Swedish e-identification
-> board.
+> [Registry for identifiers assigned by the Swedish e-identification
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
 **\[EidAttributes\]**
-> Attribute Specification for the Swedish eID Framework.
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[EidTillit\]**
-> Tillitsramverk för Svensk E-legitimation.
+> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[EidEntCat\]**
-> Entity Categories for the Swedish eID Framework.
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 **\[EidDSS\]**
-> DSS Extension for Federated Central Signing Services - Version 1.1.
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 **\[EidDSS\_Profile\]**
-> Implementation Profile for using OASIS DSS in Central Signing
-> Services.
+> [Implementation Profile for Using OASIS DSS in Central Signing
+> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions

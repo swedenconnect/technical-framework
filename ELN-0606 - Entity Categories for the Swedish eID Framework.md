@@ -2,8 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.5 - 2017-02-17
-#### *Draft version*
+### Version 1.5 - 2017-03-28
 
 *ELN-0606-v1.5*
 
@@ -375,7 +374,7 @@ All Service Type identifiers are prefixed with
 
 **\[RFC2119\]**
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
-> Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
+> Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
@@ -397,16 +396,17 @@ All Service Type identifiers are prefixed with
 > 2012.](http://macedir.org/entity-category/)
 
 **\[EidTillit\]**
-> Tillitsramverk för Svensk E-legitimation.
+> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[EidDeploy\]**
-> Deployment Profile for the Swedish eID Framework.
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 **\[EidRegistry\]**
-> Registry for identifiers assigned by the Swedish e-identification board.
+> [Registry for identifiers assigned by the Swedish e-identification
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
 **\[EidAttributes\]**
-> Attribute Specification for the Swedish eID Framework.
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
