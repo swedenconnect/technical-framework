@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2017-05-24
+### Version 1.5 - 2017-05-24 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -1022,10 +1022,9 @@ following requirements:
 
 It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:RequesterID>` element holding the entityID of the Service Provider at which the user authenticated for the current session is included in the `<saml2p:AuthnRequest>` message.
 
-```
-<saml2p:Scoping>
-  <saml2p:RequesterID>http://www.origsp.com/sp</saml2:RequesterID>
-</saml2p:Scoping>```
+    <saml2p:Scoping>
+      <saml2p:RequesterID>http://www.origsp.com/sp</saml2:RequesterID>
+    </saml2p:Scoping>
 
 *Example when the `RequesterID` element is used to inform the Identity Provider about which Service Provider that the user authenticated at during the session when a signature process is executed.*
 
