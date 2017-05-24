@@ -2,9 +2,9 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.4 - 2017-03-28
+### Version 1.5 - 2017-05-24
 
-*ELN-0602-v1.4*
+*ELN-0602-v1.5*
 
 ---
 
@@ -1020,6 +1020,17 @@ following requirements:
     also be indicated in the Signature Service metadata record using the
     `AuthnRequestsSigned` attribute (see [section 2.1.4](#signature-service)).
 
+It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:RequesterID>` element holding the entityID of the Service Provider at which the user authenticated for the current session is included in the `<saml2p:AuthnRequest>` message.
+
+```
+<saml2p:Scoping>
+  <saml2p:RequesterID>http://www.origsp.com/sp</saml2:RequesterID>
+</saml2p:Scoping>```
+
+*Example when the `RequesterID` element is used to inform the Identity Provider about which Service Provider that the user authenticated at during the session when a signature process is executed.*
+
+> The reason for this recommendation is that one single instance of a Signature Service may be used by several services representing different SAML Service Providers within an organization, and the Identity Provider processing the "authentication for signature" request may need to obtain configuration for the "original" Service Provider in order to fulfill its service.
+
 An Identity Provider that accepts an `<saml2p:AuthnRequest>` message
 from a Service Provider that has indicated that it is a Signature
 Service<sup>5</sup> MUST provide a user interface that is indicating that the
@@ -1212,6 +1223,11 @@ response with the status code
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
 
+**Changes between version 1.4 and 1.5:**
+
+- Section 7.2, "Authentication Requests", was extended to recommend the usage of the `<saml2p:RequesterID>` element within `<saml2p:Scoping>`. The reason for this recommendation is that Identity Providers in some cases need
+to know about the Service Provider at which the user authenticated during the current session.
+
 **Changes between version 1.3 and version 1.4:**
 
 -   Version 1.3 of this profile stated that a
@@ -1238,16 +1254,16 @@ response with the status code
 -   In section 6.4, the requirement to use the sub-level status code
     `http://id.elegnamnden.se/status/1.0/cancel` was added. This status
     should be used to indicate a cancelled operation.
-    
+
 - In section 6.4, the status codes `http://id.elegnamnden.se/status/1.0/fraud` and `http://id.elegnamnden.se/status/1.0/possibleFraud` were introduced. Their purpose is to alert (suspected) fraudulent behaviour.
 
 -   The specification for “Discovery within the Swedish eID Framework”
     has been deprecated and requirements referring to this document have
     been updated.
-    
+
 - A clarification to section 5.2 was made stating that conformant
   Identity Providers MUST support the HTTP-POST binding.
-  
+
 - Section 6.2 was updated with requirements for proxy-IdP:s that are expected to include the `<saml2:AuthenticatingAuthority>` element holding the entityID of the Identity Provider that provided the authentication of the principal.
 
 **Changes between version 1.2 and version 1.3:**
@@ -1346,4 +1362,3 @@ response with the status code
     provided.
 
 -   Some faulty references were corrected.
-
