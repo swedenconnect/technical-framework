@@ -157,7 +157,7 @@ The following example illustrates a claim binding the following claim values:
 
 **Registered Claims**
 
-name | Value
+Name | Value
 ---|---
 **sub** | 188803099368
 **aud** | https://eid2csig.konki.se/sign
@@ -168,9 +168,8 @@ name | Value
 
 **`urn:se:elegnamnden:jwt:sadext` Claim**
 
-
 Name | Value
----|---|---
+---|---
 **ver** | 1.0
 **irt** | \_a3a232edc94ce04ca54b41958c1b12c2
 **attr** | urn:oid:1.2.752.29.4.13
