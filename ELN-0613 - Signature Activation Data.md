@@ -118,9 +118,9 @@ This document specifies exchange of two data elements:
 - SADRequest
 - SAD
 
-The SADRequest SHALL have the format defined in section 3.1. When a Remote Signing Service request a SAD from the IdP, it MUST include the SADRequest element as an AuthnRequest extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
+The SADRequest SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the IdP, it MUST include the SADRequest element as an AuthnRequest extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
 
-When the IdP returns a SAD, as defined in section 3.2, in is SAML Assertion, it MUST be included as a single string value of a sad attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].   
+When the IdP returns a SAD, as defined in section [3.2](#signature-activation-data), in is SAML Assertion, it MUST be included as a single string value of a sad attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].   
 
 
 <a name="data-binding"></a>
@@ -200,13 +200,13 @@ Example of a SADRequest.
 
 <a name="sad-json-web-token"></a>
 #### 3.2.1. SAD JSON Web Token
-This section specifies a JSON Web Token (JWT) in accordance with [[RFC7519](#rfc7519)] as the SAD container, binding the data as defined in section 2.1.
+This section specifies a JSON Web Token (JWT) in accordance with [[RFC7519](#rfc7519)] as the SAD container, binding the data as defined in section [2.1](#scope).
 
 The SAD JWT MUST have the form of a signed JWS (JSON Web Signature).
 
 <a name="registered-jwt-claims"></a>
 ##### 3.2.1.1. Registered JWT claims
-The data signed by the SAD JWT is carried in the JWS payload in the form of JWT claims using registered claim names (as specified in [[RFC7519](#rfc7519)]) in addition to one private claim name (`seElnSadext`) specified in section 2.3.2. The following table defines the use of registered claims.
+The data signed by the SAD JWT is carried in the JWS payload in the form of JWT claims using registered claim names (as specified in [[RFC7519](#rfc7519)]) in addition to one private claim name (`seElnSadext`) specified in section [3.2.1.2](#sad-extension-claim). The following table defines the use of registered claims.
 
 name | Content
 ---|---
