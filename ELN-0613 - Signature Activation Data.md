@@ -120,7 +120,7 @@ This document specifies exchange of two data elements:
 
 The SADRequest SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the IdP, it MUST include the SADRequest element as an AuthnRequest extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
 
-When the IdP returns a SAD, as defined in section [3.2](#signature-activation-data), in is SAML Assertion, it MUST be included as a single string value of a sad attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].   
+When an IdP returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].   
 
 
 <a name="data-binding"></a>
