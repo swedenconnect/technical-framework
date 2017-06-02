@@ -206,7 +206,7 @@ The SAD JWT MUST have the form of a signed JWS (JSON Web Signature).
 
 <a name="registered-jwt-claims"></a>
 ##### 3.2.1.1. Registered JWT claims
-The data signed by the SAD JWT is carried in the JWS payload in the form of JWT claims using registered claim names (as specified in [[RFC7519](#rfc7519)]) in addition to one public claim name (`urn:se:elegnamnden:jwt:sadext`) specified in section 2.3.2. The following table defines the use of registered claims.
+The data signed by the SAD JWT is carried in the JWS payload in the form of JWT claims using registered claim names (as specified in [[RFC7519](#rfc7519)]) in addition to one private claim name (`seElnSadext`) specified in section 2.3.2. The following table defines the use of registered claims.
 
 name | Content
 ---|---
