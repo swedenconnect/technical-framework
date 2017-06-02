@@ -318,7 +318,7 @@ The complete SAD JWT including signature:
 
 <a name="schemas"></a>
 ## 4. Schemas
-The following XML schema defines the http://id.elegnamnden.se/csig/1.1/sap/ns name space:
+The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` name space:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
