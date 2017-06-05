@@ -13,7 +13,7 @@ can be found in the [march-2017 branch](https://github.com/elegnamnden/technical
 
 If you have feedback or questions regarding the Technical Framework make a post to the "Tekniskt ramverk"-thread on <https://forum.eidasweb.se>.
 
-### Releases 
+### Releases
 
 For official and draft releases of the Swedish eID Framework, see the [releases section](https://github.com/elegnamnden/technical-framework/releases).
 
@@ -31,7 +31,7 @@ An overview document (in Swedish) that describes the different parts of the Swed
 
 #### Deployment Profile for the Swedish eID Framework
 
-This is the main specification for the Swedish eID Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services. 
+This is the main specification for the Swedish eID Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services.
 
 > [ELN-0602 - Deployment Profile for the Swedish eID Framework](ELN-0602%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
 
@@ -95,7 +95,7 @@ Implementation profile for Identity Providers implementing BankID support.
 
 ### Updates to the current version of the specifications
 
-Currently, no recommended updates to the current version of the framework exists.
+> [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-05-24
 
 ## Older versions
 
