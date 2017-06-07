@@ -388,6 +388,8 @@ sign messages.
 This element MAY be present to provide requested properties of generated
 signature certificates according with section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
 
+When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with the “Deployment Profile for the Swedish eID Framework” [Eid-Profile] section 7.2.2, or reject the request.
+
 <a name="authncontextclassref"></a>
 ###### 2.1.3.9.1. AuthnContextClassRef
 

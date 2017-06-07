@@ -2,9 +2,9 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 0.1 - 2017-05-30
+### Version 1.0 Draft - 2017-05-30
 
-*ELN-0613-v0.1*
+*ELN-0613-v1.0-draft*
 
 ---
 
@@ -234,23 +234,6 @@ Name | Type | Content
 **reqid** | String | RequestID, holding the ID of the Sign Request associated with this SAD.
 **docs** | Integer | Documents, specifying the number of documents to be signed in the associated sign request.
 
-<a name="serialization"></a>
-##### 3.2.1.3. Serialization
-
-The value of the claims JSON object of the JWT can be serialized to and from the following Java Classes:
-
-    public class SadData {
-        String sub, aud, iss, jti;
-        long exp, iat;
-        SadExtData seElnSadext;    
-    }
-
-    public class SadExtData {
-        String ver,irt,attr,loa,reqid;
-        int docs;
-    }
-    
-
 <a name="example"></a>
 #### 3.2.2. Example
 
@@ -261,8 +244,8 @@ The following example illustrates a claim binding the following claim values:
 Name | Value
 ---|---
 **sub** | 188803099368
-**aud** | https://eid2csig.konki.se/sign
-**iss** | https://idp.svelegtest.se/idp
+**aud** | `https://eid2csig.konki.se/sign`
+**iss** | `https://idp.svelegtest.se/idp`
 **exp** | Fri Jun 02 11:29:11 CEST 2017
 **iat** | Fri Jun 02 11:28:11 CEST 2017
 **jti** | fb934b226b9a71b1
@@ -274,7 +257,7 @@ Name | Value
 **ver** | 1.0
 **irt** | \_a3a232edc94ce04ca54b41958c1b12c2
 **attr** | urn:oid:1.2.752.29.4.13
-**loa** | http://id.elegnamnden.se/loa/1.0/loa3
+**loa** | `http://id.elegnamnden.se/loa/1.0/loa3`
 **reqid** | f6e7d061a23293b0053dc7b038a04dad
 **docs** | 1
 
@@ -366,11 +349,11 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
 
 <a name="eln-0604"></a>**[ELN-0604]**
 
-> Attribute Specification for the Swedish eID Framework - Version 1.4.
+> [Attribute Specification for the Swedish eID Framework - Version 1.4.](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
 
 <a name="eln-0609"></a>**[ELN-0609]**
 
-> DSS Extension for Federated Central Signing Services - Version 1.1.
+> [DSS Extension for Federated Central Signing Services - Version 1.1.](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html)
 
 <a name="rsig-pp-1"></a>**[RSIG-PP-1]**
 
@@ -381,3 +364,4 @@ General System Security Requirements
 
 > European Standard prEN 419241-2 - Trustworthy Systems Supporting Server Signing - Part 2:
 Protection profile for QSCD for Server Signing
+

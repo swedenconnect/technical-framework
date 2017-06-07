@@ -81,6 +81,8 @@
     7.2. [Authentication Requests](#authentication-requests2)
 
     7.2.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
+    
+    7.2.2. [Requesting SCAL2 Signature Activation Data](#requesting-scal2-signature-activation-data)
 
     7.3. [Authentication Responses](#authentication-responses2)
 
@@ -1110,6 +1112,33 @@ associated with requests from signature services:
     authentication context which includes display of a sign message,
     even if the request has no present `ForceAuthn` attribute or includes
     a `ForceAuthn` attribute set to the value `false`.
+    
+<a name="requesting-scal2-signature-activation-data"></a>
+#### 7.2.2. Requesting SCAL2 Signature Activation Data
+
+[EidDSS_Profile] specifies that the type of signature requested by a Signature Requestor is defined by the `CertType` attribute of the `<CertRequestProperties>` element of the signature request. When the value of this attribute is set to `QC/SSCD`, the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" [SigSAP].
+
+It is the responsibility of the signature service to check that a SAD matching the request is included in corresponding identity assertion retuned from the Identity Provider. An IdP which do not recognise requests for a SAD MAY ignore this request.
+
+A SAD returned from the Identity Provider MUST have a signature which can be verified by a Certificate in the Identity Provider's metadata. The cryptographic strength of the SAD signature MUST be equivalent or better than the cryptographic strength of the signed response and/or assertion from the Identity Provider.
+
+Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI
+`http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata.
+
+```
+<md:Extensions>
+  <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+    <saml:Attribute Name="http://macedir.org/entity-category" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                             xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
+      <saml:AttributeValue xsi:type="xs:string">http://id.elegnamnden.se/sprop/1.0/scal2</saml:AttributeValue>
+    </saml:Attribute>
+    ...
+  </mdattr:EntityAttributes>
+</md:Extensions>
+```
+*Example of how an Identity Provider advertises its support for SCAL2 authentication.*
+
+
 
 <a name="authentication-responses2"></a>
 ### 7.3. Authentication Responses
@@ -1219,6 +1248,9 @@ response with the status code
 > [Implementation Profile for Using OASIS DSS in Central Signing
 > Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
+**\[SigSAP\]**
+> Signature Activation Protocol for Federated Signing.
+SigSAP
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
 

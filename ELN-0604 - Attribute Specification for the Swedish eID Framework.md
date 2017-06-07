@@ -377,8 +377,7 @@ The `authServerSignature` may be included in assertions in cases where there are
 The `sad` attribute holds Signature Activation Data that is required by a
 signature service in order to service a signature request in accordance
 with CEN EN 419 241-2<sup>5</sup>. The sad attribute holds a single string
-attribute value. The format of the string value is currently undefined,
-and will be further defined once the CEN standard is completed.
+attribute value. The format of the string value is defined in the Signature Activation Protocol for Federated Signing \[SigSAP\].
 
 > \[5\]: The standard is currently under development.
 
@@ -601,6 +600,9 @@ following attribute:
 
 **\[eIDAS\_Attr\]**
 > [eIDAS SAML Attribute Profile, 22 June 2015](https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_profile_v1.0_2.pdf).
+
+**\[SigSAP\]**
+> Signature Activation Protocol for Federated Signing.SigSAP
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions

@@ -38,6 +38,8 @@
 
     3.1. [mobile-auth](#mobile-auth)
 
+    3.2. [SCAL2](#scal2)
+
 4. [**Definitions for Service Type Entity Categories**](#definitions-for-service-type-entity-categories)
 
     4.1. [sigservice](#sigservice)
@@ -338,6 +340,18 @@ authentication using mobile devices.
 See \[EidDiscovery\] for a more extensive explanation of the use of the
 mobile-auth category.
 
+<a name="scal2"></a>
+### 3.2. SCAL2
+
+**URL**: `http://id.elegnamnden.se/sprop/1.0/scal2`
+
+**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with [SigSAP]. 
+
+For a providing service  i.e. an Identity Provider, inclusion of the
+scal2 service property states that the Identity Provider will return a SAD in response to a SADRequest in an authentication requests from a signing service.
+
+Signature Services MAY include this service property if all authentication requests from this signature service include a SADRequest. Service Providers that are not declared as a signature service MUST NOT include this service property.
+
 <a name="definitions-for-service-type-entity-categories"></a>
 ## 4. Definitions for Service Type Entity Categories
 
@@ -347,6 +361,7 @@ a particular service type.
 
 All Service Type identifiers are prefixed with
 **`http://id.elegnamnden.se/st`**.
+
 
 <a name="sigservice"></a>
 ### 4.1. sigservice
@@ -407,6 +422,9 @@ All Service Type identifiers are prefixed with
 
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+
+**\[SigSAP\]**
+> Signature Activation Protocol for Federated Signing.
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
