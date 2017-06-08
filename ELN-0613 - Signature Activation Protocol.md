@@ -53,7 +53,7 @@
 <a name="introduction"></a>
 ## 1. Introduction
 
-This document specifies a Signature Activation Protocol (SAP) and its data elements for implementation of SCAL 2 according the European Standard prEN 419241 - Trustworthy Systems Supporting Server Signing - Part 1 and 2 (prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)]). 
+This document specifies a **Signature Activation Protocol** (SAP) and its data elements for implementation of **Sole Control Assurance Level 2** (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing - Part 1 and 2 (prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)]). 
 
 The function of the SAP is to authenticate the intent of a signer to sign a particular document, or collection of documents, through exchange of the following data elements.
 
@@ -102,7 +102,7 @@ The scope of the Signature Activation Protocol (SAP) is to support request for a
 - The signer agrees to sign the data to be signed.
 - The correct signing key for this signer and this instance of signing is properly identified.
 
-The federated signing model does not use pre-stored signing keys. Instead, a new signing key is generated upon each request and after receiving the SAD. This particular use-case is recognised by prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)], which under these conditions allows that the signature key reference is implicit and derived from the signer's identity. For this particular implementation of the SAP the following data is included in the SAD:
+The federated signing model does not use pre-assigned signing keys. Instead, a new signing key is generated for each sign request then permanently deleted. This particular use-case is recognised by prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)], which under these conditions allows the signature key reference to be implicit and derived from the signer's identity. For the present implementation of the SAP the following data is included in the SAD:
 
 - The signer's identity
 - Information about how the signer was authenticated and by who

@@ -1116,14 +1116,12 @@ associated with requests from signature services:
 <a name="requesting-scal2-signature-activation-data"></a>
 #### 7.2.2. Requesting SCAL2 Signature Activation Data
 
-[EidDSS_Profile] specifies that the type of signature requested by a Signature Requestor is defined by the `CertType` attribute of the `<CertRequestProperties>` element of the signature request. When the value of this attribute is set to `QC/SSCD`, the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" [SigSAP].
-
-It is the responsibility of the signature service to check that a SAD matching the request is included in corresponding identity assertion retuned from the Identity Provider. An IdP which do not recognise requests for a SAD MAY ignore this request.
+The type of signature requested by a signature request is, according to [EidDSS_Profile], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" [SigSAP].
 
 A SAD returned from the Identity Provider MUST have a signature which can be verified by a Certificate in the Identity Provider's metadata. The cryptographic strength of the SAD signature MUST be equivalent or better than the cryptographic strength of the signed response and/or assertion from the Identity Provider.
 
 Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI
-`http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata.
+`http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An IdP which do not advertise support for SAP MAY ignore request for SAD.
 
 ```
 <md:Extensions>
