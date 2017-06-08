@@ -2,9 +2,11 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.0 - 2017-03-28
+### Version 1.1 - 2017-06-08 - *draft version*
 
-*ELN-0612-v1.0*
+*ELN-0612-v1.1*
+
+[Latest official version - 1.0](http://elegnamnden.github.io/technical-framework/latest/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html)
 
 ---
 
@@ -51,6 +53,8 @@
     4.2.1.2. [userNonVisibleData](#usernonvisibledata)
 
     4.2.2. [Mobile BankID and the personNumber attribute](#mobile-bankid-and-the-personnumber-attribute)
+    
+    4.3. [General Processing](#general-processing)
 
 5. [**Authentication Responses**](#authentication-responses)
 
@@ -67,6 +71,8 @@
     6.3. [Signature Services](#signature-services)
 
 7. [**References**](#references)
+
+8. [**Changes between versions**](#changes-between-versions)
 
 ---
 
@@ -230,9 +236,11 @@ Auto starting the BankID app from a mobile device requires the built-in web brow
 <a name="prompting-for-personal-identity-number"></a>
 ### 3.3. Prompting for Personal Identity Number (personnummer)
 
-When the user agent (web browser) and the BankID client (app or desktop) is not on the same device the Identity Provider prompts the user for his or hers personal identity number (personnummer) in order to initiate an BankID authentication. It is RECOMMENDED that the personal identity number is saved in the user's web browser session storage (in a session cookie or more preferably using the HTML5 sessionStorage object). The reason for this is that if the user performs a signature operation after authenticating he or she does not expect to have to enter the personal identity number again.
+When the user agent (web browser) and the BankID client (app or desktop) is not on the same device the Identity Provider prompts the user<sup>1</sup> for his or hers personal identity number (personnummer) in order to initiate an BankID authentication. It is RECOMMENDED that the personal identity number is saved in the user's web browser session storage (in a session cookie or more preferably using the HTML5 sessionStorage object). The reason for this is that if the user performs a signature operation after authenticating he or she does not expect to have to enter the personal identity number again.
 
 See also section [4.2.2](#mobile-bankid-and-the-personnumber-attribute), "[Mobile BankID and the personNumber attribute](#mobile-bankid-and-the-personnumber-attribute)".
+
+> \[1\]: Unless the personal identity number is included in the authentication request, see sections [4.2.2](#mobile-bankid-and-the-personnumber-attribute) and [4.3](#general-processing) below.
 
 <a name="cancelling-an-operation"></a>
 ### 3.4. Cancelling an Operation
@@ -291,9 +299,20 @@ It is RECOMMENDED that the following function is used to produce this unique bin
 <a name="mobile-bankid-and-the-personnumber-attribute"></a>
 #### 4.2.2. Mobile BankID and the personNumber attribute
 
-When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. This information is not passed in the `<saml2p:AuthnRequest>` message sent from the Signature Service. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. 
 
-> \[1\]: Almost all use cases where a user signs data is preceded by a login (authentication).
+This personal identity number may be available in the `<saml2p:AuthnRequest>` message since a Signature Service is recommended to include a `<saml2:Subject>` element that has a `<saml2:NameID>` element with the attribute `SPProvidedID` attribute holding the identity that the user has at the Identity Provider<sup>1</sup>. In the BankID case this is the personal identity number. A BankID Identity Provider SHOULD support processing of this attribute, and MUST validate it to be a valid personal identity number before using it. 
+
+In cases where the personal identity number can be found in a `<saml2p:AuthnRequest>` message as described above, it should be used as the `personNumber` parameter that is passed in the BankID `Sign`-call. If this information is not available in the request, the Identity Provider SHOULD rely on the fact that the user, most likely<sup>2</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+
+> \[1\]: See section 7.2 of \[[EidProfile](#eid-profile)\].
+> 
+> \[2\]: Almost all use cases where a user signs data is preceded by a login (authentication).
+
+<a name="general-processing"></a>
+### 4.3. General Processing
+
+Section 5.3 of \[[EidProfile](#eid-profile)\] describes how a Service Provider MAY pass the user's identity (personal identity number) in a `<saml2p:AuthnRequest>` message by including a `<saml2:Subject>` element that has a `<saml2:NameID>` element with the attribute `SPProvidedID` attribute holding the identity. [Section 4.2.2](#mobile-bankid-and-the-personnumber-attribute) above, states that an Identity Provider for Mobile BankID that processes a "authentication for signature" request SHOULD support this attribute. For other cases it is OPTIONAL for a BankID Identity Provider to process the attribute, but it should be pointed out that the user experience may be improved since the Identity Provider does not have to prompt the user for his or hers personal identity number (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above).
 
 <a name="authentication-responses"></a>
 ## 5. Authentication Responses
@@ -404,15 +423,22 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="bankid-spec"></a>
 **\[BankID_Spec\]**
-> [BankID Relying Party Guidelines, version 2.13](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v2.13.pdf).
+> [BankID Relying Party Guidelines, version 2.15](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v2.15.pdf).
 > 
 > *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
 
 <a name="eid-profile"></a>
 **\[EidProfile\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/draft/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eid-attributes"></a>
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+
+<a name="changes-between-versions"></a>
+## 8. Changes between versions
+
+**Changes between version 1.0 and 1.1:**
+
+- Section 4.2.2, "Mobile BankID and the personNumber attribute", was updated to recommend the Identity Provider to try to obtain the user's personal identity number from the `SPProvidedID` found in the `<saml2:NameID>` element under the `<saml2:Subject>` element. Also, section 4.3, "General Processing", was added where the use of the `SPProvidedID` attribute was further discussed.
 

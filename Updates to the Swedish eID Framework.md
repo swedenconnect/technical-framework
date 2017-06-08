@@ -2,7 +2,7 @@
 
 # Updates to the Swedish eID Framework
 
-### 2017-05-24
+### 2017-06-08
 
 ## Table of Contents
 
@@ -12,7 +12,9 @@
 
 2. [Updates](#updates)
 
-  E.1 [Scoping in Authentication Requests sent by Signature Services](#e1)
+  E.1. [Scoping in Authentication Requests sent by Signature Services](#e1)
+
+  E.2. [Including a User Identity in an Authentication Request](#e2) 
 
 <a name="Introduction"></a>
 ## 1. Introduction
@@ -46,6 +48,9 @@ New specification text is typically presented as follows, with new or changed te
 **\[EidProfile\]**
 > [Deployment Profile for the Swedish eID Framework, version 1.4](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html)
 
+**\[BankIDProfile\]**
+> [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html)
+
 <a name="updates"></a>
 ## 2. Updates
 
@@ -66,4 +71,48 @@ An Identity Provider may adapt user interfaces or authentication procedures to d
 
 ***Example when the `<saml2p:RequesterID>` element is used to inform the Identity Provider about which Service Provider that requested the signature associated with this request for authentication.***
 
+<a name="e2"></a>
+### E.2. Including a User Identity in an Authentication Request
+
+**Updates**: Version 1.4 of the “[Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html)” and version 1.0 of the "[Implementation Profile for BankID Identity Providers within the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html)".
+
+There are cases, especially when a Signature Service sends an authentication request, where the user experience would be greatly improved and the Identity Provider processing would become easier, if an authentication request message would include information about the user identity (if known to the Service Provider). Therefore, the following changes have been made.
+
+#### Section 5.3 of  \[EidProfile\]
+
+**New:**
+
+**A Service Provider MAY include a `<saml2:Subject>` element with a `<saml2:NameID>` containing the identity that the user has at the Identity Provider in the `SPProvidedID` attribute. The value from the `SPProvidedID` attribute MAY be used by an Identity Provider processing an authentication request. As an example, the Identity Provider may be able to avoid prompting the user for his or hers identity if this information was passed in the `<saml2p:AuthnRequest>` message.**
+
+**The Service Provider may acquire this user identity in various ways, for example, it may have received the identity in an attribute from a previous interaction with the Identity Provider (see section 7.2), by prompting the user, or any other way. If the Service Provider does not know about the type of user identities that the Identity Provider uses, or if this information is not available, the Service Provider MUST NOT include a `SPProvidedID` attribute.**
+
+    <saml2:Subject>
+      <saml2:NameID SPProvidedID="196911212032" />
+    </saml2:Subject> 
+
+***Example of how the value of a personal identity number attribute (`personalIdentityNumber`) is passed in a authentication request in order to supply the Identity Provider with extra information for its processing.***
+
+#### Section 7.2 of  \[EidProfile\]
+
+**New:**
+
+**If the Signature Requestor has authenticated the user at the Identity Provider within the same session as the request for signature is executed, it is RECOMMENDED that the Signature Service, in the `<saml2p:AuthnRequest>` message, includes a `<saml2:Subject>` element with a `<saml2:NameID>` element containing a `SPProvidedID` attribute holding the user identifier from this authentication. This is further described in section 5.3.**
+
+**The reason for this recommendation is that the user probably already has given his or hers user identity when authenticating at the Identity Provider, and for a better user experience it is therefore desirable to avoid prompting for the same information again.**
+
+#### Section 4.2.2. of  \[BankIDProfile\]
+
+**Original:**
+
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the personNumber parameter must be assigned in the BankID Sign-call. 
+
+**This information is not passed in the `<saml2p:AuthnRequest>` message sent from the Signature Service. In these cases** the Identity Provider SHOULD rely on the fact that the user, most likely, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section 3.3, "Prompting for Personal Identity Number (personnummer)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+
+**New:**
+
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. 
+
+**This personal identity number may be available in the `<saml2p:AuthnRequest>` message since a Signature Service is recommended to include a `<saml2:Subject>` element that has a `<saml2:NameID>` element with the attribute `SPProvidedID` attribute holding the identity that the user has at the Identity Provider. In the BankID case this is the personal identity number. A BankID Identity Provider SHOULD support processing of this attribute, and MUST validate it to be a valid personal identity number before using it.** 
+
+**In cases where the personal identity number can be found in a `<saml2p:AuthnRequest>` message as described above, it should be used as the `personNumber` parameter that is passed in the BankID `Sign`-call. If this information is not available in the requests** the Identity Provider SHOULD rely on the fact that the user, most likely, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section 3.3, "Prompting for Personal Identity Number (personnummer)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
 
