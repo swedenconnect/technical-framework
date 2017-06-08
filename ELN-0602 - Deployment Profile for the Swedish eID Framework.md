@@ -2,9 +2,11 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2017-06-05 - *draft version*
+### Version 1.5 - 2017-06-08 - *draft version*
 
 *ELN-0602-v1.5*
+
+[Latest official version - 1.4](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html)
 
 ---
 
@@ -522,6 +524,16 @@ Service Providers SHOULD include the `ForceAuthn` attribute in all
 `true` or `false`, and not rely on its default value. The reason for this is
 to avoid accidental SSO.
 
+A Service Provider MAY include a `<saml2:Subject>` element with a `<saml2:NameID>` containing the identity that the user has at the Identity Provider in the `SPProvidedID` attribute. The value from the `SPProvidedID` attribute MAY be used by an Identity Provider processing an authentication request. As an example, the Identity Provider may be able to avoid prompting the user for his or hers identity if this information was passed in the `<saml2p:AuthnRequest>` message.
+
+The Service Provider may acquire this user identity in various ways, for example, it may have received the identity in an attribute from a previous interaction with the Identity Provider (see [section 7.2](#authentication-requests2)), by prompting the user, or any other way. If the Service Provider does not know about the type of user identities that the Identity Provider uses, or if this information is not available, the Service Provider MUST NOT include a `SPProvidedID` attribute.
+
+    <saml2:Subject>
+      <saml2:NameID SPProvidedID="196911212032" />
+    </saml2:Subject> 
+
+*Example of how the value of a personal identity number attribute (`personalIdentityNumber`) is passed in a authentication request in order to supply the Identity Provider with extra information for its processing.* 
+
 > \[1\]: See section 3.1.1 of \[EidRegistry\].
 
 <a name="processing-requirements"></a>
@@ -1030,6 +1042,10 @@ It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:Requ
 
 > The reason for this recommendation is that an Identity Provider may adapt user interfaces or authentication procedures to different Service Providers based on either static configuration or on information found in the Service Provider's metadata. It can therefore be useful for an Identity Provider to know which Service Provider that requested the signature (*Signature Requestor*) that caused a Signature Service to request authentication. The Identity Provider may use this information to maintain the same user experience and procedures regardless of whether authentication is requested directly by the Service Provider, or by a Signature Service as a result of a signature request from the same Service Provider.
 
+If the Signature Requestor has authenticated the user at the Identity Provider within the same session as the request for signature is executed, it is RECOMMENDED that the Signature Service, in the `<saml2p:AuthnRequest>` message, includes a `<saml2:Subject>` element with a `<saml2:NameID>` element containing a `SPProvidedID` attribute holding the user identifier from this authentication. This is further described in [section 5.3](#message-content).
+
+> The reason for this recommendation is that the user probably already has given his or hers user identity when authenticating at the Identity Provider, and for a better user experience it is therefore desirable to avoid prompting for the same information again.
+
 An Identity Provider that accepts an `<saml2p:AuthnRequest>` message
 from a Service Provider that has indicated that it is a Signature
 Service<sup>5</sup> MUST provide a user interface that is indicating that the
@@ -1225,6 +1241,7 @@ response with the status code
 **Changes between version 1.4 and 1.5:**
 
 - Section 7.2, "Authentication Requests", was extended to recommend the usage of the `<saml2p:RequesterID>` element within `<saml2p:Scoping>`. The reason for this recommendation is that Identity Providers may need information about the "Signature Requestor", i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.
+- In section 5.3, "Message Content", information was added about how a Service Provider may use the `SPProvidedID` attribute within a `<saml2:Subject>` element that is included in the authentication request in order to supply to the Identity Provider information about the user that is about to be authenticated. Section 7.2, "Authentication Requests", further describes how an authentication request issued by a Signature Service should make use of the `SPProvidedID` attribute.
 
 **Changes between version 1.3 and version 1.4:**
 

@@ -95,7 +95,7 @@ Implementation profile for Identity Providers implementing BankID support.
 
 ### Updates to the current version of the specifications
 
-> [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-05-24
+> [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-06-08
 
 ## Older versions
 

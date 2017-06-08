@@ -14,12 +14,13 @@
 | [ELN-0609 - DSS Extension for Federated Signing Services](ELN-0609%20-%20DSS%20Extension%20for%20Federated%20Signing%20Services.md) | 1.1 |
 | ~~ELN-0610 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
 | [ELN-0611 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](ELN-0611%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.0 |
-| [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.0 |
+| [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.1 (draft) |
 
 ### Current version of update document
 
-The document "[Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md)" was updated 2017-05-24.
+The document "[Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md)" was updated 2017-06-08.
 
 It comprises changes added to the following draft versions:
 
 - [ELN-0602 - Deployment Profile for the Swedish eID Framework](ELN-0602%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) - 1.5 (draft)
+- [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) - 1.1 (draft)
