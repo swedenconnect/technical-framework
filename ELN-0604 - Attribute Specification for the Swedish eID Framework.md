@@ -2,9 +2,9 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.4 - 2017-03-28
+### Version 1.5 - 2017-06-09 - *draft version*
 
-*ELN-0604-v1.4*
+*ELN-0604-v1.5*
 
 ---
 
@@ -606,6 +606,10 @@ following attribute:
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.4 and version 1.5:**
+
+- Section 3.2.3: Added reference to the SAP specification as source for defining the content of the `sad` attribute.
 
 **Changes between version 1.3 and version 1.4:**
 

@@ -2,9 +2,9 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.0 Draft - 2017-05-30
+### Version 1.0 - 2017-06-09 - *draft version*
 
-*ELN-0613-v1.0-draft*
+*ELN-0613-v1.0*
 
 ---
 

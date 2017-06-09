@@ -2,9 +2,9 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.2 - 2017-03-28
+### Version 1.3 - 2017-06-09 - *draft version*
 
-*ELN-0607-v1.2*
+*ELN-0607-v1.3*
 
 ---
 
@@ -696,6 +696,10 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.2 and version 1.3:**
+
+- In section 2.1.3.9. CertRequestProperties: Added requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature.
 
 **Changes between version 1.1 and version 1.2:**
 

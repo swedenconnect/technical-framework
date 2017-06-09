@@ -2,9 +2,9 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.5 - 2017-03-28
+### Version 1.6 - 2017-06-09 - *draft version*
 
-*ELN-0606-v1.5*
+*ELN-0606-v1.6*
 
 ---
 
@@ -428,6 +428,10 @@ All Service Type identifiers are prefixed with
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
+
+**Changes between version 1.5 and version 1.6:**
+
+- Added the Service Property Category "SCAL2" in new section 3.2.
 
 **Changes between version 1.4 and version 1.5:**
 

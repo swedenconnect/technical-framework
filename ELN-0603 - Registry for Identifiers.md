@@ -2,9 +2,9 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.4 - 2017-03-28
+### Version 1.5 - 2017-06-09 - *draft version*
 
-*ELN-0603-v1.4*
+*ELN-0603-v1.5*
 
 ---
 
@@ -444,6 +444,12 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.4 and version 1.5:**
+
+- Added Identifier for service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2`
+
+- Added XML Schema name space identifier `http://id.elegnamnden.se/csig/1.1/sap/ns`. This XML Schema defines XML elements related to the Signature Activation Protocol.
 
 **Changes between version 1.3 and version 1.4:**
 

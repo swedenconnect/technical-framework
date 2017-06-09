@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2017-06-05 - *draft version*
+### Version 1.5 - 2017-06-09 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -1118,7 +1118,7 @@ associated with requests from signature services:
 
 The type of signature requested by a signature request is, according to [EidDSS_Profile], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" [SigSAP].
 
-A SAD returned from the Identity Provider MUST have a signature which can be verified by a Certificate in the Identity Provider's metadata. The cryptographic strength of the SAD signature MUST be equivalent or better than the cryptographic strength of the signed response and/or assertion from the Identity Provider.
+A SAD returned from the Identity Provider MUST have a signature which can be verified by a Certificate in the Identity Provider's metadata. The signature algorithm used to sign the SAD MUST be equivalent to the algorithm used to sign the responses and assertions from the Identity Provider.
 
 Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI
 `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An IdP which do not advertise support for SAP MAY ignore request for SAD.
@@ -1255,6 +1255,7 @@ SigSAP
 **Changes between version 1.4 and 1.5:**
 
 - Section 7.2, "Authentication Requests", was extended to recommend the usage of the `<saml2p:RequesterID>` element within `<saml2p:Scoping>`. The reason for this recommendation is that Identity Providers may need information about the "Signature Requestor", i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.
+- New section 7.2.2 "Requesting SCAL2 Signature Activation Data". This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).
 
 **Changes between version 1.3 and version 1.4:**
 
