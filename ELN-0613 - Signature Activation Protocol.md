@@ -78,11 +78,9 @@ not capitalized, they are meant in their natural-language sense.
 <a name="xml-name-space-references"></a>
 ### 1.2. XML name space references
 
-The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace
-(`http://id.elegnamnden.se/csig/1.1/sap/ns`).
+The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace `http://id.elegnamnden.se/csig/1.1/sap/ns` (https://elegnamnden.github.io/schemas/csig/1.0/EidCsigSAP-1.0.xsd). 
 
-The prefix **saml2p:** stands for the OASIS SAML 2 Protocol Schema namespace
-(`urn:oasis:names:tc:SAML:2.0:protocol`).
+The prefix **saml2p:** stands for the OASIS SAML 2 Protocol Schema namespace `urn:oasis:names:tc:SAML:2.0:protocol`.
 
 <a name="structure"></a>
 ### 1.3. Structure
