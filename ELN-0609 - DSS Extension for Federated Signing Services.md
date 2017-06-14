@@ -206,7 +206,7 @@ Listings of DSS schemas appear like this.
 ### 1.2. Normative References
 
 <a name="csig-xsd"></a>\[Csig-XSD\] This specification's DSS Extensions
-schema (Provided in this document), August 2015.
+schema Version 1.1, https://elegnamnden.github.io/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd, August 2015.
 
 <a name="dss"></a>\[OASIS-DSS\] Digital Signature Service Core Protocols,
 Elements, and Bindings Version 1.0,
@@ -1338,8 +1338,11 @@ sections above, the XML Schema in this appendix is the normative one.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
     xmlns:csig="http://id.elegnamnden.se/csig/1.1/dss-ext/ns">
+    <xs:annotation>
+        <xs:documentation>Schema location URL: https://elegnamnden.github.io/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd</xs:documentation>
+    </xs:annotation>
     <xs:import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
-        schemaLocation="saml-schema-assertion-2.0.xsd"/>
+        schemaLocation="https://docs.oasis-open.org/security/saml/v2.0/saml-schema-assertion-2.0.xsd"/>
     <xs:element name="SignRequestExtension" type="csig:SignRequestExtensionType">
         <xs:annotation>
             <xs:documentation>Extension to an OASIS DSS SignRequest, providing additional 
@@ -1504,7 +1507,7 @@ resulting Sign Response message.</xs:documentation>
         </xs:sequence>
         <xs:attribute name="Version" type="xs:string" use="optional" default="1.1">
             <xs:annotation>
-                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0". 
+                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.1". 
 This attribute provide means for the receiving service to determine the 
 expected syntax of the response based on protocol version.</xs:documentation>
             </xs:annotation>
@@ -1518,7 +1521,7 @@ expected syntax of the response based on protocol version.</xs:documentation>
             <xs:element minOccurs="0" ref="csig:SignatureCertificateChain"/>
             <xs:element minOccurs="0" ref="csig:OtherResponseInfo"/>
         </xs:sequence>
-        <xs:attribute name="Version" type="xs:string" default="1.1">
+        <xs:attribute name="Version" type="xs:string" default="1.0">
             <xs:annotation>
                 <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0". 
 This attribute provide means for the receiving service to determine the 
