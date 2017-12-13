@@ -18,7 +18,7 @@
 
 ### Current version of update document
 
-The document "[Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md)" was updated 2017-05-24.
+The document "[Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md)" was updated 2017-12-13.
 
 It comprises changes added to the following draft versions:
 

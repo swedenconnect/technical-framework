@@ -2,7 +2,7 @@
 
 # Updates to the Swedish eID Framework
 
-### 2017-05-24
+### 2017-12-13
 
 ## Table of Contents
 
@@ -13,6 +13,8 @@
 2. [Updates](#updates)
 
   E.1 [Scoping in Authentication Requests sent by Signature Services](#e1)
+  
+  E.2 [Requirements for processing received authentication URI:s](#e2)
 
 <a name="Introduction"></a>
 ## 1. Introduction
@@ -66,4 +68,39 @@ An Identity Provider may adapt user interfaces or authentication procedures to d
 
 ***Example when the `<saml2p:RequesterID>` element is used to inform the Identity Provider about which Service Provider that requested the signature associated with this request for authentication.***
 
+<a name="e2"></a>
+### E.2. Requirements for processing received authentication URI:s
 
+**Updates**: Version 1.4 of the “[Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html)”
+
+Section 6.3.4, "The Authentication Statement", contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected as follows:
+
+**Original**:
+
+The Service Provider MUST assert that the `<saml2:AuthnStatement>`
+contains a `<saml2:AuthnContext>` element that holds a
+`<saml2:AuthnContextClassRef>` element having as its value the
+authentication context URI indicating under which Level of Assurance the
+authentication was performed. **The Level of Assurance declared in the
+assertion MUST be equal to, or stronger<sup>3</sup> than, the Level of Assurance
+requested by the Service Provider.**
+
+> **\[3\]: A stronger Level of Assurance identifier is simply a LoA having a higher value than what it is compared with, i.e., `http://id.elegnamnden.se/loa/1.0/loa4` is stronger than `http://id.elegnamnden.se/loa/1.0/loa3`.**
+
+**New**:
+
+The Service Provider MUST assert that the `<saml2:AuthnStatement>`
+contains a `<saml2:AuthnContext>` element that holds a
+`<saml2:AuthnContextClassRef>` element having as its value the
+authentication context URI indicating under which Level of Assurance the
+authentication was performed. **If the Service Provider declared one, or more, 
+`<saml2:AuthnContextClassRef>` elements under the `<saml2p:RequestedAuthnContext>`
+element of the authentication request (see section 5.4), 
+the received authentication context URI MUST match one of the declared 
+authentication context URI:s from the request. If not, the Service Provider 
+MUST reject the assertion<sup>3</sup>.**
+
+> **\[3\]: If the Service Provider does not declare an authentication context URI
+> in the authentication request it should be prepared to receive any of the
+> authentication context URI:s declared by the Identity Provider in its metadata
+> record (see section 2.1.3).**
