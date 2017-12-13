@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="updates-to-the-swedish-eid-framework">Updates to the Swedish eID Framework</h1>
-<h3 id="2017-05-24">2017-05-24</h3>
+<h3 id="2017-12-13">2017-12-13</h3>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol class="list">
 <li><p><a href="#introduction">Introduction</a></p>
@@ -20,6 +20,7 @@
 </li>
 <li><p><a href="#updates">Updates</a></p>
 <p>E.1 <a href="#e1">Scoping in Authentication Requests sent by Signature Services</a></p>
+<p>E.2 <a href="#e2">Requirements for processing received authentication URI:s</a></p>
 </li>
 </ol>
 <p><a name="Introduction"></a></p>
@@ -61,6 +62,38 @@ specification text, and are intended to reduce interoperability problems within 
 <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2p:Scoping</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">saml2p:RequesterID</span>&gt;</span>http://www.origsp.com/sp<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:RequesterID</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">saml2p:Scoping</span>&gt;</span></code></pre><p><strong><em>Example when the <code>&lt;saml2p:RequesterID&gt;</code> element is used to inform the Identity Provider about which Service Provider that requested the signature associated with this request for authentication.</em></strong></p>
+<p><a name="e2"></a></p>
+<h3 id="e.2.-requirements-for-processing-received-authentication-uri:s">E.2. Requirements for processing received authentication URI:s</h3>
+<p><strong>Updates</strong>: Version 1.4 of the “<a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>”</p>
+<p>Section 6.3.4, &quot;The Authentication Statement&quot;, contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected as follows:</p>
+<p><strong>Original</strong>:</p>
+<p>The Service Provider MUST assert that the <code>&lt;saml2:AuthnStatement&gt;</code>
+contains a <code>&lt;saml2:AuthnContext&gt;</code> element that holds a
+<code>&lt;saml2:AuthnContextClassRef&gt;</code> element having as its value the
+authentication context URI indicating under which Level of Assurance the
+authentication was performed. <strong>The Level of Assurance declared in the
+assertion MUST be equal to, or stronger<sup>3</sup> than, the Level of Assurance
+requested by the Service Provider.</strong></p>
+<blockquote>
+<p><strong>[3]: A stronger Level of Assurance identifier is simply a LoA having a higher value than what it is compared with, i.e., <code>http://id.elegnamnden.se/loa/1.0/loa4</code> is stronger than <code>http://id.elegnamnden.se/loa/1.0/loa3</code>.</strong></p>
+</blockquote>
+<p><strong>New</strong>:</p>
+<p>The Service Provider MUST assert that the <code>&lt;saml2:AuthnStatement&gt;</code>
+contains a <code>&lt;saml2:AuthnContext&gt;</code> element that holds a
+<code>&lt;saml2:AuthnContextClassRef&gt;</code> element having as its value the
+authentication context URI indicating under which Level of Assurance the
+authentication was performed. <strong>If the Service Provider declared one, or more, 
+<code>&lt;saml2:AuthnContextClassRef&gt;</code> elements under the <code>&lt;saml2p:RequestedAuthnContext&gt;</code>
+element of the authentication request (see section 5.4), 
+the received authentication context URI MUST match one of the declared 
+authentication context URI:s from the request. If not, the Service Provider 
+MUST reject the assertion<sup>3</sup>.</strong></p>
+<blockquote>
+<p><strong>[3]: If the Service Provider does not declare an authentication context URI
+in the authentication request it should be prepared to receive any of the
+authentication context URI:s declared by the Identity Provider in its metadata
+record (see section 2.1.3).</strong></p>
+</blockquote>
     </article>
   </body>
 </html>
