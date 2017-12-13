@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2017-06-05 - *draft version*
+### Version 1.5 - 2017-12-13 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -757,7 +757,7 @@ An Identity Provider that acts as a proxy for other Identity Providers SHOULD in
 <saml2:AuthnStatement AuthnInstant="2013-03-15T09:22:00" SessionIndex="b07b804c-7c29-ea16-7300-4f3d6f7928ac">
   <saml2:AuthnContext>
     ...
-    <saml2:AuthenticatingAuthority>http://idp.company.com/auth</saml2:AuthenticatingAuthority>
+    <saml2:AuthenticatingAuthority>http://idp.example.com/auth</saml2:AuthenticatingAuthority>
   </saml2:AuthnContext>
 </saml2:AuthnStatement>
 ```
@@ -889,11 +889,17 @@ The Service Provider MUST assert that the `<saml2:AuthnStatement>`
 contains a `<saml2:AuthnContext>` element that holds a
 `<saml2:AuthnContextClassRef>` element having as its value the
 authentication context URI indicating under which Level of Assurance the
-authentication was performed. The Level of Assurance declared in the
-assertion MUST be equal to, or stronger<sup>3</sup> than, the Level of Assurance
-requested by the Service Provider.
+authentication was performed. If the Service Provider declared one, or more, 
+`<saml2:AuthnContextClassRef>` elements under the `<saml2p:RequestedAuthnContext>`
+element of the authentication request (see [section 5.4](#message-content)), 
+the received authentication context URI MUST match one of the declared 
+authentication context URI:s from the request. If not, the Service Provider 
+MUST reject the assertion<sup>3</sup>.
 
-> \[3\]: A stronger Level of Assurance identifier is simply a LoA having a higher value than what it is compared with, i.e., `http://id.elegnamnden.se/loa/1.0/loa4` is stronger than `http://id.elegnamnden.se/loa/1.0/loa3`.
+> \[3\]: If the Service Provider does not declare an authentication context URI
+> in the authentication request it should be prepared to receive any of the
+> authentication context URI:s declared by the Identity Provider in its metadata
+> record (see [section 2.1.3](#identity-providers)).
 
 <a name="general-security-validation"></a>
 #### 6.3.5. General Security Validation
@@ -1225,6 +1231,7 @@ response with the status code
 **Changes between version 1.4 and 1.5:**
 
 - Section 7.2, "Authentication Requests", was extended to recommend the usage of the `<saml2p:RequesterID>` element within `<saml2p:Scoping>`. The reason for this recommendation is that Identity Providers may need information about the "Signature Requestor", i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.
+- Section 6.3.4, "The Authentication Statement", contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.
 
 **Changes between version 1.3 and version 1.4:**
 
