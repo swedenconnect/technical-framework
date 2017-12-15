@@ -24,8 +24,6 @@
 
     2.2. [Data exchange](#data-exchange)
 
-    2.2. [Data binding](#data-binding)
-
 3. [**Data elements**](#data-elements)
 
     3.1. [SADRequest](#sadrequest)
@@ -53,14 +51,14 @@
 <a name="introduction"></a>
 ## 1. Introduction
 
-This document specifies a **Signature Activation Protocol** (SAP) and its data elements for implementation of **Sole Control Assurance Level 2** (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing - Part 1 and 2 (prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)]). 
+This document specifies a **Signature Activation Protocol** (SAP) and its data elements for implementation of **Sole Control Assurance Level 2** (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing - Part 1 and 2 (prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)]).
 
-The function of the SAP is to authenticate the intent of a signer to sign a particular document, or collection of documents, through exchange of the following data elements.
+The Signature Activation Protocol (SAP) defined in this document is used to exchange data between a signature service and a delegated authenticating authority such as a SAML Identity Provider. The function of the SAP is to authenticate the intent of a signer to sign a particular document, or collection of documents, through exchange of the following data elements.
 
 - Signature Activation Data (SAD) - Signed data, asserting the signer's agreement to sign specific data.
 - SADRequest - Request for a SAD.
 
-The SAP specified in this document is designed to be used with a signing service operating in accordance with the federated signing specification \[[ELN-0609](#eln-0609)\].
+The SAP specified in this document is specifically designed to be used with a signing service operating in accordance with the federated signing specification \[[ELN-0609](#eln-0609)\].
 
 <a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
@@ -107,7 +105,7 @@ The federated signing model does not use pre-assigned signing keys. Instead, a n
 - Reference to the evidence of the signer's identity (e.g. SAML Assertion)
 - Reference to the data to be signed.
 
-This implements the scenario where the IdP is the sole entity which can verify the signer's SIC (Signer’s Interaction Component) and where the SIC is used to authenticate the signer to the IdP and where that instance of authentication is used by the IdP to generate the SAD in accordance with section 5.10 of [[RSIG-PP-1](#rsig-pp-1)].
+This implements the scenario where the IdP is the sole entity which can verify the signer's private credentials via the SIC (Signer’s Interaction Component). This instance of authentication is used by the IdP to generate the SAD in accordance with section 5.10 of [[RSIG-PP-1](#rsig-pp-1)].
 
 <a name="data-exchange"></a>
 ### 2.2. Data exchange
@@ -121,11 +119,18 @@ The SADRequest SHALL have the format defined in section [3.1](#sadrequest). When
 When an IdP returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].   
 
 
-<a name="data-binding"></a>
-### 2.2. Data binding
-
 <a name="data-elements"></a>
 ## 3. Data elements
+
+The SAD requested in the SAP binds the documents to be signed to the intent by the signer to sign. This is accomplished by the interaction of a number of independent information elements as follows:
+
+- **Sign request ID**. Identifies the signed sign request to sign specific documents. The sign request is sent to signing service from the service provider requesting the signature. The sign request bound by this identifier contains all detailed data about what is being signed.
+- **Sign message**. A description of what is being signed that is passed from the service provider requesting signing to the IdP, via the signing service. The sign message is included in the sign request as well as in the SAML Authn request sent to the IdP.
+- **LoA**. The level of assurance declaration asserting the level of security used to authenticate the user and asserting that the user read and accepted the sign message and approved to sign the document/s
+- **Number of documents to sign**. Ensures that the user is aware if more than one document is being signed. This allows adaptations of the signing UI shown by the IdP.
+- **Identity of the signer**. Allows verification that the signature is bound to the appropriate signer.
+
+The SAD request and the SAD specified in this section specifies the data that needs to be exchange in addition to other protocol elements specified by SAML as well as the federated signing specification \[[ELN-0609](#eln-0609)\].
 
 <a name="sadrequest"></a>
 ### 3.1. SADRequest
@@ -226,7 +231,7 @@ The claim identified by this name has the value of a JSON object holding name va
 Name | Type | Content
 --- |--- | ---
 **ver** | String | The version of this claim, default 1.0 (Optional)
-**irt** | String | In Response To, holding the identifier of the Authn Reuqest associated with this SAD.
+**irt** | String | In Response To, holding the identifier of the Authn Request associated with this SAD.
 **attr** | String | Attribute, holding the URI identifier of the attribute specifying the users unique identifier value.
 **loa** | String | LevelOfAssurance, holding the URI identifier of the LoA used to  authenticate the signer.
 **reqid** | String | RequestID, holding the ID of the Sign Request associated with this SAD.
@@ -261,9 +266,9 @@ Name | Value
 
 **JWS Header**
 
-The Header of the JWS specifies the the signature algoritm, In this example the header is `{"alg":"RS256"}`. The Base64url encoded header is:
+The Header of the JWS specifies that it is a JWT by the "typ" parameter and the signature algoritm through the "alg" parameter. In this example the header is `{"typ":"JWT","alg":"RS256"}`. The Base64url encoded header is:
 
-> eyJhbGciOiJSUzI1NiJ9
+> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9
 
 **JWS Payload**
 
@@ -273,7 +278,7 @@ The JWS payload holding the JWT claims is represented by the following JSON obje
         "sub": "188803099368",
         "aud": "https://eid2csig.konki.se/sign",
         "iss": "https://idp.svelegtest.se/idp",
-        "exp": 1496395751,
+        "exp": 1513351060,
         "seElnSadext": {
             "ver": "1.0",
             "irt": "_a3a232edc94ce04ca54b41958c1b12c2",
@@ -282,19 +287,19 @@ The JWS payload holding the JWT claims is represented by the following JSON obje
             "reqid": "f6e7d061a23293b0053dc7b038a04dad",
             "docs": 1
         },
-        "iat": 1496395691,
-        "jti": "fb934b226b9a71b1"
+        "iat": 1513351000,
+        "jti": "d4073fc74b1b9199"
     }
 
 This payload is represented by the following Base64url encoded string:
 
-> eyJzdWIiOiIxODg4MDMwOTkzNjgiLCJhdWQiOiJodHRwczpcL1wvZWlkMmNzaWcua29ua2kuc2VcL3NpZ24iLCJpc3MiOiJodHRwczpcL1wvaWRwLnN2ZWxlZ3Rlc3Quc2VcL2lkcCIsImV4cCI6MTQ5NjM5NTc1MSwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2EzYTIzMmVkYzk0Y2UwNGNhNTRiNDE5NThjMWIxMmMyIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDpcL1wvaWQuZWxlZ25hbW5kZW4uc2VcL2xvYVwvMS4wXC9sb2EzIiwicmVxaWQiOiJmNmU3ZDA2MWEyMzI5M2IwMDUzZGM3YjAzOGEwNGRhZCIsImRvY3MiOjF9LCJpYXQiOjE0OTYzOTU2OTEsImp0aSI6ImZiOTM0YjIyNmI5YTcxYjEifQ
+> eyJzdWIiOiIxODg4MDMwOTkzNjgiLCJhdWQiOiJodHRwczpcL1wvZWlkMmNzaWcua29ua2kuc2VcL3NpZ24iLCJpc3MiOiJodHRwczpcL1wvaWRwLnN2ZWxlZ3Rlc3Quc2VcL2lkcCIsImV4cCI6MTUxMzM1MTA2MCwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2EzYTIzMmVkYzk0Y2UwNGNhNTRiNDE5NThjMWIxMmMyIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDpcL1wvaWQuZWxlZ25hbW5kZW4uc2VcL2xvYVwvMS4wXC9sb2EzIiwicmVxaWQiOiJmNmU3ZDA2MWEyMzI5M2IwMDUzZGM3YjAzOGEwNGRhZCIsImRvY3MiOjF9LCJpYXQiOjE1MTMzNTEwMDAsImp0aSI6ImQ0MDczZmM3NGIxYjkxOTkifQ
 
 **JWT**
 
 The complete SAD JWT including signature:
 
-> eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxODg4MDMwOTkzNjgiLCJhdWQiOiJodHRwczpcL1wvZWlkMmNzaWcua29ua2kuc2VcL3NpZ24iLCJpc3MiOiJodHRwczpcL1wvaWRwLnN2ZWxlZ3Rlc3Quc2VcL2lkcCIsImV4cCI6MTQ5NjM5NTc1MSwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2EzYTIzMmVkYzk0Y2UwNGNhNTRiNDE5NThjMWIxMmMyIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDpcL1wvaWQuZWxlZ25hbW5kZW4uc2VcL2xvYVwvMS4wXC9sb2EzIiwicmVxaWQiOiJmNmU3ZDA2MWEyMzI5M2IwMDUzZGM3YjAzOGEwNGRhZCIsImRvY3MiOjF9LCJpYXQiOjE0OTYzOTU2OTEsImp0aSI6ImZiOTM0YjIyNmI5YTcxYjEifQ.UP0cMpgDFQy1L2h8cF2kIaBSN5nD7tdF1dkRH89x7YjfmeVn-MbL-ILcgkW2ytIW6P61y3VtmTML6hEEHOPckhGiwpykkr0kAWEklgVFyvBWz4GWxWBnpkF_HrsVja5gBXcf20Aju6AapmDfaultyS3ToLpN0OScqQws2UdrkJY
+> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxODg4MDMwOTkzNjgiLCJhdWQiOiJodHRwczpcL1wvZWlkMmNzaWcua29ua2kuc2VcL3NpZ24iLCJpc3MiOiJodHRwczpcL1wvaWRwLnN2ZWxlZ3Rlc3Quc2VcL2lkcCIsImV4cCI6MTUxMzM1MTA2MCwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2EzYTIzMmVkYzk0Y2UwNGNhNTRiNDE5NThjMWIxMmMyIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDpcL1wvaWQuZWxlZ25hbW5kZW4uc2VcL2xvYVwvMS4wXC9sb2EzIiwicmVxaWQiOiJmNmU3ZDA2MWEyMzI5M2IwMDUzZGM3YjAzOGEwNGRhZCIsImRvY3MiOjF9LCJpYXQiOjE1MTMzNTEwMDAsImp0aSI6ImQ0MDczZmM3NGIxYjkxOTkifQ.dYQatHCxUKMSfY42FxC1g025DkmFwHk9dk9LTDdHi98yKpwM6-waoICO5YhwJq0MO2MiKmYMqOJTi31BeB_RUv4Zi6GgUfYq0CRs1nTjFgTcYtyAaoUxR9WEiylE32rBI1U2iqO2X4iUb3TzI6hb2ZtLuah72NH_ymO_taOyN_I
 
 
 <a name="schemas"></a>
