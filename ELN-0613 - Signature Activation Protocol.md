@@ -94,7 +94,7 @@ This specification uses the following typographical conventions in text:
 
 <a name="scope"></a>
 ### 2.1. Scope
-The scope of the Signature Activation Protocol (SAP) is to support request for and delivery of the Signature Activation Data (SAD) to the Signature Activation Module (SAM). The SAM is a tamper resistant module inside the Remote Signing Service which validates the SAM in order to ensure that:
+The scope of the Signature Activation Protocol (SAP) is to support request for and delivery of the Signature Activation Data (SAD) to the Signature Activation Module (SAM). The SAM is a tamper resistant module inside the Remote Signing Service which validates the SAD in order to ensure that:
 
 - The signer is properly authenticated.
 - The signer agrees to sign the data to be signed.
@@ -103,7 +103,7 @@ The scope of the Signature Activation Protocol (SAP) is to support request for a
 The federated signing model does not use pre-assigned signing keys. Instead, a new signing key is generated for each sign request then permanently deleted. This particular use-case is recognised by prEN 419 241-1 [[RSIG-PP-1](#rsig-pp-1)] and prEN 419 241-2 [[RSIG-PP-2](#rsig-pp-2)], which under these conditions allows the signature key reference to be implicit and derived from the signer's identity. For the present implementation of the SAP the following data is included in the SAD:
 
 - The signer's identity
-- Information about how the signer was authenticated and by who
+- Information about how the signer was authenticated and by whom
 - Reference to the evidence of the signer's identity (e.g. SAML Assertion)
 - Reference to the data to be signed.
 

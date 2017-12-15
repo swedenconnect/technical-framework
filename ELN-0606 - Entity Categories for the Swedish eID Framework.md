@@ -341,7 +341,7 @@ See \[EidDiscovery\] for a more extensive explanation of the use of the
 mobile-auth category.
 
 <a name="scal2"></a>
-### 3.2. SCAL2
+### 3.2. scal2
 
 **URL**: `http://id.elegnamnden.se/sprop/1.0/scal2`
 
