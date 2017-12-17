@@ -315,6 +315,15 @@ for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign r
 | `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[CSignProf\]** |
 | `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | **\[CSignProf\]** |
 
+<a name="semantics-identifier"></a>
+#### 3.1.8. Semantics identifier
+
+Identifiers used to support semantics identifiers.
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.elegnamnden.se/semantics-id/name-registration-authority` | Identifying the Swedish eIdentification board as name registration authrority | [CertProf] |
+
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
 

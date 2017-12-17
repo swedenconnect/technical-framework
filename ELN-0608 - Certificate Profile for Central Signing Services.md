@@ -27,6 +27,14 @@
     2.3. [Certificate content](#certificate-content)
 
     2.3.1. [Subject attributes and name forms](#subject-attributes-and-name-forms)
+	
+    2.3.1.1. [Person identifier attributes](#person-identifier-attributes)    
+
+    2.3.1.1.1. [Data source](#data-source)    
+
+    2.3.1.1.2. [Data format](#data-format)    
+
+    2.3.1.2. [Other attribute requirements](#other-attribute-requirements)    
 
     2.3.2. [Authentication Context and Attribute mapping](#authentication-context-and-attribute-mapping)
 
@@ -36,8 +44,8 @@
 ## 1. Introduction
 
 This document specifies a certificate profile for certificates issued by
-a signature service within the infrastructure for “Svensk
-E-legitimation”.
+a signature service based on the OASIS DSS protocol \[[DSS](#dss)\], enhanced by
+the DSS Extensions for Federated Central Signing Services \[[DSS-Ext](#dss-ext)\].
 
 <a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
@@ -78,46 +86,79 @@ certificate profile:
 Standard | Function | Referens
 --- | --- | ---
 RFC 5280 | Main certificate standard | \[[RFC5280](#rfc5280)\]
-RFC 3739 | Main certificate profile for Qualified Certificates | \[[RFC3739](#rfc3739)\]
-EN 319 412-5 | EU profile of RFC 3739 providing defined data structures for issuing Qualified Certificate in accordance with the EU electronic signature directive \[EUSig\]. | \[[EU-QC](#eu-qc)\]
-TS 102 280 | EU interoperability profile for certificates issued to Natural Persons. | \[[EU-INTEROP](#eu-interop)\]
+RFC 7773 | Authentication context extension | \[[RFC7773](#rfc7773)\]
+EN 319 411-1 | Policy requirements for PKC certificates | \[[EU-POL-NCP](#eu-pol-qc)\]
+EN 319 411-2 | Policy requirements for Qualified Certificates | \[[EU-POL-QC](#eu-pol-qc)\]
+EN 319 412-1 | Definitions of semanitic identifies and formatting rules for identity data | \[[EU-CERT-GEN](#eu-cert-gen)\]
+EN 319 412-2 | Certificate profile for certificates issued to natural persons | \[[EU-CERT-NP](#eu-cert-np)\]
+EN 319 412-5 | Declaration of Qualified Certificate properties]. | \[[EU--CERT-QC](#eu-cert-qc)\]
+
 
 <a name="qualified-and-pkc-certificates"></a>
 ### 2.2. Qualified and PKC Certificates
 
-This profile supports both Qualified Certificates as well as
-certificates that are not Qualified Certificates, here named PKC
-certificates (Public Key Certificates).
+This profile supports both Qualified Certificates as well as certificates that are not Qualified Certificates, here named PKC certificates (Public Key Certificates).
 
-The same profile requirements apply for both Qualified Certificates and
-for PKC certificates unless a requirement is explicitly related to only
-Qualified Certificates.
+All profile requirements apply to both Qualified Certificates and to PKC certificates unless it is explicitly stated that a particular requirement applies only to PKC or Qualified Certificates.
 
 <a name="certificate-content"></a>
 ### 2.3. Certificate content
 
-All certificates SHALL be fully compliant with  \[[RFC5280](#rfc5280)\], \[[RFC3739](#rfc3739)\]
-and \[[EU-INTEROP](#eu-interop)\]. All Qualified Certificates SHALL also be fully
-compliant with \[[EU-QC](#eu-qc)\].
-
-Qualified Certificates SHALL implement the “Statement regarding location
-of Policy Disclosure Statements” (PDS) as specified in section 5.2.4 of
-\[[EU-QC](#eu-qc)\].
+All certificates SHALL be fully compliant with  \[[RFC5280](#rfc5280)\] and \[[EU-CERT-NP](#en-cert-np)\]. All Qualified Certificates SHALL also implement mandatory QC statements as defined in \[[EU--CERT-QC](#eu-cert-qc)\].
 
 <a name="subject-attributes-and-name-forms"></a>
 #### 2.3.1. Subject attributes and name forms
 
-Subject name attributes and other name forms in the certificate SHALL
-comply with \[[RFC3739](#rfc3739)\].
+<a name="person-identifier-attributes"></a>
+##### 2.3.1.1. Person identifier attributes
 
-The following specific certificate subject name conventions SHALL be
-met:
+<a name="data-source"></a>
+###### 2.3.1.1.1. Data source
+All certificates SHALL contain a unique person identifier, carried in the serialNumber attribute (OID 2.5.4.5) in the subject field. The person identifier SHALL be obtained from the Identity Provider in the form of a SAML attribute. For PKC certificates the SAML attribute SHOULD be one of the attributes listed below. For Qualified Certificates the SAML attribute SHALL be one of the attributes listed below.
 
-Subject data | Requirement
---- | ---
-Swedish “personnummer” | Swedish “personnummer” obtained from a SAML assertion using the attribute with OID 1.2.752.29.4.13, SHALL be stored in a serialNumber attribute (OID 2.5.4.5) in the subject field. The data SHALL be composed according to \[[SKV704](#skv704)\]
-Swedish “samordningsnummer” | Swedish “samordningsnummer” obtained from a SAML assertion using the attribute with OID 1.2.752.29.4.13, SHALL be stored in a serialNumber attribute (OID 2.5.4.5) in the subject field. The data SHALL be composed according to \[[SKV707](#skv707)\].
-E-mail address | E-mail address, when present, SHALL be stored in a Subject Alternative Name extension as an rfc822Name.
+Attribute | Attribute name | Specification
+---|---|---
+Personnummer or Samordningsnummer | urn:oid:1.2.752.29.4.13|\[[ELN-0604](#eln-0604)\]
+Provisional ID | urn:oid:1.2.752.201.3.4 | \[[ELN-0604](#eln-0604)\]
+eIDAS person identifier | urn:oid:1.2.752.201.3.7 |\[[ELN-0604](#eln-0604)\]
+
+<a name="data-format"></a>
+###### 2.3.1.1.1. Data format
+
+The identifier data obtained from the SAML assertion SHALL be stored in the serialNumber attribute using one of the following formats
+
+- Using exactly the same format as it was obtained from the SAML attribute
+- Using conventions specified in \[[EU-CERT-GEN](#eu-cert-gen)\] as defined below.
+
+When storing person identifier in the serialNumber attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1.
+
+**Personnummer or Samordningsnummer**
+
+When the identifier is a personnummer or samordningsnummer, the semantics identifier SHALL be a natural person semantics identifier using the identity type reference "PNO".
+
+> Example: PNOSE-194911172296
+
+**Provisional ID**
+
+When the identifier is a provisional ID the semantics identifier SHALL be a natural person semantics identifier using a local national idenity type reference "PI:SE". 
+
+> Example: PI:SE-NO:16043700158
+
+This identifier illustrates that the identifier is a Provisional ID (PI) as defined in Sweden (SE) followed by a hyphen (-) and the actual provisional ID for a person from Norway (NO:16043700158).
+
+When the identity type reference is "PI:SE", the `nameRegistrationAuthorities` element of SemanticsInformation shall be present and shall contain a `uniformResourceIdentifier` `generalName` with the following value:
+
+> `http://id.elegnamnden.se/semantics-id/name-registration-authority`
+
+**eIDAS person identifier**
+
+When the identifier is an eIDAS person identifier, this profile defines no use of semantics identifer.
+
+<a name="other-attribute-requirements"></a>
+##### 2.3.1.2. Other attribute requirements
+
+E-mail address, when present, SHALL be stored in a Subject Alternative Name extension as an rfc822Name.
+
 
 <a name="authentication-context-and-attribute-mapping"></a>
 #### 2.3.2. Authentication Context and Attribute mapping
@@ -144,6 +185,15 @@ assertion.
 <a name="normative-references"></a>
 ## 3. Normative References
 
+<a name="dss"></a>**[DSS]**
+> [OASIS Standard - Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007](https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html).
+
+<a name="dss-ext"></a>**[DSS-Ext]**
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+
+<a name="eln-0604"></a>**[ELN-0604]**
+> [Attribute Specification for the Swedish eID Framework.](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
+
 <a name="rfc2119"></a>**[RFC2119]**
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
@@ -161,20 +211,29 @@ assertion.
 > W. Polk, "Internet X.509 Public Key Infrastructure Certificate and
 > Certificate Revocation List (CRL) Profile", RFC 5280, May 2008](https://www.ietf.org/rfc/rfc5280.txt).
 
-<a name="eu-qc"></a>**[EU-QC]**
-
-> “Electronic Signatures and Infrastructures (ESI); Profiles for Trust
-> Service Providers issuing certificates; Part 5: Extension for
-> Qualified Certificate profile”, ETSI TS 319 412-5 V1.1.1, Jan 2013.
-
-<a name="eu-interop"></a>**[EU-INTEROP]**
-
-> “X.509 V.3 Certificate Profile for Certificates Issued to Natural
-> Persons”, ETSI TS 102 280 V1.1.1, March 2004.
-
-<a name="authcont"></a>**[AuthCont]**
+<a name="rfc7773"></a>**[RFC7773]**
 
 > [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773)
+
+<a name="eu-pol-ncp"></a>**[EU-POL-NCP]**
+
+> ETSI EN 319 411-1, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 1: General requirements.
+
+<a name="eu-pol-ncp"></a>**[EU-POL-QC]**
+
+> ETSI EN 319 411-2, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 2: Requirements for trust service providers issuing EU qualified certificates
+
+<a name="eu-cert-gen"></a>**[EU-CERT-GEN]**
+
+> ETSI EN 319 412-1, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 1: Overview and common data structures.
+
+<a name="eu-cert-np"></a>**[EU-CERT-NP]**
+
+> ETSI EN 319 412-2, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 2: Certificate profile for certificates issued to natural persons.
+
+<a name="eu-cert-qc"></a>**[EU-CERT-QC]**
+
+> ETSI EN 319 412-5, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 5: QCStatements
 
 <a name="skv704"></a>**[SKV704]**
 
