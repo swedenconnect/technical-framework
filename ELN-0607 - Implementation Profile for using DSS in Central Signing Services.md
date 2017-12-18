@@ -686,7 +686,7 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="eid-registry"></a>**[Eid-Registry]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="informative-references"></a>
 ### 4.2. Informative References

@@ -359,11 +359,11 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
 
 <a name="eln-0604"></a>**[ELN-0604]**
 
-> [Attribute Specification for the Swedish eID Framework - Version 1.5](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eln-0609"></a>**[ELN-0609]**
 
-> [DSS Extension for Federated Central Signing Services - Version 1.2](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="rsig-pp-1"></a>**[RSIG-PP-1]**
 
