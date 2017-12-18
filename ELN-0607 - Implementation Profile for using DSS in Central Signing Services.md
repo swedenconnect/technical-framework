@@ -2,9 +2,9 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.2 - 2017-03-28
+### Version 1.3 - 2017-12-18 - *draft version*
 
-*ELN-0607-v1.2*
+*ELN-0607-v1.3*
 
 ---
 
@@ -388,6 +388,8 @@ sign messages.
 This element MAY be present to provide requested properties of generated
 signature certificates according with section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
 
+When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with the “Deployment Profile for the Swedish eID Framework” \[Eid-Profile\] section 7.2.2, or reject the request.
+
 <a name="authncontextclassref"></a>
 ###### 2.1.3.9.1. AuthnContextClassRef
 
@@ -694,6 +696,10 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.2 and version 1.3:**
+
+- In section 2.1.3.9, "CertRequestProperties", an requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature was added.
 
 **Changes between version 1.1 and version 1.2:**
 

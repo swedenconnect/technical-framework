@@ -2,9 +2,9 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.4 - 2017-03-28
+### Version 1.5 - 2017-12-18 - *draft version*
 
-*ELN-0603-v1.4*
+*ELN-0603-v1.5*
 
 ---
 
@@ -254,6 +254,7 @@ Identifiers for defined service properties.
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/sprop/1.0/mobile-auth` | Service adapted to require/provide user authentication based on mobile devices. | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/sprop/1.0/scal2` | Service adapted to support authentication requests from signature services supporting Sole Control Assurance Level 2 (SCAL2). | **\[EntityCat\]** |
 
 <a name="entity-categories-for-service-type"></a>
 ##### 3.1.3.3. Entity Categories for Service Type
@@ -290,6 +291,7 @@ Identifiers used in the protocol for requesting services form a central signing 
 | `http://id.elegnamnden.se/csig/1.0/eid2-dss/profile` | **Deprecated**. Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
 | `http://id.elegnamnden.se/csig/1.1/dss-ext/ns` | XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.1). | **\[CSignProt\]** |
 | `http://id.elegnamnden.se/csig/1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | **\[CSignProf\]** |
+| `http://id.elegnamnden.se/csig/1.1/sap/ns` | XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension | **\[SigSAP\]** |
 
 <a name="authentication-context"></a>
 #### 3.1.6. Authentication Context
@@ -420,6 +422,9 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 **\[CSignProt\]**
 > [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
+**\[SigSAP\]**
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+
 **\[CSignProf\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
 > Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
@@ -436,6 +441,12 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.4 and version 1.5:**
+
+- Added identifier for the service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2`
+
+- Added XML Schema name space identifier `http://id.elegnamnden.se/csig/1.1/sap/ns`. This XML Schema defines XML elements related to the Signature Activation Protocol.
 
 **Changes between version 1.3 and version 1.4:**
 

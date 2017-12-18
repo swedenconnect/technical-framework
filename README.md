@@ -91,11 +91,18 @@ Implementation profile for Identity Providers implementing BankID support.
 
 > [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
 
+#### Signature Activation Protocol for Federated Signing
+
+This document specifies a Signature Activation Protocol (SAP) and its data elements for implementation of Sole Control Assurance Level 2 (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing.
+
+> [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md)
+
 ---
 
 ### Updates to the current version of the specifications
 
-> [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-12-13
+> [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-12-18
+
 
 ## Older versions
 
