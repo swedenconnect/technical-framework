@@ -17,6 +17,10 @@
   E.2 [Requirements for processing received authentication URI:s](#e2)
   
   E.3. [Signature Activation Protocol for Federated Signing](#e3)
+  
+  E.4. [Support for different person identifiers in certificate profile](#e4)
+  
+  E.5. [Updated version numbers and references for the DSS Extension Specification](#e5)
 
 <a name="Introduction"></a>
 ## 1. Introduction
@@ -59,8 +63,14 @@ New specification text is typically presented as follows, with new or changed te
 **\[EidEntCat\]**
 > [Entity Categories for the Swedish eID Framework, version 1.5](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html)
 
-**\[EidDssExt\]**
+**\[EidDssProfile\]**
 > [Implementation Profile for using OASIS DSS in Central Signing Services, version 1.2](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html)
+
+**\[EidDssExt\]**
+> [DSS Extension for Federated Central Signing Services, version 1.1](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html)
+
+**\[EidCertProf\]**
+> [Certificate profile for certificates issued by Central Signing services, version 1.0](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
 
 <a name="updates"></a>
 ## 2. Updates
@@ -164,12 +174,23 @@ The new section 7.2.2 specifies how signature activation data is requested.
 
 - Section 3.2 of \[EidEntCat\] defines the new service propety entity category **scal2**.
 
-#####   \[EidDssExt\] - Implementation Profile for using OASIS DSS in Central Signing Services
+#####   \[EidDssProf\] - Implementation Profile for using OASIS DSS in Central Signing Services
 
 Section 2.1.3.9 of \[EidDssExt\] is extended with the following text:
 
 When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with the “Deployment Profile for the Swedish eID Framework” \[Eid-Profile\] section 7.2.2, or reject the request.
 
+<a name="e4"></a>
+### E.4.  Support for different person identifiers in certificate profile
 
+**Updates**: Version 1.0 of the "[Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)".
 
+Section 2.3.1.1, "Person identifier attributes" was added where data sources and data formats are described to make it possible to use Swedish "personnummer"/"samordningsnummer", Provisional ID:s or eIDAS person identifiers in the `serialNumber` attribute.
+
+<a name="e5"></a>
+###   E.5. Updated version numbers and references for the DSS Extension Specification
+
+**Updates**: Version 1.1 of the "[DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html)" specification.
+
+The version 1.1 contained some outdated references and version numbers that have been corrected. See the [diff](https://github.com/elegnamnden/technical-framework/commit/4021121bb711d302780af676c287ce030cc032e7#diff-2a443a9f73b0d311d8217bd4d785b1fe) for details.
 
