@@ -2,7 +2,7 @@
 
 # Certificate profile for certificates issued by Central Signing services
 
-### Version - 2017-12-18 - *Draft version*
+### Version 1.1 - 2017-12-18 - *Draft version*
 
 *ELN-0608-v1.1*
 
