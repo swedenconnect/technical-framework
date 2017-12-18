@@ -2,9 +2,9 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.5 - 2017-03-28
+### Version 1.6 - 2017-12-18 - *draft version*
 
-*ELN-0606-v1.5*
+*ELN-0606-v1.6*
 
 ---
 
@@ -37,6 +37,8 @@
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
     3.1. [mobile-auth](#mobile-auth)
+
+    3.2. [scal2](#scal2)
 
 4. [**Definitions for Service Type Entity Categories**](#definitions-for-service-type-entity-categories)
 
@@ -338,6 +340,19 @@ authentication using mobile devices.
 See \[EidDiscovery\] for a more extensive explanation of the use of the
 mobile-auth category.
 
+<a name="scal2"></a>
+### 3.2. scal2
+
+**URL**: `http://id.elegnamnden.se/sprop/1.0/scal2`
+
+**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with \[SigSAP\]. 
+
+For a providing service, i.e. an Identity Provider, inclusion of the
+scal2 service property states that the Identity Provider will return a "SAD" in response to a `SADRequest` in an authentication requests from a signing service.
+
+For consuming services, Signature Services MAY include this service property if all authentication requests from the 
+particular Signature Service include a `SADRequest` extension. A Service Provider that is not declared as a Signature Service MUST NOT include this service property in its metadata.
+
 <a name="definitions-for-service-type-entity-categories"></a>
 ## 4. Definitions for Service Type Entity Categories
 
@@ -347,6 +362,7 @@ a particular service type.
 
 All Service Type identifiers are prefixed with
 **`http://id.elegnamnden.se/st`**.
+
 
 <a name="sigservice"></a>
 ### 4.1. sigservice
@@ -399,17 +415,24 @@ All Service Type identifiers are prefixed with
 > [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+
+**\[SigSAP\]**
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
+
+**Changes between version 1.5 and version 1.6:**
+
+- The Service Property Category "scal2" was added to section 3.2.
 
 **Changes between version 1.4 and version 1.5:**
 

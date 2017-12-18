@@ -97,6 +97,12 @@ This document specifies a Signature Activation Protocol (SAP) and its data eleme
 
 > [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md)
 
+#### Signature Activation Protocol for Federated Signing
+
+This document specifies a Signature Activation Protocol (SAP) and its data elements for implementation of Sole Control Assurance Level 2 (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing.
+
+> [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md)
+
 ---
 
 ### Updates to the current version of the specifications

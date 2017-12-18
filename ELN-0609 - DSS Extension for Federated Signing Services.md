@@ -1,25 +1,23 @@
 <img src="img/eln-logo.png"></img>
 
-# DSS Extension for Federated Central Signing Services - Version 1.1
-## Swedish eID Framework Specification - 14 August 2015
+# DSS Extension for Federated Central Signing Services - Version 1.2
+## Swedish eID Framework Specification - 18 December 2017
 
 **Specification URIs:**
 
 **This Version:**
 
-- <http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.html> (Authoritative)\
-- <http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.pdf>
-- <http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.docx>
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.html> (Authoritative)
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.pdf>
 
 **Previous Version:**
 
-- <http://aaa-sec.com/eid2/specification/eid2dssext-1.0.html>
-- <http://aaa-sec.com/eid2/specification/eid2dssext-1.0.pdf>
-- <http://aaa-sec.com/eid2/specification/eid2dssext-1.0.xml>
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.1.html>
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.1.pdf>
 
 **Latest Version:**
 
-- <http://aaa-sec.com/eid2/specification/csig-dss-extension-1.1.html> (Authoritative)
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.html> (Authoritative)
 
 **Technical Committee:**
 
@@ -35,7 +33,7 @@
 
 **Abstract:**
 
-> This specification defines an esxtension to the OASIS DSS protocol for
+> This specification defines an extension to the OASIS DSS protocol for
 > providing centralized signing services for E-government services
 > within the identity federation for public agencies operated by the
 > Swedish E-identification board.
@@ -43,7 +41,7 @@
 ## Notices
 
 
-Copyright © Swedish E-identification Board 2015. All Rights Reserved.
+Copyright © Swedish E-identification Board 2015-2018. All Rights Reserved.
 
 This specification is defines an extension to the OASIS DSS protocol. It
 is provided in OASIS document format in order to allow it to be
@@ -206,7 +204,7 @@ Listings of DSS schemas appear like this.
 ### 1.2. Normative References
 
 <a name="csig-xsd"></a>\[Csig-XSD\] This specification's DSS Extensions
-schema (Provided in this document), August 2015.
+schema Version 1.1, https://elegnamnden.github.io/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd, August 2015.
 
 <a name="dss"></a>\[OASIS-DSS\] Digital Signature Service Core Protocols,
 Elements, and Bindings Version 1.0,
@@ -1338,8 +1336,11 @@ sections above, the XML Schema in this appendix is the normative one.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
     xmlns:csig="http://id.elegnamnden.se/csig/1.1/dss-ext/ns">
+    <xs:annotation>
+        <xs:documentation>Schema location URL: https://elegnamnden.github.io/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd</xs:documentation>
+    </xs:annotation>
     <xs:import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
-        schemaLocation="saml-schema-assertion-2.0.xsd"/>
+        schemaLocation="https://docs.oasis-open.org/security/saml/v2.0/saml-schema-assertion-2.0.xsd"/>
     <xs:element name="SignRequestExtension" type="csig:SignRequestExtensionType">
         <xs:annotation>
             <xs:documentation>Extension to an OASIS DSS SignRequest, providing additional 
@@ -1504,7 +1505,7 @@ resulting Sign Response message.</xs:documentation>
         </xs:sequence>
         <xs:attribute name="Version" type="xs:string" use="optional" default="1.1">
             <xs:annotation>
-                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0". 
+                <xs:documentation>The version of this specification. If absent, the version value defaults to "1.1". 
 This attribute provide means for the receiving service to determine the 
 expected syntax of the response based on protocol version.</xs:documentation>
             </xs:annotation>
@@ -1518,7 +1519,7 @@ expected syntax of the response based on protocol version.</xs:documentation>
             <xs:element minOccurs="0" ref="csig:SignatureCertificateChain"/>
             <xs:element minOccurs="0" ref="csig:OtherResponseInfo"/>
         </xs:sequence>
-        <xs:attribute name="Version" type="xs:string" default="1.1">
+        <xs:attribute name="Version" type="xs:string" default="1.0">
             <xs:annotation>
                 <xs:documentation>The version of this specification. If absent, the version value defaults to "1.0". 
 This attribute provide means for the receiving service to determine the 

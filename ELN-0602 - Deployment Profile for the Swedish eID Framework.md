@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2017-12-13 - *draft version*
+### Version 1.5 - 2017-12-18 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -81,6 +81,8 @@
     7.2. [Authentication Requests](#authentication-requests2)
 
     7.2.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
+    
+    7.2.2. [Requesting SCAL2 Signature Activation Data](#requesting-scal2-signature-activation-data)
 
     7.3. [Authentication Responses](#authentication-responses2)
 
@@ -258,17 +260,18 @@ assigning the `AuthnRequestsSigned` attribute of the
 `<md:SPSSODescriptor>` to a value of `true`.
 
 Section E7, “Metadata for Agreeing to Sign Authentication Requests”, of
-\[SAML v2.0 Errata 05\] specifies the following concerning the
-`AuthnRequestsSigned` attribute:
+\[[SAML v2.0 Errata
+05](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html)\]
+specifies the following concerning the `AuthnRequestsSigned` attribute:
 
 > Optional attribute that indicates whether the
-> `<saml2p:AuthnRequest>` messages sent by this service provider
+> `<saml2p:AuthnRequest>` messages sent by this Service Provider
 > will be signed. If omitted, the value is assumed to be false. A value
 > of false (or omission of this attribute) does not imply that the
-> service provider will never sign its requests or that a signed request
-> should be considered an error. However, an identity provider that
+> Service Provider will never sign its requests or that a signed request
+> should be considered an error. However, an Identity Provider that
 > receives an unsigned `<saml2p:AuthnRequest>` message from a
-> service provider whose metadata contains this attribute with a value
+> Service Provider whose metadata contains this attribute with a value
 > of true MUST return a SAML error response and MUST NOT fulfill the
 > request.
 
@@ -319,6 +322,23 @@ signed. This is indicated by assigning the
 element to a value of `true`. See further section E7, “Metadata for
 Agreeing to Sign Authentication Requests”, of \[[SAML v2.0 Errata
 05](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html)\].
+
+Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI
+`http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that does not advertise support for SAP MAY ignore requests for SAD.
+
+```
+<md:Extensions>
+  <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+    <saml:Attribute Name="http://macedir.org/entity-category" 
+                    NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
+      <saml:AttributeValue xsi:type="xs:string">http://id.elegnamnden.se/sprop/1.0/scal2</saml:AttributeValue>
+    </saml:Attribute>
+    ...
+  </mdattr:EntityAttributes>
+</md:Extensions>
+```
+*Example of how an Identity Provider advertises its support for SCAL2 authentication.*
 
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
@@ -1116,6 +1136,13 @@ associated with requests from signature services:
     authentication context which includes display of a sign message,
     even if the request has no present `ForceAuthn` attribute or includes
     a `ForceAuthn` attribute set to the value `false`.
+    
+<a name="requesting-scal2-signature-activation-data"></a>
+#### 7.2.2. Requesting SCAL2 Signature Activation Data
+
+The type of signature requested in a signature request is, according to \[EidDSS_Profile\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[SigSAP\].
+
+A SAD returned from the Identity Provider MUST have a signature which can be verified using a certificate from the Identity Provider's metadata entry. The signature algorithm used to sign the SAD MUST be equivalent to the algorithm used to sign the responses and assertions from the Identity Provider.
 
 <a name="authentication-responses2"></a>
 ### 7.3. Authentication Responses
@@ -1207,31 +1234,36 @@ response with the status code
 
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[EidTillit\]**
 > [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
 
 **\[EidEntCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 **\[EidDSS\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 **\[EidDSS\_Profile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+
+**\[SigSAP\]**
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
 
 **Changes between version 1.4 and 1.5:**
 
+- Section 2.1.3 "Identity Providers", was extended to include requirements on metadata to signal support for the SAP (Signature Activation Protocol).
 - Section 7.2, "Authentication Requests", was extended to recommend the usage of the `<saml2p:RequesterID>` element within `<saml2p:Scoping>`. The reason for this recommendation is that Identity Providers may need information about the "Signature Requestor", i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.
 - Section 6.3.4, "The Authentication Statement", contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.
+- A new section, 7.2.2, "Requesting SCAL2 Signature Activation Data", was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).
 
 **Changes between version 1.3 and version 1.4:**
 

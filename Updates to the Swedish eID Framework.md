@@ -2,7 +2,7 @@
 
 # Updates to the Swedish eID Framework
 
-### 2017-12-13
+### 2017-12-18
 
 ## Table of Contents
 
@@ -15,6 +15,8 @@
   E.1 [Scoping in Authentication Requests sent by Signature Services](#e1)
   
   E.2 [Requirements for processing received authentication URI:s](#e2)
+  
+  E.3. [Signature Activation Protocol for Federated Signing](#e3)
 
 <a name="Introduction"></a>
 ## 1. Introduction
@@ -46,7 +48,19 @@ New specification text is typically presented as follows, with new or changed te
 
 
 **\[EidProfile\]**
-> [Deployment Profile for the Swedish eID Framework, version 1.4](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html)
+> [Deployment Profile for the Swedish eID Framework, version 1.4](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html)
+
+**\[EidRegistry\]**
+> [Registry for identifiers assigned by the Swedish e-identification board, version 1.4](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0603_-_Registry_for_Identifiers.html)
+
+**\[EidAttribute\]**
+> [Attribute Specification for the Swedish eID Framework, version 1.4](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
+
+**\[EidEntCat\]**
+> [Entity Categories for the Swedish eID Framework, version 1.5](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html)
+
+**\[EidDssExt\]**
+> [Implementation Profile for using OASIS DSS in Central Signing Services, version 1.2](http://elegnamnden.github.io/technical-framework/march-2017/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html)
 
 <a name="updates"></a>
 ## 2. Updates
@@ -104,3 +118,58 @@ MUST reject the assertion<sup>3</sup>.**
 > in the authentication request it should be prepared to receive any of the
 > authentication context URI:s declared by the Identity Provider in its metadata
 > record (see section 2.1.3).**
+
+<a name="e3"></a>
+### E.3. Signature Activation Protocol for Federated Signing
+
+A new specification, [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html), was introduced in order to specify a **Signature Activation Protocol** (SAP) and its data elements for implementation of **Sole Control Assurance Level 2** (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing - Part 1 and 2 (prEN 419 241-1 and prEN 419 241-2).
+
+The Signature Activation Protocol (SAP) defined in this document is used to exchange data between a signature service and a delegated authenticating authority such as a SAML Identity Provider. The function of the SAP is to authenticate the intent of a signer to sign a particular document, or collection of documents, through exchange of the following data elements. 
+
+Furthermore, the following specifications are updated to support SAP and SAD.
+
+##### \[EidProfile\] - Deployment Profile for the Swedish eID Framework 
+
+In section 2.1.3 of \[EidProfile\], the following were added:
+
+Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that does not advertise support for SAP MAY ignore requests for SAD.
+
+```
+<md:Extensions>
+  <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+    <saml:Attribute Name="http://macedir.org/entity-category" 
+                    NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
+      <saml:AttributeValue xsi:type="xs:string">http://id.elegnamnden.se/sprop/1.0/scal2</saml:AttributeValue>
+    </saml:Attribute>
+    ...
+  </mdattr:EntityAttributes>
+</md:Extensions>
+```
+*Example of how an Identity Provider advertises its support for SCAL2 authentication.*
+
+The new section 7.2.2 specifies how signature activation data is requested.
+
+##### \[EidRegistry\] - Registry for identifiers assigned by the Swedish e-identification board
+
+- Section 3.1.3.2 of \[EidRegistry\] declares the `http://id.elegnamnden.se/sprop/1.0/scal2` service property entity category.
+- Section 3.1.5 of \[EidRegistry\] declares the XML schema name space for the Signature Activation Protocol - `http://id.elegnamnden.se/csig/1.1/sap/ns`.
+
+##### \[EidAttribute\] - Attribute Specification for the Swedish eID Framework
+
+- Section 3.2.3 of \[EidAttribute\]  clarifies the contents of the `sad` attribute value.
+
+
+#####  \[EidEntCat\] - Entity Categories for the Swedish eID Framework
+
+- Section 3.2 of \[EidEntCat\] defines the new service propety entity category **scal2**.
+
+#####   \[EidDssExt\] - Implementation Profile for using OASIS DSS in Central Signing Services
+
+Section 2.1.3.9 of \[EidDssExt\] is extended with the following text:
+
+When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with the “Deployment Profile for the Swedish eID Framework” \[Eid-Profile\] section 7.2.2, or reject the request.
+
+
+
+
