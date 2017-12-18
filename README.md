@@ -103,6 +103,7 @@ This document specifies a Signature Activation Protocol (SAP) and its data eleme
 
 > [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-12-18
 
+
 ## Older versions
 
 Older version of the specification are stored in the following branches:
