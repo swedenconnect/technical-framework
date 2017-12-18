@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID Framework</h1>
-<h3 id="version-1.5---2017-12-13---*draft-version*">Version 1.5 - 2017-12-13 - <em>draft version</em></h3>
+<h3 id="version-1.5---2017-12-18---*draft-version*">Version 1.5 - 2017-12-18 - <em>draft version</em></h3>
 <p><em>ELN-0602-v1.5</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -59,6 +59,7 @@
 <p> 7.1. <a href="#authentication-context-uris-for-signature-services">Authentication Context URIs for Signature Services</a></p>
 <p> 7.2. <a href="#authentication-requests2">Authentication Requests</a></p>
 <p> 7.2.1. <a href="#requesting-display-of-signature-message">Requesting Display of Signature Message</a></p>
+<p> 7.2.2. <a href="#requesting-scal2-signature-activation-data">Requesting SCAL2 Signature Activation Data</a></p>
 <p> 7.3. <a href="#authentication-responses2">Authentication Responses</a></p>
 </li>
 <li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
@@ -208,17 +209,18 @@ will only accept valid signed requests from this Service Provider by
 assigning the <code>AuthnRequestsSigned</code> attribute of the
 <code>&lt;md:SPSSODescriptor&gt;</code> to a value of <code>true</code>.</p>
 <p>Section E7, “Metadata for Agreeing to Sign Authentication Requests”, of
-[SAML v2.0 Errata 05] specifies the following concerning the
-<code>AuthnRequestsSigned</code> attribute:</p>
+[<a href="http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html">SAML v2.0 Errata
+05</a>]
+specifies the following concerning the <code>AuthnRequestsSigned</code> attribute:</p>
 <blockquote>
 <p>Optional attribute that indicates whether the
-<code>&lt;saml2p:AuthnRequest&gt;</code> messages sent by this service provider
+<code>&lt;saml2p:AuthnRequest&gt;</code> messages sent by this Service Provider
 will be signed. If omitted, the value is assumed to be false. A value
 of false (or omission of this attribute) does not imply that the
-service provider will never sign its requests or that a signed request
-should be considered an error. However, an identity provider that
+Service Provider will never sign its requests or that a signed request
+should be considered an error. However, an Identity Provider that
 receives an unsigned <code>&lt;saml2p:AuthnRequest&gt;</code> message from a
-service provider whose metadata contains this attribute with a value
+Service Provider whose metadata contains this attribute with a value
 of true MUST return a SAML error response and MUST NOT fulfill the
 request.</p>
 </blockquote>
@@ -262,6 +264,18 @@ signed. This is indicated by assigning the
 element to a value of <code>true</code>. See further section E7, “Metadata for
 Agreeing to Sign Authentication Requests”, of [<a href="http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html">SAML v2.0 Errata
 05</a>].</p>
+<p>Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI
+<code>http://id.elegnamnden.se/sprop/1.0/scal2</code> in its metadata. An Identity Provider that does not advertise support for SAP MAY ignore requests for SAD.</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">md:Extensions</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mdattr:EntityAttributes</span> <span class="hljs-attr">xmlns:mdattr</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:metadata:attribute"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">saml:Attribute</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"http://macedir.org/entity-category"</span> 
+                    <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>
+                    <span class="hljs-attr">xmlns:saml</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:assertion"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">saml:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">"xs:string"</span>&gt;</span>http://id.elegnamnden.se/sprop/1.0/scal2<span class="hljs-tag">&lt;/<span class="hljs-name">saml:AttributeValue</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">saml:Attribute</span>&gt;</span>
+    ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">mdattr:EntityAttributes</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">md:Extensions</span>&gt;</span></code></pre><p><em>Example of how an Identity Provider advertises its support for SCAL2 authentication.</em></p>
 <p><a name="signature-service"></a></p>
 <h4 id="2.1.4.-signature-service">2.1.4. Signature Service</h4>
 <p>The Signature Service within the framework for Swedish eID is a Service
@@ -939,6 +953,10 @@ even if the request has no present <code>ForceAuthn</code> attribute or includes
 a <code>ForceAuthn</code> attribute set to the value <code>false</code>.</p>
 </li>
 </ul>
+<p><a name="requesting-scal2-signature-activation-data"></a></p>
+<h4 id="7.2.2.-requesting-scal2-signature-activation-data">7.2.2. Requesting SCAL2 Signature Activation Data</h4>
+<p>The type of signature requested in a signature request is, according to [EidDSS_Profile], specified by the <code>CertType</code> attribute of the <code>&lt;CertRequestProperties&gt;</code> element. When the value of this attribute is set to <code>QC/SSCD</code>, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the &quot;Signature Activation Protocol for Federated Signing&quot; [SigSAP].</p>
+<p>A SAD returned from the Identity Provider MUST have a signature which can be verified using a certificate from the Identity Provider&#39;s metadata entry. The signature algorithm used to sign the SAD MUST be equivalent to the algorithm used to sign the responses and assertions from the Identity Provider.</p>
 <p><a name="authentication-responses2"></a></p>
 <h3 id="7.3.-authentication-responses">7.3. Authentication Responses</h3>
 <p>By including an authentication context URI listed in <a href="#authentication-context-uris-for-signature-services">section 7.1</a> (sign
@@ -1040,12 +1058,12 @@ Protocol and Profile, March
 </blockquote>
 <p><strong>[EidRegistry]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
 board</a>.</p>
 </blockquote>
 <p><strong>[EidAttributes]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><strong>[EidTillit]</strong></p>
 <blockquote>
@@ -1053,23 +1071,29 @@ board</a>.</p>
 </blockquote>
 <p><strong>[EidEntCat]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><strong>[EidDSS]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
 </blockquote>
 <p><strong>[EidDSS_Profile]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
 Services</a>.</p>
+</blockquote>
+<p><strong>[SigSAP]</strong></p>
+<blockquote>
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="9.-changes-between-versions">9. Changes between versions</h2>
 <p><strong>Changes between version 1.4 and 1.5:</strong></p>
 <ul class="list">
+<li>Section 2.1.3 &quot;Identity Providers&quot;, was extended to include requirements on metadata to signal support for the SAP (Signature Activation Protocol).</li>
 <li>Section 7.2, &quot;Authentication Requests&quot;, was extended to recommend the usage of the <code>&lt;saml2p:RequesterID&gt;</code> element within <code>&lt;saml2p:Scoping&gt;</code>. The reason for this recommendation is that Identity Providers may need information about the &quot;Signature Requestor&quot;, i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.</li>
 <li>Section 6.3.4, &quot;The Authentication Statement&quot;, contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.</li>
+<li>A new section, 7.2.2, &quot;Requesting SCAL2 Signature Activation Data&quot;, was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).</li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
 <ul class="list">
