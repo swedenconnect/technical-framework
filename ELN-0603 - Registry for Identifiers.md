@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.5 Draft - 2017-12-18
+### Version 1.5 - 2017-12-18 - *Draft version*
 
 *ELN-0603-v1.5*
 
@@ -324,7 +324,7 @@ Some protocols require a URI identifier to uniquely identify the entity responsi
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification board as name registration authority, responsible for a particular name space |[CertProf] |
+| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space. | **\[CertProf\]** |
 
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
@@ -423,23 +423,23 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
 **\[DeployProf\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 **\[EntityCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 **\[CSignProt\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 **\[CSignProf\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 **\[CertProf\]**
-> [Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
+> [Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/updates/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
 
 **\[AttrProf\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[eIDAS\]**
 > REGULATION (EU) No 910/2014 OF THE EUROPEAN PARLIAMENT AND OF THE
