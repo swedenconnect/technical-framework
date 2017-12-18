@@ -28,3 +28,5 @@ It comprises changes added to the following draft versions:
 - [ELN-0604 - Attribute Specification for the Swedish eID Framework](ELN-0604%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) - 1.5 (draft)
 - [ELN-0606 - Entity Categories for the Swedish eID Framework](ELN-0606%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md) - 1.6 (draft)
 - [ELN-0607 - Implementation Profile for using DSS in Central Signing Services](ELN-0607%20-%20Implementation%20Profile%20for%20using%20DSS%20in%20Central%20Signing%20Services.md) - 1.3 (draft)
+- [ELN-0608 - Certificate Profile for Central Signing Services](ELN-0608%20-%20Certificate%20Profile%20for%20Central%20Signing%20Services.md) - 1.1 (draft)
+
