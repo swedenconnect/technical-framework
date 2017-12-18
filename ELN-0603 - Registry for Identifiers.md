@@ -2,9 +2,9 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.4 - 2017-03-28
+### Version 1.5 Draft - 2017-12-18
 
-*ELN-0603-v1.4*
+*ELN-0603-v1.5*
 
 ---
 
@@ -41,7 +41,9 @@
     3.1.6. [Authentication Context](#authentication-context)
 
     3.1.7. [Sign Response Status Codes](#sign-response-status-codes)
-
+    
+    3.1.8. [Semantics identifiers](#semantics-identifiers)
+    
     3.2. [OID Identifiers](#oid-identifiers)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
@@ -315,14 +317,14 @@ for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign r
 | `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[CSignProf\]** |
 | `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | **\[CSignProf\]** |
 
-<a name="semantics-identifier"></a>
-#### 3.1.8. Semantics identifier
+<a name="semantics-identifiers"></a>
+#### 3.1.8. Name Registration Authorities
 
-Identifiers used to support semantics identifiers.
+Some protocols require a URI identifier to uniquely identify the entity responsible for a particular namespace.
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/semantics-id/name-registration-authority` | Identifying the Swedish eIdentification board as name registration authrority | [CertProf] |
+| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification board as name registration authority, responsible for a particular name space |[CertProf] |
 
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
@@ -433,6 +435,9 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > [Implementation Profile for Using OASIS DSS in Central Signing
 > Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
+**\[CertProf\]**
+> [Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
+
 **\[AttrProf\]**
 > [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
@@ -445,6 +450,10 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.4 and version 1.5:**
+
+- Added Semantics Identifiers section 3.1.8 to define a name registration authority URI necessary to express a provisional ID attribute in an X.509 certificate according to ETSI EN 319 412-1.
 
 **Changes between version 1.3 and version 1.4:**
 

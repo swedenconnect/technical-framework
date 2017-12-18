@@ -2,9 +2,9 @@
 
 # Certificate profile for certificates issued by Central Signing services
 
-### Version 1.0 - 2013-10-30
+### Version 1.1 Draft - 2017-12-18
 
-*ELN-0608-v1.0*
+*ELN-0608-v1.1*
 
 ---
 
@@ -37,8 +37,14 @@
     2.3.1.2. [Other attribute requirements](#other-attribute-requirements)    
 
     2.3.2. [Authentication Context and Attribute mapping](#authentication-context-and-attribute-mapping)
+    
+    2.3.2. [Certificate Policy](#certificate-policy)
 
 3. [**Normative References**](#normative-references)
+
+3. [**Changes between versions**](#changes-between-versions)
+
+---
 
 <a name="introduction"></a>
 ## 1. Introduction
@@ -87,7 +93,7 @@ Standard | Function | Referens
 --- | --- | ---
 RFC 5280 | Main certificate standard | \[[RFC5280](#rfc5280)\]
 RFC 7773 | Authentication context extension | \[[RFC7773](#rfc7773)\]
-EN 319 411-1 | Policy requirements for PKC certificates | \[[EU-POL-NCP](#eu-pol-qc)\]
+EN 319 411-1 | Policy requirements for PKC certificates | \[[EU-POL-NCP](#eu-pol-ncp)\]
 EN 319 411-2 | Policy requirements for Qualified Certificates | \[[EU-POL-QC](#eu-pol-qc)\]
 EN 319 412-1 | Definitions of semanitic identifies and formatting rules for identity data | \[[EU-CERT-GEN](#eu-cert-gen)\]
 EN 319 412-2 | Certificate profile for certificates issued to natural persons | \[[EU-CERT-NP](#eu-cert-np)\]
@@ -130,7 +136,7 @@ The identifier data obtained from the SAML assertion SHALL be stored in the seri
 - Using exactly the same format as it was obtained from the SAML attribute
 - Using conventions specified in \[[EU-CERT-GEN](#eu-cert-gen)\] as defined below.
 
-When storing person identifier in the serialNumber attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1.
+When storing person identifier in the serialNumber attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1. of  \[[EU-CERT-GEN](#eu-cert-gen)\].
 
 **Personnummer or Samordningsnummer**
 
@@ -148,11 +154,14 @@ This identifier illustrates that the identifier is a Provisional ID (PI) as defi
 
 When the identity type reference is "PI:SE", the `nameRegistrationAuthorities` element of SemanticsInformation shall be present and shall contain a `uniformResourceIdentifier` `generalName` with the following value:
 
-> `http://id.elegnamnden.se/semantics-id/name-registration-authority`
+> `http://id.elegnamnden.se/eln/name-registration-authority`
 
 **eIDAS person identifier**
 
-When the identifier is an eIDAS person identifier, this profile defines no use of semantics identifer.
+eIDAS person identifier attributes MAY be stored in the serial number attribute having exactly the same format as received from the SAML attribute listed above, supported by providing a semantics identifier according to \[[EU-CERT-GEN](#eu-cert-gen)\] identified by the OID `0.4.0.194121.1.3`
+
+**NOTE:**
+> A new version of the \[[EU-CERT-GEN](#eu-cert-gen)\] is processed for approval at the time of publication of this document. The new version will specify a semantics identifier for storing eIDAS person identifier attributes using the semantics identifier OID `0.4.0.194121.1.3`. This semantics identifier (`id-etsi-qcs-semanticsId-eIDASNatural`) is not yet present in the latest published version of the standard.
 
 <a name="other-attribute-requirements"></a>
 ##### 2.3.1.2. Other attribute requirements
@@ -163,24 +172,22 @@ E-mail address, when present, SHALL be stored in a Subject Alternative Name exte
 <a name="authentication-context-and-attribute-mapping"></a>
 #### 2.3.2. Authentication Context and Attribute mapping
 
-Certificates MUST include an `AuthContextExtension` according to
-\[[AuthCont](#authcont)\]. This extension SHALL include one SAML Authentication
-Context Information element identified by the XML schema name space
-identifier:
+Certificates MUST include an `AuthContextExtension` according to \[[AuthCont](#authcont)\]. This extension SHALL include one SAML Authentication Context Information element identified by the XML schema name space identifier:
 
 > `http://id.elegnamnden.se/auth-cont/1.0/saci`
 
-The `<saci:SAMLAuthContext>` element SHALL contain both an
-`<saci:AuthContextInfo>` element as well as an
-`<saci:IdAttributes>` element.
+The `<saci:SAMLAuthContext>` element SHALL contain both an `<saci:AuthContextInfo>` element as well as an `<saci:IdAttributes>` element.
 
-The `<saci:IdAttributes>` element SHALL contain one
-`<saci:AttributeMapping>` element for each subject attribute or
-other name form that was obtained from a SAML attribute in the SAML
-assertion used to authenticate the signer as part of the signature
-creation process. Each `<saci:AttributeMapping>` element SHALL
-provide the `<saml:AttributeValue>` that were obtained from the SAML
+The `<saci:IdAttributes>` element SHALL contain one `<saci:AttributeMapping>` element for each subject attribute or
+other name form that was obtained from a SAML attribute in the SAML assertion used to authenticate the signer as part of the signature
+creation process. Each `<saci:AttributeMapping>` element SHALL provide the `<saml:AttributeValue>` that were obtained from the SAML
 assertion.
+
+<a name="certificate-policy"></a>
+#### 2.3.2. Certificate Policy
+
+Certificates SHALL contain at least one referenced certificate policy. PKC certificates SHALL contain at least one reference to a policy idefined in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
+
 
 <a name="normative-references"></a>
 ## 3. Normative References
@@ -244,3 +251,15 @@ assertion.
 
 > [Skatteverket, SKV 707, Utgåva 2,
 > Samordningsnummer.](http://www.vgregion.se/upload/PVSB/Tj%E4nsteID/Samordningsnummer%20skatteverket.pdf)
+
+
+<a name="changes-between-versions"></a>
+## 4. Changes between versions
+
+**Changes between version 1.0 and version 1.1:**
+
+- Removing requirement to store personnummer or samordningsnummer
+- Updating standards references to remove old deprecated standards and replace them with the current published documents.
+- Specified optional support for using semantics identifiers in accordance with ETSI EN 319 412-1 to specify that the serialNumber attribute contains a Swedish personnummer, samordningsnummer, Provisional ID or eIDAS person identifier.
+- Adding requirement to specify ETSI policy identifiers. 
+
