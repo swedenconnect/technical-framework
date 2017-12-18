@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.5 - 2017-06-09 - *draft version*
+### Version 1.5 - 2017-12-18 - *draft version*
 
 *ELN-0603-v1.5*
 
@@ -293,9 +293,6 @@ Identifiers used in the protocol for requesting services form a central signing 
 | `http://id.elegnamnden.se/csig/1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | **\[CSignProf\]** |
 | `http://id.elegnamnden.se/csig/1.1/sap/ns` | XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension | **\[SigSAP\]** |
 
-
-
-
 <a name="authentication-context"></a>
 #### 3.1.6. Authentication Context
 
@@ -426,7 +423,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 **\[SigSAP\]**
-> Signature Activation Protocol for Federated Signing.
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 **\[CSignProf\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
@@ -447,7 +444,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 **Changes between version 1.4 and version 1.5:**
 
-- Added Identifier for service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2`
+- Added identifier for the service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2`
 
 - Added XML Schema name space identifier `http://id.elegnamnden.se/csig/1.1/sap/ns`. This XML Schema defines XML elements related to the Signature Activation Protocol.
 

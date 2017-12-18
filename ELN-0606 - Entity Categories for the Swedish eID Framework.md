@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.6 - 2017-06-09 - *draft version*
+### Version 1.6 - 2017-12-18 - *draft version*
 
 *ELN-0606-v1.6*
 
@@ -38,7 +38,7 @@
 
     3.1. [mobile-auth](#mobile-auth)
 
-    3.2. [SCAL2](#scal2)
+    3.2. [scal2](#scal2)
 
 4. [**Definitions for Service Type Entity Categories**](#definitions-for-service-type-entity-categories)
 
@@ -345,12 +345,13 @@ mobile-auth category.
 
 **URL**: `http://id.elegnamnden.se/sprop/1.0/scal2`
 
-**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with [SigSAP]. 
+**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with \[SigSAP\]. 
 
-For a providing service  i.e. an Identity Provider, inclusion of the
-scal2 service property states that the Identity Provider will return a SAD in response to a SADRequest in an authentication requests from a signing service.
+For a providing service, i.e. an Identity Provider, inclusion of the
+scal2 service property states that the Identity Provider will return a "SAD" in response to a `SADRequest` in an authentication requests from a signing service.
 
-Signature Services MAY include this service property if all authentication requests from this signature service include a SADRequest. Service Providers that are not declared as a signature service MUST NOT include this service property.
+For consuming services, Signature Services MAY include this service property if all authentication requests from the 
+particular Signature Service include a `SADRequest` extension. A Service Provider that is not declared as a Signature Service MUST NOT include this service property in its metadata.
 
 <a name="definitions-for-service-type-entity-categories"></a>
 ## 4. Definitions for Service Type Entity Categories
@@ -424,14 +425,14 @@ All Service Type identifiers are prefixed with
 > [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 **\[SigSAP\]**
-> Signature Activation Protocol for Federated Signing.
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
 
 **Changes between version 1.5 and version 1.6:**
 
-- Added the Service Property Category "SCAL2" in new section 3.2.
+- The Service Property Category "scal2" was added to section 3.2.
 
 **Changes between version 1.4 and version 1.5:**
 

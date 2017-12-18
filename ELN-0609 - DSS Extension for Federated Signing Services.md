@@ -1,25 +1,23 @@
 <img src="img/eln-logo.png"></img>
 
-# DSS Extension for Federated Central Signing Services - Version 1.1
-## Swedish eID Framework Specification - 14 August 2015
+# DSS Extension for Federated Central Signing Services - Version 1.2
+## Swedish eID Framework Specification - 18 December 2017
 
 **Specification URIs:**
 
 **This Version:**
 
-- <http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.html> (Authoritative)\
-- <http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.pdf>
-- <http://aaa-sec.com/csig/specification/csig-dss-extension-1.1.docx>
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.html> (Authoritative)
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.pdf>
 
 **Previous Version:**
 
-- <http://aaa-sec.com/eid2/specification/eid2dssext-1.0.html>
-- <http://aaa-sec.com/eid2/specification/eid2dssext-1.0.pdf>
-- <http://aaa-sec.com/eid2/specification/eid2dssext-1.0.xml>
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.1.html>
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.1.pdf>
 
 **Latest Version:**
 
-- <http://aaa-sec.com/eid2/specification/csig-dss-extension-1.1.html> (Authoritative)
+- <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.html> (Authoritative)
 
 **Technical Committee:**
 
@@ -35,7 +33,7 @@
 
 **Abstract:**
 
-> This specification defines an esxtension to the OASIS DSS protocol for
+> This specification defines an extension to the OASIS DSS protocol for
 > providing centralized signing services for E-government services
 > within the identity federation for public agencies operated by the
 > Swedish E-identification board.
@@ -43,7 +41,7 @@
 ## Notices
 
 
-Copyright © Swedish E-identification Board 2015. All Rights Reserved.
+Copyright © Swedish E-identification Board 2015-2018. All Rights Reserved.
 
 This specification is defines an extension to the OASIS DSS protocol. It
 is provided in OASIS document format in order to allow it to be

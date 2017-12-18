@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.5 - 2017-06-09 - *draft version*
+### Version 1.5 - 2017-12-18 - *draft version*
 
 *ELN-0604-v1.5*
 
@@ -376,10 +376,9 @@ The `authServerSignature` may be included in assertions in cases where there are
 
 The `sad` attribute holds Signature Activation Data that is required by a
 signature service in order to service a signature request in accordance
-with CEN EN 419 241-2<sup>5</sup>. The sad attribute holds a single string
-attribute value. The format of the string value is defined in the Signature Activation Protocol for Federated Signing \[SigSAP\].
-
-> \[5\]: The standard is currently under development.
+with CEN EN 419 241-2. The `sad` attribute holds a single string
+attribute value. The format of the string value is defined in the "Signature Activation Protocol 
+for Federated Signing" specification (\[SigSAP\]).
 
 <a name="attributes-for-the-eidas-framework"></a>
 ### 3.3. Attributes for the eIDAS Framework
@@ -602,14 +601,14 @@ following attribute:
 > [eIDAS SAML Attribute Profile, 22 June 2015](https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_profile_v1.0_2.pdf).
 
 **\[SigSAP\]**
-> Signature Activation Protocol for Federated Signing.SigSAP
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
 
 **Changes between version 1.4 and version 1.5:**
 
-- Section 3.2.3: Added reference to the SAP specification as source for defining the content of the `sad` attribute.
+- Section 3.2.3 was updated with a reference to the SAP specification as source for defining the content of the `sad` attribute.
 
 **Changes between version 1.3 and version 1.4:**
 
