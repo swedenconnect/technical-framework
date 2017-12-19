@@ -42,7 +42,7 @@
 
     3.1.7. [Sign Response Status Codes](#sign-response-status-codes)
     
-    3.1.8. [Semantics identifiers](#semantics-identifiers)
+    3.1.8. [Name Registration Authorities](#name-registration-authorities)
     
     3.2. [OID Identifiers](#oid-identifiers)
 
@@ -319,7 +319,7 @@ for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign r
 | `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[CSignProf\]** |
 | `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | **\[CSignProf\]** |
 
-<a name="semantics-identifiers"></a>
+<a name="name-registration-authorities"></a>
 #### 3.1.8. Name Registration Authorities
 
 Some protocols require a URI identifier to uniquely identify the entity responsible for a particular namespace.
