@@ -6,7 +6,7 @@
     <title>Registry for identifiers assigned by the Swedish e-identification board</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
@@ -35,6 +35,7 @@
 <p> 3.1.5. <a href="#central-signing">Central Signing</a></p>
 <p> 3.1.6. <a href="#authentication-context">Authentication Context</a></p>
 <p> 3.1.7. <a href="#sign-response-status-codes">Sign Response Status Codes</a></p>
+<p> 3.1.8. <a href="#name-registration-authorities">Name Registration Authorities</a></p>
 <p> 3.2. <a href="#oid-identifiers">OID Identifiers</a></p>
 <p> 3.2.1. <a href="#asn1-declarations">ASN.1 Declarations</a></p>
 </li>
@@ -596,6 +597,25 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 </tr>
 </tbody>
 </table>
+<p><a name="name-registration-authorities"></a></p>
+<h4 id="3.1.8.-name-registration-authorities">3.1.8. Name Registration Authorities</h4>
+<p>Some protocols require a URI identifier to uniquely identify the entity responsible for a particular namespace.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>URL</strong></th>
+<th style="text-align:left"><strong>Object</strong></th>
+<th style="text-align:left"><strong>Reference</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>http://id.elegnamnden.se/eln/name-registration-authority</code></td>
+<td style="text-align:left">Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space.</td>
+<td style="text-align:left"><strong>[CertProf]</strong></td>
+</tr>
+</tbody>
+</table>
 <p><a name="oid-identifiers"></a></p>
 <h3 id="3.2.-oid-identifiers">3.2. OID Identifiers</h3>
 <p>Defined categories:</p>
@@ -799,6 +819,10 @@ Version
 <p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
 Services</a>.</p>
 </blockquote>
+<p><strong>[CertProf]</strong></p>
+<blockquote>
+<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate profile for certificates issued by Central Signing services</a></p>
+</blockquote>
 <p><strong>[AttrProf]</strong></p>
 <blockquote>
 <p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
@@ -818,6 +842,8 @@ regulation and associated technical specifications.</p>
 <li><p>Added identifier for the service property entity category <code>http://id.elegnamnden.se/sprop/1.0/scal2</code></p>
 </li>
 <li><p>Added XML Schema name space identifier <code>http://id.elegnamnden.se/csig/1.1/sap/ns</code>. This XML Schema defines XML elements related to the Signature Activation Protocol.</p>
+</li>
+<li><p>Added Semantics Identifiers section 3.1.8 to define a name registration authority URI necessary to express a provisional ID attribute in an X.509 certificate according to ETSI EN 319 412-1.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
