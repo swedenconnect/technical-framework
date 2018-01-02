@@ -2,7 +2,7 @@
 
 # Certificate profile for certificates issued by Central Signing services
 
-### Version 1.1 - 2017-12-18 - *Draft version*
+### Version 1.1 - 2018-01-02 - *Draft version*
 
 *ELN-0608-v1.1*
 
@@ -243,12 +243,12 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 <a name="skv704"></a>**[SKV704]**
 
 > [Skatteverket, SKV 704 utgåva 8, Personnummer, September
-> 2007.](http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf)
+> 2007](http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf).
 
 <a name="skv707"></a>**[SKV707]**
 
 > [Skatteverket, SKV 707, Utgåva 2,
-> Samordningsnummer.](http://www.vgregion.se/upload/PVSB/Tj%E4nsteID/Samordningsnummer%20skatteverket.pdf)
+> Samordningsnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf).
 
 
 <a name="changes-between-versions"></a>
@@ -260,4 +260,5 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 - Updated standards references to remove old deprecated standards and replace them with the currently published documents.
 - Specified optional support for using semantics identifiers in accordance with ETSI EN 319 412-1 to specify that the serialNumber attribute contains a Swedish "personnummer" or "samordningsnummer", Provisional ID or eIDAS person identifier.
 - Added requirement to specify ETSI policy identifiers. 
+- Fix of invalid links for SKV704 and SKV707.
 
