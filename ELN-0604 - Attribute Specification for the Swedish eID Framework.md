@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.5 - 2017-12-18 - *draft version*
+### Version 1.5 - 2018-01-02 - *draft version*
 
 *ELN-0604-v1.5*
 
@@ -279,7 +279,7 @@ The following attributes are defined for use within the attribute profile for th
 | givenName | urn:oid:2.5.4.42 | Given Name | Registered given name. | NO | Valfrid |
 | displayName | urn:oid:2.16.840.1.<br/>113730.3.1.241 | Display Name | A name in any preferred presentation format. | NO | Valfrid Lindeman |
 | gender | urn:oid:1.3.6.1.5.5.7.9.3 | Gender | A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender. | NO | M |
-| personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf) and [SKV 707](http://www.skatteverket.se/download/18.3dfca4f410f4fc63c86800016382/70702.pdf). 12 digits without hyphen. | NO | 195006262546 |
+| personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf) and [SKV 707](http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf). 12 digits without hyphen. | NO | 195006262546 |
 | dateOfBirth | urn:oid:1.3.6.1.5.5.7.9.1 | Date of birth | Date of birth expressed using the format YYYY-MM-DD. | NO | 1950-06-26 |
 | birthName | urn:oid:1.2.752.201.3.8 | Name at the time of birth | Full name of a person at birth. | NO | Valfrid Danielsson |
 | street | urn:oid:2.5.4.9 | Street address | Street address. | NO | Mosebacke torg 3 |
@@ -295,8 +295,8 @@ The following attributes are defined for use within the attribute profile for th
 | mail | urn:oid:0.9.2342.<br/>19200300.100.1.3 | E-mail address | E-mail address. | YES | vfl@mosebackemonarki.se |
 | o | urn:oid:2.5.4.10 | Organization name | Registered organization name. | NO | Skatteverket |
 | ou | urn:oid:2.5.4.11 | Organizational unit name | Organizational unit name. | YES | IT-Avdelningen |
-| organizationIdentifier | urn:oid:2.5.4.97 | Organizational identifier code | Swedish “organisationsnummer” according to [SKV 709](http://www.skatteverket.se/download/18.70ac421612e2a997f85800040302/70909svartvit.pdf). 10 digits without hyphen. | NO | 5562265719 |
-| orgAffiliation | urn:oid:1.2.752.201.3.1 | &lt;uid&gt;@&lt;orgnr&gt; | *Personal ID* @ Swedish ”organisationsnummer” according to [SKV 709](http://www.skatteverket.se/download/18.70ac421612e2a997f85800040302/70909svartvit.pdf). 10 digits without hyphen. | YES | vlindman@5562265719 |
+| organizationIdentifier | urn:oid:2.5.4.97 | Organizational identifier code | Swedish “organisationsnummer” according to [SKV 709](http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf). 10 digits without hyphen. | NO | 5562265719 |
+| orgAffiliation | urn:oid:1.2.752.201.3.1 | &lt;uid&gt;@&lt;orgnr&gt; | *Personal ID* @ Swedish ”organisationsnummer” according to [SKV 709](http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf). 10 digits without hyphen. | YES | vlindman@5562265719 |
 | transactionIdentifier | urn:oid:1.2.752.201.3.2 | Transaction identifier | Transaction identifier for an event, e.g. an authentication process. | NO | *9878HJ6687 (arbitrary string)* |
 | authContextParams | urn:oid:1.2.752.201.3.3 | Authentication Context Parameters. | Key-value pairs from an authentication process. Defined by issuing entity. | NO | See [section 3.2.1](#the-authcontextparams-attribute) below. |
 | userCertificate | urn:oid:1.2.752.201.3.10 | User certificate | Base64-encoding of a user certificate. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
@@ -567,11 +567,14 @@ following attribute:
 
 **\[SKV704\]**
 > [Skatteverket, SKV 704 Utgåva 8,
-> Personnummer](http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf).
+> Personnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf).
 
 **\[SKV707\]**
 > [Skatteverket, SKV 707, Utgåva 2,
-> Samordningsnummer.](http://www.vgregion.se/upload/PVSB/Tj%E4nsteID/Samordningsnummer%20skatteverket.pdf)
+> Samordningsnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf).
+
+**\[SKV709\]**
+> [Skatteverket, SKV 709, Utgåva 8, Organisationsnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf).
 
 **\[SAML-XSD\]**
 > S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005.
@@ -609,6 +612,7 @@ following attribute:
 **Changes between version 1.4 and version 1.5:**
 
 - Section 3.2.3 was updated with a reference to the SAP specification as source for defining the content of the `sad` attribute.
+- Fix of invalid links for SKV704 and SKV707.
 
 **Changes between version 1.3 and version 1.4:**
 
