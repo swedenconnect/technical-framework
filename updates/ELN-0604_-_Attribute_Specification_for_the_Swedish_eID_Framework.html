@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.5---2017-12-18---*draft-version*">Version 1.5 - 2017-12-18 - <em>draft version</em></h3>
+<h3 id="version-1.5---2018-01-02---*draft-version*">Version 1.5 - 2018-01-02 - <em>draft version</em></h3>
 <p><em>ELN-0604-v1.5</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -361,7 +361,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">personalIdentity-<br/>Number</td>
 <td style="text-align:left">urn:oid:1.2.752.29.4.13</td>
 <td style="text-align:left">National civic registration number/code</td>
-<td style="text-align:left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf">SKV 704</a> and <a href="http://www.skatteverket.se/download/18.3dfca4f410f4fc63c86800016382/70702.pdf">SKV 707</a>. 12 digits without hyphen.</td>
+<td style="text-align:left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf">SKV 704</a> and <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf">SKV 707</a>. 12 digits without hyphen.</td>
 <td style="text-align:center">NO</td>
 <td style="text-align:left">195006262546</td>
 </tr>
@@ -489,7 +489,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">organizationIdentifier</td>
 <td style="text-align:left">urn:oid:2.5.4.97</td>
 <td style="text-align:left">Organizational identifier code</td>
-<td style="text-align:left">Swedish “organisationsnummer” according to <a href="http://www.skatteverket.se/download/18.70ac421612e2a997f85800040302/70909svartvit.pdf">SKV 709</a>. 10 digits without hyphen.</td>
+<td style="text-align:left">Swedish “organisationsnummer” according to <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf">SKV 709</a>. 10 digits without hyphen.</td>
 <td style="text-align:center">NO</td>
 <td style="text-align:left">5562265719</td>
 </tr>
@@ -497,7 +497,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">orgAffiliation</td>
 <td style="text-align:left">urn:oid:1.2.752.201.3.1</td>
 <td style="text-align:left">&lt;uid&gt;@&lt;orgnr&gt;</td>
-<td style="text-align:left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="http://www.skatteverket.se/download/18.70ac421612e2a997f85800040302/70909svartvit.pdf">SKV 709</a>. 10 digits without hyphen.</td>
+<td style="text-align:left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf">SKV 709</a>. 10 digits without hyphen.</td>
 <td style="text-align:center">YES</td>
 <td style="text-align:left">vlindman@5562265719</td>
 </tr>
@@ -834,13 +834,17 @@ Assertion Markup Language (SAML) V2.0, March
 </blockquote>
 <p><strong>[SKV704]</strong></p>
 <blockquote>
-<p><a href="http://www.skatteverket.se/download/18.1e6d5f87115319ffba380001857/70408.pdf">Skatteverket, SKV 704 Utgåva 8,
+<p><a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf">Skatteverket, SKV 704 Utgåva 8,
 Personnummer</a>.</p>
 </blockquote>
 <p><strong>[SKV707]</strong></p>
 <blockquote>
-<p><a href="http://www.vgregion.se/upload/PVSB/Tj%E4nsteID/Samordningsnummer%20skatteverket.pdf">Skatteverket, SKV 707, Utgåva 2,
-Samordningsnummer.</a></p>
+<p><a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf">Skatteverket, SKV 707, Utgåva 2,
+Samordningsnummer</a>.</p>
+</blockquote>
+<p><strong>[SKV709]</strong></p>
+<blockquote>
+<p><a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf">Skatteverket, SKV 709, Utgåva 8, Organisationsnummer</a>.</p>
 </blockquote>
 <p><strong>[SAML-XSD]</strong></p>
 <blockquote>
@@ -884,6 +888,7 @@ Framework</a>.</p>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">
 <li>Section 3.2.3 was updated with a reference to the SAP specification as source for defining the content of the <code>sad</code> attribute.</li>
+<li>Fix of invalid links for SKV704 and SKV707.</li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
 <ul class="list">
