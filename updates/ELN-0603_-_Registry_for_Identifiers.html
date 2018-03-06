@@ -6,13 +6,13 @@
     <title>Registry for identifiers assigned by the Swedish e-identification board</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="registry-for-identifiers-assigned-by-the-swedish-e-identification-board">Registry for identifiers assigned by the Swedish e-identification board</h1>
-<h3 id="version-1.5---2017-12-18---*draft-version*">Version 1.5 - 2017-12-18 - <em>draft version</em></h3>
+<h3 id="version-1.5---2018-03-06---*draft-version*">Version 1.5 - 2018-03-06 - <em>draft version</em></h3>
 <p><em>ELN-0603-v1.5</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -205,72 +205,72 @@ Framework (Tillitsramverket för Svensk e-legitimation).</p>
 <tbody>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa1</code></td>
-<td style="text-align:left">Assurance level 1</td>
+<td style="text-align:left">Assurance level 1.</td>
 <td style="text-align:left"><strong>[TillitRamv]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa2</code></td>
-<td style="text-align:left">Assurance level 2</td>
+<td style="text-align:left">Assurance level 2.</td>
 <td style="text-align:left"><strong>[TillitRamv]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa3</code></td>
-<td style="text-align:left">Assurance level 3</td>
+<td style="text-align:left">Assurance level 3.</td>
 <td style="text-align:left"><strong>[TillitRamv]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa4</code></td>
-<td style="text-align:left">Assurance level 4</td>
+<td style="text-align:left">Assurance level 4.</td>
 <td style="text-align:left"><strong>[TillitRamv]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-low</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level low</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes.</td>
 <td style="text-align:left"><strong>[eIDAS]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-sub</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level substantial</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes.</td>
 <td style="text-align:left"><strong>[eIDAS]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-high</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level high</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level high for non-notified and notified eID schemes.</td>
+<td style="text-align:left"><strong>[eIDAS]</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low</code></td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified.</td>
 <td style="text-align:left"><strong>[eIDAS]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified.</td>
 <td style="text-align:left"><strong>[eIDAS]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-high</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified.</td>
 <td style="text-align:left"><strong>[eIDAS]</strong></td>
 </tr>
 </tbody>
 </table>
 <p><strong>NOTE:</strong> eIDAS assurance levels low, substantial and high have the
-following AuthnContextClassRef URI:s defined by the EU commission:</p>
+following <code>AuthnContextClassRef</code> URI:s defined by the EU commission:</p>
 <ul class="list">
 <li><p><code>http://eidas.europa.eu/LoA/low</code></p>
 </li>
+<li><p><code>http://eidas.europa.eu/LoA/NotNotified/low</code> (for non-notified eID schemes)</p>
+</li>
 <li><p><code>http://eidas.europa.eu/LoA/substantial</code></p>
+</li>
+<li><p><code>http://eidas.europa.eu/LoA/NotNotified/substantial</code> (for non-notified eID schemes)</p>
 </li>
 <li><p><code>http://eidas.europa.eu/LoA/high</code></p>
 </li>
+<li><p><code>http://eidas.europa.eu/LoA/NotNotified/high</code> (for non-notified eID schemes)</p>
+</li>
 </ul>
-<p>The eIDAS technical specifications are currently unclear regarding how
-to specify requirements for notified eID and how to communicate to a
-Service Provider whether a notified eID was used. The URI:s defined
-above for eIDAS assurance level low, substantial and high are
-equivalent to the commission defined URI:s but adds specifically
-defined rules for notified eID.</p>
-<p>For example, the URI <code>http://id.elegnamnden.se/loa/1.0/eidas-sub</code> is
-valid for eIDAS assurance level substantial for both notified and non
-notified eIDs, <code>while http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</code> is
-only valid for eIDAS assurance level substantial if the eID used to
-authenticate the user is notified according to the eIDAS regulation.</p>
 <p>Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
 message that must be displayed to the user (see section 7 of
@@ -301,18 +301,23 @@ message that must be displayed to the user (see section 7 of
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-low-sigm</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level low with extended requirements for displaying signature messages.</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages.</td>
 <td style="text-align:left"><strong>[DeployProf]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level substantial with extended requirements for displaying signature messages.</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages.</td>
 <td style="text-align:left">[<strong>DeployProf</strong>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-high-sigm</code></td>
-<td style="text-align:left">Authentication accordance to eIDAS assurance level high with extended requirements for displaying signature messages.</td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages.</td>
 <td style="text-align:left"><strong>[DeployProf]</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm</code></td>
+<td style="text-align:left">Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages.</td>
+<td style="text-align:left">[<strong>DeployProf</strong>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm</code></td>
@@ -844,6 +849,8 @@ regulation and associated technical specifications.</p>
 <li><p>Added XML Schema name space identifier <code>http://id.elegnamnden.se/csig/1.1/sap/ns</code>. This XML Schema defines XML elements related to the Signature Activation Protocol.</p>
 </li>
 <li><p>Added Semantics Identifiers section 3.1.8 to define a name registration authority URI necessary to express a provisional ID attribute in an X.509 certificate according to ETSI EN 319 412-1.</p>
+</li>
+<li><p>Added Authentication Context URI:s <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low</code> and <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm</code> to section 3.1.1.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
