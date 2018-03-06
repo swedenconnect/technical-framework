@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.5 - 2017-12-18 - *draft version*
+### Version 1.5 - 2018-03-06 - *draft version*
 
 *ELN-0603-v1.5*
 
@@ -168,37 +168,31 @@ Framework (Tillitsramverket för Svensk e-legitimation).
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1 | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2 | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3 | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4 | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-high` | Authentication accordance to eIDAS assurance level high | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` | Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified | **\[eIDAS\]**
+| `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | **\[TillitRamv\]** |
+| `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | **\[TillitRamv\]** |
+| `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | **\[TillitRamv\]** |
+| `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | **\[TillitRamv\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-high` | Authentication accordance to eIDAS assurance level high for non-notified and notified eID schemes. | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified. | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified. | **\[eIDAS\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` | Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified. | **\[eIDAS\]**
 
 **NOTE:** eIDAS assurance levels low, substantial and high have the
-following AuthnContextClassRef URI:s defined by the EU commission:
+following `AuthnContextClassRef` URI:s defined by the EU commission:
 
 -   `http://eidas.europa.eu/LoA/low`
 
+-   `http://eidas.europa.eu/LoA/NotNotified/low` (for non-notified eID schemes)
+
 -   `http://eidas.europa.eu/LoA/substantial`
+
+-   `http://eidas.europa.eu/LoA/NotNotified/substantial` (for non-notified eID schemes)
 
 -   `http://eidas.europa.eu/LoA/high`
 
-The eIDAS technical specifications are currently unclear regarding how
-to specify requirements for notified eID and how to communicate to a
-Service Provider whether a notified eID was used. The URI:s defined
-above for eIDAS assurance level low, substantial and high are
-equivalent to the commission defined URI:s but adds specifically
-defined rules for notified eID.
-
-For example, the URI `http://id.elegnamnden.se/loa/1.0/eidas-sub` is
-valid for eIDAS assurance level substantial for both notified and non
-notified eIDs, `while http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` is
-only valid for eIDAS assurance level substantial if the eID used to
-authenticate the user is notified according to the eIDAS regulation.
+-   `http://eidas.europa.eu/LoA/NotNotified/high` (for non-notified eID schemes)
 
 Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
@@ -210,9 +204,10 @@ message that must be displayed to the user (see section 7 of
 | `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
 | `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage` | Authentication according to assurance level 4 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial with extended requirements for displaying signature messages. | \[**DeployProf**\] |
-| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | \[**DeployProf**\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[**DeployProf**\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[**DeployProf**\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm` | Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | **\[DeployProf\]** |
 
@@ -463,6 +458,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - Added XML Schema name space identifier `http://id.elegnamnden.se/csig/1.1/sap/ns`. This XML Schema defines XML elements related to the Signature Activation Protocol.
 
 - Added Semantics Identifiers section 3.1.8 to define a name registration authority URI necessary to express a provisional ID attribute in an X.509 certificate according to ETSI EN 319 412-1.
+
+- Added Authentication Context URI:s `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` and `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` to section 3.1.1.
 
 **Changes between version 1.3 and version 1.4:**
 
