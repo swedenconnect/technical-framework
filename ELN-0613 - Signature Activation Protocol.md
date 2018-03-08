@@ -2,7 +2,7 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.0 - 2018-02-16 *draft version*
+### Version 1.0 - 2018-03-08 *draft version*
 
 *ELN-0613-v1.0*
 
@@ -117,13 +117,7 @@ This document specifies exchange of two data elements:
 
 The `SADRequest` SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the `SADRequest` element as an request extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
 
-When an Identity Provider returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].   
-
-> TODO: Add info about signing
-> Should the request fail if a SAD is requested but the IdP cannot deliver it?
-> Is SignMessage required for an IdP to be able to issue a SAD? **YES**
-> For those scal2 declared - IdP must return SAD if requested.
-> TODO: Add extra info about proxied solutions (where to place cert etc.)
+When an Identity Provider returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].
 
 <a name="data-elements"></a>
 ## 3. Data elements
@@ -278,7 +272,7 @@ Name | Value
 **ver** | `1.0`
 **irt** | `_a74a068d0548a919e503e5f9ef901851`
 **attr** | `urn:oid:1.2.752.29.4.13`
-**loa** | `http://id.elegnamnden.se/loa/1.0/loa3`
+**loa** | `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage`
 **reqid** | `f6e7d061a23293b0053dc7b038a04dad`
 **docs** | `1`
 
@@ -303,7 +297,7 @@ The JWS payload holding the JWT claims is represented by the following JSON obje
             "ver" : "1.0",
             "irt" : "_a74a068d0548a919e503e5f9ef901851",
             "attr" : "urn:oid:1.2.752.29.4.13",
-            "loa" : "http://id.elegnamnden.se/loa/1.0/loa3",
+            "loa" : "http://id.elegnamnden.se/loa/1.0/loa3-sigmessage",
             "reqid" : "f6e7d061a23293b0053dc7b038a04dad",
             "docs" : 1
         }
@@ -311,20 +305,33 @@ The JWS payload holding the JWT claims is represented by the following JSON obje
 
 This payload is represented by the following Base64 URL-encoded string:
 
-> eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUxNjE5NTY1NywiaWF0IjoxNTE2MTk1MzU3LCJqdGkiOiJkNDA3M2ZjNzRiMWI5MTk5Iiwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2E3NGEwNjhkMDU0OGE5MTllNTAzZTVmOWVmOTAxODUxIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDovL2lkLmVsZWduYW1uZGVuLnNlL2xvYS8xLjAvbG9hMyIsInJlcWlkIjoiZjZlN2QwNjFhMjMyOTNiMDA1M2RjN2IwMzhhMDRkYWQiLCJkb2NzIjoxfX0=
+> eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUyMDUwNDExMCwiaWF0IjoxNTIwNTAzODEwLCJqdGkiOiIyeGlUdEZOSE5iTWpweE1yUTh0RWZHY3AiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiJfYTc0YTA2OGQwNTQ4YTkxOWU1MDNlNWY5ZWY5MDE4NTEiLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzLXNpZ21lc3NhZ2UiLCJyZXFpZCI6ImY2ZTdkMDYxYTIzMjkzYjAwNTNkYzdiMDM4YTA0ZGFkIiwiZG9jcyI6MX19
 
 **JWT**
 
 The complete SAD JWT including signature:
 
-> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUxNjE5NTY1NywiaWF0IjoxNTE2MTk1MzU3LCJqdGkiOiJkNDA3M2ZjNzRiMWI5MTk5Iiwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2E3NGEwNjhkMDU0OGE5MTllNTAzZTVmOWVmOTAxODUxIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDovL2lkLmVsZWduYW1uZGVuLnNlL2xvYS8xLjAvbG9hMyIsInJlcWlkIjoiZjZlN2QwNjFhMjMyOTNiMDA1M2RjN2IwMzhhMDRkYWQiLCJkb2NzIjoxfX0=.HW_UYQ3nma3HZjcuWTs3_oC6JXBH0mQUdjUIBFwbAlQRMMCOzrLDLCPzxd6oaHdLJ4QlVVr7gQvAmS5EwtRBgbjzV2dVq6XzX8wbaytpsYacxKg3w_aBknmfgsyw0r8wGUSHp9fw1U7MUN7a5OkL0ieO8ISt3JpP8076dTMQEMnmlHumAkzKc6mTRYmEBlAqylNx1UntPj5SwwA3EUNcvju5QwGgydELYsi5GNDhUwuKDsNrKyWcbLnOVjUqwfA-W9PQp4Bb00_JPyImC_Z_kT955wJz9VMQQTeeGdGEVsBUuifnJg2uHvWUn_DTTRbxOFhebHwsC5E2uqhXo_Qh0Q
+> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUyMDUwNDExMCwiaWF0IjoxNTIwNTAzODEwLCJqdGkiOiIyeGlUdEZOSE5iTWpweE1yUTh0RWZHY3AiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiJfYTc0YTA2OGQwNTQ4YTkxOWU1MDNlNWY5ZWY5MDE4NTEiLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzLXNpZ21lc3NhZ2UiLCJyZXFpZCI6ImY2ZTdkMDYxYTIzMjkzYjAwNTNkYzdiMDM4YTA0ZGFkIiwiZG9jcyI6MX19.jL0ccMQJmGx3UMDrNkVhFUF5iIHiLD1r-roSJsSzyUsEfEDaIBdbmjw7IpBILb2j69YTA_2z3WNBRkzTvHbYsDYucShMPQB7hbk41_oItKqTI038Y3FQXyExaNDZ7sHYK4HSQQc53JPBplu1iMsjm9VTTI9VVrWahj-1-aFbC8LmdhVNFenLuJrs_tmPIGUa_mQC61-46uKxs2Xq4NFpwdUToApAPawzIg2DktztotBVdJFvJj8nrQ9La8quHIdXaGyg5i2jG7YPA-t3Khuooie_Ja0RTAte6bvTC4YGZhj-hQUsZ4M3CDrwdyRJ5zF_HXSmviLlwvjEDekFEP_j3g
 
 <a name="verification-of-a-sad"></a>
 #### 3.2.3. Verification of a SAD
 
-The recipient of a requested SAD MUST verify it as part of the SAML response processing. 
+The recipient of a requested SAD MUST verify it as part of the SAML response processing by asserting the following:
 
-> TODO: Validation rules
+*  That the signature of the SAD JWT verifies correctly using the signature certificate of the issuing Identity Provider (found in the Identity Provider metadata).
+*  That the version of the SAD (`seElnSadext.ver`) matches the `<sap:RequestedVersion>` element of the `<sap:SADRequest>`.
+*  That the audience (`aud`) matches the entityID of the recipient, i.e., matches the `<sap:RequesterID>` element from the `<sap:SADRequest>`.
+*  That the issuer (`iss`) value matches the issuer entityID of the assertion containing the SAD (*).
+*  That the SAD is valid by checking the expiry (`exp`) and issued-at (`iat`) values (allowing for a reasonable clock skew).
+*  That the in-response-to (`seElnSadExt.irt`) value matches that `ID` of the corresponding `<sap:SADRequest>`.
+*  That the subject (`sub`) value is also represented in the SAML assertion as an attribute having the name given by the `seElnSadExt.attr` field.
+*  That the level of assurance (`seElnSadEx.loa`) value matches the value given in the `<saml2:AuthnContextClassRef>` element of the assertion.
+*  That the request ID (`seElnSadEx.reqid`) value matches the ID for the sign request (which is passed in the `<sap:SignRequestID>` element of the `<sap:SADRequest>`).
+*  That the number of documents specified in the SAD (`seElnSadEx.docs`) matches the `<sap:DocCount>` element of the `<sap:SADRequest>`.
+
+If any of the above verification steps fail, the Signature Service MUST reject the assertion.
+
+> \* - In the case where a Signature Service communicates with a Proxy Identity Provider that forwards requests to an *authenticating* Identity Provider that issues a SAD, the `iss`-value of the SAD will differ from the issuer of the assertion that is received by the Signature Service. In these cases the Signature Service should compare the `iss`-value with the value found in the `<saml2:AuthenticatingAuthority>` element of the assertion.
 
 <a name="schemas"></a>
 ## 4. Schemas
