@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="signature-activation-protocol-for-federated-signing">Signature Activation Protocol for Federated Signing</h1>
-<h3 id="version-1.0---2017-12-18---*draft-version*">Version 1.0 - 2017-12-18 - <em>draft version</em></h3>
+<h3 id="version-1.0---2018-03-11-*draft-version*">Version 1.0 - 2018-03-11 <em>draft version</em></h3>
 <p><em>ELN-0613-v1.0</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -34,8 +34,8 @@
 <p> 3.2.1. <a href="#sad-json-web-token">SAD JSON Web Token</a></p>
 <p> 3.2.1.1. <a href="#registered-jwt-claims">Registered JWT claims</a></p>
 <p> 3.2.1.2. <a href="#sad-extension-claim">SAD Extension claim</a></p>
-<p> 3.2.1.3. <a href="#serialization">Serialization</a></p>
 <p> 3.2.2. <a href="#example">Example</a></p>
+<p> 3.2.3 <a href="#verification-of-a-sad">Verification of a SAD</a></p>
 </li>
 <li><p><a href="#schemas"><strong>Schemas</strong></a></p>
 </li>
@@ -64,6 +64,7 @@ not capitalized, they are meant in their natural-language sense.</p>
 <p><a name="xml-name-space-references"></a></p>
 <h3 id="1.2.-xml-name-space-references">1.2. XML name space references</h3>
 <p>The prefix <strong>sap:</strong> stands for the Signature Activation Protocol XML Schema namespace <code>http://id.elegnamnden.se/csig/1.1/sap/ns</code> (<a href="https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd">https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd</a>). </p>
+<p>The prefix <strong>saml2:</strong> stands for the OASIS SAML 2 Assertion Schema namespace <code>urn:oasis:names:tc:SAML:2.0:assertion</code>.</p>
 <p>The prefix <strong>saml2p:</strong> stands for the OASIS SAML 2 Protocol Schema namespace <code>urn:oasis:names:tc:SAML:2.0:protocol</code>.</p>
 <p><a name="structure"></a></p>
 <h3 id="1.3.-structure">1.3. Structure</h3>
@@ -83,8 +84,7 @@ not capitalized, they are meant in their natural-language sense.</p>
 <p>The federated signing model does not use pre-assigned signing keys. Instead, a new signing key is generated for each sign request and then permanently deleted. This particular use-case is recognised by prEN 419 241-1 [<a href="#rsig-pp-1">RSIG-PP-1</a>] and prEN 419 241-2 [<a href="#rsig-pp-2">RSIG-PP-2</a>], which under these conditions allows the signature key reference to be implicit and derived from the signer&#39;s identity. For the present implementation of the SAP the following data is included in the SAD:</p>
 <ul class="list">
 <li>the signer&#39;s identity,</li>
-<li>information about how the signer was authenticated and by whom,</li>
-<li>reference to the evidence of the signer&#39;s identity (e.g. SAML Assertion), and, </li>
+<li>information about how the signer was authenticated and by whom, and,</li>
 <li>reference to the data to be signed.</li>
 </ul>
 <p>This implements the scenario where the Identity Provider is the sole entity which can verify the signer&#39;s private credentials via the SIC (Signer’s Interaction Component). This instance of authentication is used by the Identity Provider to generate the SAD in accordance with section 5.10 of [<a href="#rsig-pp-1">RSIG-PP-1</a>].</p>
@@ -92,20 +92,21 @@ not capitalized, they are meant in their natural-language sense.</p>
 <h3 id="2.2.-data-exchange">2.2. Data exchange</h3>
 <p>This document specifies exchange of two data elements:</p>
 <ul class="list">
-<li>SADRequest</li>
-<li>SAD</li>
+<li><code>SADRequest</code></li>
+<li><code>SAD</code></li>
 </ul>
 <p>The <code>SADRequest</code> SHALL have the format defined in section <a href="#sadrequest">3.1</a>. When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the <code>SADRequest</code> element as an request extension by including it as a child element to a <code>&lt;saml2p:Extensions&gt;</code> element in the <code>&lt;saml2p:AuthnRequest&gt;</code>.</p>
-<p>When an Identity Provider returns a SAD, as defined in section <a href="#signature-activation-data">3.2</a>, in a SAML Assertion, it MUST be included as a single string value of a <code>sad</code> attribute identified by the attribute name <code>urn:oid:1.2.752.201.3.12</code> as defined in the attribute specification [<a href="#eln-0604">ELN-0604</a>].   </p>
+<p>When an Identity Provider returns a SAD, as defined in section <a href="#signature-activation-data">3.2</a>, in a SAML Assertion, it MUST be included as a single string value of a <code>sad</code> attribute identified by the attribute name <code>urn:oid:1.2.752.201.3.12</code> as defined in the attribute specification [<a href="#eln-0604">ELN-0604</a>].</p>
 <p><a name="data-elements"></a></p>
 <h2 id="3.-data-elements">3. Data elements</h2>
-<p>The SAD requested in the SAP binds the documents to be signed to the intent by the signer to sign. This is accomplished by the interaction of a number of independent information elements as follows:</p>
+<p>The SAD requested in the SAP binds the documents to be signed to the intent by the signer to sign. This is accomplished by the interaction of a number of independent information attributes and elements as follows:</p>
 <ul class="list">
 <li><strong>Sign request ID</strong>. Identifies the sign request message for signing specific documents. This sign request is sent to the signing service from the service provider requesting the signature. The sign request bound by this identifier contains all detailed data about what is being signed.</li>
 <li><strong>Sign message</strong>. A description of what is being signed that is passed from the service provider requesting signing to the Identity Provider, via the signing service. The sign message is included in the sign request as well as in the SAML authentication request sent to the Identity Provider.</li>
 <li><strong>LoA</strong>. The level of assurance declaration asserting the level of security used to authenticate the user and asserting that the user read and accepted the sign message and approved to sign the document/s.</li>
 <li><strong>Number of documents to sign</strong>. Ensures that the user is aware whether more than one document is being signed. This allows adaptations of the signing UI displayed by the Identity Provider.</li>
 <li><strong>Identity of the signer</strong>. Allows verification that the signature is bound to the appropriate signer.</li>
+<li><strong>SAD Request ID</strong>. Unique identifier for the <code>SADRequest</code> element. This identifier is later included in the SAD in order to accomplish a binding between the request and the issued SAD.</li>
 </ul>
 <p>The SAD request and the SAD specified in this section specifies the data that needs to be exchanged in addition to other protocol elements specified by SAML as well as the federated signing specification [<a href="#eln-0609">ELN-0609</a>].</p>
 <p><a name="sadrequest"></a></p>
@@ -113,6 +114,10 @@ not capitalized, they are meant in their natural-language sense.</p>
 <p><a name="syntax"></a></p>
 <h4 id="3.1.1-syntax">3.1.1 Syntax</h4>
 <p>The SAD Request is provided in a <code>&lt;sap:SADRequest&gt;</code> element. The element has the following elements and attributes:</p>
+<p><code>&lt;RequesterID&gt;</code> [Required]</p>
+<blockquote>
+<p>Specifies the SAML entityID of the requesting entity. The value for this element should be the same identifier as given in the <code>&lt;saml2:Issuer&gt;</code> element of the <code>&lt;saml2p:AuthnRequest&gt;</code> that encapsulates the <code>&lt;sap:SADRequest&gt;</code> extension.</p>
+</blockquote>
 <p><code>&lt;SignRequestID&gt;</code> [Required]</p>
 <blockquote>
 <p>Specifies the value of the <code>RequestID</code> attribute of the associated <code>SignRequest</code>.</p>
@@ -129,38 +134,45 @@ not capitalized, they are meant in their natural-language sense.</p>
 <blockquote>
 <p>Optional parameters provided as name-value pairs. This specification does not define any parameters. The use of parameters may be defined in profiles of this specification or may be negotiated by other means between a remote signing service and an Identity Provider.</p>
 </blockquote>
+<p><code>ID</code> [Required]</p>
+<blockquote>
+<p>Attribute holding an unique identifier for the <code>SADRequest</code>.</p>
+</blockquote>
 <p>The following schema fragment defines the <code>&lt;sap:SADRequest&gt;</code> element:</p>
 <pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"SADRequest"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"sap:SADRequestType"</span> /&gt;
 
 &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"SADRequestType"</span>&gt;
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"RequesterID"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"SignRequestID"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"DocCount"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:int"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"RequestedVersion"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> default=<span class="hljs-string">"1.0"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> name=<span class="hljs-string">"RequestParams"</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
         &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
-          &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> maxOccurs=<span class="hljs-string">"unbounded"</span> minOccurs=<span class="hljs-string">"0"</span> name=<span class="hljs-string">"Parameter"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"sap:ParamType"</span> /&gt;
+          &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> maxOccurs=<span class="hljs-string">"unbounded"</span> minOccurs=<span class="hljs-string">"0"</span> name=<span class="hljs-string">"Parameter"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"sap:ParameterType"</span> /&gt;
         &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span>&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"ID"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:ID"</span> use=<span class="hljs-string">"required"</span> /&gt;
 &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
 
-&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"ParamType"</span>&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"ParameterType"</span>&gt;
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"xs:string"</span>&gt;
-      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span> /&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span> /&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
 &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="example"></a></p>
 <h4 id="3.1.2-example">3.1.2 Example</h4>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">sap:SADRequest</span> <span class="hljs-attr">xmlns:sap</span>=<span class="hljs-string">"http://id.elegnamnden.se/csig/1.1/sap/ns"</span>&gt;</span>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">sap:SADRequest</span> <span class="hljs-attr">ID</span>=<span class="hljs-string">"_a74a068d0548a919e503e5f9ef901851"</span> <span class="hljs-attr">xmlns:sap</span>=<span class="hljs-string">"http://id.elegnamnden.se/csig/1.1/sap/ns"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">sap:RequesterID</span>&gt;</span>http://www.example.com/sigservice<span class="hljs-tag">&lt;/<span class="hljs-name">sap:RequesterID</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">sap:SignRequestID</span>&gt;</span>f6e7d061a23293b0053dc7b038a04dad<span class="hljs-tag">&lt;/<span class="hljs-name">sap:SignRequestID</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">sap:DocCount</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">sap:DocCount</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">sap:RequestedVersion</span>&gt;</span>1.0<span class="hljs-tag">&lt;/<span class="hljs-name">sap:RequestedVersion</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">sap:RequestParams</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">sap:Parameter</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"ParamName"</span>&gt;</span>paramValue<span class="hljs-tag">&lt;/<span class="hljs-name">sap:Parameter</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">sap:Parameter</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"ParamName"</span>&gt;</span>paramValue<span class="hljs-tag">&lt;/<span class="hljs-name">sap:Parameter</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">sap:RequestParams</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">sap:SADRequest</span>&gt;</span></code></pre><p><em>Example of a SADRequest.</em></p>
 <p><a name="signature-activation-data"></a></p>
@@ -182,23 +194,23 @@ not capitalized, they are meant in their natural-language sense.</p>
 <tbody>
 <tr>
 <td><strong>sub</strong></td>
-<td>Subject - holding the attribute of the signer&#39;s unique identifier attribute.</td>
+<td>Subject - holds the attribute value of the signer&#39;s unique identifier.</td>
 </tr>
 <tr>
 <td><strong>aud</strong></td>
-<td>Audience - holding the entityID of the Signature Service which is the legitimate recipient of this SAD.</td>
+<td>Audience - holds the entityID of the Signature Service which is the legitimate recipient of this SAD. This value corresponds to the <code>&lt;sap:RequesterID&gt;</code> element of the SAD request.</td>
 </tr>
 <tr>
 <td><strong>iss</strong></td>
-<td>Issuer - holding the entityID of the IdP that generated this SAD.</td>
+<td>Issuer - holds the entityID of the IdP that generated this SAD.</td>
 </tr>
 <tr>
 <td><strong>exp</strong></td>
-<td>Expiry - specifying the time when this SAD is no longer valid (epoch time/seconds since 1970-01-01).</td>
+<td>Expiry - specifies the time when this SAD is no longer valid (epoch time/seconds since 1970-01-01).</td>
 </tr>
 <tr>
 <td><strong>iat</strong></td>
-<td>Issued At - specifying the time when this SAD was issued (epoch time/seconds since 1970-01-01).</td>
+<td>Issued At - specifies the time when this SAD was issued (epoch time/seconds since 1970-01-01).</td>
 </tr>
 <tr>
 <td><strong>jti</strong></td>
@@ -223,34 +235,46 @@ not capitalized, they are meant in their natural-language sense.</p>
 </thead>
 <tbody>
 <tr>
+<td></td>
 <td><strong>ver</strong></td>
 <td>String</td>
 <td>The version of this claim, default 1.0 (Optional).</td>
+<td></td>
 </tr>
 <tr>
+<td></td>
 <td><strong>irt</strong></td>
 <td>String</td>
-<td>In Response To - holding the identifier of the SAML <code>AuthnRequest</code> message associated with this SAD.</td>
+<td>In Response To - holds the identifier of the SAD request (<code>ID</code> attribute) that was used to request this SAD.</td>
+<td></td>
 </tr>
 <tr>
+<td></td>
 <td><strong>attr</strong></td>
 <td>String</td>
-<td>Attribute - holding the URI identifier of the attribute specifying the users unique identifier value.</td>
+<td>Attribute - holds the URI identifier of the attribute specifying the users unique identifier value.</td>
+<td></td>
 </tr>
 <tr>
+<td></td>
 <td><strong>loa</strong></td>
 <td>String</td>
-<td>LevelOfAssurance - holding the URI identifier of the level of assurance (LoA) used to authenticate the signer.</td>
+<td>LevelOfAssurance - holds the URI identifier of the level of assurance (LoA) used to authenticate the signer.</td>
+<td></td>
 </tr>
 <tr>
+<td></td>
 <td><strong>reqid</strong></td>
 <td>String</td>
-<td>RequestID - holding the ID of the Sign Request associated with this SAD.</td>
+<td>RequestID - holds the ID of the sign request associated with this SAD.</td>
+<td></td>
 </tr>
 <tr>
+<td></td>
 <td><strong>docs</strong></td>
 <td>Integer</td>
 <td>Specifies the number of documents to be signed in the associated sign request.</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -268,11 +292,11 @@ not capitalized, they are meant in their natural-language sense.</p>
 <tbody>
 <tr>
 <td><strong>sub</strong></td>
-<td><code>188803099368</code></td>
+<td><code>196302052383</code></td>
 </tr>
 <tr>
 <td><strong>aud</strong></td>
-<td><code>https://eid2csig.konki.se/sign</code></td>
+<td><code>http://www.example.com/sigservice</code></td>
 </tr>
 <tr>
 <td><strong>iss</strong></td>
@@ -280,15 +304,15 @@ not capitalized, they are meant in their natural-language sense.</p>
 </tr>
 <tr>
 <td><strong>exp</strong></td>
-<td><code>1513611170</code> (2017-12-18 16:32:50 CET)</td>
+<td><code>1516195657</code> (2018-01-17 13:27:37 GMT)</td>
 </tr>
 <tr>
 <td><strong>iat</strong></td>
-<td><code>1513611110</code> (2017-12-18 16:31:50 CET)</td>
+<td><code>1516195357</code> (2018-01-17 13:22:37 GMT)</td>
 </tr>
 <tr>
 <td><strong>jti</strong></td>
-<td><code>fb934b226b9a71b1</code></td>
+<td><code>d4073fc74b1b9199</code></td>
 </tr>
 </tbody>
 </table>
@@ -307,7 +331,7 @@ not capitalized, they are meant in their natural-language sense.</p>
 </tr>
 <tr>
 <td><strong>irt</strong></td>
-<td><code>_a3a232edc94ce04ca54b41958c1b12c2</code></td>
+<td><code>_a74a068d0548a919e503e5f9ef901851</code></td>
 </tr>
 <tr>
 <td><strong>attr</strong></td>
@@ -315,7 +339,7 @@ not capitalized, they are meant in their natural-language sense.</p>
 </tr>
 <tr>
 <td><strong>loa</strong></td>
-<td><code>http://id.elegnamnden.se/loa/1.0/loa3</code></td>
+<td><code>http://id.elegnamnden.se/loa/1.0/loa3-sigmessage</code></td>
 </tr>
 <tr>
 <td><strong>reqid</strong></td>
@@ -335,28 +359,47 @@ not capitalized, they are meant in their natural-language sense.</p>
 <p><strong>JWS Payload</strong></p>
 <p>The JWS payload holding the JWT claims is represented by the following JSON object:</p>
 <pre class="hljs"><code>{
-    <span class="hljs-attr">"sub"</span>: <span class="hljs-string">"188803099368"</span>,
-    <span class="hljs-attr">"aud"</span>: <span class="hljs-string">"https://eid2csig.konki.se/sign"</span>,
-    <span class="hljs-attr">"iss"</span>: <span class="hljs-string">"https://idp.svelegtest.se/idp"</span>,
-    <span class="hljs-attr">"exp"</span>: <span class="hljs-number">1513611170</span>,
-    <span class="hljs-attr">"seElnSadext"</span>: {
-        <span class="hljs-attr">"ver"</span>: <span class="hljs-string">"1.0"</span>,
-        <span class="hljs-attr">"irt"</span>: <span class="hljs-string">"_a3a232edc94ce04ca54b41958c1b12c2"</span>,
-        <span class="hljs-attr">"attr"</span>: <span class="hljs-string">"urn:oid:1.2.752.29.4.13"</span>,
-        <span class="hljs-attr">"loa"</span>: <span class="hljs-string">"http://id.elegnamnden.se/loa/1.0/loa3"</span>,
-        <span class="hljs-attr">"reqid"</span>: <span class="hljs-string">"f6e7d061a23293b0053dc7b038a04dad"</span>,
-        <span class="hljs-attr">"docs"</span>: <span class="hljs-number">1</span>
-    },
-    <span class="hljs-attr">"iat"</span>: <span class="hljs-number">1513611110</span>,
-    <span class="hljs-attr">"jti"</span>: <span class="hljs-string">"d4073fc74b1b9199"</span>
+    <span class="hljs-attr">"sub"</span> : <span class="hljs-string">"196302052383"</span>,
+    <span class="hljs-attr">"aud"</span> : <span class="hljs-string">"http://www.example.com/sigservice"</span>,
+    <span class="hljs-attr">"iss"</span> : <span class="hljs-string">"https://idp.svelegtest.se/idp"</span>,
+    <span class="hljs-attr">"exp"</span> : <span class="hljs-number">1516195657</span>,
+    <span class="hljs-attr">"iat"</span> : <span class="hljs-number">1516195357</span>,
+    <span class="hljs-attr">"jti"</span> : <span class="hljs-string">"d4073fc74b1b9199"</span>,
+    <span class="hljs-attr">"seElnSadext"</span> : {
+        <span class="hljs-attr">"ver"</span> : <span class="hljs-string">"1.0"</span>,
+        <span class="hljs-attr">"irt"</span> : <span class="hljs-string">"_a74a068d0548a919e503e5f9ef901851"</span>,
+        <span class="hljs-attr">"attr"</span> : <span class="hljs-string">"urn:oid:1.2.752.29.4.13"</span>,
+        <span class="hljs-attr">"loa"</span> : <span class="hljs-string">"http://id.elegnamnden.se/loa/1.0/loa3-sigmessage"</span>,
+        <span class="hljs-attr">"reqid"</span> : <span class="hljs-string">"f6e7d061a23293b0053dc7b038a04dad"</span>,
+        <span class="hljs-attr">"docs"</span> : <span class="hljs-number">1</span>
+    }
 }</code></pre><p>This payload is represented by the following Base64 URL-encoded string:</p>
 <blockquote>
-<p>eyJzdWIiOiIxODg4MDMwOTkzNjgiLCJhdWQiOiJodHRwczpcL1wvZWlkMmNzaWcua29ua2kuc2VcL3NpZ24iLCJpc3MiOiJodHRwczpcL1wvaWRwLnN2ZWxlZ3Rlc3Quc2VcL2lkcCIsImV4cCI6MTUxMzM1MTA2MCwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2EzYTIzMmVkYzk0Y2UwNGNhNTRiNDE5NThjMWIxMmMyIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDpcL1wvaWQuZWxlZ25hbW5kZW4uc2VcL2xvYVwvMS4wXC9sb2EzIiwicmVxaWQiOiJmNmU3ZDA2MWEyMzI5M2IwMDUzZGM3YjAzOGEwNGRhZCIsImRvY3MiOjF9LCJpYXQiOjE1MTMzNTEwMDAsImp0aSI6ImQ0MDczZmM3NGIxYjkxOTkifQ</p>
+<p>eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUyMDUwNDExMCwiaWF0IjoxNTIwNTAzODEwLCJqdGkiOiIyeGlUdEZOSE5iTWpweE1yUTh0RWZHY3AiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiJfYTc0YTA2OGQwNTQ4YTkxOWU1MDNlNWY5ZWY5MDE4NTEiLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzLXNpZ21lc3NhZ2UiLCJyZXFpZCI6ImY2ZTdkMDYxYTIzMjkzYjAwNTNkYzdiMDM4YTA0ZGFkIiwiZG9jcyI6MX19</p>
 </blockquote>
 <p><strong>JWT</strong></p>
 <p>The complete SAD JWT including signature:</p>
 <blockquote>
-<p>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxODg4MDMwOTkzNjgiLCJhdWQiOiJodHRwczpcL1wvZWlkMmNzaWcua29ua2kuc2VcL3NpZ24iLCJpc3MiOiJodHRwczpcL1wvaWRwLnN2ZWxlZ3Rlc3Quc2VcL2lkcCIsImV4cCI6MTUxMzM1MTA2MCwic2VFbG5TYWRleHQiOnsidmVyIjoiMS4wIiwiaXJ0IjoiX2EzYTIzMmVkYzk0Y2UwNGNhNTRiNDE5NThjMWIxMmMyIiwiYXR0ciI6InVybjpvaWQ6MS4yLjc1Mi4yOS40LjEzIiwibG9hIjoiaHR0cDpcL1wvaWQuZWxlZ25hbW5kZW4uc2VcL2xvYVwvMS4wXC9sb2EzIiwicmVxaWQiOiJmNmU3ZDA2MWEyMzI5M2IwMDUzZGM3YjAzOGEwNGRhZCIsImRvY3MiOjF9LCJpYXQiOjE1MTMzNTEwMDAsImp0aSI6ImQ0MDczZmM3NGIxYjkxOTkifQ.dYQatHCxUKMSfY42FxC1g025DkmFwHk9dk9LTDdHi98yKpwM6-waoICO5YhwJq0MO2MiKmYMqOJTi31BeB_RUv4Zi6GgUfYq0CRs1nTjFgTcYtyAaoUxR9WEiylE32rBI1U2iqO2X4iUb3TzI6hb2ZtLuah72NH_ymO_taOyN_I</p>
+<p>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUyMDUwNDExMCwiaWF0IjoxNTIwNTAzODEwLCJqdGkiOiIyeGlUdEZOSE5iTWpweE1yUTh0RWZHY3AiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiJfYTc0YTA2OGQwNTQ4YTkxOWU1MDNlNWY5ZWY5MDE4NTEiLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzLXNpZ21lc3NhZ2UiLCJyZXFpZCI6ImY2ZTdkMDYxYTIzMjkzYjAwNTNkYzdiMDM4YTA0ZGFkIiwiZG9jcyI6MX19.jL0ccMQJmGx3UMDrNkVhFUF5iIHiLD1r-roSJsSzyUsEfEDaIBdbmjw7IpBILb2j69YTA_2z3WNBRkzTvHbYsDYucShMPQB7hbk41_oItKqTI038Y3FQXyExaNDZ7sHYK4HSQQc53JPBplu1iMsjm9VTTI9VVrWahj-1-aFbC8LmdhVNFenLuJrs_tmPIGUa_mQC61-46uKxs2Xq4NFpwdUToApAPawzIg2DktztotBVdJFvJj8nrQ9La8quHIdXaGyg5i2jG7YPA-t3Khuooie_Ja0RTAte6bvTC4YGZhj-hQUsZ4M3CDrwdyRJ5zF_HXSmviLlwvjEDekFEP_j3g</p>
+</blockquote>
+<p><a name="verification-of-a-sad"></a></p>
+<h4 id="3.2.3.-verification-of-a-sad">3.2.3. Verification of a SAD</h4>
+<p>The recipient of a requested SAD MUST verify it as part of the SAML response processing by asserting the following:</p>
+<ul class="list">
+<li>That the signature of the SAD JWT verifies correctly using the signature certificate of the issuing Identity Provider (found in the Identity Provider metadata).</li>
+<li>That the version of the SAD (<code>seElnSadext.ver</code>) matches the <code>&lt;sap:RequestedVersion&gt;</code> element of the <code>&lt;sap:SADRequest&gt;</code>.</li>
+<li>That the audience (<code>aud</code>) matches the entityID of the recipient, i.e., matches the <code>&lt;sap:RequesterID&gt;</code> element from the <code>&lt;sap:SADRequest&gt;</code>.</li>
+<li>That the issuer (<code>iss</code>) value matches the issuer entityID of the assertion containing the SAD (*).</li>
+<li>That the SAD is valid by checking the expiry (<code>exp</code>) and issued-at (<code>iat</code>) values (allowing for a reasonable clock skew).</li>
+<li>That the in-response-to (<code>seElnSadExt.irt</code>) value matches that <code>ID</code> of the corresponding <code>&lt;sap:SADRequest&gt;</code>.</li>
+<li>That the subject (<code>sub</code>) value is also represented in the SAML assertion as an attribute having the name given by the <code>seElnSadExt.attr</code> field.</li>
+<li>That the level of assurance (<code>seElnSadEx.loa</code>) value matches the value given in the <code>&lt;saml2:AuthnContextClassRef&gt;</code> element of the assertion.</li>
+<li>That the request ID (<code>seElnSadEx.reqid</code>) value matches the ID for the sign request (which is passed in the <code>&lt;sap:SignRequestID&gt;</code> element of the <code>&lt;sap:SADRequest&gt;</code>).</li>
+<li>That the number of documents specified in the SAD (<code>seElnSadEx.docs</code>) matches the <code>&lt;sap:DocCount&gt;</code> element of the <code>&lt;sap:SADRequest&gt;</code>.</li>
+</ul>
+<p>If any of the above verification steps fail, the Signature Service MUST reject the assertion.</p>
+<blockquote>
+<p>* - In the case where a Signature Service communicates with a Proxy Identity Provider that forwards requests to an <em>authenticating</em> Identity Provider that issues a SAD, the <code>iss</code>-value of the SAD will differ from the issuer of the assertion that is received by the Signature Service. In these cases the Signature Service should compare the <code>iss</code>-value with the value found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of the assertion, or with relevant local policy and out-of-band configuration data.</p>
 </blockquote>
 <p><a name="schemas"></a></p>
 <h2 id="4.-schemas">4. Schemas</h2>
@@ -376,23 +419,25 @@ not capitalized, they are meant in their natural-language sense.</p>
 
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"SADRequestType"</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"RequesterID"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"SignRequestID"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"DocCount"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:int"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"RequestedVersion"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> default=<span class="hljs-string">"1.0"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> name=<span class="hljs-string">"RequestParams"</span>&gt;
         &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
           &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
-            &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> maxOccurs=<span class="hljs-string">"unbounded"</span> minOccurs=<span class="hljs-string">"0"</span> name=<span class="hljs-string">"Parameter"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"sap:ParamType"</span> /&gt;
+            &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> maxOccurs=<span class="hljs-string">"unbounded"</span> minOccurs=<span class="hljs-string">"0"</span> name=<span class="hljs-string">"Parameter"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"sap:ParameterType"</span> /&gt;
           &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
         &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span>&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"ID"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:ID"</span> use=<span class="hljs-string">"required"</span> /&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
 
-  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"ParamType"</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"ParameterType"</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"xs:string"</span>&gt;
-        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span> /&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span> /&gt;
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
