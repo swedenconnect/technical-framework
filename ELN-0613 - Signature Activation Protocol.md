@@ -2,7 +2,7 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.0 - 2018-03-08 *draft version*
+### Version 1.0 - 2018-03-11 *draft version*
 
 *ELN-0613-v1.0*
 
@@ -331,7 +331,7 @@ The recipient of a requested SAD MUST verify it as part of the SAML response pro
 
 If any of the above verification steps fail, the Signature Service MUST reject the assertion.
 
-> \* - In the case where a Signature Service communicates with a Proxy Identity Provider that forwards requests to an *authenticating* Identity Provider that issues a SAD, the `iss`-value of the SAD will differ from the issuer of the assertion that is received by the Signature Service. In these cases the Signature Service should compare the `iss`-value with the value found in the `<saml2:AuthenticatingAuthority>` element of the assertion.
+> \* - In the case where a Signature Service communicates with a Proxy Identity Provider that forwards requests to an *authenticating* Identity Provider that issues a SAD, the `iss`-value of the SAD will differ from the issuer of the assertion that is received by the Signature Service. In these cases the Signature Service should compare the `iss`-value with the value found in the `<saml2:AuthenticatingAuthority>` element of the assertion, or with relevant local policy and out-of-band configuration data.
 
 <a name="schemas"></a>
 ## 4. Schemas
