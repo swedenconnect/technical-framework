@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.5 - 2018-01-02 - *draft version*
+### Version 1.5 - 2018-03-18 - *draft version*
 
 *ELN-0604-v1.5*
 
@@ -187,6 +187,7 @@ The “Personal Identity with Civic Registration Number” attribute set provide
 | Attribute requirement | Attributes |
 | :--- | :--- |
 | **REQUIRED** | `sn` (Surname) <br /> `givenName` (Given name) <br /> `displayName` (Display name) <br /> `personalIdentityNumber` (National civic registration number) |
+| **RECOMMENDED** | `dateOfBirth` (Date of birth) |
 
 **Typical use**: In an attribute release policy that provides basic user name information together with the person’s Swedish civic registration number.
 
@@ -219,8 +220,8 @@ Framework.
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
-| **REQUIRED**<sup>2</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `transactionIdentifier` (ID of assertion issued by the member state node)<sup>4</sup> |
-| **REQUIRED**<br />(if available)<sup>3</sup> | `birthName` (Birth name) <br /> `placeOfBirth` (Place of birth) <br /> `eidasNaturalPersonAddress` (Address for natural person) <br /> `gender` (Gender) |
+| **REQUIRED**<sup>2</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `transactionIdentifier` (ID of assertion issued by the member state node)<sup>3</sup> |
+| **REQUIRED**<br />(if available)<sup>4</sup> | `birthName` (Birth name) <br /> `placeOfBirth` (Place of birth) <br /> `eidasNaturalPersonAddress` (Address for natural person) <br /> `gender` (Gender) |
 | **RECOMMENDED** | `personalIdentityNumber` (National civic registration number) <br /> `personalIdentityNumberBinding` (National civic registration number Binding URI) |
 **Typical use**: In an attribute release policy implemented by an eIDAS
 connector that provides a complete set of attributes to a requesting
@@ -256,9 +257,9 @@ examples of “converted attributes”.
 
 > \[2\]: Attributes “added” by the Swedish eID node and converted attributes for the mandatory attributes of the eIDAS minimum data set for natural persons.
 
-> \[3\]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.
+> \[3\]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the `<saml2:AuthenticatingAuthority>` element of an assertion) give a reference to the original assertion and authentication process.
 
-> \[4\]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the `<saml2:AuthenticatingAuthority>` element of an assertion) give a reference to the original assertion and authentication process.
+> \[4\]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.
 
 <a name="eidas-legal-person-attribute-set"></a>
 ### 2.6. eIDAS Legal Person Attribute Set
@@ -613,6 +614,7 @@ following attribute:
 
 - Section 3.2.3 was updated with a reference to the SAP specification as source for defining the content of the `sad` attribute.
 - Fix of invalid links for SKV704 and SKV707.
+- Section 2.3, "Natural Personal Identity with Civic Registration Number (Personnummer)", was updated so that the `dateOfBirth`-attribute is listed as a recommended attribute for the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`.
 
 **Changes between version 1.3 and version 1.4:**
 

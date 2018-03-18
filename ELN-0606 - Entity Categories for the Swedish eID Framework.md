@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.6 - 2017-12-18 - *draft version*
+### Version 1.6 - 2018-03-18 - *draft version*
 
 *ELN-0606-v1.6*
 
@@ -295,13 +295,20 @@ have an agreement with the Identity Provider.
 
 **Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
 
-Note that the Identity Providers release attributes according to the "Natural Personal Identity with Civic Registration Number" attribute set. It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
+The attribute release is according to the "Natural Personal Identity with Civic Registration Number" attribute set with the addition of the `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`). The reason that the `dateOfBirth`-attribute is required is that the eIDAS minimum dataset requires the birth date, and if an Identity Provider releases a "samordningsnummer" in the `personalIdentityNumber` (instead of a Swedish "personnummer"), the birth date may not be known to the attribute consumer.
+
+It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 
 **LoA-identifier**: Not applicable
 > An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[EidRegistry\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[EidDeploy\].
 
-**Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
+**Attribute requirements**: 
+
+- ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`) 
+
 > Natural Personal Identity with Civic Registration Number (personnummer)
+
+* `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`).
 
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
@@ -433,6 +440,7 @@ All Service Type identifiers are prefixed with
 **Changes between version 1.5 and version 1.6:**
 
 - The Service Property Category "scal2" was added to section 3.2.
+- Section 2.5, "eidas-pnr-delivery", was updated to also require attribute release of the `dateOfBirth`-attribute.
 
 **Changes between version 1.4 and version 1.5:**
 
