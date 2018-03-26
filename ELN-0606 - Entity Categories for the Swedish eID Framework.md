@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.6 - 2018-03-18 - *draft version*
+### Version 1.6 - 2018-03-26 - *draft version*
 
 *ELN-0606-v1.6*
 
@@ -295,7 +295,7 @@ have an agreement with the Identity Provider.
 
 **Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
 
-The attribute release is according to the "Natural Personal Identity with Civic Registration Number" attribute set with the addition of the `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`). The reason that the `dateOfBirth`-attribute is required is that the eIDAS minimum dataset requires the birth date, and if an Identity Provider releases a "samordningsnummer" in the `personalIdentityNumber` (instead of a Swedish "personnummer"), the birth date may not be known to the attribute consumer.
+Attribute release is based on the "Natural Personal Identity with Civic Registration Number" attribute set with the addition of a mandatory `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`). The reason for the mandatory `dateOfBirth`-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the `personalIdentityNumber` attribute, in particular when this attribute contains a "samordningsnummer".
 
 It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 

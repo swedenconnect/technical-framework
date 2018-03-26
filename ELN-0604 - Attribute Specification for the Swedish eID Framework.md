@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.5 - 2018-03-18 - *draft version*
+### Version 1.5 - 2018-03-26 - *draft version*
 
 *ELN-0604-v1.5*
 
