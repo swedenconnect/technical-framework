@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2017-12-18---*draft-version*">Version 1.6 - 2017-12-18 - <em>draft version</em></h3>
+<h3 id="version-1.6---2018-03-26---*draft-version*">Version 1.6 - 2018-03-26 - <em>draft version</em></h3>
 <p><em>ELN-0606-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -274,15 +274,22 @@ to the Swedish eIDAS-node.</p>
 <h3 id="2.5.-eidas-pnr-delivery">2.5. eidas-pnr-delivery</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery</code></p>
 <p><strong>Description</strong>: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.</p>
-<p>Note that the Identity Providers release attributes according to the &quot;Natural Personal Identity with Civic Registration Number&quot; attribute set. It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.</p>
+<p>Attribute release is based on the &quot;Natural Personal Identity with Civic Registration Number&quot; attribute set with the addition of a mandatory <code>dateOfBirth</code>-attribute (<code>urn:oid:1.3.6.1.5.5.7.9.1</code>). The reason for the mandatory <code>dateOfBirth</code>-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the <code>personalIdentityNumber</code> attribute, in particular when this attribute contains a &quot;samordningsnummer&quot;.</p>
+<p>It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.</p>
 <p><strong>LoA-identifier</strong>: Not applicable</p>
 <blockquote>
 <p>An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of [EidRegistry] as assurance certification attributes in its metadata as described in section 2.1.3 of [EidDeploy].</p>
 </blockquote>
-<p><strong>Attribute requirements</strong>: ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>)</p>
+<p><strong>Attribute requirements</strong>: </p>
+<ul class="list">
+<li>ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>) </li>
+</ul>
 <blockquote>
 <p>Natural Personal Identity with Civic Registration Number (personnummer)</p>
 </blockquote>
+<ul class="list">
+<li><code>dateOfBirth</code>-attribute (<code>urn:oid:1.3.6.1.5.5.7.9.1</code>).</li>
+</ul>
 <p><a name="definitions-for-service-property-categories"></a></p>
 <h2 id="3.-definitions-for-service-property-categories">3. Definitions for Service Property Categories</h2>
 <p>A Service Property Entity Category identifier is specified as an
@@ -393,6 +400,7 @@ board</a>.</p>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
 <li>The Service Property Category &quot;scal2&quot; was added to section 3.2.</li>
+<li>Section 2.5, &quot;eidas-pnr-delivery&quot;, was updated to also require attribute release of the <code>dateOfBirth</code>-attribute.</li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">

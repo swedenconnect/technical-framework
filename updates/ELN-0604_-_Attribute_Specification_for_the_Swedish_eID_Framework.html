@@ -6,13 +6,13 @@
     <title>Attribute Specification for the Swedish eID Framework</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.5---2018-01-02---*draft-version*">Version 1.5 - 2018-01-02 - <em>draft version</em></h3>
+<h3 id="version-1.5---2018-03-26---*draft-version*">Version 1.5 - 2018-03-26 - <em>draft version</em></h3>
 <p><em>ELN-0604-v1.5</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -217,6 +217,10 @@ than those listed as required or recommended.</p>
 <td style="text-align:left"><strong>REQUIRED</strong></td>
 <td style="text-align:left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name) <br /> <code>personalIdentityNumber</code> (National civic registration number)</td>
 </tr>
+<tr>
+<td style="text-align:left"><strong>RECOMMENDED</strong></td>
+<td style="text-align:left"><code>dateOfBirth</code> (Date of birth)</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic user name information together with the person’s Swedish civic registration number.</p>
@@ -261,10 +265,10 @@ Framework.</p>
 <tbody>
 <tr>
 <td style="text-align:left"><strong>REQUIRED</strong><sup>2</sup></td>
-<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>4</sup></td>
+<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>3</sup></td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>REQUIRED</strong><br />(if available)<sup>3</sup></td>
+<td style="text-align:left"><strong>REQUIRED</strong><br />(if available)<sup>4</sup></td>
 <td style="text-align:left"><code>birthName</code> (Birth name) <br /> <code>placeOfBirth</code> (Place of birth) <br /> <code>eidasNaturalPersonAddress</code> (Address for natural person) <br /> <code>gender</code> (Gender)</td>
 </tr>
 <tr>
@@ -302,8 +306,8 @@ corresponding string value-typed attributes. The
 examples of “converted attributes”.</p>
 <blockquote>
 <p>[2]: Attributes “added” by the Swedish eID node and converted attributes for the mandatory attributes of the eIDAS minimum data set for natural persons.</p>
-<p>[3]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.</p>
-<p>[4]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of an assertion) give a reference to the original assertion and authentication process.</p>
+<p>[3]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of an assertion) give a reference to the original assertion and authentication process.</p>
+<p>[4]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.</p>
 </blockquote>
 <p><a name="eidas-legal-person-attribute-set"></a></p>
 <h3 id="2.6.-eidas-legal-person-attribute-set">2.6. eIDAS Legal Person Attribute Set</h3>
@@ -889,6 +893,7 @@ Framework</a>.</p>
 <ul class="list">
 <li>Section 3.2.3 was updated with a reference to the SAP specification as source for defining the content of the <code>sad</code> attribute.</li>
 <li>Fix of invalid links for SKV704 and SKV707.</li>
+<li>Section 2.3, &quot;Natural Personal Identity with Civic Registration Number (Personnummer)&quot;, was updated so that the <code>dateOfBirth</code>-attribute is listed as a recommended attribute for the attribute set <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>.</li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
 <ul class="list">
