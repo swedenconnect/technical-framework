@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2018-03-11 - *draft version*
+### Version 1.5 - 2018-03-26 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -210,8 +210,8 @@ The `<mdattr:EntityAttributes>` element of a Service Provider’s
 entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](http://macedir.org/entity-category/)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[Eid2EntCat\], identifying the Service Provider needs in relation to
-identity services.
+\[Eid2EntCat\], identifying the Service Provider requirements in relation to
+identity services concerning attribute release and level of assurance.
 
 The example below illustrates how an entity declares the service entity
 category identifier **`http://id.elegnamnden.se/ec/1.0/loa3-pnr`** in its
@@ -231,9 +231,16 @@ metadata.
 </md:Extensions>
 ```
 
+If a Service Provider does not have any attribute requirements other than those
+implicitly requested by inclusion of one or more service entity categories, the
+metadata entry of the Service Provider SHOULD NOT include a
+`<md:AttributeConsumingService>` element (with `<md:RequestedAttribute>` 
+elements).
+
 Any needs for particular attributes from Identify Providers, when
 present, MUST be expressed through present service entity categories in
-combination with `<md:RequestedAttribute>` elements in the Service
+combination with `<md:RequestedAttribute>` elements under the
+`<md:AttributeConsumingService>` element in the Service
 Provider metadata. The `<md:RequestedAttribute>` elements in the
 Service Provider metadata, when present, hold a list of requested and/or
 required attributes. This list of attributes MUST be interpreted in the
@@ -492,7 +499,7 @@ Providers.
 A Service Provider SHOULD explicitly specify one requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
 containing one or more `<saml2:AuthnContextClassRef>` elements that
-each contains an authentication context URI<sup>1</sup> representing a defined
+each contains an authentication context URI<sup>*</sup> representing a defined
 Level of Assurance under which the authentication process should be
 performed.
 
@@ -542,7 +549,9 @@ Service Providers SHOULD include the `ForceAuthn` attribute in all
 `true` or `false`, and not rely on its default value. The reason for this is
 to avoid accidental SSO.
 
-> \[1\]: See section 3.1.1 of \[EidRegistry\].
+If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
+
+> \[*\]: See section 3.1.1 of \[EidRegistry\].
 
 <a name="processing-requirements"></a>
 ### 5.4. Processing Requirements
@@ -809,13 +818,24 @@ request and to verify that it received all attributes necessary for
 providing a requested service. Checks whether an Identity Provider is
 capable of fulfilling the needs of a Service Provider can be done either
 by relying on a discovery process to filter out non-conformant Identity
-Providers, and/or by examining the metadata of Identity providers. An
-Identity Provider receiving a request for more attributes than it can
+Providers, and/or by examining the metadata of Identity providers. 
+
+An Identity Provider receiving a request for more attributes than it can
 provide SHOULD return an assertion with the attributes it can provide
 according to its defined attribute release policy, leaving it up to the
 Service Provider to decide how to proceed, e.g., by denying service to
 the authenticated user, provide limited services or to use other
-resources to collect necessary attributes.
+resources to collect necessary attributes. However, if a Service Provider
+has expressed a specific attribute requirement using the `<md:RequestedAttribute>`
+element of a matching<sup>*</sup> `<md:AttributeConsumingService>` element in its metadata
+and assigned the `isRequired`-attribute to `true`, then the Identity Provider
+MUST respond with an error response if this specific attribute can not be
+delivered.
+
+> \[*\]: The Identity Provider will select the `<md:AttributeConsumingService>` element to consider
+during attribute release based on the `AttributeConsumingServiceIndex` attribute specified in
+the `<saml2p:AuthnRequest>` message, and if that attribute is not present, the default 
+`<md:AttributeConsumingService>` element.
 
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
@@ -838,13 +858,13 @@ fails MUST lead to that the Service Provider rejects the response
 message and does not use the assertion.
 
 Some of the processing requirements below are defined in order to
-protect from MITM- or MITB-attacks<sup>2</sup> were unsigned authentication
+protect from MITM- or MITB-attacks<sup>*</sup> were unsigned authentication
 requests may be changed before being sent to the Identity Provider.
 However, a Service Provider MUST implement all of the specified
 processing requirements even if it sends signed authentication request
 messages.
 
-> \[2\]: MITM stands for ”man in the middle” and MITB stands for ”man in the browser”.
+> \[*\]: MITM stands for ”man in the middle” and MITB stands for ”man in the browser”.
 
 <a name="signature-validation"></a>
 #### 6.3.1. Signature Validation
@@ -914,9 +934,9 @@ authentication was performed. If the Service Provider declared one, or more,
 element of the authentication request (see [section 5.4](#message-content)), 
 the received authentication context URI MUST match one of the declared 
 authentication context URI:s from the request. If not, the Service Provider 
-MUST reject the assertion<sup>3</sup>.
+MUST reject the assertion<sup>*</sup>.
 
-> \[3\]: If the Service Provider does not declare an authentication context URI
+> \[*\]: If the Service Provider does not declare an authentication context URI
 > in the authentication request it should be prepared to receive any of the
 > authentication context URI:s declared by the Identity Provider in its metadata
 > record (see [section 2.1.3](#identity-providers)).
@@ -986,7 +1006,7 @@ If an Identity Provider detects suspicious fraudulent behaviour or if any of its
 “DSS Extension for Federated Central Signing Services”, \[EidDSS\],
 defines an extension to the OASIS DSS protocol for providing centralized
 Signature Services within the Swedish eID Framework. This specification
-defines the communication between a *Signature Requestor*<sup>4</sup> and a
+defines the communication between a *Signature Requestor*<sup>*</sup> and a
 Signature Service, but does not cover SAML specific requirements
 regarding the user authentication phase that is part of the signature
 process.
@@ -997,7 +1017,7 @@ SAML Service Provider. All requirements regarding user authentication
 specified earlier in this profile are still valid. This section extends
 these requirements for the “authentication for signature” process.
 
-> \[4\]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.
+> \[*\]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.
 
 <a name="authentication-context-uris-for-signature-services"></a>
 ### 7.1. Authentication Context URIs for Signature Services
@@ -1060,10 +1080,10 @@ It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:Requ
 
 An Identity Provider that accepts an `<saml2p:AuthnRequest>` message
 from a Service Provider that has indicated that it is a Signature
-Service<sup>5</sup> MUST provide a user interface that is indicating that the
+Service<sup>*</sup> MUST provide a user interface that is indicating that the
 end user is performing a signature.
 
-> \[5\]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the `http://id.elegnamnden.se/st/1.0/sigservice` URI as a service type entity category in its metadata (see [2.1.4](#signature-service)).
+> \[*\]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the `http://id.elegnamnden.se/st/1.0/sigservice` URI as a service type entity category in its metadata (see [2.1.4](#signature-service)).
 
 <a name="requesting-display-of-signature-message"></a>
 #### 7.2.1. Requesting Display of Signature Message
@@ -1159,7 +1179,7 @@ message URI) in SAML assertion under the
 `<saml2:AuthnStatement>` element in the response, the Identity
 Provider asserts that it has successfully displayed the sign message
 received in the request for the user and that the user has accepted to
-sign under the context of this sign message<sup>6</sup>.
+sign under the context of this sign message<sup>*</sup>.
 
 An Identity Provider MUST NOT return an authentication context URI in an
 assertion, other than those listed in [section 7.1](#authentication-context-uris-for-signature-services), if the request
@@ -1170,7 +1190,7 @@ MUST be displayed, then the Identity Provider MUST return an error
 response with the status code
 `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
-> \[6\]: As defined in [section 5.3](#message-content), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
+> \[*\]: As defined in [section 5.3](#message-content), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
 
 <a name="normative-references"></a>
 ## 8. Normative References
@@ -1270,6 +1290,7 @@ response with the status code
 - Section 7.2, "Authentication Requests", was extended to recommend the usage of the `<saml2p:RequesterID>` element within `<saml2p:Scoping>`. The reason for this recommendation is that Identity Providers may need information about the "Signature Requestor", i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.
 - Section 6.3.4, "The Authentication Statement", contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.
 - A new section, 7.2.2, "Requesting SCAL2 Signature Activation Data", was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).
+- Attribute release rules have been clarified in sections 2.1.2, "Service Providers" and 6.2.1, "Attribute Release Rules".
 
 **Changes between version 1.3 and version 1.4:**
 
