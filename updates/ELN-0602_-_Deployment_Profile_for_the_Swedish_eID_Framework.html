@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID Framework</h1>
-<h3 id="version-1.5---2018-03-11---*draft-version*">Version 1.5 - 2018-03-11 - <em>draft version</em></h3>
+<h3 id="version-1.5---2018-03-26---*draft-version*">Version 1.5 - 2018-03-26 - <em>draft version</em></h3>
 <p><em>ELN-0602-v1.5</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -169,8 +169,8 @@ validation and encryption, indicated by an absent <code>&quot;use&quot;</code> a
 entity descriptor SHOULD contain one entity category attribute
 [<a href="http://macedir.org/entity-category/">EntCat</a>] that holds at least
 one attribute value representing a service entity category as defined in
-[Eid2EntCat], identifying the Service Provider needs in relation to
-identity services.</p>
+[EidEntCat], identifying the Service Provider requirements in relation to
+identity services concerning attribute release and level of assurance.</p>
 <p>The example below illustrates how an entity declares the service entity
 category identifier <strong><code>http://id.elegnamnden.se/ec/1.0/loa3-pnr</code></strong> in its
 metadata.</p>
@@ -184,9 +184,15 @@ metadata.</p>
       <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">mdattr:EntityAttributes</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">md:Extensions</span>&gt;</span></code></pre><p>Any needs for particular attributes from Identify Providers, when
+<span class="hljs-tag">&lt;/<span class="hljs-name">md:Extensions</span>&gt;</span></code></pre><p>If a Service Provider does not have any attribute requirements other than those
+implicitly requested by inclusion of one or more service entity categories, the
+metadata entry of the Service Provider SHOULD NOT include a
+<code>&lt;md:AttributeConsumingService&gt;</code> element (with <code>&lt;md:RequestedAttribute&gt;</code> 
+elements).</p>
+<p>Any needs for particular attributes from Identify Providers, when
 present, MUST be expressed through present service entity categories in
-combination with <code>&lt;md:RequestedAttribute&gt;</code> elements in the Service
+combination with <code>&lt;md:RequestedAttribute&gt;</code> elements under the
+<code>&lt;md:AttributeConsumingService&gt;</code> element in the Service
 Provider metadata. The <code>&lt;md:RequestedAttribute&gt;</code> elements in the
 Service Provider metadata, when present, hold a list of requested and/or
 required attributes. This list of attributes MUST be interpreted in the
@@ -397,7 +403,7 @@ Providers.</p>
 <p>A Service Provider SHOULD explicitly specify one requested
 authentication context element (<code>&lt;saml2p:RequestedAuthnContext&gt;</code>),
 containing one or more <code>&lt;saml2:AuthnContextClassRef&gt;</code> elements that
-each contains an authentication context URI<sup>1</sup> representing a defined
+each contains an authentication context URI<sup>*</sup> representing a defined
 Level of Assurance under which the authentication process should be
 performed.</p>
 <p>A present <code>&lt;saml2p:RequestedAuthnContext&gt;</code> element MUST specify
@@ -432,8 +438,9 @@ substantial level for notified eIDs defined within the eIDAS Framework.</em></p>
 <code>&lt;saml2p:AuthnRequest&gt;</code> messages and explicitly set its value to
 <code>true</code> or <code>false</code>, and not rely on its default value. The reason for this is
 to avoid accidental SSO.</p>
+<p>If the Service Provider has included more than one <code>&lt;md:AttributeConsumingService&gt;</code> element in its metadata it is RECOMMENDED that the <code>&lt;saml2p:AuthnRequest&gt;</code> message contains the <code>AttributeConsumingServiceIndex</code> attribute holding the index of the <code>&lt;md:AttributeConsumingService&gt;</code> element that the Identity Provider should consider during attribute release.</p>
 <blockquote>
-<p>[1]: See section 3.1.1 of [EidRegistry].</p>
+<p>[*]: See section 3.1.1 of [EidRegistry].</p>
 </blockquote>
 <p><a name="processing-requirements"></a></p>
 <h3 id="5.4.-processing-requirements">5.4. Processing Requirements</h3>
@@ -663,13 +670,22 @@ request and to verify that it received all attributes necessary for
 providing a requested service. Checks whether an Identity Provider is
 capable of fulfilling the needs of a Service Provider can be done either
 by relying on a discovery process to filter out non-conformant Identity
-Providers, and/or by examining the metadata of Identity providers. An
-Identity Provider receiving a request for more attributes than it can
+Providers, and/or by examining the metadata of Identity providers. </p>
+<p>An Identity Provider receiving a request for more attributes than it can
 provide SHOULD return an assertion with the attributes it can provide
-according to its defined attribute release policy, leaving it up to the
+according to its defined attribute release policy if the user has been successfully authenticated, leaving it up to the
 Service Provider to decide how to proceed, e.g., by denying service to
 the authenticated user, provide limited services or to use other
-resources to collect necessary attributes.</p>
+resources to collect necessary attributes. However, if a Service Provider
+has expressed a specific attribute requirement using the <code>&lt;md:RequestedAttribute&gt;</code>
+element of a matching<sup>*</sup> <code>&lt;md:AttributeConsumingService&gt;</code> element in its metadata
+and assigned the <code>isRequired</code>-attribute to <code>true</code>, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.</p>
+<blockquote>
+<p>[*]: The Identity Provider will select the <code>&lt;md:AttributeConsumingService&gt;</code> element to consider
+during attribute release based on the <code>AttributeConsumingServiceIndex</code> attribute specified in
+the <code>&lt;saml2p:AuthnRequest&gt;</code> message, and if that attribute is not present, the default 
+<code>&lt;md:AttributeConsumingService&gt;</code> element.</p>
+</blockquote>
 <p><a name="processing-requirements2"></a></p>
 <h3 id="6.3.-processing-requirements">6.3. Processing Requirements</h3>
 <p>This profile mandates a correct processing of a <code>&lt;saml2p:Response&gt;</code>
@@ -688,13 +704,13 @@ response message the following requirements apply. Any verification that
 fails MUST lead to that the Service Provider rejects the response
 message and does not use the assertion.</p>
 <p>Some of the processing requirements below are defined in order to
-protect from MITM- or MITB-attacks<sup>2</sup> were unsigned authentication
+protect from MITM- or MITB-attacks<sup>*</sup> were unsigned authentication
 requests may be changed before being sent to the Identity Provider.
 However, a Service Provider MUST implement all of the specified
 processing requirements even if it sends signed authentication request
 messages.</p>
 <blockquote>
-<p>[2]: MITM stands for ”man in the middle” and MITB stands for ”man in the browser”.</p>
+<p>[*]: MITM stands for ”man in the middle” and MITB stands for ”man in the browser”.</p>
 </blockquote>
 <p><a name="signature-validation"></a></p>
 <h4 id="6.3.1.-signature-validation">6.3.1. Signature Validation</h4>
@@ -752,9 +768,9 @@ authentication was performed. If the Service Provider declared one, or more,
 element of the authentication request (see <a href="#message-content">section 5.4</a>), 
 the received authentication context URI MUST match one of the declared 
 authentication context URI:s from the request. If not, the Service Provider 
-MUST reject the assertion<sup>3</sup>.</p>
+MUST reject the assertion<sup>*</sup>.</p>
 <blockquote>
-<p>[3]: If the Service Provider does not declare an authentication context URI
+<p>[*]: If the Service Provider does not declare an authentication context URI
 in the authentication request it should be prepared to receive any of the
 authentication context URI:s declared by the Identity Provider in its metadata
 record (see <a href="#identity-providers">section 2.1.3</a>).</p>
@@ -815,7 +831,7 @@ Provider according to the HTTP POST binding
 <p>“DSS Extension for Federated Central Signing Services”, [EidDSS],
 defines an extension to the OASIS DSS protocol for providing centralized
 Signature Services within the Swedish eID Framework. This specification
-defines the communication between a <em>Signature Requestor</em><sup>4</sup> and a
+defines the communication between a <em>Signature Requestor</em><sup>*</sup> and a
 Signature Service, but does not cover SAML specific requirements
 regarding the user authentication phase that is part of the signature
 process.</p>
@@ -825,7 +841,7 @@ SAML Service Provider. All requirements regarding user authentication
 specified earlier in this profile are still valid. This section extends
 these requirements for the “authentication for signature” process.</p>
 <blockquote>
-<p>[4]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.</p>
+<p>[*]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.</p>
 </blockquote>
 <p><a name="authentication-context-uris-for-signature-services"></a></p>
 <h3 id="7.1.-authentication-context-uris-for-signature-services">7.1. Authentication Context URIs for Signature Services</h3>
@@ -884,10 +900,10 @@ also be indicated in the Signature Service metadata record using the
 </blockquote>
 <p>An Identity Provider that accepts an <code>&lt;saml2p:AuthnRequest&gt;</code> message
 from a Service Provider that has indicated that it is a Signature
-Service<sup>5</sup> MUST provide a user interface that is indicating that the
+Service<sup>*</sup> MUST provide a user interface that is indicating that the
 end user is performing a signature.</p>
 <blockquote>
-<p>[5]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the <code>http://id.elegnamnden.se/st/1.0/sigservice</code> URI as a service type entity category in its metadata (see <a href="#signature-service">2.1.4</a>).</p>
+<p>[*]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the <code>http://id.elegnamnden.se/st/1.0/sigservice</code> URI as a service type entity category in its metadata (see <a href="#signature-service">2.1.4</a>).</p>
 </blockquote>
 <p><a name="requesting-display-of-signature-message"></a></p>
 <h4 id="7.2.1.-requesting-display-of-signature-message">7.2.1. Requesting Display of Signature Message</h4>
@@ -969,7 +985,7 @@ message URI) in SAML assertion under the
 <code>&lt;saml2:AuthnStatement&gt;</code> element in the response, the Identity
 Provider asserts that it has successfully displayed the sign message
 received in the request for the user and that the user has accepted to
-sign under the context of this sign message<sup>6</sup>.</p>
+sign under the context of this sign message<sup>*</sup>.</p>
 <p>An Identity Provider MUST NOT return an authentication context URI in an
 assertion, other than those listed in <a href="#authentication-context-uris-for-signature-services">section 7.1</a>, if the request
 included one of these URIs as the requested authentication context. If
@@ -979,7 +995,7 @@ MUST be displayed, then the Identity Provider MUST return an error
 response with the status code
 <code>urn:oasis:names:tc:SAML:2.0:status:AuthnFailed</code>.</p>
 <blockquote>
-<p>[6]: As defined in <a href="#message-content">section 5.3</a>, only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to <a href="#authentication-context-uris-for-signature-services">section 7.1</a> if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.</p>
+<p>[*]: As defined in <a href="#message-content">section 5.3</a>, only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to <a href="#authentication-context-uris-for-signature-services">section 7.1</a> if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.</p>
 </blockquote>
 <p><a name="normative-references"></a></p>
 <h2 id="8.-normative-references">8. Normative References</h2>
@@ -1098,6 +1114,7 @@ Services</a>.</p>
 <li>Section 7.2, &quot;Authentication Requests&quot;, was extended to recommend the usage of the <code>&lt;saml2p:RequesterID&gt;</code> element within <code>&lt;saml2p:Scoping&gt;</code>. The reason for this recommendation is that Identity Providers may need information about the &quot;Signature Requestor&quot;, i.e., the Service Provider that requested the signature that caused a Signature Service to request authentication.</li>
 <li>Section 6.3.4, &quot;The Authentication Statement&quot;, contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.</li>
 <li>A new section, 7.2.2, &quot;Requesting SCAL2 Signature Activation Data&quot;, was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).</li>
+<li>Attribute release rules have been clarified in sections 2.1.2, &quot;Service Providers&quot; and 6.2.1, &quot;Attribute Release Rules&quot;.</li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
 <ul class="list">
