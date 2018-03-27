@@ -210,7 +210,7 @@ The `<mdattr:EntityAttributes>` element of a Service Provider’s
 entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](http://macedir.org/entity-category/)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[Eid2EntCat\], identifying the Service Provider requirements in relation to
+\[EidEntCat\], identifying the Service Provider requirements in relation to
 identity services concerning attribute release and level of assurance.
 
 The example below illustrates how an entity declares the service entity
@@ -822,15 +822,13 @@ Providers, and/or by examining the metadata of Identity providers.
 
 An Identity Provider receiving a request for more attributes than it can
 provide SHOULD return an assertion with the attributes it can provide
-according to its defined attribute release policy, leaving it up to the
+according to its defined attribute release policy if the user has been successfully authenticated, leaving it up to the
 Service Provider to decide how to proceed, e.g., by denying service to
 the authenticated user, provide limited services or to use other
 resources to collect necessary attributes. However, if a Service Provider
 has expressed a specific attribute requirement using the `<md:RequestedAttribute>`
 element of a matching<sup>*</sup> `<md:AttributeConsumingService>` element in its metadata
-and assigned the `isRequired`-attribute to `true`, then the Identity Provider
-MUST respond with an error response if this specific attribute can not be
-delivered.
+and assigned the `isRequired`-attribute to `true`, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.
 
 > \[*\]: The Identity Provider will select the `<md:AttributeConsumingService>` element to consider
 during attribute release based on the `AttributeConsumingServiceIndex` attribute specified in
