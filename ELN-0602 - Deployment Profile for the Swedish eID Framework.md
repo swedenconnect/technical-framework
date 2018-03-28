@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2018-03-26 - *draft version*
+### Version 1.5 - 2018-03-28 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -163,6 +163,10 @@ the following syntax is used:
 -   `<mdattr:Element>` – for elements defined in
     \[[SAML2MetaAttr](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)\].
 
+When referring to elements from the "Identity Provider Discovery Service Protocol and Profile" specification \[[IdpDisco](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)\], the following syntax is used:
+
+- `<idpdisc:DiscoveryResponse>`
+
 When referring to elements from the W3C XML Signature namespace
 (`http://www.w3.org/2000/09/xmldsig\#`) the following syntax is used:
 
@@ -290,6 +294,8 @@ Note that the response message that carries the assertion will always be
 signed, so the Service Provider should only require signed assertions in
 case that it wants to preserve the proof of authenticity of an assertion
 separate from the response.
+
+A Service Provider wishing to make use of a central discovery service as specified in the "Identity Provider Discovery Service Protocol Profile" \[IdPDisco\] MUST include at least one `<idpdisc:DiscoveryResponse>` element as an extension under the `<md:SPSSODescriptor>` element. 
 
 <a name="identity-providers"></a>
 #### 2.1.3. Identity Providers
@@ -430,10 +436,13 @@ section [6.2.1](#attribute-release-rules), “[Attribute Release Rules](#attribu
 <a name="discovery"></a>
 ### 5.1. Discovery
 
-Currently, this deployment profile does not impose any requirements of
+This profile does not impose any requirements of
 how the process of discovery is implemented by Service Providers wishing
 to display user interfaces for selection of Identity Providers for end
-users.
+users. However, Service Providers making use of a centralized
+discovery service as defined in \[IdpDisco\] MUST follow the requirements
+stated for discovery responses in 
+section [2.1.2](##service-providers), "[Service Providers](##service-providers)".
 
 <a name="binding-and-security-requirements"></a>
 ### 5.2. Binding and Security Requirements
@@ -1289,6 +1298,7 @@ response with the status code
 - Section 6.3.4, "The Authentication Statement", contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.
 - A new section, 7.2.2, "Requesting SCAL2 Signature Activation Data", was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).
 - Attribute release rules have been clarified in sections 2.1.2, "Service Providers" and 6.2.1, "Attribute Release Rules".
+- Section 2.1.2, "Service Providers", was updated to include a requirement for Service Providers communicating with a centralized discovery service.
 
 **Changes between version 1.3 and version 1.4:**
 

@@ -2,7 +2,7 @@
 
 # E-legitimationsnämndens Tekniska ramverk
 
-### Version: 1.5 - 2017-03-28
+### Version 1.6 - 2018-03-28 - *utkast*
 
 *ELN-0600-v1.5*
 
@@ -37,8 +37,6 @@
 2. [**Tekniska specifikationer**](#tekniska-specifikationer)
 
     2.1. [SAML-profiler](#saml-profiler)
-
-    2.1.1. [Specifikationer för anvisning (Discovery)](#specifikationer-foer-anvisning-(discovery))
 
     2.2. [Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk](#specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk)
 
@@ -435,18 +433,6 @@ kring följande SAML-profiler:
     ”SAML2int profile – SAML 2.0 Interoperability Profile”
     \[[SAML2Int](http://saml2int.org/profile/current/)\].
 
-<a name="specifikationer-foer-anvisning-(discovery)"></a>
-#### 2.1.1. Specifikationer för anvisning (Discovery)
-
-Den specifikation, \[EidDiscovery\], som gällt i tidigare versioner av
-tekniskt ramverk är inte längre korrekt på grund av förändrade
-förutsättningar. Specifikt beror detta på att den tidigare definitionen
-att en e-legitimationsutfärdare endast kunde representeras med en
-legitimeringstjänst inte längre gäller.
-
-E-legitimationsnämnden planerar att utkomma med en uppdaterad
-specifikation rörande anvisning i kommande utkast av tekniskt ramverk.
-
 <a name="specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk"></a>
 ### 2.2. Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk
 
@@ -542,9 +528,6 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 **\[EidEntCat\]**
 > [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
-**\[EidDiscovery\]**
-> Discovery within the Swedish eID Framework. (Ej längre giltigt).
-
 **\[EidDSSProfile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
 > Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
@@ -582,6 +565,10 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 
 <a name="aendringar-mellan-versioner"></a>
 ## 4. Ändringar mellan versioner
+
+**Ändringar mellan version 1.5 och version 1.6:**
+
+- Borttag av underkapitel rörande anvisning.
 
 **Ändringar mellan version 1.4 och version 1.5:**
 
