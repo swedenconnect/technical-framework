@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.6 - 2018-03-26 - *draft version*
+### Version 1.6 - 2018-03-28 - *draft version*
 
 *ELN-0606-v1.6*
 
@@ -343,9 +343,6 @@ Discovery](#use-in-discovery-services)”. This means that a consuming service m
 mobile-auth category in its metadata in order to have the discovery
 process especially displaying Identity Providers that offer
 authentication using mobile devices.
-
-See \[EidDiscovery\] for a more extensive explanation of the use of the
-mobile-auth category.
 
 <a name="scal2"></a>
 ### 3.2. scal2
