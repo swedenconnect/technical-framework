@@ -3,7 +3,7 @@
 
 | File | Version |
 | :--- | :---: |
-| [ELN-0600 - Tekniskt ramverk - Svensk e-legitimation](ELN-0600%20-%20Tekniskt%20ramverk%20-%20Svensk%20e-legitimation.md) | 1.5 |   
+| [ELN-0600 - Tekniskt ramverk - Svensk e-legitimation](ELN-0600%20-%20Tekniskt%20ramverk%20-%20Svensk%20e-legitimation.md) | 1.6 (draft) |   
 | [ELN-0602 - Deployment Profile for the Swedish eID Framework](ELN-0602%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.5 (draft) |
 | [ELN-0603 - Registry for Identifiers](ELN-0603%20-%20Registry%20for%20Identifiers.md) | 1.5 (draft) |
 | [ELN-0604 - Attribute Specification for the Swedish eID Framework](ELN-0604%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.5 (draft) |
