@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
 <h1 id="deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID Framework</h1>
-<h3 id="version-1.5---2018-03-26---*draft-version*">Version 1.5 - 2018-03-26 - <em>draft version</em></h3>
+<h3 id="version-1.5---2018-03-28---*draft-version*">Version 1.5 - 2018-03-28 - <em>draft version</em></h3>
 <p><em>ELN-0602-v1.5</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -131,6 +131,10 @@ the following syntax is used:</p>
 [<a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html">SAML2MetaAttr</a>].</p>
 </li>
 </ul>
+<p>When referring to elements from the &quot;Identity Provider Discovery Service Protocol and Profile&quot; specification [<a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf">IdpDisco</a>], the following syntax is used:</p>
+<ul class="list">
+<li><code>&lt;idpdisc:DiscoveryResponse&gt;</code></li>
+</ul>
 <p>When referring to elements from the W3C XML Signature namespace
 (<code>http://www.w3.org/2000/09/xmldsig\#</code>) the following syntax is used:</p>
 <ul class="list">
@@ -237,6 +241,7 @@ attribute of the <code>&lt;md:SPSSODescriptor&gt;</code> to a value of <code>tru
 signed, so the Service Provider should only require signed assertions in
 case that it wants to preserve the proof of authenticity of an assertion
 separate from the response.</p>
+<p>A Service Provider wishing to make use of a central discovery service as specified in the &quot;Identity Provider Discovery Service Protocol Profile&quot; [IdPDisco] MUST include at least one <code>&lt;idpdisc:DiscoveryResponse&gt;</code> element as an extension under the <code>&lt;md:SPSSODescriptor&gt;</code> element. </p>
 <p><a name="identity-providers"></a></p>
 <h4 id="2.1.3.-identity-providers">2.1.3. Identity Providers</h4>
 <p>The <code>&lt;mdattr:EntityAttributes&gt;</code> element of an Identity Provider’s
@@ -345,10 +350,13 @@ section <a href="#attribute-release-rules">6.2.1</a>, “<a href="#attribute-rel
 <h2 id="5.-authentication-requests">5. Authentication Requests</h2>
 <p><a name="discovery"></a></p>
 <h3 id="5.1.-discovery">5.1. Discovery</h3>
-<p>Currently, this deployment profile does not impose any requirements of
+<p>This profile does not impose any requirements of
 how the process of discovery is implemented by Service Providers wishing
 to display user interfaces for selection of Identity Providers for end
-users.</p>
+users. However, Service Providers making use of a centralized
+discovery service as defined in [IdpDisco] MUST follow the requirements
+stated for discovery responses in 
+section <a href="##service-providers">2.1.2</a>, &quot;<a href="##service-providers">Service Providers</a>&quot;.</p>
 <p><a name="binding-and-security-requirements"></a></p>
 <h3 id="5.2.-binding-and-security-requirements">5.2. Binding and Security Requirements</h3>
 <p>The endpoints, at which an Identity Provider receives a
@@ -1115,6 +1123,7 @@ Services</a>.</p>
 <li>Section 6.3.4, &quot;The Authentication Statement&quot;, contained a requirement about how to process a received authentication context URI that was incorrect. This has been corrected.</li>
 <li>A new section, 7.2.2, &quot;Requesting SCAL2 Signature Activation Data&quot;, was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).</li>
 <li>Attribute release rules have been clarified in sections 2.1.2, &quot;Service Providers&quot; and 6.2.1, &quot;Attribute Release Rules&quot;.</li>
+<li>Section 2.1.2, &quot;Service Providers&quot;, was updated to include a requirement for Service Providers communicating with a centralized discovery service.</li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
 <ul class="list">
