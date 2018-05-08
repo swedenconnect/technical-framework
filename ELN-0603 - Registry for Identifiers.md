@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.5 - 2018-03-06 - *draft version*
+### Version 1.5 - 2018-05-08 - *draft version*
 
 *ELN-0603-v1.5*
 
@@ -43,6 +43,8 @@
     3.1.7. [Sign Response Status Codes](#sign-response-status-codes)
     
     3.1.8. [Name Registration Authorities](#name-registration-authorities)
+    
+    3.1.9. [Country Code Identifiers](#country-code-identifiers)
     
     3.2. [OID Identifiers](#oid-identifiers)
 
@@ -93,11 +95,12 @@ e-identification board is based on the following components:
 ### 2.1. URI Identifiers
 
 All URI identifiers in this registry are of URL type (Uniform Resource
-Locator), assigned under the prefix `http://id.elegnamnden.se`.
+Locator), assigned under the prefixes `http://id.elegnamnden.se` and `http://id.swedenconnect.se`.
 
 These URL identifiers are defined using the following structure:
 
-**`http://id.elegnamnden.se/{category}[/{version}]/{identifier}`**
+* **`http://id.elegnamnden.se/{category}[/{version}]/{identifier}`**, or,
+* **`http://id.swedenconnect.se/{category}[/{version}]/{identifier}`**.
 
 <a name="oid-identifiers"></a>
 ### 2.2. OID Identifiers
@@ -157,6 +160,7 @@ The following category codes are defined:
 | **auth-cont** | Authentication context information schema. |
 | **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
+| **country** | URI identifier representation of country codes. | 
 | **ns** | XML Schema namespaces. |
 
 <a name="authentication-context-uris"></a>
@@ -323,6 +327,15 @@ Some protocols require a URI identifier to uniquely identify the entity responsi
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space. | **\[CertProf\]** |
 
+<a name="country-code-identifiers"></a>
+#### 3.1.9. Country Code Identifiers
+
+Country codes represented as URI identifiers within the Swedish eID Framework are represented as:  
+
+**`http://id.swedenconnect.se/country/{country-code}`**
+
+where `{country-code}` is the two letter **\[ISO 3166\]** country code in lowercase. 
+
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
 
@@ -448,6 +461,9 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > repealing Directive 1999/93/EC. Including implementation acts of the
 > regulation and associated technical specifications.
 
+**\[ISO 3166\]**
+> Country Codes - ISO 3166, [https://www.iso.org/iso-3166-country-codes.html](https://www.iso.org/iso-3166-country-codes.html).
+
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
 
@@ -460,6 +476,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - Added Semantics Identifiers section 3.1.8 to define a name registration authority URI necessary to express a provisional ID attribute in an X.509 certificate according to ETSI EN 319 412-1.
 
 - Added Authentication Context URI:s `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` and `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` to section 3.1.1.
+
+- Added section 3.1.9, "Country Code Identifiers", that describes the format for country code URI identifiers.
 
 **Changes between version 1.3 and version 1.4:**
 
