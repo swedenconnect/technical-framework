@@ -44,7 +44,9 @@
     
     3.1.8. [Name Registration Authorities](#name-registration-authorities)
     
-    3.1.9. [Country Code Identifiers](#country-code-identifiers)
+    3.1.9. [eIDAS Identifiers](#eidas-identifiers)
+    
+    3.1.9.1. [eIDAS Proxy Service Aliases](#eidas-proxy-service-aliases)
     
     3.2. [OID Identifiers](#oid-identifiers)
 
@@ -160,7 +162,7 @@ The following category codes are defined:
 | **auth-cont** | Authentication context information schema. |
 | **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
-| **country** | URI identifier representation of country codes. | 
+| **eidas** | Identifiers used for integration with the eIDAS Framework. | 
 | **ns** | XML Schema namespaces. |
 
 <a name="authentication-context-uris"></a>
@@ -327,14 +329,21 @@ Some protocols require a URI identifier to uniquely identify the entity responsi
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space. | **\[CertProf\]** |
 
-<a name="country-code-identifiers"></a>
-#### 3.1.9. Country Code Identifiers
+<a name="eidas-identifiers"></a>
+#### 3.1.9. eIDAS Identifiers
 
-Country codes represented as URI identifiers within the Swedish eID Framework are represented as:  
+This section defines identifiers used within the Swedish eID Framework to integrate with the eIDAS Framework.
 
-**`http://id.swedenconnect.se/country/{country-code}`**
+<a name="eidas-proxy-service-aliases"></a>
+##### 3.1.9.1. eIDAS Proxy Service Aliases
 
-where `{country-code}` is the two letter **\[ISO 3166\]** country code in lowercase. 
+Each country within the eIDAS federation provides an eIDAS Proxy Service that is a Proxy Identity Provider for the authentication services within that specific country. The entityID identifier for an eIDAS Proxy Service in another country is not known to a Swedish Service Provider, but there are cases in which the Swedish Service Provider needs to refer to a specific eIDAS Proxy Service. Therefore, this specification defines an URI identifier format for eIDAS Proxy Service aliases. The format is as follows:
+
+**`http://id.swedenconnect.se/eidas/1.0/proxy-service/{country-code}`**
+
+where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format (**\[ISO 3166\]**).
+
+> A consumer of an eIDAS Proxy Service alias URI MUST accept the country code part of the URI in both lower and upper case letters.
 
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
@@ -477,7 +486,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 - Added Authentication Context URI:s `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` and `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` to section 3.1.1.
 
-- Added section 3.1.9, "Country Code Identifiers", that describes the format for country code URI identifiers.
+- Added section 3.1.9, "eIDAS Identifiers", that describes the format for eIDAS Proxy Service Alias URI identifiers.
 
 **Changes between version 1.3 and version 1.4:**
 

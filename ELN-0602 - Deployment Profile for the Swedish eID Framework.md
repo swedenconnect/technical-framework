@@ -505,12 +505,11 @@ user agent to deliver the request. This is useful to prevent malicious
 forwarding of signed requests from being accepted by unintended Identity
 Providers.
 
-A Service Provider SHOULD explicitly specify one requested
+A Service Provider SHOULD explicitly specify a requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
-containing one or more `<saml2:AuthnContextClassRef>` elements that
-each contains an authentication context URI representing a defined
-Level of Assurance under which the authentication process should be
-performed (see section 3.1.1 of \[EidRegistry\].).
+containing `<saml2:AuthnContextClassRef>` elements each holding
+a Level of Assurance authentication context URI (see section 3.1.1 of \[EidRegistry\]) 
+that the Service Provider considers acceptable for the authentication process.
 
 A present `<saml2p:RequestedAuthnContext>` element MUST specify
 exact matching by means of either an absent `Comparison` attribute or a
@@ -571,18 +570,19 @@ An Identity Provider that acts as a proxy for other Identity Providers SHOULD su
 ```
 *Example of how an `AuthnRequest` contains a `Scoping`-element where the requester signals to the Proxy IdP which Identity Provider that should perform the authentication of the user.*
 
-The Swedish eIDAS Connector is a Proxy IdP proxying requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include a country code URI under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. For these cases, a country code URI represented according to section 3.1.9 of \[EidRegistry\] should be used.
+The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[EidRegistry\].
 
 ```
 <saml2p:Scoping>
   <saml2p:IDPList>
-    <saml2p:IDPEntry ProviderID="http://id.swedenconnect.se/country/no" />
+    <saml2p:IDPEntry ProviderID="http://id.swedenconnect.se/eidas/1.0/proxy-service/no" />
   </saml2p:IDPList>
 </saml2p:Scoping>
 ```
-*Example of how an `AuthnRequest` sent to the eIDAS Connector requests proxying to Norway for authentication.*
+*Example of how an `AuthnRequest` sent to the eIDAS Connector requests that the eIDAS Connector should
+proxy the request to the Norwegian eIDAS Proxy Service for authentication.*
 
-> Note: A Service Provider may list more than one country in the `<saml2p:IDPList>`. The eIDAS Connector will then present a country selection dialogue containing only the indicated countries.
+> **Note**: A Service Provider may list more than one country in the `<saml2p:IDPList>` of a `<saml2p:Scoping>` element. The eIDAS Connector will then present a country selection dialogue containing only the listed countries.
 
 <a name="processing-requirements"></a>
 ### 5.4. Processing Requirements
