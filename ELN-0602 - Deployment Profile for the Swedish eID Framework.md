@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2018-03-28 - *draft version*
+### Version 1.5 - 2018-05-08 - *draft version*
 
 *ELN-0602-v1.5*
 
@@ -505,12 +505,11 @@ user agent to deliver the request. This is useful to prevent malicious
 forwarding of signed requests from being accepted by unintended Identity
 Providers.
 
-A Service Provider SHOULD explicitly specify one requested
+A Service Provider SHOULD explicitly specify a requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
-containing one or more `<saml2:AuthnContextClassRef>` elements that
-each contains an authentication context URI<sup>*</sup> representing a defined
-Level of Assurance under which the authentication process should be
-performed.
+containing `<saml2:AuthnContextClassRef>` elements each holding
+a Level of Assurance authentication context URI (see section 3.1.1 of \[EidRegistry\]) 
+that the Service Provider considers acceptable for the authentication process.
 
 A present `<saml2p:RequestedAuthnContext>` element MUST specify
 exact matching by means of either an absent `Comparison` attribute or a
@@ -560,7 +559,30 @@ to avoid accidental SSO.
 
 If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
 
-> \[*\]: See section 3.1.1 of \[EidRegistry\].
+An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the `<saml2p:Scoping>` element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) that may be used to authenticate the user. See section 3.4.1.5 of \[SAML2Core\].
+
+```
+<saml2p:Scoping>
+  <saml2p:IDPList>
+    <saml2p:IDPEntry ProviderID="http://idp.example.com" />
+  </saml2p:IDPList>
+</saml2p:Scoping>
+```
+*Example of how an `AuthnRequest` contains a `Scoping`-element where the requester signals to the Proxy IdP which Identity Provider that should perform the authentication of the user.*
+
+The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[EidRegistry\].
+
+```
+<saml2p:Scoping>
+  <saml2p:IDPList>
+    <saml2p:IDPEntry ProviderID="http://id.swedenconnect.se/eidas/1.0/proxy-service/no" />
+  </saml2p:IDPList>
+</saml2p:Scoping>
+```
+*Example of how an `AuthnRequest` sent to the eIDAS Connector requests that the eIDAS Connector should
+proxy the request to the Norwegian eIDAS Proxy Service for authentication.*
+
+> **Note**: A Service Provider may list more than one country in the `<saml2p:IDPList>` of a `<saml2p:Scoping>` element. The eIDAS Connector will then present a country selection dialogue containing only the listed countries.
 
 <a name="processing-requirements"></a>
 ### 5.4. Processing Requirements
@@ -1299,6 +1321,7 @@ response with the status code
 - A new section, 7.2.2, "Requesting SCAL2 Signature Activation Data", was added. This amendment describes how and when to request Signature Activation Data from an Identity Provider in order to enable a signature service to operate as a Qualified Signature Creation Device (QSCD).
 - Attribute release rules have been clarified in sections 2.1.2, "Service Providers" and 6.2.1, "Attribute Release Rules".
 - Section 2.1.2, "Service Providers", was updated to include a requirement for Service Providers communicating with a centralized discovery service.
+- Section 5.3, "Message Content", was updated to describe the use of `<saml2p:IDPEntry>` elements under the `<samp2p:Scoping>` elements for requests sent to Identity Providers acting as proxies for other Identity Providers.
 
 **Changes between version 1.3 and version 1.4:**
 
