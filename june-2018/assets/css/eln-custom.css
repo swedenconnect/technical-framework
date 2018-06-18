@@ -1,0 +1,22 @@
+
+
+.markdown-body hr {
+    display: none;
+}
+
+.markdown-body {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.markdown-body h2 {
+    page-break-before: always;
+}
+
+.markdown-body h3, 
+.markdown-body h4, 
+.markdown-body h5, 
+.markdown-body h6 {
+    page-break-after: avoid !important;
+}
+
