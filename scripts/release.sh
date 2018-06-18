@@ -26,7 +26,7 @@ fi
 INPUT_DIR=${1%/}
 OUTPUT_DIR=${2%/}
 
-declare -a SPECIFICATIONS=("ELN-0600 - Tekniskt ramverk - Svensk e-legitimation"
+declare -a SPECIFICATIONS=("ELN-0600 - Tekniskt ramverk - Introduktion"
     "ELN-0602 - Deployment Profile for the Swedish eID Framework"
     "ELN-0603 - Registry for Identifiers"
     "ELN-0604 - Attribute Specification for the Swedish eID Framework"
