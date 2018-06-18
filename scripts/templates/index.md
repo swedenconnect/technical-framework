@@ -36,6 +36,7 @@ For a detailed list of changes you can view all changes in GitHub using this lin
 * [**ELN-0609 - DSS Extension for Federated Signing Services**](ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html) - version X.Y \| [pdf download](pdf/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.pdf)
 * [**ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework**](ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html) - version X.Y \| [pdf download](pdf/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.pdf)
 * [**ELN-0612 - BankID Profile for the Swedish eID Framework**](ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html) - version X.Y \| [pdf download](pdf/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.pdf)
+* [**ELN-0613 - Signature Activation Protocol**](ELN-0613_-_Signature_Activation_Protocol.html) - version X.Y \| [pdf download](pdf/ELN-0613_-_Signature_Activation_Protocol.pdf)
 
 <a href="pdf/swe-eid-specifications.zip"><img src="img/pdf.png" /></a> [Download a ZIP-file of all specifications in PDF-format](pdf/swe-eid-specifications.zip).
 
