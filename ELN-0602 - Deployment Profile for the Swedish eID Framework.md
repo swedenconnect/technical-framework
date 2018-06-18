@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2018-05-08 - *draft version*
+### Version 1.5 - 2018-06-19
 
 *ELN-0602-v1.5*
 
@@ -122,6 +122,8 @@ This profile does not handle requirements regarding algorithms and
 different versions of underlying security mechanisms. This information
 is distributed by the federation operator in other channels.
 
+> Note: The work on SAML2Int has been moved to the Kantara Initiative. However, this version of the Swedish eID Framework still refers to version 0.2.1 of the SAML2Int profile as published on [http://saml2int.org/profile/current](http://saml2int.org/profile/current/).
+
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
@@ -142,8 +144,7 @@ with caution.
 ### 1.2. References to SAML 2.0 Standards and Profiles
 
 When referring to elements from the SAML 2.0 core specification
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\],
-the following syntax is used:
+\[[SAML2Core](#saml2core)\], the following syntax is used:
 
 -   `<saml2p:Protocolelement>` – for elements from the SAML 2.0
     Protocol namespace.
@@ -154,16 +155,13 @@ the following syntax is used:
 When referring to elements from the SAML 2.0 metadata specifications,
 the following syntax is used:
 
--   `<md:Metadataelement>` – for elements defined in
-    \[[SAML2Meta](http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)\].
+-   `<md:Metadataelement>` – for elements defined in \[[SAML2Meta](#saml2meta)\].
 
--   `<mdui:Element>` – for elements defined in
-    \[[SAML2MetaUI](https://www.oasis-open.org/committees/download.php/39441/draft-sstc-saml-metadata-ui-03.pdf)\].
+-   `<mdui:Element>` – for elements defined in \[[SAML2MetaUI](#saml2metaui)\].
 
--   `<mdattr:Element>` – for elements defined in
-    \[[SAML2MetaAttr](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)\].
+-   `<mdattr:Element>` – for elements defined in \[[SAML2MetaAttr](#saml2metaattr)\].
 
-When referring to elements from the "Identity Provider Discovery Service Protocol and Profile" specification \[[IdpDisco](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf)\], the following syntax is used:
+When referring to elements from the "Identity Provider Discovery Service Protocol and Profile" specification \[[IdpDisco](#idpdisco)\], the following syntax is used:
 
 - `<idpdisc:DiscoveryResponse>`
 
@@ -172,15 +170,15 @@ When referring to elements from the W3C XML Signature namespace
 
 -   `<ds:Signature>`
 
+**Note**: For all references to core SAML specifications, direct or indirect, the \[[SAML v2.0 Errata 05](#saml2errata05)\] MUST always also be considered.
+
 <a name="metadata-and-trust-management"></a>
 ## 2. Metadata and Trust Management
 
 Identity Providers and Service Providers that are part of the federation
 for Swedish eID MUST provide a SAML 2.0 Metadata document representing
-its entity. Provided metadata MUST conform to
-\[[SAML2Int](http://saml2int.org/profile/current/)\] as well as the SAML
-V2.0 Metadata Interoperability Profile Version 1.0
-\[[MetaIOP](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-iop.pdf)\].
+its entity. Provided metadata MUST conform to \[[SAML2Int](#saml2int)\] as well 
+as the SAML V2.0 Metadata Interoperability Profile Version 1.0 \[[SAML2MetaIOP](#saml2metaiop)\].
 
 <a name="requirements-for-metadata-content"></a>
 ### 2.1. Requirements for Metadata Content
@@ -202,6 +200,22 @@ The `<md:OrganizationDisplayName>` element SHALL contain a display
 name of the organization and SHALL NOT contain a service name that is
 unrelated to the name of the organization.
 
+Metadata for an entity SHALL contain an `<mdui:UIInfo>`
+extension, extending the `<md:SPSSODescriptor>` or `<md:IDPSSODescriptor>` element 
+(depending on the type of the entity). This `<mdui:UIInfo>` element SHALL at least contain a
+`<mdui:DisplayName>` element with the language attribute `sv`
+(Swedish), representing the entity name that has been approved
+by the federation operator. The `<mdui:UIInfo>` element SHALL also
+contain a reference to one, or more, logotype images (`<mdui:Logo>`) as described in section 2.1.5
+of \[[SAML2MetaUI](#saml2metaui)\] and SHOULD
+contain a `<mdui:Description>` element with the language attribute
+`sv` (Swedish).
+
+It is RECOMMENDED that the above elements represented in Swedish also be
+represented with the language attribute `en` (English).
+
+The federation operator may impose further requirements regarding the `<mdui:UIInfo>` extension.
+
 All services represented in the metadata SHALL include RSA public keys
 in the form of a certificate, which supports both signature validation
 and encryption. The same public key MAY support both signature
@@ -212,9 +226,9 @@ validation and encryption, indicated by an absent `"use"` attribute.
 
 The `<mdattr:EntityAttributes>` element of a Service Provider’s
 entity descriptor SHOULD contain one entity category attribute
-\[[EntCat](http://macedir.org/entity-category/)\] that holds at least
+\[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[EidEntCat\], identifying the Service Provider requirements in relation to
+\[[EidEntCat](#eidentcat)\], identifying the Service Provider requirements in relation to
 identity services concerning attribute release and level of assurance.
 
 The example below illustrates how an entity declares the service entity
@@ -248,20 +262,7 @@ combination with `<md:RequestedAttribute>` elements under the
 Provider metadata. The `<md:RequestedAttribute>` elements in the
 Service Provider metadata, when present, hold a list of requested and/or
 required attributes. This list of attributes MUST be interpreted in the
-context of present service entity categories defined in \[EidEntCat\].
-
-Metadata for a Service Provider SHALL contain an `<mdui:UIInfo>`
-extension, extending the `<md:SPSSODescriptor>` element. This
-`<mdui:UIInfo>` element SHALL at least contain a
-`<mdui:DisplayName>` element with the language attribute `sv`
-(Swedish), representing the Service Provider name that has been approved
-by the federation operator. The `<mdui:UIInfo>` element SHALL also
-contain a reference to a logotype image (`<mdui:Logo>`) and SHOULD
-contain a `<mdui:Description>` element with the language attribute
-`sv` (Swedish).
-
-It is RECOMMENDED that the above elements represented in Swedish also be
-represented with the language attribute `en` (English).
+context of present service entity categories defined in \[[EidEntCat](#eidentcat)\].
 
 A Service Provider MAY sign authentication request messages sent to
 Identity Providers. A Service Provider that signs authentication
@@ -271,8 +272,7 @@ assigning the `AuthnRequestsSigned` attribute of the
 `<md:SPSSODescriptor>` to a value of `true`.
 
 Section E7, “Metadata for Agreeing to Sign Authentication Requests”, of
-\[[SAML v2.0 Errata
-05](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html)\]
+\[[SAML v2.0 Errata 05](#saml2errata05)\]
 specifies the following concerning the `AuthnRequestsSigned` attribute:
 
 > Optional attribute that indicates whether the
@@ -295,48 +295,34 @@ signed, so the Service Provider should only require signed assertions in
 case that it wants to preserve the proof of authenticity of an assertion
 separate from the response.
 
-A Service Provider wishing to make use of a central discovery service as specified in the "Identity Provider Discovery Service Protocol Profile" \[IdPDisco\] MUST include at least one `<idpdisc:DiscoveryResponse>` element as an extension under the `<md:SPSSODescriptor>` element. 
+A Service Provider wishing to make use of a central discovery service as specified in the "Identity Provider Discovery Service Protocol Profile" \[[IdPDisco](#idpdisco)\] MUST include at least one `<idpdisc:DiscoveryResponse>` element as an extension under the `<md:SPSSODescriptor>` element. 
 
 <a name="identity-providers"></a>
 #### 2.1.3. Identity Providers
 
 The `<mdattr:EntityAttributes>` element of an Identity Provider’s
 entity descriptor SHOULD contain one entity category attribute
-\[[EntCat](http://macedir.org/entity-category/)\] that holds at least
+\[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[EidEntCat\], defining the Identity Provider ability to deliver
+\[[EidEntCat](#eidentcat)\], defining the Identity Provider ability to deliver
 assertions.
 
 The `<mdattr:EntityAttributes>` element of an Identity Provider’s
 metadata SHALL contain an attribute according to
-\[[SAML2IAP](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-assurance-profile.html)\]
-with `Name="urn:oasis:names:tc:SAML:attribute:assurance-certification"`
+\[[SAML2IAP](#saml2iap)\] with `Name="urn:oasis:names:tc:SAML:attribute:assurance-certification"`
 holding at least one attribute value identifying a Level of Assurance
 (LoA) level for which the Identity Provider has been approved and where
 the value is one of the identifiers defined in section 3.1.1 of
-\[EidRegistry\] and whose meaning are defined in \[EidTillit\].
-
-Metadata for an Identity Provider SHALL contain an `<mdui:UIInfo>`
-extension, extending the `<md:IDPSSODescriptor>` element. This
-`<mdui:UIInfo>` element SHALL at least contain a
-`<mdui:DisplayName>` element with the language attribute `sv`
-(Swedish), representing the Identity Provider service name that has been
-approved by the federation operator. The `<mdui:UIInfo>` element
-SHALL also contain a reference to a logotype image (`<mdui:Logo>`)
-and SHOULD contain a `<mdui:Description>` element with the language
-attribute `sv` (Swedish).
-
-It is RECOMMENDED that the above elements represented in Swedish also be
-represented with the language attribute `en` (English).
+\[[EidRegistry](#eidregistry)\] and whose meaning are defined in \[[EidTillit](#eidtillit)\].
 
 An Identity Provider MAY require authentication request messages to be
 signed. This is indicated by assigning the
 `WantAuthnRequestsSigned` attribute of the `<md:IDPSSPDescriptor>`
 element to a value of `true`. See further section E7, “Metadata for
 Agreeing to Sign Authentication Requests”, of \[[SAML v2.0 Errata
-05](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html)\].
+05](#saml2errata05)\].
 
-Identity Providers SHALL advertise support for the SAP protocol according to [SigSAP], by including the service property entity category URI
+Identity Providers SHALL advertise support for the SAP protocol according to \[[SigSAP](#sigsap)\], by including the service property entity category URI
 `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that does not advertise support for SAP MAY ignore requests for SAD.
 
 ```
@@ -356,29 +342,14 @@ Identity Providers SHALL advertise support for the SAP protocol according to [Si
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
 
-The Signature Service within the framework for Swedish eID is a Service
+A Signature Service within the Swedish eID Framework is a Service
 Provider with specific requirements concerning its representation in
-metadata. Its entry in metadata SHALL contain an `<mdui:UIInfo>`
-element, extending the `<md:SPSSODescriptor>` element. This
-`<mdui:UIInfo>` element SHALL at least contain a
-`<mdui:DisplayName>` element with the language attribute `sv`
-(Swedish), representing the signature service that has been approved by
-the federation operator.
-
-The `<mdui:UIInfo>` element SHALL also contain a reference to a
-logotype image (`<mdui:Logo>`) and at least contain one
-`<mdui:Description>` element with the language attribute `sv`
-(Swedish), providing a description of the service according to
-requirements provided by the federation operator.
-
-It is RECOMMENDED that the above elements represented in Swedish also be
-represented with the language attribute `en` (English).
+metadata. 
 
 The `<mdattr:EntityAttributes>` element of a Signature Service SP
 entity descriptor SHALL include the service type entity category
-identifier **`http://id.elegnamnden.se/st/1.0/sigservice`** \[EidEntCat\]
-as a value to the entity category attribute
-\[[EntCat](http://macedir.org/entity-category/)\].
+identifier **`http://id.elegnamnden.se/st/1.0/sigservice`** (\[[EidEntCat](#eidentcat)\])
+as a value to the entity category attribute \[[EntCat](#entcat)\].
 
 ```
 <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">`
@@ -406,8 +377,7 @@ as Signature Services have this attribute set.
 Identity Providers and Service Providers MUST support both the
 `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` and the
 `urn:oasis:names:tc:SAML:2.0:nameid-format:transient` name identifier
-formats as specified in
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\].
+formats as specified in \[[SAML2Core](#saml2core)\].
 
 Identity Providers SHALL default to use the
 `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` name identifier
@@ -420,8 +390,8 @@ message).
 <a name="attributes"></a>
 ## 4. Attributes
 
-Attribute specifications for the Swedish eID Framework is defined in
-\[EidAttributes\].
+Attribute specifications for the Swedish eID Framework are defined in
+\[[EidAttributes](#eidattributes)\].
 
 The content of `<saml2:AttributeValue>` elements exchanged via any
 SAML 2.0 messages or assertions SHOULD be limited to a single child text
@@ -440,9 +410,9 @@ This profile does not impose any requirements of
 how the process of discovery is implemented by Service Providers wishing
 to display user interfaces for selection of Identity Providers for end
 users. However, Service Providers making use of a centralized
-discovery service as defined in \[IdpDisco\] MUST follow the requirements
+discovery service as defined in \[[IdpDisco](#idpdisco)\] MUST follow the requirements
 stated for discovery responses in 
-section [2.1.2](##service-providers), "[Service Providers](##service-providers)".
+section [2.1.2](##service-providers), "[Service Providers](#service-providers)".
 
 <a name="binding-and-security-requirements"></a>
 ### 5.2. Binding and Security Requirements
@@ -450,14 +420,14 @@ section [2.1.2](##service-providers), "[Service Providers](##service-providers)"
 The endpoints, at which an Identity Provider receives a
 `<saml2p:AuthnRequest>` message, and all subsequent exchanges with
 the user agent, MUST be protected by TLS/SSL
-(\[[SAML2Int](http://saml2int.org/profile/current/)\] specifies SHOULD).
+(\[[SAML2Int](#saml2int)\] specifies SHOULD).
 
-\[[SAML2Int](http://saml2int.org/profile/current/)\] specifies that a
+\[[SAML2Int](#saml2int)\] specifies that a
 `<saml2p:AuthnRequest>` message MUST be communicated to the Identity
 Provider using the HTTP-REDIRECT binding. This profile will also allow
 the usage of the HTTP-POST binding for sending
 `<saml2p:AuthnRequest>` messages (see section 3.5 of
-\[[SAML2Bind](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)\]),
+\[[SAML2Bind](#saml2bind)\]),
 meaning that Identity Providers conformant with this profile MUST support
 the HTTP-POST binding.
 
@@ -482,7 +452,7 @@ The signature for authentication request messages is applied differently
 depending on the binding. The HTTP-REDIRECT binding requires the
 signature to be applied to the URL-encoded value rather than being
 placed within the XML-message (see section 3.4.4.1 of
-\[[SAML2Bind](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)\]).
+\[[SAML2Bind](#saml2bind)\]).
 For the HTTP-POST binding the `<saml2p:AuthnRequest>` element MUST
 be signed using a `<ds:Signature>` element within the
 `<saml2:AuthnRequest>`.
@@ -490,14 +460,13 @@ be signed using a `<ds:Signature>` element within the
 <a name="message-content"></a>
 ### 5.3. Message Content
 
-\[[SAML2Int](http://saml2int.org/profile/current/)\] specifies that a
+\[[SAML2Int](#saml2int)\] specifies that a
 `<saml2p:AuthnRequest>` message SHOULD contain an
 `AssertionConsumerServiceURL` attribute identifying the desired response
 location. The Service Provider MUST NOT use any other values for this
 attribute than those listed in its metadata record as
 `<md:AssertionConsumerService>` elements for the HTTP-POST binding
-(see section 4.1.6 of
-\[[SAML2Prof](http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf)\]).
+(see section 4.1.6 of \[[SAML2Prof](#saml2prof)\]).
 
 The `Destination` attribute of the `<saml2p:AuthnRequest>` message
 MUST contain the URL to which the Service Provider has instructed the
@@ -508,7 +477,7 @@ Providers.
 A Service Provider SHOULD explicitly specify a requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
 containing `<saml2:AuthnContextClassRef>` elements each holding
-a Level of Assurance authentication context URI (see section 3.1.1 of \[EidRegistry\]) 
+a Level of Assurance authentication context URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\]) 
 that the Service Provider considers acceptable for the authentication process.
 
 A present `<saml2p:RequestedAuthnContext>` element MUST specify
@@ -522,7 +491,7 @@ one out of a selection of acceptable authentication context URIs, then
 all of these URIs MUST be included in the request.
 
 The requested authentication context SHOULD be consistent with at least
-one of the service entity categories \[EidEntCat\] declared in the
+one of the service entity categories \[[EidEntCat](#eidentcat)\] declared in the
 Service Provider’s metadata entry. See further [section 5.4.4](#authentication-context-and-level-of-assurance-handling) below.
 
 ```
@@ -559,7 +528,7 @@ to avoid accidental SSO.
 
 If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
 
-An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the `<saml2p:Scoping>` element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) that may be used to authenticate the user. See section 3.4.1.5 of \[SAML2Core\].
+An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the `<saml2p:Scoping>` element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) that may be used to authenticate the user. See section 3.4.1.5 of \[[SAML2Core](#saml2core)\].
 
 ```
 <saml2p:Scoping>
@@ -570,7 +539,7 @@ An Identity Provider that acts as a proxy for other Identity Providers SHOULD su
 ```
 *Example of how an `AuthnRequest` contains a `Scoping`-element where the requester signals to the Proxy IdP which Identity Provider that should perform the authentication of the user.*
 
-The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[EidRegistry\].
+The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[[EidRegistry](#eidregistry)\].
 
 ```
 <saml2p:Scoping>
@@ -609,9 +578,9 @@ from the Service Provider’s metadata entry. This location is found in an
 `<md:AssertionConsumerService>` element with HTTP-POST binding that
 is marked as default (has the `isDefault` attribute set), or if no element
 has the `isDefault` attribute set, the one with the lowest index value
-(see section 2.4.4.1 of \[SAML2Meta\]).
+(see section 2.4.4.1 of \[[SAML2Meta](#saml2meta)\]).
 
-Section 8.2 of \[[SAML2Int](http://saml2int.org/profile/current/)\]
+Section 8.2 of \[[SAML2Int](#saml2int)\]
 specifies how comparisons between the `AssertionConsumerServiceURL` value
 and the values found in the Service Provider’s metadata should be
 performed.
@@ -619,10 +588,10 @@ performed.
 <a name="identity-provider-user-interface"></a>
 #### 5.4.3. Identity Provider User Interface
 
-Where the requirements for user interfaces defined for the federation
-requires presentation of information elements related to the Service
-Provider, these information elements MUST be obtained from the
-`<mdui:UIInfo>` element in the Service Provider’s metadata entry.
+An Identity Provider presenting information related to a Service Provider
+in its user interface during processing of an `<saml2p:AuthnRequest>` message
+MUST obtain this information from the
+`<mdui:UIInfo>` element of the Service Provider’s metadata entry.
 Implementers of this profile MUST be capable of handling display
 information stored in the `<mdui:DisplayName>`, `<mdui:Logo>`
 and the `<mdui:Description>` elements.
@@ -649,14 +618,14 @@ authentication contexts in `<saml2p:AuthnRequest>` in the
 the requested authentication process and Level of Assurance. The
 Identity Provider SHALL respond with an error `<saml2p:StatusCode>`
 with the value `urn:oasis:names:tc:SAML:2.0:status:Requester`
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\]
+\[[SAML2Core](#saml2core)\]
 if no requested authentication context is supported. If no requested
 authentication context is present in the `<saml2p:AuthnRequest>`,
 the Identity Provider MAY return the result of a default authentication
 process that is consistent with the Identity Providers metadata.
 
 **Note**: The Identity Provider does not have to consider the service
-entity categories (\[EidEntCat\]) declared in the Service Provider’s
+entity categories (\[[EidEntCat](#eidentcat)\]) declared in the Service Provider’s
 metadata entry when determining the requested authentication context
 under which the authentication should be performed. The purpose of the
 service entity categories is primarily to support service matching in
@@ -681,7 +650,7 @@ NOT re-use an already existing security context in the following cases:
     with the value of `true`.
 
 -   If the original authentication process, which led to the
-    establishment of the security context, was performed using a weaker
+    establishment of the security context, was performed using another
     Level of Assurance that what is requested in the current
     `<saml2p:AuthnRequest>` message.
 
@@ -703,7 +672,7 @@ interface for consent/information in these cases.
 
 The endpoint(s) at which a Service Provider receives a
 `<saml2p:Response>` message MUST be protected by TLS/SSL
-(\[[SAML2Int](http://saml2int.org/profile/current/)\] states SHOULD).
+(\[[SAML2Int](#saml2int)\] states SHOULD).
 
 The `<saml2p:Response>` message issued by the Identity Provider MUST
 be signed using a `<ds:Signature>` element within the
@@ -728,7 +697,7 @@ messages (i.e., responses that are not the result of an earlier
 `<saml2p:AuthnRequest>` message). Service Providers that do accept
 unsolicited response messages MUST ensure, by other means, that the
 security and processing requirements of this profile ([section 6.3](#processing-requirements)) can
-be fully satisfied. \[[SAML2Int](http://saml2int.org/profile/current/)\]
+be fully satisfied. \[[SAML2Int](#saml2int)\]
 allows the use of unsolicited responses, but this profile has more
 strict security and processing requirements that make the use of
 unsolicited responses violate these requirements.
@@ -811,7 +780,7 @@ placed under the `<saml2:AuthnStatement>` element as the value of an
 *Example of how an Authentication Context URI identifier representing a
 Level of Assurance is included in an authentication statement.*
 
-An Identity Provider that acts as a proxy for other Identity Providers SHOULD include the `<saml2:AuthenticatingAuthority>` element under the `<saml2:AuthnContext>` element. This element will contain the entityID of the Identity Provider that was involved in authenticating the principal.
+An Identity Provider that acts as a proxy for other Identity Providers SHOULD include the `<saml2:AuthenticatingAuthority>` element under the `<saml2:AuthnContext>` element. This element will contain the entityID of the Identity Provider that authenticated the principal.
 
 ```
 <saml2:AuthnStatement AuthnInstant="2013-03-15T09:22:00" SessionIndex="b07b804c-7c29-ea16-7300-4f3d6f7928ac">
@@ -830,17 +799,17 @@ An Identity Provider determines which attributes to include in the
 `<saml2:AttributeStatement>` element of an assertion based on the
 Service Provider requirements and its agreements with the user being
 authenticated. Service Provider attribute preferences and requirements
-are specified by the service entity categories \[EidEntCat\] and
+are specified by the service entity categories \[[EidEntCat](#eidentcat)\] and
 requested attributes in the `<md:AttributeConsumingService>` element
 declared in the Service Provider metadata. A service entity category
-specifies the attribute set (as defined in \[EidAttributes\]) that is
+specifies the attribute set (as defined in \[[EidAttributes](#eidattributes)\]) that is
 requested for the attribute release process.
 
 An Identity Provider declares service entity categories in order to
 publish its ability to deliver attributes according to certain attribute
 sets. For all declared service entity categories, the Identity Provider
 MUST possess the ability to deliver the mandatory attributes of the
-underlying attribute set. See \[EidEntCat\] and \[EidAttributes\] for
+underlying attribute set. See \[[EidEntCat](#eidentcat)\] and \[[EidAttributes](#eidattributes)\] for
 details.
 
 The Service Provider is responsible for checking that an Identity
@@ -853,9 +822,9 @@ Providers, and/or by examining the metadata of Identity providers.
 
 An Identity Provider receiving a request for more attributes than it can
 provide SHOULD return an assertion with the attributes it can provide
-according to its defined attribute release policy if the user has been successfully authenticated, leaving it up to the
-Service Provider to decide how to proceed, e.g., by denying service to
-the authenticated user, provide limited services or to use other
+according to its defined attribute release policy if the user has been successfully 
+authenticated, leaving it up to the Service Provider to decide how to proceed, 
+e.g., by denying service to the authenticated user, provide limited services or to use other
 resources to collect necessary attributes. However, if a Service Provider
 has expressed a specific attribute requirement using the `<md:RequestedAttribute>`
 element of a matching<sup>*</sup> `<md:AttributeConsumingService>` element in its metadata
@@ -871,13 +840,9 @@ the `<saml2p:AuthnRequest>` message, and if that attribute is not present, the d
 
 This profile mandates a correct processing of a `<saml2p:Response>`
 message in order to ensure proper protection from the security threats
-described in
-\[[SAML2Sec](http://docs.oasis-open.org/security/saml/v2.0/saml-sec-consider-2.0-os.pdf)\].
-Processing requirements are listed in
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\],
-\[[SAML2Prof](http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf)\]
-and
-\[[SAML2Sec](http://docs.oasis-open.org/security/saml/v2.0/saml-sec-consider-2.0-os.pdf)\].
+described in \[[SAML2Sec](#saml2sec)\].
+Processing requirements are listed in \[[SAML2Core](#saml2core)\],
+\[[SAML2Prof](#saml2prof)\] and \[[SAML2Sec](#saml2sec)\].
 This document will list the necessary requirements that apply to this
 profile.
 
@@ -980,7 +945,7 @@ of the `<saml2:Conditions>` element).
 
 In order to prevent stolen assertions and user impersonation, the
 Service Provider SHOULD implement a validation that rejects an assertion
-if the time given it its IssueInstant attribute compared to the time
+if the time given it its `IssueInstant` attribute compared to the time
 when the response message is received is too great. This time is
 typically on the order of seconds, and limits the time window when a
 stolen assertion could be used.
@@ -1000,9 +965,8 @@ assertions in the `<saml2p:Response>` message.
 An Identity Provider conformant with this profile SHOULD NOT make use of
 any other `<saml2p:StatusCode>` values than those specified in
 section 3.2.2.2 of
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\]
-or in section 3.1.4 of \[EidRegistry\]. The top-level
-`<saml2p:StatusCode>` value may only be one of the following error
+\[[SAML2Core](#saml2core)\] or in section 3.1.4 of \[[EidRegistry](#eidregistry)\]. 
+The top-level `<saml2p:StatusCode>` value may only be one of the following error
 identifiers:
 
 -   `urn:oasis:names:tc:SAML:2.0:status:Requester` – The request could not
@@ -1024,15 +988,14 @@ user interface it MUST also offer ways for the end user to confirm this
 information (for example, by including an OK-button). When the end user
 acknowledges taking part of the information (i.e., clicks on the OK-button),
 the `<saml2p:Response>` message is posted back to the Service
-Provider according to the HTTP POST binding
-\[[SAML2Bind](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)\].
+Provider according to the HTTP POST binding \[[SAML2Bind](#saml2bind)\].
 
 If an Identity Provider detects suspicious fraudulent behaviour or if any of its security checks alerts a (possible) fraud, the Identity Provider MUST NOT issue an assertion but instead display an error message. After the end user confirms this error message, the error message posted back to the Service Provider SHOULD contain a second-level status code set to `http://id.elegnamnden.se/status/1.0/fraud` or `http://id.elegnamnden.se/status/1.0/possibleFraud` (depending on whether the Identity Provider aborted the authentication due to a determined or suspected fraud).
 
 <a name="authentication-for-signature"></a>
 ## 7. Authentication for Signature
 
-“DSS Extension for Federated Central Signing Services”, \[EidDSS\],
+“DSS Extension for Federated Central Signing Services”, \[[EidDSS](#eiddss)\],
 defines an extension to the OASIS DSS protocol for providing centralized
 Signature Services within the Swedish eID Framework. This specification
 defines the communication between a *Signature Requestor*<sup>*</sup> and a
@@ -1078,7 +1041,7 @@ are:
 
 These URIs extend the corresponding authentication context URIs used to
 represent Level of Assurance identifiers (see section 3.1.1 of
-\[EidRegistry\]) with requirements listed in the sections below. A
+\[[EidRegistry](#eidregistry)\]) with requirements listed in the sections below. A
 Signature Service MAY use any of the defined authentication context
 URIs. The URIs listed above are only used when there is an explicit
 requirement for the Identity Provider to display a sign message provided
@@ -1117,8 +1080,8 @@ end user is performing a signature.
 <a name="requesting-display-of-signature-message"></a>
 #### 7.2.1. Requesting Display of Signature Message
 
-\[EidDSS\_Profile\] specifies that a Signature Requestor may include a
-`SignMessage` element (as defined by \[EidDSS\]) in a signature request.
+\[[EidDSS\_Profile](#eiddssprofile)\] specifies that a Signature Requestor may include a
+`SignMessage` element (as defined by \[[EidDSS](#eiddss)\]) in a signature request.
 This element holds a message that the Identity Provider, which is
 responsible for “authentication for signature”, should present to the
 user that is performing the signature.
@@ -1127,21 +1090,21 @@ A Signature Service MAY request the Identity Provider to show a sign
 message to the user by including the `SignMessage` element from the
 signature request as a child element to an `<saml2p:Extensions>`
 element in the `<saml2p:AuthnRequest>` message (see section 3.2.1 of
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\]).
+\[[SAML2Core](#saml2core)\]).
 
 If the `SignMessage` element from the signature request includes a
 `MustShow` attribute with the value `true`, the Signature Service MUST
 require that the provided sign message is displayed by the Identity
 Provider, by including an authentication context URI (as defined in
-[section 7.1](#authentication-context-uris-for-signature-services) above) to the `<saml2:AuthnContextClassRef>` element
-that is part of the `<saml2p:RequestedAuthnContext>` element of the
-`<saml2p:AuthnRequest>` message.
+[section 7.1](#authentication-context-uris-for-signature-services) above) to the 
+`<saml2:AuthnContextClassRef>` element that is part of the 
+`<saml2p:RequestedAuthnContext>` element of the `<saml2p:AuthnRequest>` 
+message.
 
 Identity Providers SHALL advertise supported authentication contexts
-defined by the URIs listed in [section 7.1](#authentication-context-uris-for-signature-services), by including the URIs of
-supported authentication contexts as EntityAttributes of the type
-`urn:oasis:names:tc:SAML:attribute:assurance-certification` in its
-metadata.
+defined by the URIs listed in [section 7.1](#authentication-context-uris-for-signature-services), 
+by including the URIs of supported authentication contexts as EntityAttributes of the type
+`urn:oasis:names:tc:SAML:attribute:assurance-certification` in its metadata.
 
 ```
 <md:Extensions>
@@ -1191,19 +1154,18 @@ associated with requests from signature services:
 <a name="requesting-scal2-signature-activation-data"></a>
 #### 7.2.2. Requesting SCAL2 Signature Activation Data
 
-The type of signature requested in a signature request is, according to \[EidDSS_Profile\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[SigSAP\]. An authentication request message that includes this `SADRequest` extension MUST also include the `SignMessage` extension (as described above).
+The type of signature requested in a signature request is, according to \[[EidDSS_Profile](#eiddssprofile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SigSAP](#sigsap)\]. An authentication request message that includes this `SADRequest` extension MUST also include the `SignMessage` extension (as described above).
 
 As pointed out in [section 2.1.3](#identity-providers) an Identity Provider that supports processing of SAD requests and issuance of SAD-attributes SHALL advertise this by declaring the service property entity category `scal2` in its metadata. An Identity Provider that has declared this entity category MUST return a SAD-attribute in an issued assertion if the corresponding `<saml2p:AuthnRequest>` message contains the `<sap:SADRequest>` extension.
 
 A SAD returned from the Identity Provider MUST have a signature which can be verified using a certificate from the Identity Provider's metadata entry. The signature algorithm used to sign the SAD MUST be equivalent to the algorithm used to sign the responses and assertions from the Identity Provider.
 
-Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of \[SigSAP\].
+Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of \[[SigSAP](#sigsap)\].
 
 <a name="authentication-responses2"></a>
 ### 7.3. Authentication Responses
 
-By including an authentication context URI listed in [section 7.1](#authentication-context-uris-for-signature-services) (sign
-message URI) in SAML assertion under the
+By including an authentication context URI listed in [section 7.1](#authentication-context-uris-for-signature-services) (sign message URI) in SAML assertion under the
 `<saml2:AuthnContextClassRef>` element of the
 `<saml2:AuthnStatement>` element in the response, the Identity
 Provider asserts that it has successfully displayed the sign message
@@ -1211,104 +1173,124 @@ received in the request for the user and that the user has accepted to
 sign under the context of this sign message<sup>*</sup>.
 
 An Identity Provider MUST NOT return an authentication context URI in an
-assertion, other than those listed in [section 7.1](#authentication-context-uris-for-signature-services), if the request
-included one of these URIs as the requested authentication context. If
+assertion, other than those listed in [section 7.1](#authentication-context-uris-for-signature-services), if the request included one of these URIs as the requested authentication context. If
 the Identity Provider failed to display the sign message or the user
 failed to accept it, and the request indicated that the sign message
 MUST be displayed, then the Identity Provider MUST return an error
-response with the status code
-`urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
+response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 > \[*\]: As defined in [section 5.3](#message-content), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
 
 <a name="normative-references"></a>
 ## 8. Normative References
 
+<a name="rfc2119"></a>
 **\[RFC2119\]**
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
 
+<a name="saml2int"></a>
 **\[SAML2Int\]**
 > [SAML2int profile v0.21 – SAML 2.0 Interoperability
 > Profile](http://saml2int.org/profile/current/).
 
+<a name="saml2core"></a>
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
+<a name="saml2errata05"></a>
 **\[SAML v2.0 Errata 05\]**
 > [SAML Version 2.0 Errata 05. 01 May 2012. OASIS Approved
 > Errata](http://docs.oasis-open.org/security/saml/v2.0/errata05/os/saml-v2.0-errata05-os.html).
 
+<a name="saml2bind"></a>
 **\[SAML2Bind\]**
 > [OASIS Standard, Bindings for the OASIS Security Assertion Markup
 > Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)
 
+<a name="saml2prof"></a>
 **\[SAML2Prof\]**
 > [OASIS Standard, Profiles for the OASIS Security Assertion Markup
 > Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf)
 
+<a name="saml2meta"></a>
 **\[SAML2Meta\]**
 > [OASIS Standard, Metadata for the OASIS Security Assertion Markup
 > Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)
 
+<a name="saml2sec"></a>
 **\[SAML2Sec\]**
 > [Security and Privacy Considerations for the OASIS Security Assertion
 > Markup Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-sec-consider-2.0-os.pdf)
 
+<a name="saml2iap"></a>
 **\[SAML2IAP\]**
 > [SAML V2.0 Identity Assurance Profiles Version 1.0, 05 November
 > 2010](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-assurance-profile.html).
 
-**\[MetaIOP\]**
+<a name="saml2metaiop"></a>
+**\[SAML2MetaIOP\]**
 > [OASIS Committee Specification, SAML V2.0 Metadata Interoperability Profile Version 1.0, August 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-iop.pdf).
 
+<a name="saml2metaui"></a>
 **\[SAML2MetaUI\]**
 > [OASIS Draft, SAML V2.0 Metadata Extensions for Login and Discovery
-> User Interface Version 1.0, September
-> 2010](https://www.oasis-open.org/committees/download.php/39441/draft-sstc-saml-metadata-ui-03.pdf).
+> User Interface Version 1.0, April 2012](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-metadata-ui/v1.0/sstc-saml-metadata-ui-v1.0.html)
 
+<a name="saml2metaattr"></a>
 **\[SAML2MetaAttr\]**
 > [OASIS Committee Specification, SAML V2.0 Metadata Extension for
 > Entity Attributes Version 1.0, August
 > 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html).
 
+<a name="entcat"></a>
 **\[EntCat\]**
-> [The Entity Category SAML Entity Metadata Attribute Type, March
-> 2012](http://macedir.org/entity-category/).
+> [The Entity Category SAML Entity Metadata Attribute Type, January
+> 2018](https://tools.ietf.org/html/draft-young-entity-category).
 
+<a name="idpdisco"></a>
 **\[IdpDisco\]**
 > [OASIS Committee Specification, Identity Provider Discovery Service
 > Protocol and Profile, March
 > 2008](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf).
 
+<a name="eidregistry"></a>
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
+<a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
+> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
+> 
+> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
 
+<a name="eidentcat"></a>
 **\[EidEntCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
+<a name="eiddss"></a>
 **\[EidDSS\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
+<a name=""eiddssprofile"></a>
 **\[EidDSS\_Profile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
+<a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
@@ -1322,6 +1304,8 @@ response with the status code
 - Attribute release rules have been clarified in sections 2.1.2, "Service Providers" and 6.2.1, "Attribute Release Rules".
 - Section 2.1.2, "Service Providers", was updated to include a requirement for Service Providers communicating with a centralized discovery service.
 - Section 5.3, "Message Content", was updated to describe the use of `<saml2p:IDPEntry>` elements under the `<samp2p:Scoping>` elements for requests sent to Identity Providers acting as proxies for other Identity Providers.
+- The reference to \[[SAML2MetaUI](#saml2metaui)\] was updated to the latest official version: http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-metadata-ui/v1.0/sstc-saml-metadata-ui-v1.0.html.
+- The reference to \[[EntCat](#entcat)\] was updated to the latest version. 
 
 **Changes between version 1.3 and version 1.4:**
 

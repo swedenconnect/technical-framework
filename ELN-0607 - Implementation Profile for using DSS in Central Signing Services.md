@@ -2,7 +2,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.3 - 2017-12-18 - *draft version*
+### Version 1.3 - 2018-06-19
 
 *ELN-0607-v1.3*
 
@@ -686,7 +686,7 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="eid-registry"></a>**[Eid-Registry]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="informative-references"></a>
 ### 4.2. Informative References

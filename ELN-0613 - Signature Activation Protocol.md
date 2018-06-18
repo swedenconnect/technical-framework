@@ -2,7 +2,7 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.0 - 2018-03-11 *draft version*
+### Version 1.0 - 2018-06-19
 
 *ELN-0613-v1.0*
 
@@ -386,17 +386,15 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
 
 <a name="rfc7519"></a>**[RFC7519]**
 
-> [Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
-              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
-              ](http://www.rfc-editor.org/info/rfc7519).
+> [Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015](http://www.rfc-editor.org/info/rfc7519).
 
 <a name="eln-0604"></a>**[ELN-0604]**
 
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eln-0609"></a>**[ELN-0609]**
 
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="rsig-pp-1"></a>**[RSIG-PP-1]**
 

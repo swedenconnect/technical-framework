@@ -2,7 +2,7 @@
 
 # Registry for identifiers assigned by the Swedish e-identification board
 
-### Version 1.5 - 2018-05-08 - *draft version*
+### Version 1.5 - 2018-06-19
 
 *ELN-0603-v1.5*
 
@@ -174,16 +174,16 @@ Framework (Tillitsramverket för Svensk e-legitimation).
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | **\[TillitRamv\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-high` | Authentication accordance to eIDAS assurance level high for non-notified and notified eID schemes. | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified. | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified. | **\[eIDAS\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` | Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified. | **\[eIDAS\]**
+| `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | \[[TillitRamv](#tillitramv)\] |
+| `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | \[[TillitRamv](#tillitramv)\] |
+| `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | \[[TillitRamv](#tillitramv)\] |
+| `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | \[[TillitRamv](#tillitramv)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-high` | Authentication accordance to eIDAS assurance level high for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified. | \[[eIDAS](#eidas)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified. | \[[eIDAS](#eidas)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` | Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified. | \[[eIDAS](#eidas)\] |
 
 **NOTE:** eIDAS assurance levels low, substantial and high have the
 following `AuthnContextClassRef` URI:s defined by the EU commission:
@@ -203,19 +203,19 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
 message that must be displayed to the user (see section 7 of
-\[DeployProf\]).
+\[[EidDeploy](#eiddeploy)\]).
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage` | Authentication according to assurance level 4 with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | \[**DeployProf**\] |
-| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[**DeployProf**\] |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[**DeployProf**\] |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm` | Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage` | Authentication according to assurance level 4 with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm` | Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages. | \[[EidDeploy](#eiddeploy)\] |
 
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
@@ -225,11 +225,11 @@ Specification for the Swedish eID Framework.
 
 | **Identifier** | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- | :--- |
-| ELN-AP-Pseudonym-01  | `http://id.elegnamnden.se/ap/1.0/pseudonym-01` | Pseudonym identity attribute set.  | **\[AttrProf\]** |
-| ELN-AP-NaturalPerson-01 | `http://id.elegnamnden.se/ap/1.0/natural-person-01` | Personal identity without civic registration number attribute set. | **\[AttrProf\]** |
-| ELN-AP-Pnr-01 | `http://id.elegnamnden.se/ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | **\[AttrProf\]** |
-| ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/ap/1.0/org-person-01` | Organizational identity attribute set. | **\[AttrProf\]** |
-| ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | **\[AttrProf\]** |
+| ELN-AP-Pseudonym-01  | `http://id.elegnamnden.se/ap/1.0/pseudonym-01` | Pseudonym identity attribute set.  | \[[EidAttributes](#eidattributes)\] |
+| ELN-AP-NaturalPerson-01 | `http://id.elegnamnden.se/ap/1.0/natural-person-01` | Personal identity without civic registration number attribute set. | \[[EidAttributes](#eidattributes)\] |
+| ELN-AP-Pnr-01 | `http://id.elegnamnden.se/ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | \[[EidAttributes](#eidattributes)\] |
+| ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/ap/1.0/org-person-01` | Organizational identity attribute set. | \[[EidAttributes](#eidattributes)\] |
+| ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | \[[EidAttributes](#eidattributes)\] |
 
 <a name="entity-category-identifiers"></a>
 #### 3.1.3. Entity Category Identifiers
@@ -243,11 +243,11 @@ Identifiers for entity categories representing alternative sets of requirements.
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -256,8 +256,8 @@ Identifiers for defined service properties.
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/sprop/1.0/mobile-auth` | Service adapted to require/provide user authentication based on mobile devices. | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/sprop/1.0/scal2` | Service adapted to support authentication requests from signature services supporting Sole Control Assurance Level 2 (SCAL2). | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/sprop/1.0/mobile-auth` | Service adapted to require/provide user authentication based on mobile devices. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/sprop/1.0/scal2` | Service adapted to support authentication requests from signature services supporting Sole Control Assurance Level 2 (SCAL2). | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="entity-categories-for-service-type"></a>
 ##### 3.1.3.3. Entity Categories for Service Type
@@ -266,22 +266,22 @@ Identifiers for defined service types.
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/st/1.0/sigservice` | Electronic signature service | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/st/1.0/public-sector-sp` | Public sector Service Provider | **\[EntityCat\]** |
-| `http://id.elegnamnden.se/st/1.0/private-sector-sp` | Private sector Service Provider | **\[EntityCat\]** |
+| `http://id.elegnamnden.se/st/1.0/sigservice` | Electronic signature service | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/st/1.0/public-sector-sp` | Public sector Service Provider | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/st/1.0/private-sector-sp` | Private sector Service Provider | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
 
 Status code identifiers for use in SAML Response messages. The list
 below extends the list of second-level status codes defined in section
-3.2.2.2 of \[SAML2Core\].
+3.2.2.2 of \[[SAML2Core](#saml2core)\].
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/status/1.0/cancel` | Status code representing a cancelled operation. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/status/1.0/fraud` | Status code indicating a fraudulent request. | **\[DeployProf\]** |
-| `http://id.elegnamnden.se/status/1.0/possibleFraud` | Status code indicating a possible fraudulent request. | **\[DeployProf\]** |
+| `http://id.elegnamnden.se/status/1.0/cancel` | Status code representing a cancelled operation. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/status/1.0/fraud` | Status code indicating a fraudulent request. | \[[EidDeploy](#eiddeploy)\] |
+| `http://id.elegnamnden.se/status/1.0/possibleFraud` | Status code indicating a possible fraudulent request. | \[[EidDeploy](#eiddeploy)\] |
 
 <a name="central-signing"></a>
 #### 3.1.5. Central Signing
@@ -292,9 +292,9 @@ Identifiers used in the protocol for requesting services form a central signing 
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/csig/1.0/dss-ext/ns` | **Deprecated**. XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
 | `http://id.elegnamnden.se/csig/1.0/eid2-dss/profile` | **Deprecated**. Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
-| `http://id.elegnamnden.se/csig/1.1/dss-ext/ns` | XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.1). | **\[CSignProt\]** |
-| `http://id.elegnamnden.se/csig/1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | **\[CSignProf\]** |
-| `http://id.elegnamnden.se/csig/1.1/sap/ns` | XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension | **\[SigSAP\]** |
+| `http://id.elegnamnden.se/csig/1.1/dss-ext/ns` | XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.1). | \[[EidDSSExt](#eiddssext)\] |
+| `http://id.elegnamnden.se/csig/1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.elegnamnden.se/csig/1.1/sap/ns` | XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension | \[[EidSigSAP](#eidsigsap)\] |
 
 <a name="authentication-context"></a>
 #### 3.1.6. Authentication Context
@@ -303,22 +303,21 @@ Identifiers associated with the Authentication Context X.509 extension
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema name space for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | **\[AuthContExt\]** |
+| `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema name space for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[AuthContExt](#authcontext)\] |
 
 <a name="sign-response-status-codes"></a>
 #### 3.1.7. Sign Response Status Codes
 
 Status code identifiers for the DSS Extension for SAML based Central Signing service. The following identifiers provide defined status codes
-for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign response message according to the OASIS standard
-“Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0”.
+for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign response message according to the OASIS standard “Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0” \[[OASIS-DSS](#oasis-dss)\].
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the signature request has expired. | **\[CSignProf\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request. | **\[CSignProf\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | **\[CSignProf\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | **\[CSignProf\]** |
-| `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | **\[CSignProf\]** |
+| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the signature request has expired. | \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.elegnamnden.se/sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request. | \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | \[[EidCSignProf](#eidcsignprof)\] |
 
 <a name="name-registration-authorities"></a>
 #### 3.1.8. Name Registration Authorities
@@ -327,7 +326,7 @@ Some protocols require a URI identifier to uniquely identify the entity responsi
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space. | **\[CertProf\]** |
+| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space. | \[[CertProf](#certprof)\] |
 
 <a name="eidas-identifiers"></a>
 #### 3.1.9. eIDAS Identifiers
@@ -341,7 +340,7 @@ Each country within the eIDAS federation provides an eIDAS Proxy Service that is
 
 **`http://id.swedenconnect.se/eidas/1.0/proxy-service/{country-code}`**
 
-where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format (**\[ISO 3166\]**).
+where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[[ISO 3166](#iso3166)\].
 
 > A consumer of an eIDAS Proxy Service alias URI MUST accept the country code part of the URI in both lower and upper case letters.
 
@@ -363,20 +362,20 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 | **OID** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| 1.2.752.201.5.1 | Authentication Context extension | **\[AuthContExt\]** |
-| 1.2.752.201.3.1 | Organization Affiliation Attribute | **\[AttrProf\]** |
-| 1.2.752.201.3.2 | Transaction Identifier | **\[AttrProf\]** |
-| 1.2.752.201.3.3 | Authentication Context Parameters | **\[AttrProf\]** |
-| 1.2.752.201.3.4 | Provisional ID | **\[AttrProf\]** |
-| 1.2.752.201.3.5 | Provisional ID Persistence Indicator | **\[AttrProf\]** |
-| 1.2.752.201.3.6 | Personal Identity Number Binding URI | **\[AttrProf\]** |
-| 1.2.752.201.3.7 | eIDAS Person Identifier | **\[AttrProf\]** |
-| 1.2.752.201.3.8 | Birth name | **\[AttrProf\]** |
-| 1.2.752.201.3.9 | eIDAS Natural Person Address | **\[AttrProf\]** |
-| 1.2.752.201.3.10 | User Certificate | **\[AttrProf\]** |
-| 1.2.752.201.3.11 | User Signature | **\[AttrProf\]** |
-| 1.2.752.201.3.12 | Signature Activation Data | **\[AttrProf\]** |
-| 1.2.752.201.3.13 | Authentication Server Signature | **\[AttrProf\]** |
+| 1.2.752.201.5.1 | Authentication Context extension | \[[AuthContExt](#authcontext)\] |
+| 1.2.752.201.3.1 | Organization Affiliation Attribute | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.2 | Transaction Identifier | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.3 | Authentication Context Parameters | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.4 | Provisional ID | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.5 | Provisional ID Persistence Indicator | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.6 | Personal Identity Number Binding URI | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.7 | eIDAS Person Identifier | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.8 | Birth name | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.9 | eIDAS Natural Person Address | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.10 | User Certificate | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.11 | User Signature | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.12 | Signature Activation Data | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.13 | Authentication Server Signature | \[[EidAttributes](#eidattributes)\] |
 
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
@@ -426,43 +425,56 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 <a name="references"></a>
 ## 4. References
 
+<a name="saml2core"></a>
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
+<a name="oasis-dss"></a>
 **\[OASIS-DSS\]**
 > [Digital Signature Service Core Protocols, Elements, and Bindings
-> Version
-> 1.0.](http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html)
+> Version 1.0.](http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html)
 
+<a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
+> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
+> 
+> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
 
+<a name="authcontext"></a>
 **\[AuthContExt\]**
 > [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
-**\[DeployProf\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+<a name="eiddeploy"></a>
+**\[EidDeploy\]**
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
-**\[EntityCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+<a name="eidentitycat"></a>
+**\[EidEntityCat\]**
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
-**\[CSignProt\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+<a name="eiddssext"></a>
+**\[EidDSSExt\]**
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
-**\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
+<a name="eidsigsap"></a>
+**\[EidSigSAP\]**
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
-**\[CSignProf\]**
+<a name="eidcsignprof"></a>
+**\[EidCSignProf\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
+<a name="certprof"></a>
 **\[CertProf\]**
-> [Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/updates/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
+> [Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
 
-**\[AttrProf\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+<a name="eidattributes"></a>
+**\[EidAttributes\]**
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="eidas"></a>
 **\[eIDAS\]**
 > REGULATION (EU) No 910/2014 OF THE EUROPEAN PARLIAMENT AND OF THE
 > COUNCIL of 23 July 2014 on electronic identification and trust
@@ -470,6 +482,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 > repealing Directive 1999/93/EC. Including implementation acts of the
 > regulation and associated technical specifications.
 
+<a name="iso3166"></a>
 **\[ISO 3166\]**
 > Country Codes - ISO 3166, [https://www.iso.org/iso-3166-country-codes.html](https://www.iso.org/iso-3166-country-codes.html).
 
