@@ -1,10 +1,10 @@
 <img src="img/eln-logo.png"></img>
 
-# E-legitimationsnämndens Tekniska ramverk
+# En introduktion till E-legitimationsnämndens Tekniska ramverk
 
-### Version 1.6 - 2018-03-28 - *utkast*
+### 2018-06-19
 
-*ELN-0600-v1.5*
+*ELN-0600*
 
 ---
 
@@ -53,8 +53,6 @@
     3.1. [E-legitimationsnämnden](#e-legitimationsnaemnden)
 
     3.2. [Övriga referenser](#oevriga-referenser)
-
-4. [**Ändringar mellan versioner**](#aendringar-mellan-versioner)
 
 <a name="introduktion"></a>
 ## 1. Introduktion
@@ -190,7 +188,7 @@ Förlitandeparter, t.ex. e-tjänster, integrerar mot legitimeringstjänster
 genom standardiserade meddelanden och konsumerar identitetsintyg vilka
 också har standardiserade format.
 
-Detta tekniska ramverk bygger på interoperabilitetsprofilen ” SAML2int
+E-legitimationsnämndens tekniska ramverk bygger på interoperabilitetsprofilen ” SAML2int
 Profile – SAML 2.0 Interoperability Profile”
 \[[SAML2Int](http://saml2int.org/profile/current/)\]. Profilen stöds av
 ett flertal kommersiella produkter och Open Source-lösningar, vilket
@@ -421,17 +419,9 @@ tekniska ramverk.
 <a name="saml-profiler"></a>
 ### 2.1. SAML-profiler
 
-Identitetsfederationer som följer detta tekniska ramverk är uppbyggda
-kring följande SAML-profiler:
-
--   Implementationsprofil – ”Kantara Initiative eGovernment
-    Implementation Profile of SAML 2.0”
-    \[[eGov2](http://kantarainitiative.org/confluence/download/attachments/42140355/kantara-report-egov-saml2-profile-2.0.pdf)\].
-
--   Deploymentprofil – E-legitimationsnämndens ”Deployment Profile for
-    the Swedish eID Framework” \[EidProfile\]. Denna profil utgår från
-    ”SAML2int profile – SAML 2.0 Interoperability Profile”
-    \[[SAML2Int](http://saml2int.org/profile/current/)\].
+Identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk är uppbyggda
+kring ”Deployment Profile for the Swedish eID Framework” \[EidProfile\]. Denna profil utgår från
+”SAML2int profile – SAML 2.0 Interoperability Profile” \[[SAML2Int](http://saml2int.org/profile/current/)\].
 
 <a name="specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk"></a>
 ### 2.2. Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk
@@ -484,7 +474,7 @@ E-legitimationsnämnden och beskriver dess betydelse.
 ### 2.3. Specifikationer för Underskriftstjänst
 
 Detta stycke innehåller referenser till de dokument vilka definierar
-underskriftstjänster inom federationer som följer detta tekniska
+underskriftstjänster inom federationer som följer E-legitimationsnämndens tekniska
 ramverk.
 
 Implementationsprofilen ”Implementation Profile for Using OASIS DSS in
@@ -509,7 +499,9 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 ### 3.1. E-legitimationsnämnden
 
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
+> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
+> 
+> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Börjar gälla 2018-08-20.
 
 **\[EidProfile\]**
 > [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
@@ -542,18 +534,9 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 <a name="oevriga-referenser"></a>
 ### 3.2. Övriga referenser
 
-**\[eGov2\]**
-> [Kantara Initiative eGovernment Implementation Profile of SAML 2.0,
-> Version 2.0, June 11,
-> 2010.](http://kantarainitiative.org/confluence/download/attachments/42140355/kantara-report-egov-saml2-profile-2.0.pdf)
-
 **\[SAML2Int\]**
 > [SAML2int profile v0.2.1 – SAML 2.0 Interoperability
 > Profile](http://saml2int.org/profile/current/).
-
-**\[IdpDisco\]**
-> [OASIS Committee Specification, Identity Provider Discovery Service Protocol and Profile, March
-> 2008](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf).
 
 **\[DSS\]**
 > [OASIS Standard – Digital Signature Service Core Protocols, Elements,
@@ -563,55 +546,3 @@ Context Certificate Extension \[AuthContext\], vilken beskriver hur
 **\[AuthContext\]**
 > [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
-<a name="aendringar-mellan-versioner"></a>
-## 4. Ändringar mellan versioner
-
-**Ändringar mellan version 1.5 och version 1.6:**
-
-- Borttag av underkapitel rörande anvisning.
-
-**Ändringar mellan version 1.4 och version 1.5:**
-
--   Tillägg av avsnitt 1.7, om eIDAS.
-
--   Benämningen ”Tekniskt ramverk för Svensk e-legitimation” ersattes
-    med ”E-legitimationsnämndens tekniska ramverk” med avsikten att
-    reservera begreppet Svensk e-legitimation för kvalitetsmärkningen av
-    svenska e-legitimationer vilken är oberoende av detta tekniska
-    ramverk.
-
--   Referenser till tekniska specifikationer rörande anvisning i avsnitt
-    2.1.1 togs bort på grund av ändrade förutsättningar.
-
-**Ändringar mellan version 1.3 och version 1.4:**
-
--   Tekniskt ramverk för Svensk e-legitimation bygger nu på en nyare
-    version av ”SAML2int Deployment Profile” (se
-    <http://saml2int.org/profile/current/>).
-
--   Specifikationen ”Authentication Context Classes for Levels of
-    Assurance for the Swedish eID Framework” är inte längre del av
-    tekniskt ramverk för Svensk e-legitimation. Dess tidigare syfte har
-    ersatts med användande av attribut (som definieras i
-    \[EidAttributes\] och \[EidProfile\]). I detta dokument utgår det
-    tidigare kapitlet 2.2.3, ”Identifierare och schema för
-    representation av tillitsnivåer”.
-
--   Specifikationen \[EidDSSExt\] vars tidigare namn var ”Eid2 DSS
-    Extension for SAML based Central Signing service” heter nu ”DSS
-    Extension for Federated Central Signing Services”.
-
-**Ändringar mellan version 1.2 och version 1.3:**
-
--   Tagit bort avsnittet *Integrering med verksamhetsspecifika
-    federationer* (flyttas till vägledningar).
-
-**Ändringar mellan version 1.1 och version 1.2:**
-
--   Genomgång av referenslistan. I övrigt inga förändringar.
-
-**Ändringar mellan version 1.0 och version 1.1:**
-
--   Förtydliganden kring användande av entitetskategorier.
-
--   Tillägg av specifikationer för Underskriftstjänst.

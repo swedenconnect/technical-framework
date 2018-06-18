@@ -2,9 +2,9 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.0 - 2017-03-28
+### Version 1.1 - 2018-06-19
 
-*ELN-0612-v1.0*
+*ELN-0612-v1.1*
 
 ---
 
@@ -67,6 +67,8 @@
     6.3. [Signature Services](#signature-services)
 
 7. [**References**](#references)
+
+8. [**Changes between versions**](#changes-between-versions)
 
 ---
 
@@ -158,7 +160,7 @@ For Identity Providers implementing BankID support in **one** Identity Provider 
 
 An BankID Identity Provider use the BankID Relying Party API, as described in \[[BankID_Spec](#bankid_spec)\], to communicate with the BankID-server when providing its services to end users. When a BankID-operation has completed successfully, the Identity Provider (the BankID Relying Party) invokes the `Collect`-method to obtain the result from the operation.
 
-The table [below](#attribute-transformation) contains attribute transformation mappings between attributes from a `Collect`-method response as described in section 12.8 of \[[BankID_Spec](#bankid_spec)\] and attributes defined within the Swedish eID Framework as defined in \[[EidAttributes](#eid-attributes)\].
+The table [below](#attribute-transformation) contains attribute transformation mappings between attributes from a `Collect`-method response as described in section 13.2 of \[[BankID_Spec](#bankid_spec)\] and attributes defined within the Swedish eID Framework as defined in \[[EidAttributes](#eid-attributes)\].
 
 An Identity Provider should not necessarily release all transformed attributes received from the BankID-server to the Service Provider. See further section [5.1](#attribute-release-rules), "[Attribute Release Rules](#attribute-release-rules)".
 
@@ -168,22 +170,22 @@ An Identity Provider should not necessarily release all transformed attributes r
 | BankID attribute | SAML Attribute | Description |
 | :--- | :--- | :--- |
 | `orderRef` | transactionIdentifier<br />`urn:oid:1.2.752.201.3.2` | The BankID order reference received from a BankID `Auth`- or `Sign`-method invocation. This parameter is supplied as an input parameter to the `Collect`-call and is the unique transaction identifier for the BankID-operation. |
-| `userInfo.personalNumber` | personalIdentityNumber<br />`urn:oid:1.2.752.29.4.13` | Swedish ”personnummer”. 12 digits without hyphen. |
-| `userInfo.givenName` | givenName<br />`urn:oid:2.5.4.42` | User's given name. |
-| `userInfo.surname` | sn<br />`urn:oid:2.5.4.4` | User's surname. |
-| `userInfo.name` | displayName<br />`urn:oid:2.16.840.1.113730.3.1.241` | User's given name and surname. |
-| `userInfo.notBefore` | *bankidNotBefore* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | Start of validity of user's BankID.<br />No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidNotBefore*, see [2.1.1](#the-authcontextparams-attribute) below. |
-| `userInfo.notAfter` | *bankidNotAfter* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | End of validity of user's BankID.<br />No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidNotAfter*, see [2.1.1](#the-authcontextparams-attribute) below. |
-| `userInfo.ipAddress` | *bankidUserAgentAddress* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | The IP-address of the user agent presented to the BankID server. In cases where a user uses BankID "on another device" this address may not be the same as the web user agent. No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidUserAgentAddress*, see [2.1.1](#the-authcontextparams-attribute) below. |
-| `signature` | userSignature<br />`urn:oid:1.2.752.201.3.11` | The signature applied by the user as part of the authentication/signature process. |
-| `ocspResponse` | authServerSignature<br />`urn:oid:1.2.752.201.3.13` | The OCSP response signed by the BankID issuer that proves that the user BankID was checked for revocation. |
+| `completionData.`<br />`user.personalNumber` | personalIdentityNumber<br />`urn:oid:1.2.752.29.4.13` | Swedish ”personnummer”. 12 digits without hyphen. |
+| `completionData.`<br />`user.givenName` | givenName<br />`urn:oid:2.5.4.42` | User's given name. |
+| `completionData.`<br />`user.surname` | sn<br />`urn:oid:2.5.4.4` | User's surname. |
+| `completionData.`<br />`user.name` | displayName<br />`urn:oid:2.16.840.1.113730.3.1.241` | User's given name and surname. |
+| `completionData.`<br />`cert.notBefore` | *bankidNotBefore* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | Start of validity of user's BankID.<br />No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidNotBefore*, see [2.1.1](#the-authcontextparams-attribute) below. |
+| `completionData.`<br />`cert.notAfter` | *bankidNotAfter* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | End of validity of user's BankID.<br />No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidNotAfter*, see [2.1.1](#the-authcontextparams-attribute) below. |
+| `completionData.`<br />`device.ipAddress` | *bankidUserAgentAddress* key in authContextParams<br />`urn:oid:1.2.752.201.3.3` | The IP-address of the user agent presented to the BankID server. In cases where a user uses BankID "on another device" this address may not be the same as the web user agent. No direct attribute mapping exists, but may be represented as key-value pair in authContextParams, where the key is *bankidUserAgentAddress*, see [2.1.1](#the-authcontextparams-attribute) below. |
+| `completionData.`<br />`signature` | userSignature<br />`urn:oid:1.2.752.201.3.11` | The signature applied by the user as part of the authentication/signature process. |
+| `completionData.`<br />`ocspResponse` | authServerSignature<br />`urn:oid:1.2.752.201.3.13` | The OCSP response signed by the BankID issuer that proves that the user BankID was checked for revocation. |
 
 <a name="the-authcontextparams-attribute"></a>
 #### 2.1.1. The authContextParams Attribute
 
 The `authContextParams` attribute, see section 3.2.1 of \[[EidAttributes](#eid-attributes)\], is a general purpose attribute to be used when non-standardized authentication data is to be transfered in a SAML assertion. 
 
-The attribute is used by attribute providers to release data from an authentication process that has no attribute definition of its own. Thus, should the BankID attributes `userInfo.notBefore`, `userInfo.notAfter` and `userInfo.ipAddress` be transformed and included into an assertion, they would have to be placed as key-value pairs of the `authContextParams` attribute as the example below.
+The attribute is used by attribute providers to release data from an authentication process that has no attribute definition of its own. Thus, should the BankID attributes `completionData.cert.notBefore`, `completionData.cert.notAfter` and `completionData.device.ipAddress` be transformed and included into an assertion, they would have to be placed as key-value pairs of the `authContextParams` attribute as the example below.
 
     <saml2:Attribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
                                FriendlyName="authContextParams"
@@ -196,9 +198,9 @@ The attribute is used by attribute providers to release data from an authenticat
 
 The example above represents the following BankID attributes and values:
 
-* `userInfo.notBefore` = 2016-05-30T09-30-10Z
-* `userInfo.notAfter` = 2018-05-30T09-30-10Z
-* `userInfo.ipAddress` = 85.229.202.232
+* `completionData.cert.notBefore` = 2016-05-30T09-30-10Z
+* `completionData.cert.notAfter` = 2018-05-30T09-30-10Z
+* `completionData.device.ipAddress` = 85.229.202.232
 
 > The format for the notBefore and notAfter attributes should be the representation as given by the XML type `xs:dateTime`.
 
@@ -241,6 +243,8 @@ A BankID Identity Provider SHOULD include a Cancel-button in the user interface 
 
 In cases where the BankID app is on another device than the user agent and the Identity Provider has received notification from the BankID-server that the app has been started by the user, it is RECOMMENDED that the Cancel-button in the Identity Provider user interface is hidden or disabled. The reason for this is that the BankID app itself has a Cancel-button, and if the user cancels the operation using the Cancel-button in the Identity Provider user interface instead of in the app itself, the app will be left dangling until it times out and during that time the user may be prevented from using its BankID.
 
+> Another thing to pay attention to is the case where the user clicks the Cancel-button in the Identity Provider user interface before starting the BankID app. The session against the BankID-server may then have been started, but since there are no ways of cancelling a BankID-session, the user will be prevented from starting a new session until the previous session times out. A suggestion in the cases where a BankID-session was started, is that the Identity Provider initiates a new BankID-operation in order to "kill" the previous one (the newly created session will also be invalidated by the BankID-server).
+
 <a name="authentication-requests"></a>
 ## 4. Authentication Requests
 
@@ -265,7 +269,7 @@ The BankID client (app or desktop program) comprises a text box in which the sig
 
 An Identity Provider that processes an `<saml2p:AuthnRequest>` from a Signature Service is not given the actual data that is being signed by the user via the Signature Service. However, in order to invoke the BankID signature function, the Identity Provider must supply the BankID-server with data to be signed. This section specifies the input to the BankID signature operation.
 
-The "To-be-signed" data that is passed as input the the BankID `Sign`-method is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (section 12.2.1 of \[[BankID_Spec](#bankid_spec)\]).
+The "To-be-signed" data that is passed as input the the BankID `Sign`-method is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (section 13.1.2 of \[[BankID_Spec](#bankid_spec)\]).
 
 <a name="uservisibledata"></a>
 ##### 4.2.1.1. userVisibleData - Signature Message
@@ -327,11 +331,9 @@ It is RECOMMENDED that authentication/signature errors and failures to start the
 
 If the user cancels a BankID operation, either by clicking the Cancel-button in the Identity Provider user interface or the Cancel-button in the BankID app/Security Application, the Identity Provider SHOULD respond with a `<saml2p:Response>` message where the second level status code is `http://id.elegnamnden.se/status/1.0/cancel`.
 
-In cases where the Identity Provider receives the BankID error code `ALREADY_IN_PROGRESS` in response to an `Auth`- or `Sign`-call the Identity Provider MAY display a warning to the user that someone may have initiated a BankID operation using their personal identity number<sup>2</sup>. If this warning is displayed, it is RECOMMENDED that the second level status code `http://id.elegnamnden.se/status/1.0/possibleFraud` is included in the error response message posted back to the Service Provider.
+In cases where the Identity Provider receives the BankID error code `ALREADY_IN_PROGRESS` in response to an `Auth`- or `Sign`-call the Identity Provider MAY display a warning to the user that someone may have initiated a BankID operation using their personal identity number<sup>1</sup>. If this warning is displayed, it is RECOMMENDED that the second level status code `http://id.elegnamnden.se/status/1.0/possibleFraud` is included in the error response message posted back to the Service Provider.
 
-> \[1\]: As defined in sections 12.7 and 12.8.5 of \[[BankID_Spec](#bankid_spec)\].
-> 
-> \[2\]: There have been reports where fraudsters remotely try to convince people of using their Mobile BankID to log in to a service. In these cases, the fraudster initiates a BankID authentication prior to the person he tries to trick into logging in to the service, and is waiting for the user to enter his or hers personal code, thus authenticating the fraudsters session. 
+s> \[1\]: There have been reports where fraudsters remotely try to convince people of using their Mobile BankID to log in to a service. In these cases, the fraudster initiates a BankID authentication prior to the person he tries to trick into logging in to the service, and is waiting for the user to enter his or hers personal code, thus authenticating the fraudsters session. 
 
 <a name="metadata"></a>
 ## 6. Metadata
@@ -404,7 +406,7 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="bankid-spec"></a>
 **\[BankID_Spec\]**
-> [BankID Relying Party Guidelines, version 2.13](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v2.13.pdf).
+> [BankID Relying Party Guidelines, version 3.1](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.1.pdf).
 > 
 > *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
 
@@ -416,3 +418,10 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="changes-between-versions"></a>
+## 8. Changes between versions
+
+**Changes between version 1.0 and 1.1:**
+
+- Section 3.4, "Cancelling an Operation" was extended with a suggestion of how to avoid dangling sessions after user cancel.
+- The profile now references the BankID Relying Party Guidelines that makes use of JSON.

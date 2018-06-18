@@ -7,7 +7,7 @@ This repository comprises the specifications of the Swedish eID Framework.
 ### About
 
 The specifications in this branch are the latest development of the Swedish eID Framework. The latest official release
-can be found in the [march-2017 branch](https://github.com/elegnamnden/technical-framework/tree/march-2017).
+can be found in the [june-2018 branch](https://github.com/elegnamnden/technical-framework/tree/june-2018).
 
 ### Feedback and Questions
 
@@ -21,11 +21,11 @@ The releases can also be found under <http://elegnamnden.github.io/technical-fra
 
 ## Contents
 
-#### Tekniskt ramverk för Svensk e-legitimation
+#### En introduktion till E-legitimationsnämndens Tekniska ramverk
 
 An overview document (in Swedish) that describes the different parts of the Swedish eID Framework.
 
-> [ELN-0600 - Tekniskt ramverk - Svensk e-legitimation](ELN-0600%20-%20Tekniskt%20ramverk%20-%20Svensk%20e-legitimation.md)
+> [Tekniskt ramverk - Introduktion](ELN-0600%20-%20Tekniskt%20ramverk%20-%20Introduktion.md)
 
 > This document will be translated into English.
 
@@ -105,10 +105,6 @@ This document specifies a Signature Activation Protocol (SAP) and its data eleme
 
 ---
 
-### Updates to the current version of the specifications
-
-> [Updates to the Swedish eID Framework](Updates%20to%20the%20Swedish%20eID%20Framework.md) - 2017-12-18
-
 ## Older versions
 
 Older version of the specification are stored in the following branches:
@@ -116,3 +112,4 @@ Older version of the specification are stored in the following branches:
 + june-2014 - For the June 2014 release
 + april-2015 - For the April 2015 release
 + october-2015 - For the October 2015 release
++ march-2017 - For the March 2017 release

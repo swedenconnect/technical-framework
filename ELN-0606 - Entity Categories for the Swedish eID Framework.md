@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.6 - 2018-03-28 - *draft version*
+### Version 1.6 - 2018-06-19
 
 *ELN-0606-v1.6*
 
@@ -65,9 +65,8 @@ federation.
 The use of Entity Categories for the Swedish eID Framework is restricted
 to SAML metadata where Entity Categories are placed as SAML attributes
 under the `<mdattr:EntityAttributes>` element
-(\[[SAML2MetaAttr](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)\])
-for an `<md:Extensions>` element
-(\[[SAML2Meta](http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)\]).
+(\[[SAML2MetaAttr](#saml2metaattr)\]) for an `<md:Extensions>` element
+(\[[SAML2Meta](#saml2meta)\]).
 
     <md:EntityDescriptor entityID="https://eid2.example.com/entityid">
       <md:Extensions>
@@ -102,7 +101,7 @@ Three types of Entity Categories are used within the federation:
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in \[[RFC2119](http://www.ietf.org/rfc/rfc2119.txt)\].
+document are to be interpreted as described in \[[RFC2119](#rfc2119)\].
 
 The use of SHOULD, SHOULD NOT, and RECOMMENDED reflects broad consensus
 on deployment practices intended to foster both interoperability and
@@ -116,8 +115,7 @@ with caution.
 ### 1.2. References to SAML 2.0 Standards and Profiles
 
 When referring to elements from the SAML 2.0 core specification
-\[[SAML2Core](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)\],
-the following syntax is used:
+\[[SAML2Core](#saml2core)\], the following syntax is used:
 
 -   `<saml2p:Element>` – for elements from the SAML 2.0 Protocol
     namespace.
@@ -128,11 +126,9 @@ the following syntax is used:
 When referring to elements from the SAML 2.0 metadata specifications,
 the following syntax is used:
 
--   `<md:Element>` – for elements defined in
-    \[[SAML2Meta](http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)\].
+-   `<md:Element>` – for elements defined in \[[SAML2Meta](#saml2meta)\].
 
--   `<mdattr:Element>` – for elements defined in
-    \[[SAML2MetaAttr](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)\].
+-   `<mdattr:Element>` – for elements defined in \[[SAML2MetaAttr](#saml2metaattr)\].
 
 <a name="consuming-and-providing-services"></a>
 ### 1.3. Consuming and Providing Services
@@ -242,7 +238,7 @@ have an agreement with the Identity Provider.
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa3-pnr`
 
-**Description**: User authentication according to assurance level 3 \[EidTillit\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
 
@@ -254,7 +250,7 @@ have an agreement with the Identity Provider.
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa2-pnr`
 
-**Description**: User authentication according to assurance level 2 \[EidTillit\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
 
@@ -266,7 +262,7 @@ have an agreement with the Identity Provider.
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa4-pnr`
 
-**Description**: User authentication according to assurance level 4 \[EidTillit\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
 
@@ -300,7 +296,7 @@ Attribute release is based on the "Natural Personal Identity with Civic Registra
 It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 
 **LoA-identifier**: Not applicable
-> An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[EidRegistry\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[EidDeploy\].
+> An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[[EidRegistry](#eidregistry)\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[[EidDeploy](#eiddeploy)\].
 
 **Attribute requirements**: 
 
@@ -349,7 +345,7 @@ authentication using mobile devices.
 
 **URL**: `http://id.elegnamnden.se/sprop/1.0/scal2`
 
-**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with \[SigSAP\]. 
+**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with \[[SigSAP](#sigsap)\]. 
 
 For a providing service, i.e. an Identity Provider, inclusion of the
 scal2 service property states that the Identity Provider will return a "SAD" in response to a `SADRequest` in an authentication requests from a signing service.
@@ -392,44 +388,56 @@ All Service Type identifiers are prefixed with
 <a name="references"></a>
 ## 5. References
 
+<a name="rfc2119"></a>
 **\[RFC2119\]**
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
+<a name="saml2core"></a>
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
+<a name="saml2meta"></a>
 **\[SAML2Meta\]**
 > [OASIS Standard, Metadata for the OASIS Security Assertion Markup
 > Language (SAML) V2.0, March
 > 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf)
 
+<a name="saml2metaattr"></a>
 **\[SAML2MetaAttr\]**
 > [OASIS Committee Specification, SAML V2.0 Metadata Extension for
 > Entity Attributes Version 1.0, August
 > 2009.](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html)
 
+<a name="entcat"></a>
 **\[EntCat\]**
-> [The Entity Category SAML Entity Metadata Attribute Type, March
-> 2012.](http://macedir.org/entity-category/)
+> [The Entity Category SAML Entity Metadata Attribute Type, January
+> 2018.](https://tools.ietf.org/html/draft-young-entity-category)
 
+<a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation](http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf).
+> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
+> 
+> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
 
+<a name="eiddeploy"></a>
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
+<a name="eidregistry"></a>
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
+<a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions

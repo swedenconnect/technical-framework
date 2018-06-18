@@ -2,7 +2,7 @@
 
 # Certificate profile for certificates issued by Central Signing services
 
-### Version 1.1 - 2018-01-02 - *Draft version*
+### Version 1.1 - 2018-06-19
 
 *ELN-0608-v1.1*
 
@@ -38,7 +38,7 @@
 
     2.3.2. [Authentication Context and Attribute mapping](#authentication-context-and-attribute-mapping)
     
-    2.3.2. [Certificate Policy](#certificate-policy)
+    2.3.3. [Certificate Policy](#certificate-policy)
 
 3. [**Normative References**](#normative-references)
 
@@ -182,7 +182,7 @@ other name form that was obtained from a SAML attribute in the SAML assertion us
 were obtained from the SAML assertion.
 
 <a name="certificate-policy"></a>
-#### 2.3.2. Certificate Policy
+#### 2.3.3. Certificate Policy
 
 Certificates SHALL contain at least one referenced certificate policy. PKC certificates SHALL contain at least one reference to a policy idefined in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
 
@@ -197,7 +197,7 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 > [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="eln-0604"></a>**[ELN-0604]**
-> [Attribute Specification for the Swedish eID Framework.](http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
+> [Attribute Specification for the Swedish eID Framework.](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
 
 <a name="rfc2119"></a>**[RFC2119]**
 
