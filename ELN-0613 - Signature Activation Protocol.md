@@ -2,9 +2,9 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.0 - 2018-06-19
+### Version 1.1 - 2018-08-03 - *Draft version*
 
-*ELN-0613-v1.0*
+*ELN-0613-v1.1*
 
 ---
 
@@ -47,6 +47,8 @@
 4. [**Schemas**](#schemas)
 
 5. [**Normative References**](#normative-references)
+
+6. [**Changes between versions**](#changes-between-versions)
 
 <a name="introduction"></a>
 ## 1. Introduction
@@ -174,7 +176,7 @@ The following schema fragment defines the `<sap:SADRequest>` element:
         <xs:element name="RequesterID" type="xs:string" />
         <xs:element name="SignRequestID" type="xs:string" />
         <xs:element name="DocCount" type="xs:int" />
-        <xs:element name="RequestedVersion" type="xs:string" default="1.0" />
+        <xs:element name="RequestedVersion" type="xs:string" minOccurs="0" default="1.0" />
         <xs:element minOccurs="0" name="RequestParams">
           <xs:complexType>
             <xs:sequence>
@@ -355,7 +357,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
           <xs:element name="RequesterID" type="xs:string" />
           <xs:element name="SignRequestID" type="xs:string" />
           <xs:element name="DocCount" type="xs:int" />
-          <xs:element name="RequestedVersion" type="xs:string" default="1.0" />
+          <xs:element name="RequestedVersion" type="xs:string" minOccurs="0" default="1.0" />
           <xs:element minOccurs="0" name="RequestParams">
             <xs:complexType>
               <xs:sequence>
@@ -405,4 +407,12 @@ General System Security Requirements
 
 > European Standard prEN 419241-2 - Trustworthy Systems Supporting Server Signing - Part 2:
 Protection profile for QSCD for Server Signing
+
+
+<a name="changes-between-versions"></a>
+## 6. Changes between versions
+
+**Changes between version 1.0 and 1.1:**
+
+- The `RequestedVersion` element of the `SADRequestType` is now marked as optional in the schema definition.
 

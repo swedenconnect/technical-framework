@@ -14,5 +14,5 @@
 | ~~ELN-0610 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
 | [ELN-0611 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](ELN-0611%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.0 |
 | [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.1 |
-| [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md) | 1.0 |
+| [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md) | 1.1<br/>(draft version) |
 
