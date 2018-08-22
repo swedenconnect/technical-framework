@@ -1,10 +1,10 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.5 - 2018-06-19
+### Version 1.6 - 2018-08-22 - **Draft version**
 
-*ELN-0602-v1.5*
+*ELN-0602-v1.6*
 
 ---
 
@@ -1018,33 +1018,17 @@ The Swedish eID Framework defines additional authentication context URIs
 to be used in `<saml2p:AuthnRequest>` and `<saml2:Assertion>`
 elements during “authentication for signature”. These authentication
 context URIs are applicable when the Identity Provider is required to
-display a sign message as part of the authentication process. These URIs
-are:
+display a sign message as part of the authentication process. They
+are refered to as "Sign Message Authentication Context URIs" and
+are defined in section 3.1.1.1 of \[[EidRegistry](#eidregistry)\].
 
--   `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage`
+A sign message authentication context URI extends the corresponding authentication context URI used to represent a Level of Assurance identifier (as defined in section 3.1.1 of \[[EidRegistry](#eidregistry)\]) with requirements listed in the sections below.
 
--   `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage`
+For example, the `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` URI is the sign message authentication context URI corresponding to the `http://id.elegnamnden.se/loa/1.0/loa3` Level of Assurance identifier.
 
--   `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage`
-
--   `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm`
-
--   `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm`
-
--   `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm`
-
--   `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm`
-
--   `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm`
-
--   `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm`
-
-These URIs extend the corresponding authentication context URIs used to
-represent Level of Assurance identifiers (see section 3.1.1 of
-\[[EidRegistry](#eidregistry)\]) with requirements listed in the sections below. A
-Signature Service MAY use any of the defined authentication context
-URIs. The URIs listed above are only used when there is an explicit
-requirement for the Identity Provider to display a sign message provided
+A Signature Service MAY use any of the defined authentication context
+URIs. The URIs listed in section 3.1.1.1 of \[[EidRegistry](#eidregistry)\] are only used when 
+there is an explicit requirement for the Identity Provider to display a sign message provided
 in the authentication request.
 
 <a name="authentication-requests2"></a>
@@ -1095,14 +1079,14 @@ element in the `<saml2p:AuthnRequest>` message (see section 3.2.1 of
 If the `SignMessage` element from the signature request includes a
 `MustShow` attribute with the value `true`, the Signature Service MUST
 require that the provided sign message is displayed by the Identity
-Provider, by including an authentication context URI (as defined in
+Provider, by including an authentication context URI (as described in
 [section 7.1](#authentication-context-uris-for-signature-services) above) to the 
 `<saml2:AuthnContextClassRef>` element that is part of the 
 `<saml2p:RequestedAuthnContext>` element of the `<saml2p:AuthnRequest>` 
 message.
 
 Identity Providers SHALL advertise supported authentication contexts
-defined by the URIs listed in [section 7.1](#authentication-context-uris-for-signature-services), 
+defined by the URIs listed in sections 3.1.1 and 3.1.1.1 of \[[EidRegistry](#eidregistry)\], 
 by including the URIs of supported authentication contexts as EntityAttributes of the type
 `urn:oasis:names:tc:SAML:attribute:assurance-certification` in its metadata.
 
@@ -1119,11 +1103,11 @@ by including the URIs of supported authentication contexts as EntityAttributes o
   </mdattr:EntityAttributes>
 </md:Extensions>
 ```
-*Example of how an Identity Provider advertises its support for LoA3
+*Example of how an Identity Provider advertises its support for LoA 3
 authentication (including support for displaying of sign messages).*
 
 Identity Providers processing a request with a requested authentication
-context identified by any of the URIs listed in 7.1 SHALL meet the
+context that is a "Sign Message Authentication Context URI" SHALL meet the
 following requirements (in addition to other general requirements
 associated with requests from signature services:
 
@@ -1139,11 +1123,10 @@ associated with requests from signature services:
     or the sign message for any reason cannot be displayed in a proper
     manner, the Identity Provider must return an error response.
 
--   If authentication and sign message confirmation by the user was
-    successful, the Identity Provider MUST include the authentication
-    context URI from the list in 7.1 in the assertion that is consistent
-    with the authentication context requested in the authentication
-    request.
+-   If authentication and sign message confirmation by the user was 
+	successful, the Identity Provider MUST include the authentication 
+	context URI in the assertion that is consistent 
+	with the authentication context requested in the authentication request.
 
 -   The Identity Provider MUST NOT return an assertion without
     performing authentication process consistent with the requested
@@ -1165,7 +1148,7 @@ Verification of a received SAD-attribute MUST follow the verification rules spec
 <a name="authentication-responses2"></a>
 ### 7.3. Authentication Responses
 
-By including an authentication context URI listed in [section 7.1](#authentication-context-uris-for-signature-services) (sign message URI) in SAML assertion under the
+By including a sign message authentication context URI, as described in [section 7.1](#authentication-context-uris-for-signature-services), in the SAML assertion under the
 `<saml2:AuthnContextClassRef>` element of the
 `<saml2:AuthnStatement>` element in the response, the Identity
 Provider asserts that it has successfully displayed the sign message
@@ -1173,7 +1156,8 @@ received in the request for the user and that the user has accepted to
 sign under the context of this sign message<sup>*</sup>.
 
 An Identity Provider MUST NOT return an authentication context URI in an
-assertion, other than those listed in [section 7.1](#authentication-context-uris-for-signature-services), if the request included one of these URIs as the requested authentication context. If
+assertion, other than those defined in section 3.1.1.1 of \[[EidRegistry](#eidregistry)\], 
+if the request included one of these URIs as the requested authentication context. If
 the Identity Provider failed to display the sign message or the user
 failed to accept it, and the request indicated that the sign message
 MUST be displayed, then the Identity Provider MUST return an error
@@ -1271,9 +1255,7 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
-> 
-> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
+> [Tillitsramverk för Svensk e-legitimation - version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf)
 
 <a name="eidentcat"></a>
 **\[EidEntCat\]**
@@ -1294,6 +1276,10 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
+
+**Changes between version 1.5 and 1.6:**
+
+- The definition of all possible "Sign Message Authentication Context URIs" has been moved from section 7.1, "Authentication Context URIs for Signature Services", to section 3.1.1.1 of \[[EidRegistry](#eidregistry)\].
 
 **Changes between version 1.4 and 1.5:**
 
