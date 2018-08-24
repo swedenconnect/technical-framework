@@ -23,7 +23,7 @@
     3.1. [URL Identifiers](#url-identifiers)
 
     3.1.1. [Authentication Context URIs](#authentication-context-uris)
-    
+
     3.1.1.1. [Sign Message Authentication Context URIs](#sign-message-authentication-context-uris)
 
     3.1.2. [Attribute Sets](#attribute-sets)
@@ -43,13 +43,13 @@
     3.1.6. [Authentication Context](#authentication-context)
 
     3.1.7. [Sign Response Status Codes](#sign-response-status-codes)
-    
+
     3.1.8. [Name Registration Authorities](#name-registration-authorities)
-    
+
     3.1.9. [eIDAS Identifiers](#eidas-identifiers)
-    
+
     3.1.9.1. [eIDAS Proxy Service Aliases](#eidas-proxy-service-aliases)
-    
+
     3.2. [OID Identifiers](#oid-identifiers)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
@@ -164,22 +164,21 @@ The following category codes are defined:
 | **auth-cont** | Authentication context information schema. |
 | **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
-| **eidas** | Identifiers used for integration with the eIDAS Framework. | 
+| **eidas** | Identifiers used for integration with the eIDAS Framework. |
 | **ns** | XML Schema namespaces. |
 
 <a name="authentication-context-uris"></a>
 #### 3.1.1. Authentication Context URIs
 
 Authentication Context URIs representing assurance levels
-(Tillitsnivåer) according to the assurance framework for the Swedish eID
-Framework (Tillitsramverket för Svensk e-legitimation).
+(Tillitsnivåer) relevant to \[[EidDeploy](#eiddeploy)\] such assurance levels according to the assurance framework for the Swedish eID Framework (Tillitsramverket för Svensk e-legitimation).
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | \[[TillitRamv](#tillitramv)\] |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3. | |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 (`http://id.elegnamnden.se/loa/1.0/loa3`). | |
 | `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
@@ -212,7 +211,7 @@ meaning for use with authentication requests that includes a sign
 message that must be displayed to the user (see section 7 of
 \[[EidDeploy](#eiddeploy)\]).
 
-| **URL** | **Object** | 
+| **URL** | **Object** |
 | :--- | :--- |
 | `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. |
 | `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. |
@@ -390,9 +389,9 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 #### 3.2.1. ASN.1 Declarations
 
     -- Object Identifier Registry for the Swedish E-identification board
-    
+
     id-eleg OBJECT IDENTIFIER ::= {iso(1) member-body(2) se(752) e-legitimationsnamnden(201)}
-    
+
     -- E-legnamnden arcs
     id-mod    OBJECT IDENTIFIER ::= { id-eleg 0 }    -- ASN.1 modules
     id-test   OBJECT IDENTIFIER ::= { id-eleg 1 }    -- OIDs for test
@@ -400,15 +399,15 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr   OBJECT IDENTIFIER ::= { id-eleg 3 }    -- Attributes
     id-qcs    OBJECT IDENTIFIER ::= { id-eleg 4 }    -- QC Statement
     id-ce     OBJECT IDENTIFIER ::= { id-eleg 5 }    -- Cert Extensions
-    
+
     -- E-legnamnden modules
-    
+
     id-mod-qcAuthContext OBJECT IDENTIFIER ::= { id-mod 1 }
-    
+
     -- E-legnamnden OIDs for test
-    
+
     -- E-legnamnden Policy
-    
+
     -- E-legnamnden Attributes
     id-attr-org-affiliation      OBJECT IDENTIFIER ::= { id-attr 1 }    -- Organizational affiliation
     id-attr-transaction-id       OBJECT IDENTIFIER ::= { id-attr 2 }    -- Transaction identifier
@@ -423,11 +422,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature    
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
-    
+
     -- E-legnamnden QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
     id-qcs-statement   OBJECT IDENTIFIER ::= { id-qcs 2 }   –- QC statements
-    
+
     -- E-legnamnden Certificate Extensions
     id-ce-authContext  OBJECT IDENTIFIER ::= { id-ce 1 }
 
@@ -447,7 +446,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
 > [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
-> 
+>
 > [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
 
 <a name="authcontext"></a>
@@ -521,12 +520,12 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 -   The SAML status code identifier
     `http://id.elegnamnden.se/status/1.0/cancel` was added to be used in SAML
     Response messages to indicate a cancelled operation.
-    
+
 - Added the SAML status code identifiers `http://id.elegnamnden.se/status/1.0/fraud` and `http://id.elegnamnden.se/status/1.0/possibleFraud` were added to be used in SAML Response messages to alert fraudulent requests.
 
 -   Added attribute definitions for “Birth name”, “User certificate”,
     “User signature”, "Authentication Server Signature" and “Signature activation data”. See chapter 3.2.
-    
+
 -  Added the Service Type Entity Categories `http://id.elegnamnden.se/st/1.0/public-sector-sp` and `http://id.elegnamnden.se/st/1.0/private-sector-sp` to section 3.1.3.3.
 
 **Changes between version 1.2 and version 1.3:**
