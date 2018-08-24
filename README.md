@@ -1,4 +1,4 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 # Technical Specifications for the Swedish eID Framework
 
