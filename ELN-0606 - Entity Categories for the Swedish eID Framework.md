@@ -231,7 +231,7 @@ A service entity category identifies an arbitrary set of requirements and condit
 
 **Note**: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
 
-**Note**: A providing service that does not comply with any of the defined service entity categories may define its own service entity category identifier in order to utilize the entity category matching rules. Any service entity category identifier defined by other parties than the federation operator or by this specification should use the prefix `http://id.swedenconnect.se/ec/<org>`, where `org` is the defining organization's identifier.
+**Note**: A providing service that does not comply with any of the defined service entity categories may define its own service entity category identifier in order to utilize the entity category matching rules. Any service entity category identifier defined outside of this specification should use the prefix `http://id.swedenconnect.se/ec/<org>`, where `org` is the defining organization's identifier.
 
 <a name="loa3-pnr"></a>
 ### 2.1. loa3-pnr
@@ -390,11 +390,9 @@ All Service Type identifiers are prefixed with
 
 Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.
 
-All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract`.
+All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract/<org>`, where `org` is identifier for the defining organization.
 
 The meaning of different contracts and business agreements are out of scope for this specification. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
-
-For Service Contract identifiers defined by other parties than the federation operator, the prefix `http://id.swedenconnect.se/contract/<org>` should be used, where `org` is the defining organization's identifier.
 
 
 <a name="references"></a>

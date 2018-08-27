@@ -286,11 +286,10 @@ Identifiers for defined service types.
 
 Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.
 
-All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract`.
+All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract/<org>`, where `org` is the identifier for the defining organization.
 
 The Swedish eID Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
 
-For Service Contract identifiers defined by other parties than the federation operator, the prefix `http://id.swedenconnect.se/contract/<org>` should be used, where `org` is the defining organization's identifier.
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
