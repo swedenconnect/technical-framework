@@ -1,10 +1,10 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.6 - 2018-06-19
+### Version 1.7 - 2018-08-27 - *Draft version*
 
-*ELN-0606-v1.6*
+*ELN-0606-v1.7*
 
 ---
 
@@ -48,9 +48,11 @@
     
     4.3. [private-sector-sp](#private-sector-sp)
 
-5. [**References**](#references)
+5. [**Service Contract Categories**](#service-contract-categories)
 
-6. [**Changes between versions**](#changes-between-versions)
+6. [**References**](#references)
+
+7. [**Changes between versions**](#changes-between-versions)
 
 ---
 
@@ -89,12 +91,14 @@ attribute for a Service Provider or Identity Provider.*
 Three types of Entity Categories are used within the federation:
 
 -   Service entity category – Identifiers for entity categories
-    representing alternative sets of requirements.
+    representing sets of requirements.
 
 -   Service property categories – Identifiers for defined service
     properties.
 
 -   Service type categories – Identifiers for defined service types.
+
+-   Service contract categories - Identifiers for labelling entities based on contracts or business agreements.
 
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
@@ -152,9 +156,10 @@ These differences are outlined in the following table:
 
 | EC type | Consuming service | Providing service | Service matching rule |
 | :--- | :--- | :--- | :--- |
-| **Service Entity Category** | Each declared category represents an alternative set of requirements for the service. | Represents the ability to deliver assertions in accordance with each declared category. | At least one of the entity categories declared by the consuming service MUST be declared by the providing service. |
+| **Service Entity Category** | Each declared category represents an alternative set of requirements for the service. | Represents the ability to deliver assertions in accordance with each declared category. | At least one of the service entity categories declared by the consuming service MUST be declared by the providing service. |
 | **Service Property** | Represents a property of this service. | Represents the ability to deliver assertions to a consuming service that has the declared property. | All properties declared by the consuming service MUST be declared by the providing service. |
 | **Service Type** | Declares the type of service provided by this consuming service. | Not applicable. | No matching rule. |
+| **Service Contract** | Each declared category represents a contract, or business agreement, that the service is affiliated to. | Represents the contracts, or business agreements, under which the providing service may deliver services. | At least one of the service contract entity categories declared by the consuming service MUST be declared by the providing service. (Same as for Service Entity Categories). |
 
 <a name="use-in-discovery"></a>
 ### 1.4. Use in Discovery
@@ -167,13 +172,16 @@ the end-user. The filtering algorithm is very simple:
 
 For a Service Provider requesting discovery its metadata entry is
 scanned for Entity Category identifiers of the type Service Entity
-Category and Service Property. The algorithm then iterates over all
+Category, Service Contract and Service Property. The algorithm then iterates over all
 Identity Providers found in the metadata repository for the
 federation. The discovery process SHOULD display Identity Providers as
 a plausible choice, if and only if, they have declared;
 
 -   at least one of the Service Entity Category identifiers declared by
-    the Service Provider, and
+    the Service Provider,
+    
+-   at least one of the Service Contract identifiers declared by the Service
+    Provider (provided the Service Provider has declared at least one), and
 
 -   all of the Service Property identifiers declared by the Service
     Provider.
@@ -196,6 +204,9 @@ single entity category attribute.
                                    NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">    
             <saml:AttributeValue xsi:type="xs:string">
               http://id.elegnamnden.se/ec/1.0/loa3-pnr
+            </saml:AttributeValue>
+            <saml:AttributeValue xsi:type="xs:string">
+              http://id.swedenconnect.se/contract/sc/1.0/eidas
             </saml:AttributeValue>    
             <saml:AttributeValue xsi:type="xs:string">
               http://id.elegnamnden.se/sprop/1.0/mobile-auth
@@ -214,24 +225,13 @@ This section contains a listing of all Service Entity Categories that
 are defined within the framework for Swedish eID.
 
 All service entity category identifiers are prefixed with
-**`http://id.elegnamnden.se/ec`**.
+`http://id.elegnamnden.se/ec` or `http://id.swedenconnect.se/ec` (defined after Aug. 2018).
 
-A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes.
+A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes. For contract- or business agreement requirements [Service Contract Categories](#service-contract-categories) should be used.
 
 **Note**: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
 
-**Note**: The service entity category may serve as a means to restrict a providing service to only those Service Providers that has made a deliberate choice to accept the providing service. This is achieved if an Identity Provider only lists a privately defined service entity category in its metadata which is understood and accepted by just a subset of all service providers. Each Service Provider can then make this Identity Provider selectable (matching its own service) by including this private service entity category in its metadata.
-
-***Example***: 
-Suppose that the Identity Provider X delivers assertions according to service entity category
-"loa3-pnr" (as described below), but only to relying parties to which it has a business
-agreement with. In order to facilitate the matching rules for discovery 
-(see [section 1.4](#use-in-discovery-services) above) the service entity category, 
-"loa3-pnr-X", is introduced. It has the same meaning as "loa3-pnr" with the additional
-requirement that there must exist a bilateral agreement between a Service Provider and
-Identity Provider X. This URI for this new service entity category should now be included 
-in the metadata for the Identity Provider, and in metadata for the Service Providers that 
-have an agreement with the Identity Provider.
+**Note**: A providing service that does not comply with any of the defined service entity categories may define its own service entity category identifier in order to utilize the entity category matching rules. Any service entity category identifier defined by other parties than the federation operator or by this specification should use the prefix `http://id.swedenconnect.se/ec/<org>`, where `org` is the defining organization's identifier.
 
 <a name="loa3-pnr"></a>
 ### 2.1. loa3-pnr
@@ -385,8 +385,20 @@ All Service Type identifiers are prefixed with
 
 **Description**: A service type that indicates that an Service Provider is a "private sector" SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
 
+<a name="service-contract-categories"></a>
+## 5. Service Contract Categories
+
+Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.
+
+All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract`.
+
+The meaning of different contracts and business agreements are out of scope for this specification. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
+
+For Service Contract identifiers defined by other parties than the federation operator, the prefix `http://id.swedenconnect.se/contract/<org>` should be used, where `org` is the defining organization's identifier.
+
+
 <a name="references"></a>
-## 5. References
+## 6. References
 
 <a name="rfc2119"></a>
 **\[RFC2119\]**
@@ -413,14 +425,11 @@ All Service Type identifiers are prefixed with
 
 <a name="entcat"></a>
 **\[EntCat\]**
-> [The Entity Category SAML Entity Metadata Attribute Type, January
-> 2018.](https://tools.ietf.org/html/draft-young-entity-category)
+> [RFC8409 - The Entity Category Security Assertion Markup Language (SAML) Attribute Types, August 2018](https://tools.ietf.org/html/rfc8409).
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
-> 
-> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
+> [Tillitsramverk för Svensk e-legitimation, version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
@@ -440,7 +449,14 @@ All Service Type identifiers are prefixed with
 > [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
-## 6. Changes between versions
+## 7. Changes between versions
+
+**Changes between version 1.6 and version 1.7:**
+
+- A new entity categorty type, Service Contract, was added to section 5.
+
+- The reference \[EntCat\] now refers to [RFC-8409](https://tools.ietf.org/html/rfc8409) instead of 
+[https://tools.ietf.org/html/draft-young-entity-category](https://tools.ietf.org/html/draft-young-entity-category).
 
 **Changes between version 1.5 and version 1.6:**
 
