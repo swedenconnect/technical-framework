@@ -159,7 +159,7 @@ These differences are outlined in the following table:
 | **Service Entity Category** | Each declared category represents an alternative set of requirements for the service. | Represents the ability to deliver assertions in accordance with each declared category. | At least one of the service entity categories declared by the consuming service MUST be declared by the providing service. |
 | **Service Property** | Represents a property of this service. | Represents the ability to deliver assertions to a consuming service that has the declared property. | All properties declared by the consuming service MUST be declared by the providing service. |
 | **Service Type** | Declares the type of service provided by this consuming service. | Not applicable. | No matching rule. |
-| **Service Contract** | Each declared category represents a contract, or business agreement, that the service is affiliated to. | Represents the contracts, or business agreements, under which the providing service may deliver services. | At least one of the service contract entity categories declared by the consuming service MUST be declared by the providing service. (Same as for Service Entity Categories). |
+| **Service Contract** | Each declared category represents a contract, or business agreement, that the service is affiliated to. | Represents the contracts, or business agreements, under which the providing service may deliver services. | At least one of the service contract identifiers declared by a providing service must be declared by the consuming service. A providing service that does not declare any service contract identifiers match all consuming services regarding service contract matching. |
 
 <a name="use-in-discovery"></a>
 ### 1.4. Use in Discovery
@@ -175,16 +175,16 @@ scanned for Entity Category identifiers of the type Service Entity
 Category, Service Contract and Service Property. The algorithm then iterates over all
 Identity Providers found in the metadata repository for the
 federation. The discovery process SHOULD display Identity Providers as
-a plausible choice, if and only if, they have declared;
+a plausible choice, if and only if, the following conditions apply;
 
--   at least one of the Service Entity Category identifiers declared by
-    the Service Provider,
-    
--   at least one of the Service Contract identifiers declared by the Service
-    Provider (provided the Service Provider has declared at least one), and
+-   the Identity Provider declares at least of the Service Entity Category 
+    identifiers declared by the Service Provider,
+
+-   if the Identity Provider declares at least one Service Contract identifier,
+    the Service Provider must declare at least one of declared identifiers, and,
 
 -   all of the Service Property identifiers declared by the Service
-    Provider.
+    Provider must be declared by the Identity Provider.
 
 <a name="representation-of-entity-categories-in-metadata"></a>
 ### 1.5. Representation of Entity Categories in Metadata
