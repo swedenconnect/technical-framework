@@ -174,8 +174,6 @@ The following category codes are defined:
 Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to 
 \[[TillitRamv](#tillitramv)\] and \[[EidDeploy](#eiddeploy)\]. 
 
-
-
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | \[[TillitRamv](#tillitramv)\] |
