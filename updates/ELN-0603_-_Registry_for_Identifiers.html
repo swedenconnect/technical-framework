@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registry for identifiers assigned by the Swedish e-identification board</title>
+    <title>Swedish eID Framework - Registry for identifiers</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
     <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
-    <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
-<h1 id="registry-for-identifiers-assigned-by-the-swedish-e-identification-board">Registry for identifiers assigned by the Swedish e-identification board</h1>
-<h3 id="version-1.5---2018-05-08---*draft-version*">Version 1.5 - 2018-05-08 - <em>draft version</em></h3>
-<p><em>ELN-0603-v1.5</em></p>
+    <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
+<h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
+<h3 id="version-1.6---2018-08-31---*draft-version*">Version 1.6 - 2018-08-31 - <em>Draft version</em></h3>
+<p><em>ELN-0603-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol class="list">
@@ -26,11 +26,13 @@
 <li><p><a href="#assigned-identifiers"><strong>Assigned Identifiers</strong></a></p>
 <p> 3.1. <a href="#url-identifiers">URL Identifiers</a></p>
 <p> 3.1.1. <a href="#authentication-context-uris">Authentication Context URIs</a></p>
+<p> 3.1.1.1. <a href="#sign-message-authentication-context-uris">Sign Message Authentication Context URIs</a></p>
 <p> 3.1.2. <a href="#attribute-sets">Attribute Sets</a></p>
 <p> 3.1.3. <a href="#entity-category-identifiers">Entity Category Identifiers</a></p>
 <p> 3.1.3.1. <a href="#service-entity-categories">Service Entity Categories</a></p>
 <p> 3.1.3.2. <a href="#entity-categories-for-service-properties">Entity Categories for Service Properties</a></p>
 <p> 3.1.3.3. <a href="#entity-categories-for-service-type">Entity Categories for Service Type</a></p>
+<p> 3.1.3.4. <a href="#entity-categories-for-service-contract">Entity Categories for Service Contract</a></p>
 <p> 3.1.4. <a href="#saml-protocol-status-codes">SAML Protocol Status Codes</a></p>
 <p> 3.1.5. <a href="#central-signing">Central Signing</a></p>
 <p> 3.1.6. <a href="#authentication-context">Authentication Context</a></p>
@@ -51,9 +53,8 @@
 <p>The implementation of a Swedish infrastructure for electronic
 identification and electronic signature requires various types of
 identifiers to represent objects in protocols and data structures.</p>
-<p>This document defines the structure for identifiers assigned by the
-Swedish e-identification board and provides a registry for assigned
-identifiers.</p>
+<p>This document defines the structure for identifiers assigned by the Swedish eID Framework
+and provides a registry for assigned identifiers.</p>
 <p>The following types of identifiers are assigned in this document:</p>
 <ul class="list">
 <li><p>URI (Uniform Resource Identifier)</p>
@@ -69,8 +70,7 @@ structure. Where applicable, this registry provides references to the
 documents where the exact meaning of each identifier is defined.</p>
 <p><a name="structure"></a></p>
 <h2 id="2.-structure">2. Structure</h2>
-<p>The basic structure of identifiers assigned by the Swedish
-e-identification board is based on the following components:</p>
+<p>The basic structure of identifiers assigned by the Swedish eID Framework is based on the following components:</p>
 <table>
 <thead>
 <tr>
@@ -81,7 +81,7 @@ e-identification board is based on the following components:</p>
 <tbody>
 <tr>
 <td><strong>Prefix</strong></td>
-<td>The leading portion of the identifier that associates the identifier with this registry and identifies the Swedish e-identification board as the assigner of the identifier.</td>
+<td>The leading portion of the identifier that associates the identifier with this registry and identifies the Swedish e-identification board or Sweden Connect as the assigner of the identifier.</td>
 </tr>
 <tr>
 <td><strong>Category</strong></td>
@@ -173,6 +173,10 @@ assigning a new identifier.</p>
 <td>Service Type. Specific entity category identifiers for defined types of services in the federation.</td>
 </tr>
 <tr>
+<td><strong>contract</strong></td>
+<td>Service contract. Specific entity category identifiers for declaring contract, or business agreement, affiliation within a federation.</td>
+</tr>
+<tr>
 <td><strong>csig</strong></td>
 <td>Central Signing Service – Identifiers used by the central signing service infrastructure.</td>
 </tr>
@@ -200,9 +204,8 @@ assigning a new identifier.</p>
 </table>
 <p><a name="authentication-context-uris"></a></p>
 <h4 id="3.1.1.-authentication-context-uris">3.1.1. Authentication Context URIs</h4>
-<p>Authentication Context URIs representing assurance levels
-(Tillitsnivåer) according to the assurance framework for the Swedish eID
-Framework (Tillitsramverket för Svensk e-legitimation).</p>
+<p>Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to 
+[<a href="#tillitramv">TillitRamv</a>] and [<a href="#eiddeploy">EidDeploy</a>]. </p>
 <table>
 <thead>
 <tr>
@@ -215,52 +218,57 @@ Framework (Tillitsramverket för Svensk e-legitimation).</p>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa1</code></td>
 <td style="text-align:left">Assurance level 1.</td>
-<td style="text-align:left"><strong>[TillitRamv]</strong></td>
+<td style="text-align:left">[<a href="#tillitramv">TillitRamv</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa2</code></td>
 <td style="text-align:left">Assurance level 2.</td>
-<td style="text-align:left"><strong>[TillitRamv]</strong></td>
+<td style="text-align:left">[<a href="#tillitramv">TillitRamv</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa3</code></td>
 <td style="text-align:left">Assurance level 3.</td>
-<td style="text-align:left"><strong>[TillitRamv]</strong></td>
+<td style="text-align:left">[<a href="#tillitramv">TillitRamv</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/loa/1.0/</code><br/><code>uncertified-loa3</code></td>
+<td style="text-align:left">A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - <code>http://id.elegnamnden.se/loa/1.0/loa3</code>.</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa4</code></td>
 <td style="text-align:left">Assurance level 4.</td>
-<td style="text-align:left"><strong>[TillitRamv]</strong></td>
+<td style="text-align:left">[<a href="#tillitramv">TillitRamv</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-low</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes.</td>
-<td style="text-align:left"><strong>[eIDAS]</strong></td>
+<td style="text-align:left">[<a href="#eidas">eIDAS</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-sub</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes.</td>
-<td style="text-align:left"><strong>[eIDAS]</strong></td>
+<td style="text-align:left">[<a href="#eidas">eIDAS</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-high</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level high for non-notified and notified eID schemes.</td>
-<td style="text-align:left"><strong>[eIDAS]</strong></td>
+<td style="text-align:left">[<a href="#eidas">eIDAS</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified.</td>
-<td style="text-align:left"><strong>[eIDAS]</strong></td>
+<td style="text-align:left">[<a href="#eidas">eIDAS</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified.</td>
-<td style="text-align:left"><strong>[eIDAS]</strong></td>
+<td style="text-align:left">[<a href="#eidas">eIDAS</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-high</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level high using an eID scheme that MUST be notified.</td>
-<td style="text-align:left"><strong>[eIDAS]</strong></td>
+<td style="text-align:left">[<a href="#eidas">eIDAS</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -280,63 +288,60 @@ following <code>AuthnContextClassRef</code> URI:s defined by the EU commission:<
 <li><p><code>http://eidas.europa.eu/LoA/NotNotified/high</code> (for non-notified eID schemes)</p>
 </li>
 </ul>
+<p><a name="sign-message-authentication-context-uris"></a></p>
+<h4 id="3.1.1.1.-sign-message-authentication-context-uris">3.1.1.1. Sign Message Authentication Context URIs</h4>
 <p>Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
 message that must be displayed to the user (see section 7 of
-[DeployProf]).</p>
+[<a href="#eiddeploy">EidDeploy</a>]).</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:left"><strong>URL</strong></th>
 <th style="text-align:left"><strong>Object</strong></th>
-<th style="text-align:left"><strong>Reference</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa2-sigmessage</code></td>
 <td style="text-align:left">Authentication according to assurance level 2 with extended requirements for displaying signature messages.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa3-sigmessage</code></td>
 <td style="text-align:left">Authentication according to assurance level 3 with extended requirements for displaying signature messages.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/loa/1.0/</code><br/><code>uncertified-loa3-sigmessage</code></td>
+<td style="text-align:left">Authentication according to uncertified-loa3, as defined above, with extended requirements for displaying signature messages.</td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/loa4-sigmessage</code></td>
 <td style="text-align:left">Authentication according to assurance level 4 with extended requirements for displaying signature messages.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-low-sigm</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages.</td>
-<td style="text-align:left">[<strong>DeployProf</strong>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-high-sigm</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages.</td>
-<td style="text-align:left">[<strong>DeployProf</strong>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages.</td>
-<td style="text-align:left">[<strong>DeployProf</strong>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm</code></td>
 <td style="text-align:left">Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
 </tr>
 </tbody>
 </table>
@@ -358,31 +363,31 @@ Specification for the Swedish eID Framework.</p>
 <td style="text-align:left">ELN-AP-Pseudonym-01</td>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ap/1.0/pseudonym-01</code></td>
 <td style="text-align:left">Pseudonym identity attribute set.</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">ELN-AP-NaturalPerson-01</td>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ap/1.0/natural-person-01</code></td>
 <td style="text-align:left">Personal identity without civic registration number attribute set.</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">ELN-AP-Pnr-01</td>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ap/1.0/pnr-01</code></td>
 <td style="text-align:left">Personal identity with civic registration number attribute set.</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">ELN-AP-OrgPerson-01</td>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ap/1.0/org-person-01</code></td>
 <td style="text-align:left">Organizational identity attribute set.</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">ELN-AP-eIDAS-NatPer-01</td>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01</code></td>
 <td style="text-align:left">Natural person identity for the eIDAS Framework.</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -404,27 +409,27 @@ Specification for the Swedish eID Framework.</p>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa2-pnr</code></td>
 <td style="text-align:left">Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa3-pnr</code></td>
 <td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa4-pnr</code></td>
 <td style="text-align:left">Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/eidas-naturalperson</code></td>
 <td style="text-align:left">Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”.</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery</code></td>
 <td style="text-align:left">Service providing assertions to eIDAS services via Swedish eIDAS-node</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -443,12 +448,12 @@ Specification for the Swedish eID Framework.</p>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sprop/1.0/mobile-auth</code></td>
 <td style="text-align:left">Service adapted to require/provide user authentication based on mobile devices.</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sprop/1.0/scal2</code></td>
 <td style="text-align:left">Service adapted to support authentication requests from signature services supporting Sole Control Assurance Level 2 (SCAL2).</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -467,25 +472,30 @@ Specification for the Swedish eID Framework.</p>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/st/1.0/sigservice</code></td>
 <td style="text-align:left">Electronic signature service</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/st/1.0/public-sector-sp</code></td>
 <td style="text-align:left">Public sector Service Provider</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/st/1.0/private-sector-sp</code></td>
 <td style="text-align:left">Private sector Service Provider</td>
-<td style="text-align:left"><strong>[EntityCat]</strong></td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 </tbody>
 </table>
+<p><a name="entity-categories-for-service-contract"></a></p>
+<h5 id="3.1.3.4.-entity-categories-for-service-contract">3.1.3.4. Entity Categories for Service Contract</h5>
+<p>Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.</p>
+<p>All Service Contract identifiers are prefixed with <code>http://id.swedenconnect.se/contract/&lt;org&gt;</code>, where <code>org</code> is the identifier for the defining organization.</p>
+<p>The Swedish eID Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.</p>
 <p><a name="saml-protocol-status-codes"></a></p>
 <h4 id="3.1.4.-saml-protocol-status-codes">3.1.4. SAML Protocol Status Codes</h4>
 <p>Status code identifiers for use in SAML Response messages. The list
 below extends the list of second-level status codes defined in section
-3.2.2.2 of [SAML2Core].</p>
+3.2.2.2 of [<a href="#saml2core">SAML2Core</a>].</p>
 <table>
 <thead>
 <tr>
@@ -498,17 +508,17 @@ below extends the list of second-level status codes defined in section
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/status/1.0/cancel</code></td>
 <td style="text-align:left">Status code representing a cancelled operation.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
+<td style="text-align:left">[<a href="#eiddeploy">EidDeploy</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/status/1.0/fraud</code></td>
 <td style="text-align:left">Status code indicating a fraudulent request.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
+<td style="text-align:left">[<a href="#eiddeploy">EidDeploy</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/status/1.0/possibleFraud</code></td>
 <td style="text-align:left">Status code indicating a possible fraudulent request.</td>
-<td style="text-align:left"><strong>[DeployProf]</strong></td>
+<td style="text-align:left">[<a href="#eiddeploy">EidDeploy</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -537,17 +547,17 @@ below extends the list of second-level status codes defined in section
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/csig/1.1/dss-ext/ns</code></td>
 <td style="text-align:left">XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.1).</td>
-<td style="text-align:left"><strong>[CSignProt]</strong></td>
+<td style="text-align:left">[<a href="#eiddssext">EidDSSExt</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/csig/1.1/dss-ext/profile</code></td>
 <td style="text-align:left">Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1).</td>
-<td style="text-align:left"><strong>[CSignProf]</strong></td>
+<td style="text-align:left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/csig/1.1/sap/ns</code></td>
 <td style="text-align:left">XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension</td>
-<td style="text-align:left"><strong>[SigSAP]</strong></td>
+<td style="text-align:left">[<a href="#eidsigsap">EidSigSAP</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -566,15 +576,14 @@ below extends the list of second-level status codes defined in section
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/auth-cont/1.0/saci</code></td>
 <td style="text-align:left">XML schema name space for SAML Authentication Context Information in the Authentication Context X.509 certificate extension</td>
-<td style="text-align:left"><strong>[AuthContExt]</strong></td>
+<td style="text-align:left">[<a href="#authcontext">AuthContExt</a>]</td>
 </tr>
 </tbody>
 </table>
 <p><a name="sign-response-status-codes"></a></p>
 <h4 id="3.1.7.-sign-response-status-codes">3.1.7. Sign Response Status Codes</h4>
 <p>Status code identifiers for the DSS Extension for SAML based Central Signing service. The following identifiers provide defined status codes
-for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Result&gt;</code> element of a sign response message according to the OASIS standard
-“Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0”.</p>
+for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Result&gt;</code> element of a sign response message according to the OASIS standard “Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0” [<a href="#oasis-dss">OASIS-DSS</a>].</p>
 <table>
 <thead>
 <tr>
@@ -587,27 +596,27 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sig-status/1.0/req-expired</code></td>
 <td style="text-align:left">The time window for the signature request has expired.</td>
-<td style="text-align:left"><strong>[CSignProf]</strong></td>
+<td style="text-align:left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sig-status/1.0/user-mismatch</code></td>
 <td style="text-align:left">The authenticated user does not match the signer identity attributes in the request.</td>
-<td style="text-align:left"><strong>[CSignProf]</strong></td>
+<td style="text-align:left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sig-status/1.0/unsupported-loa</code></td>
 <td style="text-align:left">The requested level of assurance for user authentication is not supported.</td>
-<td style="text-align:left"><strong>[CSignProf]</strong></td>
+<td style="text-align:left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sig-status/1.0/sigmessage-error</code></td>
 <td style="text-align:left">A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user.</td>
-<td style="text-align:left"><strong>[CSignProf]</strong></td>
+<td style="text-align:left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/sig-status/1.0/user-cancel</code></td>
 <td style="text-align:left">The end user cancelled the signature operation.</td>
-<td style="text-align:left"><strong>[CSignProf]</strong></td>
+<td style="text-align:left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -626,7 +635,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/eln/name-registration-authority</code></td>
 <td style="text-align:left">Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space.</td>
-<td style="text-align:left"><strong>[CertProf]</strong></td>
+<td style="text-align:left">[<a href="#certprof">CertProf</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -637,7 +646,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <h5 id="3.1.9.1.-eidas-proxy-service-aliases">3.1.9.1. eIDAS Proxy Service Aliases</h5>
 <p>Each country within the eIDAS federation provides an eIDAS Proxy Service that is a Proxy Identity Provider for the authentication services within that specific country. The entityID identifier for an eIDAS Proxy Service in another country is not known to a Swedish Service Provider, but there are cases in which the Swedish Service Provider needs to refer to a specific eIDAS Proxy Service. Therefore, this specification defines an URI identifier format for eIDAS Proxy Service aliases. The format is as follows:</p>
 <p><strong><code>http://id.swedenconnect.se/eidas/1.0/proxy-service/{country-code}</code></strong></p>
-<p>where <code>{country-code}</code> is the country identifier in ISO 3166-1 alpha-2 format (<strong>[ISO 3166]</strong>).</p>
+<p>where <code>{country-code}</code> is the country identifier in ISO 3166-1 alpha-2 format [<a href="#iso3166">ISO 3166</a>].</p>
 <blockquote>
 <p>A consumer of an eIDAS Proxy Service alias URI MUST accept the country code part of the URI in both lower and upper case letters.</p>
 </blockquote>
@@ -691,72 +700,72 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <tr>
 <td style="text-align:left">1.2.752.201.5.1</td>
 <td style="text-align:left">Authentication Context extension</td>
-<td style="text-align:left"><strong>[AuthContExt]</strong></td>
+<td style="text-align:left">[<a href="#authcontext">AuthContExt</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.1</td>
 <td style="text-align:left">Organization Affiliation Attribute</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.2</td>
 <td style="text-align:left">Transaction Identifier</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.3</td>
 <td style="text-align:left">Authentication Context Parameters</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.4</td>
 <td style="text-align:left">Provisional ID</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.5</td>
 <td style="text-align:left">Provisional ID Persistence Indicator</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.6</td>
 <td style="text-align:left">Personal Identity Number Binding URI</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.7</td>
 <td style="text-align:left">eIDAS Person Identifier</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.8</td>
 <td style="text-align:left">Birth name</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.9</td>
 <td style="text-align:left">eIDAS Natural Person Address</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.10</td>
 <td style="text-align:left">User Certificate</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.11</td>
 <td style="text-align:left">User Signature</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.12</td>
 <td style="text-align:left">Signature Activation Data</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.13</td>
 <td style="text-align:left">Authentication Server Signature</td>
-<td style="text-align:left"><strong>[AttrProf]</strong></td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -804,55 +813,66 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <span class="hljs-comment">-- E-legnamnden Certificate Extensions</span>
 <span class="hljs-built_in">id</span>-ce-authContext  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-ce <span class="hljs-number">1</span> }</code></pre><p><a name="references"></a></p>
 <h2 id="4.-references">4. References</h2>
-<p><strong>[SAML2Core]</strong></p>
+<p><a name="saml2core"></a>
+<strong>[SAML2Core]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
 Assertion Markup Language (SAML) V2.0, March 2005</a>.</p>
 </blockquote>
-<p><strong>[OASIS-DSS]</strong></p>
+<p><a name="oasis-dss"></a>
+<strong>[OASIS-DSS]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html">Digital Signature Service Core Protocols, Elements, and Bindings
-Version
-1.0.</a></p>
+Version 1.0.</a></p>
 </blockquote>
-<p><strong>[TillitRamv]</strong></p>
+<p><a name="tillitramv"></a>
+<strong>[TillitRamv]</strong></p>
 <blockquote>
-<p><a href="http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf">Tillitsramverk för Svensk e-legitimation</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf">Tillitsramverk för Svensk e-legitimation version 1.4</a>.</p>
 </blockquote>
-<p><strong>[AuthContExt]</strong></p>
+<p><a name="authcontext"></a>
+<strong>[AuthContExt]</strong></p>
 <blockquote>
 <p><a href="https://tools.ietf.org/html/rfc7773">RFC 7773: Authentication Context Certificate Extension</a>.</p>
 </blockquote>
-<p><strong>[DeployProf]</strong></p>
+<p><a name="eiddeploy"></a>
+<strong>[EidDeploy]</strong></p>
 <blockquote>
 <p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
 </blockquote>
-<p><strong>[EntityCat]</strong></p>
+<p><a name="eidentitycat"></a>
+<strong>[EidEntityCat]</strong></p>
 <blockquote>
 <p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
 </blockquote>
-<p><strong>[CSignProt]</strong></p>
+<p><a name="eiddssext"></a>
+<strong>[EidDSSExt]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
 </blockquote>
-<p><strong>[SigSAP]</strong></p>
+<p><a name="eidsigsap"></a>
+<strong>[EidSigSAP]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
-<p><strong>[CSignProf]</strong></p>
+<p><a name="eidcsignprof"></a>
+<strong>[EidCSignProf]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
 Services</a>.</p>
 </blockquote>
-<p><strong>[CertProf]</strong></p>
+<p><a name="certprof"></a>
+<strong>[CertProf]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate profile for certificates issued by Central Signing services</a></p>
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate profile for certificates issued by Central Signing services</a></p>
 </blockquote>
-<p><strong>[AttrProf]</strong></p>
+<p><a name="eidattributes"></a>
+<strong>[EidAttributes]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
 </blockquote>
-<p><strong>[eIDAS]</strong></p>
+<p><a name="eidas"></a>
+<strong>[eIDAS]</strong></p>
 <blockquote>
 <p>REGULATION (EU) No 910/2014 OF THE EUROPEAN PARLIAMENT AND OF THE
 COUNCIL of 23 July 2014 on electronic identification and trust
@@ -860,12 +880,22 @@ services for electronic transactions in the internal market and
 repealing Directive 1999/93/EC. Including implementation acts of the
 regulation and associated technical specifications.</p>
 </blockquote>
-<p><strong>[ISO 3166]</strong></p>
+<p><a name="iso3166"></a>
+<strong>[ISO 3166]</strong></p>
 <blockquote>
 <p>Country Codes - ISO 3166, <a href="https://www.iso.org/iso-3166-country-codes.html">https://www.iso.org/iso-3166-country-codes.html</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
+<p><strong>Changes between version 1.5 and version 1.6:</strong></p>
+<ul class="list">
+<li><p>The specification was renamed from &quot;Registry for identifiers assigned by the Swedish e-identification board&quot; to &quot;Swedish eID Framework - Registry for identifiers&quot;. </p>
+</li>
+<li><p>The authentication context URIs <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> and <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage</code> were introduced in sections 3.1.1 and 3.1.1.1.</p>
+</li>
+<li><p>A description of Service Contract Entity Categories was added to section 3.1.3.4.</p>
+</li>
+</ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">
 <li><p>Added identifier for the service property entity category <code>http://id.elegnamnden.se/sprop/1.0/scal2</code></p>

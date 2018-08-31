@@ -10,10 +10,10 @@
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
-    <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
+    <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2018-03-28---*draft-version*">Version 1.6 - 2018-03-28 - <em>draft version</em></h3>
-<p><em>ELN-0606-v1.6</em></p>
+<h3 id="version-1.7---2018-08-31---*draft-version*">Version 1.7 - 2018-08-31 - <em>Draft version</em></h3>
+<p><em>ELN-0606-v1.7</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol class="list">
@@ -40,6 +40,8 @@
 <p> 4.2. <a href="#public-sector-sp">public-sector-sp</a></p>
 <p> 4.3. <a href="#private-sector-sp">private-sector-sp</a></p>
 </li>
+<li><p><a href="#service-contract-categories"><strong>Service Contract Categories</strong></a></p>
+</li>
 <li><p><a href="#references"><strong>References</strong></a></p>
 </li>
 <li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
@@ -55,9 +57,8 @@ federation.</p>
 <p>The use of Entity Categories for the Swedish eID Framework is restricted
 to SAML metadata where Entity Categories are placed as SAML attributes
 under the <code>&lt;mdattr:EntityAttributes&gt;</code> element
-([<a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html">SAML2MetaAttr</a>])
-for an <code>&lt;md:Extensions&gt;</code> element
-([<a href="http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf">SAML2Meta</a>]).</p>
+([<a href="#saml2metaattr">SAML2MetaAttr</a>]) for an <code>&lt;md:Extensions&gt;</code> element
+([<a href="#saml2meta">SAML2Meta</a>]).</p>
 <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">md:EntityDescriptor</span> <span class="hljs-attr">entityID</span>=<span class="hljs-string">"https://eid2.example.com/entityid"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">md:Extensions</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">mdattr:EntityAttributes</span> <span class="hljs-attr">xmlns:mdattr</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:metadata:attribute"</span>&gt;</span>
@@ -76,19 +77,21 @@ attribute for a Service Provider or Identity Provider.</em></p>
 <p>Three types of Entity Categories are used within the federation:</p>
 <ul class="list">
 <li><p>Service entity category – Identifiers for entity categories
-representing alternative sets of requirements.</p>
+representing sets of requirements.</p>
 </li>
 <li><p>Service property categories – Identifiers for defined service
 properties.</p>
 </li>
 <li><p>Service type categories – Identifiers for defined service types.</p>
 </li>
+<li><p>Service contract categories - Identifiers for labelling entities based on contracts or business agreements.</p>
+</li>
 </ul>
 <p><a name="requirements-notation"></a></p>
 <h3 id="1.1.-requirements-notation">1.1. Requirements Notation</h3>
 <p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
 &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
-document are to be interpreted as described in [<a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119</a>].</p>
+document are to be interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
 <p>The use of SHOULD, SHOULD NOT, and RECOMMENDED reflects broad consensus
 on deployment practices intended to foster both interoperability and
 guarantees of security and confidentiality needed to satisfy the
@@ -99,8 +102,7 @@ with caution.</p>
 <p><a name="references-to-saml-20-standards-and-profiles"></a></p>
 <h3 id="1.2.-references-to-saml-2.0-standards-and-profiles">1.2. References to SAML 2.0 Standards and Profiles</h3>
 <p>When referring to elements from the SAML 2.0 core specification
-[<a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">SAML2Core</a>],
-the following syntax is used:</p>
+[<a href="#saml2core">SAML2Core</a>], the following syntax is used:</p>
 <ul class="list">
 <li><p><code>&lt;saml2p:Element&gt;</code> – for elements from the SAML 2.0 Protocol
 namespace.</p>
@@ -112,11 +114,9 @@ namespace.</p>
 <p>When referring to elements from the SAML 2.0 metadata specifications,
 the following syntax is used:</p>
 <ul class="list">
-<li><p><code>&lt;md:Element&gt;</code> – for elements defined in
-[<a href="http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf">SAML2Meta</a>].</p>
+<li><p><code>&lt;md:Element&gt;</code> – for elements defined in [<a href="#saml2meta">SAML2Meta</a>].</p>
 </li>
-<li><p><code>&lt;mdattr:Element&gt;</code> – for elements defined in
-[<a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html">SAML2MetaAttr</a>].</p>
+<li><p><code>&lt;mdattr:Element&gt;</code> – for elements defined in [<a href="#saml2metaattr">SAML2MetaAttr</a>].</p>
 </li>
 </ul>
 <p><a name="consuming-and-providing-services"></a></p>
@@ -149,7 +149,7 @@ service.</p>
 <td style="text-align:left"><strong>Service Entity Category</strong></td>
 <td style="text-align:left">Each declared category represents an alternative set of requirements for the service.</td>
 <td style="text-align:left">Represents the ability to deliver assertions in accordance with each declared category.</td>
-<td style="text-align:left">At least one of the entity categories declared by the consuming service MUST be declared by the providing service.</td>
+<td style="text-align:left">At least one of the service entity categories declared by the consuming service MUST be declared by the providing service.</td>
 </tr>
 <tr>
 <td style="text-align:left"><strong>Service Property</strong></td>
@@ -163,6 +163,12 @@ service.</p>
 <td style="text-align:left">Not applicable.</td>
 <td style="text-align:left">No matching rule.</td>
 </tr>
+<tr>
+<td style="text-align:left"><strong>Service Contract</strong></td>
+<td style="text-align:left">Each declared category represents a contract, or business agreement, that the service is affiliated to.</td>
+<td style="text-align:left">Represents the contracts, or business agreements, under which the providing service may deliver services.</td>
+<td style="text-align:left">At least one of the service contract identifiers declared by a providing service must be declared by the consuming service. A providing service that does not declare any service contract identifiers match all consuming services regarding service contract matching.</td>
+</tr>
 </tbody>
 </table>
 <p><a name="use-in-discovery"></a></p>
@@ -174,16 +180,19 @@ filtering, i.e., when deciding which Identity Providers to present for
 the end-user. The filtering algorithm is very simple:</p>
 <p>For a Service Provider requesting discovery its metadata entry is
 scanned for Entity Category identifiers of the type Service Entity
-Category and Service Property. The algorithm then iterates over all
+Category, Service Contract and Service Property. The algorithm then iterates over all
 Identity Providers found in the metadata repository for the
 federation. The discovery process SHOULD display Identity Providers as
-a plausible choice, if and only if, they have declared;</p>
+a plausible choice, if and only if, the following conditions apply;</p>
 <ul class="list">
-<li><p>at least one of the Service Entity Category identifiers declared by
-the Service Provider, and</p>
+<li><p>the Identity Provider declares at least of the Service Entity Category 
+identifiers declared by the Service Provider,</p>
+</li>
+<li><p>if the Identity Provider declares at least one Service Contract identifier,
+the Service Provider must declare at least one of declared identifiers, and,</p>
 </li>
 <li><p>all of the Service Property identifiers declared by the Service
-Provider.</p>
+Provider must be declared by the Identity Provider.</p>
 </li>
 </ul>
 <p><a name="representation-of-entity-categories-in-metadata"></a></p>
@@ -202,6 +211,9 @@ single entity category attribute.</p>
                                NameFormat=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;    
         &lt;sam<span class="hljs-variable">l:AttributeValue</span> xsi:<span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span>&gt;
           http://id.elegnamnden.<span class="hljs-keyword">se</span>/<span class="hljs-keyword">ec</span>/<span class="hljs-number">1.0</span>/loa3-pnr
+        &lt;/sam<span class="hljs-variable">l:AttributeValue</span>&gt;
+        &lt;sam<span class="hljs-variable">l:AttributeValue</span> xsi:<span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span>&gt;
+          http://id.swedenconnect.<span class="hljs-keyword">se</span>/contract/sc/<span class="hljs-number">1.0</span>/eidas
         &lt;/sam<span class="hljs-variable">l:AttributeValue</span>&gt;    
         &lt;sam<span class="hljs-variable">l:AttributeValue</span> xsi:<span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span>&gt;
           http://id.elegnamnden.<span class="hljs-keyword">se</span>/sprop/<span class="hljs-number">1.0</span>/mobile-auth
@@ -215,24 +227,14 @@ single entity category attribute.</p>
 <p>This section contains a listing of all Service Entity Categories that
 are defined within the framework for Swedish eID.</p>
 <p>All service entity category identifiers are prefixed with
-<strong><code>http://id.elegnamnden.se/ec</code></strong>.</p>
-<p>A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes.</p>
+<code>http://id.elegnamnden.se/ec</code> or <code>http://id.swedenconnect.se/ec</code> (defined after Aug. 2018).</p>
+<p>A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes. For contract- or business agreement requirements <a href="#service-contract-categories">Service Contract Categories</a> should be used.</p>
 <p><strong>Note</strong>: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  <a href="#consuming-and-providing-services">section 1.3</a> and any requirements and conditions that serves this purpose are considered valid.</p>
-<p><strong>Note</strong>: The service entity category may serve as a means to restrict a providing service to only those Service Providers that has made a deliberate choice to accept the providing service. This is achieved if an Identity Provider only lists a privately defined service entity category in its metadata which is understood and accepted by just a subset of all service providers. Each Service Provider can then make this Identity Provider selectable (matching its own service) by including this private service entity category in its metadata.</p>
-<p><strong><em>Example</em></strong>: 
-Suppose that the Identity Provider X delivers assertions according to service entity category
-&quot;loa3-pnr&quot; (as described below), but only to relying parties to which it has a business
-agreement with. In order to facilitate the matching rules for discovery 
-(see <a href="#use-in-discovery-services">section 1.4</a> above) the service entity category, 
-&quot;loa3-pnr-X&quot;, is introduced. It has the same meaning as &quot;loa3-pnr&quot; with the additional
-requirement that there must exist a bilateral agreement between a Service Provider and
-Identity Provider X. This URI for this new service entity category should now be included 
-in the metadata for the Identity Provider, and in metadata for the Service Providers that 
-have an agreement with the Identity Provider.</p>
+<p><strong>Note</strong>: A providing service that does not comply with any of the defined service entity categories may define its own service entity category identifier in order to utilize the entity category matching rules. Any service entity category identifier defined outside of this specification should use the prefix <code>http://id.swedenconnect.se/ec/&lt;org&gt;</code>, where <code>org</code> is the defining organization&#39;s identifier.</p>
 <p><a name="loa3-pnr"></a></p>
 <h3 id="2.1.-loa3-pnr">2.1. loa3-pnr</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/ec/1.0/loa3-pnr</code></p>
-<p><strong>Description</strong>: User authentication according to assurance level 3 [EidTillit] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).</p>
+<p><strong>Description</strong>: User authentication according to assurance level 3 [<a href="#eidtillit">EidTillit</a>] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).</p>
 <p><strong>LoA-identifier</strong>: <code>http://id.elegnamnden.se/loa/1.0/loa3</code></p>
 <p><strong>Attribute requirements</strong>: ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>)</p>
 <blockquote>
@@ -241,7 +243,7 @@ have an agreement with the Identity Provider.</p>
 <p><a name="loa2-pnr"></a></p>
 <h3 id="2.2.-loa2-pnr">2.2. loa2-pnr</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/ec/1.0/loa2-pnr</code></p>
-<p><strong>Description</strong>: User authentication according to assurance level 2 [EidTillit] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).</p>
+<p><strong>Description</strong>: User authentication according to assurance level 2 [<a href="#eidtillit">EidTillit</a>] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).</p>
 <p><strong>LoA-identifier</strong>: <code>http://id.elegnamnden.se/loa/1.0/loa2</code></p>
 <p><strong>Attribute requirements</strong>: ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>)</p>
 <blockquote>
@@ -250,7 +252,7 @@ have an agreement with the Identity Provider.</p>
 <p><a name="loa4-pnr"></a></p>
 <h3 id="2.3.-loa4-pnr">2.3. loa4-pnr</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/ec/1.0/loa4-pnr</code></p>
-<p><strong>Description</strong>: User authentication according to assurance level 4 [EidTillit] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).</p>
+<p><strong>Description</strong>: User authentication according to assurance level 4 [<a href="#eidtillit">EidTillit</a>] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).</p>
 <p><strong>LoA-identifier</strong>: <code>http://id.elegnamnden.se/loa/1.0/loa4</code></p>
 <p><strong>Attribute requirements</strong>: ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>)</p>
 <blockquote>
@@ -278,7 +280,7 @@ to the Swedish eIDAS-node.</p>
 <p>It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.</p>
 <p><strong>LoA-identifier</strong>: Not applicable</p>
 <blockquote>
-<p>An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of [EidRegistry] as assurance certification attributes in its metadata as described in section 2.1.3 of [EidDeploy].</p>
+<p>An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of [<a href="#eidregistry">EidRegistry</a>] as assurance certification attributes in its metadata as described in section 2.1.3 of [<a href="#eiddeploy">EidDeploy</a>].</p>
 </blockquote>
 <p><strong>Attribute requirements</strong>: </p>
 <ul class="list">
@@ -318,7 +320,7 @@ authentication using mobile devices.</p>
 <p><a name="scal2"></a></p>
 <h3 id="3.2.-scal2">3.2. scal2</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/sprop/1.0/scal2</code></p>
-<p><strong>Description</strong>: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with [SigSAP]. </p>
+<p><strong>Description</strong>: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with [<a href="#sigsap">SigSAP</a>]. </p>
 <p>For a providing service, i.e. an Identity Provider, inclusion of the
 scal2 service property states that the Identity Provider will return a &quot;SAD&quot; in response to a <code>SADRequest</code> in an authentication requests from a signing service.</p>
 <p>For consuming services, Signature Services MAY include this service property if all authentication requests from the 
@@ -342,59 +344,81 @@ a particular service type.</p>
 <h3 id="4.3.-private-sector-sp">4.3. private-sector-sp</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/st/1.0/private-sector-sp</code></p>
 <p><strong>Description</strong>: A service type that indicates that an Service Provider is a &quot;private sector&quot; SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.</p>
+<p><a name="service-contract-categories"></a></p>
+<h2 id="5.-service-contract-categories">5. Service Contract Categories</h2>
+<p>Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.</p>
+<p>All Service Contract identifiers are prefixed with <code>http://id.swedenconnect.se/contract/&lt;org&gt;</code>, where <code>org</code> is identifier for the defining organization.</p>
+<p>The meaning of different contracts and business agreements are out of scope for this specification. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.</p>
 <p><a name="references"></a></p>
-<h2 id="5.-references">5. References</h2>
-<p><strong>[RFC2119]</strong></p>
+<h2 id="6.-references">6. References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
 <blockquote>
 <p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
 Levels, March 1997</a>.</p>
 </blockquote>
-<p><strong>[SAML2Core]</strong></p>
+<p><a name="saml2core"></a>
+<strong>[SAML2Core]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
 Assertion Markup Language (SAML) V2.0, March
 2005.</a></p>
 </blockquote>
-<p><strong>[SAML2Meta]</strong></p>
+<p><a name="saml2meta"></a>
+<strong>[SAML2Meta]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf">OASIS Standard, Metadata for the OASIS Security Assertion Markup
 Language (SAML) V2.0, March
 2005.</a></p>
 </blockquote>
-<p><strong>[SAML2MetaAttr]</strong></p>
+<p><a name="saml2metaattr"></a>
+<strong>[SAML2MetaAttr]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html">OASIS Committee Specification, SAML V2.0 Metadata Extension for
 Entity Attributes Version 1.0, August
 2009.</a></p>
 </blockquote>
-<p><strong>[EntCat]</strong></p>
+<p><a name="entcat"></a>
+<strong>[EntCat]</strong></p>
 <blockquote>
-<p><a href="http://macedir.org/entity-category/">The Entity Category SAML Entity Metadata Attribute Type, March
-2012.</a></p>
+<p><a href="https://tools.ietf.org/html/rfc8409">RFC8409 - The Entity Category Security Assertion Markup Language (SAML) Attribute Types, August 2018</a>.</p>
 </blockquote>
-<p><strong>[EidTillit]</strong></p>
+<p><a name="eidtillit"></a>
+<strong>[EidTillit]</strong></p>
 <blockquote>
-<p><a href="http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf">Tillitsramverk för Svensk e-legitimation</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf">Tillitsramverk för Svensk e-legitimation, version 1.4</a>.</p>
 </blockquote>
-<p><strong>[EidDeploy]</strong></p>
+<p><a name="eiddeploy"></a>
+<strong>[EidDeploy]</strong></p>
 <blockquote>
 <p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
 </blockquote>
-<p><strong>[EidRegistry]</strong></p>
+<p><a name="eidregistry"></a>
+<strong>[EidRegistry]</strong></p>
 <blockquote>
 <p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
 board</a>.</p>
 </blockquote>
-<p><strong>[EidAttributes]</strong></p>
+<p><a name="eidattributes"></a>
+<strong>[EidAttributes]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
 </blockquote>
-<p><strong>[SigSAP]</strong></p>
+<p><a name="sigsap"></a>
+<strong>[SigSAP]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
-<h2 id="6.-changes-between-versions">6. Changes between versions</h2>
+<h2 id="7.-changes-between-versions">7. Changes between versions</h2>
+<p><strong>Changes between version 1.6 and version 1.7:</strong></p>
+<ul class="list">
+<li><p>A new entity categorty type, Service Contract, was added to section 5.</p>
+</li>
+<li><p>The reference [EntCat] now refers to <a href="https://tools.ietf.org/html/rfc8409">RFC-8409</a> instead of 
+<a href="https://tools.ietf.org/html/draft-young-entity-category">https://tools.ietf.org/html/draft-young-entity-category</a>.</p>
+</li>
+</ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
 <li>The Service Property Category &quot;scal2&quot; was added to section 3.2.</li>
