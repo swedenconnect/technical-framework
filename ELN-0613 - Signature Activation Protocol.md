@@ -242,8 +242,8 @@ A private claim name is defined in this specification which extends the register
 
 The claim identified by this name has the value of a JSON object holding name-value pairs in accordance with the following table:
 
-Name | Type | Content
---- |--- | ---
+| Name | Type | Content |
+| --- | --- | --- |
 | **ver** | String | The version of this claim, default 1.0 (Optional). |
 | **irt** | String | In Response To - holds the identifier of the SAD request (`ID` attribute) that was used to request this SAD. |
 | **attr** | String | Attribute - holds the URI identifier of the attribute specifying the users unique identifier value. |
