@@ -1,8 +1,8 @@
 <img src="img/sweden-connect.png"></img>
 
-# Registry for identifiers assigned by the Swedish e-identification board
+# Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2018-08-22 - *Draft version*
+### Version 1.6 - 2018-08-27 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -35,6 +35,8 @@
     3.1.3.2. [Entity Categories for Service Properties](#entity-categories-for-service-properties)
 
     3.1.3.3. [Entity Categories for Service Type](#entity-categories-for-service-type)
+    
+    3.1.3.4. [Entity Categories for Service Contract](#entity-categories-for-service-contract)
 
     3.1.4. [SAML Protocol Status Codes](#saml-protocol-status-codes)
 
@@ -65,9 +67,8 @@ The implementation of a Swedish infrastructure for electronic
 identification and electronic signature requires various types of
 identifiers to represent objects in protocols and data structures.
 
-This document defines the structure for identifiers assigned by the
-Swedish e-identification board and provides a registry for assigned
-identifiers.
+This document defines the structure for identifiers assigned by the Swedish eID Framework
+and provides a registry for assigned identifiers.
 
 The following types of identifiers are assigned in this document:
 
@@ -85,12 +86,11 @@ documents where the exact meaning of each identifier is defined.
 <a name="structure"></a>
 ## 2. Structure
 
-The basic structure of identifiers assigned by the Swedish
-e-identification board is based on the following components:
+The basic structure of identifiers assigned by the Swedish eID Framework is based on the following components:
 
 | **Parameter** | **Description** |
 | ---| ---|
-| **Prefix** | The leading portion of the identifier that associates the identifier with this registry and identifies the Swedish e-identification board as the assigner of the identifier. |
+| **Prefix** | The leading portion of the identifier that associates the identifier with this registry and identifies the Swedish e-identification board or Sweden Connect as the assigner of the identifier. |
 | **Category** | A code for the category of an identifier. Each category is a defined context for a collection of identifiers within the scope of a protocol, service or object type. |
 | **Version** (optional) | An indicator of the version of the object represented by this identifier. The exact semantic of the version indicator, if present, is defined within each category. |
 | **Identifier** | A sequence of characters or numbers (according to the syntax of the identifier type), which distinguish this identifier among all other identifiers within a particular prefix, category and version. |
@@ -160,6 +160,7 @@ The following category codes are defined:
 | **ec** | Entity Category. Generic service type declarations for service matching. |
 | **sprop** | Service Property. Specific entity category identifiers for specific service property. |
 | **st** | Service Type. Specific entity category identifiers for defined types of services in the federation. |
+| **contract** | Service contract. Specific entity category identifiers for declaring contract, or business agreement, affiliation within a federation. |
 | **csig** | Central Signing Service – Identifiers used by the central signing service infrastructure. |
 | **auth-cont** | Authentication context information schema. |
 | **status** | SAML Protocol status codes. |
@@ -170,15 +171,15 @@ The following category codes are defined:
 <a name="authentication-context-uris"></a>
 #### 3.1.1. Authentication Context URIs
 
-Authentication Context URIs representing assurance levels
-(Tillitsnivåer) relevant to \[[EidDeploy](#eiddeploy)\] such assurance levels according to the assurance framework for the Swedish eID Framework (Tillitsramverket för Svensk e-legitimation).
+Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to 
+\[[TillitRamv](#tillitramv)\] and \[[EidDeploy](#eiddeploy)\]. 
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | \[[TillitRamv](#tillitramv)\] |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 (`http://id.elegnamnden.se/loa/1.0/loa3`). | |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | |
 | `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-low` | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-sub` | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
@@ -277,6 +278,16 @@ Identifiers for defined service types.
 | `http://id.elegnamnden.se/st/1.0/sigservice` | Electronic signature service | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/st/1.0/public-sector-sp` | Public sector Service Provider | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/st/1.0/private-sector-sp` | Private sector Service Provider | \[[EidEntityCat](#eidentitycat)\] |
+
+<a name="entity-categories-for-service-contract"></a>
+##### 3.1.3.4. Entity Categories for Service Contract
+
+Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.
+
+All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract/<org>`, where `org` is the identifier for the defining organization.
+
+The Swedish eID Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
+
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
@@ -499,7 +510,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 **Changes between version 1.5 and version 1.6:**
 
+- The specification was renamed from "Registry for identifiers assigned by the Swedish e-identification board" to "Swedish eID Framework - Registry for identifiers". 
+
 - The authentication context URIs `http://id.swedenconnect.se/loa/1.0/uncertified-loa3` and `http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage` were introduced in sections 3.1.1 and 3.1.1.1.
+
+- A description of Service Contract Entity Categories was added to section 3.1.3.4.
 
 **Changes between version 1.4 and version 1.5:**
 
