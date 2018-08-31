@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2018-08-22 - **Draft version**
+### Version 1.6 - 2018-08-31 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -1247,7 +1247,7 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
@@ -1259,7 +1259,7 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 <a name="eidentcat"></a>
 **\[EidEntCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="eiddss"></a>
 **\[EidDSS\]**

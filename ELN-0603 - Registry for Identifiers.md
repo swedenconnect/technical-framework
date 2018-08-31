@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2018-08-27 - *Draft version*
+### Version 1.6 - 2018-08-31 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -456,9 +456,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
->
-> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
+> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf).
 
 <a name="authcontext"></a>
 **\[AuthContExt\]**
@@ -466,11 +464,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eidentitycat"></a>
 **\[EidEntityCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="eiddssext"></a>
 **\[EidDSSExt\]**

@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2018-08-27 - *Draft version*
+### Version 1.7 - 2018-08-31 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -431,12 +431,12 @@ The meaning of different contracts and business agreements are out of scope for 
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
