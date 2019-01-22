@@ -10,7 +10,29 @@
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
 
+    1.1. [Requirement key words](#requirement-key-words)
+
+    1.2. [XML name space references](#xml-name-space-references)
+
+    1.3. [Structure](#structure)
+
+2. [**Data elements**](#data-elements)
+
+    2.1. [Subject Preselect Criteria](#subject-preselect-criteria)
+
+    2.2. [MatchingPolicy](#matchingpolicy)
+
+3. [**Examples**](#examples)
+
+4. [**Schemas**](#schemas)
+
+5. [**Normative References**](#normative-references)
+
+6. [**Changes between versions**](#changes-between-versions)
+
+<a name="introduction"></a>
 ## 1. Introduction
 
 Authentication of users sometimes require a specific user to be authenticated, in particular in the case when the user authenticates to a signature service to sign a document in a context where the signer already has been authenticated.
@@ -19,7 +41,7 @@ Some Identity Providers, such an Identity Provider acting as proxy to BankID (Se
 
 This specification defines an element that may be included in the `<Extensions>` element of a SAML AuthnRequest where the requesting service provider can specify matching criteria that may be used by the IdP to preselect the particular user that should be authenticated.
 
-
+<a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
 
 The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
@@ -29,20 +51,29 @@ The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 
 These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
+<a name="xml-name-space-references"></a>
 ### 1.2. XML name space references
 
 The prefix **asp:** stands for the Authenticated Subject Preselection XML Schema namespace `http://id.swedenconnect.se/authn/1.0/subject-preselect/ns` (https://elegnamnden.github.io/schemas/...). 
 
 The prefix **saml2:** stands for the OASIS SAML 2 Assertion Schema namespace `urn:oasis:names:tc:SAML:2.0:assertion`.
 
+<a name="structure"></a>
 ### 1.3. Structure
 
 This specification uses the following typographical conventions in text:
 `<LocalElement>`, `<ns:ForeignElement>`, `Attribute`, **Datatype**,
 `OtherCode`.
 
+<a name="data-elements"></a>
 ## 2. Data elements
 
+This specification defines the element `<SubjectPreselectCriteria>` to be included in the <Extensions> element of an AuhtnRequest. 
+
+This element MAY be used by an IdentityProvider to preselect the subject to authenticate. The `<SubjectPreselectCriteria>` element is outlined in the following illustration:
+
+<img src="img/SubjectPreselectCriteriaElement.png"></img>
+<a name="subject-preselect-criteria"></a>
 ### 2.1. Subject Preselect Criteria
 
 The Subject Preselect  Criteria is provided in a `<SubjectPreselectCriteria>` element. The element has the following elements and attributes:
@@ -68,7 +99,8 @@ The following schema fragment defines the `<SubjectPreselectCriteria>` element:
 
 
 
-### 2.1. MatchingPolicy
+<a name="matchingpolicy"></a>
+### 2.2. MatchingPolicy
 
 The matching policy `<MatchingPolicy>` element contains one or more `<MatchValue>` elements. 
 
@@ -84,7 +116,7 @@ The `<MatchValue>` element contains a string value to be matched against the pre
 
 `MustValidate` \[Default `true`\]
 
-> When set to `true`, this indicates that the value of the specified type of this element MUST match the preselected subject and that the Identity Provider MUST verify this value in the authentication process. A value of `false` means that the Identity Provider does not have to verify this value and may rely entirely on other present match criteria to identify the preselected subject.
+> When set to `true`, this indicates that the specified value MUST match a validated property of the preselected user for this preselect match criteria to be satisfied. A value of `false` means that the Identity Provider MAY ignore this value and MAY rely entirely on other present `<MatchValue>` elements to match against the preselected subject.
 
 `##any` \[Optional\]
 
@@ -116,6 +148,7 @@ The following schema fragment defines the `<MatchingPolicyType>` complex type:
 
 
 
+<a name="examples"></a>
 ## 3. Examples
 
     <asp:SubjectPreselectCriteria xmlns:asp="http://id.swedenconnect.se/authn/1.0/subject-preselect/ns">
@@ -140,6 +173,7 @@ The following schema fragment defines the `<MatchingPolicyType>` complex type:
 
 Attributes in the examples above are specified in [[ELN-0604](eln-0604)].
 
+<a name="schemas"></a>
 ## 4. Schemas
 The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/subject-preselect/ns` name space:
 
@@ -185,6 +219,7 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/subje
         </xs:complexType>
     </xs:schema>
 
+<a name="normative-references"></a>
 ## 5. Normative References
 
 <a name="rfc2119"></a>**[RFC2119]**
@@ -204,6 +239,7 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/subje
 
 > [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](http://docs.swedenconnect.se/technical-framework/latest/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html).
 
+<a name="changes-between-versions"></a>
 ## 6. Changes between versions
 
 This is the first version of this draft.
