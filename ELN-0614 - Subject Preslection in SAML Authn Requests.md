@@ -227,10 +227,6 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/subje
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
-<a name="rfc7519"></a>**[RFC7519]**
-
-> [Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015](http://www.rfc-editor.org/info/rfc7519).
-
 <a name="eln-0604"></a>**[ELN-0604]**
 
 > [Attribute Specification for the Swedish eID Framework](http://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
