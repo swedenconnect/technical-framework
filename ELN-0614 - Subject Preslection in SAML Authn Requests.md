@@ -2,7 +2,7 @@
 
 # Subject Preslection in SAML Authn Requests 
 
-### Version 1.1 - 2018-08-03 - *Draft version*
+### Version 1.1 - 2019-01-22 - *Draft version*
 
 *ELN-0614-v0.1*
 
