@@ -1,6 +1,6 @@
 <img src="img/sweden-connect.png"></img>
 
-# Subject Preslection in SAML Authn Requests 
+# Subject Preselection in SAML Authentication Requests 
 
 ### Version 1.1 - 2019-01-22 - *Draft version*
 
@@ -49,7 +49,7 @@ The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **MAY**, and **OPTIONAL** are to be interpreted as described in
 \[[RFC2119](#rfc2119)\].
 
-These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
+These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
 <a name="xml-name-space-references"></a>
 ### 1.2. XML name space references
