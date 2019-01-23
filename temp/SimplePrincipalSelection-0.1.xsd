@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"
-    xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-
-    <xs:annotation>
-        <xs:documentation>
-            Schema location URL: https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd
-        </xs:documentation>
-    </xs:annotation>
-
-    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
-    <xs:complexType name="PrincipalSelectionType">
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType"
-                minOccurs="0"/>
-            <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="MatchValueType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute name="NameFormat" type="xs:anyURI"
-                    default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
-                <xs:attribute name="Name" type="xs:string" use="required"/>
-                <xs:anyAttribute namespace="##any"/>
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-    <xs:complexType name="AnyType">
-        <xs:sequence>
-            <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
-        </xs:sequence>
-    </xs:complexType>
+  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"
+  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+  
+  <xs:annotation>
+    <xs:documentation>
+      Schema location URL:
+    </xs:documentation>
+  </xs:annotation>
+  
+  <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
+  <xs:complexType name="PrincipalSelectionType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType"
+        minOccurs="0"/>
+      <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MatchValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="NameFormat" type="xs:anyURI"
+          default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+        <xs:attribute name="Name" type="xs:string" use="required"/>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AnyType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>
