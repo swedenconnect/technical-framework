@@ -35,11 +35,11 @@
 <a name="introduction"></a>
 ## 1. Introduction
 
-Authentication of users sometimes require a specific user to be authenticated, in particular in the case when the user authenticates to a signature service to sign a document in a context where the signer already has been authenticated.
+When a Service Provider requests authentication of a user (principal), the Service Provider may have prior knowledge about the user to be authenticated, for example, when re-authenticating an already authenticated user, or when a user authenticates to a signature service where the user signs a document in a context where he or she already has been authenticated.
 
-Some Identity Providers, such an Identity Provider acting as proxy to BankID (See: [[ELN-0612](#eln-0612)]), requires the user to enter personal identifying data such as the national person identifier (personnummer) in order to initiate the authentication process with a particular user's credentials. This process can be avoided when the service provider already knows which user that will be authenticated if the service provider has the means to communicate this information to the Identity Provider.
+Some Identity Providers, such as an Identity Provider acting as a proxy for BankID (see \[[ELN-0612](#eln-0612)\]), in some cases requires the user to provider his or hers personal identity number in order to initiate a BankID operation. Using the extension defined in this specification a BankID Identity Provider does not have to prompt the user for a user's personal identity number. This is especially important when it is processing a request from a signature service.
 
-This specification defines an element that may be included in the `<Extensions>` element of a SAML AuthnRequest where the requesting service provider can specify matching criteria that may be used by the IdP to preselect the particular user that should be authenticated.
+This specification defines an element that may be included in the `<Extensions>` element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to pre-select the particular user that should be authenticated.
 
 <a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
@@ -54,7 +54,7 @@ These keywords are capitalized when used to unambiguously specify requirements o
 <a name="xml-name-space-references"></a>
 ### 1.2. XML name space references
 
-The prefix **asp:** stands for the Authenticated Subject Preselection XML Schema namespace `http://id.swedenconnect.se/authn/1.0/principal-selection/ns` (https://elegnamnden.github.io/schemas/...). 
+The prefix **psc:** stands for the Principal Selection Criteria XML Schema namespace `http://id.swedenconnect.se/authn/1.0/principal-selection/ns`. 
 
 The prefix **saml2:** stands for the OASIS SAML 2 Assertion Schema namespace `urn:oasis:names:tc:SAML:2.0:assertion`.
 
@@ -68,18 +68,18 @@ This specification uses the following typographical conventions in text:
 <a name="data-elements"></a>
 ## 2. Data elements
 
-This specification defines the element `<PrincipalSelection>` to be included in the <Extensions> element of an AuhtnRequest. 
+This specification defines the element `<PrincipalSelection>` to be included in the `<Extensions>` element of an `AuthnRequest`. 
 
-This element MAY be used by an IdentityProvider to preselect the subject to authenticate. 
+This element MAY be used by an Identity Provider to pre-select the subject to authenticate. 
 
 
 <a name="principalselection"></a>
 ### 2.1. PrincipalSelection
 
-The Subject Preselect  Criteria is provided in a `<PrincipalSelection>` element. The element has the following elements and attributes:
+The Principal Selection Criteria is provided in a `<PrincipalSelection>` element. The element has the following elements and attributes:
 
-`<MatchValue>` \[zero or more\]
-> This element holds values that MAY be used by the IdP to match against a principal to be authenticated. 
+`<MatchValue>` \[Zero or more\]
+> This element holds values that MAY be used by the Identity Provider to match against a principal to be authenticated. 
 
 `<OtherCriteria>` \[Optional\]
 
@@ -87,27 +87,26 @@ The Subject Preselect  Criteria is provided in a `<PrincipalSelection>` element.
 
 The following schema fragment defines the `<PrincipalSelection>` element:
 
-    <xs:element name="PrincipalSelection" type="asp:PrincipalSelectionType"/>
+    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
     <xs:complexType name="PrincipalSelectionType">
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="MatchValue" type="asp:MatchValueType"
-                minOccurs="0"/>
-            <xs:element minOccurs="0" name="OtherCriteria" type="asp:AnyType"/>
-        </xs:sequence>
+      <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="0"/>
+          <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>
+      </xs:sequence>
     </xs:complexType>
 
 <a name="matchvalue"></a>
 ### 2.2 MatchValue
 
-The `<MatchValue>` element contains a string value to be matched against the preselected subject. This element has the following attributes which determines the meaning of the match value:
+The `<MatchValue>` element contains a string value to be matched against the selected principal. This element has the following attributes which determines the meaning of the match value:
 
 `Name` \[Required\]
 
-> The identifying name of the type of identifier value expressed in the MatchValue element. This is analogous to the `Name` attribute of a SAML `<saml2:Attribute>` element.
+> The identifying name of the type of identifier value expressed in the `MatchValue` element. This is analogous to the `Name` attribute of a SAML `<saml2:Attribute>` element.
 
 `NameFormat` \[Default `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`\]
 
-> Attribute specifying the format of the Name attribute. This attribute is analogous to the `NameFormat` attribute of a SAML `<saml2:Attribute>` element.
+> Attribute specifying the format of the `Name` attribute. This attribute is analogous to the `NameFormat` attribute of a SAML `<saml2:Attribute>` element.
 
 `##any` \[Optional\]
 
@@ -116,79 +115,52 @@ The `<MatchValue>` element contains a string value to be matched against the pre
 The following schema fragment defines the `<MatchingPolicyType>` complex type:
 
     <xs:complexType name="MatchValueType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute name="NameFormat" type="xs:anyURI"
-                    default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
-                <xs:attribute name="Name" type="xs:string" use="required"/>
-                <xs:anyAttribute namespace="##any"/>
-            </xs:extension>
-        </xs:simpleContent>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="NameFormat" type="xs:anyURI"
+              default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+          <xs:attribute name="Name" type="xs:string" use="required"/>
+          <xs:anyAttribute namespace="##any"/>
+        </xs:extension>
+      </xs:simpleContent>
     </xs:complexType>
+    
     <xs:complexType name="AnyType">
-        <xs:sequence>
-            <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
-        </xs:sequence>
+      <xs:sequence>
+        <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+      </xs:sequence>
     </xs:complexType>
 
 
 <a name="examples"></a>
 ## 3. Examples
 
-    <asp:PrincipalSelection xmlns:asp="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-        <asp:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</asp:MatchValue>
-    </asp:PrincipalSelection>
+    <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</psc:MatchValue>
+    </psc:PrincipalSelection>
 
-> *Example of a SubjectPreselectCriteria specifying a Swedish person identifier (Personnummer) as match value*
+Example of a `PrincipalSelection` specifying a Swedish personal identity number (personnummer) as match value.
 
-    <asp:PrincipalSelection xmlns:asp="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-        <asp:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</asp:MatchValue>
-        <asp:MatchValue Name="urn:oid:1.2.752.201.3.4">XE:197309069289</asp:MatchValue>
-    </asp:PrincipalSelection>
+    <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</psc:MatchValue>
+      <psc:MatchValue Name="urn:oid:1.2.752.201.3.4">NO:19730906123</psc:MatchValue>
+    </psc:PrincipalSelection>
 
-> *Example of a SubjectPreselectCriteria specifying two alternative matching policies. Policy 1 specifying a Swedish person identifier (Personnummer) as match value and Policy 2 specifying a ProvidionalID as match values*
+Example of a `PrincipalSelection` specifying two alternative matching policies. The first policy specifies a Swedish personal identity number (personnummer) and the second specifies a ProvisionalID attribute.
 
-Attributes in the examples above are specified in [[ELN-0604](eln-0604)].
+Attributes in the examples above are specified in \[[ELN-0604](eln-0604)\].
 
 <a name="schemas"></a>
 ## 4. Schemas
-The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/principal-selection/ns` name space:
+The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/principal-selection/ns` namespace:
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-        targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"
-        xmlns:asp="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-    
-        <xs:annotation>
-            <xs:documentation>
-                Schema location URL: https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd
-            </xs:documentation>
-        </xs:annotation>
-    
-        <xs:element name="PrincipalSelection" type="asp:PrincipalSelectionType"/>
-        <xs:complexType name="PrincipalSelectionType">
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" name="MatchValue" type="asp:MatchValueType"
-                    minOccurs="0"/>
-                <xs:element minOccurs="0" name="OtherCriteria" type="asp:AnyType"/>
-            </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="MatchValueType">
-            <xs:simpleContent>
-                <xs:extension base="xs:string">
-                    <xs:attribute name="NameFormat" type="xs:anyURI"
-                        default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
-                    <xs:attribute name="Name" type="xs:string" use="required"/>
-                    <xs:anyAttribute namespace="##any"/>
-                </xs:extension>
-            </xs:simpleContent>
-        </xs:complexType>
-        <xs:complexType name="AnyType">
-            <xs:sequence>
-                <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:schema>
+```
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">      <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
+    <xs:complexType name="PrincipalSelectionType">    <xs:sequence>      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="0"/>      <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>    </xs:sequence>  </xs:complexType>
+    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI"          default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>        <xs:attribute name="Name" type="xs:string" use="required"/>        <xs:anyAttribute namespace="##any"/>      </xs:extension>    </xs:simpleContent>  </xs:complexType>
+    <xs:complexType name="AnyType">    <xs:sequence>      <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>    </xs:sequence>  </xs:complexType>
+  </xs:schema>
+```
 
 <a name="normative-references"></a>
 ## 5. Normative References
