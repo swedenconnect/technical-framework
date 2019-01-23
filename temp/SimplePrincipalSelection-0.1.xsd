@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"
-    xmlns:asp="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+    xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
 
     <xs:annotation>
         <xs:documentation>
@@ -9,12 +9,12 @@
         </xs:documentation>
     </xs:annotation>
 
-    <xs:element name="PrincipalSelection" type="asp:PrincipalSelectionType"/>
+    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
     <xs:complexType name="PrincipalSelectionType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="MatchValue" type="asp:MatchValueType"
+            <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType"
                 minOccurs="0"/>
-            <xs:element minOccurs="0" name="OtherCriteria" type="asp:AnyType"/>
+            <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="MatchValueType">
