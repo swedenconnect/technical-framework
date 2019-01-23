@@ -37,9 +37,9 @@
 
 When a Service Provider requests authentication of a user (principal), the Service Provider may have prior knowledge about the user to be authenticated, for example, when re-authenticating an already authenticated user, or when a user authenticates to a signature service where the user signs a document in a context where he or she already has been authenticated.
 
-Some Identity Providers, such as an Identity Provider acting as a proxy for BankID (see \[[ELN-0612](#eln-0612)\]), in some cases requires the user to provider his or hers personal identity number in order to initiate a BankID operation. Using the extension defined in this specification a BankID Identity Provider does not have to prompt the user for a user's personal identity number. This is especially important when it is processing a request from a signature service.
+> Note: An Identity Provider acting as a proxy for BankID (see \[[ELN-0612](#eln-0612)\]), in some cases require the user to provide his or hers personal identity number in order to initiate a BankID operation. Using the extension defined in this specification a BankID Identity Provider does not have to prompt the user for the personal identity number. This is especially useful when it is processing a request from a signature service.
 
-This specification defines an element that may be included in the `<Extensions>` element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to pre-select the particular user that should be authenticated.
+This specification defines an element that may be included in the `<Extensions>` element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
 
 <a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
@@ -70,7 +70,7 @@ This specification uses the following typographical conventions in text:
 
 This specification defines the element `<PrincipalSelection>` to be included in the `<Extensions>` element of an `AuthnRequest`. 
 
-This element MAY be used by an Identity Provider to pre-select the subject to authenticate. 
+This element MAY be used by an Identity Provider to select the subject to authenticate. 
 
 
 <a name="principalselection"></a>
@@ -83,7 +83,7 @@ The Principal Selection Criteria is provided in a `<PrincipalSelection>` element
 
 `<OtherCriteria>` \[Optional\]
 
-> This element is an extension element that may contain any element that provides other matching criteria in accordance with local conventions or future specifications.
+> This element is an extension element that MAY contain any element that provides other matching criteria in accordance with local conventions or future specifications.
 
 The following schema fragment defines the `<PrincipalSelection>` element:
 
@@ -106,7 +106,7 @@ The `<MatchValue>` element contains a string value to be matched against the sel
 
 `NameFormat` \[Default `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`\]
 
-> Attribute specifying the format of the `Name` attribute. This attribute is analogous to the `NameFormat` attribute of a SAML `<saml2:Attribute>` element.
+> Attribute specifying the format of the `Name` attribute value. This attribute is analogous to the `NameFormat` attribute of a SAML `<saml2:Attribute>` element.
 
 `##any` \[Optional\]
 
