@@ -22,7 +22,7 @@
 
     2.1. [PrincipalSelection](#principalselection)
 
-    2.3 [MatchValue](#matchvalue)
+    2.2 [MatchValue](#matchvalue)
 
 3. [**Examples**](#examples)
 
@@ -97,7 +97,7 @@ The following schema fragment defines the `<PrincipalSelection>` element:
     </xs:complexType>
 
 <a name="matchvalue"></a>
-### 2.3 MatchValue
+### 2.2 MatchValue
 
 The `<MatchValue>` element contains a string value to be matched against the preselected subject. This element has the following attributes which determines the meaning of the match value:
 
