@@ -78,7 +78,7 @@ This element MAY be used by an Identity Provider to select the subject to authen
 
 The Principal Selection Criteria is provided in a `<PrincipalSelection>` element. The element has the following elements and attributes:
 
-`<MatchValue>` \[Zero or more\]
+`<MatchValue>` \[One or more\]
 > This element holds values that MAY be used by the Identity Provider to match against a principal to be authenticated. 
 
 The following schema fragment defines the `<PrincipalSelection>` element:
