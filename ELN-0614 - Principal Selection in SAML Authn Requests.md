@@ -81,17 +81,12 @@ The Principal Selection Criteria is provided in a `<PrincipalSelection>` element
 `<MatchValue>` \[Zero or more\]
 > This element holds values that MAY be used by the Identity Provider to match against a principal to be authenticated. 
 
-`<OtherCriteria>` \[Optional\]
-
-> This element is an extension element that MAY contain any element that provides other matching criteria in accordance with local conventions or future specifications.
-
 The following schema fragment defines the `<PrincipalSelection>` element:
 
     <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
     <xs:complexType name="PrincipalSelectionType">
       <xs:sequence>
-          <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="0"/>
-          <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>
+        <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="1"/>
       </xs:sequence>
     </xs:complexType>
 
@@ -112,7 +107,7 @@ The `<MatchValue>` element contains a string value to be matched against the sel
 
 > Extension point for any attribute in accordance with local conventions and future specifications.
 
-The following schema fragment defines the `<MatchingPolicyType>` complex type:
+The following schema fragment defines the `<MatchValueType>` complex type:
 
     <xs:complexType name="MatchValueType">
       <xs:simpleContent>
@@ -124,13 +119,6 @@ The following schema fragment defines the `<MatchingPolicyType>` complex type:
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
-    
-    <xs:complexType name="AnyType">
-      <xs:sequence>
-        <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
-      </xs:sequence>
-    </xs:complexType>
-
 
 <a name="examples"></a>
 ## 3. Examples
@@ -155,11 +143,34 @@ Attributes in the examples above are specified in \[[ELN-0604](eln-0604)\].
 The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/principal-selection/ns` namespace:
 
 ```
-<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">      <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
-    <xs:complexType name="PrincipalSelectionType">    <xs:sequence>      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="0"/>      <xs:element minOccurs="0" name="OtherCriteria" type="psc:AnyType"/>    </xs:sequence>  </xs:complexType>
-    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI"          default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>        <xs:attribute name="Name" type="xs:string" use="required"/>        <xs:anyAttribute namespace="##any"/>      </xs:extension>    </xs:simpleContent>  </xs:complexType>
-    <xs:complexType name="AnyType">    <xs:sequence>      <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>    </xs:sequence>  </xs:complexType>
-  </xs:schema>
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"
+  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+
+  <xs:annotation>
+    <xs:documentation>
+      Schema location URL:
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
+  <xs:complexType name="PrincipalSelectionType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MatchValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="NameFormat" type="xs:anyURI"
+          default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
+        <xs:attribute name="Name" type="xs:string" use="required"/>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>
 ```
 
 <a name="normative-references"></a>
