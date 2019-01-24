@@ -97,6 +97,14 @@ This document specifies a Signature Activation Protocol (SAP) and its data eleme
 
 > [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md)
 
+#### Principal Selection in SAML Authentication Requests
+
+*Draft version*
+
+This specification defines an element that may be included in the Extensions element of a SAML AuthnRequest where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
+
+> [ELN-0614 - Principal Selection in SAML Authentication Requests](ELN-0614%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
+
 ---
 
 ## Older versions
@@ -107,3 +115,7 @@ Older version of the specification are stored in the following branches:
 + april-2015 - For the April 2015 release
 + october-2015 - For the October 2015 release
 + march-2017 - For the March 2017 release
+
+---
+
+Copyright &copy; 2017-2019, [Sweden Connect](https://swedenconnect.se). Licensed under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).

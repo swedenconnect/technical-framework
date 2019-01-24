@@ -36,7 +36,8 @@ declare -a SPECIFICATIONS=("ELN-0600 - Tekniskt ramverk - Introduktion"
     "ELN-0609 - DSS Extension for Federated Signing Services"
     "ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework"
     "ELN-0612 - BankID Profile for the Swedish eID Framework"
-    "ELN-0613 - Signature Activation Protocol")
+    "ELN-0613 - Signature Activation Protocol"
+    "ELN-0614 - Principal Selection in SAML Authentication Requests.md")
 
 #
 # Produce HTML
