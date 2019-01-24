@@ -2,9 +2,9 @@
 
 # Principal Selection in SAML Authentication Requests 
 
-### Version 0.1 - 2019-01-22 - *Draft version*
+### Version 1.0 - 2019-01-24 - *Draft version*
 
-*ELN-0614-v0.1*
+*ELN-0614-v1.0*
 
 ---
 
@@ -130,8 +130,8 @@ The following schema fragment defines the `<MatchValueType>` complex type:
 Example of a `PrincipalSelection` specifying a Swedish personal identity number (personnummer) as match value.
 
     <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</psc:MatchValue>
-      <psc:MatchValue Name="urn:oid:1.2.752.201.3.4">NO:19730906123</psc:MatchValue>
+      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">198906059483</psc:MatchValue>
+      <psc:MatchValue Name="urn:oid:1.2.752.201.3.4">NO:05068907693</psc:MatchValue>
     </psc:PrincipalSelection>
 
 Example of a `PrincipalSelection` specifying two alternative matching policies. The first policy specifies a Swedish personal identity number (personnummer) and the second specifies a ProvisionalID attribute.
@@ -143,34 +143,8 @@ Attributes in the examples above are specified in \[[ELN-0604](eln-0604)\].
 The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/principal-selection/ns` namespace:
 
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"
-  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-
-  <xs:annotation>
-    <xs:documentation>
-      Schema location URL:
-    </xs:documentation>
-  </xs:annotation>
-
-  <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType"/>
-  <xs:complexType name="PrincipalSelectionType">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="1"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="MatchValueType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="NameFormat" type="xs:anyURI"
-          default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"/>
-        <xs:attribute name="Name" type="xs:string" use="required"/>
-        <xs:anyAttribute namespace="##any"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-</xs:schema>
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">  <xs:annotation>    <xs:documentation>      Schema location URL: https://docs.swedenconnect.se/schemas/authn/1.0/PrincipalSelection-1.0.xsd    </xs:documentation>  </xs:annotation>    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType" />    <xs:complexType name="PrincipalSelectionType">    <xs:sequence>      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="1" />    </xs:sequence>  </xs:complexType>    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI" 
+            default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />        <xs:attribute name="Name" type="xs:string" use="required" />        <xs:anyAttribute namespace="##any" />      </xs:extension>    </xs:simpleContent>  </xs:complexType>  </xs:schema>
 ```
 
 <a name="normative-references"></a>
