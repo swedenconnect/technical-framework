@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2018-08-31 - **Draft version**
+### Version 1.6 - 2019-03-04 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -161,6 +161,8 @@ the following syntax is used:
 
 -   `<mdattr:Element>` – for elements defined in \[[SAML2MetaAttr](#saml2metaattr)\].
 
+-  `<alg:Element>` – for elements defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\].
+
 When referring to elements from the "Identity Provider Discovery Service Protocol and Profile" specification \[[IdpDisco](#idpdisco)\], the following syntax is used:
 
 - `<idpdisc:DiscoveryResponse>`
@@ -178,7 +180,8 @@ When referring to elements from the W3C XML Signature namespace
 Identity Providers and Service Providers that are part of the federation
 for Swedish eID MUST provide a SAML 2.0 Metadata document representing
 its entity. Provided metadata MUST conform to \[[SAML2Int](#saml2int)\] as well 
-as the SAML V2.0 Metadata Interoperability Profile Version 1.0 \[[SAML2MetaIOP](#saml2metaiop)\].
+as the SAML V2.0 Metadata Interoperability Profile Version 1.0 \[[SAML2MetaIOP](#saml2metaiop)\] 
+and SHOULD follow SAML v2.0 Metadata Profile for Algorithm Support Version 1.0 \[[SAML2MetaAlgSupport](#saml2metaalg)\].
 
 <a name="requirements-for-metadata-content"></a>
 ### 2.1. Requirements for Metadata Content
@@ -220,6 +223,10 @@ All services represented in the metadata SHALL include RSA public keys
 in the form of a certificate, which supports both signature validation
 and encryption. The same public key MAY support both signature
 validation and encryption, indicated by an absent `"use"` attribute.
+
+Services MAY declare encryption and signature capabilities as defined in  \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Swedish eID Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
+
+All services conformant with this specification MUST support the mandatory algorithms defined by the Swedish eID Framework, meaning that a service has no possibility to opt-out from a certain mandatory algorithm by excluding it from the declared capabilities. The main purpose of declaring an algorithm using any of the elements `<md:EncryptionMethod>`, `<alg:SigningMethod>` or `<alg:DigestMethod>` is to declare which algorithm the service prefers.
 
 <a name="service-providers"></a>
 #### 2.1.2. Service Providers
@@ -441,7 +448,7 @@ messages to be signed MUST still accept and verify signed request
 messages from Service Providers that indicate, in their metadata, that
 they sign request messages (see [2.1.2](#service-providers) above). If this signature
 verification fails, the Identity Provider MUST return a SAML error
-response and MUST NOT fulfill the request.
+response and MUST NOT fulfil the request.
 
 An Identity Provider that receives a request message that is not signed
 from a Service Provider that has indicated, in its metadata, that it
@@ -456,6 +463,8 @@ placed within the XML-message (see section 3.4.4.1 of
 For the HTTP-POST binding the `<saml2p:AuthnRequest>` element MUST
 be signed using a `<ds:Signature>` element within the
 `<saml2:AuthnRequest>`.
+
+Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider's metadata (`<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Swedish eID Framework during the signature operation.
 
 <a name="message-content"></a>
 ### 5.3. Message Content
@@ -691,6 +700,9 @@ Identity Providers SHALL utilize XML Encryption and return a
 message. The elements `<saml2:EncryptedID>` and
 `<saml2:EncryptedAttribute>` MUST NOT be used; instead the entire
 assertion should be encrypted.
+
+Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use one of the mandatory algorithms defined by the Swedish eID Framework during the operations. For encryption, the chosen algorithm MUST also be compatible
+with the Service Provider's encryption key declared in metadata.
 
 Service Providers SHOULD NOT accept unsolicited `<saml2p:Response>`
 messages (i.e., responses that are not the result of an earlier
@@ -1085,6 +1097,8 @@ Provider, by including an authentication context URI (as described in
 `<saml2p:RequestedAuthnContext>` element of the `<saml2p:AuthnRequest>` 
 message.
 
+If the `Message`-element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Swedish eID Framework during the encryption operation, which is compatible with the Identity Provider's encryption key declared in metadata.
+
 Identity Providers SHALL advertise supported authentication contexts
 defined by the URIs listed in sections 3.1.1 and 3.1.1.1 of \[[EidRegistry](#eidregistry)\], 
 by including the URIs of supported authentication contexts as EntityAttributes of the type
@@ -1233,6 +1247,10 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 > Entity Attributes Version 1.0, August
 > 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-attr.html).
 
+<a name="saml2metaalg"></a>
+**\[SAML2MetaAlgSupport\]**
+> [SAML v2.0 Metadata Profile for Algorithm Support Version 1.0, 21 February 2011](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-metadata-algsupport.html).
+
 <a name="entcat"></a>
 **\[EntCat\]**
 > [The Entity Category SAML Entity Metadata Attribute Type, January
@@ -1280,6 +1298,7 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 **Changes between version 1.5 and 1.6:**
 
 - The definition of all possible "Sign Message Authentication Context URIs" has been moved from section 7.1, "Authentication Context URIs for Signature Services", to section 3.1.1.1 of \[[EidRegistry](#eidregistry)\].
+- In order to facilitate algorithm interoperability between peers additions concerning "Metadata Profile for Algorithm Support" \[[SAML2MetaAlgSupport](#saml2metaalg)\] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.
 
 **Changes between version 1.4 and 1.5:**
 
