@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-02-22 - **Draft version**
+### Version 1.6 - 2019-03-04 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -701,7 +701,8 @@ message. The elements `<saml2:EncryptedID>` and
 `<saml2:EncryptedAttribute>` MUST NOT be used; instead the entire
 assertion should be encrypted.
 
-Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use one of the mandatory algorithms defined by the Swedish eID Framework during the operations.
+Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use one of the mandatory algorithms defined by the Swedish eID Framework during the operations. For encryption, the chosen algorithm MUST also be compatible
+with the Service Provider's encryption key declared in metadata.
 
 Service Providers SHOULD NOT accept unsolicited `<saml2p:Response>`
 messages (i.e., responses that are not the result of an earlier
@@ -1096,7 +1097,7 @@ Provider, by including an authentication context URI (as described in
 `<saml2p:RequestedAuthnContext>` element of the `<saml2p:AuthnRequest>` 
 message.
 
-If the `Message`-element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Swedish eID Framework during the encryption operation.
+If the `Message`-element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Swedish eID Framework during the encryption operation, which is compatible with the Identity Provider's encryption key declared in metadata.
 
 Identity Providers SHALL advertise supported authentication contexts
 defined by the URIs listed in sections 3.1.1 and 3.1.1.1 of \[[EidRegistry](#eidregistry)\], 
