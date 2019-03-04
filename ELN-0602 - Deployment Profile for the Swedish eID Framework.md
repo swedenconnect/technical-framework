@@ -699,7 +699,7 @@ Identity Providers SHALL utilize XML Encryption and return a
 `<saml2:EncryptedAssertion>` element in the `<saml2p:Response>`
 message. The elements `<saml2:EncryptedID>` and
 `<saml2:EncryptedAttribute>` MUST NOT be used; instead the entire
-assertion should be encrypted.
+assertion MUST be encrypted.
 
 Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use one of the mandatory algorithms defined by the Swedish eID Framework during the operations. For encryption, the chosen algorithm MUST also be compatible
 with the Service Provider's encryption key declared in metadata.
