@@ -1,10 +1,10 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.1 - 2018-06-19
+### Version 1.2 - 2019-05-16 - **Draft version**
 
-*ELN-0612-v1.1*
+*ELN-0612-v1.2*
 
 ---
 
@@ -158,9 +158,9 @@ For Identity Providers implementing BankID support in **one** Identity Provider 
 <a name="attributes"></a>
 ## 2. Attributes
 
-An BankID Identity Provider use the BankID Relying Party API, as described in \[[BankID_Spec](#bankid_spec)\], to communicate with the BankID-server when providing its services to end users. When a BankID-operation has completed successfully, the Identity Provider (the BankID Relying Party) invokes the `Collect`-method to obtain the result from the operation.
+An BankID Identity Provider use the BankID Relying Party API, as described in \[[BankID_Spec](#bankid_spec)\], to communicate with the BankID-server when providing its services to end users. When a BankID-operation has completed successfully, the Identity Provider (the BankID Relying Party) invokes the Collect-method (`/rp/v5/collect`) to obtain the result from the operation.
 
-The table [below](#attribute-transformation) contains attribute transformation mappings between attributes from a `Collect`-method response as described in section 13.2 of \[[BankID_Spec](#bankid_spec)\] and attributes defined within the Swedish eID Framework as defined in \[[EidAttributes](#eid-attributes)\].
+The table [below](#attribute-transformation) contains attribute transformation mappings between attributes from a Collect-method response as described in section 14.2.5 of \[[BankID_Spec](#bankid_spec)\] and attributes defined within the Swedish eID Framework as defined in \[[EidAttributes](#eid-attributes)\].
 
 An Identity Provider should not necessarily release all transformed attributes received from the BankID-server to the Service Provider. See further section [5.1](#attribute-release-rules), "[Attribute Release Rules](#attribute-release-rules)".
 
@@ -169,7 +169,7 @@ An Identity Provider should not necessarily release all transformed attributes r
 
 | BankID attribute | SAML Attribute | Description |
 | :--- | :--- | :--- |
-| `orderRef` | transactionIdentifier<br />`urn:oid:1.2.752.201.3.2` | The BankID order reference received from a BankID `Auth`- or `Sign`-method invocation. This parameter is supplied as an input parameter to the `Collect`-call and is the unique transaction identifier for the BankID-operation. |
+| `orderRef` | transactionIdentifier<br />`urn:oid:1.2.752.201.3.2` | The BankID order reference received from a BankID Auth (`/rp/v5/auth`) or Sign (`rp/v5/sign`) method invocation. This parameter is supplied as an input parameter to the Collect-call and is the unique transaction identifier for the BankID-operation. |
 | `completionData.`<br />`user.personalNumber` | personalIdentityNumber<br />`urn:oid:1.2.752.29.4.13` | Swedish ”personnummer”. 12 digits without hyphen. |
 | `completionData.`<br />`user.givenName` | givenName<br />`urn:oid:2.5.4.42` | User's given name. |
 | `completionData.`<br />`user.surname` | sn<br />`urn:oid:2.5.4.4` | User's surname. |
@@ -212,11 +212,11 @@ This profile does not state any requirements on how the user interface for an Id
 <a name="general-requirements"></a>
 ### 3.1. General Requirements
 
-The user interface for a BankID Identity Provider SHOULD use the recommended user and error messages as defined in sections 5, "Recommended User Messages", and 10, "Recommended Terminology", of \[[BankID_Spec](#bankid_spec)\].
+The user interface for a BankID Identity Provider SHOULD use the recommended user and error messages as defined in sections 6, "Recommended User Messages", and 11, "Recommended Terminology", of \[[BankID_Spec](#bankid_spec)\].
 
 The user interface for a BankID Identity Provider MUST display information about the Service Provider that sent the request. It is RECOMMENDED that this information is obtained from the `<mdui:UIInfo>` element from the Service Provider's metadata entry.
 
-It MUST be clear to the whether an authentication or a signature process is ongoing. 
+It MUST be clear to the user whether an authentication or a signature process is ongoing. 
 
 When an error occurs during an authentication or signature operation, the Identity Provider MUST display an error message that can be easily understood by the end user, and offer the possibility to acknowledge the error so that an error response may be posted back to the requesting Service Provider (as specified in section 6.4, "Error Responses", of \[[EidProfile](#eid-profile)\]).
 
@@ -241,9 +241,9 @@ See also section [4.2.2](#mobile-bankid-and-the-personnumber-attribute), "[Mobil
 
 A BankID Identity Provider SHOULD include a Cancel-button in the user interface enabling the possibility for the user to cancel the BankID operation. 
 
-In cases where the BankID app is on another device than the user agent and the Identity Provider has received notification from the BankID-server that the app has been started by the user, it is RECOMMENDED that the Cancel-button in the Identity Provider user interface is hidden or disabled. The reason for this is that the BankID app itself has a Cancel-button, and if the user cancels the operation using the Cancel-button in the Identity Provider user interface instead of in the app itself, the app will be left dangling until it times out and during that time the user may be prevented from using its BankID.
+If the use clicks the Cancel-button after a BankID-operation has been started<sup>1</sup> the Identity Provider MUST invoke the BankID-operation `/rp/v5/cancel`. Failure to do so may lead to a dangling BankID session that needs to time out before the user can use BankID again.
 
-> Another thing to pay attention to is the case where the user clicks the Cancel-button in the Identity Provider user interface before starting the BankID app. The session against the BankID-server may then have been started, but since there are no ways of cancelling a BankID-session, the user will be prevented from starting a new session until the previous session times out. A suggestion in the cases where a BankID-session was started, is that the Identity Provider initiates a new BankID-operation in order to "kill" the previous one (the newly created session will also be invalidated by the BankID-server).
+> \[1\]: Meaning that `/rp/v5/auth` or `/rp/v5/sign` has been called for the transaction.
 
 <a name="authentication-requests"></a>
 ## 4. Authentication Requests
@@ -269,12 +269,12 @@ The BankID client (app or desktop program) comprises a text box in which the sig
 
 An Identity Provider that processes an `<saml2p:AuthnRequest>` from a Signature Service is not given the actual data that is being signed by the user via the Signature Service. However, in order to invoke the BankID signature function, the Identity Provider must supply the BankID-server with data to be signed. This section specifies the input to the BankID signature operation.
 
-The "To-be-signed" data that is passed as input the the BankID `Sign`-method is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (section 13.1.2 of \[[BankID_Spec](#bankid_spec)\]).
+The "To-be-signed" data that is passed as input the the BankID Sign-method (`/rp/v5/sign`) is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (section 14.1.2 of \[[BankID_Spec](#bankid_spec)\]).
 
 <a name="uservisibledata"></a>
 ##### 4.2.1.1. userVisibleData - Signature Message
 
-The `Sign`-method parameter `userVisibleData` holds data that will be signed by the user but it is also displayed in the BankID application text box.
+The Sign-method parameter `userVisibleData` holds data that will be signed by the user but it is also displayed in the BankID application text box.
 
 If the `<saml2p:AuthnRequest>` message contains a `SignMessage` extension, the contents of this message MUST be assigned to the `userVisibleData` parameter (after necessary encoding).
 
@@ -286,7 +286,7 @@ A BankID Identity Provider MUST only process `SignMessage` elements having their
 <a name="usernonvisibledata"></a>
 ##### 4.2.1.2. userNonVisibleData
 
-In order to produce a BankID signature that contains a connection to the `<saml2p:AuthnRequest>` message that initiated this signature, a BankID Identity Provider compliant to this profile MUST assign the  `userNonVisibleData` parameter with data that uniquely binds the signature to the `<saml2p:AuthnRequest>` message.
+In order to produce a BankID signature that contains a binding to the `<saml2p:AuthnRequest>` message that initiated this signature, a BankID Identity Provider compliant to this profile MUST assign the  `userNonVisibleData` parameter with data that uniquely binds the signature to the `<saml2p:AuthnRequest>` message.
 
 It is RECOMMENDED that the following function is used to produce this unique binding:
 
@@ -295,7 +295,7 @@ It is RECOMMENDED that the following function is used to produce this unique bin
 <a name="mobile-bankid-and-the-personnumber-attribute"></a>
 #### 4.2.2. Mobile BankID and the personNumber attribute
 
-When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID `Sign`-call. This information is not passed in the `<saml2p:AuthnRequest>` message sent from the Signature Service. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID Sign-call. This information is not passed in the `<saml2p:AuthnRequest>` message sent from the Signature Service. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
 
 > \[1\]: Almost all use cases where a user signs data is preceded by a login (authentication).
 
@@ -331,9 +331,9 @@ It is RECOMMENDED that authentication/signature errors and failures to start the
 
 If the user cancels a BankID operation, either by clicking the Cancel-button in the Identity Provider user interface or the Cancel-button in the BankID app/Security Application, the Identity Provider SHOULD respond with a `<saml2p:Response>` message where the second level status code is `http://id.elegnamnden.se/status/1.0/cancel`.
 
-In cases where the Identity Provider receives the BankID error code `ALREADY_IN_PROGRESS` in response to an `Auth`- or `Sign`-call the Identity Provider MAY display a warning to the user that someone may have initiated a BankID operation using their personal identity number<sup>1</sup>. If this warning is displayed, it is RECOMMENDED that the second level status code `http://id.elegnamnden.se/status/1.0/possibleFraud` is included in the error response message posted back to the Service Provider.
+In cases where the Identity Provider receives the BankID error code `ALREADY_IN_PROGRESS` in response to an Auth- or Sign-call the Identity Provider MAY display a warning to the user that someone may have initiated a BankID operation using their personal identity number<sup>1</sup>. If this warning is displayed, it is RECOMMENDED that the second level status code `http://id.elegnamnden.se/status/1.0/possibleFraud` is included in the error response message posted back to the Service Provider.
 
-s> \[1\]: There have been reports where fraudsters remotely try to convince people of using their Mobile BankID to log in to a service. In these cases, the fraudster initiates a BankID authentication prior to the person he tries to trick into logging in to the service, and is waiting for the user to enter his or hers personal code, thus authenticating the fraudsters session. 
+> \[1\]: There have been reports where fraudsters remotely try to convince people of using their Mobile BankID to log in to a service. In these cases, the fraudster initiates a BankID authentication prior to the person he tries to trick into logging in to the service, and is waiting for the user to enter his or hers personal code, thus authenticating the fraudsters session. 
 
 <a name="metadata"></a>
 ## 6. Metadata
@@ -406,7 +406,7 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="bankid-spec"></a>
 **\[BankID_Spec\]**
-> [BankID Relying Party Guidelines, version 3.1](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.1.pdf).
+> [BankID Relying Party Guidelines, version 3.2.2](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.2.2.pdf).
 > 
 > *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
 
@@ -420,6 +420,10 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
+
+**Changes between version 1.1 and 1.2:**
+
+- Since the BankID API now includes a cancel-method section 3.4, "Cancelling an Operation", was updated to require usage of this method if the user cancels the operation.
 
 **Changes between version 1.0 and 1.1:**
 
