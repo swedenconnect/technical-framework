@@ -2,7 +2,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.2 - 2019-05-16 - **Draft version**
+### Version 1.2 - 2019-05-20 - **Draft version**
 
 *ELN-0612-v1.2*
 
@@ -232,7 +232,15 @@ Auto starting the BankID app from a mobile device requires the built-in web brow
 <a name="prompting-for-personal-identity-number"></a>
 ### 3.3. Prompting for Personal Identity Number (personnummer)
 
-When the user agent (web browser) and the BankID client (app or desktop) is not on the same device the Identity Provider prompts the user for his or hers personal identity number (personnummer) in order to initiate an BankID authentication. It is RECOMMENDED that the personal identity number is saved in the user's web browser session storage (in a session cookie or more preferably using the HTML5 sessionStorage object). The reason for this is that if the user performs a signature operation after authenticating he or she does not expect to have to enter the personal identity number again.
+When the user agent (web browser) and the BankID client (app or desktop) is not on the same device, and the QR code functionality is not being used for the requesting Service Provider, the Identity Provider needs to prompt the user for his or hers personal identity number (personnummer) in order to initiate a BankID operation. 
+
+Before prompting the user the Identity Provider SHOULD check if the current authentication request contains a `<psc:PrincipalSelection>` extension holding a personal identity number attribute value. 
+
+If the personal identity number is present in the `<psc:PrincipalSelection>` extension and the current operation is an "authentication for signature" operation (see [section 4.2 below](#authentication-for-signature)), the Identity Provider MUST NOT prompt the user for the personal identity number, but use the value received in the request to initiate the signature operation. 
+
+If the current operation is an "ordinary" authentication and the personal identity number is received in the request, the Identity Provider MAY use this value to pre-fill the personal identity number in the prompt dialogue to make the user experience smooth, but it SHOULD NOT use it to initiate the BankID operation without user interaction. 
+
+> Note: Until the `<psc:PrincipalSelection>` extension is widely used the Identity Provider MAY save the personal identity number in the user's web browser session storage (in a session cookie or more preferably using the HTML5 sessionStorage object). That way the Identity Provider can avoid prompting the user for the personal identity number for signature operations even if the requesting Signature Service does not support the `<psc:PrincipalSelection>` extension.
 
 See also section [4.2.2](#mobile-bankid-and-the-personnumber-attribute), "[Mobile BankID and the personNumber attribute](#mobile-bankid-and-the-personnumber-attribute)".
 
@@ -295,7 +303,11 @@ It is RECOMMENDED that the following function is used to produce this unique bin
 <a name="mobile-bankid-and-the-personnumber-attribute"></a>
 #### 4.2.2. Mobile BankID and the personNumber attribute
 
-When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet) the `personNumber` parameter must be assigned in the BankID Sign-call. This information is not passed in the `<saml2p:AuthnRequest>` message sent from the Signature Service. In these cases the Identity Provider SHOULD rely on the fact that the user, most likely<sup>1</sup>, already has been authenticated at the Identity Provider, and use the personal identity number given when the user authenticated also for the signature operation (see section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)", above). Only in cases when the Identity Provider can not obtain the personal identity number should a dialogue asking the personal identity number be displayed.
+When Mobile BankID is being used to sign data and the user has initiated the signature operation against the Signature Service from another device (desktop och tablet), and the BankID QR code functionality is not being used, the `personNumber` parameter must be assigned in the BankID Sign-call.
+
+Preferably this information was received in the `<psc:PrincipalSelection>` of the `<saml2p:AuthnRequest>` as described in section [3.3](#prompting-for-personal-identity-number), "[Prompting for Personal Identity Number (personnummer)](#prompting-for-personal-identity-number)". 
+
+Identity Providers wanting to support Signature Services that do not include the `<psc:PrincipalSelection>` extension MAY store the personal identity number in the user's web browser session storage during authentication, and use it during signature<sup>1</sup>, see section [3.3](#prompting-for-personal-identity-number) above.
 
 > \[1\]: Almost all use cases where a user signs data is preceded by a login (authentication).
 
@@ -364,6 +376,28 @@ It is RECOMMENDED that Service Providers communicating with BankID Identity Prov
 
 A BankID Identity Provider MUST require authentication request messages to be signed. This is indicated by assigning the `WantAuthnRequestsSigned` attribute of the `<md:IDPSSPDescriptor>` element to a value of `true`. 
 
+A BankID Identity Provider SHOULD declare the `<psc:RequestedPrincipalSelection>` element containing the attribute name for personalIdentityNumber (`urn:oid:1.2.752.29.4.13`) and include it in its metadata entry as described in section 2.1.3 of \[[EidProfile](#eid-profile)\]. 
+
+Using this extension the Identity Provider announces that the requestor should send the personal identity number in the authentication request if this is known to the requestor. In this way, the Identity Provider does not have to prompt the user for the personal identity number for the use cases where this is required.
+
+```
+...
+<md:IDPSSODescriptor WantAuthnRequestsSigned="true"
+     protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+  <md:Extensions>
+    <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+      ...
+    </mdui:UIInfo>
+    <psc:RequestedPrincipalSelection 
+         xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13" />
+    </psc:RequestedPrincipalSelection>
+  </md:Extensions>
+  <md:KeyDescriptor use="signing">
+    ...
+```
+*Example of how the Identity Provider declares the `RequestedPrincipalSelection` extension in its metadata.*
+
 <a name="signature-services"></a>
 ### 6.3. Signature Services
 
@@ -418,12 +452,18 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="principalsel"></a>
+**\[PrincipalSel\]**
+> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html).
+> 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
 
 **Changes between version 1.1 and 1.2:**
 
 - Since the BankID API now includes a cancel-method section 3.4, "Cancelling an Operation", was updated to require usage of this method if the user cancels the operation.
+- Sections 3.3, "Prompting for Personal Identity Number", and 4.2.2, "Mobile BankID and the personNumber attribute", were updated with new recommendations and requirements for the `<psc:PrincipalSelection>` extension.
+- Section 6.2 was updated with a requirement that a BankID Identity Provider should include the `<psc:RequestedPrincipalSelection>` element in its metadata.
 
 **Changes between version 1.0 and 1.1:**
 

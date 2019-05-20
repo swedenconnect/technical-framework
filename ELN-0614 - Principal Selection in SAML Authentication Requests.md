@@ -2,7 +2,7 @@
 
 # Principal Selection in SAML Authentication Requests 
 
-### Version 1.0 - 2019-01-24 - *Draft version*
+### Version 1.0 - 2019-05-20 - *Draft version*
 
 *ELN-0614-v1.0*
 
@@ -12,9 +12,9 @@
 
 1. [**Introduction**](#introduction)
 
-    1.1. [Requirement key words](#requirement-key-words)
+    1.1. [Requirements Notation](#requirements-notation)
 
-    1.2. [XML name space references](#xml-name-space-references)
+    1.2. [XML Namespace References](#xml-namespace-references)
 
     1.3. [Structure](#structure)
 
@@ -22,10 +22,16 @@
 
     2.1. [PrincipalSelection](#principalselection)
 
-    2.2 [MatchValue](#matchvalue)
+    2.1.1. [MatchValue](#matchvalue)
+    
+    2.2. [RequestedPrincipalSelection](#requestedprincipalselection)
 
 3. [**Examples**](#examples)
 
+    3.1. [Authentication Requests](#authentication-requests)
+    
+    3.2. [Metadata Extension](#metadata-extension)
+ 
 4. [**Schemas**](#schemas)
 
 5. [**Normative References**](#normative-references)
@@ -37,12 +43,14 @@
 
 When a Service Provider requests authentication of a user (principal), the Service Provider may have prior knowledge about the user to be authenticated, for example, when re-authenticating an already authenticated user, or when a user authenticates to a signature service where the user signs a document in a context where he or she already has been authenticated.
 
-> Note: An Identity Provider acting as a proxy for BankID (see \[[ELN-0612](#eln-0612)\]), in some cases require the user to provide his or hers personal identity number in order to initiate a BankID operation. Using the extension defined in this specification a BankID Identity Provider does not have to prompt the user for the personal identity number. This is especially useful when it is processing a request from a signature service.
+This specification defines the `<psc:PrincipalSelection>` element that may be included in the `<saml2p:Extensions>` element of a SAML `<saml2p:AuthnRequest>` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
 
-This specification defines an element that may be included in the `<Extensions>` element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
+The specification also defines the `<psc:RequestedPrincipalSelection>` element that should be used by Identity Providers that may need information about a known user in order to avoid prompting for the user ID<sup>1</sup>. The element should be included as an extension in the Identity Provider metadata under the `<md:IDPSSODescriptor>` element.
 
-<a name="requirement-key-words"></a>
-### 1.1. Requirement key words
+> \[1]\: The typical use case is when a user once has authenticated for a service and provided his or hers user ID to the Identity Provider, and is about to perform a signature. If the Identity Provider prompts the user for the user ID once again the user experience is poor and the Service Provider will receive customer complaints.
+
+<a name="requirements-notation"></a>
+### 1.1. Requirements Notation
 
 The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**,
@@ -51,12 +59,16 @@ The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 
 These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
-<a name="xml-name-space-references"></a>
-### 1.2. XML name space references
+<a name="xml-namespace-references"></a>
+### 1.2. XML Namespace References
 
-The prefix **psc:** stands for the Principal Selection Criteria XML Schema namespace `http://id.swedenconnect.se/authn/1.0/principal-selection/ns`. 
+The prefix **psc:** stands for the Principal Selection Criteria XML schema namespace `http://id.swedenconnect.se/authn/1.0/principal-selection/ns`. 
 
-The prefix **saml2:** stands for the OASIS SAML 2 Assertion Schema namespace `urn:oasis:names:tc:SAML:2.0:assertion`.
+The prefix **saml2:** stands for the OASIS SAML 2 Assertion schema namespace `urn:oasis:names:tc:SAML:2.0:assertion`.
+
+The prefix **saml2p:** stands for the OASIS SAML 2 Protocol schema namespace `urn:oasis:names:tc:SAML:2.0:protocol`.
+
+The prefix **md:** stands for the OASIS SAML 2 Metadata schema namespace `urn:oasis:names:tc:SAML:2.0:metadata`.
 
 <a name="structure"></a>
 ### 1.3. Structure
@@ -79,7 +91,7 @@ This element MAY be used by an Identity Provider to select the subject to authen
 The Principal Selection Criteria is provided in a `<PrincipalSelection>` element. The element has the following elements and attributes:
 
 `<MatchValue>` \[One or more\]
-> This element holds values that MAY be used by the Identity Provider to match against a principal to be authenticated. 
+> This element holds values that MAY be used by the Identity Provider to match against a principal to be authenticated.
 
 The following schema fragment defines the `<PrincipalSelection>` element:
 
@@ -91,7 +103,7 @@ The following schema fragment defines the `<PrincipalSelection>` element:
     </xs:complexType>
 
 <a name="matchvalue"></a>
-### 2.2 MatchValue
+#### 2.1.1 MatchValue
 
 The `<MatchValue>` element contains a string value to be matched against the selected principal. This element has the following attributes which determines the meaning of the match value:
 
@@ -120,30 +132,86 @@ The following schema fragment defines the `<MatchValueType>` complex type:
       </xs:simpleContent>
     </xs:complexType>
 
+<a name="requestedprincipalselection"></a>
+### 2.2. RequestedPrincipalSelection
+
+An Identity Provider uses the `<RequestedPrincipalSelection>` element to declare that it wishes to receive the `<PrincipalSelection>` extension element in authentication requests. The contained `MatchValue` elements should contain no values, only the attribute name of a `MatchValue` element is relevant to declare which attributes of a known user that is interest for the Identity Provider.
+
+The following schema fragment defines the `<RequestedPrincipalSelection>` element:
+
+```
+<element name="RequestedPrincipalSelection" type="psc:RequestedPrincipalSelectionType" />
+<complexType name="RequestedPrincipalSelectionType">
+  <complexContent>
+    <extension base="psc:PrincipalSelectionType" />
+  </complexContent>
+</complexType>
+```
+
 <a name="examples"></a>
 ## 3. Examples
 
-    <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</psc:MatchValue>
-    </psc:PrincipalSelection>
+Attributes in the examples below are specified in \[[ELN-0604](eln-0604)\].
 
-Example of a `PrincipalSelection` specifying a Swedish personal identity number (personnummer) as match value.
+<a name="authentication-requests"></a>
+### 3.1. Authentication Requests
 
-    <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
-      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">198906059483</psc:MatchValue>
-      <psc:MatchValue Name="urn:oid:1.2.752.201.3.4">NO:05068907693</psc:MatchValue>
-    </psc:PrincipalSelection>
+    ...
+    <saml2p:Extensions>
+      <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+        <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">197309069289</psc:MatchValue>
+      </psc:PrincipalSelection>
+    </saml2p:Extensions>
+    ...
+
+Example of a `PrincipalSelection` specifying a Swedish personal identity number (personnummer) as match attribute.
+
+    ...
+    <saml2p:Extensions>
+      <psc:PrincipalSelection xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+        <psc:MatchValue Name="urn:oid:1.2.752.29.4.13">198906059483</psc:MatchValue>
+        <psc:MatchValue Name="urn:oid:1.2.752.201.3.4">NO:05068907693</psc:MatchValue>
+      </psc:PrincipalSelection>
+    <saml2p:Extensions>
+    ...
 
 Example of a `PrincipalSelection` specifying two alternative matching policies. The first policy specifies a Swedish personal identity number (personnummer) and the second specifies a ProvisionalID attribute.
 
-Attributes in the examples above are specified in \[[ELN-0604](eln-0604)\].
+<a name="metadata-extension"></a>
+### 3.2. Metadata Extension
+
+```
+...
+<md:IDPSSODescriptor WantAuthnRequestsSigned="true"
+     protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+  <md:Extensions>
+    <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+      ...
+    </mdui:UIInfo>
+    <psc:RequestedPrincipalSelection 
+         xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">
+      <psc:MatchValue Name="urn:oid:1.2.752.29.4.13" />
+    </psc:RequestedPrincipalSelection>
+  </md:Extensions>
+  <md:KeyDescriptor use="signing">
+    ...
+```
+
+Example of how an Identity Provider advertises, it its metadata, that it wishes to receive the Swedish personal identity number (personnummer) of the user in a `<PrincipalSelection>` extension element of the authentication request if this information is known to the requestor.
 
 <a name="schemas"></a>
 ## 4. Schemas
 The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/principal-selection/ns` namespace:
 
 ```
-<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">  <xs:annotation>    <xs:documentation>      Schema location URL: https://docs.swedenconnect.se/schemas/authn/1.0/PrincipalSelection-1.0.xsd    </xs:documentation>  </xs:annotation>    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType" />    <xs:complexType name="PrincipalSelectionType">    <xs:sequence>      <xs:element maxOccurs="unbounded" name="MatchValue" type="psc:MatchValueType" minOccurs="1" />    </xs:sequence>  </xs:complexType>    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI" 
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">  <xs:annotation>    <xs:documentation>      Schema location URL: https://docs.swedenconnect.se/schemas/authn/1.0/PrincipalSelection-1.0.xsd    </xs:documentation>  </xs:annotation>    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType" />  <xs:complexType name="PrincipalSelectionType">    <xs:sequence>      <xs:element name="MatchValue" type="psc:MatchValueType" minOccurs="1" maxOccurs="unbounded" />    </xs:sequence>  </xs:complexType>
+  
+  <element name="RequestedPrincipalSelection" type="psc:RequestedPrincipalSelectionType" />
+  <complexType name="RequestedPrincipalSelectionType">
+    <complexContent>
+      <extension base="psc:PrincipalSelectionType" />
+    </complexContent>
+  </complexType>    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI" 
             default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />        <xs:attribute name="Name" type="xs:string" use="required" />        <xs:anyAttribute namespace="##any" />      </xs:extension>    </xs:simpleContent>  </xs:complexType>  </xs:schema>
 ```
 
@@ -159,11 +227,7 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/princ
 
 > [Attribute Specification for the Swedish eID Framework](http://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
-<a name="eln-0612"></a>**[ELN-0612]**
-
-> [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](http://docs.swedenconnect.se/technical-framework/latest/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html).
-
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
 
-This is the first version of this draft.
+This is the first version of this specification.

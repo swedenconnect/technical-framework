@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-03-04 - **Draft version**
+### Version 1.6 - 2019-05-20 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -39,6 +39,12 @@
     5.2. [Binding and Security Requirements](#binding-and-security-requirements)
 
     5.3. [Message Content](#message-content)
+    
+    5.3.1. [Requested Authentication Context](#requested-authentication-context)
+    
+    5.3.2. [Scoping](#scoping)
+    
+    5.3.3. [Principal Selection](#principal-selection)
 
     5.4. [Processing Requirements](#processing-requirements)
 
@@ -346,6 +352,8 @@ Identity Providers SHALL advertise support for the SAP protocol according to \[[
 ```
 *Example of how an Identity Provider advertises its support for SCAL2 authentication.*
 
+An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension in authentication requests SHOULD include the `<psc:RequestedPrincipalSelection>` extension extending the `<md:IDPSSODescriptor>` element. In this extension the Identity Provider declares which attribute value(s) it requests to be sent in the authentication request `<psc:PrincipalSelection>` extension by the requestor. See [section 5.3.3](#principal-selection) and \[[PrincipalSel](#principalsel)\].
+
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
 
@@ -483,6 +491,20 @@ user agent to deliver the request. This is useful to prevent malicious
 forwarding of signed requests from being accepted by unintended Identity
 Providers.
 
+Identity Providers conformant with this profile MUST support the
+`ForceAuthn` and `IsPassive` attributes received in
+`<saml2p:AuthnRequest>` messages.
+
+Service Providers SHOULD include the `ForceAuthn` attribute in all
+`<saml2p:AuthnRequest>` messages and explicitly set its value to
+`true` or `false`, and not rely on its default value. The reason for this is
+to avoid accidental SSO.
+
+If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
+
+<a name="requested-authentication-context"></a>
+#### 5.3.1. Requested Authentication Context
+
 A Service Provider SHOULD explicitly specify a requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
 containing `<saml2:AuthnContextClassRef>` elements each holding
@@ -526,16 +548,8 @@ states that it requests the authentication to be performed according to
 either the LoA3 URI defined within the Swedish eID Framework or the
 substantial level for notified eIDs defined within the eIDAS Framework.*
 
-Identity Providers conformant with this profile MUST support the
-`ForceAuthn` and `IsPassive` attributes received in
-`<saml2p:AuthnRequest>` messages.
-
-Service Providers SHOULD include the `ForceAuthn` attribute in all
-`<saml2p:AuthnRequest>` messages and explicitly set its value to
-`true` or `false`, and not rely on its default value. The reason for this is
-to avoid accidental SSO.
-
-If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
+<a name="scoping"></a>
+#### 5.3.2. Scoping
 
 An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the `<saml2p:Scoping>` element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) that may be used to authenticate the user. See section 3.4.1.5 of \[[SAML2Core](#saml2core)\].
 
@@ -561,6 +575,17 @@ The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDA
 proxy the request to the Norwegian eIDAS Proxy Service for authentication.*
 
 > **Note**: A Service Provider may list more than one country in the `<saml2p:IDPList>` of a `<saml2p:Scoping>` element. The eIDAS Connector will then present a country selection dialogue containing only the listed countries.
+
+<a name="principal-selection"></a>
+#### 5.3.3. Principal Selection
+
+The specification "Principal Selection in SAML Authentication Requests", \[[PrincipalSel](#principalsel)\], defines the `<psc:PrincipalSelection>` extension that enables a requestor to inform the Identity Provider about known attributes for the principal that is about to be authenticated. A typical case is when an already logged in user is sent to the Identity Provider for re-authentication, and it is undesirable that the user is prompted for its user ID.
+
+An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension SHOULD advertise this in its metadata according to [section 2.1.3](#identity-providers).
+
+A Service Provider that sends an authentication request  to an Identity Provider that has declared that it wishes to receive certain attribute values MAY include the `<psc:PrincipalSelection>` extension in the `<saml2p:AuthnRequest>` message, provided that the Service Provider has knowledge about this information.
+
+A Service Provider that is a Signature Service SHOULD include the extension for the case described above.
 
 <a name="processing-requirements"></a>
 ### 5.4. Processing Requirements
@@ -1056,6 +1081,8 @@ following requirements:
     also be indicated in the Signature Service metadata record using the
     `AuthnRequestsSigned` attribute (see [section 2.1.4](#signature-service)).
 
+If the receiving Identity Provider has declared that it wishes to receive certain attributes known about the user that is performing the signature operation (see [section 2.1.3](#identity-providers)), and the Signature Service has received any of the declared attributes in the `Signer` element of the `SignRequest` (\[[EidDSS](#eiddss)\]), the Signature Service SHOULD include those attributes in a `<psc:PrincipalSelection>` extension of the authentication request. See also [section 5.3.3](#principal-selection).
+
 It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:RequesterID>` element holding the entityID of the Service Requestor is included in `<saml2p:AuthnRequest>` messages generated by a Signature Service.
 
     <saml2p:Scoping>
@@ -1177,7 +1204,7 @@ failed to accept it, and the request indicated that the sign message
 MUST be displayed, then the Identity Provider MUST return an error
 response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
-> \[*\]: As defined in [section 5.3](#message-content), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
+> \[*\]: As defined in [section 5.3.1](#requested-authentication-context), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
 
 <a name="normative-references"></a>
 ## 8. Normative References
@@ -1265,32 +1292,36 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> board](https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation - version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf)
+> [Tillitsramverk för Svensk e-legitimation - version 1.4](https://docs.swedenconnect.se/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf)
 
 <a name="eidentcat"></a>
 **\[EidEntCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="eiddss"></a>
 **\[EidDSS\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name=""eiddssprofile"></a>
 **\[EidDSS\_Profile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 <a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+
+<a name="principalsel"></a>
+**\[PrincipalSel\]**
+> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html).
 
 <a name="changes-between-versions"></a>
 ## 9. Changes between versions
@@ -1299,6 +1330,8 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 - The definition of all possible "Sign Message Authentication Context URIs" has been moved from section 7.1, "Authentication Context URIs for Signature Services", to section 3.1.1.1 of \[[EidRegistry](#eidregistry)\].
 - In order to facilitate algorithm interoperability between peers additions concerning "Metadata Profile for Algorithm Support" \[[SAML2MetaAlgSupport](#saml2metaalg)\] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.
+- Section 5.3, "Message Content", was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.
+- The `PrincipalSelection` and `RequestedPrincipalSelection` extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.
 
 **Changes between version 1.4 and 1.5:**
 
