@@ -17,7 +17,7 @@ If you have feedback or questions regarding the Technical Framework make a post 
 
 For official and draft releases of the Swedish eID Framework, see the [releases section](https://github.com/swedenconnect/technical-framework/releases).
 
-The releases can also be found under <http://docs.swedenconnect.se/technical-framework/>.
+The releases can also be found under <https://docs.swedenconnect.se/technical-framework/>.
 
 ## Contents
 
