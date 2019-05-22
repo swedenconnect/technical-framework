@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2018-08-31---**draft-version**">Version 1.6 - 2018-08-31 - <strong>Draft version</strong></h3>
+<h3 id="version-1.6---2019-05-22---**draft-version**">Version 1.6 - 2019-05-22 - <strong>Draft version</strong></h3>
 <p><em>ELN-0602-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -36,6 +36,9 @@
 <p> 5.1. <a href="#discovery">Discovery</a></p>
 <p> 5.2. <a href="#binding-and-security-requirements">Binding and Security Requirements</a></p>
 <p> 5.3. <a href="#message-content">Message Content</a></p>
+<p> 5.3.1. <a href="#requested-authentication-context">Requested Authentication Context</a></p>
+<p> 5.3.2. <a href="#scoping">Scoping</a></p>
+<p> 5.3.3. <a href="#principal-selection">Principal Selection</a></p>
 <p> 5.4. <a href="#processing-requirements">Processing Requirements</a></p>
 <p> 5.4.1. <a href="#validation-of-destination">Validation of Destination</a></p>
 <p> 5.4.2. <a href="#validation-of-assertion-consumer-addresses">Validation of Assertion Consumer Addresses</a></p>
@@ -129,6 +132,8 @@ the following syntax is used:</p>
 </li>
 <li><p><code>&lt;mdattr:Element&gt;</code> – for elements defined in [<a href="#saml2metaattr">SAML2MetaAttr</a>].</p>
 </li>
+<li><p><code>&lt;alg:Element&gt;</code> – for elements defined in [<a href="#saml2metaalg">SAML2MetaAlgSupport</a>].</p>
+</li>
 </ul>
 <p>When referring to elements from the &quot;Identity Provider Discovery Service Protocol and Profile&quot; specification [<a href="#idpdisco">IdpDisco</a>], the following syntax is used:</p>
 <ul class="list">
@@ -145,7 +150,8 @@ the following syntax is used:</p>
 <p>Identity Providers and Service Providers that are part of the federation
 for Swedish eID MUST provide a SAML 2.0 Metadata document representing
 its entity. Provided metadata MUST conform to [<a href="#saml2int">SAML2Int</a>] as well 
-as the SAML V2.0 Metadata Interoperability Profile Version 1.0 [<a href="#saml2metaiop">SAML2MetaIOP</a>].</p>
+as the SAML V2.0 Metadata Interoperability Profile Version 1.0 [<a href="#saml2metaiop">SAML2MetaIOP</a>] 
+and SHOULD follow SAML v2.0 Metadata Profile for Algorithm Support Version 1.0 [<a href="#saml2metaalg">SAML2MetaAlgSupport</a>].</p>
 <p><a name="requirements-for-metadata-content"></a></p>
 <h3 id="2.1.-requirements-for-metadata-content">2.1. Requirements for Metadata Content</h3>
 <p><a name="generic"></a></p>
@@ -178,6 +184,8 @@ represented with the language attribute <code>en</code> (English).</p>
 in the form of a certificate, which supports both signature validation
 and encryption. The same public key MAY support both signature
 validation and encryption, indicated by an absent <code>&quot;use&quot;</code> attribute.</p>
+<p>Services MAY declare encryption and signature capabilities as defined in  [<a href="#saml2metaalg">SAML2MetaAlgSupport</a>]. The declared algorithms MUST meet the algorithm requirements defined by the Swedish eID Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. </p>
+<p>All services conformant with this specification MUST support the mandatory algorithms defined by the Swedish eID Framework, meaning that a service has no possibility to opt-out from a certain mandatory algorithm by excluding it from the declared capabilities. The main purpose of declaring an algorithm using any of the elements <code>&lt;md:EncryptionMethod&gt;</code>, <code>&lt;alg:SigningMethod&gt;</code> or <code>&lt;alg:DigestMethod&gt;</code> is to declare which algorithm the service prefers.</p>
 <p><a name="service-providers"></a></p>
 <h4 id="2.1.2.-service-providers">2.1.2. Service Providers</h4>
 <p>The <code>&lt;mdattr:EntityAttributes&gt;</code> element of a Service Provider’s
@@ -274,6 +282,7 @@ Agreeing to Sign Authentication Requests”, of [<a href="#saml2errata05">SAML v
     ...
   <span class="hljs-tag">&lt;/<span class="hljs-name">mdattr:EntityAttributes</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">md:Extensions</span>&gt;</span></code></pre><p><em>Example of how an Identity Provider advertises its support for SCAL2 authentication.</em></p>
+<p>An Identity Provider that wishes to receive the <code>&lt;psc:PrincipalSelection&gt;</code> extension in authentication requests SHOULD include the <code>&lt;psc:RequestedPrincipalSelection&gt;</code> extension extending the <code>&lt;md:IDPSSODescriptor&gt;</code> element. In this extension the Identity Provider declares which attribute value(s) it wants to receive in authentication requests from requestors using the <code>&lt;psc:PrincipalSelection&gt;</code> authentication request extension. See <a href="#principal-selection">section 5.3.3</a> and [<a href="#principalsel">PrincipalSel</a>].</p>
 <p><a name="signature-service"></a></p>
 <h4 id="2.1.4.-signature-service">2.1.4. Signature Service</h4>
 <p>A Signature Service within the Swedish eID Framework is a Service
@@ -353,7 +362,7 @@ messages to be signed MUST still accept and verify signed request
 messages from Service Providers that indicate, in their metadata, that
 they sign request messages (see <a href="#service-providers">2.1.2</a> above). If this signature
 verification fails, the Identity Provider MUST return a SAML error
-response and MUST NOT fulfill the request.</p>
+response and MUST NOT fulfil the request.</p>
 <p>An Identity Provider that receives a request message that is not signed
 from a Service Provider that has indicated, in its metadata, that it
 will only send signed request messages (see <a href="#service-providers">2.1.2</a> above) MUST respond
@@ -366,6 +375,7 @@ placed within the XML-message (see section 3.4.4.1 of
 For the HTTP-POST binding the <code>&lt;saml2p:AuthnRequest&gt;</code> element MUST
 be signed using a <code>&lt;ds:Signature&gt;</code> element within the
 <code>&lt;saml2:AuthnRequest&gt;</code>.</p>
+<p>Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider&#39;s metadata (<code>&lt;alg:SigningMethod&gt;</code> and <code>&lt;alg:DigestMethod&gt;</code> elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Swedish eID Framework during the signature operation.</p>
 <p><a name="message-content"></a></p>
 <h3 id="5.3.-message-content">5.3. Message Content</h3>
 <p>[<a href="#saml2int">SAML2Int</a>] specifies that a
@@ -380,6 +390,16 @@ MUST contain the URL to which the Service Provider has instructed the
 user agent to deliver the request. This is useful to prevent malicious
 forwarding of signed requests from being accepted by unintended Identity
 Providers.</p>
+<p>Identity Providers conformant with this profile MUST support the
+<code>ForceAuthn</code> and <code>IsPassive</code> attributes received in
+<code>&lt;saml2p:AuthnRequest&gt;</code> messages.</p>
+<p>Service Providers SHOULD include the <code>ForceAuthn</code> attribute in all
+<code>&lt;saml2p:AuthnRequest&gt;</code> messages and explicitly set its value to
+<code>true</code> or <code>false</code>, and not rely on its default value. The reason for this is
+to avoid accidental SSO.</p>
+<p>If the Service Provider has included more than one <code>&lt;md:AttributeConsumingService&gt;</code> element in its metadata it is RECOMMENDED that the <code>&lt;saml2p:AuthnRequest&gt;</code> message contains the <code>AttributeConsumingServiceIndex</code> attribute holding the index of the <code>&lt;md:AttributeConsumingService&gt;</code> element that the Identity Provider should consider during attribute release.</p>
+<p><a name="requested-authentication-context"></a></p>
+<h4 id="5.3.1.-requested-authentication-context">5.3.1. Requested Authentication Context</h4>
 <p>A Service Provider SHOULD explicitly specify a requested
 authentication context element (<code>&lt;saml2p:RequestedAuthnContext&gt;</code>),
 containing <code>&lt;saml2:AuthnContextClassRef&gt;</code> elements each holding
@@ -410,14 +430,8 @@ authentication request message. In this case, the Service Provider
 states that it requests the authentication to be performed according to
 either the LoA3 URI defined within the Swedish eID Framework or the
 substantial level for notified eIDs defined within the eIDAS Framework.</em></p>
-<p>Identity Providers conformant with this profile MUST support the
-<code>ForceAuthn</code> and <code>IsPassive</code> attributes received in
-<code>&lt;saml2p:AuthnRequest&gt;</code> messages.</p>
-<p>Service Providers SHOULD include the <code>ForceAuthn</code> attribute in all
-<code>&lt;saml2p:AuthnRequest&gt;</code> messages and explicitly set its value to
-<code>true</code> or <code>false</code>, and not rely on its default value. The reason for this is
-to avoid accidental SSO.</p>
-<p>If the Service Provider has included more than one <code>&lt;md:AttributeConsumingService&gt;</code> element in its metadata it is RECOMMENDED that the <code>&lt;saml2p:AuthnRequest&gt;</code> message contains the <code>AttributeConsumingServiceIndex</code> attribute holding the index of the <code>&lt;md:AttributeConsumingService&gt;</code> element that the Identity Provider should consider during attribute release.</p>
+<p><a name="scoping"></a></p>
+<h4 id="5.3.2.-scoping">5.3.2. Scoping</h4>
 <p>An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the <code>&lt;saml2p:Scoping&gt;</code> element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) that may be used to authenticate the user. See section 3.4.1.5 of [<a href="#saml2core">SAML2Core</a>].</p>
 <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2p:Scoping</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">saml2p:IDPList</span>&gt;</span>
@@ -434,6 +448,13 @@ proxy the request to the Norwegian eIDAS Proxy Service for authentication.</em><
 <blockquote>
 <p><strong>Note</strong>: A Service Provider may list more than one country in the <code>&lt;saml2p:IDPList&gt;</code> of a <code>&lt;saml2p:Scoping&gt;</code> element. The eIDAS Connector will then present a country selection dialogue containing only the listed countries.</p>
 </blockquote>
+<p><a name="principal-selection"></a></p>
+<h4 id="5.3.3.-principal-selection">5.3.3. Principal Selection</h4>
+<p>The specification &quot;Principal Selection in SAML Authentication Requests&quot;, [<a href="#principalsel">PrincipalSel</a>], defines the <code>&lt;psc:PrincipalSelection&gt;</code> extension that enables a requestor to inform the Identity Provider about known attributes for the principal that is about to be authenticated. </p>
+<p>This may be relevant for Identity Provider services who prompt users for an identifier in order initiate an authentication process with the user&#39;s eID. In such cases, this extension can be used to avoid unnecessary prompting when the user&#39;s identity is known in advance to the service requesting authentication, such as when a previously authenticated user is requested to sign a document.</p>
+<p>An Identity Provider that wishes to receive the <code>&lt;psc:PrincipalSelection&gt;</code> extension SHOULD advertise this in its metadata according to <a href="#identity-providers">section 2.1.3</a>.</p>
+<p>A Service Provider that sends an authentication request  to an Identity Provider that has declared that it wishes to receive certain attribute values MAY include the <code>&lt;psc:PrincipalSelection&gt;</code> extension in the <code>&lt;saml2p:AuthnRequest&gt;</code> message, provided that the Service Provider has knowledge about this information.</p>
+<p>A Service Provider that is a Signature Service SHOULD include the extension for the case described above.</p>
 <p><a name="processing-requirements"></a></p>
 <h3 id="5.4.-processing-requirements">5.4. Processing Requirements</h3>
 <p><a name="validation-of-destination"></a></p>
@@ -552,7 +573,9 @@ message as stated above).</p>
 <code>&lt;saml2:EncryptedAssertion&gt;</code> element in the <code>&lt;saml2p:Response&gt;</code>
 message. The elements <code>&lt;saml2:EncryptedID&gt;</code> and
 <code>&lt;saml2:EncryptedAttribute&gt;</code> MUST NOT be used; instead the entire
-assertion should be encrypted.</p>
+assertion MUST be encrypted.</p>
+<p>Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider&#39;s metadata (<code>&lt;md:EncryptionMethod&gt;</code>, <code>&lt;alg:SigningMethod&gt;</code> and <code>&lt;alg:DigestMethod&gt;</code> elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use one of the mandatory algorithms defined by the Swedish eID Framework during the operations. For encryption, the chosen algorithm MUST also be compatible
+with the Service Provider&#39;s encryption key declared in metadata.</p>
 <p>Service Providers SHOULD NOT accept unsolicited <code>&lt;saml2p:Response&gt;</code>
 messages (i.e., responses that are not the result of an earlier
 <code>&lt;saml2p:AuthnRequest&gt;</code> message). Service Providers that do accept
@@ -857,6 +880,7 @@ also be indicated in the Signature Service metadata record using the
 <code>AuthnRequestsSigned</code> attribute (see <a href="#signature-service">section 2.1.4</a>).</p>
 </li>
 </ul>
+<p>If the receiving Identity Provider has declared that it wishes to receive principal selection information about the signer (see <a href="#principal-selection">section 5.3.3</a>), and the Signature Service has received any of the requested attribute values in the <code>Signer</code> element of the <code>SignRequest</code> ([<a href="#eiddss">EidDSS</a>]), the Signature Service SHOULD include those attribute values in a <code>&lt;psc:PrincipalSelection&gt;</code> extension of the authentication request.</p>
 <p>It is RECOMMENDED that the <code>&lt;saml2p:Scoping&gt;</code> element containing a <code>&lt;saml2p:RequesterID&gt;</code> element holding the entityID of the Service Requestor is included in <code>&lt;saml2p:AuthnRequest&gt;</code> messages generated by a Signature Service.</p>
 <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2p:Scoping</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">saml2p:RequesterID</span>&gt;</span>http://www.origsp.com/sp<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:RequesterID</span>&gt;</span>
@@ -891,6 +915,7 @@ Provider, by including an authentication context URI (as described in
 <code>&lt;saml2:AuthnContextClassRef&gt;</code> element that is part of the 
 <code>&lt;saml2p:RequestedAuthnContext&gt;</code> element of the <code>&lt;saml2p:AuthnRequest&gt;</code> 
 message.</p>
+<p>If the <code>Message</code>-element of the <code>SignMessage</code> is to be encrypted, the Service Provider SHOULD consult the Identity Provider&#39;s metadata (<code>&lt;md:EncryptionMethod&gt;</code> elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Swedish eID Framework during the encryption operation, which is compatible with the Identity Provider&#39;s encryption key declared in metadata.</p>
 <p>Identity Providers SHALL advertise supported authentication contexts
 defined by the URIs listed in sections 3.1.1 and 3.1.1.1 of [<a href="#eidregistry">EidRegistry</a>], 
 by including the URIs of supported authentication contexts as EntityAttributes of the type
@@ -958,7 +983,7 @@ failed to accept it, and the request indicated that the sign message
 MUST be displayed, then the Identity Provider MUST return an error
 response with the status code <code>urn:oasis:names:tc:SAML:2.0:status:AuthnFailed</code>.</p>
 <blockquote>
-<p>[*]: As defined in <a href="#message-content">section 5.3</a>, only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to <a href="#authentication-context-uris-for-signature-services">section 7.1</a> if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.</p>
+<p>[*]: As defined in <a href="#requested-authentication-context">section 5.3.1</a>, only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to <a href="#authentication-context-uris-for-signature-services">section 7.1</a> if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.</p>
 </blockquote>
 <p><a name="normative-references"></a></p>
 <h2 id="8.-normative-references">8. Normative References</h2>
@@ -1039,6 +1064,11 @@ User Interface Version 1.0, April 2012</a></p>
 Entity Attributes Version 1.0, August
 2009</a>.</p>
 </blockquote>
+<p><a name="saml2metaalg"></a>
+<strong>[SAML2MetaAlgSupport]</strong></p>
+<blockquote>
+<p><a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-metadata-algsupport.html">SAML v2.0 Metadata Profile for Algorithm Support Version 1.0, 21 February 2011</a>.</p>
+</blockquote>
 <p><a name="entcat"></a>
 <strong>[EntCat]</strong></p>
 <blockquote>
@@ -1055,45 +1085,53 @@ Protocol and Profile, March
 <p><a name="eidregistry"></a>
 <strong>[EidRegistry]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
 board</a>.</p>
 </blockquote>
 <p><a name="eidattributes"></a>
 <strong>[EidAttributes]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><a name="eidtillit"></a>
 <strong>[EidTillit]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf">Tillitsramverk för Svensk e-legitimation - version 1.4</a></p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf">Tillitsramverk för Svensk e-legitimation - version 1.4</a></p>
 </blockquote>
 <p><a name="eidentcat"></a>
 <strong>[EidEntCat]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><a name="eiddss"></a>
 <strong>[EidDSS]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
 </blockquote>
 <p>&lt;a name=&quot;&quot;eiddssprofile&quot;&gt;</a>
 <strong>[EidDSS_Profile]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
 Services</a>.</p>
 </blockquote>
 <p><a name="sigsap"></a>
 <strong>[SigSAP]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+</blockquote>
+<p><a name="principalsel"></a>
+<strong>[PrincipalSel]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html">Principal Selection in SAML Authentication Requests</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="9.-changes-between-versions">9. Changes between versions</h2>
 <p><strong>Changes between version 1.5 and 1.6:</strong></p>
 <ul class="list">
 <li>The definition of all possible &quot;Sign Message Authentication Context URIs&quot; has been moved from section 7.1, &quot;Authentication Context URIs for Signature Services&quot;, to section 3.1.1.1 of [<a href="#eidregistry">EidRegistry</a>].</li>
+<li>In order to facilitate algorithm interoperability between peers additions concerning &quot;Metadata Profile for Algorithm Support&quot; [<a href="#saml2metaalg">SAML2MetaAlgSupport</a>] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.</li>
+<li>Section 5.3, &quot;Message Content&quot;, was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.</li>
+<li>The <code>PrincipalSelection</code> and <code>RequestedPrincipalSelection</code> extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.</li>
 </ul>
 <p><strong>Changes between version 1.4 and 1.5:</strong></p>
 <ul class="list">
