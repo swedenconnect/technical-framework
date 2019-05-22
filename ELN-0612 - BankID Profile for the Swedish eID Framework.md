@@ -2,7 +2,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.2 - 2019-05-20 - **Draft version**
+### Version 1.2 - 2019-05-22 - **Draft version**
 
 *ELN-0612-v1.2*
 

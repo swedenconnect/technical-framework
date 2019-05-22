@@ -2,7 +2,7 @@
 
 # Principal Selection in SAML Authentication Requests 
 
-### Version 1.0 - 2019-05-20 - *Draft version*
+### Version 1.0 - 2019-05-22 - *Draft version*
 
 *ELN-0614-v1.0*
 
@@ -140,12 +140,12 @@ An Identity Provider uses the `<RequestedPrincipalSelection>` element to declare
 The following schema fragment defines the `<RequestedPrincipalSelection>` element:
 
 ```
-<element name="RequestedPrincipalSelection" type="psc:RequestedPrincipalSelectionType" />
-<complexType name="RequestedPrincipalSelectionType">
-  <complexContent>
-    <extension base="psc:PrincipalSelectionType" />
-  </complexContent>
-</complexType>
+<xs:element name="RequestedPrincipalSelection" type="psc:RequestedPrincipalSelectionType" />
+<xs:complexType name="RequestedPrincipalSelectionType">
+  <xs:complexContent>
+    <xs:extension base="psc:PrincipalSelectionType" />
+  </xs:complexContent>
+</xs:complexType>
 ```
 
 <a name="examples"></a>
@@ -206,12 +206,12 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/princ
 ```
 <?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://id.swedenconnect.se/authn/1.0/principal-selection/ns"  xmlns:psc="http://id.swedenconnect.se/authn/1.0/principal-selection/ns">  <xs:annotation>    <xs:documentation>      Schema location URL: https://docs.swedenconnect.se/schemas/authn/1.0/PrincipalSelection-1.0.xsd    </xs:documentation>  </xs:annotation>    <xs:element name="PrincipalSelection" type="psc:PrincipalSelectionType" />  <xs:complexType name="PrincipalSelectionType">    <xs:sequence>      <xs:element name="MatchValue" type="psc:MatchValueType" minOccurs="1" maxOccurs="unbounded" />    </xs:sequence>  </xs:complexType>
   
-  <element name="RequestedPrincipalSelection" type="psc:RequestedPrincipalSelectionType" />
-  <complexType name="RequestedPrincipalSelectionType">
-    <complexContent>
-      <extension base="psc:PrincipalSelectionType" />
-    </complexContent>
-  </complexType>    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI" 
+  <xs:element name="RequestedPrincipalSelection" type="psc:RequestedPrincipalSelectionType" />
+  <xs:complexType name="RequestedPrincipalSelectionType">
+    <xs:complexContent>
+      <xs:extension base="psc:PrincipalSelectionType" />
+    </xs:complexContent>
+  </xs:complexType>    <xs:complexType name="MatchValueType">    <xs:simpleContent>      <xs:extension base="xs:string">        <xs:attribute name="NameFormat" type="xs:anyURI" 
             default="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" />        <xs:attribute name="Name" type="xs:string" use="required" />        <xs:anyAttribute namespace="##any" />      </xs:extension>    </xs:simpleContent>  </xs:complexType>  </xs:schema>
 ```
 
