@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-03-04 - *Draft version*
+### Version 1.6 - 2019-08-14 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -194,15 +194,15 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 
 -   `http://eidas.europa.eu/LoA/low`
 
--   `http://eidas.europa.eu/LoA/NotNotified/low` (for non-notified eID schemes)
+-   `http://eidas.europa.eu/NotNotified/LoA/low` (for non-notified eID schemes)
 
 -   `http://eidas.europa.eu/LoA/substantial`
 
--   `http://eidas.europa.eu/LoA/NotNotified/substantial` (for non-notified eID schemes)
+-   `http://eidas.europa.eu/NotNotified/LoA/substantial` (for non-notified eID schemes)
 
 -   `http://eidas.europa.eu/LoA/high`
 
--   `http://eidas.europa.eu/LoA/NotNotified/high` (for non-notified eID schemes)
+-   `http://eidas.europa.eu/NotNotified/LoA/high` (for non-notified eID schemes)
 
 <a name="sign-message-authentication-context-uris"></a>
 #### 3.1.1.1. Sign Message Authentication Context URIs
@@ -514,6 +514,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - The authentication context URIs `http://id.swedenconnect.se/loa/1.0/uncertified-loa3` and `http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage` were introduced in sections 3.1.1 and 3.1.1.1, and the service entity category `http://id.swedenconnect.se/ec/sc/uncertified-loa3-pnr` was added to section 3.1.3.1.
 
 - A description of Service Contract Entity Categories was added to section 3.1.3.4.
+
+- In section 3.1.1, the EU commission `AuthnContextClassRef` URI:s for non-notified schemes were changed.
 
 **Changes between version 1.4 and version 1.5:**
 
