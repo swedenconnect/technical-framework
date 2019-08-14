@@ -6,13 +6,13 @@
     <title>Swedish eID Framework - Registry for identifiers</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.6---2018-08-31---*draft-version*">Version 1.6 - 2018-08-31 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2019-08-14---*draft-version*">Version 1.6 - 2019-08-14 - <em>Draft version</em></h3>
 <p><em>ELN-0603-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -277,15 +277,15 @@ following <code>AuthnContextClassRef</code> URI:s defined by the EU commission:<
 <ul class="list">
 <li><p><code>http://eidas.europa.eu/LoA/low</code></p>
 </li>
-<li><p><code>http://eidas.europa.eu/LoA/NotNotified/low</code> (for non-notified eID schemes)</p>
+<li><p><code>http://eidas.europa.eu/NotNotified/LoA/low</code> (for non-notified eID schemes)</p>
 </li>
 <li><p><code>http://eidas.europa.eu/LoA/substantial</code></p>
 </li>
-<li><p><code>http://eidas.europa.eu/LoA/NotNotified/substantial</code> (for non-notified eID schemes)</p>
+<li><p><code>http://eidas.europa.eu/NotNotified/LoA/substantial</code> (for non-notified eID schemes)</p>
 </li>
 <li><p><code>http://eidas.europa.eu/LoA/high</code></p>
 </li>
-<li><p><code>http://eidas.europa.eu/LoA/NotNotified/high</code> (for non-notified eID schemes)</p>
+<li><p><code>http://eidas.europa.eu/NotNotified/LoA/high</code> (for non-notified eID schemes)</p>
 </li>
 </ul>
 <p><a name="sign-message-authentication-context-uris"></a></p>
@@ -415,6 +415,11 @@ Specification for the Swedish eID Framework.</p>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa3-pnr</code></td>
 <td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/ec/sc/</code><br/><code>uncertified-loa3-pnr</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa4-pnr</code></td>
@@ -891,9 +896,11 @@ regulation and associated technical specifications.</p>
 <ul class="list">
 <li><p>The specification was renamed from &quot;Registry for identifiers assigned by the Swedish e-identification board&quot; to &quot;Swedish eID Framework - Registry for identifiers&quot;. </p>
 </li>
-<li><p>The authentication context URIs <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> and <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage</code> were introduced in sections 3.1.1 and 3.1.1.1.</p>
+<li><p>The authentication context URIs <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> and <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage</code> were introduced in sections 3.1.1 and 3.1.1.1, and the service entity category <code>http://id.swedenconnect.se/ec/sc/uncertified-loa3-pnr</code> was added to section 3.1.3.1.</p>
 </li>
 <li><p>A description of Service Contract Entity Categories was added to section 3.1.3.4.</p>
+</li>
+<li><p>In section 3.1.1, the EU commission <code>AuthnContextClassRef</code> URI:s for non-notified schemes were changed.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
