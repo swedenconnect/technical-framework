@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2018-08-31 - *Draft version*
+### Version 1.7 - 2019-08-14 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -244,6 +244,10 @@ A service entity category identifies an arbitrary set of requirements and condit
 
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
 > Natural Personal Identity with Civic Registration Number (personnummer).
+> 
+> **Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute, which is defined to hold either a Swedish personal number (”personnummer”) defined in \[[SKV 704](#skv704)\], or a Swedish coordination number (”samordningsnummer”) as defined in \[[SKV 707](#skv707)\]. 
+> 
+> However, since a Swedish coordination number (”samordningsnummer”) is not consistent with assurance level 3, the `personalIdentityNumber` attribute is only allowed to hold a Swedish personal number ("personnummer") if the scope of the `loa3-pnr` service entity category.
 
 <a name="loa2-pnr"></a>
 ### 2.2. loa2-pnr
@@ -268,6 +272,9 @@ A service entity category identifies an arbitrary set of requirements and condit
 
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
 > Natural Personal Identity with Civic Registration Number (personnummer)
+>
+> **Note**: See the restriction described in section [2.1](#loa3-pnr), [loa3-pnr](#loa3-pnr).
+
 
 <a name="eidas-naturalperson"></a>
 ### 2.4. eidas-naturalperson
@@ -291,7 +298,7 @@ A service entity category identifies an arbitrary set of requirements and condit
 
 **Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
 
-Attribute release is based on the "Natural Personal Identity with Civic Registration Number" attribute set with the addition of a mandatory `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`). The reason for the mandatory `dateOfBirth`-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the `personalIdentityNumber` attribute, in particular when this attribute contains a "samordningsnummer".
+Attribute release is based on the "Natural Personal Identity with Civic Registration Number" attribute set with the addition of a mandatory `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`). The reason for the mandatory `dateOfBirth`-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the `personalIdentityNumber` attribute.
 
 It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 
@@ -425,33 +432,43 @@ The meaning of different contracts and business agreements are out of scope for 
 **\[EntCat\]**
 > [RFC8409 - The Entity Category Security Assertion Markup Language (SAML) Attribute Types, August 2018](https://tools.ietf.org/html/rfc8409).
 
+<a name="skv704"></a>
+**\[SKV704\]**
+> [Skatteverket, SKV 704 Utgåva 8,
+> Personnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf).
+
+<a name="skv707"></a>
+**\[SKV707\]**
+> [Skatteverket, SKV 707, Utgåva 2,
+> Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
+
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation, version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf).
+> [Tillitsramverk för Svensk e-legitimation, version 1.4](https://docs.swedenconnect.se/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
 > [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> board](https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 7. Changes between versions
 
 **Changes between version 1.6 and version 1.7:**
 
-- A new entity categorty type, Service Contract, was added to section 5.
+- A new entity category type, Service Contract, was added to section 5.
 
 - The reference \[EntCat\] now refers to [RFC-8409](https://tools.ietf.org/html/rfc8409) instead of 
 [https://tools.ietf.org/html/draft-young-entity-category](https://tools.ietf.org/html/draft-young-entity-category).
@@ -459,7 +476,10 @@ The meaning of different contracts and business agreements are out of scope for 
 **Changes between version 1.5 and version 1.6:**
 
 - The Service Property Category "scal2" was added to section 3.2.
+
 - Section 2.5, "eidas-pnr-delivery", was updated to also require attribute release of the `dateOfBirth`-attribute.
+
+- Section 2.1, "loa3-pnr", was updated with a restriction stating that the `personalIdentityNumber` only may contain a Swedish personal number ("personnummer") and not a coordination number ("samordningsnummer"), if attribute release is made in `loa3-pnr` scope.
 
 **Changes between version 1.4 and version 1.5:**
 
