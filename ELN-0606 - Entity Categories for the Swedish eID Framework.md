@@ -245,9 +245,9 @@ A service entity category identifies an arbitrary set of requirements and condit
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
 > Natural Personal Identity with Civic Registration Number (personnummer).
 > 
-> **Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute, which is defined to hold either a Swedish personal number (”personnummer”) defined in \[[SKV 704](#skv704)\], or a Swedish coordination number (”samordningsnummer”) as defined in \[[SKV 707](#skv707)\]. 
+> **Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute, which is defined to hold either a Swedish identity personal number (”personnummer”) defined in \[[SKV 704](#skv704)\], or a Swedish coordination number (”samordningsnummer”) as defined in \[[SKV 707](#skv707)\]. 
 > 
-> However, since a Swedish coordination number (”samordningsnummer”) is not consistent with assurance level 3, the `personalIdentityNumber` attribute is only allowed to hold a Swedish personal number ("personnummer") if the scope of the `loa3-pnr` service entity category.
+> However, since a Swedish coordination number (”samordningsnummer”) is not consistent with assurance level 3, the `personalIdentityNumber` attribute is only allowed to hold a Swedish personal identity number ("personnummer") if the scope of the `loa3-pnr` service entity category.
 
 <a name="loa2-pnr"></a>
 ### 2.2. loa2-pnr
@@ -479,7 +479,7 @@ The meaning of different contracts and business agreements are out of scope for 
 
 - Section 2.5, "eidas-pnr-delivery", was updated to also require attribute release of the `dateOfBirth`-attribute.
 
-- Section 2.1, "loa3-pnr", was updated with a restriction stating that the `personalIdentityNumber` only may contain a Swedish personal number ("personnummer") and not a coordination number ("samordningsnummer"), if attribute release is made in `loa3-pnr` scope.
+- Section 2.1, "loa3-pnr", was updated with a restriction stating that the `personalIdentityNumber` only may contain a Swedish personal identity number ("personnummer") and not a coordination number ("samordningsnummer"), if attribute release is made in `loa3-pnr` scope.
 
 **Changes between version 1.4 and version 1.5:**
 
