@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2018-08-31---*draft-version*">Version 1.7 - 2018-08-31 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2019-08-14---*draft-version*">Version 1.7 - 2019-08-14 - <em>Draft version</em></h3>
 <p><em>ELN-0606-v1.7</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -239,6 +239,8 @@ are defined within the framework for Swedish eID.</p>
 <p><strong>Attribute requirements</strong>: ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>)</p>
 <blockquote>
 <p>Natural Personal Identity with Civic Registration Number (personnummer).</p>
+<p><strong>Note</strong>: The <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code> attribute set includes the <code>personalIdentityNumber</code> attribute, which is defined to hold either a Swedish identity personal number (”personnummer”) defined in [<a href="#skv704">SKV 704</a>], or a Swedish coordination number (”samordningsnummer”) as defined in [<a href="#skv707">SKV 707</a>]. </p>
+<p>However, since a Swedish coordination number (”samordningsnummer”) is not consistent with assurance level 3, the <code>personalIdentityNumber</code> attribute is only allowed to hold a Swedish personal identity number (&quot;personnummer&quot;) if the scope of the <code>loa3-pnr</code> service entity category.</p>
 </blockquote>
 <p><a name="loa2-pnr"></a></p>
 <h3 id="2.2.-loa2-pnr">2.2. loa2-pnr</h3>
@@ -257,6 +259,7 @@ are defined within the framework for Swedish eID.</p>
 <p><strong>Attribute requirements</strong>: ELN-AP-Pnr-01 (<code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>)</p>
 <blockquote>
 <p>Natural Personal Identity with Civic Registration Number (personnummer)</p>
+<p><strong>Note</strong>: See the restriction described in section <a href="#loa3-pnr">2.1</a>, <a href="#loa3-pnr">loa3-pnr</a>.</p>
 </blockquote>
 <p><a name="eidas-naturalperson"></a></p>
 <h3 id="2.4.-eidas-naturalperson">2.4. eidas-naturalperson</h3>
@@ -276,7 +279,7 @@ to the Swedish eIDAS-node.</p>
 <h3 id="2.5.-eidas-pnr-delivery">2.5. eidas-pnr-delivery</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery</code></p>
 <p><strong>Description</strong>: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.</p>
-<p>Attribute release is based on the &quot;Natural Personal Identity with Civic Registration Number&quot; attribute set with the addition of a mandatory <code>dateOfBirth</code>-attribute (<code>urn:oid:1.3.6.1.5.5.7.9.1</code>). The reason for the mandatory <code>dateOfBirth</code>-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the <code>personalIdentityNumber</code> attribute, in particular when this attribute contains a &quot;samordningsnummer&quot;.</p>
+<p>Attribute release is based on the &quot;Natural Personal Identity with Civic Registration Number&quot; attribute set with the addition of a mandatory <code>dateOfBirth</code>-attribute (<code>urn:oid:1.3.6.1.5.5.7.9.1</code>). The reason for the mandatory <code>dateOfBirth</code>-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the <code>personalIdentityNumber</code> attribute.</p>
 <p>It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.</p>
 <p><strong>LoA-identifier</strong>: Not applicable</p>
 <blockquote>
@@ -383,37 +386,49 @@ Entity Attributes Version 1.0, August
 <blockquote>
 <p><a href="https://tools.ietf.org/html/rfc8409">RFC8409 - The Entity Category Security Assertion Markup Language (SAML) Attribute Types, August 2018</a>.</p>
 </blockquote>
+<p><a name="skv704"></a>
+<strong>[SKV704]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf">Skatteverket, SKV 704 Utgåva 8,
+Personnummer</a>.</p>
+</blockquote>
+<p><a name="skv707"></a>
+<strong>[SKV707]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf">Skatteverket, SKV 707, Utgåva 2,
+Samordningsnummer</a>.</p>
+</blockquote>
 <p><a name="eidtillit"></a>
 <strong>[EidTillit]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf">Tillitsramverk för Svensk e-legitimation, version 1.4</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf">Tillitsramverk för Svensk e-legitimation, version 1.4</a>.</p>
 </blockquote>
 <p><a name="eiddeploy"></a>
 <strong>[EidDeploy]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><a name="eidregistry"></a>
 <strong>[EidRegistry]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
 board</a>.</p>
 </blockquote>
 <p><a name="eidattributes"></a>
 <strong>[EidAttributes]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><a name="sigsap"></a>
 <strong>[SigSAP]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="7.-changes-between-versions">7. Changes between versions</h2>
 <p><strong>Changes between version 1.6 and version 1.7:</strong></p>
 <ul class="list">
-<li><p>A new entity categorty type, Service Contract, was added to section 5.</p>
+<li><p>A new entity category type, Service Contract, was added to section 5.</p>
 </li>
 <li><p>The reference [EntCat] now refers to <a href="https://tools.ietf.org/html/rfc8409">RFC-8409</a> instead of 
 <a href="https://tools.ietf.org/html/draft-young-entity-category">https://tools.ietf.org/html/draft-young-entity-category</a>.</p>
@@ -421,8 +436,12 @@ board</a>.</p>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
-<li>The Service Property Category &quot;scal2&quot; was added to section 3.2.</li>
-<li>Section 2.5, &quot;eidas-pnr-delivery&quot;, was updated to also require attribute release of the <code>dateOfBirth</code>-attribute.</li>
+<li><p>The Service Property Category &quot;scal2&quot; was added to section 3.2.</p>
+</li>
+<li><p>Section 2.5, &quot;eidas-pnr-delivery&quot;, was updated to also require attribute release of the <code>dateOfBirth</code>-attribute.</p>
+</li>
+<li><p>Section 2.1, &quot;loa3-pnr&quot;, was updated with a restriction stating that the <code>personalIdentityNumber</code> only may contain a Swedish personal identity number (&quot;personnummer&quot;) and not a coordination number (&quot;samordningsnummer&quot;), if attribute release is made in <code>loa3-pnr</code> scope.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">
