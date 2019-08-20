@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.6---2019-08-14---*draft-version*">Version 1.6 - 2019-08-14 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2019-08-20---*draft-version*">Version 1.6 - 2019-08-20 - <em>Draft version</em></h3>
 <p><em>ELN-0603-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -40,6 +40,7 @@
 <p> 3.1.8. <a href="#name-registration-authorities">Name Registration Authorities</a></p>
 <p> 3.1.9. <a href="#eidas-identifiers">eIDAS Identifiers</a></p>
 <p> 3.1.9.1. <a href="#eidas-proxy-service-aliases">eIDAS Proxy Service Aliases</a></p>
+<p> 3.1.9.2. <a href="#eidas-connector-aliases">eIDAS Connector Aliases</a></p>
 <p> 3.2. <a href="#oid-identifiers">OID Identifiers</a></p>
 <p> 3.2.1. <a href="#asn1-declarations">ASN.1 Declarations</a></p>
 </li>
@@ -655,6 +656,15 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <blockquote>
 <p>A consumer of an eIDAS Proxy Service alias URI MUST accept the country code part of the URI in both lower and upper case letters.</p>
 </blockquote>
+<p><a name="eidas-connector-aliases"></a></p>
+<h5 id="3.1.9.2.-eidas-connector-aliases">3.1.9.2. eIDAS Connector Aliases</h5>
+<p>A Swedish Identity Provider that delivers authentication services to eIDAS, via the Swedish eIDAS Proxy Service, will receive the entityID of the Service Provider from another country that has requested user authentication in a <code>&lt;saml2p:RequesterID&gt;</code> element of the authentication request. Along with this information, the Swedish Proxy Service will also include another <code>RequesterID</code> element that holds the &quot;eIDAS Connector alias&quot; URI, telling from which country the requesting Service Provider resides.</p>
+<p>The format of this alias is as follows:</p>
+<p><strong><code>http://id.swedenconnect.se/eidas/1.0/connector/{country-code}</code></strong></p>
+<p>where <code>{country-code}</code> is the country identifier in ISO 3166-1 alpha-2 format [<a href="#iso3166">ISO 3166</a>].</p>
+<blockquote>
+<p>A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.</p>
+</blockquote>
 <p><a name="oid-identifiers"></a></p>
 <h3 id="3.2.-oid-identifiers">3.2. OID Identifiers</h3>
 <p>Defined categories:</p>
@@ -901,6 +911,8 @@ regulation and associated technical specifications.</p>
 <li><p>A description of Service Contract Entity Categories was added to section 3.1.3.4.</p>
 </li>
 <li><p>In section 3.1.1, the EU commission <code>AuthnContextClassRef</code> URI:s for non-notified schemes were changed.</p>
+</li>
+<li><p>Section 3.1.9.2, &quot;eIDAS Connector Aliases&quot;, defining the URI format for representing country affiliation of eIDAS connector services, was added.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
