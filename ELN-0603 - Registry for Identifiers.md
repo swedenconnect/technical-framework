@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-08-14 - *Draft version*
+### Version 1.6 - 2019-08-20 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -51,7 +51,9 @@
     3.1.9. [eIDAS Identifiers](#eidas-identifiers)
 
     3.1.9.1. [eIDAS Proxy Service Aliases](#eidas-proxy-service-aliases)
-
+    
+    3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
+    
     3.2. [OID Identifiers](#oid-identifiers)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
@@ -364,6 +366,19 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 
 > A consumer of an eIDAS Proxy Service alias URI MUST accept the country code part of the URI in both lower and upper case letters.
 
+<a name="eidas-connector-aliases"></a>
+##### 3.1.9.2. eIDAS Connector Aliases
+
+A Swedish Identity Provider that delivers authentication services to eIDAS, via the Swedish eIDAS Proxy Service, will receive the entityID of the Service Provider from another country that has requested user authentication in a `<saml2p:RequesterID>` element of the authentication request. Along with this information, the Swedish Proxy Service will also include another `RequesterID` element that holds the "eIDAS Connector alias" URI, telling from which country the requesting Service Provider resides.
+ 
+The format of this alias is as follows:
+
+**`http://id.swedenconnect.se/eidas/1.0/connector/{country-code}`**
+
+where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[[ISO 3166](#iso3166)\].
+
+> A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.
+
 <a name="oid-identifiers"></a>
 ### 3.2. OID Identifiers
 
@@ -516,6 +531,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - A description of Service Contract Entity Categories was added to section 3.1.3.4.
 
 - In section 3.1.1, the EU commission `AuthnContextClassRef` URI:s for non-notified schemes were changed.
+
+- Section 3.1.9.2, "eIDAS Connector Aliases", defining the URI format for representing country affiliation of eIDAS connector services, was added.
 
 **Changes between version 1.4 and version 1.5:**
 
