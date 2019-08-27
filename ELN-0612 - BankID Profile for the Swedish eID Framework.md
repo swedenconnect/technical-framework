@@ -182,6 +182,7 @@ The QR code functionality is a relatively new feature that was introduced to pro
 
 Due to large number of BankID users and the fear of changing a well established pattern, many BankID Relying Parties have not yet implemented the use of QR codes. It is a consideration of ease of use versus higher security, and different service providers may have different opinion regarding the feature.
 
+
 Therefore, this profile defines the `http://id.swedenconnect.se/general-ec/1.0/bankid/qr-code` entity category. It may be declared in a Service Provider's metadata as an indicator for a BankID Identity Provider that the Service Provider requires that the QR code functionality is used instead of prompting for the user personal identity number.
 
 > See \[[EidEntCat](#eidentcat)\] for more information about entity categories.
@@ -262,16 +263,20 @@ When an operation is initiated where the BankID client (app or desktop program) 
 
 For the above cases where the BankID client is automatically started from the Identity Provider, the Identity Provider user interface SHOULD NOT ask for the user's personal identity number. This information is available in the "BankID app" or "BankID Security Application".
 
-Auto starting the BankID app from a mobile device requires the built-in web browser to be used to guarantee full support, see section 3.1 of \[[BankID_Spec](#bankid_spec)\]. If the Identity Provider detects that the user is not using the platform's default browser it SHOULD display a button with an autostart link (that will start the BankID app when clicked) and also display a message informing the user the he or she will have to switch back to the browser manually after the BankID operation<sup>1</sup>.
+Auto starting the BankID app from a mobile device requires the built-in web browser to be used to guarantee full support, see section 3.1 of \[[BankID_Spec](#bankid_spec)\]. If the Identity Provider detects that the user is not using the platform's default browser it SHOULD prompt for the personal identity number and ask the user to manually start the BankID app (and switch back to the browser after the BankID operation).
 
-> \[1\]: Alternatively the Identity Provider may ask the user to start the BankID app manually and scan a QR-code, or enter a personal identity number and then manually start the app.
+> **Note:** As an alternative to the above requirement the Identity Provider may display a button with an autostart link that starts the BankID app when clicked. The personal identity number will not be needed and the user will not have to start the app manually. 
+
+> However, on iOS this will not work if an embedded browser is running within an app, since apps that are started by apps need to be whitelisted. Another thing to take into account is that the user still has to switch back from the BankID app to the browser, and that may not be obvious for the user (since the app was started automatically). 
+
+> The recommendation is to abstain from using autostart links/buttons.
  
 <a name="mobile-bankid-on-another-device"></a>
 ### 3.3. Mobile BankID on another Device
 
 If the user agent (web browser) and the BankID app is not on the same device, a BankID Identity Provider SHOULD check for the presence of the QR code entity category (see section [1.4](#relying-party-configuration), "[Relying Party Configuration](#relying-party-configuration)", above) to determine whether a QR code should be displayed in the UI to initiate the operation.
 
-If the Service Provider has declared the `http://id.swedenconnect.se/general-ec/1.0/bankid/qr-code` entity category the BankID Identity Provider SHOULD display a generated QR code for the user instead of prompting for the personal identity number.
+If the Service Provider has declared the `http://id.swedenconnect.se/general-ec/1.0/bankid/qr-code` entity category the BankID Identity Provider SHOULD display a generated QR code for the user and SHOULD NOT prompt the user for the personal identity number.
 
 Note that the presence of the QR code entity category in the Service Provider metadata has precedence over the presence of the `<psc:PrincipalSelection>` extension in the authentication request<sup>1</sup>.
 
@@ -421,7 +426,7 @@ A Service Provider requesting an attribute that is not supported by all Identity
 
 It is RECOMMENDED that Service Providers communicating with BankID Identity Providers include the `transactionIdentifier` attribute as a requested attribute.
 
-As described in section [1.4](#relying-party-configuration), "[Relying Party Configuration]("#relying-party-configuration"), a Service Provider may declare an entity category telling the BankID Identity Provider that it requires QR codes to be used instead of prompting for the user personal identity number.
+As described in section [1.4](#relying-party-configuration), "[Relying Party Configuration]("#relying-party-configuration"), a Service Provider may declare an entity category telling the BankID Identity Provider that it wishes QR codes to be used instead of prompting for the user personal identity number.
 
     <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
       <saml:Attribute Name="http://macedir.org/entity-category" 
