@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2019-08-22 - *Draft version*
+### Version 1.7 - 2019-08-27 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -412,7 +412,7 @@ The meaning of different contracts and business agreements are out of scope for 
 
 An entity category of the General Entity Category type is a category that does not fit into any of the other category types regarding definitions and matching rules.
 
-General category identifiers are prefixed with `http://id.swedenconnect.se/misc-ec`.
+General category identifiers are prefixed with `http://id.swedenconnect.se/general-ec`.
 
 
 <a name="references"></a>
