@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2019-08-14 - *Draft version*
+### Version 1.7 - 2019-08-27 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -50,9 +50,11 @@
 
 5. [**Service Contract Categories**](#service-contract-categories)
 
-6. [**References**](#references)
+6. [**General Entity Categories**](#general-entity-categories)
 
-7. [**Changes between versions**](#changes-between-versions)
+7. [**References**](#references)
+
+8. [**Changes between versions**](#changes-between-versions)
 
 ---
 
@@ -88,7 +90,7 @@ under the `<mdattr:EntityAttributes>` element
 __`http://id.elegnamnden.se/ec/1.0/loa3-pnr`__ specified as an entity
 attribute for a Service Provider or Identity Provider.*
 
-Three types of Entity Categories are used within the federation:
+Five types of Entity Categories are used within the federation:
 
 -   Service entity category – Identifiers for entity categories
     representing sets of requirements.
@@ -99,6 +101,8 @@ Three types of Entity Categories are used within the federation:
 -   Service type categories – Identifiers for defined service types.
 
 -   Service contract categories - Identifiers for labelling entities based on contracts or business agreements.
+
+-	General categories - Identifiers defined within the Swedish eID Framework for miscellaneous purposes.
 
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
@@ -160,6 +164,7 @@ These differences are outlined in the following table:
 | **Service Property** | Represents a property of this service. | Represents the ability to deliver assertions to a consuming service that has the declared property. | All properties declared by the consuming service MUST be declared by the providing service. |
 | **Service Type** | Declares the type of service provided by this consuming service. | Not applicable. | No matching rule. |
 | **Service Contract** | Each declared category represents a contract, or business agreement, that the service is affiliated to. | Represents the contracts, or business agreements, under which the providing service may deliver services. | At least one of the service contract identifiers declared by a providing service must be declared by the consuming service. A providing service that does not declare any service contract identifiers match all consuming services regarding service contract matching. |
+| **General** | An entity category type for miscellaneous purposes. | An entity category type for miscellaneous purposes. | No general matching rule.<br />However, the meaning of a general entity category may be such that it affects matching. |
 
 <a name="use-in-discovery"></a>
 ### 1.4. Use in Discovery
@@ -383,14 +388,14 @@ All Service Type identifiers are prefixed with
 
 **URL**: `http://id.elegnamnden.se/st/1.0/public-sector-sp`
 
-**Description**: A service type that indicates that an Service Provider is a "public sector" SP.    This category MUST be used by public sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
+**Description**: A service type that indicates that a Service Provider is a "public sector" SP. This category MUST be used by public sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
 
 <a name="private-sector-sp"></a>
 ### 4.3. private-sector-sp
 
 **URL**: `http://id.elegnamnden.se/st/1.0/private-sector-sp`
 
-**Description**: A service type that indicates that an Service Provider is a "private sector" SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
+**Description**: A service type that indicates that a Service Provider is a "private sector" SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
 
 <a name="service-contract-categories"></a>
 ## 5. Service Contract Categories
@@ -402,8 +407,16 @@ All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/c
 The meaning of different contracts and business agreements are out of scope for this specification. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
 
 
+<a name="general-entity-categories"></a>
+## 6. General Entity Categories
+
+An entity category of the General Entity Category type is a category that does not fit into any of the other category types regarding definitions and matching rules.
+
+General category identifiers are prefixed with `http://id.swedenconnect.se/general-ec`.
+
+
 <a name="references"></a>
-## 6. References
+## 7. References
 
 <a name="rfc2119"></a>
 **\[RFC2119\]**
@@ -464,7 +477,7 @@ The meaning of different contracts and business agreements are out of scope for 
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
-## 7. Changes between versions
+## 8. Changes between versions
 
 **Changes between version 1.6 and version 1.7:**
 
@@ -472,6 +485,8 @@ The meaning of different contracts and business agreements are out of scope for 
 
 - The reference \[EntCat\] now refers to [RFC-8409](https://tools.ietf.org/html/rfc8409) instead of 
 [https://tools.ietf.org/html/draft-young-entity-category](https://tools.ietf.org/html/draft-young-entity-category).
+
+- Chapter 6, "General Entity Categories", introduced a general entity category type for miscellaneous purposes.
 
 **Changes between version 1.5 and version 1.6:**
 
