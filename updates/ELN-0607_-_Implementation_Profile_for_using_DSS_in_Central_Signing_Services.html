@@ -10,10 +10,10 @@
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
-    <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
+    <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS DSS in Central Signing Services</h1>
-<h3 id="version-1.3---2017-12-18---*draft-version*">Version 1.3 - 2017-12-18 - <em>draft version</em></h3>
-<p><em>ELN-0607-v1.3</em></p>
+<h3 id="version-1.4---2019-08-28---*draft-version*">Version 1.4 - 2019-08-28 - <em>Draft version</em></h3>
+<p><em>ELN-0607-v1.4</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol class="list">
@@ -213,17 +213,17 @@ obtained assertion from the specified Identity Provider, the Signing
 Service MUST reject the sign request.</p>
 <p><a name="identityprovider"></a></p>
 <h5 id="2.1.3.4.-identityprovider">2.1.3.4. IdentityProvider</h5>
-<p>This element MUST be present, specifying the SAML EntityID of the
+<p>This element MUST be present, specifying the SAML entityID of the
 Identity Provider that MUST be used to authenticate the signer. The
 Signing Service MUST NOT generate the requested signature unless the
 signer is successfully authenticated through this Identity Provider.</p>
 <p><a name="sign-requester"></a></p>
 <h5 id="2.1.3.5.-sign-requester">2.1.3.5. Sign Requester</h5>
 <p>This element MUST be present, specifying the identity of the Requesting
-Service in the form of its SAML EntityID.</p>
+Service in the form of its SAML entityID.</p>
 <p><a name="signservice"></a></p>
 <h5 id="2.1.3.6-signservice">2.1.3.6 SignService</h5>
-<p>This element MUST be present, specifying the SAML EntityID of the
+<p>This element MUST be present, specifying the SAML entityID of the
 Signing Service that is the target of this sign request.</p>
 <p><a name="requestedsignaturealgorithm"></a></p>
 <h5 id="2.1.3.7.-requestedsignaturealgorithm">2.1.3.7. RequestedSignatureAlgorithm</h5>
@@ -241,7 +241,7 @@ Provider MAY display for the user before obtaining the user’s consent to
 sign. The message MAY be provided in clear text or in encrypted form.
 The attribute <code>MustShow</code> MUST be set to <code>true</code> if the Identity Provider is
 required to show this message to the user. When the message is provided
-in encrypted form, the <code>DisplayEntity</code> attribute MUST include the EntityID
+in encrypted form, the <code>DisplayEntity</code> attribute MUST include the entityID
 of the Identity Provider holding the private decryption key. The
 encryption key included in the metadata of the identified Identity
 Provider SHOULD be used to encrypt the message.</p>
@@ -438,7 +438,7 @@ SHOULD attempt to provide all “requested” attributes.</p>
 source to obtain requested attribute values, as long as the identity
 assertion provided by the specified Identity Provider is sufficient to
 uniquely identify the signer. The Sign Requester MAY provide one or more
-SAML EntityID identifiers of Attribute Authorities in
+SAML entityID identifiers of Attribute Authorities in
 <code>&lt;AttributeAuthority&gt;</code> elements, which could be used to obtain an
 attribute value for the requested attribute.</p>
 <p>It is left to local policy of the Signature Service whether it accepts
@@ -572,7 +572,7 @@ equivalent to the following implementation example:</p>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Note:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> Since your browser does not support JavaScript,
     you must press the Continue button once to proceed.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">noscript</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">'https://eid2csig.konki.se/signrequest'</span> <span class="hljs-attr">method</span>=<span class="hljs-string">'post'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">'https://csig.example.com/signrequest'</span> <span class="hljs-attr">method</span>=<span class="hljs-string">'post'</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'Binding'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'POST/XML/1.0'</span>/&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'RelayState'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'56345145a482995d'</span>/&gt;</span>
@@ -625,7 +625,7 @@ equivalent to the following implementation example:</p>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'Binding'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'POST/XML/1.0'</span>/&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'RelayState'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'56345145a482995d'</span>/&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">' EidSignResponse'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'PD94bWw…WVzdD4='</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'EidSignResponse'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'PD94bWw…WVzdD4='</span>/&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">noscript</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
@@ -665,47 +665,59 @@ the value “post”.</p>
 <h2 id="4.-references">4. References</h2>
 <p><a name="normative-references"></a></p>
 <h3 id="4.1.-normative-references">4.1. Normative References</h3>
-<p><a name="eid-profile"></a><strong>[Eid-Profile]</strong></p>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997.</a>.</p>
 </blockquote>
-<p><a name="rfc2119"></a><strong>[RFC2119]</strong></p>
-<blockquote>
-<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997.</a></p>
-</blockquote>
-<p><a name="dss-ext"></a><strong>[DSS-Ext]</strong></p>
-<blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
-</blockquote>
-<p><a name="dss"></a><strong>[DSS]</strong></p>
+<p><a name="dss"></a>
+<strong>[DSS]</strong></p>
 <blockquote>
 <p><a href="https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html">OASIS Standard - Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007</a>.</p>
 </blockquote>
-<p><a name="saml-xsd"></a><strong>[SAML-XSD]</strong></p>
+<p><a name="saml-xsd"></a>
+<strong>[SAML-XSD]</strong></p>
 <blockquote>
 <p>S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005. Document ID: saml-schema-assertion-2.0. See <a href="http://www.oasisopen.org/committees/security/">http://www.oasisopen.org/committees/security/</a>.</p>
 </blockquote>
-<p><a name="xmlsig"></a><strong>[XMLSig]</strong></p>
+<p><a name="xmlsig"></a>
+<strong>[XMLSig]</strong></p>
 <blockquote>
-<p>D. Eastlake et al, XML-Signature Syntax and Processing, W3C Recommendation, February 2002.</p>
+<p>D. Eastlake et al, <a href="https://www.w3.org/TR/2002/REC-xmldsig-core-20020212/">XML-Signature Syntax and Processing, W3C Recommendation, February 2002</a>.</p>
 </blockquote>
-<p><a name="xmlsig-xsd"></a><strong>[XMLSig-XSD]</strong></p>
+<p><a name="xmlsig-xsd"></a>
+<strong>[XMLSig-XSD]</strong></p>
 <blockquote>
-<p>XML Signature Schema. World Wide Web Consortium. See <a href="http://www.w3.org/TR/2000/CR-xmldsig-core-20001031/xmldsig-coreschema.xsd">http://www.w3.org/TR/2000/CR-xmldsig-core-20001031/xmldsig-coreschema.xsd</a>.</p>
+<p>XML Signature Schema. World Wide Web Consortium. See <a href="https://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd">https://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd</a>.</p>
 </blockquote>
-<p><a name="eid-registry"></a><strong>[Eid-Registry]</strong></p>
+<p><a name="eid-profile"></a>
+<strong>[Eid-Profile]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html">Registry for identifiers assigned by the Swedish e-identification
-board</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="dss-ext"></a>
+<strong>[DSS-Ext]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+</blockquote>
+<p><a name="eid-registry"></a>
+<strong>[Eid-Registry]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html">Swedish eID Framework - Registry for identifiers</a>.</p>
 </blockquote>
 <p><a name="informative-references"></a></p>
 <h3 id="4.2.-informative-references">4.2. Informative References</h3>
-<p><a name="saml2bind"></a><strong>[SAML2Bind]</strong></p>
+<p><a name="saml2bind"></a>
+<strong>[SAML2Bind]</strong></p>
 <blockquote>
-<p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf">OASIS Standard, Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0, March 2005.</a></p>
+<p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf">OASIS Standard, Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0, March 2005.</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
+<p><strong>Changes between version 1.3 and version 1.4:</strong></p>
+<ul class="list">
+<li>Updates of references and change of logotype.</li>
+</ul>
 <p><strong>Changes between version 1.2 and version 1.3:</strong></p>
 <ul class="list">
 <li>In section 2.1.3.9, &quot;CertRequestProperties&quot;, an requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature was added.</li>

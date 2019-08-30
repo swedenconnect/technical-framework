@@ -6,14 +6,14 @@
     <title>Attribute Specification for the Swedish eID Framework</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
-    <article class="markdown-body"><p><img src="img/eln-logo.png"></img></p>
+    <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.5---2018-03-26---*draft-version*">Version 1.5 - 2018-03-26 - <em>draft version</em></h3>
-<p><em>ELN-0604-v1.5</em></p>
+<h3 id="version-1.6---2019-08-28---*draft-version*">Version 1.6 - 2019-08-28 - <em>Draft version</em></h3>
+<p><em>ELN-0604-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol class="list">
@@ -96,7 +96,7 @@ release requirements.</p>
 <h3 id="1.2.-requirement-key-words">1.2. Requirement key words</h3>
 <p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
 “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be
-interpreted as described in [RFC2119].</p>
+interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
 <p>These keywords are capitalized when used to unambiguously specify
 requirements over protocol features and behavior that affect the
 interoperability and security of implementations. When these words are
@@ -118,12 +118,12 @@ whether or not a namespace declaration is present in the example:</p>
 <tr>
 <td style="text-align:left"><code>saml</code></td>
 <td style="text-align:left"><code>urn:oasis:names:tc:SAML:2.0:assertion</code></td>
-<td style="text-align:left">The SAML V2.0 assertion namespace, defined in the schema [SAML-XSD].</td>
+<td style="text-align:left">The SAML V2.0 assertion namespace, defined in the schema [<a href="#saml-xsd">SAML-XSD</a>].</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>xs</code></td>
 <td style="text-align:left"><code>http://www.w3.org/2001/XMLSchema</code></td>
-<td style="text-align:left">The XML Schema namespace, representing definitions of data types in [XML-Schema].</td>
+<td style="text-align:left">The XML Schema namespace, representing definitions of data types in [<a href="#xml-schema">XML-Schema</a>].</td>
 </tr>
 </tbody>
 </table>
@@ -141,14 +141,14 @@ sub-elements in accordance with <a href="#attributes">section 3.1</a>.</p>
 for each attribute set as means for other documents to reference
 specific attribute sets.</p>
 <p>Each attribute set defines a number of mandatory attributes that MUST be
-released by an Attribute Provider<sup>1</sup> that provides attributes according
+released by an Attribute Provider<sup>*</sup> that provides attributes according
 to the given attribute set, and optionally recommended attributes that
 SHOULD be released as part of the attribute set if they are available to
 the provider.</p>
 <p><strong>Note</strong>: An Attribute Provider may also release other attributes, not
 specified by the defined attribute sets it supports. See further section
 6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish
-eID Framework” ([EidDeployProf]).</p>
+eID Framework” ([<a href="#eiddeployprof">EidDeployProf</a>]).</p>
 <p>In order to comply with a defined attribute set, the following attribute
 requirements apply:</p>
 <table>
@@ -172,7 +172,7 @@ requirements apply:</p>
 <p>A defined attribute set does not define any rules for attributes other
 than those listed as required or recommended.</p>
 <blockquote>
-<p>[1]: An Attribute Provider is an entity that releases attributes to a requesting entity. In all practical cases within the Swedish eID Framework this entity is an Identity Provider or an Attribute Authority. Within the eIDAS Framework, the Swedish eIDAS node acts as the Attribute Provider for the Service Providers.</p>
+<p>[*]: An Attribute Provider is an entity that releases attributes to a requesting entity. In all practical cases within the Swedish eID Framework this entity is an Identity Provider or an Attribute Authority. Within the eIDAS Framework, the Swedish eIDAS node acts as the Attribute Provider for the Service Providers.</p>
 </blockquote>
 <p><a name="pseudonym-identity"></a></p>
 <h3 id="2.1.-pseudonym-identity">2.1. Pseudonym Identity</h3>
@@ -264,11 +264,11 @@ Framework.</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong>REQUIRED</strong><sup>2</sup></td>
-<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>3</sup></td>
+<td style="text-align:left"><strong>REQUIRED</strong><sup>*</sup></td>
+<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>**</sup></td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>REQUIRED</strong><br />(if available)<sup>4</sup></td>
+<td style="text-align:left"><strong>REQUIRED</strong><br />(if available)<sup>***</sup></td>
 <td style="text-align:left"><code>birthName</code> (Birth name) <br /> <code>placeOfBirth</code> (Place of birth) <br /> <code>eidasNaturalPersonAddress</code> (Address for natural person) <br /> <code>gender</code> (Gender)</td>
 </tr>
 <tr>
@@ -305,9 +305,9 @@ corresponding string value-typed attributes. The
 <code>eidasPersonIdentifier</code>, <code>sn</code>, <code>givenName</code> and <code>dateOfBirth</code> attributes are
 examples of “converted attributes”.</p>
 <blockquote>
-<p>[2]: Attributes “added” by the Swedish eID node and converted attributes for the mandatory attributes of the eIDAS minimum data set for natural persons.</p>
-<p>[3]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of an assertion) give a reference to the original assertion and authentication process.</p>
-<p>[4]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.</p>
+<p>[*]: Attributes “added” by the Swedish eID node and converted attributes for the mandatory attributes of the eIDAS minimum data set for natural persons.</p>
+<p>[**]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of an assertion) give a reference to the original assertion and authentication process.</p>
+<p>[***]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.</p>
 </blockquote>
 <p><a name="eidas-legal-person-attribute-set"></a></p>
 <h3 id="2.6.-eidas-legal-person-attribute-set">2.6. eIDAS Legal Person Attribute Set</h3>
@@ -365,7 +365,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">personalIdentity-<br/>Number</td>
 <td style="text-align:left">urn:oid:1.2.752.29.4.13</td>
 <td style="text-align:left">National civic registration number/code</td>
-<td style="text-align:left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf">SKV 704</a> and <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf">SKV 707</a>. 12 digits without hyphen.</td>
+<td style="text-align:left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="#skv704">SKV 704</a> and <a href="#skv707">SKV 707</a>. 12 digits without hyphen.</td>
 <td style="text-align:center">NO</td>
 <td style="text-align:left">195006262546</td>
 </tr>
@@ -493,7 +493,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">organizationIdentifier</td>
 <td style="text-align:left">urn:oid:2.5.4.97</td>
 <td style="text-align:left">Organizational identifier code</td>
-<td style="text-align:left">Swedish “organisationsnummer” according to <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf">SKV 709</a>. 10 digits without hyphen.</td>
+<td style="text-align:left">Swedish “organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
 <td style="text-align:center">NO</td>
 <td style="text-align:left">5562265719</td>
 </tr>
@@ -501,7 +501,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">orgAffiliation</td>
 <td style="text-align:left">urn:oid:1.2.752.201.3.1</td>
 <td style="text-align:left">&lt;uid&gt;@&lt;orgnr&gt;</td>
-<td style="text-align:left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf">SKV 709</a>. 10 digits without hyphen.</td>
+<td style="text-align:left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
 <td style="text-align:center">YES</td>
 <td style="text-align:left">vlindman@5562265719</td>
 </tr>
@@ -575,7 +575,7 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">National civic registration number/code binding URI</td>
 <td style="text-align:left">The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See <a href="#the-personalidentitynumberbinding-attribute">section 3.3.2</a> below.</td>
 <td style="text-align:center">NO</td>
-<td style="text-align:left"><a href="http://eid.org.se/presentedInPerson">http://eid.org.se/presentedInPerson</a></td>
+<td style="text-align:left"><a href="http://eid.example.se/presentedInPerson">http://eid.example.se/presentedInPerson</a></td>
 </tr>
 <tr>
 <td style="text-align:left">eidasPersonIdentifier</td>
@@ -596,7 +596,7 @@ examples of “converted attributes”.</p>
 </tbody>
 </table>
 <p>All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the <code>xs:string</code> data type. Certain attributes such as <code>mail</code>, <code>personalIdentityNumber</code>, <code>organizationIdentifier</code>, <code>telephoneNumber</code> and <code>mobile</code> use a restricted character set according to its defined usage within this specification.</p>
-<p>All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 [X.520]. That is, case-insensitive comparison where insignificant spaces are ignored.</p>
+<p>All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 [<a href="#x520">X.520</a>]. That is, case-insensitive comparison where insignificant spaces are ignored.</p>
 <p>Attributes with a “NO” value in the multivalued column MUST NOT have more than one <code>&lt;AttributeValue&gt;</code> sub-element. Attributes with a “YES” value in the multivalued column MAY have one or more <code>&lt;AttributeValue&gt;</code> sub-elements.</p>
 <p><a name="saml-attribute-format"></a></p>
 <h3 id="3.2.-saml-attribute-format">3.2. SAML Attribute Format</h3>
@@ -636,11 +636,11 @@ make use of the <code>userCertificate</code> and <code>userSignature</code> attr
 <p>The <code>userCertificate</code> attribute holds, as its value, a base64-encoding of
 the X.509 certificate presented by the subject during authentication.</p>
 <p>The <code>userSignature</code> attribute contains a base64-encoding of a signature
-object that was created by the subject during the authentication<sup>4</sup>
+object that was created by the subject during the authentication<sup>*</sup>
 process.</p>
 <p>The <code>authServerSignature</code> may be included in assertions in cases where there are requirements to include a digitally signed proof from the authentication server at which the end user authenticated. This is mainly useful in cases where the SAML Identity Provider delegates end user authentication to a subordinate authentication server.</p>
 <blockquote>
-<p>[4]: Note that an authentication process, may be “authentication for signature” as specified in section 7 of [EidDeployProf].</p>
+<p>[*]: Note that an authentication process, may be “authentication for signature” as specified in section 7 of [<a href="#eiddeployprof">EidDeployProf</a>].</p>
 </blockquote>
 <p><a name="the-sad-attribute"></a></p>
 <h4 id="3.2.3.-the-sad-attribute">3.2.3. The sad Attribute</h4>
@@ -648,7 +648,7 @@ process.</p>
 signature service in order to service a signature request in accordance
 with CEN EN 419 241-2. The <code>sad</code> attribute holds a single string
 attribute value. The format of the string value is defined in the &quot;Signature Activation Protocol 
-for Federated Signing&quot; specification ([SigSAP]).</p>
+for Federated Signing&quot; specification [<a href="#sigsap">SigSAP</a>].</p>
 <p><a name="attributes-for-the-eidas-framework"></a></p>
 <h3 id="3.3.-attributes-for-the-eidas-framework">3.3. Attributes for the eIDAS Framework</h3>
 <p><a name="the-prid-and-pridpersistence-attributes"></a></p>
@@ -668,7 +668,7 @@ the user in a common format regardless of the composition of the
 original attributes received from the authenticating source. The <code>prid</code>
 attribute value is not stored in any registry, but derived from the
 received attributes at each authentication instant according to defined
-algorithms specified in [ConstructedAttr]. The algorithm ensures that
+algorithms specified in [<a href="#constructedattr">ConstructedAttr</a>]. The algorithm ensures that
 each <code>prid</code> is unique for each authenticated entity, but does not ensure
 persistence. If the attributes received for an entity changes over time,
 the <code>prid</code> attribute may also change dependent on the defined <code>prid</code>
@@ -684,7 +684,7 @@ and service functions for users with different persistence expectancy.
 This may assist users with low persistence expectancy to regain control
 of their user account, should their <code>prid</code> change in the future.</p>
 <p>The specification “eIDAS Constructed Attributes Specification for the
-Swedish eID Framework”, [ConstructedAttr], declares the details for
+Swedish eID Framework”, [<a href="#constructedattr">ConstructedAttr</a>], declares the details for
 how the <code>prid</code> and <code>pridPersistence</code> attributes are generated and how they
 should be processed.</p>
 <p><a name="the-personalidentitynumberbinding-attribute"></a></p>
@@ -709,7 +709,7 @@ be included in this attribute. Such URI identifiers will be specified in
 documents specifying appropriate binding mechanisms.</p>
 <p><a name="conversion-of-eidas-attributes"></a></p>
 <h4 id="3.3.3.-conversion-of-eidas-attributes">3.3.3. Conversion of eIDAS Attributes</h4>
-<p>The attributes specified within eIDAS ([eIDAS_Attr]) does not use
+<p>The attributes specified within eIDAS ([<a href="#eidas-attr">eIDAS_Attr</a>]) does not use
 simple string type values. Instead each attribute is represented using
 its own dedicated XML data type. This affects interoperability in a
 negative way since most standard SAML software need to be modified to
@@ -762,13 +762,13 @@ Swedish eID Framework.</p>
 </tbody>
 </table>
 <p><strong>Note</strong>: When converting an eIDAS attribute that makes use of
-“transliteration” (as described in section 2.4 of [eIDAS_Attr])
+“transliteration” (as described in section 2.4 of [<a href="#eidas-attr">eIDAS_Attr</a>])
 attribute values having the <code>LatinScript</code> attribute set to <code>false</code> will not
 be part of the resulting attribute.</p>
 <p><a name="conversion-of-eidas-currentaddress"></a></p>
 <h5 id="3.3.3.1.-conversion-of-eidas-currentaddress">3.3.3.1. Conversion of eIDAS CurrentAddress</h5>
 <p>The eIDAS attribute <code>CurrentAddress</code> is defined in section 2.2.9 of
-[eIDAS_Attr]. Its value is a Base64-encoding of an XML-structure of
+[<a href="#eidas-attr">eIDAS_Attr</a>]. Its value is a Base64-encoding of an XML-structure of
 the type CurrentAddressStructuredType.</p>
 <pre class="hljs"><code>&lt;xsd:complexType name=<span class="hljs-string">"CurrentAddressStructuredType"</span>&gt;
   &lt;xsd:annotation&gt;
@@ -825,70 +825,92 @@ following attribute:</p>
   <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span></code></pre><p><a name="references"></a></p>
 <h2 id="4.-references">4. References</h2>
-<p><strong>[RFC2119]</strong></p>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
 <blockquote>
 <p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
 Levels, March 1997.</a></p>
 </blockquote>
-<p><strong>[SAML2Core]</strong></p>
+<p><a name="saml2core"></a>
+<strong>[SAML2Core]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
 Assertion Markup Language (SAML) V2.0, March
 2005</a>.</p>
 </blockquote>
-<p><strong>[SKV704]</strong></p>
+<p><a name="skv704"></a>
+<strong>[SKV704]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf">Skatteverket, SKV 704 Utgåva 8,
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf">Skatteverket, SKV 704 Utgåva 8,
 Personnummer</a>.</p>
 </blockquote>
-<p><strong>[SKV707]</strong></p>
+<p><a name="skv707"></a>
+<strong>[SKV707]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf">Skatteverket, SKV 707, Utgåva 2,
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf">Skatteverket, SKV 707, Utgåva 2,
 Samordningsnummer</a>.</p>
 </blockquote>
-<p><strong>[SKV709]</strong></p>
+<p><a name="skv709"></a>
+<strong>[SKV709]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf">Skatteverket, SKV 709, Utgåva 8, Organisationsnummer</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv709-8.pdf">Skatteverket, SKV 709, Utgåva 8, Organisationsnummer</a>.</p>
 </blockquote>
-<p><strong>[SAML-XSD]</strong></p>
+<p><a name="x520"></a>
+<strong>[X.520]</strong></p>
+<blockquote>
+<p><a href="https://www.itu.int/rec/T-REC-X.520-201610-I/en">ITU-T X.520 - Open Systems Interconnection – The Directory: Selected attribute types</a>.</p>
+</blockquote>
+<p><a name="saml-xsd"></a>
+<strong>[SAML-XSD]</strong></p>
 <blockquote>
 <p>S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005.
 Document ID saml-schema-assertion-2.0. See
 <a href="http://www.oasisopen.org/committees/security/">http://www.oasisopen.org/committees/security/</a>.</p>
 </blockquote>
-<p><strong>[XML-Schema]</strong></p>
+<p><a name="xml-schema"></a>
+<strong>[XML-Schema]</strong></p>
 <blockquote>
 <p>XML Schema Part 2: Datatypes Second Edition, W3C Recommendation, 28
 October 2004. See <a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a>.</p>
 </blockquote>
-<p><strong>[ISO3166]</strong></p>
+<p><a name="iso3166"></a>
+<strong>[ISO3166]</strong></p>
 <blockquote>
 <p>Codes for the representation of names of countries and their
 subdivisions Part 1: Country codes, ISO standard, ISO 3166-1.</p>
 </blockquote>
-<p><strong>[TillitRamv]</strong></p>
+<p><a name="tillitramv"></a>
+<strong>[TillitRamv]</strong></p>
 <blockquote>
-<p><a href="http://www.elegnamnden.se/download/18.77dbcb041438070e039d237/1444138670074/ELN-0700+-+Tillitsramverk+för+Svensk+e-legitimation.pdf">Tillitsramverk för Svensk e-legitimation</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf">Tillitsramverk för Svensk e-legitimation - 2018-158</a></p>
 </blockquote>
-<p><strong>[EidDeployProf]</strong></p>
+<p><a name="eiddeployprof"></a>
+<strong>[EidDeployProf]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
 </blockquote>
-<p><strong>[ConstructedAttr]</strong></p>
+<p><a name="constructedattr"></a>
+<strong>[ConstructedAttr]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/latest/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS Constructed Attributes Specification for the Swedish eID
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS Constructed Attributes Specification for the Swedish eID
 Framework</a>.</p>
 </blockquote>
-<p><strong>[eIDAS_Attr]</strong></p>
+<p><a name="eidas-attr"></a>
+<strong>[eIDAS_Attr]</strong></p>
 <blockquote>
-<p><a href="https://joinup.ec.europa.eu/sites/default/files/eidas_saml_attribute_profile_v1.0_2.pdf">eIDAS SAML Attribute Profile, 22 June 2015</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.2-FINAL.pdf">eIDAS SAML Attribute Profile, version 1.2, 21 May 2019</a>.</p>
 </blockquote>
-<p><strong>[SigSAP]</strong></p>
+<p><a name="sigsap"></a>
+<strong>[SigSAP]</strong></p>
 <blockquote>
-<p><a href="http://elegnamnden.github.io/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
+<p><strong>Changes between version 1.5 and version 1.6:</strong></p>
+<ul class="list">
+<li>References were updated to point at the latest versions of the &quot;Tillitsramverk för Svensk e-legitimation&quot; and &quot;eIDAS SAML Attribute Profile&quot; specifications.</li>
+</ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">
 <li>Section 3.2.3 was updated with a reference to the SAP specification as source for defining the content of the <code>sad</code> attribute.</li>
