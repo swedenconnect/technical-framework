@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-08-20 - *Draft version*
+### Version 1.6 - 2019-08-28 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -472,7 +472,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf).
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf).
 
 <a name="authcontext"></a>
 **\[AuthContExt\]**
@@ -533,6 +533,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - In section 3.1.1, the EU commission `AuthnContextClassRef` URI:s for non-notified schemes were changed.
 
 - Section 3.1.9.2, "eIDAS Connector Aliases", defining the URI format for representing country affiliation of eIDAS connector services, was added.
+
+- - The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 
 **Changes between version 1.4 and version 1.5:**
 

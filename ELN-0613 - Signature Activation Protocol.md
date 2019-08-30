@@ -1,8 +1,8 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.1 - 2018-08-03 - *Draft version*
+### Version 1.1 - 2019-08-30 - *Draft version*
 
 *ELN-0613-v1.1*
 
@@ -60,7 +60,7 @@ The Signature Activation Protocol (SAP) defined in this document is used to exch
 - Signature Activation Data (SAD) - Signed data, asserting the signer's agreement to sign specific data.
 - SADRequest - Request for a SAD.
 
-The SAP specified in this document is specifically designed to be used with a signing service operating in accordance with the federated signing specification \[[ELN-0609](#eln-0609)\].
+The SAP specified in this document is specifically designed to be used with a signing service operating in accordance with the federated signing specification \[[DSS-Ext](#dss-ext)\].
 
 <a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
@@ -119,7 +119,7 @@ This document specifies exchange of two data elements:
 
 The `SADRequest` SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the `SADRequest` element as an request extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
 
-When an Identity Provider returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[ELN-0604](#eln-0604)].
+When an Identity Provider returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[EidAttributes](#eidattributes)].
 
 <a name="data-elements"></a>
 ## 3. Data elements
@@ -133,7 +133,7 @@ The SAD requested in the SAP binds the documents to be signed to the intent by t
 - **Identity of the signer**. Allows verification that the signature is bound to the appropriate signer.
 - **SAD Request ID**. Unique identifier for the `SADRequest` element. This identifier is later included in the SAD in order to accomplish a binding between the request and the issued SAD.
 
-The SAD request and the SAD specified in this section specifies the data that needs to be exchanged in addition to other protocol elements specified by SAML as well as the federated signing specification \[[ELN-0609](#eln-0609)\].
+The SAD request and the SAD specified in this section specifies the data that needs to be exchanged in addition to other protocol elements specified by SAML as well as the federated signing specification \[[DSS-Ext](#dss-ext)\].
 
 <a name="sadrequest"></a>
 ### 3.1. SADRequest
@@ -333,7 +333,7 @@ The recipient of a requested SAD MUST verify it as part of the SAML response pro
 
 If any of the above verification steps fail, the Signature Service MUST reject the assertion.
 
-> \* - In the case where a Signature Service communicates with a Proxy Identity Provider that forwards requests to an *authenticating* Identity Provider that issues a SAD, the `iss`-value of the SAD will differ from the issuer of the assertion that is received by the Signature Service. In these cases the Signature Service should compare the `iss`-value with the value found in the `<saml2:AuthenticatingAuthority>` element of the assertion, or with relevant local policy and out-of-band configuration data.
+> \[\*\]: In the case where a Signature Service communicates with a Proxy Identity Provider that forwards requests to an *authenticating* Identity Provider that issues a SAD, the `iss`-value of the SAD will differ from the issuer of the assertion that is received by the Signature Service. In these cases the Signature Service should compare the `iss`-value with the value found in the `<saml2:AuthenticatingAuthority>` element of the assertion, or with relevant local policy and out-of-band configuration data.
 
 <a name="schemas"></a>
 ## 4. Schemas
@@ -381,29 +381,35 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
 <a name="normative-references"></a>
 ## 5. Normative References
 
-<a name="rfc2119"></a>**[RFC2119]**
+<a name="rfc2119"></a>
+**[RFC2119]**
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
-<a name="rfc7519"></a>**[RFC7519]**
+<a name="rfc7519"></a>
+**[RFC7519]**
 
 > [Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015](http://www.rfc-editor.org/info/rfc7519).
 
-<a name="eln-0604"></a>**[ELN-0604]**
+<a name="eidattributes"></a>
+**[EidAttributes]**
 
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
-<a name="eln-0609"></a>**[ELN-0609]**
+<a name="dss-ext"></a>
+**[DSS-Ext]**
 
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
-<a name="rsig-pp-1"></a>**[RSIG-PP-1]**
+<a name="rsig-pp-1"></a>
+**[RSIG-PP-1]**
 
 > European Standard prEN 419241-1 - Trustworthy Systems Supporting Server Signing - Part 1:
 General System Security Requirements
 
-<a name="rsig-pp-2"></a>**[RSIG-PP-2]**
+<a name="rsig-pp-2"></a>
+**[RSIG-PP-2]**
 
 > European Standard prEN 419241-2 - Trustworthy Systems Supporting Server Signing - Part 2:
 Protection profile for QSCD for Server Signing

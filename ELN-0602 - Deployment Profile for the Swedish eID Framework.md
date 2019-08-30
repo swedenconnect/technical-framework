@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-05-22 - **Draft version**
+### Version 1.6 - 2019-08-28 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -1298,11 +1298,11 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation - version 1.4](https://docs.swedenconnect.se/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf)
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
 
 <a name="eidentcat"></a>
 **\[EidEntCat\]**
@@ -1334,6 +1334,7 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 - In order to facilitate algorithm interoperability between peers additions concerning "Metadata Profile for Algorithm Support" \[[SAML2MetaAlgSupport](#saml2metaalg)\] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.
 - Section 5.3, "Message Content", was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.
 - The `PrincipalSelection` and `RequestedPrincipalSelection` extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.
+- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 
 **Changes between version 1.4 and 1.5:**
 

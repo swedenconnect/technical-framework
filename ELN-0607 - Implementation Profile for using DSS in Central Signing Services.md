@@ -1,10 +1,10 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.3 - 2018-06-19
+### Version 1.4 - 2019-08-28 - *Draft version*
 
-*ELN-0607-v1.3*
+*ELN-0607-v1.4*
 
 ---
 
@@ -242,7 +242,7 @@ Service MUST reject the sign request.
 <a name="identityprovider"></a>
 ##### 2.1.3.4. IdentityProvider
 
-This element MUST be present, specifying the SAML EntityID of the
+This element MUST be present, specifying the SAML entityID of the
 Identity Provider that MUST be used to authenticate the signer. The
 Signing Service MUST NOT generate the requested signature unless the
 signer is successfully authenticated through this Identity Provider.
@@ -251,12 +251,12 @@ signer is successfully authenticated through this Identity Provider.
 ##### 2.1.3.5. Sign Requester
 
 This element MUST be present, specifying the identity of the Requesting
-Service in the form of its SAML EntityID.
+Service in the form of its SAML entityID.
 
 <a name="signservice"></a>
 ##### 2.1.3.6 SignService
 
-This element MUST be present, specifying the SAML EntityID of the
+This element MUST be present, specifying the SAML entityID of the
 Signing Service that is the target of this sign request.
 
 <a name="requestedsignaturealgorithm"></a>
@@ -280,7 +280,7 @@ Provider MAY display for the user before obtaining the user’s consent to
 sign. The message MAY be provided in clear text or in encrypted form.
 The attribute `MustShow` MUST be set to `true` if the Identity Provider is
 required to show this message to the user. When the message is provided
-in encrypted form, the `DisplayEntity` attribute MUST include the EntityID
+in encrypted form, the `DisplayEntity` attribute MUST include the entityID
 of the Identity Provider holding the private decryption key. The
 encryption key included in the metadata of the identified Identity
 Provider SHOULD be used to encrypt the message.
@@ -295,7 +295,7 @@ attributes for each tag other than those listed in the following table:
 | HTML Tags | Type | Allowed attributes |
 | --- | --- | --- |
 | h1, h2, h3, h4 | Headings | style |
-| div, span, p | Section | style |
+| div, span, p | Section | style |
 | table, tr, td | Table | style |
 | b, strong | Highlight | style |
 | i, u, br | Format | &nbsp; |
@@ -416,7 +416,7 @@ The Signing Service MAY use an Attribute Authority as complementary
 source to obtain requested attribute values, as long as the identity
 assertion provided by the specified Identity Provider is sufficient to
 uniquely identify the signer. The Sign Requester MAY provide one or more
-SAML EntityID identifiers of Attribute Authorities in
+SAML entityID identifiers of Attribute Authorities in
 `<AttributeAuthority>` elements, which could be used to obtain an
 attribute value for the requested attribute.
 
@@ -587,7 +587,7 @@ equivalent to the following implementation example:
     <p><strong>Note:</strong> Since your browser does not support JavaScript,
     you must press the Continue button once to proceed.</p>
   </noscript>
-  <form action='https://eid2csig.konki.se/signrequest' method='post'>
+  <form action='https://csig.example.com/signrequest' method='post'>
     <div>
       <input type='hidden' name='Binding' value='POST/XML/1.0'/>
       <input type='hidden' name='RelayState' value='56345145a482995d'/>
@@ -632,7 +632,7 @@ equivalent to the following implementation example:
     <div>
       <input type='hidden' name='Binding' value='POST/XML/1.0'/>
       <input type='hidden' name='RelayState' value='56345145a482995d'/>
-      <input type='hidden' name=' EidSignResponse' value='PD94bWw…WVzdD4='/>
+      <input type='hidden' name='EidSignResponse' value='PD94bWw…WVzdD4='/>
     </div>
     <noscript>
       <div>
@@ -663,39 +663,51 @@ EidSignResponse | Base64 encoded sign response.
 <a name="normative-references"></a>
 ### 4.1. Normative References
 
-<a name="eid-profile"></a>**[Eid-Profile]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+<a name="rfc2119"></a>
+**[RFC2119]**
+>[Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt).
 
-<a name="rfc2119"></a>**[RFC2119]**
->[Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
-
-<a name="dss-ext"></a>**[DSS-Ext]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
-
-<a name="dss"></a>**[DSS]**
+<a name="dss"></a>
+**[DSS]**
 > [OASIS Standard - Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007](https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html).
 
-<a name="saml-xsd"></a>**[SAML-XSD]**
+<a name="saml-xsd"></a>
+**[SAML-XSD]**
 > S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005. Document ID: saml-schema-assertion-2.0. See <http://www.oasisopen.org/committees/security/>.
 
-<a name="xmlsig"></a>**[XMLSig]**
-> D. Eastlake et al, XML-Signature Syntax and Processing, W3C Recommendation, February 2002.
+<a name="xmlsig"></a>
+**[XMLSig]**
+> D. Eastlake et al, [XML-Signature Syntax and Processing, W3C Recommendation, February 2002](https://www.w3.org/TR/2002/REC-xmldsig-core-20020212/).
 
-<a name="xmlsig-xsd"></a>**[XMLSig-XSD]**
-> XML Signature Schema. World Wide Web Consortium. See <http://www.w3.org/TR/2000/CR-xmldsig-core-20001031/xmldsig-coreschema.xsd>.
+<a name="xmlsig-xsd"></a>
+**[XMLSig-XSD]**
+> XML Signature Schema. World Wide Web Consortium. See <https://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd>.
 
-<a name="eid-registry"></a>**[Eid-Registry]**
-> [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+<a name="eid-profile"></a>
+**[Eid-Profile]**
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+
+<a name="dss-ext"></a>
+**[DSS-Ext]**
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+
+<a name="eid-registry"></a>
+**[Eid-Registry]**
+> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
 
 <a name="informative-references"></a>
 ### 4.2. Informative References
 
-<a name="saml2bind"></a>**[SAML2Bind]**
-> [OASIS Standard, Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0, March 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf)
+<a name="saml2bind"></a>
+**[SAML2Bind]**
+> [OASIS Standard, Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0, March 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf).
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.3 and version 1.4:**
+
+- Updates of references and change of logotype.
 
 **Changes between version 1.2 and version 1.3:**
 

@@ -1,8 +1,8 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
-# En introduktion till E-legitimationsnämndens Tekniska ramverk
+# En introduktion till Sweden Connect Teknisk ramverk
 
-### 2018-06-19
+### 2019-08-28
 
 *ELN-0600*
 
@@ -16,7 +16,7 @@
 
     1.2. [Tillitsramverk och säkerhetsnivåer](#tillitsramverk-och-saekerhetsnivaaer)
 
-    1.3. [Tjänst för insamling, administration och publicering av metadata](#tjaenst-foer-insamling,-administration-och-publicering-av-metadata)
+    1.3. [Tjänst för insamling, administration och publicering av metadata](#tjaenst-foer-insamling-administration-och-publicering-av-metadata)
 
     1.4. [Anvisningstjänst](#anvisningstjaenst)
 
@@ -24,7 +24,7 @@
 
     1.6. [Underskrift](#underskrift)
 
-    1.7. [E-legitimationsnämndens tekniska ramverk och eIDAS](#e-legitimationsnaemndens-tekniska-ramverk-och-eidas)
+    1.7. [Tekniskt ramverk och eIDAS](#tekniskt-ramverk-och-eidas)
 
     1.7.1. [Autentiseringar med utländska e-legitimationer](#autentiseringar-med-utlaendska-e-legitimationer)
 
@@ -37,20 +37,34 @@
 2. [**Tekniska specifikationer**](#tekniska-specifikationer)
 
     2.1. [SAML-profiler](#saml-profiler)
+    
+    2.1.1. [Deployment Profile for the Swedish eID Framework](#deployment-profile-for-the-swedish-eid-framework)
 
-    2.2. [Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk](#specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk)
+    2.1.2. [Swedish eID Framework - Registry for identifiers](#swedish-eid-framework-registry-for-identifiers)
+    
+    2.1.3. [Attribute Specification for the Swedish eID Framework](#attribute-specification-for-the-swedish-eid-framework)
+    
+    2.1.4. [Entity Categories for the Swedish eID Framework](#entity-categories-for-the-swedish-eid-framework)
 
-    2.2.1. [Register för identifierare definierade av E-legitimationsnämnden](#register-foer-identifierare-definierade-av-e-legitimationsnaemnden)
+    2.1.5. [eIDAS Constructed Attributes Specification for the Swedish eID Framework](#eidas-constructed-attributes-specification-for-the-swedish-eid-framework)
+    
+    2.1.6. [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](#bankid-profile)
+    
+    2.1.7. [Principal Selection in SAML Authentication Requests](#principal-selection-in-saml-authentication-requests)
 
-    2.2.2. [Attributspecifikation](#attributspecifikation)
-
-    2.2.3. [Specifikationer av entitetskategorier](#specifikationer-av-entitetskategorier)
-
-    2.3. [Specifikationer för Underskriftstjänst](#specifikationer-foer-underskriftstjaenst)
+    2.2. [Specifikationer för Underskrift](#specifikationer-foer-underskrift)
+    
+    2.2.1. [Implementation Profile for using OASIS DSS in Central Signing Services](#implementation-profile-oasis-dss)
+    
+    2.2.2. [DSS Extension for Federated Central Signing Services](#dss-extensions)
+    
+    2.2.3. [Certificate Profile for Certificates Issued by Central Signing Services](#certificate-profile-css)
+    
+    2.2.4. [Signature Activation Protocol for Federated Signing](#signature-activation)
 
 3. [**Referenslista**](#referenslista)
 
-    3.1. [E-legitimationsnämnden](#e-legitimationsnaemnden)
+    3.1. [E-legitimationsnämnden, DIGG](#e-legitimationsnaemnden)
 
     3.2. [Övriga referenser](#oevriga-referenser)
 
@@ -60,19 +74,17 @@
 <a name="oeversikt"></a>
 ### 1.1. Översikt
 
-E-legitimationsnämndens tekniska ramverk är anpassat för
+Sweden Connect Tekniskt Ramverk är anpassat för
 identitetsfederationer som baseras på SAML 2.0.
 
 Förlitande parter erhåller identitetsintyg i ett standardiserat format
-från en identitetsintygstjänst, i detta ramverk benämnd
-legitimeringstjänst. Legitimeringstjänsterna tillhandahålls av, i
-federationen, godkända leverantörer av intygstjänster.
+från en legitimeringstjänst<sup>1</sup>.
 
-Detta innebär också att e-tjänster som kräver underskrift inte längre
-behöver anpassas efter olika användares e-legitimationer för att skapa
-elektroniska underskrifter. Istället överlåter e-tjänsten detta till en
-underskriftstjänst där användare med stöd av legitimering via
-intygstjänsten ges möjlighet att underteckna elektroniska handlingar.
+E-tjänster som kräver underskrift behöver inte anpassas efter olika 
+användares e-legitimationer för att skapa elektroniska underskrifter. 
+Istället överlåter e-tjänsten detta till en underskriftstjänst där användare 
+med stöd av legitimering via en legitimeringstjänst ges möjlighet att underteckna
+elektroniska handlingar.
 
 Inom federationen intar e-tjänster och motsvarande förlitande parter
 rollen som Service Provider (SP) medan legitimeringstjänster som
@@ -92,15 +104,16 @@ Då såväl personidentitetsuppgifter som andra attribut kopplat till
 användare tillhandahålls genom identitetsintyg och attributsintyg, kan
 alla typer av e-legitimationer som förlitande part har avtal om och som
 ingår i federationen användas för legitimering mot en e-tjänst som
-kräver såväl personnummer/samordningsnummer som ytterligare information
-om juridisk behörighet, även om e-legitimationen inte innehåller några
-specifika personuppgifter (t.ex. koddosor för generering av
-engångslösenord).
+kräver såväl personnummer som ytterligare information, även om 
+e-legitimationen inte innehåller några specifika personuppgifter 
+(t.ex. koddosor för generering av engångslösenord).
 
 ![](img/sweeid-overview1.jpg)
 
 Figur 1: *Illustration av kommunikationen mellan de olika tjänsterna inom
 en identitetsfederation.*
+
+> \[1\]: Legitimeringstjänst benämns i annan dokumentation från DIGG också som identitetstjänst och intygstjänst. I detta dokument används dock uteslutande benämningen legitimeringstjänst.
 
 <a name="tillitsramverk-och-saekerhetsnivaaer"></a>
 ### 1.2. Tillitsramverk och säkerhetsnivåer
@@ -109,7 +122,7 @@ Grunden för vilken säkerhetsnivå som tillämpas när en användare
 legitimerar sig är den tillitsnivå avseende e-legitimationen som
 e-tjänsten kräver. För att dessa säkerhetsnivåer ska kunna vara
 jämförbara inom ramen för federationen definieras fyra tillitsnivåer (1
-– 4) i Tillitsramverket för Svensk e-legitimation \[EidTillit\] och tre
+– 4) i Tillitsramverket för Svensk e-legitimation \[[EidTillit](#eidtillit)\] och tre
 tillitsnivåer (låg, väsentlig, hög) i EU-förordningen eIDAS. Alla som
 utfärdar identitetsintyg måste visa att hela den process som ligger till
 grund för utfärdandet av identitetsintyg uppfyller kraven i den
@@ -127,11 +140,11 @@ efterfrågade tillitsnivån, detta innefattar bl.a.
 
 -   Krav på fastställande av den e-legitimationssökandens identitet.
 
-<a name="tjaenst-foer-insamling,-administration-och-publicering-av-metadata"></a>
+<a name="tjaenst-foer-insamling-administration-och-publicering-av-metadata"></a>
 ### 1.3. Tjänst för insamling, administration och publicering av metadata
 
 En SAML-federation tillhandahåller information om federationens
-deltagare genom s.k. metadata. Som deltagare i en federation räknas
+deltagare genom SAML metadata. Som deltagare i en federation räknas
 såväl aktörer som levererar legitimerings- och attributtjänster i
 federationen som förlitande parter, d.v.s. aktörer som konsumerar dessa
 tjänster, t ex. e-tjänster.
@@ -141,18 +154,12 @@ deltagares tjänster, inklusive de uppgifter som krävs för ett säkert
 informationsutbyte mellan deltagarna. Metadata måste hållas uppdaterat
 av respektive part och överensstämma med avtalade förhållanden.
 
-Det viktigaste syftet med metadata är att tillhandahålla de nycklar som
-krävs för säker kommunikation och informationsutväxling mellan tjänster.
+Det viktigaste syftet med metadata är att tillhandahålla de nycklar/certifikat 
+som krävs för säker kommunikation och informationsutväxling mellan tjänster.
 Utöver nycklar innehåller metadata även annan information som är viktig
 för samverkan mellan tjänster t ex. adresser till funktioner som krävs,
 information om tillitsnivåer, tjänstekategorier,
 användargränssnittsinformation mm.
-
-Identitetsfederationer förutsätter att legitimeringstjänster och
-e-tjänster litar på varandra och därmed kan verifiera de signaturer som
-används i kommunikationen mellan parterna. Rent tekniskt baseras denna
-tillit på att respektive aktörer litar på varandras
-signeringscertifikat.
 
 En identitetsfederation definieras av ett register i XML-format som är
 signerat med federationsoperatörens certifikat. Filen innehåller
@@ -181,6 +188,8 @@ som gör sitt val och användaren, tillsammans med dennes val, styrs
 tillbaka till e-tjänsten som nu vet till vilken legitimeringstjänst
 användaren ska skickas för legitimering.
 
+> För närvarande finns ingen gemensam anvisningstjänst för Sweden Connect-federationen.
+
 <a name="integration-hos-foerlitande-part"></a>
 ### 1.5. Integration hos förlitande part
 
@@ -188,42 +197,44 @@ Förlitandeparter, t.ex. e-tjänster, integrerar mot legitimeringstjänster
 genom standardiserade meddelanden och konsumerar identitetsintyg vilka
 också har standardiserade format.
 
-E-legitimationsnämndens tekniska ramverk bygger på interoperabilitetsprofilen ” SAML2int
-Profile – SAML 2.0 Interoperability Profile”
-\[[SAML2Int](http://saml2int.org/profile/current/)\]. Profilen stöds av
-ett flertal kommersiella produkter och Open Source-lösningar, vilket
-underlättar integrationsarbetet hos e-tjänster.
+Sweden Connect tekniskt ramverk bygger på interoperabilitetsprofilen 
+”SAML V2.0 Deployment Profile for Federation Interoperability”
+\[[SAML2Int](#saml2int)\]. Profilen stöds av ett flertal kommersiella 
+produkter och Open Source-lösningar, vilket underlättar integrationsarbetet
+hos e-tjänster.
 
 Många e-tjänster använder fristående autentiseringslösningar vilket
 innebär att en anpassning av integrationen för att följa
-E-legitimationsnämndens tekniska ramverk får en begränsad påverkan på
-e-tjänsten som sådan.
+tekniskt ramverk får en begränsad påverkan på e-tjänsten som sådan.
 
 <a name="underskrift"></a>
 ### 1.6. Underskrift
 
-Vid underskrift blir det med E-legitimationsnämndens tekniska ramverk
+Vid underskrift blir det med Sweden Connect tekniskt ramverk
 möjligt att använda olika typer av e-legitimationer, även sådana som
 inte är certifikatbaserade, utan att speciella anpassningar i e-tjänsten
-behövs. Orsaken är att det är det elektroniskt utställda
+behövs. Anledningen är att det är det elektroniskt utställda
 identitetsintyget (som används för identifiering av användare vid
 underskrift) har samma format oavsett vilken typ av e-legitimation som
 användaren använder.
 
 En underskriftstjänst har som syfte att möjliggöra underskrift inom
-identitetsfederationer som följer E-legitimationsnämndens tekniska
-ramverk med stöd av alla typer av e-legitimationer som erbjuder
-tillräcklig grad av säkerhet.
+identitetsfederationer som följer tekniskt ramverk med stöd av alla 
+typer av e-legitimationer som erbjuder tillräcklig grad av säkerhet.
 
-Genom att upphandla och införa en underskriftstjänst kan en förlitande
-part som ingår i en sådan federation låta en användare skriva under en
-elektronisk handling med stöd av den upphandlande underskriftstjänsten.
+Genom att upphandla<sup>1</sup> och införa en underskriftstjänst kan en förlitande
+part som ingår i federationen låta en användare skriva under en
+elektronisk handling med stöd av underskriftstjänsten.
 Användarens elektroniska signatur och tillhörande signeringscertifikat
 skapas av underskriftstjänsten efter det att användaren accepterat att
-skriva under genom att legitimera sig mot underskriftstjänsten.
+skriva under genom att legitimera sig mot underskriftstjänsten<sup>2</sup>.
 
-<a name="e-legitimationsnaemndens-tekniska-ramverk-och-eidas"></a>
-### 1.7. E-legitimationsnämndens tekniska ramverk och eIDAS
+> \[1\]: Det är också möjligt att själv implementera en underskriftstjänst baserat på specifikationerna i tekniskt ramverk, eller på annat sätt införskaffa en underskriftstjänst.
+
+> \[2\]: Viktigt att påpeka är att det är av största vikt att användaren upplever det som att denne skriver under en handling. Därför ska ett underskriftsflöde användas för de e-legitimationer som stödjer detta i samband med "legitimering för underskrift".
+
+<a name="tekniskt-ramverk-och-eidas"></a>
+### 1.7. Tekniskt ramverk och eIDAS
 
 EU-förordningen ([910/2014](http://eur-lex.europa.eu/legal-content/SV/TXT/PDF/?uri=CELEX:32014R0910&from=EN)) om elektronisk identifiering och betrodda
 tjänster, eIDAS, ställer krav på svenska offentliga organ att erkänna de
@@ -236,15 +247,14 @@ land.
 #### 1.7.1. Autentiseringar med utländska e-legitimationer
 
 De tekniska specifikationerna för eIDAS bygger, såsom
-E-legitimationsnämndens tekniska ramverk, på SAML-standarder, och även
+tekniskt ramverk, på SAML-standarder, och även
 om likheterna är många finns även skillnader i dessa specifikationer. En
 svensk e-tjänst ska dock inte förhålla sig direkt till eIDAS tekniska
 specifikationer. Nedanstående bild illustrerar hur
-E-legitimationsnämndens eIDAS-nod (*eIDAS-connector*) agerar som en brygga
-mellan andra länder och en svensk federation då en person autentiseras
+den svenska eIDAS-noden (*eIDAS-connector*) agerar som en brygga
+mellan andra länder och den svenska federationen då en person autentiseras
 med en utländsk e-legitimation mot en svensk e-tjänst.
-E-legitimationsnämndens eIDAS-nod följer E-legitimationsnämndens tekniska
-ramverk.
+Den svenska eIDAS-noden följer tekniskt ramverk.
 
 ![](img/eidas-flow.jpg)
 
@@ -259,12 +269,11 @@ Flödet är enligt följande:
 
 3.  E-tjänsten skapar en legitimeringsbegäran enligt detta tekniska
     ramverk och styr användaren till den svenska eIDAS-noden (*connector*)
-    som E-legitimationsnämnden ansvarar för. eIDAS-noden uppträder som
-    en legitimeringstjänst (*Identity Provider*) i federationen/-erna in
+    som DIGG ansvarar för. eIDAS-noden uppträder som
+    en legitimeringstjänst (*Identity Provider*) i federationen in
     mot svenska förlitande parter vilket innebär att kommunikation med
     denna tjänst utförs på samma sätt som mot övriga
-    legitimeringstjänster inom federationer som följer
-    E-legitimationsnämndens tekniska ramverk.
+    legitimeringstjänster inom federationer som följer tekniskt ramverk.
 
 4.  Den mottagna begäran behandlas och eIDAS-noden visar upp en valsida
     där användaren väljer ”sitt land”<sup>1</sup>. Den svenska eIDAS-noden
@@ -286,34 +295,37 @@ Flödet är enligt följande:
 7.  Detta intyg styrs nu vidare till den svenska eIDAS-noden. Noden tar
     emot intyget och validerar dess korrekthet. I samband med att
     intyget transformeras från eIDAS-format till ett intyg utformat
-    enligt E-legitimationsnämndens tekniska ramverk anropar noden också
+    enligt tekniskt ramverk anropar noden också
     en attributtjänst för att, om möjligt, givet eIDAS-attribut erhålla
     attribut som stöds av den svenska e-tjänsten (t.ex. slå upp ett
-    svenskt person- eller samordningsnummer givet ett eIDAS
-    *PersonIdentifier*-attribut).
+    svenskt personnummer givet ett eIDAS *PersonIdentifier*-attribut)<sup>2</sup>.
 
 8.  Slutligen postas ett intyg, på ett format som uppfyller
-    E-legitimationsnämndens tekniska ramverk, till e-tjänsten.
+    tekniskt ramverk, till e-tjänsten.
 
 9.  Förlitande part kompletterar eventuellt med ytterligare information
     och avgör om användaren ska ges till åtkomst till tjänsten.
 
-Svenska e-tjänster behöver således endast stödja E-legitimationsnämndens
-tekniska ramverk för att kunna hantera en autentisering utförd med en
+Svenska e-tjänster behöver således endast stödja 
+tekniskt ramverk för att kunna hantera en autentisering utförd med en
 europeisk e-legitimation. Dock måste e-tjänsten kunna hantera den
-identitet som presenteras, vilket inte nödvändigtvis är ett personnummer
-eller samordningsnummer. Det kan alltså hända att en e-tjänst
-autentiserar en användare via eIDAS-ramverket, men att användarens
+identitet som presenteras, vilket inte nödvändigtvis är ett personnummer. 
+Det kan alltså hända att en e-tjänst autentiserar en användare via 
+eIDAS-ramverket, men att användarens
 presenterade identitet inte går att använda hos e-tjänsten. Mer om detta
 i kapitlet 1.7.3 nedan.
 
 > \[1\]: Egentligen väljer användaren till vilken ”eIDAS Proxy-tjänst” som begäran ska skickas vidare till. Detta är beroende landstillhörigheten för användarens e-legitimationsutfärdare.
 
+> \[2\]: I skrivande stund (augusti 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
+
+
 <a name="underskrifter-med-utlaendska-e-legitimationer"></a>
 #### 1.7.2. Underskrifter med utländska e-legitimationer
 
-Inom ramen för detta tekniska ramverk tillämpas en modell för
-elektronisk underskrift som kallas federerad underskrift. En
+Som redan beskrivits tillämpas en modell för
+elektronisk underskrift inom ramen för detta tekniska ramverk
+som kallas federerad underskrift. En
 serverbaserad underskriftstjänst knyts till e-tjänsten som i sin tur
 begär underskrift. När en användare skriver under ett dokument skickar
 e-tjänsten en underskriftsbegäran till underskriftstjänsten.
@@ -384,75 +396,81 @@ eller en utländsk medborgare som har sådan anknytning till svenska
 myndigheter att denne tilldelats ett styrkt samordningsnummer.
 
 Det faktum att en person med utländsk e-legitimation innehar ett svenskt
-personnummer eller samordningsnummer är normalt sett inte känt för den
+personnummer är normalt sett inte känt för den
 utländska legitimeringstjänsten och denna information ingår därför inte
 i identitetsintyg från landet där personen legitimeras. Den svenska
-noden har däremot möjlighet att fråga en attributtjänst i Sverige<sup>2</sup> om
+noden har däremot möjlighet att fråga en attributtjänst i Sverige<sup>1</sup> om
 det finns ett registrerat personnummer eller samordningsnummer för den
 legitimerade personen och kan, om så är fallet, påföra sådan information
 i det identitetsintyg som skickas till e-tjänsten.
 
-> \[2\]: Om en sådan kommer att finnas i enlighet med Skatteverkets förslag till regeringen i oktober 2016.
+> \[1\]: I skrivande stund (augusti 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
 
 <a name="svenska-e-legitimationer-i-utlaendska-e-tjaenster"></a>
 #### 1.7.4. Svenska e-legitimationer i utländska e-tjänster
 
-Sverige har möjlighet att anmäla svenska e-legitimationer på tillitsnivå låg (low), väsentlig (substantial) och hög (high) enligt eIDAS. Det finns en politisk vilja i Sverige att låta innehavare av svenska e-legitimationer logga in i utländska tjänster.
+Sverige har möjlighet att anmäla svenska e-legitimationer på tillitsnivå låg (low), väsentlig (substantial) och hög (high) enligt eIDAS. Det finns en politisk vilja i Sverige att låta innehavare av svenska e-legitimationer logga in i utländska tjänster<sup>1</sup>.
  
-En begäran om legitimering från en utländsk e-tjänst ställs till E-legitimationsnämndens eIDAS-nod (Proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
-I den svenska eIDAS-noden väljer användaren med vilken svensk e-legitimation denne önskar autentisera sig, varpå en legitimeringsbegäran till den legitimeringstjänst (*Identity Provider*) som hanterar vald e-legitimation skickas. Denna begäran är utformad enligt E-legitimationsnämndens tekniska ramverk vilket innebär att en svensk legitimeringstjänst inte behöver förhålla sig till eIDAS tekniska specifikationer.
+En begäran om legitimering från en utländsk e-tjänst ställs till E-den svenska eIDAS-noden (proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
+I den svenska eIDAS-noden väljer användaren med vilken svensk e-legitimation denne önskar autentisera sig, varpå en legitimeringsbegäran till den legitimeringstjänst (*Identity Provider*) som hanterar vald e-legitimation skickas. Denna begäran är utformad enligt tekniskt ramverk vilket innebär att en svensk legitimeringstjänst inte behöver förhålla sig till eIDAS tekniska specifikationer.
 
-Användaren autentiseras hos den svenska legitimeringstjänsten och ett identitetsintyg ställs ut (enligt E-legitimationsnämndens tekniska ramverk). Detta intyg mottas av den svenska eIDAS Proxy-tjänsten och omvandlas till ett intyg enligt eIDAS specifikationer innan det skickas vidare till den utländska eIDAS-connectorn och därpå till den anropande e-tjänsten (*Service Provider*).
+Användaren autentiseras hos den svenska legitimeringstjänsten och ett identitetsintyg ställs ut (enligt tekniskt ramverk). Detta intyg mottas av den svenska eIDAS Proxy-tjänsten och omvandlas till ett intyg enligt eIDAS specifikationer innan det skickas vidare till den utländska eIDAS-connectorn och därpå till den anropande e-tjänsten (*Service Provider*).
  
-När en svensk e-legitimation används för inloggning utomlands har Sverige möjlighet att skicka med antingen det svenska personnumret som personidentitetsbegrepp, eller en pseudonym. Denna fråga och andra villkor för att använda svenska e-legitimationer i utländska e-tjänster utreds under 2017 i en offentlig utredning ([N 2016:01 Utredningen om effektiv styrning av nationella digitala tjänster](http://www.sou.gov.se/n-201601-utredningen-om-effektiv-styrning-av-nationella-digitala-tjanster-i-en-samverkande-forvaltning/)), som ska redovisas till regeringen 2017-12-31.
+> \[1\]: Projektet för att anmäla svenska e-legitimationer för användande inom eIDAS-samarbetet påbörjas under september 2019. 
 
 <a name="tekniska-specifikationer"></a>
 ## 2. Tekniska specifikationer
 
 Detta kapitel innehåller specifikationer och profiler för
-identitetsfederationer som följer E-legitimationsnämndens tekniska
+identitetsfederationer som följer Sweden Connect tekniskt
 ramverk, och vissa kringliggande tjänster. Där inget annat nämns är
 dessa dokument normativa för leverans av tjänster inom
-identitetsfederationer som implementerar E-legitimationsnämndens
-tekniska ramverk.
+identitetsfederationer som implementerar 
+tekniskt ramverk.
 
 <a name="saml-profiler"></a>
 ### 2.1. SAML-profiler
 
-Identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk är uppbyggda
-kring ”Deployment Profile for the Swedish eID Framework” \[EidProfile\]. Denna profil utgår från
-”SAML2int profile – SAML 2.0 Interoperability Profile” \[[SAML2Int](http://saml2int.org/profile/current/)\].
+Identitetsfederationer som följer Sweden Connect tekniska ramverk är uppbyggda
+kring ”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\]. Denna profil utgår från
+”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\], men innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
 
-<a name="specifikationer-foer-identitetsfederationer-som-foeljer-e-legitimationsnaemndens-tekniska-ramverk"></a>
-### 2.2. Specifikationer för identitetsfederationer som följer E-legitimationsnämndens tekniska ramverk
+<a name="deployment-profile-for-the-swedish-eid-framework"></a>
+#### 2.1.1. Deployment Profile for the Swedish eID Framework
 
-<a name="register-foer-identifierare-definierade-av-e-legitimationsnaemnden"></a>
-#### 2.2.1. Register för identifierare definierade av E-legitimationsnämnden
+”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\], är huvuddokumentet för tekniskt ramverk och specificerar bland annat:
+
+- Hur SAML metadata ska byggas upp och tolkas.
+
+- Hur formatet av en legitimeringsbegäran ska se ut.
+
+- Hur en legitimeringsbegäran ska behandlas, och hur ett identitetsintyg ska konstrueras, verifieras och behandlas.
+
+- Krav på säkerhet.
+
+- Specifika SAML-krav för underskriftstjänster och "legitimering för underskrift".
+
+<a name="swedish-eid-framework-registry-for-identifiers"></a>
+#### 2.1.2. Swedish eID Framework - Registry for identifiers
 
 Implementering av en infrastruktur för Svensk e-legitimation kräver
 olika former av identifierare för att representera objekt i
-datastrukturer. Dokumentet ”Registry for identifiers assigned by the
-Swedish e-identification board” \[EidRegistry\] definierar strukturen
-för identifierare som tilldelats av E-legitimationsnämnden, samt ett
+datastrukturer. Dokumentet ”Swedish eID Framework - Registry for identifiers”, \[[EidRegistry](#eidregistry)\], definierar strukturen
+för identifierare som tilldelats inom ramen för tekniskt ramverk, samt ett
 register över definierade identifierare.
 
-<a name="attributspecifikation"></a>
-#### 2.2.2. Attributspecifikation
+<a name="attribute-specification-for-the-swedish-eid-framework"></a>
+#### 2.1.3. Attribute Specification for the Swedish eID Framework
 
-Dokumentet ”Attribute Specification for the Swedish eID Framework”
-\[EidAttributes\] deklarerar de SAML attributprofiler som används inom
+Specifikationen ”Attribute Specification for the Swedish eID Framework”,
+\[[EidAttributes](#eidattributes)\], deklarerar de SAML attributprofiler som används inom
 identitetsfederationer som följer tekniskt ramverk inklusive de som
 ansluter till eIDAS via den svenska eIDAS-noden.
 
-Dokumentet ”eIDAS Constructed Attributes Specification for the Swedish
-eID Framework” \[EidConstrAttributes\] specificerar processer och regler
-för hur ID-attribut konstrueras baserat på attribut som tas emot vid
-legitimering mot eIDAS.
+<a name="entity-categories-for-the-swedish-eid-framework"></a>
+#### 2.1.4. Entity Categories for the Swedish eID Framework
 
-<a name="specifikationer-av-entitetskategorier"></a>
-#### 2.2.3. Specifikationer av entitetskategorier
-
-Entitetskategorier (Entity Categories) används inom federationen för tre
+Entitetskategorier (Entity Categories) används inom federationen för ett antal olika
 syften:
 
 -   Service Entity Categories – Används i federationens metadata för att
@@ -465,84 +483,142 @@ syften:
 
 -   Service Type Entity Categories – Används för att representera olika
     tjänstetyper inom federationen.
+    
+-   Service Contract Entity Categories - Används av tjänster för att annonsera 
+    avtalsformer och liknande.
+    
+-   General Entity Categories - Entitetskategorier som inte faller inom ramen
+    för någon av de ovanstående typerna.
 
-Dokumentet ”Entity Categories for the Swedish eID Framework”
-\[EidEntCat\] specificerar de entitetskategorier som definieras av
-E-legitimationsnämnden och beskriver dess betydelse.
+Specifikationen ”Entity Categories for the Swedish eID Framework”
+\[[EidEntCat](#eidentcat)\] specificerar de entitetskategorier som definieras av tekniskt ramverk och beskriver dess betydelse.
 
-<a name="specifikationer-foer-underskriftstjaenst"></a>
-### 2.3. Specifikationer för Underskriftstjänst
+<a name="eidas-constructed-attributes-specification-for-the-swedish-eid-framework"></a>
+#### 2.1.5. eIDAS Constructed Attributes Specification for the Swedish eID Framework
+
+Specifikationen ”eIDAS Constructed Attributes Specification for the Swedish
+eID Framework”, \[[EidConstrAttributes](#eidconstrattributes)\], specificerar processer och regler
+för hur ID-attribut konstrueras baserat på attribut som tas emot vid
+legitimering mot eIDAS.
+
+<a name="bankid-profile"></a>
+#### 2.1.6. Implementation Profile for BankID Identity Providers within the Swedish eID Framework
+
+Specifikationen "Implementation Profile for BankID Identity Providers within the Swedish eID Framework", \[[EidBankID](#eidbankid)\], definierar regler för hur en legitimeringstjänst som implementerar stöd för BankID skall utformas.
+
+> **Notera:** Denna specifikation är inte normativ för uppfyllande av tekniskt ramverk. Den är endast relevant för legitimeringstjänster som implementerar stöd för BankID samt e-tjänster som använder dessa.
+
+<a name="principal-selection-in-saml-authentication-requests"></a>
+#### 2.1.7. Principal Selection in SAML Authentication Requests
+
+Specifikationen "Principal Selection in SAML Authentication Requests", \[[EidPrincipalSel](#eidprincipalsel)\], definierar en utökning till SAML som möjliggör för en förlitande part att informera en legitimeringstjänst vilken identitet den önskar ska legitimeras.
+
+<a name="specifikationer-foer-underskrift"></a>
+### 2.2. Specifikationer för Underskrift
 
 Detta stycke innehåller referenser till de dokument vilka definierar
-underskriftstjänster inom federationer som följer E-legitimationsnämndens tekniska
+underskriftstjänster inom federationer som följer Sweden Connect tekniskt
 ramverk.
 
-Implementationsprofilen ”Implementation Profile for Using OASIS DSS in
-Central Signing Services” \[EidDSSProfile\] specificerar en profil för
-underskriftsbegäran och respons enligt OASIS standarden ”Digital
-Signature Service Core Protocols, Elements, and Bindings”
-\[[DSS](http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.doc)\],
-och utökar denna med definitioner specificerade i ”DSS Extension for
-Federated Central Signing Services” \[EidDSSExt\].
+<a name="implementation-profile-oasis-dss"></a>
+#### 2.2.1. Implementation Profile for using OASIS DSS in Central Signing Services
 
-Vidare definieras en certifikatprofil ”Certificate profile for
-certificates issued by Central Signing services” \[EidCertProf\] som
-specificerar innehåll i signeringscertifikat. Denna profil tillämpar en
-ny certifikatextension till stöd för signeringstjänsten, Authentication
-Context Certificate Extension \[AuthContext\], vilken beskriver hur
-”Authentication Context” representeras i X.509 certifikat.
+Implementationsprofilen ”Implementation Profile for Using OASIS DSS in
+Central Signing Services”, \[[EidDSSProfile](#eiddssprofile)\], specificerar en profil för
+underskriftsbegäran och respons enligt OASIS standarden ”Digital
+Signature Service Core Protocols, Elements, and Bindings”,
+\[[DSS](#dss)\].
+
+<a name="dss-extensions"></a>
+#### 2.2.2. DSS Extension for Federated Central Signing Services
+
+”DSS Extension for Federated Central Signing Services”, \[[EidDSSExt](#eiddssext)\], är en påbyggnad av 
+OASIS standarden ”Digital Signature Service Core Protocols, Elements, and Bindings”, \[[DSS](#dss)\], där definitioner som behövs för underskrift enligt tekniskt ramverk specificeras.
+
+<a name="certificate-profile-css"></a>
+#### 2.2.3. Certificate Profile for Certificates Issued by Central Signing Services
+
+Certifikatprofilen ”Certificate profile for certificates issued by Central Signing services”, \[[EidCertProf](#eidcertprof)\], specificerar innehåll i signeringscertifikat. Denna profil tillämpar en
+ny certifikatextension till stöd för underskriftstjänster.
+
+Denna profil refererar till "Authentication Context Certificate Extension", \[[AuthContext](#authcontext)\], vilken beskriver hur ”Authentication Context” representeras i X.509 certifikat.
+
+<a name="signature-activation"></a>
+#### 2.2.4. Signature Activation Protocol for Federated Signing
+
+Specifikationen "Signature Activation Protocol for Federated Signing", \[[EidSigAct](#eidsigact)\], definierar ett "Signature Activation Protocol" (SAP) för implementation av "Sole Control Assurance Level 2" (SCAL2) enligt standarden "prEN 419241 - Trustworthy Systems Supporting Server Signing".
 
 <a name="referenslista"></a>
 ## 3. Referenslista
 
 <a name="e-legitimationsnaemnden"></a>
-### 3.1. E-legitimationsnämnden
+### 3.1. E-legitimationsnämnden, DIGG
 
+<a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
-> 
-> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Börjar gälla 2018-08-20.
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
 
+<a name="eidprofile"></a>
 **\[EidProfile\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
+<a name="eidregistry"></a>
 **\[EidRegistry\]**
-> [Registry for identifiers assigned by the Swedish e-identification
-> board](http://elegnamnden.github.io/technical-framework/latest/ELN-0603_-_Registry_for_Identifiers.html).
+> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
 
+<a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="eidentcat"></a>
+**\[EidEntCat\]**
+> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+
+<a name="eidconstrattributes"></a>
 **\[EidConstrAttributes\]**
 > [eIDAS Constructed Attributes Specification for the Swedish eID
-> Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
+> Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
-**\[EidEntCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+<a name="eidbankid"></a>
+**\[EidBankID\]**
+> [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html).
 
+<a name="eidprincipalsel"></a>
+**\[EidPrincipalSel\]**
+> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html).
+
+<a name="eiddssprofile"></a>
 **\[EidDSSProfile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
+<a name="eiddssext"></a>
 **\[EidDSSExt\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
 
+<a name="eidcertprof"></a>
 **\[EidCertProf\]**
 > [Certificate profile for certificates issued by Central Signing
-> services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html).
+> services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html).
+
+<a name="eidsigact"></a>
+**\[EidSigAct\]**
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="oevriga-referenser"></a>
 ### 3.2. Övriga referenser
 
+<a name="saml2int"></a>
 **\[SAML2Int\]**
-> [SAML2int profile v0.2.1 – SAML 2.0 Interoperability
-> Profile](http://saml2int.org/profile/current/).
+> [SAML V2.0 Deployment Profile for Federation Interoperability](https://kantarainitiative.github.io/SAMLprofiles/saml2int.html).
 
+<a name="dss"></a>
 **\[DSS\]**
 > [OASIS Standard – Digital Signature Service Core Protocols, Elements,
 > and Bindings Version 1.0, April 11,
 > 2007](http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.doc).
 
+<a name="authcontext"></a>
 **\[AuthContext\]**
 > [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
