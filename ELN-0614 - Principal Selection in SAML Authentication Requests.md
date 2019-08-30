@@ -2,7 +2,7 @@
 
 # Principal Selection in SAML Authentication Requests 
 
-### Version 1.0 - 2019-05-22 - *Draft version*
+### Version 1.0 - 2019-08-30 - *Draft version*
 
 *ELN-0614-v1.0*
 
@@ -151,7 +151,7 @@ The following schema fragment defines the `<RequestedPrincipalSelection>` elemen
 <a name="examples"></a>
 ## 3. Examples
 
-Attributes in the examples below are specified in \[[ELN-0604](eln-0604)\].
+Attributes in the examples below are specified in \[[EidAttributes](eidattributes)\].
 
 <a name="authentication-requests"></a>
 ### 3.1. Authentication Requests
@@ -218,14 +218,16 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/princ
 <a name="normative-references"></a>
 ## 5. Normative References
 
-<a name="rfc2119"></a>**[RFC2119]**
+<a name="rfc2119"></a>
+**[RFC2119]**
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
-<a name="eln-0604"></a>**[ELN-0604]**
+<a name="eidattributes"></a>
+**[EidAttributes]**
 
-> [Attribute Specification for the Swedish eID Framework](http://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions

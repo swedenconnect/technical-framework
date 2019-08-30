@@ -1,10 +1,10 @@
-<img src="img/eln-logo.png"></img>
+<img src="img/sweden-connect.png"></img>
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.5 - 2018-06-19
+### Version 1.6 - 2019-08-28 - *Draft version*
 
-*ELN-0604-v1.5*
+*ELN-0604-v1.6*
 
 ---
 
@@ -571,16 +571,16 @@ following attribute:
 <a name="skv704"></a>
 **\[SKV704\]**
 > [Skatteverket, SKV 704 Utgåva 8,
-> Personnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv704-8.pdf).
+> Personnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf).
 
 <a name="skv707"></a>
 **\[SKV707\]**
 > [Skatteverket, SKV 707, Utgåva 2,
-> Samordningsnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv707-2.pdf).
+> Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
 
 <a name="skv709"></a>
 **\[SKV709\]**
-> [Skatteverket, SKV 709, Utgåva 8, Organisationsnummer](http://elegnamnden.github.io/technical-framework/mirror/skv/skv709-8.pdf).
+> [Skatteverket, SKV 709, Utgåva 8, Organisationsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv709-8.pdf).
 
 <a name="x520"></a>
 **\[X.520\]**
@@ -604,29 +604,32 @@ following attribute:
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation version 1.3](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.3.pdf)
-> 
-> [Tillitsramverk för Svensk e-legitimation version 1.4](http://elegnamnden.github.io/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf) - Valid from 2018-08-20.
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+
 
 <a name="eiddeployprof"></a>
 **\[EidDeployProf\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="constructedattr"></a>
 **\[ConstructedAttr\]**
 > [eIDAS Constructed Attributes Specification for the Swedish eID
-> Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
+> Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas-attr"></a>
 **\[eIDAS\_Attr\]**
-> [eIDAS SAML Attribute Profile, 28 October 2016](https://ec.europa.eu/cefdigital/wiki/download/attachments/46992719/eIDAS%20SAML%20Attribute%20Profile%20v1.1_2.pdf).
+> [eIDAS SAML Attribute Profile, version 1.2, 21 May 2019](https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.2-FINAL.pdf).
 
 <a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.5 and version 1.6:**
+
+- References were updated to point at the latest versions of the "Tillitsramverk för Svensk e-legitimation" and "eIDAS SAML Attribute Profile" specifications.
 
 **Changes between version 1.4 and version 1.5:**
 
