@@ -1,6 +1,6 @@
 <img src="img/sweden-connect.png"></img>
 
-# En introduktion till Sweden Connect Teknisk ramverk
+# En introduktion till Sweden Connect Tekniskt ramverk
 
 ### 2019-08-28
 
