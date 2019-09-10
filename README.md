@@ -25,9 +25,9 @@ The releases can also be found under <https://docs.swedenconnect.se/technical-fr
 
 An overview document (in Swedish) that describes the different parts of the Swedish eID Framework.
 
-> [Tekniskt ramverk - Introduktion](ELN-0600%20-%20Tekniskt%20ramverk%20-%20Introduktion.md)
+> [Tekniskt ramverk - Introduktion](ELN-0600%20-%20Tekniskt%20ramverk%20-%20Introduktion.md) (in Swedish)
 
-> This document will be translated into English.
+> [Introduction to the Swedish eID Framework](ELN-0600%20-%20Swedish%20eID%20Framework%20-%20Introduction.md) (in English)
 
 #### Deployment Profile for the Swedish eID Framework
 

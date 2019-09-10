@@ -2,7 +2,7 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2019-08-28
+### 2019-09-10
 
 *ELN-0600*
 
@@ -317,7 +317,7 @@ i kapitlet 1.7.3 nedan.
 
 > \[1\]: Egentligen väljer användaren till vilken ”eIDAS Proxy-tjänst” som begäran ska skickas vidare till. Detta är beroende landstillhörigheten för användarens e-legitimationsutfärdare.
 
-> \[2\]: I skrivande stund (augusti 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
+> \[2\]: I skrivande stund (september 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
 
 
 <a name="underskrifter-med-utlaendska-e-legitimationer"></a>
@@ -347,11 +347,6 @@ om vad som undertecknas. Först när användaren genom att legitimera sig
 (för underskrift) utfärdas ett identitetsintyg, som skickas till
 underskriftstjänsten och som i sin tur genererar underskriften.
 
-I likhet med underskrift med stöd av legitimering med svenska
-e-legitimationer så innebär underskrift med utländsk e-legitimation att
-användarens av förlitande part registrerade identitet kan utgöras av
-andra attribut än de som tillhandahålls av legitimeringstjänsten (t.ex.
-anställningsnummer i stället för personnummer).
 
 <a name="hantering-av-identiteter"></a>
 #### 1.7.3. Hantering av identiteter
@@ -373,7 +368,7 @@ Storbritannien) kommer identifieraren att vara olika beroende på vilken
 av landets e-legitimationer en användare för tillfället väljer att
 använda.
 
-För att förenkla hanteringen av användare i svenska e-tjänster så
+För att förenkla hanteringen av användare i svenska e-tjänster
 genererar den svenska eIDAS-noden ett standardiserat ID-attribut för
 användare som legitimerats med utländsk e-legitimation, ett s.k.
 *provisional ID* (förkortat PRID). Dessutom skapas ett tillhörande
@@ -389,34 +384,34 @@ för en användare vars identitet har ändrats, att återfå kontrollen över
 sin information i e-tjänsten.
 
 I vissa fall kan en person som legitimeras med en utländsk
-e-legitimation även inneha ett svenskt personnummer eller ett styrkt
-svenskt samordningsnummer. Det kan till exempel röra sig om en svensk
-medborgare som flyttat utomlands och skaffat utländsk e-legitimation
-eller en utländsk medborgare som har sådan anknytning till svenska
-myndigheter att denne tilldelats ett styrkt samordningsnummer.
+e-legitimation även inneha ett svenskt personnummer. Det kan till exempel 
+röra sig om en svensk medborgare som flyttat utomlands och skaffat utländsk e-legitimation
+eller en utländsk medborgare som är folkbokförd i Sverige och har tilldelats ett
+personnummer.
 
 Det faktum att en person med utländsk e-legitimation innehar ett svenskt
 personnummer är normalt sett inte känt för den
 utländska legitimeringstjänsten och denna information ingår därför inte
 i identitetsintyg från landet där personen legitimeras. Den svenska
 noden har däremot möjlighet att fråga en attributtjänst i Sverige<sup>1</sup> om
-det finns ett registrerat personnummer eller samordningsnummer för den
+det finns ett registrerat personnummer för den
 legitimerade personen och kan, om så är fallet, påföra sådan information
 i det identitetsintyg som skickas till e-tjänsten.
 
-> \[1\]: I skrivande stund (augusti 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
+> \[1\]: I skrivande stund (september 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
 
 <a name="svenska-e-legitimationer-i-utlaendska-e-tjaenster"></a>
 #### 1.7.4. Svenska e-legitimationer i utländska e-tjänster
 
 Sverige har möjlighet att anmäla svenska e-legitimationer på tillitsnivå låg (low), väsentlig (substantial) och hög (high) enligt eIDAS. Det finns en politisk vilja i Sverige att låta innehavare av svenska e-legitimationer logga in i utländska tjänster<sup>1</sup>.
  
-En begäran om legitimering från en utländsk e-tjänst ställs till E-den svenska eIDAS-noden (proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
+En begäran om legitimering från en utländsk e-tjänst ställs till den svenska eIDAS-noden (proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
 I den svenska eIDAS-noden väljer användaren med vilken svensk e-legitimation denne önskar autentisera sig, varpå en legitimeringsbegäran till den legitimeringstjänst (*Identity Provider*) som hanterar vald e-legitimation skickas. Denna begäran är utformad enligt tekniskt ramverk vilket innebär att en svensk legitimeringstjänst inte behöver förhålla sig till eIDAS tekniska specifikationer.
 
 Användaren autentiseras hos den svenska legitimeringstjänsten och ett identitetsintyg ställs ut (enligt tekniskt ramverk). Detta intyg mottas av den svenska eIDAS Proxy-tjänsten och omvandlas till ett intyg enligt eIDAS specifikationer innan det skickas vidare till den utländska eIDAS-connectorn och därpå till den anropande e-tjänsten (*Service Provider*).
  
-> \[1\]: Projektet för att anmäla svenska e-legitimationer för användande inom eIDAS-samarbetet påbörjas under september 2019. 
+> \[1\]: Projektet för att anmäla svenska e-legitimationer för användande inom eIDAS-samarbetet
+påbörjades under september 2019. 
 
 <a name="tekniska-specifikationer"></a>
 ## 2. Tekniska specifikationer
@@ -473,7 +468,7 @@ ansluter till eIDAS via den svenska eIDAS-noden.
 Entitetskategorier (Entity Categories) används inom federationen för ett antal olika
 syften:
 
--   Service Entity Categories – Används i federationens metadata för att
+-   Service Entity Categories – Används i metadata för att
     representera e-tjänsters krav på tillitsnivåer och begärda attribut,
     samt legitimeringstjänsters uppfyllande av tillitsnivåer och
     leverans av attribut.
@@ -506,7 +501,7 @@ legitimering mot eIDAS.
 
 Specifikationen "Implementation Profile for BankID Identity Providers within the Swedish eID Framework", \[[EidBankID](#eidbankid)\], definierar regler för hur en legitimeringstjänst som implementerar stöd för BankID skall utformas.
 
-> **Notera:** Denna specifikation är inte normativ för uppfyllande av tekniskt ramverk. Den är endast relevant för legitimeringstjänster som implementerar stöd för BankID samt e-tjänster som använder dessa.
+> **Notera:** Denna specifikation är inte normativ för uppfyllande av tekniskt ramverk. Den är endast relevant för legitimeringstjänster som implementerar stöd för BankID samt e-tjänster som använder dessa. Dock så skall legitimeringstjänster som implementerar stöd för BankID och vill ansluta till Sweden Connect-federationen uppfylla denna specifikation.
 
 <a name="principal-selection-in-saml-authentication-requests"></a>
 #### 2.1.7. Principal Selection in SAML Authentication Requests
