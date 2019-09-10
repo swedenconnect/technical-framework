@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="en-introduktion-till-sweden-connect-tekniskt-ramverk">En introduktion till Sweden Connect Tekniskt ramverk</h1>
-<h3 id="2019-08-28">2019-08-28</h3>
+<h3 id="2019-09-10">2019-09-10</h3>
 <p><em>ELN-0600</em></p>
 <hr>
 <h2 id="innehållsförteckning">Innehållsförteckning</h2>
@@ -271,7 +271,7 @@ presenterade identitet inte går att använda hos e-tjänsten. Mer om detta
 i kapitlet 1.7.3 nedan.</p>
 <blockquote>
 <p>[1]: Egentligen väljer användaren till vilken ”eIDAS Proxy-tjänst” som begäran ska skickas vidare till. Detta är beroende landstillhörigheten för användarens e-legitimationsutfärdare.</p>
-<p>[2]: I skrivande stund (augusti 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.</p>
+<p>[2]: I skrivande stund (september 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.</p>
 </blockquote>
 <p><a name="underskrifter-med-utlaendska-e-legitimationer"></a></p>
 <h4 id="1.7.2.-underskrifter-med-utländska-e-legitimationer">1.7.2. Underskrifter med utländska e-legitimationer</h4>
@@ -296,11 +296,6 @@ ett dokument, vem som begärt underskrift samt med eventuell information
 om vad som undertecknas. Först när användaren genom att legitimera sig
 (för underskrift) utfärdas ett identitetsintyg, som skickas till
 underskriftstjänsten och som i sin tur genererar underskriften.</p>
-<p>I likhet med underskrift med stöd av legitimering med svenska
-e-legitimationer så innebär underskrift med utländsk e-legitimation att
-användarens av förlitande part registrerade identitet kan utgöras av
-andra attribut än de som tillhandahålls av legitimeringstjänsten (t.ex.
-anställningsnummer i stället för personnummer).</p>
 <p><a name="hantering-av-identiteter"></a></p>
 <h4 id="1.7.3.-hantering-av-identiteter">1.7.3. Hantering av identiteter</h4>
 <p>Identitetsintyg från andra länder följer EU-gemensamma tekniska
@@ -319,7 +314,7 @@ eller bara byter e-legitimation. Från några länder (t.ex.
 Storbritannien) kommer identifieraren att vara olika beroende på vilken
 av landets e-legitimationer en användare för tillfället väljer att
 använda.</p>
-<p>För att förenkla hanteringen av användare i svenska e-tjänster så
+<p>För att förenkla hanteringen av användare i svenska e-tjänster
 genererar den svenska eIDAS-noden ett standardiserat ID-attribut för
 användare som legitimerats med utländsk e-legitimation, ett s.k.
 <em>provisional ID</em> (förkortat PRID). Dessutom skapas ett tillhörande
@@ -334,30 +329,30 @@ med användaren och proaktivt tillhandahålla funktioner som underlättar
 för en användare vars identitet har ändrats, att återfå kontrollen över
 sin information i e-tjänsten.</p>
 <p>I vissa fall kan en person som legitimeras med en utländsk
-e-legitimation även inneha ett svenskt personnummer eller ett styrkt
-svenskt samordningsnummer. Det kan till exempel röra sig om en svensk
-medborgare som flyttat utomlands och skaffat utländsk e-legitimation
-eller en utländsk medborgare som har sådan anknytning till svenska
-myndigheter att denne tilldelats ett styrkt samordningsnummer.</p>
+e-legitimation även inneha ett svenskt personnummer. Det kan till exempel 
+röra sig om en svensk medborgare som flyttat utomlands och skaffat utländsk e-legitimation
+eller en utländsk medborgare som är folkbokförd i Sverige och har tilldelats ett
+personnummer.</p>
 <p>Det faktum att en person med utländsk e-legitimation innehar ett svenskt
 personnummer är normalt sett inte känt för den
 utländska legitimeringstjänsten och denna information ingår därför inte
 i identitetsintyg från landet där personen legitimeras. Den svenska
 noden har däremot möjlighet att fråga en attributtjänst i Sverige<sup>1</sup> om
-det finns ett registrerat personnummer eller samordningsnummer för den
+det finns ett registrerat personnummer för den
 legitimerade personen och kan, om så är fallet, påföra sådan information
 i det identitetsintyg som skickas till e-tjänsten.</p>
 <blockquote>
-<p>[1]: I skrivande stund (augusti 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.</p>
+<p>[1]: I skrivande stund (september 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.</p>
 </blockquote>
 <p><a name="svenska-e-legitimationer-i-utlaendska-e-tjaenster"></a></p>
 <h4 id="1.7.4.-svenska-e-legitimationer-i-utländska-e-tjänster">1.7.4. Svenska e-legitimationer i utländska e-tjänster</h4>
 <p>Sverige har möjlighet att anmäla svenska e-legitimationer på tillitsnivå låg (low), väsentlig (substantial) och hög (high) enligt eIDAS. Det finns en politisk vilja i Sverige att låta innehavare av svenska e-legitimationer logga in i utländska tjänster<sup>1</sup>.</p>
-<p>En begäran om legitimering från en utländsk e-tjänst ställs till E-den svenska eIDAS-noden (proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
+<p>En begäran om legitimering från en utländsk e-tjänst ställs till den svenska eIDAS-noden (proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
 I den svenska eIDAS-noden väljer användaren med vilken svensk e-legitimation denne önskar autentisera sig, varpå en legitimeringsbegäran till den legitimeringstjänst (<em>Identity Provider</em>) som hanterar vald e-legitimation skickas. Denna begäran är utformad enligt tekniskt ramverk vilket innebär att en svensk legitimeringstjänst inte behöver förhålla sig till eIDAS tekniska specifikationer.</p>
 <p>Användaren autentiseras hos den svenska legitimeringstjänsten och ett identitetsintyg ställs ut (enligt tekniskt ramverk). Detta intyg mottas av den svenska eIDAS Proxy-tjänsten och omvandlas till ett intyg enligt eIDAS specifikationer innan det skickas vidare till den utländska eIDAS-connectorn och därpå till den anropande e-tjänsten (<em>Service Provider</em>).</p>
 <blockquote>
-<p>[1]: Projektet för att anmäla svenska e-legitimationer för användande inom eIDAS-samarbetet påbörjas under september 2019. </p>
+<p>[1]: Projektet för att anmäla svenska e-legitimationer för användande inom eIDAS-samarbetet
+påbörjades under september 2019. </p>
 </blockquote>
 <p><a name="tekniska-specifikationer"></a></p>
 <h2 id="2.-tekniska-specifikationer">2. Tekniska specifikationer</h2>
@@ -405,7 +400,7 @@ ansluter till eIDAS via den svenska eIDAS-noden.</p>
 <p>Entitetskategorier (Entity Categories) används inom federationen för ett antal olika
 syften:</p>
 <ul class="list">
-<li><p>Service Entity Categories – Används i federationens metadata för att
+<li><p>Service Entity Categories – Används i metadata för att
 representera e-tjänsters krav på tillitsnivåer och begärda attribut,
 samt legitimeringstjänsters uppfyllande av tillitsnivåer och
 leverans av attribut.</p>
@@ -435,7 +430,7 @@ legitimering mot eIDAS.</p>
 <h4 id="2.1.6.-implementation-profile-for-bankid-identity-providers-within-the-swedish-eid-framework">2.1.6. Implementation Profile for BankID Identity Providers within the Swedish eID Framework</h4>
 <p>Specifikationen &quot;Implementation Profile for BankID Identity Providers within the Swedish eID Framework&quot;, [<a href="#eidbankid">EidBankID</a>], definierar regler för hur en legitimeringstjänst som implementerar stöd för BankID skall utformas.</p>
 <blockquote>
-<p><strong>Notera:</strong> Denna specifikation är inte normativ för uppfyllande av tekniskt ramverk. Den är endast relevant för legitimeringstjänster som implementerar stöd för BankID samt e-tjänster som använder dessa.</p>
+<p><strong>Notera:</strong> Denna specifikation är inte normativ för uppfyllande av tekniskt ramverk. Den är endast relevant för legitimeringstjänster som implementerar stöd för BankID samt e-tjänster som använder dessa. Dock så skall legitimeringstjänster som implementerar stöd för BankID och vill ansluta till Sweden Connect-federationen uppfylla denna specifikation.</p>
 </blockquote>
 <p><a name="principal-selection-in-saml-authentication-requests"></a></p>
 <h4 id="2.1.7.-principal-selection-in-saml-authentication-requests">2.1.7. Principal Selection in SAML Authentication Requests</h4>
