@@ -13,6 +13,10 @@ can be found in the [june-2018 branch](https://github.com/swedenconnect/technica
 
 If you have feedback or questions regarding the Technical Framework make a post to the "Tekniskt ramverk"-thread on <https://forum.eidasweb.se>.
 
+### The Working Group
+
+The [Working Group for the Swedish eID Framework](working-group/wg.md) is responsible of development of future versions of the framework. 
+
 ### Releases
 
 For official and draft releases of the Swedish eID Framework, see the [releases section](https://github.com/swedenconnect/technical-framework/releases).
