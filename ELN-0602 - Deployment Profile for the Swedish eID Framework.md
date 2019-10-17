@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-08-28 - **Draft version**
+### Version 1.6 - 2019-10-17 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -92,43 +92,40 @@
 
     7.3. [Authentication Responses](#authentication-responses2)
 
-8. [**Normative References**](#normative-references)
+8. [**Cryptographic Algorithms**](#cryptographic-algorithms)
 
-9. [**Changes between versions**](#changes-between-versions)
+    8.1. [Digest Algorithms](#digest-algorithms)
+
+    8.2. [Signature Algorithms](#signature-algorithms)
+    
+    8.3. [Block Encryption Algorithms](#block-encryption-algorithms)
+    
+    8.4. [Key Transport Algorithms](#key-transport-algorithms)
+
+9. [**Normative References**](#normative-references)
+
+19. [**Changes between versions**](#changes-between-versions)
 
 ---
 
 <a name="introduction"></a>
 ## 1. Introduction
 
-This profile specifies behavior and options that deployments of the SAML
-V2.0 Web Browser SSO Profile
-\[[SAML2Prof](http://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf)\]
-are required or permitted to rely on. The profile extends Interoperable
-SAML 2.0 Web Browser SSO Deployment Profile
-\[[SAML2Int](http://saml2int.org/profile/current/)\] with requirements
-specific for the Swedish eID Framework and specifies deployment details
-that are not covered in
-\[[SAML2Int](http://saml2int.org/profile/current/)\].
+This profile specifies behaviour and options that deployments of the SAML
+V2.0 Web Browser SSO Profile \[[SAML2Prof](#saml2prof)\]
+are required or permitted to rely on. The requirements specified in this profile
+are in addition to the underlying normative requirements of \[[SAML2Prof](#saml2prof)\]
+(and modified by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
+
+> Note: The profile is influenced by, but not normatively dependent on, [SAML2Int](https://kantarainitiative.github.io/SAMLprofiles/saml2int.html).
 
 Readers should be familiar with all relevant reference documents, and
 any requirements stated are not repeated unless where deemed necessary
 to clarify or highlight a certain issue.
 
-This profile, like \[[SAML2Int](http://saml2int.org/profile/current/)\],
-addresses the content, exchange, and processing of SAML messages, but
-also specifies some deployment details that go beyond that scope, such
-as required metadata elements.
-
 Any SAML features specified in referenced SAML documents that are
 optional are out of scope of this profile, unless explicitly specified
 by this profile.
-
-This profile does not handle requirements regarding algorithms and
-different versions of underlying security mechanisms. This information
-is distributed by the federation operator in other channels.
-
-> Note: The work on SAML2Int has been moved to the Kantara Initiative. However, this version of the Swedish eID Framework still refers to version 0.2.1 of the SAML2Int profile as published on [http://saml2int.org/profile/current](http://saml2int.org/profile/current/).
 
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
@@ -183,17 +180,18 @@ When referring to elements from the W3C XML Signature namespace
 <a name="metadata-and-trust-management"></a>
 ## 2. Metadata and Trust Management
 
-Identity Providers and Service Providers that are part of the federation
-for Swedish eID MUST provide a SAML 2.0 Metadata document representing
-its entity. Provided metadata MUST conform to \[[SAML2Int](#saml2int)\] as well 
-as the SAML V2.0 Metadata Interoperability Profile Version 1.0 \[[SAML2MetaIOP](#saml2metaiop)\] 
-and SHOULD follow SAML v2.0 Metadata Profile for Algorithm Support Version 1.0 \[[SAML2MetaAlgSupport](#saml2metaalg)\].
+Identity Providers and Service Providers conformant with this profile MUST provide a SAML 2.0 Metadata document representing its entity. The provided metadata MUST conform to "Metadata for the OASIS Security Assertion Markup Language (SAML) V2.0", \[[SAML2Meta](#saml2meta)\], and SHOULD follow "SAML v2.0 Metadata Profile for Algorithm Support Version 1.0", \[[SAML2MetaAlgSupport](#saml2metaalg)\].
+
+Services conforming to this profile MUST be able to consume SAML metadata on an automated and periodic basis using the processing rules defined by "SAML V2.0 Metadata Interoperability Profile Version 1.0" \[[SAML2MetaIOP](#saml2metaiop)\]. Automatic consumption of metadata MUST be followed by a successful signature verification of the downloaded metadata before it is trusted. 
 
 <a name="requirements-for-metadata-content"></a>
 ### 2.1. Requirements for Metadata Content
 
 <a name="generic"></a>
 #### 2.1.1. Generic
+
+<a name="display-information"></a>
+##### 2.1.1.1. Display Information
 
 All services that are represented in the Metadata SHALL include a
 `<md:Organization>` element with mandatory child elements, which
@@ -225,12 +223,43 @@ represented with the language attribute `en` (English).
 
 The federation operator may impose further requirements regarding the `<mdui:UIInfo>` extension.
 
-All services represented in the metadata SHALL include RSA public keys
-in the form of a certificate, which supports both signature validation
-and encryption. The same public key MAY support both signature
-validation and encryption, indicated by an absent `"use"` attribute.
+<a name="certificates-in-metadata"></a>
+##### 2.1.1.2. Certificates in Metadata
 
-Services MAY declare encryption and signature capabilities as defined in  \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Swedish eID Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
+Public keys used for signature validation and encryption MUST be expressed via X.509
+certificates included in metadata as `<ds:X509Certificate>` child elements to
+`<md:KeyDescriptor>` elements. These certificates merely acts as containers for the public keys 
+needed for signature validation and encryption and the consumer of a metadata entry cannot
+expect to be able to execute a successful certificate path validation of such certificates.
+A metadata consumer MUST NOT reject a metadata entry due to that certificate trust is missing,
+the certificate is expired, or certificate revocation information is missing.
+
+However, for interoperability reasons it is RECOMMENDED that:
+
+* self-signed certificates are used,
+* certificates with a long validity time are used,
+* certificates are not signed with MD5- och SHA1-based signature algorithms. 
+
+All services represented in metadata SHALL include at least one `<md:KeyDescriptor>` 
+holding a X.509 certificate to be used for signature validation and/or message encryption. 
+The same certificate MAY be used for both signature validation and encryption. It those cases 
+the `use` attribute of the `<md:KeyDescriptor>` element should be absent. If separate signature
+and encryption keys are used, this is indicated by assigning the `use` attribute to `signing`
+and `encryption` respectively.
+
+In order to facilitate key rollover of a signing key, a service MUST support multiple signing 
+certificates found in peer metadata and MUST support signature validation using a key from 
+any of the available peer signature certificates.
+
+For key rollover of encryption keys, the service that is performing the key rollover MUST only
+publish the latest key (in a certificate) to its metadata entry. Until all peers have consumed
+the service's metadata entry containing the new certificate, the service MUST support decrypting 
+messages using both the old and new key.
+
+<a name="declaring-algorithm-support"></a>
+##### 2.1.1.3. Declaring Algorithm Support
+
+Services MAY declare encryption and signature capabilities as defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Swedish eID Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
 
 All services conformant with this specification MUST support the mandatory algorithms defined by the Swedish eID Framework, meaning that a service has no possibility to opt-out from a certain mandatory algorithm by excluding it from the declared capabilities. The main purpose of declaring an algorithm using any of the elements `<md:EncryptionMethod>`, `<alg:SigningMethod>` or `<alg:DigestMethod>` is to declare which algorithm the service prefers.
 
@@ -434,17 +463,12 @@ section [2.1.2](##service-providers), "[Service Providers](#service-providers)".
 
 The endpoints, at which an Identity Provider receives a
 `<saml2p:AuthnRequest>` message, and all subsequent exchanges with
-the user agent, MUST be protected by TLS/SSL
-(\[[SAML2Int](#saml2int)\] specifies SHOULD).
+the user agent, MUST be protected by TLS/SSL.
 
-\[[SAML2Int](#saml2int)\] specifies that a
-`<saml2p:AuthnRequest>` message MUST be communicated to the Identity
-Provider using the HTTP-REDIRECT binding. This profile will also allow
-the usage of the HTTP-POST binding for sending
-`<saml2p:AuthnRequest>` messages (see section 3.5 of
-\[[SAML2Bind](#saml2bind)\]),
-meaning that Identity Providers conformant with this profile MUST support
-the HTTP-POST binding.
+A Service Provider sending an `<saml2p:AuthnRequest>` message to an Identity Provider
+may do so using either the HTTP-Redirect or HTTP-POST binding \[[SAML2Bind](#saml2bind)\],
+meaning that Identity Providers conformant with this profile MUST support the
+HTTP-Redirect and the HTTP-POST binding.
 
 An Identity Provider that requires `<saml2p:AuthnRequest>` messages
 to be signed MUST not accept messages that are not signed, or where the
@@ -477,13 +501,17 @@ Before signing the authentication request, the Service Provider SHOULD consult t
 <a name="message-content"></a>
 ### 5.3. Message Content
 
-\[[SAML2Int](#saml2int)\] specifies that a
-`<saml2p:AuthnRequest>` message SHOULD contain an
+An `<saml2p:AuthnRequest>` message MUST NOT contain a Document Type Definition (DTD).
+
+The `<saml2p:AuthnRequest>` message SHOULD contain an
 `AssertionConsumerServiceURL` attribute identifying the desired response
 location. The Service Provider MUST NOT use any other values for this
 attribute than those listed in its metadata record as
 `<md:AssertionConsumerService>` elements for the HTTP-POST binding
-(see section 4.1.6 of \[[SAML2Prof](#saml2prof)\]).
+(see section 4.1.6 of \[[SAML2Prof](#saml2prof)\]), and URL
+canonicalization or normalization MUST NOT be required.
+
+A Service Provider MUST NOT include an `AssertionConsumerServiceIndex` attribute.
 
 The `Destination` attribute of the `<saml2p:AuthnRequest>` message
 MUST contain the URL to which the Service Provider has instructed the
@@ -616,11 +644,6 @@ is marked as default (has the `isDefault` attribute set), or if no element
 has the `isDefault` attribute set, the one with the lowest index value
 (see section 2.4.4.1 of \[[SAML2Meta](#saml2meta)\]).
 
-Section 8.2 of \[[SAML2Int](#saml2int)\]
-specifies how comparisons between the `AssertionConsumerServiceURL` value
-and the values found in the Service Provider’s metadata should be
-performed.
-
 <a name="identity-provider-user-interface"></a>
 #### 5.4.3. Identity Provider User Interface
 
@@ -631,6 +654,11 @@ MUST obtain this information from the
 Implementers of this profile MUST be capable of handling display
 information stored in the `<mdui:DisplayName>`, `<mdui:Logo>`
 and the `<mdui:Description>` elements.
+
+An Identity Provider displaying logotypes found in a Service Provider's
+metadata MUST be able to handle embedded in-line images, as well as
+vector-based images where the height and width given in metadata should
+be interpreted as image dimensions and not the actual size.
 
 <a name="authentication-context-and-level-of-assurance-handling"></a>
 #### 5.4.4. Authentication Context and Level of Assurance Handling
@@ -707,8 +735,7 @@ interface for consent/information in these cases.
 ### 6.1. Security Requirements
 
 The endpoint(s) at which a Service Provider receives a
-`<saml2p:Response>` message MUST be protected by TLS/SSL
-(\[[SAML2Int](#saml2int)\] states SHOULD).
+`<saml2p:Response>` message MUST be protected by TLS/SSL.
 
 The `<saml2p:Response>` message issued by the Identity Provider MUST
 be signed using a `<ds:Signature>` element within the
@@ -736,13 +763,15 @@ messages (i.e., responses that are not the result of an earlier
 `<saml2p:AuthnRequest>` message). Service Providers that do accept
 unsolicited response messages MUST ensure, by other means, that the
 security and processing requirements of this profile ([section 6.3](#processing-requirements)) can
-be fully satisfied. \[[SAML2Int](#saml2int)\]
-allows the use of unsolicited responses, but this profile has more
-strict security and processing requirements that make the use of
-unsolicited responses violate these requirements.
+be fully satisfied.
 
 <a name="message-content2"></a>
 ### 6.2. Message Content
+
+The `<saml2:Response>` message MUST NOT contain a Document Type Definition (DTD).
+
+Successful response messages MUST contain exactly one `<saml2:AuthnStatement>` element
+and exactly one `<saml2:AttributeStatement>` element.
 
 The `<saml2:Response>` message MUST contain an `<saml2:Issuer>`
 element containing the unique identifier (entityID) of the issuing
@@ -866,13 +895,8 @@ authenticated, leaving it up to the Service Provider to decide how to proceed,
 e.g., by denying service to the authenticated user, provide limited services or to use other
 resources to collect necessary attributes. However, if a Service Provider
 has expressed a specific attribute requirement using the `<md:RequestedAttribute>`
-element of a matching<sup>*</sup> `<md:AttributeConsumingService>` element in its metadata
+element of a matching `<md:AttributeConsumingService>` element in its metadata
 and assigned the `isRequired`-attribute to `true`, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.
-
-> \[*\]: The Identity Provider will select the `<md:AttributeConsumingService>` element to consider
-during attribute release based on the `AttributeConsumingServiceIndex` attribute specified in
-the `<saml2p:AuthnRequest>` message, and if that attribute is not present, the default 
-`<md:AttributeConsumingService>` element.
 
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
@@ -908,14 +932,13 @@ verified.
 
 The public key being used to verify the signature MUST appear in the
 issuing Identity Provider’s metadata record (as a
-`<ds:X509Certificate>` or `<ds:KeyValue>` element under the
-`<ds:KeyInfo>` element).
+`<ds:X509Certificate>` under the `<ds:KeyInfo>` element).
 
 <a name="subject-confirmation"></a>
 #### 6.3.2. Subject Confirmation
 
 Based on the `InResponseTo` attribute of the
-`<saml2:SubjectConfirmationData>` the Subject Provider MUST be able
+`<saml2:SubjectConfirmationData>` the Service Provider MUST be able
 to obtain the corresponding `<saml2p:AuthnRequest>` message, or a
 secure context containing corresponding information from the request
 (for future processing of the assertion).
@@ -994,6 +1017,8 @@ of `true` in the authentication request, the Service Provider SHOULD
 ensure that the `AuthnInstant` attribute of the
 `<saml2:AuthnStatement>` element is greater than the time when the
 request was sent (allowing for a reasonable clock skew).
+
+A reasonable clock skew according to this profile is between 3 and 5 minutes in either direction.
 
 <a name="error-responses"></a>
 ### 6.4. Error Responses
@@ -1208,18 +1233,127 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 > \[*\]: As defined in [section 5.3.1](#requested-authentication-context), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
 
+<a name="cryptographic-algorithms"></a>
+## 8. Cryptographic Algorithms
+
+This section lists the requirements for crypto algorithm support for being compliant with this profile.
+
+Services conforming to this profile MUST support the mandatory algorithms below, and SHOULD support the algorithms listed as optional.
+
+The sender of a secure message MUST NOT use an algorithm that is not listed as mandatory in the sections below, unless it is explicitly declared by the peer in its metadata (see \[[SAML2MetaAlgSupport](#saml2metaalg)\]). 
+
+A service processing a message in which an algorithm not listed below has been used MUST refuse to accept the message and respond with an error, unless this algorithm has been declared as preferred or supported by the service in its metadata entry.
+
+> This profile does not specify a complete list of blacklisted algorithms. However, there is a need to explicitly point out that the commonly used algorithms SHA-1 for digests and RSA PKCS#1.5 for key transport are considered broken and SHOULD not be used or accepted.
+
+The algorithms below are defined in \[[XMLEnc](#xmlenc)\], \[[XMLDSig](#xmldsig)\] and \[[RFC4051](#rfc4051)\].
+
+<a name="digest-algorithms"></a>
+### 8.1. Digest Algorithms
+
+**Mandatory:**
+
+* SHA-256, `http://www.w3.org/2001/04/xmlenc#sha256`
+
+**Optional:**
+
+* SHA-384, `http://www.w3.org/2001/04/xmldsig-more#sha384`
+* SHA-512, `http://www.w3.org/2001/04/xmlenc#sha512`
+
+<a name="signature-algorithms"></a>
+### 8.2. Signature Algorithms
+
+**Mandatory:**
+
+* RSA-SHA256, `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`
+* ECDSA-SHA256, `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256`
+
+**Optional:**
+
+* RSA-SHA384, `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384`
+* RSA-SHA512, `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512`
+* ECDSA-SHA384, `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384`
+* ECDSA-SHA512, `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512`
+
+<a name="block-encryption-algorithms"></a>
+### 8.3. Block Encryption Algorithms
+
+**Mandatory:**
+
+* AES128-CBC, `http://www.w3.org/2001/04/xmlenc#aes128-cbc`
+* AES192-CBC, `http://www.w3.org/2001/04/xmlenc#aes192-cbc`
+* AES256-CBC, `http://www.w3.org/2001/04/xmlenc#aes256-cbc`
+
+**Optional:**
+
+* AES128-GCM, `http://www.w3.org/2009/xmlenc11#aes128-gcm`
+* AES192-GCM, `http://www.w3.org/2009/xmlenc11#aes192-gcm`
+* AES256-GCM, `http://www.w3.org/2009/xmlenc11#aes256-gcm`
+
+**Note:** The AES-CBC algorithm has been reported to have vulnerabilities, but these weaknesses can not be exploited when using signed SAML messages. Also, the support for AES-GCM in SAML software is not sufficiently spread at the time of writing. Therefore, the current version of this profile specifies AES-CBC as the default block encryption algorithm.
+
+Services supporting the AES-GCM algorithm SHOULD indicate this in its metadata.
+
+```
+...
+<md:KeyDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" use="encryption">
+  <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+    <ds:X509Data>
+      <ds:X509Certificate>MIIE+DC...SpWg==</ds:X509Certificate>
+    </ds:X509Data>
+  </ds:KeyInfo>
+  <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes256-gcm"/>
+  <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes128-gcm"/>
+  ...
+</md:KeyDescriptor>
+``` 
+*Example of how a service announces that it has support for AES-GCM and wishes peers to use these algorithms when encrypting for the service.*
+
+<a name="key-transport-algorithms"></a>
+### 8.4. Key Transport Algorithms
+
+**Mandatory:**
+
+* RSA-OAEP-MGF1P, `http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p`
+  * Key transport digest: SHA-1 (`http://www.w3.org/2000/09/xmldsig#sha1`)
+
+For interoperability reasons the current version of this profile specifies the RSA-OAEP-MGF1P algorithm as the default key transport algorithms. This algorithm's padding method defaults to the use of SHA-1 as a digest algorithm and also uses the "MGF1 with SHA-1" mask generation function.
+
+**Optional:**
+
+* RSA-OAEP-MGF1P, `http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p`
+  * Key transport digest: Any of the digest methods listed as mandatory or optional in section [8.1](#digest-algorithms).
+
+A service wishing to receive encrypted messages where SHA-1 is not used as the key transport digest SHOULD indicate this in its metadata using the `<md:EncryptionMethod>` element as the example below.
+
+```
+...
+<md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p">
+  <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+</md:EncryptionMethod>
+...
+```
+*Example of how a service announces that it wishes that the peer uses SHA-256 as the key transport digest when encrypting using RSA-OAEP-MGF1P.*
+
 <a name="normative-references"></a>
-## 8. Normative References
+## 9. Normative References
 
 <a name="rfc2119"></a>
 **\[RFC2119\]**
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
 
-<a name="saml2int"></a>
-**\[SAML2Int\]**
-> [SAML2int profile v0.21 – SAML 2.0 Interoperability
-> Profile](http://saml2int.org/profile/current/).
+<a name="xmlenc"></a>
+**\[XMLEnc\]**
+> [D. Eastlake et al. XML Encryption Syntax and Processing. W3C Recommendation, April 2013](https://www.w3.org/TR/xmlenc-core1/).
+
+<a name="xmldsig"></a>
+**\[XMLDSig\]**
+> [D. Eastlake et al. XML-Signature Syntax and Processing, Version 1.1. W3C Recommendation, April 2013](https://www.w3.org/TR/xmldsig-core1/).
+
+<a name="rfc4051"></a>
+**\[RFC4051\]**
+> IETF RFC 4051, Additional XML Security Uniform Resource Identifiers, April 2005. <https://www.ietf.org/rfc/rfc4051.txt>.
 
 <a name="saml2core"></a>
 **\[SAML2Core\]**
@@ -1326,7 +1460,7 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 > [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html).
 
 <a name="changes-between-versions"></a>
-## 9. Changes between versions
+## 10. Changes between versions
 
 **Changes between version 1.5 and 1.6:**
 
@@ -1335,6 +1469,9 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 - Section 5.3, "Message Content", was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.
 - The `PrincipalSelection` and `RequestedPrincipalSelection` extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.
 - The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
+- This profile is no longer normatively dependent upon SAML2Int. Therefore, the profile has been updated with requirements that previously was implicit (due to the normative dependency to SAML2Int).
+- Section 8, "Cryptographic Algorithms", was introduced in order to clearly define the algorithm requirements for services that are conformant to this profile.
+- Section 2.1.1 was updated with elaborations concerning certificates in metadata.
 
 **Changes between version 1.4 and 1.5:**
 
