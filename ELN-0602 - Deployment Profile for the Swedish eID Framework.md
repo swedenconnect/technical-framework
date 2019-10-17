@@ -1238,6 +1238,10 @@ response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
 
 This section lists the requirements for crypto algorithm support for being compliant with this profile.
 
+For signature and encryption keys the following requirements apply:
+* RSA public keys MUST be at least 2048 bits in length. 3072 bits or more is RECOMMENDED.
+* EC public keys MUST be at least 256 bits in length.
+
 Services conforming to this profile MUST support the mandatory algorithms below, and SHOULD support the algorithms listed as optional.
 
 The sender of a secure message MUST NOT use an algorithm that is not listed as mandatory in the sections below, unless it is explicitly declared by the peer in its metadata (see \[[SAML2MetaAlgSupport](#saml2metaalg)\]). 
