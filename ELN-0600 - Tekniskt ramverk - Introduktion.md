@@ -2,9 +2,9 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2019-09-10
+### 2019-10-22
 
-*ELN-0600*
+*2019-267* 
 
 ---
 
@@ -64,7 +64,7 @@
 
 3. [**Referenslista**](#referenslista)
 
-    3.1. [E-legitimationsnämnden, DIGG](#e-legitimationsnaemnden)
+    3.1. [DIGG](#digg)
 
     3.2. [Övriga referenser](#oevriga-referenser)
 
@@ -197,7 +197,7 @@ Förlitandeparter, t.ex. e-tjänster, integrerar mot legitimeringstjänster
 genom standardiserade meddelanden och konsumerar identitetsintyg vilka
 också har standardiserade format.
 
-Sweden Connect tekniskt ramverk bygger på interoperabilitetsprofilen 
+Sweden Connect tekniskt ramverk är influerad av interoperabilitetsprofilen 
 ”SAML V2.0 Deployment Profile for Federation Interoperability”
 \[[SAML2Int](#saml2int)\]. Profilen stöds av ett flertal kommersiella 
 produkter och Open Source-lösningar, vilket underlättar integrationsarbetet
@@ -427,8 +427,7 @@ tekniskt ramverk.
 ### 2.1. SAML-profiler
 
 Identitetsfederationer som följer Sweden Connect tekniska ramverk är uppbyggda
-kring ”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\]. Denna profil utgår från
-”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\], men innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
+kring ”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\]. Denna profil är influerad av, men inte normativt beroende på, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. [\[EidProfile](#eidprofile)\] innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
 
 <a name="deployment-profile-for-the-swedish-eid-framework"></a>
 #### 2.1.1. Deployment Profile for the Swedish eID Framework
@@ -546,8 +545,8 @@ Specifikationen "Signature Activation Protocol for Federated Signing", \[[EidSig
 <a name="referenslista"></a>
 ## 3. Referenslista
 
-<a name="e-legitimationsnaemnden"></a>
-### 3.1. E-legitimationsnämnden, DIGG
+<a name="digg"></a>
+### 3.1. DIGG
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**

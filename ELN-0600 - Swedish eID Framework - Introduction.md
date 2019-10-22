@@ -2,9 +2,7 @@
 
 # Introduction to the Swedish eID Framework
 
-### 2019-09-10
-
-*ELN-0600*
+### 2019-10-22
 
 ---
 
@@ -64,7 +62,7 @@
 
 3. [**References**](#references)
 
-    3.1. [E-legitimationsnämnden, DIGG](#e-legitimationsnaemnden)
+    3.1. [DIGG](#digg)
 
     3.2. [Other References](#other-references)
 
@@ -180,7 +178,7 @@ Relying parties, e.g., service providers, integrate towards identity providers u
 standardized messages and consume identity assertions that also have a standardized
 format.
 
-The Swedish eID Framework is built upon the interoperability profile
+The Swedish eID Framework is influenced by the interoperability profile
 ”SAML V2.0 Deployment Profile for Federation Interoperability”
 \[[SAML2Int](#saml2int)\]. This profile is supported by several commercial
 products and vendors as well as open source libraries. This facilitates
@@ -403,7 +401,7 @@ otherwise stated.
 
 Identity federations conforming to the Swedish eID Framework are built around
 ”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\].
-This profile is based on ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\], but also contains rules and guidelines specific for the Swedish eID Framework.
+This profile is influenced by, but not normatively dependent on, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. [\[EidProfile](#eidprofile)\] also contains rules and guidelines specific for the Swedish eID Framework.
 
 <a name="deployment-profile-for-the-swedish-eid-framework"></a>
 #### 2.1.1. Deployment Profile for the Swedish eID Framework
@@ -530,8 +528,8 @@ defines a "Signature Activation Protocol" (SAP) for implementation of "Sole Cont
 <a name="references"></a>
 ## 3. References
 
-<a name="e-legitimationsnaemnden"></a>
-### 3.1. E-legitimationsnämnden, DIGG
+<a name="digg"></a>
+### 3.1. DIGG
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
@@ -584,8 +582,8 @@ defines a "Signature Activation Protocol" (SAP) for implementation of "Sole Cont
 **\[EidSigAct\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
 
-<a name="oevriga-referenser"></a>
-### 3.2. Övriga referenser
+<a name="other-references"></a>
+### 3.2. Other references
 
 <a name="saml2int"></a>
 **\[SAML2Int\]**
