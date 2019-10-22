@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-10-17 - **Draft version**
+### Version 1.6 - 2019-10-22 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -237,15 +237,16 @@ the certificate is expired, or certificate revocation information is missing.
 However, for interoperability reasons it is RECOMMENDED that:
 
 * self-signed certificates are used,
-* certificates with a long validity time are used,
+* non-expired certificates (with a long validity time) are used,
 * certificates are not signed with MD5- och SHA1-based signature algorithms. 
 
-All services represented in metadata SHALL include at least one `<md:KeyDescriptor>` 
-holding a X.509 certificate to be used for signature validation and/or message encryption. 
-The same certificate MAY be used for both signature validation and encryption. It those cases 
-the `use` attribute of the `<md:KeyDescriptor>` element should be absent. If separate signature
-and encryption keys are used, this is indicated by assigning the `use` attribute to `signing`
-and `encryption` respectively.
+All services represented in metadata SHOULD include at least one `<md:KeyDescriptor>` 
+element holding a certificate to be used for signature validation (with the `use`-attribute
+set to `signing`), and one `<md:KeyDescriptor>` element containing a certificate 
+to be used for message encryption (with the `use`-attribute set to `encryption`).
+It is allowed to use the same key and certificate for both usages, but in order to enable
+a future key rollover it is RECOMMENDED to avoid using only one `<md:KeyDescriptor>` element
+for both usages (i.e., with an absent `use`-attribute).
 
 In order to facilitate key rollover of a signing key, a service MUST support multiple signing 
 certificates found in peer metadata and MUST support signature validation using a key from 
@@ -466,7 +467,7 @@ The endpoints, at which an Identity Provider receives a
 the user agent, MUST be protected by TLS/SSL.
 
 A Service Provider sending an `<saml2p:AuthnRequest>` message to an Identity Provider
-may do so using either the HTTP-Redirect or HTTP-POST binding \[[SAML2Bind](#saml2bind)\],
+may do so using either the HTTP-Redirect or HTTP-POST binding \[[SAML2Bind](#saml2bind)\]<sup>*</sup>,
 meaning that Identity Providers conformant with this profile MUST support the
 HTTP-Redirect and the HTTP-POST binding.
 
@@ -497,6 +498,12 @@ be signed using a `<ds:Signature>` element within the
 `<saml2:AuthnRequest>`.
 
 Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider's metadata (`<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Swedish eID Framework during the signature operation.
+
+> \[*\]: A Service Provider should be aware of web browser, or web server, size limitations
+of URL:s, and it is RECOMMENDED that a Service Provider use the HTTP-POST binding in cases where 
+the `<saml2p:AuthnRequest>` message becomes very large. This may be the case when a `SignMessage`
+extension containing much data is used, or when a complete certificate chain is attached to the signature 
+of the message.
 
 <a name="message-content"></a>
 ### 5.3. Message Content
@@ -1240,7 +1247,8 @@ This section lists the requirements for crypto algorithm support for being compl
 
 For signature and encryption keys the following requirements apply:
 * RSA public keys MUST be at least 2048 bits in length. 3072 bits or more is RECOMMENDED.
-* EC public keys MUST be at least 256 bits in length.
+* EC public keys MUST be at least 256 bits in length (signature only).
+  * The curves NIST Curve P-256, NIST Curve P-384 and NIST Curve P-521 MUST be supported (\[[RFC5480](#rfc5480)\]).
 
 Services conforming to this profile MUST support the mandatory algorithms below, and SHOULD support the algorithms listed as optional.
 
@@ -1321,7 +1329,7 @@ Services supporting the AES-GCM algorithm SHOULD indicate this in its metadata.
 * RSA-OAEP-MGF1P, `http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p`
   * Key transport digest: SHA-1 (`http://www.w3.org/2000/09/xmldsig#sha1`)
 
-For interoperability reasons the current version of this profile specifies the RSA-OAEP-MGF1P algorithm as the default key transport algorithms. This algorithm's padding method defaults to the use of SHA-1 as a digest algorithm and also uses the "MGF1 with SHA-1" mask generation function.
+For interoperability reasons the current version of this profile specifies the RSA-OAEP-MGF1P algorithm as the default key transport algorithms. This algorithm's padding method defaults to the use of SHA-1 as a digest algorithm and also uses the "MGF1 with SHA-1" mask generation function<sup>*</sup>.
 
 **Optional:**
 
@@ -1339,6 +1347,8 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 ```
 *Example of how a service announces that it wishes that the peer uses SHA-256 as the key transport digest when encrypting using RSA-OAEP-MGF1P.*
 
+> \[*\]: Note that the use if SHA-1 in this context (both as digest algoritm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 is is known to be relevant to its use in this context.
+
 <a name="normative-references"></a>
 ## 9. Normative References
 
@@ -1354,10 +1364,6 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 <a name="xmldsig"></a>
 **\[XMLDSig\]**
 > [D. Eastlake et al. XML-Signature Syntax and Processing, Version 1.1. W3C Recommendation, April 2013](https://www.w3.org/TR/xmldsig-core1/).
-
-<a name="rfc4051"></a>
-**\[RFC4051\]**
-> IETF RFC 4051, Additional XML Security Uniform Resource Identifiers, April 2005. <https://www.ietf.org/rfc/rfc4051.txt>.
 
 <a name="saml2core"></a>
 **\[SAML2Core\]**
@@ -1462,6 +1468,15 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 <a name="principalsel"></a>
 **\[PrincipalSel\]**
 > [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html).
+
+<a name="rfc4051"></a>
+**\[RFC4051\]**
+> [IETF RFC 4051, Additional XML Security Uniform Resource Identifiers, April 2005](https://www.ietf.org/rfc/rfc4051.txt).
+
+<a name="rfc5480"></a>
+**\[RFC5480\]**
+> [IETF RFC 5480, Elliptic Curve Cryptography Subject Public Key Information, March 2009](https://www.ietf.org/rfc/rfc5480.txt).
+
 
 <a name="changes-between-versions"></a>
 ## 10. Changes between versions

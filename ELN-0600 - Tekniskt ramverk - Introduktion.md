@@ -2,7 +2,7 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2019-10-16
+### 2019-10-22
 
 *2019-267* 
 
