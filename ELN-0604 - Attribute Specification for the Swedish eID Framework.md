@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.6 - 2019-08-28 - *Draft version*
+### Version 1.6 - 2019-10-25 - *Draft version*
 
 *ELN-0604-v1.6*
 
@@ -220,7 +220,7 @@ Framework.
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
-| **REQUIRED**<sup>*</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `transactionIdentifier` (ID of assertion issued by the member state node)<sup>\*\*</sup> |
+| **REQUIRED**<sup>*</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `c` (Country code for the eIDAS country that authenticated the subject) <br />`transactionIdentifier` (ID of assertion issued by the member state node)<sup>\*\*</sup> |
 | **REQUIRED**<br />(if available)<sup>\*\*\*</sup> | `birthName` (Birth name) <br /> `placeOfBirth` (Place of birth) <br /> `eidasNaturalPersonAddress` (Address for natural person) <br /> `gender` (Gender) |
 | **RECOMMENDED** | `personalIdentityNumber` (National civic registration number) <br /> `personalIdentityNumberBinding` (National civic registration number Binding URI) |
 **Typical use**: In an attribute release policy implemented by an eIDAS
@@ -630,6 +630,8 @@ following attribute:
 **Changes between version 1.5 and version 1.6:**
 
 - References were updated to point at the latest versions of the "Tillitsramverk för Svensk e-legitimation" and "eIDAS SAML Attribute Profile" specifications.
+
+- Section 2.5, "eIDAS Natural Person Attribute Set", was updated so that the `c` (country) attribute is a required attribute for this attribute set.
 
 **Changes between version 1.4 and version 1.5:**
 
