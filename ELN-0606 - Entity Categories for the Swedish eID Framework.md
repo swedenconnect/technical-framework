@@ -442,10 +442,13 @@ authentication app instead of prompting for the user identity. This effectively 
 user agent to the same physical location as the authentication device, and in practice
 makes the attacks described above impossible.
 
-This profile defines the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category to be declared by Service Providers in order to add a requirement on Identity Providers 
-vulnerable of the attacks described above that they SHOULD use a secure authenticator binding (if this
-feature is supported by the Identity Provider).
+This profile defines the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` 
+entity category to be declared by Service Providers that require that a secure authenticator
+binding is performed, and by Identity Providers that implement authentication schemes where
+a secure authenticator binding is supported.
 
+An Identity Provider that has declared the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` category in its metadata MUST perform a secure authenticator binding for requests sent
+from Service Providers that have declared this entity category in their metadata entries.
 
 <a name="references"></a>
 ## 7. References

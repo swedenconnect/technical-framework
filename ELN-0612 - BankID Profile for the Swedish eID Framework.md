@@ -188,7 +188,15 @@ initiate BankID operations. This is performed by declaring the
 `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category
 (see section 6.1 of \[[EidEntCat](#eidentcat)\]) in the Service Provider metadata.
 
-A BankID Identity Provider compliant with this profile SHOULD check the presence of the `secure-authenticator-binding` entity category from the Service Provider metadata when processing a request, and SHOULD prompt the user to scan a QR code instead of asking for the personal identity number if the entity category is present in the Service Provider metadata.
+A BankID Identity Provider compliant with this profile SHOULD support the use of QR codes to
+initialize BankID operations. 
+
+BankID Identity Providers that support the QR code feature MUST declare the 
+`http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity
+category in its metadata and MUST check the presence of this entity category from a 
+requesting Service Provider's metadata when processing a request, and MUST prompt the 
+user to scan a QR code instead of asking for the personal identity number if the entity 
+category is present.
 
 > See [section 6](#metadata), "[Metadata](#metadata)", for details how to declare the secure-authenticator-binding entity category.
 
@@ -473,6 +481,9 @@ Using this extension the Identity Provider announces that the requestor should s
     ...
 ```
 *Example of how the Identity Provider declares the `RequestedPrincipalSelection` extension in its metadata.*
+
+A BankID Identity Provider supporting the BankID QR code feature MUST declare this in its metadata using
+the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category.
 
 <a name="signature-services"></a>
 ### 6.3. Signature Services
