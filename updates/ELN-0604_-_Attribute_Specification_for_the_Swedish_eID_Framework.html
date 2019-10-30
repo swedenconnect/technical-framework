@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2019-08-28---*draft-version*">Version 1.6 - 2019-08-28 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2019-10-25---*draft-version*">Version 1.6 - 2019-10-25 - <em>Draft version</em></h3>
 <p><em>ELN-0604-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -265,7 +265,7 @@ Framework.</p>
 <tbody>
 <tr>
 <td style="text-align:left"><strong>REQUIRED</strong><sup>*</sup></td>
-<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>**</sup></td>
+<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>c</code> (Country code for the eIDAS country that authenticated the subject) <br /><code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>**</sup></td>
 </tr>
 <tr>
 <td style="text-align:left"><strong>REQUIRED</strong><br />(if available)<sup>***</sup></td>
@@ -909,7 +909,10 @@ Framework</a>.</p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
-<li>References were updated to point at the latest versions of the &quot;Tillitsramverk för Svensk e-legitimation&quot; and &quot;eIDAS SAML Attribute Profile&quot; specifications.</li>
+<li><p>References were updated to point at the latest versions of the &quot;Tillitsramverk för Svensk e-legitimation&quot; and &quot;eIDAS SAML Attribute Profile&quot; specifications.</p>
+</li>
+<li><p>Section 2.5, &quot;eIDAS Natural Person Attribute Set&quot;, was updated so that the <code>c</code> (country) attribute is a required attribute for this attribute set.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">
