@@ -2,7 +2,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.2 - 2019-10-29 - **Draft version**
+### Version 1.2 - 2019-10-31 - **Draft version**
 
 *ELN-0612-v1.2*
 
@@ -37,6 +37,8 @@
     3.2. [Automatic Start of the BankID Client](#automatic-start-of-bankid-client)
 
     3.3. [Mobile BankID on another Device](#mobile-bankid-on-another-device)
+    
+    3.3.1. [User Experience Recommendations](#user-experience-recommendations)
 
     3.4. [Cancelling an Operation](#cancelling-an-operation)
 
@@ -284,15 +286,19 @@ Auto starting the BankID app from a mobile device requires the built-in web brow
 <a name="mobile-bankid-on-another-device"></a>
 ### 3.3. Mobile BankID on another Device
 
-If the user agent (web browser) and the BankID app is not on the same device, a BankID Identity Provider SHOULD check for the presence of the `secure-authenticator-binding` entity category (see section [1.4](#relying-party-configuration), "[Relying Party Configuration](#relying-party-configuration)", above) to determine whether a QR code should be displayed in the UI to initiate the operation.
+If the user agent (web browser) and the BankID app is not on the same device, a BankID Identity 
+Provider that supports the BankID QR code feature MUST check for the presence of the 
+`http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category
+in a requesting Service Provider's metadata entry. If the Service Provider has declared this entity category, the BankID Identity Provider MUST display a generated QR code for the user and 
+MUST NOT prompt the user for the personal identity number.
 
-If the Service Provider has declared the 
-`http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category the 
-BankID Identity Provider SHOULD display a generated QR code for the user and SHOULD NOT prompt 
-the user for the personal identity number.
-
-Note that the presence of the `secure-authenticator-binding` entity category in the Service Provider
-metadata has precedence over the presence of the `<psc:PrincipalSelection>` extension in the authentication request<sup>1</sup>.
+> Note: If the `secure-authenticator-binding` entity category is present in the Service Provider 
+metadata entry **and** a `<psc:PrincipalSelection>` extension containing a personal identity number 
+is included in the authentication request from the Service Provider, the BankID Identity Provider 
+SHOULD include this number in the BankID operation (`auth` or `sign`) along with the BankID
+requirement parameter `autoStartTokenRequired=true` when initializing the BankID operation 
+(see chapter 4 in \[[BankID_Spec](#bankid_spec)\]). A generated QR code MUST still be displayed 
+by the BankID Identity Provider, but by providing the personal identity number in the initializing BankID call the session will be bound not only to the BankID app that is used to scan the QR code but also to a specific user. If a user with a different personal identity number scans the QR code the operation will fail.
 
 If the `secure-authenticator-binding` entity category is not declared by the requesting Service
 Provider, the Identity Provider needs to prompt the user for his or hers personal identity number (personnummer) in order to initiate a BankID operation. 
@@ -307,17 +313,19 @@ If the current operation is an "ordinary" authentication and the personal identi
 
 See also section [4.2.2](#mobile-bankid-and-the-personnumber-attribute), "[Mobile BankID and the personNumber attribute](#mobile-bankid-and-the-personnumber-attribute)".
 
-> \[1\]: In a scenario where the user first logs in to a service, and later performs a signature, care should be taken to the user experience versus security. The user will probably think is disturbing to have to scan a QR code for every signature he or she makes within the logged in session. If the service can protect against the remote fraudster threat by using QR code for login, and if the `<psc:PrincipalSelection>` extension preventing personal identity number prompting is used for subsequent signatures, we probably have found the safest and most user friendly process. 
+<a name="user-experience-recommendations"></a>
+#### 3.3.1. User Experience Recommendations
 
-> This could be accomplished by declaring the `secure-authenticator-binding` entity category for the Service Provider responsible of user login, but not declaring it for the service's Signature Service. Instead the Signature Service makes sure to always include the `<psc:PrincipalSelection>` extension in authentication requests sent.
->
-> Note: An Identity Provider processing a request from a signature service can derive the QR versus prompting for personal identity number setting for the corresponding "login service" if the `RequesterID` element is present in the authentication request. This element holds the entityID for the login service that initiated the signature operation.
+In a scenario where the user first logs in to a service, and later performs a signature, care should be taken to the user experience versus security. The user will probably think is disturbing to have to scan a QR code for every signature he or she performs within the logged in session. If the service can protect against the remote fraudster threat by using QR code for login, and if the `<psc:PrincipalSelection>` extension preventing personal identity number prompting is used for subsequent signatures, we probably have found the safest and most user friendly process. 
 
+This could be accomplished by declaring the `secure-authenticator-binding` entity category for the Service Provider responsible of user login, but not declaring it for the service's Signature Service. Instead the Signature Service makes sure to always include the `<psc:PrincipalSelection>` extension in authentication requests sent.
+
+Note: An Identity Provider processing a request from a signature service can derive the QR versus prompting for personal identity number setting for the corresponding "login service" if the `RequesterID` element is present in the authentication request. This element holds the entityID for the login service that initiated the signature operation.
 
 <a name="cancelling-an-operation"></a>
 ### 3.4. Cancelling an Operation
 
-A BankID Identity Provider SHOULD include a Cancel-button in the user interface enabling the possibility for the user to cancel the BankID operation. 
+A BankID Identity Provider MUST include a Cancel-button in the user interface enabling the possibility for the user to cancel the BankID operation. 
 
 If the use clicks the Cancel-button after a BankID-operation has been started<sup>1</sup> the Identity Provider MUST invoke the BankID-operation `/rp/v5/cancel`. Failure to do so may lead to a dangling BankID session that needs to time out before the user can use BankID again.
 
