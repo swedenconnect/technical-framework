@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2019-10-29 - *Draft version*
+### Version 1.7 - 2019-11-01 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -444,8 +444,12 @@ makes the attacks described above impossible.
 
 This profile defines the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` 
 entity category to be declared by Service Providers that require that a secure authenticator
-binding is performed, and by Identity Providers that implement authentication schemes where
-a secure authenticator binding is supported.
+binding is performed by the Identity Providers supporting this.
+
+An Identity Provider that supports different methods of initiating authentication, or signature,
+operations, and where at least one of these methods is a "secure authenticator binding" SHOULD
+declare the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity
+category in its metadata.
 
 An Identity Provider that has declared the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` category in its metadata MUST perform a secure authenticator binding for requests sent
 from Service Providers that have declared this entity category in their metadata entries.
