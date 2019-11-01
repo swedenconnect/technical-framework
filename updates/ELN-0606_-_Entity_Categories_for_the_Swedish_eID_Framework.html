@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2019-08-27---*draft-version*">Version 1.7 - 2019-08-27 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2019-10-29---*draft-version*">Version 1.7 - 2019-10-29 - <em>Draft version</em></h3>
 <p><em>ELN-0606-v1.7</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -43,6 +43,7 @@
 <li><p><a href="#service-contract-categories"><strong>Service Contract Categories</strong></a></p>
 </li>
 <li><p><a href="#general-entity-categories"><strong>General Entity Categories</strong></a></p>
+<p> 6.1. <a href="#secure-authenticator-binding">secure-authenticator-binding</a></p>
 </li>
 <li><p><a href="#references"><strong>References</strong></a></p>
 </li>
@@ -366,6 +367,33 @@ a particular service type.</p>
 <h2 id="6.-general-entity-categories">6. General Entity Categories</h2>
 <p>An entity category of the General Entity Category type is a category that does not fit into any of the other category types regarding definitions and matching rules.</p>
 <p>General category identifiers are prefixed with <code>http://id.swedenconnect.se/general-ec</code>.</p>
+<p><a name="secure-authenticator-binding"></a></p>
+<h3 id="6.1.-secure-authenticator-binding">6.1. secure-authenticator-binding</h3>
+<p><strong>URL</strong>: <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code></p>
+<p><strong>Description</strong>: Some authentication schemes use an authentication device (<em>authenticator</em>) that 
+is external, i.e., not bound to the user agent. These types of authentication schemes may be
+vulnerable to certain types of phishing attacks where a fraudster who controls the user agent can
+trick, or persuade, the user to initiate an operation on the authentication device. </p>
+<p>A typical example of the threat described above is where an Identity Provider implements an
+authentication scheme that uses a mobile app as the authenticator. In those cases the user
+normally enters some input (often the user identity) in the web browser (user agent) that is
+then used by the Identity Provider to initiate an authentication session against the app running
+on the user&#39;s mobile device. The problem here is that there is no way we can now that the
+person initiating the operation in the web browser by entering a user identity is the same 
+person who opens, and performs the authentication in the app. </p>
+<p>In order to prevent attacks of this type many authentication schemes offer alternative ways
+of initiating authentication (or signature) sessions, where some sort of binding between the
+user agent and the authentication device is performed. An good example of this is when 
+Identity Providers prompt the user to scan a QR-code displayed in the web browser using the 
+authentication app instead of prompting for the user identity. This effectively binds the
+user agent to the same physical location as the authentication device, and in practice
+makes the attacks described above impossible.</p>
+<p>This profile defines the <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> 
+entity category to be declared by Service Providers that require that a secure authenticator
+binding is performed, and by Identity Providers that implement authentication schemes where
+a secure authenticator binding is supported.</p>
+<p>An Identity Provider that has declared the <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> category in its metadata MUST perform a secure authenticator binding for requests sent
+from Service Providers that have declared this entity category in their metadata entries.</p>
 <p><a name="references"></a></p>
 <h2 id="7.-references">7. References</h2>
 <p><a name="rfc2119"></a>
@@ -448,6 +476,8 @@ board</a>.</p>
 <a href="https://tools.ietf.org/html/draft-young-entity-category">https://tools.ietf.org/html/draft-young-entity-category</a>.</p>
 </li>
 <li><p>Chapter 6, &quot;General Entity Categories&quot;, introduced a general entity category type for miscellaneous purposes.</p>
+</li>
+<li><p>Section 6.1, &quot;secure-authenticator-binding&quot;, was added defining the <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> entity category.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
