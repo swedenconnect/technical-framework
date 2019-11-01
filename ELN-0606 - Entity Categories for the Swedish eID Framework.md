@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2019-08-27 - *Draft version*
+### Version 1.7 - 2019-10-29 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -51,6 +51,8 @@
 5. [**Service Contract Categories**](#service-contract-categories)
 
 6. [**General Entity Categories**](#general-entity-categories)
+
+    6.1. [secure-authenticator-binding](#secure-authenticator-binding)
 
 7. [**References**](#references)
 
@@ -414,6 +416,39 @@ An entity category of the General Entity Category type is a category that does n
 
 General category identifiers are prefixed with `http://id.swedenconnect.se/general-ec`.
 
+<a name="secure-authenticator-binding"></a>
+### 6.1. secure-authenticator-binding
+
+**URL**: `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding`
+
+**Description**: Some authentication schemes use an authentication device (*authenticator*) that 
+is external, i.e., not bound to the user agent. These types of authentication schemes may be
+vulnerable to certain types of phishing attacks where a fraudster who controls the user agent can
+trick, or persuade, the user to initiate an operation on the authentication device. 
+
+A typical example of the threat described above is where an Identity Provider implements an
+authentication scheme that uses a mobile app as the authenticator. In those cases the user
+normally enters some input (often the user identity) in the web browser (user agent) that is
+then used by the Identity Provider to initiate an authentication session against the app running
+on the user's mobile device. The problem here is that there is no way we can now that the
+person initiating the operation in the web browser by entering a user identity is the same 
+person who opens, and performs the authentication in the app. 
+
+In order to prevent attacks of this type many authentication schemes offer alternative ways
+of initiating authentication (or signature) sessions, where some sort of binding between the
+user agent and the authentication device is performed. An good example of this is when 
+Identity Providers prompt the user to scan a QR-code displayed in the web browser using the 
+authentication app instead of prompting for the user identity. This effectively binds the
+user agent to the same physical location as the authentication device, and in practice
+makes the attacks described above impossible.
+
+This profile defines the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` 
+entity category to be declared by Service Providers that require that a secure authenticator
+binding is performed, and by Identity Providers that implement authentication schemes where
+a secure authenticator binding is supported.
+
+An Identity Provider that has declared the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` category in its metadata MUST perform a secure authenticator binding for requests sent
+from Service Providers that have declared this entity category in their metadata entries.
 
 <a name="references"></a>
 ## 7. References
@@ -487,6 +522,8 @@ General category identifiers are prefixed with `http://id.swedenconnect.se/gener
 [https://tools.ietf.org/html/draft-young-entity-category](https://tools.ietf.org/html/draft-young-entity-category).
 
 - Chapter 6, "General Entity Categories", introduced a general entity category type for miscellaneous purposes.
+
+- Section 6.1, "secure-authenticator-binding", was added defining the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category.
 
 **Changes between version 1.5 and version 1.6:**
 
