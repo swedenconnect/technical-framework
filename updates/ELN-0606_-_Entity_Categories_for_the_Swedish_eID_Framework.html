@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2019-10-29---*draft-version*">Version 1.7 - 2019-10-29 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2019-11-01---*draft-version*">Version 1.7 - 2019-11-01 - <em>Draft version</em></h3>
 <p><em>ELN-0606-v1.7</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -390,8 +390,11 @@ user agent to the same physical location as the authentication device, and in pr
 makes the attacks described above impossible.</p>
 <p>This profile defines the <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> 
 entity category to be declared by Service Providers that require that a secure authenticator
-binding is performed, and by Identity Providers that implement authentication schemes where
-a secure authenticator binding is supported.</p>
+binding is performed by the Identity Providers supporting this.</p>
+<p>An Identity Provider that supports different methods of initiating authentication, or signature,
+operations, and where at least one of these methods is a &quot;secure authenticator binding&quot; SHOULD
+declare the <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> entity
+category in its metadata.</p>
 <p>An Identity Provider that has declared the <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> category in its metadata MUST perform a secure authenticator binding for requests sent
 from Service Providers that have declared this entity category in their metadata entries.</p>
 <p><a name="references"></a></p>
