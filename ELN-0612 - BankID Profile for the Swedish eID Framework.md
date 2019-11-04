@@ -2,7 +2,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.2 - 2019-10-31 - **Draft version**
+### Version 1.2 - 2019-11-01 - **Draft version**
 
 *ELN-0612-v1.2*
 
@@ -350,6 +350,9 @@ An Identity Provider conforming to the Swedish eID Framework is obliged to handl
 
 The BankID client (app or desktop program) comprises a text box in which the signature message is displayed for the user. A BankID Identity Provider MUST NOT display the signature message in any other way than in this text box. How the signature message is assigned is specified below.
 
+If the BankID Identity Provider prompts the user for his or hers personal identity number in order to initialize
+the BankID signature operation, the Identity Provider MUST honour the requirement that ensures that a sign message is only displayed to the intended principal, see section 7.2.1 in \[[EidProfile](#eid-profile)\].
+
 <a name="input-to-bankid-signing"></a>
 #### 4.2.1. Input to BankID Signing
 
@@ -572,6 +575,8 @@ using the `secure-authenticator-binding` entity category, may request that QR co
 - Section 6.2 was updated with a requirement that a BankID Identity Provider should include the `<psc:RequestedPrincipalSelection>` element in its metadata.
 
 - The recommendation in section 3.2 concerning handling of non default browsers was updated.
+
+- Section 4.2 was updated with a requirement that ensures that only the intended user sees a sign message.
 
 **Changes between version 1.0 and 1.1:**
 

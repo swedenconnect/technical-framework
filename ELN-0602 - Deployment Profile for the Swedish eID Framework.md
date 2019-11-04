@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-10-22 - **Draft version**
+### Version 1.6 - 2019-11-01 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -147,7 +147,7 @@ with caution.
 ### 1.2. References to SAML 2.0 Standards and Profiles
 
 When referring to elements from the SAML 2.0 core specification
-\[[SAML2Core](#saml2core)\], the following syntax is used:
+\[[7.2.](#saml2core)\], the following syntax is used:
 
 -   `<saml2p:Protocolelement>` – for elements from the SAML 2.0
     Protocol namespace.
@@ -1181,6 +1181,16 @@ by including the URIs of supported authentication contexts as EntityAttributes o
 *Example of how an Identity Provider advertises its support for LoA 3
 authentication (including support for displaying of sign messages).*
 
+If an Identity Provider that has ways of determining the principal's identity before displaying
+a sign message receives a `<psc:PrincipalSelection>` extension in  the authentication request 
+it SHOULD ensure that the contents of the `<psc:PrincipalSelection>` extension matches the 
+principal identity. If there is a mismatch, the Identity Provider MUST NOT display the
+sign message, and if the request states that the sign message must be displayed, fail with
+an error response where the second-level status code is set to
+`urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal` \[[SAML2Core](#saml2core)\].
+
+> Typical scenarios where the above requirement apply is for the Swedish eIDAS connector that first authenticates a principal and then displays the sign message, and for Identity Providers that prompt the user for its user identity as part of its authentication scheme. In those scenarios the Identity Providers must compare the principal identity with the contents of `<psc:PrincipalSelection>`, if received in the authentication request. 
+
 Identity Providers processing a request with a requested authentication
 context that is a "Sign Message Authentication Context URI" SHALL meet the
 following requirements (in addition to other general requirements
@@ -1491,6 +1501,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 - This profile is no longer normatively dependent upon SAML2Int. Therefore, the profile has been updated with requirements that previously was implicit (due to the normative dependency to SAML2Int).
 - Section 8, "Cryptographic Algorithms", was introduced in order to clearly define the algorithm requirements for services that are conformant to this profile.
 - Section 2.1.1 was updated with elaborations concerning certificates in metadata.
+- Section 7.2.1 was updated with a requirement that ensures that a sign message is only displayed to the intended user.
 
 **Changes between version 1.4 and 1.5:**
 
