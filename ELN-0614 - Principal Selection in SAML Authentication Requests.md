@@ -2,7 +2,7 @@
 
 # Principal Selection in SAML Authentication Requests 
 
-### Version 1.0 - 2019-08-30 - *Draft version*
+### Version 1.0 - 2019-11-01 - *Draft version*
 
 *ELN-0614-v1.0*
 
@@ -47,7 +47,13 @@ This specification defines the `<psc:PrincipalSelection>` element that may be in
 
 The specification also defines the `<psc:RequestedPrincipalSelection>` element that should be used by Identity Providers that may need information about a known user in order to avoid prompting for the user ID<sup>1</sup>. The element should be included as an extension in the Identity Provider metadata under the `<md:IDPSSODescriptor>` element.
 
-> \[1]\: The typical use case is when a user once has authenticated for a service and provided his or hers user ID to the Identity Provider, and is about to perform a signature. If the Identity Provider prompts the user for the user ID once again the user experience is poor and the Service Provider will receive customer complaints.
+Even though the main purpose of the `<psc:PrincipalSelection>` extension is to aid the Identity Provider
+in selecting a particular subject for the authentication, an Identity Provider MAY also compare the match 
+values present in the extension with the resulting attributes from the user authentication, and in case of a 
+mismatch, respond with an error. In these cases the second-level SAML status code MUST be set to
+`urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal` \[[SAML2Core](#saml2core)\].
+
+> \[1\]: The typical use case is when a user once has authenticated for a service and provided his or hers user ID to the Identity Provider, and is about to perform a signature. If the Identity Provider prompts the user for the user ID once again the user experience is poor and the Service Provider will receive customer complaints.
 
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
@@ -223,6 +229,12 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/princ
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
+
+<a name="saml2core"></a>
+**\[SAML2Core\]**
+> [OASIS Standard, Assertions and Protocols for the OASIS Security
+> Assertion Markup Language (SAML) V2.0, March
+> 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
 <a name="eidattributes"></a>
 **[EidAttributes]**
