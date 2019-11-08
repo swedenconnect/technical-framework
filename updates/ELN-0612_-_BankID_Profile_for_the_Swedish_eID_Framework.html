@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="implementation-profile-for-bankid-identity-providers-within-the-swedish-eid-framework">Implementation Profile for BankID Identity Providers within the Swedish eID Framework</h1>
-<h3 id="version-1.2---2019-10-31---**draft-version**">Version 1.2 - 2019-10-31 - <strong>Draft version</strong></h3>
+<h3 id="version-1.2---2019-11-01---**draft-version**">Version 1.2 - 2019-11-01 - <strong>Draft version</strong></h3>
 <p><em>ELN-0612-v1.2</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -346,6 +346,8 @@ Provider, the Identity Provider needs to prompt the user for his or hers persona
 <li>and most importantly, BankID is PKI-based and has support for signing using a non-repudiation key, so there is no reason not to use this function.</li>
 </ul>
 <p>The BankID client (app or desktop program) comprises a text box in which the signature message is displayed for the user. A BankID Identity Provider MUST NOT display the signature message in any other way than in this text box. How the signature message is assigned is specified below.</p>
+<p>If the BankID Identity Provider prompts the user for his or hers personal identity number in order to initialize
+the BankID signature operation, the Identity Provider MUST honour the requirement that ensures that a sign message is only displayed to the intended principal, see section 7.2.1 in [<a href="#eid-profile">EidProfile</a>].</p>
 <p><a name="input-to-bankid-signing"></a></p>
 <h4 id="4.2.1.-input-to-bankid-signing">4.2.1. Input to BankID Signing</h4>
 <p>An Identity Provider that processes an <code>&lt;saml2p:AuthnRequest&gt;</code> from a Signature Service is not given the actual data that is being signed by the user via the Signature Service. However, in order to invoke the BankID signature function, the Identity Provider must supply the BankID-server with data to be signed. This section specifies the input to the BankID signature operation.</p>
@@ -527,6 +529,8 @@ using the <code>secure-authenticator-binding</code> entity category, may request
 <li><p>Section 6.2 was updated with a requirement that a BankID Identity Provider should include the <code>&lt;psc:RequestedPrincipalSelection&gt;</code> element in its metadata.</p>
 </li>
 <li><p>The recommendation in section 3.2 concerning handling of non default browsers was updated.</p>
+</li>
+<li><p>Section 4.2 was updated with a requirement that ensures that only the intended user sees a sign message.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.0 and 1.1:</strong></p>
