@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-08-28 - *Draft version*
+### Version 1.6 - 2019-12-09 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -411,6 +411,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | 1.2.752.201.3.11 | User Signature | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.12 | Signature Activation Data | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.13 | Authentication Server Signature | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.14 | Sign Message Digest | \[[EidAttributes](#eidattributes)\] |
 
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
@@ -449,10 +450,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature    
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
+    id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
 
     -- E-legnamnden QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
-    id-qcs-statement   OBJECT IDENTIFIER ::= { id-qcs 2 }   –- QC statements
+    id-qcs-statement   OBJECT IDENTIFIER ::= { id-qcs 2 }   -- QC statements
 
     -- E-legnamnden Certificate Extensions
     id-ce-authContext  OBJECT IDENTIFIER ::= { id-ce 1 }
@@ -534,7 +536,9 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 - Section 3.1.9.2, "eIDAS Connector Aliases", defining the URI format for representing country affiliation of eIDAS connector services, was added.
 
-- - The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
+- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
+
+- Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.
 
 **Changes between version 1.4 and version 1.5:**
 
