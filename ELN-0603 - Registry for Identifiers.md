@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-12-09 - *Draft version*
+### Version 1.6 - 2019-12-16 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -24,7 +24,7 @@
 
     3.1.1. [Authentication Context URIs](#authentication-context-uris)
 
-    3.1.1.1. [Sign Message Authentication Context URIs](#sign-message-authentication-context-uris)
+    3.1.1.1. [Sign Message Authentication Context URIs (deprecated)](#sign-message-authentication-context-uris)
 
     3.1.2. [Attribute Sets](#attribute-sets)
 
@@ -207,25 +207,29 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 -   `http://eidas.europa.eu/NotNotified/LoA/high` (for non-notified eID schemes)
 
 <a name="sign-message-authentication-context-uris"></a>
-#### 3.1.1.1. Sign Message Authentication Context URIs
+#### 3.1.1.1. Sign Message Authentication Context URIs (deprecated)
 
-Authentication Context URIs extending the above URIs with specific
+**DEPRECATED**
+
+The use of Sign Message Authentication Context URIs is deprecated. See section 7 of \[[EidDeploy](#eiddeploy)\] for details.
+
+> Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
 message that must be displayed to the user (see section 7 of
 \[[EidDeploy](#eiddeploy)\]).
 
-| **URL** | **Object** |
-| :--- | :--- |
-| `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3-sigmessage` | Authentication according to uncertified-loa3, as defined above, with extended requirements for displaying signature messages. |  |
-| `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage` | Authentication according to assurance level 4 with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. |
-| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm` | Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages. |
+>| **URL** | **Object** |
+>| :--- | :--- |
+>| `http://id.elegnamnden.se/loa/1.0/loa2-sigmessage` | Authentication according to assurance level 2 with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` | Authentication according to assurance level 3 with extended requirements for displaying signature messages. |
+>| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3-sigmessage` | Authentication according to uncertified-loa3, as defined above, with extended requirements for displaying signature messages. |  |
+>| `http://id.elegnamnden.se/loa/1.0/loa4-sigmessage` | Authentication according to assurance level 4 with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/eidas-low-sigm` | Authentication accordance to eIDAS assurance level low (notified or non-notified eID schemes) with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/eidas-sub-sigm` | Authentication accordance to eIDAS assurance level substantial (notified or non-notified eID schemes) with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/eidas-high-sigm` | Authentication accordance to eIDAS assurance level high (notified or non-notified eID schemes) with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/eidas-nf-low-sigm` | Authentication accordance to eIDAS assurance level low using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub-sigm` | Authentication accordance to eIDAS assurance level substantial using an eID scheme that MUST be notified, with extended requirements for displaying signature messages. |
+>| `http://id.elegnamnden.se/loa/1.0/eidas-nf-high-sigm` | Authentication accordance to eIDAS assurance level high with an eID scheme that MUST be notified, with extended requirements for displaying signature messages. |
 
 
 <a name="attribute-sets"></a>
@@ -539,6 +543,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 
 - Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.
+
+- The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.
 
 **Changes between version 1.4 and version 1.5:**
 
