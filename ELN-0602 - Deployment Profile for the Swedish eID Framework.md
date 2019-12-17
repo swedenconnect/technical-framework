@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-12-16 - **Draft version**
+### Version 1.6 - 2019-12-17 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -1086,9 +1086,7 @@ Earlier versions of the Swedish eID Framework defined a set of Authentication Co
 
 - for Identity Providers, to include in issued assertions as an evidence that the sign message was displayed for the user.
 
-Implementations using the special purpose Authentication Context URI:s turned out to be complex and error prone, and therefore,
-this version of the Swedish eID Framework defines a new, and much simpler, way of requesting and asserting the displaying of
-sign messages, see sections [7.2.1](#requesting-display-of-signature-message) and [7.3](#authentication-responses2) below.
+Implementations using the special purpose Authentication Context URI:s for sign message turned out to be complex as the number of authentication context classes expands to align with eIDAS and other federations. Usage of these special purpose Authentication Context URI:s have therefore been deprecated and replaced with a much simpler way of requesting and asserting the displaying of sign messages, see sections [7.2.1](#requesting-display-of-signature-message) and [7.3](#authentication-responses2) below.
 
 However, for backwards compatibility reasons, up until the 31th of December 2020, Identity Providers MUST support processing of the special purpose sigmessage URI:s according to version 1.5 of "Deployment Profile for the Swedish eID Framework", \[[EidDeploy_1.5](#eiddeploy_15)\]. 
 
@@ -1225,7 +1223,9 @@ By including the `signMessageDigest` attribute (see section 3.2.4 of \[[EidAttri
 in the SAML assertion, the Identity Provider asserts that it has successfully displayed the sign message
 received in the request for the user and that the user has accepted to sign under the context of this sign message.
 
-Below follows the deprecated requirements that MUST be supported by Identity Providers until the 31th of December 2020:
+Up until the 31th of December 2020, Identity Providers MUST also support the deprecated requirements stated below.
+
+**Deprecated requirements:**
 
 > By including a sign message authentication context URI, as described in [section 7.1](#authentication-context-uris-for-signature-services), in the SAML assertion under the
 `<saml2:AuthnContextClassRef>` element of the

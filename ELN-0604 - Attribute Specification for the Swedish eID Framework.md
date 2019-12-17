@@ -388,20 +388,31 @@ for Federated Signing" specification \[[SigSAP](#sigsap)\].
 #### 3.2.4. The signMessageDigest Attribute
 
 The `signMessageDigest` attribute is included in an assertion as a proof that an Identity Provider displayed
-a sign message for the user. This sign message is the `SignMessage` extension that may be included in an 
-authentication request by Signature Service Service Providers. See section 7 of \[[EidDeployProf](#eiddeployprof)\]
-for details.
+a sign message for the user and that the user actively confirmed acceptance of this sign message. This sign 
+message is the `SignMessage` extension that may be included in an authentication request by Signature Service 
+Service Providers. See section 7 of \[[EidDeployProf](#eiddeployprof)\] for details.
 
-The attribute value format for the `signMessageDigest` attribute is `digest-message-uri;base64(digest(msg))`, where `msg` is the 
-Base64-encoding of the cleartext text that was displayed. The `msg` equals the `csig:Message` element value of the `csig:SignMessage` (\[[DSSExt](#dssext)\]). Thus, if the `csig:Message` element is encrypted into a `csig:EncryptedMessage`, the 
-element value after encryption should be used.
+The attribute value format for the `signMessageDigest` attribute is `digest-message-uri;sign-message-digest`, where 
+`sign-message-digest` is `base64(digest(msg))`. The `msg` is the UTF-8 encoded bytes of the sign message that was displayed. It equals the `csig:Message` element value of the `csig:SignMessage` (\[[DSSExt](#dssext)\]). Thus, if the `csig:Message` element is encrypted into a `csig:EncryptedMessage`, the element value after decryption should be used.
 
-Entities compliant with this specification SHOULD use `http://www.w3.org/2001/04/xmlenc#sha256` as the digest algorithm.
+Entities compliant with this specification MUST use `http://www.w3.org/2001/04/xmlenc#sha256` as the digest algorithm, 
+unless the recipient of the `signMessageDigest` attribute has declared another digest algorithm as preferred in its
+metadata entry (see section 2.1.1.3 of [[EidDeployProf](#eiddeployprof)\]). In those cases this algorithm MAY be used.
+
 
 **Example:**
 
-Suppose that the unencrypted message is "I hereby confirm that I want to join example.com as a customer". The base64 encoding
-of this message is "SSBoZXJlYnkgY29uZmlybSB0aGF0IEkgd2FudCB0byBqb2luIGV4YW1wbGUuY29tIGFzIGEgY3VzdG9tZXI=", which is the input to the digesting operation.
+Suppose that the unencrypted message is "I hereby confirm that I want to join example.com as a customer". This is
+represented as:
+
+```
+<csig:Message>
+  SSBoZXJlYnkgY29uZmlybSB0aGF0IEkgd2FudCB0byBqb2luIGV4YW1wbGUuY29tIGFzIGEgY3VzdG9tZXI=
+</csig:Message>
+```
+
+The input to the digesting operation is the value bytes of the `csig:Message` element which is UTF-8 encoded bytes
+of the actual sign message<sup>*</sup>.
 
 The `signMessageDigest` attribute for the above example will then be:
 
@@ -409,11 +420,10 @@ The `signMessageDigest` attribute for the above example will then be:
 <saml2:Attribute FriendlyName="signMessageDigest" Name="urn:oid:1.2.752.201.3.14"
   NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
   <saml2:AttributeValue xsi:type="xsd:string">
-    http://www.w3.org/2001/04/xmlenc#sha256;u3+BqUo/3LDoPqqqHSwNOilbf3NMPrBMdeYXPczmRiw=
+    http://www.w3.org/2001/04/xmlenc#sha256;0yKaSVsYeh+PX2Q6diqO2w89+a3Dm303tp3AVjgxwj0=
   </saml2:AttributeValue>
 </saml2:Attribute>
 ```
-
 
 <a name="attributes-for-the-eidas-framework"></a>
 ### 3.3. Attributes for the eIDAS Framework
