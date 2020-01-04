@@ -88,24 +88,24 @@ Claims Data Type | JSON Data Type | Description
 
 The SVA token JWT SHALL contain claims according to the following table.
 
-Name | Data Type | Value | Precence
+Name | Data Type | Value | Presence
 --- | --- | --- | ---
 `jti`  | **String** | A "JWT ID" registered claim according to \[[RFC7519](#rfc7519)\]. It is RECOMMENDED that the identifier holds a headecimal string representation of a 128 bit unsigned integer. |MANDATORY
 `iss`  | **StringOrURI**  | A "Issuer" registered claim according to \[[RFC7519](#rfc7519)\]. An arbitrary unique identifier of the SVA issuer. This value SHOULD have the value of an URI identifier based on a domain owned by the issuer. | MANDATORY
 `iat`  | **NumericDate**  | An "Issued At" registered claim according to \[[RFC7519](#rfc7519)\] expressig the time when this SVA token was issued  | MANDATORY
 `aud`  | **\[StringOrURI\]** or **StringOrURI** | An "Audience" registered claim according to \[[RFC7519](#rfc7519)\]. The audience claim is an array of one or more identifiers, identifying intended recipients of the SVA token. Each identifier MAY identify a single entity, a group of entities or a common policy adopted by a group of entites. If only one value is provided it MAY be provided as a single StringOrURI value instead of as an array of values.| OPTIONAL
 `exp`  | **NumericDate**  | An **Expiration Time** registered claim according to \[[RFC7519](#rfc7519)\] expressig the time when services and responsibilities related to this SVA token is no longer provided by the SVA Issuer. The precice meaning of the expiration time claim is defined by local policy. See implementation note below <sup>2</sup>   | OPTIONAL
-`sva_claims`  | **Object\<SVAClaims\>**  | One instance of the `sva_claims` **ClaimsObject** as defined in section 2.2.3.1  | MANDATORY
+`sig_val_assert`  | **Object\<SigValAssertion\>**  | Signature validation assertion claims for this SVA token extending the standard registered JTW claims above. | MANDATORY
 
 > \[2\]: An SVA token asserts that a certain validation process was undertaken at a certain instance of time. This fact never changes and never expires. However, some aspects of the SVA claim such as liability for false claims or service provision related to a specific SVA token may stop after a certain period of time, such as a service where an old SVA token can be upgraded to a new SVA token signed with fresh keys and algorithms.
 
 
 #### 2.2.3. Claim object classes
 
-##### 2.2.3.1. The SVAClaims object
+##### 2.2.3.1. The SigValAssertion object
 The sva_claims ClaimsObject contains the following values:
 
-Name | Data Type | Value | Precence
+Name | Data Type | Value | Presence
 --- | --- | --- | ---
 `ver` | **String** | Version. This version is indicated by the value "1.0" | MANDATORY
 `profile`| **StringOrURI** | Name of a profile applied to this speicification that defines conventions of content of specific claims and extension points.| OPTIONAL
@@ -114,33 +114,57 @@ Name | Data Type | Value | Precence
 `sig`  | **\[Object\<Signature\>\]**   | The `sig` claim provide information about validated signatures as an array of **Signature** objects. If the SVA token contains signature validation assertions for more than one signature, then each signature is represented by a separate **Signature** object. An SVA token MUST contain at least one Signature object | MANDATORY
 `ext` | **MAP\<String\>** | Extension point for additional claims related to the SVA token. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
-##### 2.2.3.2. The Signature object
+##### 2.2.3.2. The Signature claims object
 The Signature object contains claims related to signature validation assertioins for one signature and contains the following values:
 
-Name | Data Type | Value | Precence
+Name | Data Type | Value | Presence
 --- | --- | --- | ---
-`ref`  | **Object\<Reference\>** | Reference information identifying the target signature and the Signed Bytes of the signature. | MANDATORY |
-|`cert_hash` | **Base64Binary** | The hash value of the signing certificate used to validate the target signature. | MANDATORY |
-| `chain_hash` | **Base64Binary** | Hash value of the concattenated bytes of the certificate chain provided in the target signature including the certificate of the signer. The order of the certificates in the target chain must be identical to the order of certificates as they appear in the target signature.| MANDATORY
-|`sd_hash` | **Object\<DocHash\>** | Providing hash values and references to Signed Data signed by the target signature. | MANDATORY  |
-|`sig_ver` | **Object\<Result\>** | Information about the results of signature validation according to defined validation procedures. | MANDATORY |
-|`time_ver` | **Object\<VerifiedTimes\>**  | Collection of assertions that the target signature has been verified to exist at specific instances of time in the past. | OPTIONAL |
+`ref`  | **Object\<Reference\>** | Reference information identifying the target signature. | MANDATORY |
+|`sig_data` | **\[Object\<SignedData\>\]** | Array of references to Signed Data signed by the target signature. | MANDATORY  |
+|`cert_hash` | **Base64Binary** | Hash of the signing certificate or equivalent public key container used to validate the target signature. | MANDATORY |
+| `chain_hash` | **Base64Binary** | Hash of the concattenated bytes of the certificate chain provided in the target signature.| MANDATORY
+|`sig_val` | **\[Object\<PolicyValidation\>\]** | Array of results of signature validation according to defined validation procedures. | MANDATORY |
+|`time_val` | **\[Object\<TimeValidation\>\]**  | Array of results of time verification validating proof that the target signature has existed at specific instances of time in the past. | OPTIONAL |
+`ext` | **MAP\<String\>** | Extension point for additional claims related to the target signature. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
-##### 2.2.3.3. The Reference object
+##### 2.2.3.3. The Reference claims object
 
-Name | Data Type | Value | Precence
+Name | Data Type | Value | Presence
 --- | --- | --- | ---
-`id`  | **String**  | Optional identifier assigned to the target signature. The source of this identifier is defined by a SVA token profile according to section 3  |  OPTIONAL
-`sig_hash`  | **Base64Binary** | Hash value of the target signature value | MANDATORY
-`sb_hash` | **Base64Binary** | Hash value of the Signed Bytes of the target signature | MANDATORY
+`id`  | **String**  | Optional identifier assigned to the target signature.  |  OPTIONAL
+`sig_hash`  | **Base64Binary** | Hash value of the target signature value. | MANDATORY
+`sb_hash` | **Base64Binary** | Hash value of the Signed Bytes of the target signature. | MANDATORY
 
-##### 2.2.3.4. The DocHash object
+##### 2.2.3.4. The SignedData claims object
 
-##### 2.2.3.5. The Result object
+Name | Data Type | Value | Presence
+--- | --- | --- | ---
+`ref` | **String** | Reference identifier identifying the data or data fragment covered by the target signature. | MANDATORY
+`hash`  | **Base64Binary** | Hash of the data covered by the target signature | MANDATORY
 
-##### 2.2.3.6. The VerifiedTimes object
+##### 2.2.3.5. The PolicyValidation claims object
 
-##### 2.2.3.7. The PolicyValidation object
+Name | Data Type | Value | Presence
+--- | --- | --- | ---
+`pol`  | **StringOrURI** | Identifier of the policy governing the validation process  | MANDATORY
+`res`  | **String** | Result of the validation process. The value MUST be one of "PASSED", "FAILED" or "INDETERMINATE" as defined by  \[[ETSI EN 319 102-1](#etsi319102-1)\]| MANDATORY
+`msg` | **String** | An optional message describing the result. | OPTIONAL
+`ext` | **MAP\<String\>** | Extension for additional information about the validation result.  | OPTIONAL
+
+
+##### 2.2.3.6. The TimeVerification claims object
+
+
+Name | Data Type | Value | Presence
+--- | --- | --- | ---
+`time`  | **NumericDate** | The verified time  | MANDATORY
+`type`  | **StringOrURI** | Identifier of the type of evidence of time | MANDATORY
+`iss` | **StringOrURI** | Identifier of the entity that issued the evidence of time | MANDATORY
+`cert_hash`  | **Base64Binary** | Hash of the certificate or equivalent public key token of the signer of the validated evidence of time  | OPTIONAL
+`id` | **String** | Unique identifier assigned to the evidence of time  |  OPTIONAL
+`val` | **\[Object\<PolicyValidation\>\]**  | Array of results of validation of the time evidence according to defined validation procedures.  |  OPTIONAL
+`ext` | **MAP\<String\>** | Extension for additional information about the signature validation result.  | OPTIONAL
+
 
 2.2.3. SVA JWT header
 
@@ -151,6 +175,107 @@ XML and PDF etc defined in other documents
 ## 4. Signature Validation with SVA Token
 
 ## 5. Examples
+
+The following example illustrates a basic SVA token according to this specification issued for a signed PDF document.
+
+SVA token JWT:
+
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJhdWQiOiJodHRwOlwvXC9leGFtcGxlLmNvbVwvYXV
+kaWVuY2UxIiwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlkYXRvciIsInNpZ19
+2YWxfYXNzZXJ0Ijp7InNpZyI6W3siZXh0IjpudWxsLCJyZWYiOnsic2lnX2hhc2giOiJcL3o1NTY2dVV
+ET2QrVTFOMXZkdG5IRytMUDRGNGkycnhQaHFOQzdldjJwZ01WZTNWcUczMWtlY2dYME9waXVcL2Z4ZVd
+GNDZWRXozenJqOHhTS0V6R0tBPT0iLCJpZCI6bnVsbCwic2JfaGFzaCI6IkFFUmU5RTZFZmd1YkppTmN
+acElNOUJCRVZnSHgrQ2NqdkdxYjJ1bDI4MFJDdkoyeU1WTmVGaFJ5M2VmeFpSK2JGR2FBUGNSekhCZTZ
+Zd2Q1NEFIZVBRPT0ifSwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25hdHVyZSB2YWx
+pZGF0aW9uIiwiZXh0IjpudWxsLCJyZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5
+jb25uZWN0LnNlXC9zdmFcL3NpZ3ZhbC1wb2xpY3lcL2NoYWluXC8wMSJ9XSwiY2VydF9oYXNoIjoiTlN
+1Rk1cL3ZKK2JlQmxRdFFUem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xLVkdibGE5VVJ6WWNzaXNBeDJ
+iY3NxT2hrdlZUYzNtSzlFNmFnMDdoZmF3PT0iLCJjaGFpbl9oYXNoIjoiTlN1Rk1cL3ZKK2JlQmxRdFF
+Uem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xLVkdibGE5VVJ6WWNzaXNBeDJiY3NxT2hrdlZUYzNtSzl
+FNmFnMDdoZmF3PT0iLCJzaWdfZGF0YSI6W3sicmVmIjoiMCA3NDY5NyA3OTY5OSAzNzg4MSIsImhhc2g
+iOiJiOEVMMU1vVTRxeFlJMXJraXNrOG9xOGlRM0xyRG95Y2tabm9IVmNOY1BTWmlHeTZLdVwvK1FQWnh
+nSnBnbEZ5NURSK2JidjJqZWpOejZBK2Y5emVTd2c9PSJ9XSwidGltZV92YWwiOltdfV0sImV4dCI6eyJ
+uYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4wIiwiY2hhaW4iOlsiTUlJQjZUQ0N
+BVXVnQXdJQkFnSUVYSEFYdURBS0JnZ3Foa2pPUFFRREFqQTVNUXN3Q1FZRFZRUUdFd0pUUlRFT01Bd0d
+BMVVFQ2d3RlNVUnpaV014R2pBWUJnTlZCQU1NRVU5d1pXNVRRVTFNSUVWRFF5QlVaWE4wTUI0WERURTV
+NREl5TWpFMU16a3pObG9YRFRJd01ESXlNakUxTXprek5sb3dPVEVMTUFrR0ExVUVCaE1DVTBVeERqQU1
+CZ05WQkFvTUJVbEVjMlZqTVJvd0dBWURWUVFEREJGUGNHVnVVMEZOVENCRlEwTWdWR1Z6ZERDQm16QVF
+CZ2NxaGtqT1BRSUJCZ1VyZ1FRQUl3T0JoZ0FFQVp3REFOVlNYUDVlTndPVjk4WjlhcXpOXC93SFpBVWk
+4YWp1YzBwU20wbElJNXZBTXBTRXZreWJUelNXRWRcL2RSRFB1UmJuRzFxd3VSeER6QklxV29jSEc2QUc
+wY2xkaExWQ2w0dlYzVDg5UFVBTDlkR1JiMTh1V253VFVPWWJ1OWM4Wnl1RTc5WU93ZmpJSnNxS0FcL1B
+CY2NwaTJEZzM1MTlvNlMySXl3eFdOSE5Qd0tNQW9HQ0NxR1NNNDlCQU1DQTRHTEFEQ0Jod0pDQU5jUXh
+tZVE0bjh6WTJscXJ0amhvOU1RS21iWXVPem9XejVKb1wvNGQrOU9PUlowVTlRMHo4RCtJRXRLVDRkZER
+mb1VMMGIwb0NHT1Y3TzB4YzNqekxsQU5Ba0U4azR2VjA4N2NiNFo2S1gyUXRORUhmMXFZb3lFeWI1UUt
+ZbnU4a2pGa3ZGa2hRN1ZxM0dEUUYzZEdrTDI2RkVhU0wwZzZDdnBZR3piM2VcL2NxV296RjVnPT0iXSw
+icHJvZmlsZSI6IlBERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC9
+4bWxlbmMjc2hhNTEyIn0sImlhdCI6MTU3ODE3NTA4OSwianRpIjoiZWEwYWIxMDcyNTAzMjhiNTg5YjE
+0MGI0N2NmZjQxOGQifQ.ACIzxnOgD3jjGEoq_48jcZBfmVViRHfT_y-uUr0yN2PBK7pi9bNJVbCe51mq
+9ho1RGSzJpqKFQBBUcFfPiLBgN8qAJSszbWdpADlBg7jv1ILe5UsgWzMGYbX2pvKsE_VdbJqhHVtvqRG
+I5gIlJPvZZ6vZTofvLZ7q6QyrXdbHFMW2JZH
+```
+Decoded JWT Header:
+```
+{"typ":"JWT","alg":"ES512"}
+
+```
+Decoded JWT Claims
+```
+{
+  "jti" : "ea0ab107250328b589b140b47cff418d",
+  "iss" : "https://swedenconnect.se/validator",
+  "iat" : 1578175089,
+  "aud" : "http://example.com/audience",
+  "sig_val_assert" : {
+    "ver" : "1.0",
+    "profile" : "PDF",
+    "hash_algo" : "http://www.w3.org/2001/04/xmlenc#sha512",
+    "chain" : [ "MIIB6TCCAUugAwIBAgIEXHAXuDAKBggqhkjOPQQDAjA5MQswCQYDVQQGEwJTRTE
+                 OMAwGA1UECgwFSURzZWMxGjAYBgNVBAMMEU9wZW5TQU1MIEVDQyBUZXN0MB4XDT
+                 E5MDIyMjE1MzkzNloXDTIwMDIyMjE1MzkzNlowOTELMAkGA1UEBhMCU0UxDjAMB
+                 gNVBAoMBUlEc2VjMRowGAYDVQQDDBFPcGVuU0FNTCBFQ0MgVGVzdDCBmzAQBgcq
+                 hkjOPQIBBgUrgQQAIwOBhgAEAZwDANVSXP5eNwOV98Z9aqzN/wHZAUi8ajuc0pS
+                 m0lII5vAMpSEvkybTzSWEd/dRDPuRbnG1qwuRxDzBIqWocHG6AG0cldhLVCl4vV
+                 3T89PUAL9dGRb18uWnwTUOYbu9c8ZyuE79YOwfjIJsqKA/PBccpi2Dg3519o6S2
+                 IywxWNHNPwKMAoGCCqGSM49BAMCA4GLADCBhwJCANcQxmeQ4n8zY2lqrtjho9MQ
+                 KmbYuOzoWz5Jo/4d+9OORZ0U9Q0z8D+IEtKT4ddDfoUL0b0oCGOV7O0xc3jzLlA
+                 NAkE8k4vV087cb4Z6KX2QtNEHf1qYoyEyb5QKYnu8kjFkvFkhQ7Vq3GDQF3dGkL
+                 26FEaSL0g6CvpYGzb3e/cqWozF5g==" ],
+    "sig" : [ {
+      "ref" : {
+        "sig_hash" : "/z5566uUDOd+U1N1vdtnHG+LP4F4i2rxPhqNC7ev2pgMVe3VqG31kecgX0
+                      Opiu/fxeWF46VEz3zrj8xSKEzGKA==",
+        "sb_hash" : "AERe9E6EfgubJiNcZpIM9BBEVgHx+CcjvGqb2ul280RCvJ2yMVNeFhRy3ef
+                     xZR+bFGaAPcRzHBe6Ywd54AHePQ=="
+      },
+      "sig_data" : [ {
+        "ref" : "0 74697 79699 37881",
+        "hash" : "b8EL1MoU4qxYI1rkisk8oq8iQ3LrDoyckZnoHVcNcPSZiGy6Ku/+QPZxgJpglF
+                  y5DR+bbv2jejNz6A+f9zeSwg=="
+      } ],
+      "cert_hash" : "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisA
+                     x2bcsqOhkvVTc3mK9E6ag07hfaw==",
+      "chain_hash" : "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsis
+                      Ax2bcsqOhkvVTc3mK9E6ag07hfaw==",
+      "sig_val" : [ {
+        "pol" : "http://id.swedenconnect.se/sva/sigval-policy/chain/01",
+        "res" : "PASSED",
+        "msg" : "Passed basic signature validation"
+      } ],
+      "time_val" : [ ]
+    } ],
+    "ext" : {
+      "name1" : "val1",
+      "name2" : "val2"
+    }
+  }
+}
+```
+
+
+
+
+
 
 ## 6. Normative References
 
