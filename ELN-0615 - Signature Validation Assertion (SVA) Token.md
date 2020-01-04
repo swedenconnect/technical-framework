@@ -67,21 +67,21 @@ Using the SVA token, the signed document can be validated once using a reliable 
 The SVA token is carried in a JSON Web Token (JWT) in accordance with \[[RFC7519](#rfc7519)\].
 
 ### 2.2.1. Data types
-Content of claims in a SVA token MUST comply with a specified Claims Data Type according to the following table:
+Content of claims in a SVA token are specified using the claims data types in the following table:
 
 Claims Data Type | JSON Data Type | Description
 ---|---|---
-**String**  | string  | Any case sensitive string value.
+**String**  | string  | An arbitrary case sensitive string value.
 **Base64Binary**  | string  | String representation of Base-64 encoded byte array of binary data.
 **StringOrURI**  | string  | As defined in \[[RFC7519](#rfc7519)\]. (A JSON string value, with the additional requirement that while arbitrary string values MAY be used, any value containing a ":" character MUST be a URI).
-**URI**  | string  | The string MUST be a valid URI 
-**Integer**  | number  | A 32 bit signed integer value (A value from -2<sup>31</sup> to 2<sup>31</sup> - 1).
-**Long**  | number  |  A 64 bit signed integer value (A value from -2<sup>63</sup> to 2<sup>63</sup> - 1).
+**URI**  | string  | A valid URI
+**Integer**  | number  | A 32 bit signed integer value (from -2<sup>31</sup> to 2<sup>31</sup> - 1).
+**Long**  | number  |  A 64 bit signed integer value (from -2<sup>63</sup> to 2<sup>63</sup> - 1).
 **NumericDate**  |  number |  As defined in \[[RFC7519](#rfc7519)\]. (A JSON numeric value representing the number of seconds from 1970-01-01T00:00:00Z UTC until the specified UTC date/time, ignoring leap seconds.)
-**Boolean**  | boolean  | the explicit value true or false.
+**Boolean**  | boolean  | The explicit value true or false.
 **Object\<Class\>**  | object  | A JSON object holding a claims object of a class defined in this document (see section 2.2.2).
-**Map\<Type\>**  | object  | A JSON object with one or more named values where each value is of the declared Type. Example: Map\<String\> according to this notation is equivalent to a Java object of type Map\<String, String\>. The Map key class declaration is omitted in this type notation as the name of a JSON value is allways a string value.
-**Array**  | array  |  An array of values of a specific data type as defined in this table. An array is expressed in this specification by square brackets. E.g. **\[String\]** is an expression of an array of String values and **\[doc_hash\]** is an array of ClaimsObject of type doc_hash.
+**Map\<Type\>**  | object  | A JSON object with name value pairs where the value is an object of the specified Type in the notation. Example: Map\<String\> according to this notation is a JSON object with name value pairs where all values are of type String.
+**Array**  | array  |  An array of values of a specific data type as defined in this table. An array is expressed in this specification by square brackets. E.g. **\[String\]** indicates an array of String values and **\[Object\<DocHash\>\]** indicates an array of DocHash objects.
 **Null** | null | Representing an absent value. A claim with a null value is equivalent with an absent claim in this specification.
 
 #### 2.2.2. SVA token claims
@@ -108,24 +108,25 @@ The sva_claims ClaimsObject contains the following values:
 Name | Data Type | Value | Precence
 --- | --- | --- | ---
 `ver` | **String** | Version. This version is indicated by the value "1.0" | MANDATORY
+`profile`| **StringOrURI** | Name of a profile applied to this speicification that defines conventions of content of specific claims and extension points.| OPTIONAL
 `hash_algo`  | **URI** | The URI identifier of the hash algorithm used to provide hash values within the SVA token claims. The URI identifier SHALL be one defined in \[[RFC6931](#rfc6931)\] or in the IANA registry defined by this RFC. | MANDATORY
 `chain`  | \[**Base64Binary**\]  | An optional array of DER encoded chain of certificates that MAY be used to validate signature that signs the SVA token. The first certificate in the chain must hold the public key that is used to validate the SVA token signature and any folloing certificates MAY be used to verify the first certificate  | OPTIONAL
-`sig`  | **\[Object\<Signature\>\]**   | The `sig` **ClaimsObject** represent the claims related to a single signature. If the SVA token contains signature validation assertions for more than one signature, then each signature is represented by a separate `sig` **ClaimsObject**. An SVA token MUST contain at least one `sig` **ClaimsObject**  | MANDATORY
+`sig`  | **\[Object\<Signature\>\]**   | The `sig` claim provide information about validated signatures as an array of **Signature** objects. If the SVA token contains signature validation assertions for more than one signature, then each signature is represented by a separate **Signature** object. An SVA token MUST contain at least one Signature object | MANDATORY
+`ext` | **MAP\<String\>** | Extension point for additional claims related to the SVA token. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
 ##### 2.2.3.2. The Signature object
-The sig ClaimsObject contains claims related to signature validation assertioins for one signature and contains the following values:
+The Signature object contains claims related to signature validation assertioins for one signature and contains the following values:
 
 Name | Data Type | Value | Precence
 --- | --- | --- | ---
-`type` | **String** | The identifier of the type of signature covered by this sig ClaimsObject. Type identifiers are defined by profiles of this specification specifying the use of SVA tokens with different types of signed documents. See section 3. | MANDATORY
 `ref`  | **Object\<Reference\>** | Reference information identifying the target signature and the Signed Bytes of the signature. | MANDATORY |
 |`cert_hash` | **Base64Binary** | The hash value of the signing certificate used to validate the target signature. | MANDATORY |
 | `chain_hash` | **Base64Binary** | Hash value of the concattenated bytes of the certificate chain provided in the target signature including the certificate of the signer. The order of the certificates in the target chain must be identical to the order of certificates as they appear in the target signature.| MANDATORY
-|`doc_hash` | **Object\<DocHash\>** | Providing hash values and references to Signed Data signed by the target signature. | MANDATORY  |
-|`result` | **Object\<Result\>** | Information about the results of signature validation according to defined validation procedures. | MANDATORY |
-|`verified_times` | **Object\<VerifiedTimes\>**  | Collection of assertions that the target signature has been verified to exist at specific instances of time in the past. | OPTIONAL |
+|`sd_hash` | **Object\<DocHash\>** | Providing hash values and references to Signed Data signed by the target signature. | MANDATORY  |
+|`sig_ver` | **Object\<Result\>** | Information about the results of signature validation according to defined validation procedures. | MANDATORY |
+|`time_ver` | **Object\<VerifiedTimes\>**  | Collection of assertions that the target signature has been verified to exist at specific instances of time in the past. | OPTIONAL |
 
-##### 2.2.3.3. The Reference ClaimsObject
+##### 2.2.3.3. The Reference object
 
 Name | Data Type | Value | Precence
 --- | --- | --- | ---
@@ -133,16 +134,13 @@ Name | Data Type | Value | Precence
 `sig_hash`  | **Base64Binary** | Hash value of the target signature value | MANDATORY
 `sb_hash` | **Base64Binary** | Hash value of the Signed Bytes of the target signature | MANDATORY
 
-##### 2.2.3.4. The DocHash ClaimsObject
+##### 2.2.3.4. The DocHash object
 
-##### 2.2.3.5. The Result ClaimsObject
+##### 2.2.3.5. The Result object
 
-##### 2.2.3.6. The VerifiedTimes ClaimsObject
+##### 2.2.3.6. The VerifiedTimes object
 
-##### 2.2.3.7. The PolicyValidation ClaimsObject
-
-##### 2.2.3.7. The Extension ClaimsObject
-
+##### 2.2.3.7. The PolicyValidation object
 
 2.2.3. SVA JWT header
 
