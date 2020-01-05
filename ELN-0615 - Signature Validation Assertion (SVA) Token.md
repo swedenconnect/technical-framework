@@ -195,24 +195,29 @@ iY3NxT2hrdlZUYzNtSzlFNmFnMDdoZmF3PT0iLCJjaGFpbl9oYXNoIjoiTlN1Rk1cL3ZKK2JlQmxRdFF
 Uem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xLVkdibGE5VVJ6WWNzaXNBeDJiY3NxT2hrdlZUYzNtSzl
 FNmFnMDdoZmF3PT0iLCJzaWdfZGF0YSI6W3sicmVmIjoiMCA3NDY5NyA3OTY5OSAzNzg4MSIsImhhc2g
 iOiJiOEVMMU1vVTRxeFlJMXJraXNrOG9xOGlRM0xyRG95Y2tabm9IVmNOY1BTWmlHeTZLdVwvK1FQWnh
-nSnBnbEZ5NURSK2JidjJqZWpOejZBK2Y5emVTd2c9PSJ9XSwidGltZV92YWwiOltdfV0sImV4dCI6eyJ
-uYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4wIiwiY2hhaW4iOlsiTUlJQjZUQ0N
-BVXVnQXdJQkFnSUVYSEFYdURBS0JnZ3Foa2pPUFFRREFqQTVNUXN3Q1FZRFZRUUdFd0pUUlRFT01Bd0d
-BMVVFQ2d3RlNVUnpaV014R2pBWUJnTlZCQU1NRVU5d1pXNVRRVTFNSUVWRFF5QlVaWE4wTUI0WERURTV
-NREl5TWpFMU16a3pObG9YRFRJd01ESXlNakUxTXprek5sb3dPVEVMTUFrR0ExVUVCaE1DVTBVeERqQU1
-CZ05WQkFvTUJVbEVjMlZqTVJvd0dBWURWUVFEREJGUGNHVnVVMEZOVENCRlEwTWdWR1Z6ZERDQm16QVF
-CZ2NxaGtqT1BRSUJCZ1VyZ1FRQUl3T0JoZ0FFQVp3REFOVlNYUDVlTndPVjk4WjlhcXpOXC93SFpBVWk
-4YWp1YzBwU20wbElJNXZBTXBTRXZreWJUelNXRWRcL2RSRFB1UmJuRzFxd3VSeER6QklxV29jSEc2QUc
-wY2xkaExWQ2w0dlYzVDg5UFVBTDlkR1JiMTh1V253VFVPWWJ1OWM4Wnl1RTc5WU93ZmpJSnNxS0FcL1B
-CY2NwaTJEZzM1MTlvNlMySXl3eFdOSE5Qd0tNQW9HQ0NxR1NNNDlCQU1DQTRHTEFEQ0Jod0pDQU5jUXh
-tZVE0bjh6WTJscXJ0amhvOU1RS21iWXVPem9XejVKb1wvNGQrOU9PUlowVTlRMHo4RCtJRXRLVDRkZER
-mb1VMMGIwb0NHT1Y3TzB4YzNqekxsQU5Ba0U4azR2VjA4N2NiNFo2S1gyUXRORUhmMXFZb3lFeWI1UUt
-ZbnU4a2pGa3ZGa2hRN1ZxM0dEUUYzZEdrTDI2RkVhU0wwZzZDdnBZR3piM2VcL2NxV296RjVnPT0iXSw
-icHJvZmlsZSI6IlBERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC9
-4bWxlbmMjc2hhNTEyIn0sImlhdCI6MTU3ODE3NTA4OSwianRpIjoiZWEwYWIxMDcyNTAzMjhiNTg5YjE
-0MGI0N2NmZjQxOGQifQ.ACIzxnOgD3jjGEoq_48jcZBfmVViRHfT_y-uUr0yN2PBK7pi9bNJVbCe51mq
-9ho1RGSzJpqKFQBBUcFfPiLBgN8qAJSszbWdpADlBg7jv1ILe5UsgWzMGYbX2pvKsE_VdbJqhHVtvqRG
-I5gIlJPvZZ6vZTofvLZ7q6QyrXdbHFMW2JZH
+nSnBnbEZ5NURSK2JidjJqZWpOejZBK2Y5emVTd2c9PSJ9XSwidGltZV92YWwiOlt7InZhbCI6W3sibXN
+nIjpudWxsLCJleHQiOm51bGwsInJlcyI6IlBBU1NFRCIsInBvbCI6Imh0dHA6XC9cL2lkLnN3ZWRlbmN
+vbm5lY3Quc2VcL3N2YVwvc2lndmFsLXBvbGljeVwvdHJ1c3RcLzAxIn1dLCJleHQiOm51bGwsImlzcyI
+6Imh0dHBzOlwvXC9zd2VkZW5jb25uZWN0LnNlXC92YWxpZGF0b3IiLCJjZXJ0X2hhc2giOm51bGwsInR
+pbWUiOjE1NzgxNzUwODksImlkIjoiNTU4ZTVmN2I5MDliMWY5IiwidHlwZSI6Imh0dHA6XC9cL2lkLnN
+3ZWRlbmNvbm5lY3Quc2VcL3N2YVwvdGltZXZhbC10eXBlXC9wZGYtc3ZhLXRpbWVzdGFtcFwvMDEifV1
+9XSwiZXh0Ijp7Im5hbWUyIjoidmFsMiIsIm5hbWUxIjoidmFsMSJ9LCJ2ZXIiOiIxLjAiLCJjaGFpbiI
+6WyJNSUlCNlRDQ0FVdWdBd0lCQWdJRVhIQVh1REFLQmdncWhrak9QUVFEQWpBNU1Rc3dDUVlEVlFRR0V
+3SlRSVEVPTUF3R0ExVUVDZ3dGU1VSelpXTXhHakFZQmdOVkJBTU1FVTl3Wlc1VFFVMU1JRVZEUXlCVVp
+YTjBNQjRYRFRFNU1ESXlNakUxTXprek5sb1hEVEl3TURJeU1qRTFNemt6Tmxvd09URUxNQWtHQTFVRUJ
+oTUNVMFV4RGpBTUJnTlZCQW9NQlVsRWMyVmpNUm93R0FZRFZRUUREQkZQY0dWdVUwRk5UQ0JGUTBNZ1Z
+HVnpkRENCbXpBUUJnY3Foa2pPUFFJQkJnVXJnUVFBSXdPQmhnQUVBWndEQU5WU1hQNWVOd09WOThaOWF
+xek5cL3dIWkFVaThhanVjMHBTbTBsSUk1dkFNcFNFdmt5YlR6U1dFZFwvZFJEUHVSYm5HMXF3dVJ4RHp
+CSXFXb2NIRzZBRzBjbGRoTFZDbDR2VjNUODlQVUFMOWRHUmIxOHVXbndUVU9ZYnU5YzhaeXVFNzlZT3d
+maklKc3FLQVwvUEJjY3BpMkRnMzUxOW82UzJJeXd4V05ITlB3S01Bb0dDQ3FHU000OUJBTUNBNEdMQUR
+DQmh3SkNBTmNReG1lUTRuOHpZMmxxcnRqaG85TVFLbWJZdU96b1d6NUpvXC80ZCs5T09SWjBVOVEwejh
+EK0lFdEtUNGRkRGZvVUwwYjBvQ0dPVjdPMHhjM2p6TGxBTkFrRThrNHZWMDg3Y2I0WjZLWDJRdE5FSGY
+xcVlveUV5YjVRS1ludThrakZrdkZraFE3VnEzR0RRRjNkR2tMMjZGRWFTTDBnNkN2cFlHemIzZVwvY3F
+Xb3pGNWc9PSJdLCJwcm9maWxlIjoiUERGIiwiaGFzaF9hbGdvIjoiaHR0cDpcL1wvd3d3LnczLm9yZ1w
+vMjAwMVwvMDRcL3htbGVuYyNzaGE1MTIifSwiaWF0IjoxNTc4MjE4MTI2LCJqdGkiOiIzMWVlOWEyOWY
+3NDY2NGE2NzQxMWU5OTgzYjc5ZTRkYiJ9.ANmdTvUeg4w2wg8og7DSR6wKWdS6-eRDRdaffybmO3UNsI
+3oubdDRlPwpHN02wwt1NvixgxyaOYagcCX9BNBvjw-AR6PcLv-uOM901mkSpfYb2_7IYGsxzd1U34cP2
+xnptcLLOf6kyGkbsXLbHYBseUaWUhczZmfbTJ-iDjiV89gFuip
 ```
 Decoded JWT Header:
 ```
@@ -222,14 +227,12 @@ Decoded JWT Header:
 Decoded JWT Claims
 ```
 {
-  "jti" : "ea0ab107250328b589b140b47cff418d",
+  "aud" : "http://example.com/audience1",
   "iss" : "https://swedenconnect.se/validator",
-  "iat" : 1578175089,
-  "aud" : "http://example.com/audience",
+  "iat" : 1578218126,
+  "jti" : "31ee9a29f74664a67411e9983b79e4db",
   "sig_val_assert" : {
     "ver" : "1.0",
-    "profile" : "PDF",
-    "hash_algo" : "http://www.w3.org/2001/04/xmlenc#sha512",
     "chain" : [ "MIIB6TCCAUugAwIBAgIEXHAXuDAKBggqhkjOPQQDAjA5MQswCQYDVQQGEwJTRTE
                  OMAwGA1UECgwFSURzZWMxGjAYBgNVBAMMEU9wZW5TQU1MIEVDQyBUZXN0MB4XDT
                  E5MDIyMjE1MzkzNloXDTIwMDIyMjE1MzkzNlowOTELMAkGA1UEBhMCU0UxDjAMB
@@ -241,10 +244,13 @@ Decoded JWT Claims
                  KmbYuOzoWz5Jo/4d+9OORZ0U9Q0z8D+IEtKT4ddDfoUL0b0oCGOV7O0xc3jzLlA
                  NAkE8k4vV087cb4Z6KX2QtNEHf1qYoyEyb5QKYnu8kjFkvFkhQ7Vq3GDQF3dGkL
                  26FEaSL0g6CvpYGzb3e/cqWozF5g==" ],
+    "profile" : "PDF",
+    "hash_algo" : "http://www.w3.org/2001/04/xmlenc#sha512",
     "sig" : [ {
       "ref" : {
         "sig_hash" : "/z5566uUDOd+U1N1vdtnHG+LP4F4i2rxPhqNC7ev2pgMVe3VqG31kecgX0
                       Opiu/fxeWF46VEz3zrj8xSKEzGKA==",
+        "id" : null,
         "sb_hash" : "AERe9E6EfgubJiNcZpIM9BBEVgHx+CcjvGqb2ul280RCvJ2yMVNeFhRy3ef
                      xZR+bFGaAPcRzHBe6Ywd54AHePQ=="
       },
@@ -258,18 +264,29 @@ Decoded JWT Claims
       "chain_hash" : "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsis
                       Ax2bcsqOhkvVTc3mK9E6ag07hfaw==",
       "sig_val" : [ {
-        "pol" : "http://id.swedenconnect.se/sva/sigval-policy/chain/01",
+        "msg" : "Passed basic signature validation",
+        "ext" : null,
         "res" : "PASSED",
-        "msg" : "Passed basic signature validation"
+        "pol" : "http://id.swedenconnect.se/sva/sigval-policy/chain/01"
       } ],
-      "time_val" : [ ]
+      "time_val" : [ {
+        "val" : [ {
+          "res" : "PASSED",
+          "pol" : "http://id.swedenconnect.se/sva/sigval-policy/trust/01"
+        } ],
+        "iss" : "https://swedenconnect.se/validator",
+        "time" : 1578175089,
+        "id" : "558e5f7b909b1f9",
+        "type" : "http://id.swedenconnect.se/sva/timeval-type/pdf-sva-timestamp/01"
+      } ]
     } ],
     "ext" : {
-      "name1" : "val1",
-      "name2" : "val2"
+      "name2" : "val2",
+      "name1" : "val1"
     }
   }
 }
+
 ```
 
 
