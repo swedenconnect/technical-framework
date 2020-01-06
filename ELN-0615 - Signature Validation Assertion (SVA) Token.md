@@ -60,22 +60,22 @@ Electronic signatures have a limited lifespan where they can be validated and de
 - No proof of time when the signature was actually created
 - Algorithms used to create the signature is no longer considered secure
 - Services necessary to validate the signature are no longer available
-- Inability to verify supporting evidence such as, CA certificates, OCSP responses, revociation lists or simestamps
+- Inability to verify supporting evidence such as, CA certificates, OCSP responses, revocation lists or time stamps
 
 The challenge to validate an electronic signature is increasing with time to the point where it simply is impossible to verify the actual signature with sufficient level of assurance.
 
-Current existing standards such as the ETSI AdES profiles for CMS, XML adn PDF signatures can be used to prolong the lifetime of signaure by storing data that supports validation of the signature beyond the lifetime of the signing certificate. The problem with this approach is that the amount of information that must be stored with the signature is growing over time. The growing amount of information and signed objects that must be validated in order to verify the original signature is growing in complexity to the point where it may become infesible to validate the original signatue.
+Current existing standards such as the ETSI AdES profiles for CMS, XML and PDF signatures can be used to prolong the lifetime of a signature by storing data that supports validation of the signature beyond the lifetime of the signing certificate. The problem with this approach is that the amount of information that must be stored with the signature is growing over time. The growing amount of information and signed objects that must be validated in order to verify the original signature is growing in complexity to the point where it may become infeasible to validate the original signature.
 
-The signatue validation assertion (SVA) defined in this document takes a fundamentally different approach to the problem by providing an assertion that asserts the validity of a signature. The SVA is issued by a trusted authority and assertes that a particular signature was successfully validated according to defined procedures at a certain time. The basic idea and intent behind the SVA that once the SVA is issued by a trusted authority, any future validation of that signature is satisfied by validating the SVA only withou any need to validate the original signature.
+The signature validation assertion (SVA) defined in this document takes a fundamentally different approach to the problem by providing an assertion that asserts the validity of a signature. The SVA is issued by a trusted authority and asserts that a particular signature was successfully validated according to defined procedures at a certain time. The basic idea and intent behind the SVA that once the SVA is issued by a trusted authority, any future validation of that signature is satisfied by validating the SVA only without any need to validate the original signature.
 
-This approach drastically reduces the complexity of signature validation of old signatures for the simple reason that validating the SVA only requires validation of one signature (in the most optimal case). The signature over the SVA. The SVA can be signed with keys and algorithms that makes it valid for a considerable time in the future and if needed, the SVA can be re-issued with fresh keys and signature to extend the liftime of the original signature validity.
+This approach drastically reduces the complexity of signature validation of old signatures for the simple reason that validating the SVA only requires validation of one signature (in the most optimal case). The signature over the SVA. The SVA can be signed with keys and algorithms that makes it valid for a considerable time in the future and if needed, the SVA can be re-issued with fresh keys and signature to extend the lifetime of the original signature validity.
 
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
 The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**, **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in BCP 14 \[[RFC2119](#rfc2119)\] \[[RFC8174](#rfc8174)\] when, and only when, they appear in all capitals, as shown here.
 
-These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
+These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
 
 <a name="definitions"></a>
@@ -85,7 +85,7 @@ This document use the following defined terms <sup>1</sup>:
 
 Term | Meaning
 --- | ---
-Signed Data  | The data covered by a particular signature. This is typically equivalent to the signed document and represents the data that the signer intended to sign. In some cases, such as in some XML signatures, the signed data can be the colleciton of several data fragments each referenced by the signature. In the case of PDF, this is the data covered by the "ByteRange" parameter in the signature dictionary.
+Signed Data  | The data covered by a particular signature. This is typically equivalent to the signed document and represents the data that the signer intended to sign. In some cases, such as in some XML signatures, the signed data can be the collection of several data fragments each referenced by the signature. In the case of PDF, this is the data covered by the "ByteRange" parameter in the signature dictionary.
 Signed Bytes  | These are the actual bytes of data that was hashed and signed by the signature algorithm. In most cases this is not the actual Signed Data, but a collection of signature metadata that includes references (hash) of the Signed Data as well as information about algorithms and other data bound to a signature. In XML this is the canonicalized SignedInfo element and in CMS/PDF signatures this is the DER encoded SignedAttributes structure.
 
 > \[1\]: When these terms are used in their defined meaning, they appear with a capitalized first letter as shown in the table.
@@ -97,16 +97,16 @@ Signed Bytes  | These are the actual bytes of data that was hashed and signed by
 <a name="function"></a>
 ### 2.1. Function
 
-The function of the SVA token is to capture evidence of signature validity at one instance of secure signature validation process and to use that evicdence to eliminate the need to preform any repeated cryptographic validation of the original signature value as well as reliance on any hash values bound to that signature. The SVA token achieves this through binding the following information to a specific electronic singature though external evidence:
+The function of the SVA token is to capture evidence of signature validity at one instance of secure signature validation process and to use that evidence to eliminate the need to perform any repeated cryptographic validation of the original signature value as well as reliance on any hash values bound to that signature. The SVA token achieves this through binding the following information to a specific electronic signature though external evidence:
 
 - Unique identification of the signature
 - The data and metadata signed by the signature
 - The signer's certificate that was validated as part of signature validation
 - The certificate chain that was used to validate the signer's certificate
-- Assertion that this signature was validated, when validaton was performed, which procedures that was used to validate the signature and the outcome of the validation
-- Assertion that evidence of time when the signature is known to have existed was validated, which procedures that was used to validate the time of existance and the outcome of the validation
+- Assertion that this signature was validated, when validation was performed, which procedures that was used to validate the signature and the outcome of the validation
+- Assertion that evidence of time when the signature is known to have existed was validated, which procedures that was used to validate the time of existence and the outcome of the validation
 
-Using an SVA token is equivalent to validating a signed document in a system once and then using that document multipple times without revalidating the signature for each usage. Such procedure is common in systems where the document is residing in a safe and trusted environment where it is unlikely to be modified between usages. The SVA token simply allows the time and environment where the document can be stored and used to expand beyond a local controlled environment and a short instance of time.
+Using an SVA token is equivalent to validating a signed document in a system once and then using that document multiple times without revalidating the signature for each usage. Such procedure is common in systems where the document is residing in a safe and trusted environment where it is unlikely to be modified between usages. The SVA token simply allows the time and environment where the document can be stored and used to expand beyond a local controlled environment and a short instance of time.
 
 Using the SVA token, the signed document can be validated once using a reliable trusted service and then that SVA token can be used to extend reliance of that secure validation process. The SVA token is therefore not only a valuable tool to extend the lifetime of a signed document, but also a useful tool to deploy and use one secure external validation service instead of having a close integration between signature validation and document usage.
 
@@ -140,11 +140,11 @@ The SVA token JWT SHALL contain claims according to the following table.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
-`jti`  | **String** | A "JWT ID" registered claim according to \[[RFC7519](#rfc7519)\]. It is RECOMMENDED that the identifier holds a headecimal string representation of a 128 bit unsigned integer. |MANDATORY
+`jti`  | **String** | A "JWT ID" registered claim according to \[[RFC7519](#rfc7519)\]. It is RECOMMENDED that the identifier holds a hexadecimal string representation of a 128 bit unsigned integer. |MANDATORY
 `iss`  | **StringOrURI**  | A "Issuer" registered claim according to \[[RFC7519](#rfc7519)\]. An arbitrary unique identifier of the SVA issuer. This value SHOULD have the value of an URI identifier based on a domain owned by the issuer. | MANDATORY
-`iat`  | **NumericDate**  | An "Issued At" registered claim according to \[[RFC7519](#rfc7519)\] expressig the time when this SVA token was issued  | MANDATORY
-`aud`  | **\[StringOrURI\]** or **StringOrURI** | An "Audience" registered claim according to \[[RFC7519](#rfc7519)\]. The audience claim is an array of one or more identifiers, identifying intended recipients of the SVA token. Each identifier MAY identify a single entity, a group of entities or a common policy adopted by a group of entites. If only one value is provided it MAY be provided as a single StringOrURI value instead of as an array of values.| OPTIONAL
-`exp`  | **NumericDate**  | An **Expiration Time** registered claim according to \[[RFC7519](#rfc7519)\] expressig the time when services and responsibilities related to this SVA token is no longer provided by the SVA Issuer. The precice meaning of the expiration time claim is defined by local policy. See implementation note below <sup>2</sup>   | OPTIONAL
+`iat`  | **NumericDate**  | An "Issued At" registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when this SVA token was issued  | MANDATORY
+`aud`  | **\[StringOrURI\]** or **StringOrURI** | An "Audience" registered claim according to \[[RFC7519](#rfc7519)\]. The audience claim is an array of one or more identifiers, identifying intended recipients of the SVA token. Each identifier MAY identify a single entity, a group of entities or a common policy adopted by a group of entities. If only one value is provided it MAY be provided as a single StringOrURI value instead of as an array of values.| OPTIONAL
+`exp`  | **NumericDate**  | An **Expiration Time** registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when services and responsibilities related to this SVA token is no longer provided by the SVA Issuer. The precise meaning of the expiration time claim is defined by local policy. See implementation note below <sup>2</sup>   | OPTIONAL
 `sig_val_assertion`  | **Object\<SigValAssertion\>**  | Signature validation assertion claims for this SVA token extending the standard registered JTW claims above. | MANDATORY
 
 > \[2\]: An SVA token asserts that a certain validation process was undertaken at a certain instance of time. This fact never changes and never expires. However, some aspects of the SVA claim such as liability for false claims or service provision related to a specific SVA token may stop after a certain period of time, such as a service where an old SVA token can be upgraded to a new SVA token signed with fresh keys and algorithms.
@@ -160,15 +160,15 @@ The SigValAssertion claims object holds all custom claims of the SVA token JWT a
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
 `ver` | **String** | Version. This version is indicated by the value "1.0" | MANDATORY
-`profile`| **StringOrURI** | Name of a profile applied to this speicification that defines conventions of content of specific claims and extension points.| OPTIONAL
+`profile`| **StringOrURI** | Name of a profile applied to this specification that defines conventions of content of specific claims and extension points.| OPTIONAL
 `hash_algo` | **URI** | The URI identifier of the hash algorithm used to provide hash values within the SVA token claims. The URI identifier SHALL be one defined in \[[RFC6931](#rfc6931)\] or in the IANA registry defined by this RFC. | MANDATORY
 `cert_ref`  | **Object\<CertReference\>**  | Information about certificates that MAY be used to validate the signature on this SVA token. | OPTIONAL
 `sig`  | **\[Object\<Signature\>\]**   | The `sig` claim provide information about validated signatures as an array of **Signature** objects. If the SVA token contains signature validation assertions for more than one signature, then each signature is represented by a separate **Signature** object. An SVA token MUST contain at least one Signature object | MANDATORY
-`ext` | **MAP\<String\>** | Extension point for additional claims related to the SVA token. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
+`ext` | **MAP\<String\>** | Extension point for additional claims related to the SVA token. Extension claims are added at the discretion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
 <a name="the-signature-claims-object"></a>
 ##### 2.2.3.2. The Signature claims object
-The Signature object contains claims related to signature validation assertioins for one signature and contains the following values:
+The Signature object contains claims related to signature validation assertions for one signature and contains the following values:
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -177,7 +177,7 @@ Name | Data Type | Value | Presence
 |`signer_cert_ref` | **Object\<CertReference\>** | Reference to signer certificate and optionally reference to a supporting certificate chain that was used to validate the target signature. | MANDATORY |
 |`sig_val` | **\[Object\<PolicyValidation\>\]** | Array of results of signature validation according to defined validation procedures. | MANDATORY |
 |`time_val` | **\[Object\<TimeValidation\>\]**  | Array of results of time verification validating proof that the target signature has existed at specific instances of time in the past. | OPTIONAL |
-`ext` | **MAP\<String\>** | Extension point for additional claims related to the target signature. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
+`ext` | **MAP\<String\>** | Extension point for additional claims related to the target signature. Extension claims are added at the discretion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
 <a name="the-sigreference-claims-object"></a>
 ##### 2.2.3.3. The SigReference claims object
@@ -231,7 +231,7 @@ Name | Data Type | Value | Presence
 <a name="the-certreference-claims-object"></a>
 ##### 2.2.3.7. The CertReference claims object
 
-The CertReference claims object allows reference to a signle certificate or a chain of certificates, either by providing the actual certificate data or by providing a hash reference for certificates that can be located in the target signature.
+The CertReference claims object allows reference to a single certificate or a chain of certificates, either by providing the actual certificate data or by providing a hash reference for certificates that can be located in the target signature.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -252,7 +252,7 @@ Identifer | Ref data content
 <a name="sva-jose-header"></a>
 #### 2.2.4. SVA JOSE header
 
-The SVA token JWT MUST contain the following JOSE header parameters in acccordance with section 5 of \[[RFC7519](#rfc7519)\].
+The SVA token JWT MUST contain the following JOSE header parameters in accordance with section 5 of \[[RFC7519](#rfc7519)\].
 
 JOSE Header | value
 --- | ---
@@ -281,13 +281,13 @@ Each profile MUST as a minimum define:
 Signature validation based on an SVA token SHALL follow the following basic steps.
 
 1. Locate all available SVA tokens available for the signed document that is relevant for the target signature.
-2. Select the most recent SVA token that can be successfylly validated and meets the requirement of the relying party
+2. Select the most recent SVA token that can be successfully validated and meets the requirement of the relying party
 3. Verify the integrity of the signature and the Signed Bytes of the target signature using the `sig_ref` claim.
 4. Verify that the SignedData reference in the original signature matches the reference values in the sig_data_ref claim.
 5. Verify the integrity of referenced Signed Data using provided hash values in the sig_data_ref claim.
 6. Obtain the verified certificates supporting the asserted signature validation through the signer_cert_ref claim.
-7. Verify that signature validation policy results satifies the requirements of the relying party.
-8. Verify that verified time results satifies the context within which the signed document is used.
+7. Verify that signature validation policy results satisfies the requirements of the relying party.
+8. Verify that verified time results satisfies the context within which the signed document is used.
 
 After validating these steps, signature validity is established as well as the trusted signer certificate binding the identity of the signer to the signature.
 
