@@ -103,7 +103,7 @@ Name | Data Type | Value | Presence
 #### 2.2.3. Claim object classes
 
 ##### 2.2.3.1. The SigValAssertion object
-The sva_claims ClaimsObject contains the following values:
+The SigValAssertion claims object holds all custom claims of the SVA token JWT and contains the following values:
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -128,6 +128,8 @@ Name | Data Type | Value | Presence
 
 ##### 2.2.3.3. The SigReference claims object
 
+The SigReference claims object provides information to used to match the Signature claims object to a specific target signature and to verify the inteigrity of the target siganture value and Signed Bytes.
+
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
 `id`  | **String**  | Optional identifier assigned to the target signature.  |  OPTIONAL
@@ -136,12 +138,16 @@ Name | Data Type | Value | Presence
 
 ##### 2.2.3.4. The SignedData claims object
 
+The SignedData claims object provides information used to verify the target signature references to Signed Data as well as to verify the integrity of all data signed by the target signature.
+
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
 `ref` | **String** | Reference identifier identifying the data or data fragment covered by the target signature. | MANDATORY
 `hash`  | **Base64Binary** | Hash of the data covered by the target signature | MANDATORY
 
 ##### 2.2.3.5. The PolicyValidation claims object
+
+The PolicyValidation claims object provide information about the result of a validation process according to a speicific policy.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -153,6 +159,7 @@ Name | Data Type | Value | Presence
 
 ##### 2.2.3.6. The TimeVerification claims object
 
+The TimeVerification claims object provide information about the result of validating time evidence asserting that the target signature existed at a particular time in the past.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -166,7 +173,7 @@ Name | Data Type | Value | Presence
 
 ##### 2.2.3.7. The CertReference claims object
 
-
+The CertReference claims object allows reference to a signle certificate or a chain of certificates, either by providing the actual certificate data or by providing a hash reference for certificates that can be located in the target signature.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -183,7 +190,7 @@ Identifer | Ref data content
 
 
 
-#### 2.2.3. SVA JOSE header
+#### 2.2.4. SVA JOSE header
 
 The SVA token JWT MUST contain the following JODE header parameters in acccordance with section 5 of \[[RFC7519](#rfc7519)\].
 
@@ -213,9 +220,14 @@ Signature validation based on an SVA token SHALL follow the following basic step
 
 1. Locate all available SVA tokens available for the signed document that is relevant for the target signature.
 2. Select the most recent SVA token that can be successfylly validated and meets the requirement of the relying party
-3. Verify the integrity of the signature and the Signed Bytes of the target signature.
-4.
+3. Verify the integrity of the signature and the Signed Bytes of the target signature using the `sig_ref` claim.
+4. Verify that the SignedData reference in the original signature matches the reference values in the sig_data_ref claim.
+5. Verify the integrity of referenced Signed Data using provided hash values in the sig_data_ref claim.
+6. Obtain the verified certificates supporting the asserted signature validation through the signer_cert_ref claim.
+7. Verify that signature validation policy results satifies the requirements of the relying party.
+8. Verify that verified time results satifies the context within which the signed document is used.
 
+After validating these steps, signature validity is established as well as the trusted signer certificate binding the identity of the signer to the signature.
 
 ## 5. Examples
 
@@ -340,9 +352,43 @@ Decoded JWT Claims
 
 ```
 
-
-
-
-
+> Note: The order of the JSON objects has been rearranged from the order they appear in the JWT to increase readablilty. Line breaks in the decoded example are also inserted for readablilty. These are not allowed in valid JSON data.
 
 ## 6. Normative References
+
+<a name="rfc2119"></a>
+**[RFC2119]**
+
+> [Bradner, S., Key words for use in RFCs to Indicate Requirement
+> Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
+
+<a name="rfc6931"></a>
+**[RFC6931]**
+
+> [Eastlake 3rd, D., Additional XML Security Uniform Resource Identifiers
+> (URIs), April 2013](http://www.ietf.org/rfc/rfc6931.txt).
+
+<a name="rfc7518"></a>
+**[RFC7518]**
+
+> [Jones, M., JSON Web Algorithms (JWA),
+> May 2015](http://www.ietf.org/rfc/rfc7518.txt).
+
+<a name="rfc7519"></a>
+**[RFC7519]**
+
+> [Jones, M., Bradley, J., Sakimura, N., JSON Web Token (JWT),
+> May 2015](http://www.ietf.org/rfc/rfc7518.txt).
+
+<a name="rfc8174"></a>
+**[RFC8174]**
+
+> [Leiba, B., Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words,
+> May 2017](http://www.ietf.org/rfc/rfc8174.txt).
+
+<a name="etsi319102-1"></a>
+**[ETSI EN 319 102-1]**
+
+> [ETSI - Electronic Signatures and Infrastructures (ESI); Procedures for
+> Creation and Validation of AdES Digital Signatures; Part 1: Creation and
+> Validation](https://www.etsi.org/deliver/etsi_en/319100_319199/31910201/01.01.01_60/en_31910201v010101p.pdf).
