@@ -95,7 +95,7 @@ Name | Data Type | Value | Presence
 `iat`  | **NumericDate**  | An "Issued At" registered claim according to \[[RFC7519](#rfc7519)\] expressig the time when this SVA token was issued  | MANDATORY
 `aud`  | **\[StringOrURI\]** or **StringOrURI** | An "Audience" registered claim according to \[[RFC7519](#rfc7519)\]. The audience claim is an array of one or more identifiers, identifying intended recipients of the SVA token. Each identifier MAY identify a single entity, a group of entities or a common policy adopted by a group of entites. If only one value is provided it MAY be provided as a single StringOrURI value instead of as an array of values.| OPTIONAL
 `exp`  | **NumericDate**  | An **Expiration Time** registered claim according to \[[RFC7519](#rfc7519)\] expressig the time when services and responsibilities related to this SVA token is no longer provided by the SVA Issuer. The precice meaning of the expiration time claim is defined by local policy. See implementation note below <sup>2</sup>   | OPTIONAL
-`sig_val_assert`  | **Object\<SigValAssertion\>**  | Signature validation assertion claims for this SVA token extending the standard registered JTW claims above. | MANDATORY
+`sig_val_assertion`  | **Object\<SigValAssertion\>**  | Signature validation assertion claims for this SVA token extending the standard registered JTW claims above. | MANDATORY
 
 > \[2\]: An SVA token asserts that a certain validation process was undertaken at a certain instance of time. This fact never changes and never expires. However, some aspects of the SVA claim such as liability for false claims or service provision related to a specific SVA token may stop after a certain period of time, such as a service where an old SVA token can be upgraded to a new SVA token signed with fresh keys and algorithms.
 
@@ -109,8 +109,8 @@ Name | Data Type | Value | Presence
 --- | --- | --- | ---
 `ver` | **String** | Version. This version is indicated by the value "1.0" | MANDATORY
 `profile`| **StringOrURI** | Name of a profile applied to this speicification that defines conventions of content of specific claims and extension points.| OPTIONAL
-`hash_algo`  | **URI** | The URI identifier of the hash algorithm used to provide hash values within the SVA token claims. The URI identifier SHALL be one defined in \[[RFC6931](#rfc6931)\] or in the IANA registry defined by this RFC. | MANDATORY
-`chain`  | \[**Base64Binary**\]  | An optional array of DER encoded chain of certificates that MAY be used to validate signature that signs the SVA token. The first certificate in the chain must hold the public key that is used to validate the SVA token signature and any folloing certificates MAY be used to verify the first certificate  | OPTIONAL
+`hash_algo` | **URI** | The URI identifier of the hash algorithm used to provide hash values within the SVA token claims. The URI identifier SHALL be one defined in \[[RFC6931](#rfc6931)\] or in the IANA registry defined by this RFC. | MANDATORY
+`cert_ref`  | **Object\<CertReference\>**  | Information about certificates that MAY be used to validate the signature on this SVA token. | OPTIONAL
 `sig`  | **\[Object\<Signature\>\]**   | The `sig` claim provide information about validated signatures as an array of **Signature** objects. If the SVA token contains signature validation assertions for more than one signature, then each signature is represented by a separate **Signature** object. An SVA token MUST contain at least one Signature object | MANDATORY
 `ext` | **MAP\<String\>** | Extension point for additional claims related to the SVA token. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
@@ -119,15 +119,14 @@ The Signature object contains claims related to signature validation assertioins
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
-`ref`  | **Object\<Reference\>** | Reference information identifying the target signature. | MANDATORY |
+`sig_ref`  | **Object\<SigReference\>** | Reference information identifying the target signature. | MANDATORY |
 |`sig_data` | **\[Object\<SignedData\>\]** | Array of references to Signed Data signed by the target signature. | MANDATORY  |
-|`cert_hash` | **Base64Binary** | Hash of the signing certificate or equivalent public key container used to validate the target signature. | MANDATORY |
-| `chain_hash` | **Base64Binary** | Hash of the concattenated bytes of the certificate chain provided in the target signature.| MANDATORY
+|`signer_cert_ref` | **Object\<CertReference\>** | Reference to signer certificate and optionally reference to a supporting certificate chain that was used to validate the target signature. | MANDATORY |
 |`sig_val` | **\[Object\<PolicyValidation\>\]** | Array of results of signature validation according to defined validation procedures. | MANDATORY |
 |`time_val` | **\[Object\<TimeValidation\>\]**  | Array of results of time verification validating proof that the target signature has existed at specific instances of time in the past. | OPTIONAL |
 `ext` | **MAP\<String\>** | Extension point for additional claims related to the target signature. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
-##### 2.2.3.3. The Reference claims object
+##### 2.2.3.3. The SigReference claims object
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -160,19 +159,63 @@ Name | Data Type | Value | Presence
 `time`  | **NumericDate** | The verified time  | MANDATORY
 `type`  | **StringOrURI** | Identifier of the type of evidence of time | MANDATORY
 `iss` | **StringOrURI** | Identifier of the entity that issued the evidence of time | MANDATORY
-`cert_hash`  | **Base64Binary** | Hash of the certificate or equivalent public key token of the signer of the validated evidence of time  | OPTIONAL
+`iss_cert_ref`  | **Object\<CertReference\>** | Reference to the certificate and certificate chain used to validate the signature on the validated evidence of time | OPTIONAL
 `id` | **String** | Unique identifier assigned to the evidence of time  |  OPTIONAL
 `val` | **\[Object\<PolicyValidation\>\]**  | Array of results of validation of the time evidence according to defined validation procedures.  |  OPTIONAL
 `ext` | **MAP\<String\>** | Extension for additional information about the signature validation result.  | OPTIONAL
 
+##### 2.2.3.7. The CertReference claims object
 
-2.2.3. SVA JWT header
+
+
+Name | Data Type | Value | Presence
+--- | --- | --- | ---
+`type` | **StringOrURI** | An identifier of the type of reference provided in the ref claim. The type identifier MUST be one of the identifiers defined below or a URI identifier | MANDATORY
+`ref` | **\[String\]** | An array of string parameters according to conventions defined by the type identifier  | MANDATORY
+
+The following type identifiers are defined:
+Identifer | Ref data content
+--- | ---
+`cert` |  One string holding a Base64 encoded X.509 certificate
+`chain` | Array of Base64 encoded X.509 certificates. The certificates MUST be stored in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array.
+`cert_hash` | Base64 encoded hash value over the target X.509 certificate
+`cert_and_chain_hash` | Two Base64 encoded hash values. The first hash value is the hash over the target end entity certificate and the next hash is the hash over the certificate chain included in the target signature. This type identifier MUST NOT be used if the certificate chain is not provided in the target signature. The chain hash is calculated over the concatenated bytes of the chain certificate exactly in the order they appear in the target signature. If an external chain not provided in the target signature was used, then the `chain` type SHOULD be used.
+
+
+
+#### 2.2.3. SVA JOSE header
+
+The SVA token JWT MUST contain the following JODE header parameters in acccordance with section 5 of \[[RFC7519](#rfc7519)\].
+
+JOSE Header | value
+--- | ---
+`typ`  | This parameter MUST have the string value "JWT" (upper case).
+`alg`  | Specifying the algorithm used to sign the SVA token JWT using a value specified in \[[RFC7518](#rfc7518)\]. The specified signature hash algorithm SHOULD be identical to, and MUST be of equivalent or better strength compared with, the hash algorithm specified in the SigValAssertion claims object `hash_algo` claim.
+
+
 
 ## 3. Profiles
-XML and PDF etc defined in other documents
+Each signed document and signature type will have to define the precise content and use of several claims in the SVA token.
+
+Each profile MUST as a minimum define:
+
+- How to specify reference to Signed Data content of the signed document.
+- How to make reference to the target signature and the Signed Bytes of the signature
+- How references should be made to certificates supporting the signature
+- Whether each signature is supported by it's own SVA token, or whether one SVA token may support multiple signatures of the same document.
+- Explicit information on how to perform signature validation based on an SVA token, if applicable.
+- How to attach an SVA token to a document signature or signed document, if applicable.
 
 
 ## 4. Signature Validation with SVA Token
+
+Signature validation based on an SVA token SHALL follow the following basic steps.
+
+1. Locate all available SVA tokens available for the signed document that is relevant for the target signature.
+2. Select the most recent SVA token that can be successfylly validated and meets the requirement of the relying party
+3. Verify the integrity of the signature and the Signed Bytes of the target signature.
+4.
+
 
 ## 5. Examples
 
@@ -181,43 +224,40 @@ The following example illustrates a basic SVA token according to this specificat
 SVA token JWT:
 
 ```
-eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJhdWQiOiJodHRwOlwvXC9leGFtcGxlLmNvbVwvYXV
-kaWVuY2UxIiwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlkYXRvciIsInNpZ19
-2YWxfYXNzZXJ0Ijp7InNpZyI6W3siZXh0IjpudWxsLCJyZWYiOnsic2lnX2hhc2giOiJcL3o1NTY2dVV
-ET2QrVTFOMXZkdG5IRytMUDRGNGkycnhQaHFOQzdldjJwZ01WZTNWcUczMWtlY2dYME9waXVcL2Z4ZVd
-GNDZWRXozenJqOHhTS0V6R0tBPT0iLCJpZCI6bnVsbCwic2JfaGFzaCI6IkFFUmU5RTZFZmd1YkppTmN
-acElNOUJCRVZnSHgrQ2NqdkdxYjJ1bDI4MFJDdkoyeU1WTmVGaFJ5M2VmeFpSK2JGR2FBUGNSekhCZTZ
-Zd2Q1NEFIZVBRPT0ifSwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25hdHVyZSB2YWx
-pZGF0aW9uIiwiZXh0IjpudWxsLCJyZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5
-jb25uZWN0LnNlXC9zdmFcL3NpZ3ZhbC1wb2xpY3lcL2NoYWluXC8wMSJ9XSwiY2VydF9oYXNoIjoiTlN
-1Rk1cL3ZKK2JlQmxRdFFUem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xLVkdibGE5VVJ6WWNzaXNBeDJ
-iY3NxT2hrdlZUYzNtSzlFNmFnMDdoZmF3PT0iLCJjaGFpbl9oYXNoIjoiTlN1Rk1cL3ZKK2JlQmxRdFF
-Uem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xLVkdibGE5VVJ6WWNzaXNBeDJiY3NxT2hrdlZUYzNtSzl
-FNmFnMDdoZmF3PT0iLCJzaWdfZGF0YSI6W3sicmVmIjoiMCA3NDY5NyA3OTY5OSAzNzg4MSIsImhhc2g
-iOiJiOEVMMU1vVTRxeFlJMXJraXNrOG9xOGlRM0xyRG95Y2tabm9IVmNOY1BTWmlHeTZLdVwvK1FQWnh
-nSnBnbEZ5NURSK2JidjJqZWpOejZBK2Y5emVTd2c9PSJ9XSwidGltZV92YWwiOlt7InZhbCI6W3sibXN
-nIjpudWxsLCJleHQiOm51bGwsInJlcyI6IlBBU1NFRCIsInBvbCI6Imh0dHA6XC9cL2lkLnN3ZWRlbmN
-vbm5lY3Quc2VcL3N2YVwvc2lndmFsLXBvbGljeVwvdHJ1c3RcLzAxIn1dLCJleHQiOm51bGwsImlzcyI
-6Imh0dHBzOlwvXC9zd2VkZW5jb25uZWN0LnNlXC92YWxpZGF0b3IiLCJjZXJ0X2hhc2giOm51bGwsInR
-pbWUiOjE1NzgxNzUwODksImlkIjoiNTU4ZTVmN2I5MDliMWY5IiwidHlwZSI6Imh0dHA6XC9cL2lkLnN
-3ZWRlbmNvbm5lY3Quc2VcL3N2YVwvdGltZXZhbC10eXBlXC9wZGYtc3ZhLXRpbWVzdGFtcFwvMDEifV1
-9XSwiZXh0Ijp7Im5hbWUyIjoidmFsMiIsIm5hbWUxIjoidmFsMSJ9LCJ2ZXIiOiIxLjAiLCJjaGFpbiI
-6WyJNSUlCNlRDQ0FVdWdBd0lCQWdJRVhIQVh1REFLQmdncWhrak9QUVFEQWpBNU1Rc3dDUVlEVlFRR0V
-3SlRSVEVPTUF3R0ExVUVDZ3dGU1VSelpXTXhHakFZQmdOVkJBTU1FVTl3Wlc1VFFVMU1JRVZEUXlCVVp
-YTjBNQjRYRFRFNU1ESXlNakUxTXprek5sb1hEVEl3TURJeU1qRTFNemt6Tmxvd09URUxNQWtHQTFVRUJ
-oTUNVMFV4RGpBTUJnTlZCQW9NQlVsRWMyVmpNUm93R0FZRFZRUUREQkZQY0dWdVUwRk5UQ0JGUTBNZ1Z
-HVnpkRENCbXpBUUJnY3Foa2pPUFFJQkJnVXJnUVFBSXdPQmhnQUVBWndEQU5WU1hQNWVOd09WOThaOWF
-xek5cL3dIWkFVaThhanVjMHBTbTBsSUk1dkFNcFNFdmt5YlR6U1dFZFwvZFJEUHVSYm5HMXF3dVJ4RHp
-CSXFXb2NIRzZBRzBjbGRoTFZDbDR2VjNUODlQVUFMOWRHUmIxOHVXbndUVU9ZYnU5YzhaeXVFNzlZT3d
-maklKc3FLQVwvUEJjY3BpMkRnMzUxOW82UzJJeXd4V05ITlB3S01Bb0dDQ3FHU000OUJBTUNBNEdMQUR
-DQmh3SkNBTmNReG1lUTRuOHpZMmxxcnRqaG85TVFLbWJZdU96b1d6NUpvXC80ZCs5T09SWjBVOVEwejh
-EK0lFdEtUNGRkRGZvVUwwYjBvQ0dPVjdPMHhjM2p6TGxBTkFrRThrNHZWMDg3Y2I0WjZLWDJRdE5FSGY
-xcVlveUV5YjVRS1ludThrakZrdkZraFE3VnEzR0RRRjNkR2tMMjZGRWFTTDBnNkN2cFlHemIzZVwvY3F
-Xb3pGNWc9PSJdLCJwcm9maWxlIjoiUERGIiwiaGFzaF9hbGdvIjoiaHR0cDpcL1wvd3d3LnczLm9yZ1w
-vMjAwMVwvMDRcL3htbGVuYyNzaGE1MTIifSwiaWF0IjoxNTc4MjE4MTI2LCJqdGkiOiIzMWVlOWEyOWY
-3NDY2NGE2NzQxMWU5OTgzYjc5ZTRkYiJ9.ANmdTvUeg4w2wg8og7DSR6wKWdS6-eRDRdaffybmO3UNsI
-3oubdDRlPwpHN02wwt1NvixgxyaOYagcCX9BNBvjw-AR6PcLv-uOM901mkSpfYb2_7IYGsxzd1U34cP2
-xnptcLLOf6kyGkbsXLbHYBseUaWUhczZmfbTJ-iDjiV89gFuip
+eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJhdWQiOiJodHRwOlwvXC9leGFtcGxlLmNvbVwvYXVkaWVuY2UxIiw
+ic2lnX3ZhbF9hc3NlcnRpb24iOnsic2lnIjpbeyJleHQiOm51bGwsInNpZ192YWwiOlt7Im1zZyI6IlBhc3NlZCBiYXN
+pYyBzaWduYXR1cmUgdmFsaWRhdGlvbiIsImV4dCI6bnVsbCwicmVzIjoiUEFTU0VEIiwicG9sIjoiaHR0cDpcL1wvaWQ
+uc3dlZGVuY29ubmVjdC5zZVwvc3ZhXC9zaWd2YWwtcG9saWN5XC9jaGFpblwvMDEifV0sInNpZ19yZWYiOnsic2lnX2h
+hc2giOiJcL3o1NTY2dVVET2QrVTFOMXZkdG5IRytMUDRGNGkycnhQaHFOQzdldjJwZ01WZTNWcUczMWtlY2dYME9waXV
+cL2Z4ZVdGNDZWRXozenJqOHhTS0V6R0tBPT0iLCJpZCI6bnVsbCwic2JfaGFzaCI6IkFFUmU5RTZFZmd1YkppTmNacEl
+NOUJCRVZnSHgrQ2NqdkdxYjJ1bDI4MFJDdkoyeU1WTmVGaFJ5M2VmeFpSK2JGR2FBUGNSekhCZTZZd2Q1NEFIZVBRPT0
+ifSwic2lnbmVyX2NlcnRfcmVmIjp7InJlZiI6WyJOU3VGTVwvdkorYmVCbFF0UVR6bWNZaDV4N0w4V0M5RTFLUEhSQTF
+pb05PbEtWR2JsYTlVUnpZY3Npc0F4MmJjc3FPaGt2VlRjM21LOUU2YWcwN2hmYXc9PSJdLCJ0eXBlIjoiY2VydF9oYXN
+oIn0sInNpZ19kYXRhX3JlZiI6W3sicmVmIjoiMCA3NDY5NyA3OTY5OSAzNzg4MSIsImhhc2giOiJiOEVMMU1vVTRxeFl
+JMXJraXNrOG9xOGlRM0xyRG95Y2tabm9IVmNOY1BTWmlHeTZLdVwvK1FQWnhnSnBnbEZ5NURSK2JidjJqZWpOejZBK2Y
+5emVTd2c9PSJ9XSwidGltZV92YWwiOlt7InZhbCI6W3sibXNnIjpudWxsLCJleHQiOm51bGwsInJlcyI6IlBBU1NFRCI
+sInBvbCI6Imh0dHA6XC9cL2lkLnN3ZWRlbmNvbm5lY3Quc2VcL3N2YVwvc2lndmFsLXBvbGljeVwvdHJ1c3RcLzAxIn1
+dLCJleHQiOm51bGwsImlzc19jZXJ0X3JlZiI6eyJyZWYiOlsiT2VuSSs0MzRKaGJ2ZkRudGZWXC84ck94RzdGa3Z5amF
+LVkphVnFJRkJYb2hWaEFlNWZLOGFub3YxUzY4OHI3S2JhbCtmdnBhSDFqOGliZzUyUUJ5MVBRPT0iXSwidHlwZSI6ImN
+lcnRfaGFzaCJ9LCJpc3MiOiJodHRwczpcL1wvc3dlZGVuY29ubmVjdC5zZVwvdmFsaWRhdG9yIiwidGltZSI6MTU3ODM
+zODk5NCwiaWQiOiIyNDM4MjE0OThlOGFjNzIiLCJ0eXBlIjoiaHR0cDpcL1wvaWQuc3dlZGVuY29ubmVjdC5zZVwvc3Z
+hXC90aW1ldmFsLXR5cGVcL3BkZi1zdmEtdGltZXN0YW1wXC8wMSJ9XX1dLCJleHQiOnsibmFtZTIiOiJ2YWwyIiwibmF
+tZTEiOiJ2YWwxIn0sInZlciI6IjEuMCIsInByb2ZpbGUiOiJQREYiLCJoYXNoX2FsZ28iOiJodHRwOlwvXC93d3cudzM
+ub3JnXC8yMDAxXC8wNFwveG1sZW5jI3NoYTUxMiIsImNlcnRfcmVmIjp7InJlZiI6WyJNSUlCNlRDQ0FVdWdBd0lCQWd
+JRVhIQVh1REFLQmdncWhrak9QUVFEQWpBNU1Rc3dDUVlEVlFRR0V3SlRSVEVPTUF3R0ExVUVDZ3dGU1VSelpXTXhHakF
+ZQmdOVkJBTU1FVTl3Wlc1VFFVMU1JRVZEUXlCVVpYTjBNQjRYRFRFNU1ESXlNakUxTXprek5sb1hEVEl3TURJeU1qRTF
+Nemt6Tmxvd09URUxNQWtHQTFVRUJoTUNVMFV4RGpBTUJnTlZCQW9NQlVsRWMyVmpNUm93R0FZRFZRUUREQkZQY0dWdVU
+wRk5UQ0JGUTBNZ1ZHVnpkRENCbXpBUUJnY3Foa2pPUFFJQkJnVXJnUVFBSXdPQmhnQUVBWndEQU5WU1hQNWVOd09WOTh
+aOWFxek5cL3dIWkFVaThhanVjMHBTbTBsSUk1dkFNcFNFdmt5YlR6U1dFZFwvZFJEUHVSYm5HMXF3dVJ4RHpCSXFXb2N
+IRzZBRzBjbGRoTFZDbDR2VjNUODlQVUFMOWRHUmIxOHVXbndUVU9ZYnU5YzhaeXVFNzlZT3dmaklKc3FLQVwvUEJjY3B
+pMkRnMzUxOW82UzJJeXd4V05ITlB3S01Bb0dDQ3FHU000OUJBTUNBNEdMQURDQmh3SkNBTmNReG1lUTRuOHpZMmxxcnR
+qaG85TVFLbWJZdU96b1d6NUpvXC80ZCs5T09SWjBVOVEwejhEK0lFdEtUNGRkRGZvVUwwYjBvQ0dPVjdPMHhjM2p6TGx
+BTkFrRThrNHZWMDg3Y2I0WjZLWDJRdE5FSGYxcVlveUV5YjVRS1ludThrakZrdkZraFE3VnEzR0RRRjNkR2tMMjZGRWF
+TTDBnNkN2cFlHemIzZVwvY3FXb3pGNWc9PSJdLCJ0eXBlIjoiY2VydCJ9fSwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmN
+vbm5lY3Quc2VcL3ZhbGlkYXRvciIsImlhdCI6MTU3ODMzOTAzNywianRpIjoiYzIwZGFmMjI0NjQyNTAzMzBkYTA1YTQ
+3Njk1MDgwMjAifQ.AfNraBf_CPX5zgMjZS7w6RCxjxj-_bdksJ8eG3pNBOml7YhtnkBFpoqDsaz1FstDthppAeHkLD7f
+IEkb-Xmn1J6sAKdhQ9ayz92K02MkW-mkoYeQsYk2OomLMUh11kw-v1_QWrYxcUlSiVpDF1WU6-q6uOAoar5OFOpNDlmC
+jAFb9Xou
 ```
 Decoded JWT Header:
 ```
@@ -227,42 +267,45 @@ Decoded JWT Header:
 Decoded JWT Claims
 ```
 {
-  "aud" : "http://example.com/audience1",
+  "jti" : "c20daf22464250330da05a4769508020",
   "iss" : "https://swedenconnect.se/validator",
-  "iat" : 1578218126,
-  "jti" : "31ee9a29f74664a67411e9983b79e4db",
-  "sig_val_assert" : {
+  "iat" : 1578339037,
+  "aud" : "http://example.com/audience1",
+  "sig_val_assertion" : {
     "ver" : "1.0",
-    "chain" : [ "MIIB6TCCAUugAwIBAgIEXHAXuDAKBggqhkjOPQQDAjA5MQswCQYDVQQGEwJTRTE
-                 OMAwGA1UECgwFSURzZWMxGjAYBgNVBAMMEU9wZW5TQU1MIEVDQyBUZXN0MB4XDT
-                 E5MDIyMjE1MzkzNloXDTIwMDIyMjE1MzkzNlowOTELMAkGA1UEBhMCU0UxDjAMB
-                 gNVBAoMBUlEc2VjMRowGAYDVQQDDBFPcGVuU0FNTCBFQ0MgVGVzdDCBmzAQBgcq
-                 hkjOPQIBBgUrgQQAIwOBhgAEAZwDANVSXP5eNwOV98Z9aqzN/wHZAUi8ajuc0pS
-                 m0lII5vAMpSEvkybTzSWEd/dRDPuRbnG1qwuRxDzBIqWocHG6AG0cldhLVCl4vV
-                 3T89PUAL9dGRb18uWnwTUOYbu9c8ZyuE79YOwfjIJsqKA/PBccpi2Dg3519o6S2
-                 IywxWNHNPwKMAoGCCqGSM49BAMCA4GLADCBhwJCANcQxmeQ4n8zY2lqrtjho9MQ
-                 KmbYuOzoWz5Jo/4d+9OORZ0U9Q0z8D+IEtKT4ddDfoUL0b0oCGOV7O0xc3jzLlA
-                 NAkE8k4vV087cb4Z6KX2QtNEHf1qYoyEyb5QKYnu8kjFkvFkhQ7Vq3GDQF3dGkL
-                 26FEaSL0g6CvpYGzb3e/cqWozF5g==" ],
     "profile" : "PDF",
     "hash_algo" : "http://www.w3.org/2001/04/xmlenc#sha512",
+    "cert_ref" : {
+      "ref" : [ "MIIB6TCCAUugAwIBAgIEXHAXuDAKBggqhkjOPQQDAjA5MQswCQYDVQQGEwJTRTEOMAwGA1UECgw
+                 FSURzZWMxGjAYBgNVBAMMEU9wZW5TQU1MIEVDQyBUZXN0MB4XDTE5MDIyMjE1MzkzNloXDTIwMD
+                 IyMjE1MzkzNlowOTELMAkGA1UEBhMCU0UxDjAMBgNVBAoMBUlEc2VjMRowGAYDVQQDDBFPcGVuU
+                 0FNTCBFQ0MgVGVzdDCBmzAQBgcqhkjOPQIBBgUrgQQAIwOBhgAEAZwDANVSXP5eNwOV98Z9aqzN
+                 /wHZAUi8ajuc0pSm0lII5vAMpSEvkybTzSWEd/dRDPuRbnG1qwuRxDzBIqWocHG6AG0cldhLVCl
+                 4vV3T89PUAL9dGRb18uWnwTUOYbu9c8ZyuE79YOwfjIJsqKA/PBccpi2Dg3519o6S2IywxWNHNP
+                 wKMAoGCCqGSM49BAMCA4GLADCBhwJCANcQxmeQ4n8zY2lqrtjho9MQKmbYuOzoWz5Jo/4d+9OOR
+                 Z0U9Q0z8D+IEtKT4ddDfoUL0b0oCGOV7O0xc3jzLlANAkE8k4vV087cb4Z6KX2QtNEHf1qYoyEy
+                 b5QKYnu8kjFkvFkhQ7Vq3GDQF3dGkL26FEaSL0g6CvpYGzb3e/cqWozF5g==" ],
+      "type" : "cert"
+    },
     "sig" : [ {
-      "ref" : {
-        "sig_hash" : "/z5566uUDOd+U1N1vdtnHG+LP4F4i2rxPhqNC7ev2pgMVe3VqG31kecgX0
-                      Opiu/fxeWF46VEz3zrj8xSKEzGKA==",
+      "ext" : null,
+      "sig_ref" : {
         "id" : null,
-        "sb_hash" : "AERe9E6EfgubJiNcZpIM9BBEVgHx+CcjvGqb2ul280RCvJ2yMVNeFhRy3ef
-                     xZR+bFGaAPcRzHBe6Ywd54AHePQ=="
+        "sig_hash" : "/z5566uUDOd+U1N1vdtnHG+LP4F4i2rxPhqNC7ev2pgMVe3VqG31kecgX0Opiu/fxeWF46
+                      VEz3zrj8xSKEzGKA==",
+        "sb_hash" : "AERe9E6EfgubJiNcZpIM9BBEVgHx+CcjvGqb2ul280RCvJ2yMVNeFhRy3efxZR+bFGaAPcR
+                     zHBe6Ywd54AHePQ=="
       },
-      "sig_data" : [ {
+      "sig_data_ref" : [ {
         "ref" : "0 74697 79699 37881",
-        "hash" : "b8EL1MoU4qxYI1rkisk8oq8iQ3LrDoyckZnoHVcNcPSZiGy6Ku/+QPZxgJpglF
-                  y5DR+bbv2jejNz6A+f9zeSwg=="
+        "hash" : "b8EL1MoU4qxYI1rkisk8oq8iQ3LrDoyckZnoHVcNcPSZiGy6Ku/+QPZxgJpglFy5DR+bbv2jej
+                  Nz6A+f9zeSwg=="
       } ],
-      "cert_hash" : "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisA
-                     x2bcsqOhkvVTc3mK9E6ag07hfaw==",
-      "chain_hash" : "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsis
-                      Ax2bcsqOhkvVTc3mK9E6ag07hfaw==",
+      "signer_cert_ref" : {
+        "ref" : [ "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisAx2bcsqOhkvVTc3
+        mK9E6ag07hfaw==" ],
+        "type" : "cert_hash"
+      },
       "sig_val" : [ {
         "msg" : "Passed basic signature validation",
         "ext" : null,
@@ -271,12 +314,20 @@ Decoded JWT Claims
       } ],
       "time_val" : [ {
         "val" : [ {
+          "msg" : null,
+          "ext" : null,
           "res" : "PASSED",
           "pol" : "http://id.swedenconnect.se/sva/sigval-policy/trust/01"
         } ],
+        "ext" : null,
+        "iss_cert_ref" : {
+          "ref" : [ "OenI+434JhbvfDntfV/8rOxG7FkvyjaKVJaVqIFBXohVhAe5fK8anov1S688r7Kbal+fvpa
+                     H1j8ibg52QBy1PQ==" ],
+          "type" : "cert_hash"
+        },
         "iss" : "https://swedenconnect.se/validator",
-        "time" : 1578175089,
-        "id" : "558e5f7b909b1f9",
+        "time" : 1578338994,
+        "id" : "243821498e8ac72",
         "type" : "http://id.swedenconnect.se/sva/timeval-type/pdf-sva-timestamp/01"
       } ]
     } ],
@@ -295,17 +346,3 @@ Decoded JWT Claims
 
 
 ## 6. Normative References
-
-
-## Appendix A. Deleted stuff
-
-#### 2.1.1. Principles of trust
-This technical specification makes no claims about when it is suitable to use an SVA token to support validation of old signatures or under what circumstances it is necessary to actually verify the original signature also after considerable time. It should be noted however that no validation of electronic signatures is possible withour relying on validatiton statements from trusted authorities such as:
-
-- The certificate is a statement by a trusted authority that the named subject is to sole entity in control of the private signing key.
-- The certificate reovocation list or OCSP response is a statement that a certificate was valid (or at least not revoked) at a certain point of time.
-- A time stamp is a statment that some information existed at a certain instance of time.
-
-In this context, the SVA should be regared as comparable statment that requires the issuer to be trustworthy and not compromized in the same way that traditional signature validation requires that the issuer of the signer certificate is trustworthy and not compromized.
-
-The risk introduced when validating an old signature is that all stored evidence of validity must be verified and if verification of a signle token fails, the whole chain of proof fails. In this scenario, the SVA may offer a more managable risk management by providing one sigle verifiable statment of validity based on a trusted verification process perfomed when the evidence were relatively new and fresh.
