@@ -10,6 +10,49 @@
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
+
+    1.1. [Requirements Notation](#requirements-notation)
+
+    1.2. [Definitions](#definitions)
+
+2. [**SVA Token**](#sva-token)
+
+    2.1. [Function](#function)
+
+    2.2. [SVA Token Syntax](#sva-token-syntax)
+
+    2.2.1. [Data types](#data-types)
+
+    2.2.2. [SVA token claims](#sva-token-claims)
+
+    2.2.3. [Claim object classes](#claim-object-classes)
+
+    2.2.3.1. [The SigValAssertion object](#the-sigvalassertion-object)
+
+    2.2.3.2. [The Signature claims object](#the-signature-claims-object)
+
+    2.2.3.3. [The SigReference claims object](#the-sigreference-claims-object)
+
+    2.2.3.4. [The SignedData claims object](#the-signeddata-claims-object)
+
+    2.2.3.5. [The PolicyValidation claims object](#the-policyvalidation-claims-object)
+
+    2.2.3.6. [The TimeVerification claims object](#the-timeverification-claims-object)
+
+    2.2.3.7. [The CertReference claims object](#the-certreference-claims-object)
+
+    2.2.4. [SVA JOSE header](#sva-jose-header)
+
+3. [**Profiles**](#profiles)
+
+4. [**Signature Validation with SVA Token**](#signature-validation-with-sva-token)
+
+5. [**Examples**](#examples)
+
+6. [**Normative References**](#normative-references)
+
+<a name="introduction"></a>
 ## 1. Introduction
 Electronic signatures have a limited lifespan where they can be validated and determined to be authentic. Many factors may contribute to make it harder to validate electronic signatures over time such as:
 
@@ -27,6 +70,7 @@ The signatue validation assertion (SVA) defined in this document takes a fundame
 
 This approach drastically reduces the complexity of signature validation of old signatures for the simple reason that validating the SVA only requires validation of one signature (in the most optimal case). The signature over the SVA. The SVA can be signed with keys and algorithms that makes it valid for a considerable time in the future and if needed, the SVA can be re-issued with fresh keys and signature to extend the liftime of the original signature validity.
 
+<a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
 The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**, **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in BCP 14 \[[RFC2119](#rfc2119)\] \[[RFC8174](#rfc8174)\] when, and only when, they appear in all capitals, as shown here.
@@ -34,7 +78,8 @@ The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**, **SHALL** **N
 These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
 
-### 1.1. Definitions
+<a name="definitions"></a>
+### 1.2. Definitions
 
 This document use the following defined terms <sup>1</sup>:
 
@@ -46,8 +91,10 @@ Signed Bytes  | These are the actual bytes of data that was hashed and signed by
 > \[1\]: When these terms are used in their defined meaning, they appear with a capitalized first letter as shown in the table.
 
 
+<a name="sva-token"></a>
 ## 2. SVA Token
 
+<a name="function"></a>
 ### 2.1. Function
 
 The function of the SVA token is to capture evidence of signature validity at one instance of secure signature validation process and to use that evicdence to eliminate the need to preform any repeated cryptographic validation of the original signature value as well as reliance on any hash values bound to that signature. The SVA token achieves this through binding the following information to a specific electronic singature though external evidence:
@@ -63,9 +110,11 @@ Using an SVA token is equivalent to validating a signed document in a system onc
 
 Using the SVA token, the signed document can be validated once using a reliable trusted service and then that SVA token can be used to extend reliance of that secure validation process. The SVA token is therefore not only a valuable tool to extend the lifetime of a signed document, but also a useful tool to deploy and use one secure external validation service instead of having a close integration between signature validation and document usage.
 
+<a name="sva-token-syntax"></a>
 ### 2.2. SVA Token Syntax
 The SVA token is carried in a JSON Web Token (JWT) in accordance with \[[RFC7519](#rfc7519)\].
 
+<a name="data-types"></a>
 ### 2.2.1. Data types
 Content of claims in a SVA token are specified using the claims data types in the following table:
 
@@ -84,6 +133,7 @@ Claims Data Type | JSON Data Type | Description
 **Array**  | array  |  An array of values of a specific data type as defined in this table. An array is expressed in this specification by square brackets. E.g. **\[String\]** indicates an array of String values and **\[Object\<DocHash\>\]** indicates an array of DocHash objects.
 **Null** | null | Representing an absent value. A claim with a null value is equivalent with an absent claim in this specification.
 
+<a name="sva-token-claims"></a>
 #### 2.2.2. SVA token claims
 
 The SVA token JWT SHALL contain claims according to the following table.
@@ -100,8 +150,10 @@ Name | Data Type | Value | Presence
 > \[2\]: An SVA token asserts that a certain validation process was undertaken at a certain instance of time. This fact never changes and never expires. However, some aspects of the SVA claim such as liability for false claims or service provision related to a specific SVA token may stop after a certain period of time, such as a service where an old SVA token can be upgraded to a new SVA token signed with fresh keys and algorithms.
 
 
+<a name="claim-object-classes"></a>
 #### 2.2.3. Claim object classes
 
+<a name="the-sigvalassertion-object"></a>
 ##### 2.2.3.1. The SigValAssertion object
 The SigValAssertion claims object holds all custom claims of the SVA token JWT and contains the following values:
 
@@ -114,6 +166,7 @@ Name | Data Type | Value | Presence
 `sig`  | **\[Object\<Signature\>\]**   | The `sig` claim provide information about validated signatures as an array of **Signature** objects. If the SVA token contains signature validation assertions for more than one signature, then each signature is represented by a separate **Signature** object. An SVA token MUST contain at least one Signature object | MANDATORY
 `ext` | **MAP\<String\>** | Extension point for additional claims related to the SVA token. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
+<a name="the-signature-claims-object"></a>
 ##### 2.2.3.2. The Signature claims object
 The Signature object contains claims related to signature validation assertioins for one signature and contains the following values:
 
@@ -126,6 +179,7 @@ Name | Data Type | Value | Presence
 |`time_val` | **\[Object\<TimeValidation\>\]**  | Array of results of time verification validating proof that the target signature has existed at specific instances of time in the past. | OPTIONAL |
 `ext` | **MAP\<String\>** | Extension point for additional claims related to the target signature. Extension claims are added at the discresion of the SVA Issuer but MUST follow any conventions defined in a profile of this specification (see section 3) |  OPTIONAL
 
+<a name="the-sigreference-claims-object"></a>
 ##### 2.2.3.3. The SigReference claims object
 
 The SigReference claims object provides information to used to match the Signature claims object to a specific target signature and to verify the inteigrity of the target siganture value and Signed Bytes.
@@ -136,6 +190,7 @@ Name | Data Type | Value | Presence
 `sig_hash`  | **Base64Binary** | Hash value of the target signature value. | MANDATORY
 `sb_hash` | **Base64Binary** | Hash value of the Signed Bytes of the target signature. | MANDATORY
 
+<a name="the-signeddata-claims-object"></a>
 ##### 2.2.3.4. The SignedData claims object
 
 The SignedData claims object provides information used to verify the target signature references to Signed Data as well as to verify the integrity of all data signed by the target signature.
@@ -145,6 +200,7 @@ Name | Data Type | Value | Presence
 `ref` | **String** | Reference identifier identifying the data or data fragment covered by the target signature. | MANDATORY
 `hash`  | **Base64Binary** | Hash of the data covered by the target signature | MANDATORY
 
+<a name="the-policyvalidation-claims-object"></a>
 ##### 2.2.3.5. The PolicyValidation claims object
 
 The PolicyValidation claims object provide information about the result of a validation process according to a speicific policy.
@@ -157,6 +213,7 @@ Name | Data Type | Value | Presence
 `ext` | **MAP\<String\>** | Extension for additional information about the validation result.  | OPTIONAL
 
 
+<a name="the-timeverification-claims-object"></a>
 ##### 2.2.3.6. The TimeVerification claims object
 
 The TimeVerification claims object provide information about the result of validating time evidence asserting that the target signature existed at a particular time in the past.
@@ -171,6 +228,7 @@ Name | Data Type | Value | Presence
 `val` | **\[Object\<PolicyValidation\>\]**  | Array of results of validation of the time evidence according to defined validation procedures.  |  OPTIONAL
 `ext` | **MAP\<String\>** | Extension for additional information about the signature validation result.  | OPTIONAL
 
+<a name="the-certreference-claims-object"></a>
 ##### 2.2.3.7. The CertReference claims object
 
 The CertReference claims object allows reference to a signle certificate or a chain of certificates, either by providing the actual certificate data or by providing a hash reference for certificates that can be located in the target signature.
@@ -190,6 +248,7 @@ Identifer | Ref data content
 
 
 
+<a name="sva-jose-header"></a>
 #### 2.2.4. SVA JOSE header
 
 The SVA token JWT MUST contain the following JODE header parameters in acccordance with section 5 of \[[RFC7519](#rfc7519)\].
@@ -201,6 +260,7 @@ JOSE Header | value
 
 
 
+<a name="profiles"></a>
 ## 3. Profiles
 Each signed document and signature type will have to define the precise content and use of several claims in the SVA token.
 
@@ -214,6 +274,7 @@ Each profile MUST as a minimum define:
 - How to attach an SVA token to a document signature or signed document, if applicable.
 
 
+<a name="signature-validation-with-sva-token"></a>
 ## 4. Signature Validation with SVA Token
 
 Signature validation based on an SVA token SHALL follow the following basic steps.
@@ -229,6 +290,7 @@ Signature validation based on an SVA token SHALL follow the following basic step
 
 After validating these steps, signature validity is established as well as the trusted signer certificate binding the identity of the signer to the signature.
 
+<a name="examples"></a>
 ## 5. Examples
 
 The following example illustrates a basic SVA token according to this specification issued for a signed PDF document.
@@ -354,6 +416,7 @@ Decoded JWT Claims
 
 > Note: The order of the JSON objects has been rearranged from the order they appear in the JWT to increase readablilty. Line breaks in the decoded example are also inserted for readablilty. These are not allowed in valid JSON data.
 
+<a name="normative-references"></a>
 ## 6. Normative References
 
 <a name="rfc2119"></a>
