@@ -2,7 +2,7 @@
 
 # Signature Validation Assertion (SVA) Token
 
-### Version 1.0 - 2020-01-02 - *Draft version*
+### Version 0.1 - 2020-01-06 - *Draft version*
 
 *ELN-0615-v1.0*
 
@@ -144,7 +144,7 @@ Name | Data Type | Value | Presence
 `iss`  | **StringOrURI**  | A "Issuer" registered claim according to \[[RFC7519](#rfc7519)\]. An arbitrary unique identifier of the SVA issuer. This value SHOULD have the value of an URI identifier based on a domain owned by the issuer. | MANDATORY
 `iat`  | **NumericDate**  | An "Issued At" registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when this SVA token was issued  | MANDATORY
 `aud`  | **\[StringOrURI\]** or **StringOrURI** | An "Audience" registered claim according to \[[RFC7519](#rfc7519)\]. The audience claim is an array of one or more identifiers, identifying intended recipients of the SVA token. Each identifier MAY identify a single entity, a group of entities or a common policy adopted by a group of entities. If only one value is provided it MAY be provided as a single StringOrURI value instead of as an array of values.| OPTIONAL
-`exp`  | **NumericDate**  | An **Expiration Time** registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when services and responsibilities related to this SVA token is no longer provided by the SVA Issuer. The precise meaning of the expiration time claim is defined by local policy. See implementation note below <sup>2</sup>   | OPTIONAL
+`exp`  | **NumericDate**  | An "Expiration Time" registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when services and responsibilities related to this SVA token is no longer provided by the SVA Issuer. The precise meaning of the expiration time claim is defined by local policy. See implementation note below <sup>2</sup>   | OPTIONAL
 `sig_val_assertion`  | **Object\<SigValAssertion\>**  | Signature validation assertion claims for this SVA token extending the standard registered JTW claims above. | MANDATORY
 
 > \[2\]: An SVA token asserts that a certain validation process was undertaken at a certain instance of time. This fact never changes and never expires. However, some aspects of the SVA claim such as liability for false claims or service provision related to a specific SVA token may stop after a certain period of time, such as a service where an old SVA token can be upgraded to a new SVA token signed with fresh keys and algorithms.
