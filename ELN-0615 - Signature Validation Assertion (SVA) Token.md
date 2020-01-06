@@ -239,6 +239,7 @@ Name | Data Type | Value | Presence
 `ref` | **\[String\]** | An array of string parameters according to conventions defined by the type identifier  | MANDATORY
 
 The following type identifiers are defined:
+
 Identifer | Ref data content
 --- | ---
 `cert` |  One string holding a Base64 encoded X.509 certificate
@@ -251,7 +252,7 @@ Identifer | Ref data content
 <a name="sva-jose-header"></a>
 #### 2.2.4. SVA JOSE header
 
-The SVA token JWT MUST contain the following JODE header parameters in acccordance with section 5 of \[[RFC7519](#rfc7519)\].
+The SVA token JWT MUST contain the following JOSE header parameters in acccordance with section 5 of \[[RFC7519](#rfc7519)\].
 
 JOSE Header | value
 --- | ---
