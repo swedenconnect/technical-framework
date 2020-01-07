@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.6 - 2019-12-09 - *Draft version*
+### Version 1.6 - 2020-01-07 - *Draft version*
 
 *ELN-0604-v1.6*
 
@@ -392,7 +392,8 @@ a sign message for the user and that the user actively confirmed acceptance of t
 message is the `SignMessage` extension that may be included in an authentication request by Signature Service 
 Service Providers. See section 7 of \[[EidDeployProf](#eiddeployprof)\] for details.
 
-The attribute value format for the `signMessageDigest` attribute is `digest-message-uri;sign-message-digest`, where 
+The attribute value format for the `signMessageDigest` attribute is `digest-algorithm-identifier;sign-message-digest`, where
+`digest-algorithm-identifier` is the XML Security algorithm URI identifier of the selected digest algorithm and
 `sign-message-digest` is `base64(digest(msg))`. The `msg` is the UTF-8 encoded bytes of the sign message that was displayed. It equals the `csig:Message` element value of the `csig:SignMessage` (\[[DSSExt](#dssext)\]). Thus, if the `csig:Message` element is encrypted into a `csig:EncryptedMessage`, the element value after decryption should be used.
 
 Entities compliant with this specification MUST use `http://www.w3.org/2001/04/xmlenc#sha256` as the digest algorithm, 

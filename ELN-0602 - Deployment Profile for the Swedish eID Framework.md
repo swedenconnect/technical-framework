@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-12-17 - **Draft version**
+### Version 1.6 - 2020-01-07 - **Draft version**
 
 *ELN-0602-v1.6*
 
