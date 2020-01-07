@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.6---2019-08-28---*draft-version*">Version 1.6 - 2019-08-28 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2019-12-16---*draft-version*">Version 1.6 - 2019-12-16 - <em>Draft version</em></h3>
 <p><em>ELN-0603-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -26,7 +26,7 @@
 <li><p><a href="#assigned-identifiers"><strong>Assigned Identifiers</strong></a></p>
 <p> 3.1. <a href="#url-identifiers">URL Identifiers</a></p>
 <p> 3.1.1. <a href="#authentication-context-uris">Authentication Context URIs</a></p>
-<p> 3.1.1.1. <a href="#sign-message-authentication-context-uris">Sign Message Authentication Context URIs</a></p>
+<p> 3.1.1.1. <a href="#sign-message-authentication-context-uris">Sign Message Authentication Context URIs (deprecated)</a></p>
 <p> 3.1.2. <a href="#attribute-sets">Attribute Sets</a></p>
 <p> 3.1.3. <a href="#entity-category-identifiers">Entity Category Identifiers</a></p>
 <p> 3.1.3.1. <a href="#service-entity-categories">Service Entity Categories</a></p>
@@ -290,7 +290,10 @@ following <code>AuthnContextClassRef</code> URI:s defined by the EU commission:<
 </li>
 </ul>
 <p><a name="sign-message-authentication-context-uris"></a></p>
-<h4 id="3.1.1.1.-sign-message-authentication-context-uris">3.1.1.1. Sign Message Authentication Context URIs</h4>
+<h4 id="3.1.1.1.-sign-message-authentication-context-uris-(deprecated)">3.1.1.1. Sign Message Authentication Context URIs (deprecated)</h4>
+<p><strong>DEPRECATED</strong></p>
+<p>The use of Sign Message Authentication Context URIs is deprecated. See section 7 of [<a href="#eiddeploy">EidDeploy</a>] for details.</p>
+<blockquote>
 <p>Authentication Context URIs extending the above URIs with specific
 meaning for use with authentication requests that includes a sign
 message that must be displayed to the user (see section 7 of
@@ -346,6 +349,7 @@ message that must be displayed to the user (see section 7 of
 </tr>
 </tbody>
 </table>
+</blockquote>
 <p><a name="attribute-sets"></a></p>
 <h4 id="3.1.2.-attribute-sets">3.1.2. Attribute Sets</h4>
 <p>Identifiers for attribute sets defined in the Attribute Profile
@@ -782,6 +786,11 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <td style="text-align:left">Authentication Server Signature</td>
 <td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
+<tr>
+<td style="text-align:left">1.2.752.201.3.14</td>
+<td style="text-align:left">Sign Message Digest</td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
+</tr>
 </tbody>
 </table>
 <p><a name="asn1-declarations"></a></p>
@@ -820,10 +829,11 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <span class="hljs-built_in">id</span>-attr-user-signature       OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">11</span> }   <span class="hljs-comment">-- User signature    </span>
 <span class="hljs-built_in">id</span>-attr-sad                  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">12</span> }   <span class="hljs-comment">-- Signature activation data</span>
 <span class="hljs-built_in">id</span>-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">13</span> }   <span class="hljs-comment">-- Authentication server signature</span>
+<span class="hljs-built_in">id</span>-attr-sign-message-digest  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">14</span> }   <span class="hljs-comment">-- Sign message digest</span>
 
 <span class="hljs-comment">-- E-legnamnden QC Statement extension</span>
 <span class="hljs-built_in">id</span>-qcs-sid         OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">1</span> }   <span class="hljs-comment">-- Semantics Identifiers</span>
-<span class="hljs-built_in">id</span>-qcs-statement   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">2</span> }   –- QC statements
+<span class="hljs-built_in">id</span>-qcs-statement   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">2</span> }   <span class="hljs-comment">-- QC statements</span>
 
 <span class="hljs-comment">-- E-legnamnden Certificate Extensions</span>
 <span class="hljs-built_in">id</span>-ce-authContext  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-ce <span class="hljs-number">1</span> }</code></pre><p><a name="references"></a></p>
@@ -914,9 +924,11 @@ regulation and associated technical specifications.</p>
 </li>
 <li><p>Section 3.1.9.2, &quot;eIDAS Connector Aliases&quot;, defining the URI format for representing country affiliation of eIDAS connector services, was added.</p>
 </li>
-<li><ul class="list">
-<li>The link for the &quot;Tillitsramverk för Svensk e-legitimation&quot; specification was updated.</li>
-</ul>
+<li><p>The link for the &quot;Tillitsramverk för Svensk e-legitimation&quot; specification was updated.</p>
+</li>
+<li><p>Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.</p>
+</li>
+<li><p>The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>

@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2019-11-01---**draft-version**">Version 1.6 - 2019-11-01 - <strong>Draft version</strong></h3>
+<h3 id="version-1.6---2020-01-07---**draft-version**">Version 1.6 - 2020-01-07 - <strong>Draft version</strong></h3>
 <p><em>ELN-0602-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -59,7 +59,7 @@
 <p> 6.4. <a href="#error-responses">Error Responses</a></p>
 </li>
 <li><p><a href="#authentication-for-signature"><strong>Authentication for Signature</strong></a></p>
-<p> 7.1. <a href="#authentication-context-uris-for-signature-services">Authentication Context URIs for Signature Services</a></p>
+<p> 7.1. <a href="#authentication-context-uris-for-signature-services">Authentication Context URIs for Signature Services (deprecated)</a></p>
 <p> 7.2. <a href="#authentication-requests2">Authentication Requests</a></p>
 <p> 7.2.1. <a href="#requesting-display-of-signature-message">Requesting Display of Signature Message</a></p>
 <p> 7.2.2. <a href="#requesting-scal2-signature-activation-data">Requesting SCAL2 Signature Activation Data</a></p>
@@ -521,12 +521,7 @@ be interpreted as image dimensions and not the actual size.</p>
 and may define specific requirements on the authentication process.
 There can be multiple authentication context URIs representing the same
 Level of Assertion, but one authentication context URI always identifies
-one defined Level of Assurance. For example, requests for authentication
-from a Signature Service that requires a sign message to be displayed as
-part of the authentication process will request a different
-authentication context URI (see <a href="#authentication-for-signature">section 7</a>) than a typical Service
-Provider just requesting authentication of a user, even if the requested
-Level of Assurance is the same.</p>
+one defined Level of Assurance. </p>
 <p>Identity Providers SHALL exclusively use one of the requested
 authentication contexts in <code>&lt;saml2p:AuthnRequest&gt;</code> in the
 <code>&lt;saml2:AuthnContextClassRef&gt;</code> element under the
@@ -871,7 +866,18 @@ these requirements for the “authentication for signature” process.</p>
 <p>[*]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.</p>
 </blockquote>
 <p><a name="authentication-context-uris-for-signature-services"></a></p>
-<h3 id="7.1.-authentication-context-uris-for-signature-services">7.1. Authentication Context URIs for Signature Services</h3>
+<h3 id="7.1.-authentication-context-uris-for-signature-services-(deprecated)">7.1. Authentication Context URIs for Signature Services (deprecated)</h3>
+<p>Earlier versions of the Swedish eID Framework defined a set of Authentication Context URI:s with the following meaning:</p>
+<ul class="list">
+<li><p>for Signature Services, a means to require that a sign message would be displayed by the Identity Provider processing the authentication request, and,</p>
+</li>
+<li><p>for Identity Providers, to include in issued assertions as an evidence that the sign message was displayed for the user.</p>
+</li>
+</ul>
+<p>Implementations using the special purpose Authentication Context URI:s for sign message turned out to be complex as the number of authentication context classes expands to align with eIDAS and other federations. Usage of these special purpose Authentication Context URI:s have therefore been deprecated and replaced with a much simpler way of requesting and asserting the displaying of sign messages, see sections <a href="#requesting-display-of-signature-message">7.2.1</a> and <a href="#authentication-responses2">7.3</a> below.</p>
+<p>However, for backwards compatibility reasons, up until the 31th of December 2020, Identity Providers MUST support processing of the special purpose sigmessage URI:s according to version 1.5 of &quot;Deployment Profile for the Swedish eID Framework&quot;, [<a href="#eiddeploy_15">EidDeploy_1.5</a>]. </p>
+<p><b>Deprecated requirements:</b></p>
+<blockquote>
 <p>The Swedish eID Framework defines additional authentication context URIs
 to be used in <code>&lt;saml2p:AuthnRequest&gt;</code> and <code>&lt;saml2:Assertion&gt;</code>
 elements during “authentication for signature”. These authentication
@@ -885,6 +891,7 @@ are defined in section 3.1.1.1 of [<a href="#eidregistry">EidRegistry</a>].</p>
 URIs. The URIs listed in section 3.1.1.1 of [<a href="#eidregistry">EidRegistry</a>] are only used when 
 there is an explicit requirement for the Identity Provider to display a sign message provided
 in the authentication request.</p>
+</blockquote>
 <p><a name="authentication-requests2"></a></p>
 <h3 id="7.2.-authentication-requests">7.2. Authentication Requests</h3>
 <p>Authentication requests from a Signature Service SHALL meet the
@@ -925,31 +932,9 @@ message to the user by including the <code>SignMessage</code> element from the
 signature request as a child element to an <code>&lt;saml2p:Extensions&gt;</code>
 element in the <code>&lt;saml2p:AuthnRequest&gt;</code> message (see section 3.2.1 of
 [<a href="#saml2core">SAML2Core</a>]).</p>
-<p>If the <code>SignMessage</code> element from the signature request includes a
-<code>MustShow</code> attribute with the value <code>true</code>, the Signature Service MUST
-require that the provided sign message is displayed by the Identity
-Provider, by including an authentication context URI (as described in
-<a href="#authentication-context-uris-for-signature-services">section 7.1</a> above) to the 
-<code>&lt;saml2:AuthnContextClassRef&gt;</code> element that is part of the 
-<code>&lt;saml2p:RequestedAuthnContext&gt;</code> element of the <code>&lt;saml2p:AuthnRequest&gt;</code> 
-message.</p>
+<p>All Identity Providers compliant with this profile MUST be able to parse and understand
+the <code>SignMessage</code> extension.</p>
 <p>If the <code>Message</code>-element of the <code>SignMessage</code> is to be encrypted, the Service Provider SHOULD consult the Identity Provider&#39;s metadata (<code>&lt;md:EncryptionMethod&gt;</code> elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Swedish eID Framework during the encryption operation, which is compatible with the Identity Provider&#39;s encryption key declared in metadata.</p>
-<p>Identity Providers SHALL advertise supported authentication contexts
-defined by the URIs listed in sections 3.1.1 and 3.1.1.1 of [<a href="#eidregistry">EidRegistry</a>], 
-by including the URIs of supported authentication contexts as EntityAttributes of the type
-<code>urn:oasis:names:tc:SAML:attribute:assurance-certification</code> in its metadata.</p>
-<pre class="hljs"><code>&lt;md:Extensions&gt;
-  &lt;mdattr:EntityAttributes xmln<span class="hljs-variable">s:mdattr</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:metadata:attribute"</span>&gt;
-    &lt;sam<span class="hljs-variable">l:Attribute</span> Name=<span class="hljs-string">"urn:oasis:names:tc:SAML:attribute:assurance-certification"</span>
-                    NameFormat=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>
-                    xmln<span class="hljs-variable">s:saml</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:assertion"</span>&gt;
-      &lt;sam<span class="hljs-variable">l:AttributeValue</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span>&gt;http://id.elegnamnden.<span class="hljs-keyword">se</span>/loa/<span class="hljs-number">1.0</span>/loa3&lt;/sam<span class="hljs-variable">l:AttributeValue</span>&gt;
-      &lt;sam<span class="hljs-variable">l:AttributeValue</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span>&gt;http://id.elegnamnden.<span class="hljs-keyword">se</span>/loa/<span class="hljs-number">1.0</span>/loa3-sigmessage&lt;/sam<span class="hljs-variable">l:AttributeValue</span>&gt;
-    &lt;/sam<span class="hljs-variable">l:Attribute</span>&gt;
-    ...
-  &lt;/mdattr:EntityAttributes&gt;
-&lt;/md:Extensions&gt;</code></pre><p><em>Example of how an Identity Provider advertises its support for LoA 3
-authentication (including support for displaying of sign messages).</em></p>
 <p>If an Identity Provider that has ways of determining the principal&#39;s identity before displaying
 a sign message receives a <code>&lt;psc:PrincipalSelection&gt;</code> extension in  the authentication request 
 it SHOULD ensure that the contents of the <code>&lt;psc:PrincipalSelection&gt;</code> extension matches the 
@@ -960,35 +945,41 @@ an error response where the second-level status code is set to
 <blockquote>
 <p>Typical scenarios where the above requirement apply is for the Swedish eIDAS connector that first authenticates a principal and then displays the sign message, and for Identity Providers that prompt the user for its user identity as part of its authentication scheme. In those scenarios the Identity Providers must compare the principal identity with the contents of <code>&lt;psc:PrincipalSelection&gt;</code>, if received in the authentication request. </p>
 </blockquote>
-<p>Identity Providers processing a request with a requested authentication
-context that is a &quot;Sign Message Authentication Context URI&quot; SHALL meet the
-following requirements (in addition to other general requirements
-associated with requests from signature services:</p>
+<p>Identity Providers processing a request containing a <code>SignMessage</code> extension SHALL meet
+the following requirements (in addition to other general requirements associated with requests 
+from signature services):</p>
 <ul class="list">
-<li><p>The authentication request SHALL contain a sign message that can be
-extracted by the Identity Provider. If the Identity Provider fails
-to locate, decrypt or extract the sign message in clear text form,
-it must return an error response.</p>
+<li><p>If the <code>MustShow</code> attribute of the <code>SignMessage</code> extension is set, the Identity Provider
+MUST fail with an error response if the message, for some reason, can not be displayed 
+to the user.</p>
 </li>
-<li><p>The Identity Provider MUST display the sign message to the user in a
-manner that is consistent with the data format of the sign message.
-If necessary, the Identity Provider MUST process defined filtering
-rules on the message. If the present message format is not supported
-or the sign message for any reason cannot be displayed in a proper
-manner, the Identity Provider must return an error response.</p>
+<li><p>The Identity Provider MUST display the sign message to the user in a manner that is consistent 
+with the data format of the sign message. If necessary, the Identity Provider MUST process 
+defined filtering rules on the message. If the present message format is not supported or the 
+sign message for any reason cannot be displayed in a proper manner, the Identity Provider must
+return an error response.</p>
 </li>
-<li><p>If authentication and sign message confirmation by the user was 
-successful, the Identity Provider MUST include the authentication 
-context URI in the assertion that is consistent 
-with the authentication context requested in the authentication request.</p>
+<li><p>If authentication and sign message confirmation by the user was successful, the Identity Provider 
+MUST include the <code>signMessageDigest</code> attribute (see section 3.2.4 of [<a href="#eidattributes">EidAttributes</a>]) 
+in the assertion that is issued.</p>
 </li>
-<li><p>The Identity Provider MUST NOT return an assertion without
-performing authentication process consistent with the requested
-authentication context which includes display of a sign message,
-even if the request has no present <code>ForceAuthn</code> attribute or includes
-a <code>ForceAuthn</code> attribute set to the value <code>false</code>.</p>
+<li><p>The Identity Provider MUST NOT return an assertion without performing an authentication process 
+consistent with the requested authentication context which includes display of a sign message,
+even if the request has no present <code>ForceAuthn</code> attribute or includes a <code>ForceAuthn</code> attribute set 
+to the value <code>false</code>.  </p>
 </li>
 </ul>
+<blockquote>
+<p><strong>Note:</strong> For backwards compatibility reasons, up until the 31th of December 2020, Identity Providers MUST also
+apply the above requirements when processing a request with a requested authentication context that is a 
+&quot;Sign Message Authentication Context URI&quot; along with the following (deprecated) requirement:</p>
+<ul class="list">
+<li>The authentication request SHALL contain a sign message that can be
+extracted by the Identity Provider. If the Identity Provider fails
+to locate, decrypt or extract the sign message in clear text form,
+it must return an error response.</li>
+</ul>
+</blockquote>
 <p><a name="requesting-scal2-signature-activation-data"></a></p>
 <h4 id="7.2.2.-requesting-scal2-signature-activation-data">7.2.2. Requesting SCAL2 Signature Activation Data</h4>
 <p>The type of signature requested in a signature request is, according to [<a href="#eiddssprofile">EidDSS_Profile</a>], specified by the <code>CertType</code> attribute of the <code>&lt;CertRequestProperties&gt;</code> element. When the value of this attribute is set to <code>QC/SSCD</code>, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the &quot;Signature Activation Protocol for Federated Signing&quot; [<a href="#sigsap">SigSAP</a>]. An authentication request message that includes this <code>SADRequest</code> extension MUST also include the <code>SignMessage</code> extension (as described above).</p>
@@ -997,6 +988,12 @@ a <code>ForceAuthn</code> attribute set to the value <code>false</code>.</p>
 <p>Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of [<a href="#sigsap">SigSAP</a>].</p>
 <p><a name="authentication-responses2"></a></p>
 <h3 id="7.3.-authentication-responses">7.3. Authentication Responses</h3>
+<p>By including the <code>signMessageDigest</code> attribute (see section 3.2.4 of [<a href="#eidattributes">EidAttributes</a>]) 
+in the SAML assertion, the Identity Provider asserts that it has successfully displayed the sign message
+received in the request for the user and that the user has accepted to sign under the context of this sign message.</p>
+<p>Up until the 31th of December 2020, Identity Providers MUST also support the deprecated requirements stated below.</p>
+<p><strong>Deprecated requirements:</strong></p>
+<blockquote>
 <p>By including a sign message authentication context URI, as described in <a href="#authentication-context-uris-for-signature-services">section 7.1</a>, in the SAML assertion under the
 <code>&lt;saml2:AuthnContextClassRef&gt;</code> element of the
 <code>&lt;saml2:AuthnStatement&gt;</code> element in the response, the Identity
@@ -1010,7 +1007,6 @@ the Identity Provider failed to display the sign message or the user
 failed to accept it, and the request indicated that the sign message
 MUST be displayed, then the Identity Provider MUST return an error
 response with the status code <code>urn:oasis:names:tc:SAML:2.0:status:AuthnFailed</code>.</p>
-<blockquote>
 <p>[*]: As defined in <a href="#requested-authentication-context">section 5.3.1</a>, only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to <a href="#authentication-context-uris-for-signature-services">section 7.1</a> if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.</p>
 </blockquote>
 <p><a name="cryptographic-algorithms"></a></p>
@@ -1210,6 +1206,11 @@ Entity Attributes Version 1.0, August
 Protocol and Profile, March
 2008</a>.</p>
 </blockquote>
+<p><a name="eiddeploy_15"></a>
+<strong>[EidDeploy_1.5]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/june-2018/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework, version 1.5</a>.</p>
+</blockquote>
 <p><a name="eidregistry"></a>
 <strong>[EidRegistry]</strong></p>
 <blockquote>
@@ -1270,11 +1271,15 @@ Services</a>.</p>
 <li>In order to facilitate algorithm interoperability between peers additions concerning &quot;Metadata Profile for Algorithm Support&quot; [<a href="#saml2metaalg">SAML2MetaAlgSupport</a>] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.</li>
 <li>Section 5.3, &quot;Message Content&quot;, was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.</li>
 <li>The <code>PrincipalSelection</code> and <code>RequestedPrincipalSelection</code> extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.</li>
-<li>The link for the &quot;Tillitsramverk för Svensk e-legitimation&quot; specification was updated.</li>
+<li>The link for the &quot;Tillitsramverk för Svensk e-legitimation&quot; specification was updated.</li>
 <li>This profile is no longer normatively dependent upon SAML2Int. Therefore, the profile has been updated with requirements that previously was implicit (due to the normative dependency to SAML2Int).</li>
 <li>Section 8, &quot;Cryptographic Algorithms&quot;, was introduced in order to clearly define the algorithm requirements for services that are conformant to this profile.</li>
 <li>Section 2.1.1 was updated with elaborations concerning certificates in metadata.</li>
-<li>Section 7.2.1 was updated with a requirement that ensures that a sign message is only displayed to the intended user.</li>
+<li><p>Section 7.2.1 was updated with a requirement that ensures that a sign message is only displayed to the intended user.</p>
+</li>
+<li><p>Section 7, &quot;Authentication for Signature&quot;, was updated where &quot;Sign Message Authentication Context URI&quot; were deprecated
+and the use of the <code>signMessageDigest</code> attribute was introduced.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.4 and 1.5:</strong></p>
 <ul class="list">

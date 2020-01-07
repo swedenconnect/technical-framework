@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2019-10-25---*draft-version*">Version 1.6 - 2019-10-25 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2020-01-07---*draft-version*">Version 1.6 - 2020-01-07 - <em>Draft version</em></h3>
 <p><em>ELN-0604-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -37,6 +37,7 @@
 <p> 3.2.1. <a href="#the-authcontextparams-attribute">The authContextParams Attribute</a></p>
 <p> 3.2.2. <a href="#the-usercertificate-and-usersignature-attributes">The userCertificate, userSignature and authServerSignature Attributes</a></p>
 <p> 3.2.3. <a href="#the-sad-attribute">The sad Attribute</a></p>
+<p> 3.2.4. <a href="#the-signmessagedigest-attribute">The signMessageDigest Attribute</a></p>
 <p> 3.3. <a href="#attributes-for-the-eidas-framework">Attributes for the eIDAS Framework</a></p>
 <p> 3.3.1. <a href="#the-prid-and-pridpersistence-attributes">The prid and pridPersistence Attributes</a></p>
 <p> 3.3.2. <a href="#the-personalidentitynumberbinding-attribute">The personalIdentityNumberBinding Attribute</a></p>
@@ -554,6 +555,14 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">See <a href="#the-sad-attribute">section 3.2.3</a> below.</td>
 </tr>
 <tr>
+<td style="text-align:left">signMessageDigest</td>
+<td style="text-align:left">urn:oid:1.2.752.201.3.14</td>
+<td style="text-align:left">Sign message digest</td>
+<td style="text-align:left">Included in assertions as a proof that a user sign message was displayed.</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:left">See <a href="#the-signmessagedigest-attribute">section 3.2.4</a> below.</td>
+</tr>
+<tr>
 <td style="text-align:left">prid</td>
 <td style="text-align:left">urn:oid:1.2.752.201.3.4</td>
 <td style="text-align:left">Provisional identifier</td>
@@ -649,7 +658,32 @@ signature service in order to service a signature request in accordance
 with CEN EN 419 241-2. The <code>sad</code> attribute holds a single string
 attribute value. The format of the string value is defined in the &quot;Signature Activation Protocol 
 for Federated Signing&quot; specification [<a href="#sigsap">SigSAP</a>].</p>
-<p><a name="attributes-for-the-eidas-framework"></a></p>
+<p><a name="the-signmessagedigest-attribute"></a></p>
+<h4 id="3.2.4.-the-signmessagedigest-attribute">3.2.4. The signMessageDigest Attribute</h4>
+<p>The <code>signMessageDigest</code> attribute is included in an assertion as a proof that an Identity Provider displayed
+a sign message for the user and that the user actively confirmed acceptance of this sign message. This sign 
+message is the <code>SignMessage</code> extension that may be included in an authentication request by Signature Service 
+Service Providers. See section 7 of [<a href="#eiddeployprof">EidDeployProf</a>] for details.</p>
+<p>The attribute value format for the <code>signMessageDigest</code> attribute is <code>digest-algorithm-identifier;sign-message-digest</code>, where
+<code>digest-algorithm-identifier</code> is the XML Security algorithm URI identifier of the selected digest algorithm and
+<code>sign-message-digest</code> is <code>base64(digest(msg))</code>. The <code>msg</code> is the UTF-8 encoded bytes of the sign message that was displayed. It equals the <code>csig:Message</code> element value of the <code>csig:SignMessage</code> ([<a href="#dssext">DSSExt</a>]). Thus, if the <code>csig:Message</code> element is encrypted into a <code>csig:EncryptedMessage</code>, the element value after decryption should be used.</p>
+<p>Entities compliant with this specification MUST use <code>http://www.w3.org/2001/04/xmlenc#sha256</code> as the digest algorithm, 
+unless the recipient of the <code>signMessageDigest</code> attribute has declared another digest algorithm as preferred in its
+metadata entry (see section 2.1.1.3 of [<a href="#eiddeployprof">EidDeployProf</a>]). In those cases this algorithm MAY be used.</p>
+<p><strong>Example:</strong></p>
+<p>Suppose that the unencrypted message is &quot;I hereby confirm that I want to join example.com as a customer&quot;. This is
+represented as:</p>
+<pre class="hljs"><code><span class="hljs-section">&lt;csig:Message&gt;</span>
+  <span class="hljs-attribute">SSBoZXJlYnkgY29uZmlybSB0aGF0IEkgd2FudCB0byBqb2luIGV4YW1wbGUuY29tIGFzIGEgY3VzdG9tZXI</span>=
+<span class="hljs-section">&lt;/csig:Message&gt;</span></code></pre><p>The input to the digesting operation is the value bytes of the <code>csig:Message</code> element which is UTF-8 encoded bytes
+of the actual sign message<sup>*</sup>.</p>
+<p>The <code>signMessageDigest</code> attribute for the above example will then be:</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">"signMessageDigest"</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.201.3.14"</span>
+  <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">"xsd:string"</span>&gt;</span>
+    http://www.w3.org/2001/04/xmlenc#sha256;0yKaSVsYeh+PX2Q6diqO2w89+a3Dm303tp3AVjgxwj0=
+  <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span></code></pre><p><a name="attributes-for-the-eidas-framework"></a></p>
 <h3 id="3.3.-attributes-for-the-eidas-framework">3.3. Attributes for the eIDAS Framework</h3>
 <p><a name="the-prid-and-pridpersistence-attributes"></a></p>
 <h4 id="3.3.1.-the-prid-and-pridpersistence-attributes">3.3.1. The prid and pridPersistence Attributes</h4>
@@ -905,6 +939,11 @@ Framework</a>.</p>
 <blockquote>
 <p><a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
+<p><a name="dssext"></a>
+<strong>[DSSExt]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+</blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
@@ -912,6 +951,8 @@ Framework</a>.</p>
 <li><p>References were updated to point at the latest versions of the &quot;Tillitsramverk för Svensk e-legitimation&quot; and &quot;eIDAS SAML Attribute Profile&quot; specifications.</p>
 </li>
 <li><p>Section 2.5, &quot;eIDAS Natural Person Attribute Set&quot;, was updated so that the <code>c</code> (country) attribute is a required attribute for this attribute set.</p>
+</li>
+<li><p>The attribute <code>signMessageDigest</code> was introduced (see section 3.2.4).</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
