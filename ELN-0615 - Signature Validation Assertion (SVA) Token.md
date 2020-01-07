@@ -300,39 +300,39 @@ Signature validation token JWT:
 
 ```
 eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJhdWQiOiJodHRwOlwvXC9leGFtcGxlLmNvbVwvYXVkaWVuY2UxIiw
-ic2lnX3ZhbF9hc3NlcnRpb24iOnsic2lnIjpbeyJleHQiOm51bGwsInNpZ192YWwiOlt7Im1zZyI6IlBhc3NlZCBiYXN
-pYyBzaWduYXR1cmUgdmFsaWRhdGlvbiIsImV4dCI6bnVsbCwicmVzIjoiUEFTU0VEIiwicG9sIjoiaHR0cDpcL1wvaWQ
-uc3dlZGVuY29ubmVjdC5zZVwvc3ZhXC9zaWd2YWwtcG9saWN5XC9jaGFpblwvMDEifV0sInNpZ19yZWYiOnsic2lnX2h
-hc2giOiJcL3o1NTY2dVVET2QrVTFOMXZkdG5IRytMUDRGNGkycnhQaHFOQzdldjJwZ01WZTNWcUczMWtlY2dYME9waXV
-cL2Z4ZVdGNDZWRXozenJqOHhTS0V6R0tBPT0iLCJpZCI6bnVsbCwic2JfaGFzaCI6IkFFUmU5RTZFZmd1YkppTmNacEl
-NOUJCRVZnSHgrQ2NqdkdxYjJ1bDI4MFJDdkoyeU1WTmVGaFJ5M2VmeFpSK2JGR2FBUGNSekhCZTZZd2Q1NEFIZVBRPT0
-ifSwic2lnbmVyX2NlcnRfcmVmIjp7InJlZiI6WyJOU3VGTVwvdkorYmVCbFF0UVR6bWNZaDV4N0w4V0M5RTFLUEhSQTF
-pb05PbEtWR2JsYTlVUnpZY3Npc0F4MmJjc3FPaGt2VlRjM21LOUU2YWcwN2hmYXc9PSJdLCJ0eXBlIjoiY2VydF9oYXN
-oIn0sInNpZ19kYXRhX3JlZiI6W3sicmVmIjoiMCA3NDY5NyA3OTY5OSAzNzg4MSIsImhhc2giOiJiOEVMMU1vVTRxeFl
-JMXJraXNrOG9xOGlRM0xyRG95Y2tabm9IVmNOY1BTWmlHeTZLdVwvK1FQWnhnSnBnbEZ5NURSK2JidjJqZWpOejZBK2Y
-5emVTd2c9PSJ9XSwidGltZV92YWwiOlt7InZhbCI6W3sibXNnIjpudWxsLCJleHQiOm51bGwsInJlcyI6IlBBU1NFRCI
-sInBvbCI6Imh0dHA6XC9cL2lkLnN3ZWRlbmNvbm5lY3Quc2VcL3N2YVwvc2lndmFsLXBvbGljeVwvdHJ1c3RcLzAxIn1
-dLCJleHQiOm51bGwsImlzc19jZXJ0X3JlZiI6eyJyZWYiOlsiT2VuSSs0MzRKaGJ2ZkRudGZWXC84ck94RzdGa3Z5amF
-LVkphVnFJRkJYb2hWaEFlNWZLOGFub3YxUzY4OHI3S2JhbCtmdnBhSDFqOGliZzUyUUJ5MVBRPT0iXSwidHlwZSI6ImN
-lcnRfaGFzaCJ9LCJpc3MiOiJodHRwczpcL1wvc3dlZGVuY29ubmVjdC5zZVwvdmFsaWRhdG9yIiwidGltZSI6MTU3ODM
-zODk5NCwiaWQiOiIyNDM4MjE0OThlOGFjNzIiLCJ0eXBlIjoiaHR0cDpcL1wvaWQuc3dlZGVuY29ubmVjdC5zZVwvc3Z
-hXC90aW1ldmFsLXR5cGVcL3BkZi1zdmEtdGltZXN0YW1wXC8wMSJ9XX1dLCJleHQiOnsibmFtZTIiOiJ2YWwyIiwibmF
-tZTEiOiJ2YWwxIn0sInZlciI6IjEuMCIsInByb2ZpbGUiOiJQREYiLCJoYXNoX2FsZ28iOiJodHRwOlwvXC93d3cudzM
-ub3JnXC8yMDAxXC8wNFwveG1sZW5jI3NoYTUxMiIsImNlcnRfcmVmIjp7InJlZiI6WyJNSUlCNlRDQ0FVdWdBd0lCQWd
-JRVhIQVh1REFLQmdncWhrak9QUVFEQWpBNU1Rc3dDUVlEVlFRR0V3SlRSVEVPTUF3R0ExVUVDZ3dGU1VSelpXTXhHakF
-ZQmdOVkJBTU1FVTl3Wlc1VFFVMU1JRVZEUXlCVVpYTjBNQjRYRFRFNU1ESXlNakUxTXprek5sb1hEVEl3TURJeU1qRTF
-Nemt6Tmxvd09URUxNQWtHQTFVRUJoTUNVMFV4RGpBTUJnTlZCQW9NQlVsRWMyVmpNUm93R0FZRFZRUUREQkZQY0dWdVU
-wRk5UQ0JGUTBNZ1ZHVnpkRENCbXpBUUJnY3Foa2pPUFFJQkJnVXJnUVFBSXdPQmhnQUVBWndEQU5WU1hQNWVOd09WOTh
-aOWFxek5cL3dIWkFVaThhanVjMHBTbTBsSUk1dkFNcFNFdmt5YlR6U1dFZFwvZFJEUHVSYm5HMXF3dVJ4RHpCSXFXb2N
-IRzZBRzBjbGRoTFZDbDR2VjNUODlQVUFMOWRHUmIxOHVXbndUVU9ZYnU5YzhaeXVFNzlZT3dmaklKc3FLQVwvUEJjY3B
-pMkRnMzUxOW82UzJJeXd4V05ITlB3S01Bb0dDQ3FHU000OUJBTUNBNEdMQURDQmh3SkNBTmNReG1lUTRuOHpZMmxxcnR
-qaG85TVFLbWJZdU96b1d6NUpvXC80ZCs5T09SWjBVOVEwejhEK0lFdEtUNGRkRGZvVUwwYjBvQ0dPVjdPMHhjM2p6TGx
-BTkFrRThrNHZWMDg3Y2I0WjZLWDJRdE5FSGYxcVlveUV5YjVRS1ludThrakZrdkZraFE3VnEzR0RRRjNkR2tMMjZGRWF
-TTDBnNkN2cFlHemIzZVwvY3FXb3pGNWc9PSJdLCJ0eXBlIjoiY2VydCJ9fSwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmN
-vbm5lY3Quc2VcL3ZhbGlkYXRvciIsImlhdCI6MTU3ODMzOTAzNywianRpIjoiYzIwZGFmMjI0NjQyNTAzMzBkYTA1YTQ
-3Njk1MDgwMjAifQ.AfNraBf_CPX5zgMjZS7w6RCxjxj-_bdksJ8eG3pNBOml7YhtnkBFpoqDsaz1FstDthppAeHkLD7f
-IEkb-Xmn1J6sAKdhQ9ayz92K02MkW-mkoYeQsYk2OomLMUh11kw-v1_QWrYxcUlSiVpDF1WU6-q6uOAoar5OFOpNDlmC
-jAFb9Xou
+iaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlkYXRvciIsImlhdCI6MTU3ODM5NTg5MywianRpIjo
+iM2UwNjEwNzlhOTkxMDcxYTVkMmRjZmQyZWUxYzY3OTQiLCJzaWdfdmFsX2NsYWltcyI6eyJzaWciOlt7ImV4dCI6bnV
+sbCwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25hdHVyZSB2YWxpZGF0aW9uIiwiZXh0IjpudWxsLCJ
+yZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5jb25uZWN0LnNlXC9zdnRcL3NpZ3ZhbC1wb2xpY3l
+cL2NoYWluXC8wMSJ9XSwic2lnX3JlZiI6eyJzaWdfaGFzaCI6IlwvejU1NjZ1VURPZCtVMU4xdmR0bkhHK0xQNEY0aTJ
+yeFBocU5DN2V2MnBnTVZlM1ZxRzMxa2VjZ1gwT3BpdVwvZnhlV0Y0NlZFejN6cmo4eFNLRXpHS0E9PSIsImlkIjpudWx
+sLCJzYl9oYXNoIjoiQUVSZTlFNkVmZ3ViSmlOY1pwSU05QkJFVmdIeCtDY2p2R3FiMnVsMjgwUkN2SjJ5TVZOZUZoUnk
+zZWZ4WlIrYkZHYUFQY1J6SEJlNll3ZDU0QUhlUFE9PSJ9LCJzaWduZXJfY2VydF9yZWYiOnsicmVmIjpbIk5TdUZNXC9
+2SitiZUJsUXRRVHptY1loNXg3TDhXQzlFMUtQSFJBMWlvTk9sS1ZHYmxhOVVSelljc2lzQXgyYmNzcU9oa3ZWVGMzbUs
+5RTZhZzA3aGZhdz09Il0sInR5cGUiOiJjZXJ0X2hhc2gifSwic2lnX2RhdGFfcmVmIjpbeyJyZWYiOiIwIDc0Njk3IDc
+5Njk5IDM3ODgxIiwiaGFzaCI6ImI4RUwxTW9VNHF4WUkxcmtpc2s4b3E4aVEzTHJEb3lja1pub0hWY05jUFNaaUd5Nkt
+1XC8rUVBaeGdKcGdsRnk1RFIrYmJ2Mmplak56NkErZjl6ZVN3Zz09In1dLCJ0aW1lX3ZhbCI6W3sidmFsIjpbeyJtc2c
+iOm51bGwsImV4dCI6bnVsbCwicmVzIjoiUEFTU0VEIiwicG9sIjoiaHR0cDpcL1wvaWQuc3dlZGVuY29ubmVjdC5zZVw
+vc3Z0XC9zaWd2YWwtcG9saWN5XC90cnVzdFwvMDEifV0sImV4dCI6bnVsbCwiaXNzX2NlcnRfcmVmIjp7InJlZiI6WyJ
+PZW5JKzQzNEpoYnZmRG50ZlZcLzhyT3hHN0ZrdnlqYUtWSmFWcUlGQlhvaFZoQWU1Zks4YW5vdjFTNjg4cjdLYmFsK2Z
+2cGFIMWo4aWJnNTJRQnkxUFE9PSJdLCJ0eXBlIjoiY2VydF9oYXNoIn0sImlzcyI6Imh0dHBzOlwvXC9zd2VkZW5jb25
+uZWN0LnNlXC92YWxpZGF0b3IiLCJ0aW1lIjoxNTc4Mzk1ODg1LCJpZCI6ImUyZWNkMWU5ODY2ZjdjYiIsInR5cGUiOiJ
+odHRwOlwvXC9pZC5zd2VkZW5jb25uZWN0LnNlXC9zdnRcL3RpbWV2YWwtdHlwZVwvcGRmLXN2YS10aW1lc3RhbXBcLzA
+xIn1dfV0sImV4dCI6eyJuYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4wIiwicHJvZmlsZSI6IlB
+ERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC94bWxlbmMjc2hhNTEyIiwiY2VydF9
+yZWYiOnsicmVmIjpbIk1JSUI2VENDQVV1Z0F3SUJBZ0lFWEhBWHVEQUtCZ2dxaGtqT1BRUURBakE1TVFzd0NRWURWUVF
+HRXdKVFJURU9NQXdHQTFVRUNnd0ZTVVJ6WldNeEdqQVlCZ05WQkFNTUVVOXdaVzVUUVUxTUlFVkRReUJVWlhOME1CNFh
+EVEU1TURJeU1qRTFNemt6TmxvWERUSXdNREl5TWpFMU16a3pObG93T1RFTE1Ba0dBMVVFQmhNQ1UwVXhEakFNQmdOVkJ
+Bb01CVWxFYzJWak1Sb3dHQVlEVlFRRERCRlBjR1Z1VTBGTlRDQkZRME1nVkdWemREQ0JtekFRQmdjcWhrak9QUUlCQmd
+VcmdRUUFJd09CaGdBRUFad0RBTlZTWFA1ZU53T1Y5OFo5YXF6Tlwvd0haQVVpOGFqdWMwcFNtMGxJSTV2QU1wU0V2a3l
+iVHpTV0VkXC9kUkRQdVJibkcxcXd1UnhEekJJcVdvY0hHNkFHMGNsZGhMVkNsNHZWM1Q4OVBVQUw5ZEdSYjE4dVdud1R
+VT1lidTljOFp5dUU3OVlPd2ZqSUpzcUtBXC9QQmNjcGkyRGczNTE5bzZTMkl5d3hXTkhOUHdLTUFvR0NDcUdTTTQ5QkF
+NQ0E0R0xBRENCaHdKQ0FOY1F4bWVRNG44elkybHFydGpobzlNUUttYll1T3pvV3o1Sm9cLzRkKzlPT1JaMFU5UTB6OEQ
+rSUV0S1Q0ZGREZm9VTDBiMG9DR09WN08weGMzanpMbEFOQWtFOGs0dlYwODdjYjRaNktYMlF0TkVIZjFxWW95RXliNVF
+LWW51OGtqRmt2RmtoUTdWcTNHRFFGM2RHa0wyNkZFYVNMMGc2Q3ZwWUd6YjNlXC9jcVdvekY1Zz09Il0sInR5cGUiOiJ
+jZXJ0In19fQ.ABX86yxICFISWcuEZeGnxV-H-F4eWcVvTUegS7wdR2znB4Nj_xvg6laMGFOByMlZCp4ck2H7WukKYhNC
+7qfPbXDXARtjhhVrb_1qyQhs3aGnZsvvBaq9oKw52EibdgSutLDEndcpEo-d719M8RDxdwPXIQzCUTTUJT8R94m9xyL6
+2aNZ
 ```
 Decoded JWT Header:
 ```
@@ -342,11 +342,11 @@ Decoded JWT Header:
 Decoded JWT Claims
 ```
 {
-  "jti" : "c20daf22464250330da05a4769508020",
+  "jti" : "3e061079a991071a5d2dcfd2ee1c6794",
   "iss" : "https://swedenconnect.se/validator",
-  "iat" : 1578339037,
+  "iat" : 1578395893,
   "aud" : "http://example.com/audience1",
-  "sig_val_assertion" : {
+  "sig_val_claims" : {
     "ver" : "1.0",
     "profile" : "PDF",
     "hash_algo" : "http://www.w3.org/2001/04/xmlenc#sha512",
@@ -364,35 +364,35 @@ Decoded JWT Claims
     },
     "sig" : [ {
       "ext" : null,
+      "sig_val" : [ {
+        "msg" : "Passed basic signature validation",
+        "ext" : null,
+        "res" : "PASSED",
+        "pol" : "http://id.swedenconnect.se/svt/sigval-policy/chain/01"
+      } ],
       "sig_ref" : {
-        "id" : null,
         "sig_hash" : "/z5566uUDOd+U1N1vdtnHG+LP4F4i2rxPhqNC7ev2pgMVe3VqG31kecgX0Opiu/fxeWF46
                       VEz3zrj8xSKEzGKA==",
+        "id" : null,
         "sb_hash" : "AERe9E6EfgubJiNcZpIM9BBEVgHx+CcjvGqb2ul280RCvJ2yMVNeFhRy3efxZR+bFGaAPcR
                      zHBe6Ywd54AHePQ=="
+      },
+      "signer_cert_ref" : {
+        "ref" : [ "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisAx2bcsqOhkvVTc3
+                   mK9E6ag07hfaw==" ],
+        "type" : "cert_hash"
       },
       "sig_data_ref" : [ {
         "ref" : "0 74697 79699 37881",
         "hash" : "b8EL1MoU4qxYI1rkisk8oq8iQ3LrDoyckZnoHVcNcPSZiGy6Ku/+QPZxgJpglFy5DR+bbv2jej
                   Nz6A+f9zeSwg=="
       } ],
-      "signer_cert_ref" : {
-        "ref" : [ "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisAx2bcsqOhkvVTc3
-        mK9E6ag07hfaw==" ],
-        "type" : "cert_hash"
-      },
-      "sig_val" : [ {
-        "msg" : "Passed basic signature validation",
-        "ext" : null,
-        "res" : "PASSED",
-        "pol" : "http://id.swedenconnect.se/sva/sigval-policy/chain/01"
-      } ],
       "time_val" : [ {
         "val" : [ {
           "msg" : null,
           "ext" : null,
           "res" : "PASSED",
-          "pol" : "http://id.swedenconnect.se/sva/sigval-policy/trust/01"
+          "pol" : "http://id.swedenconnect.se/svt/sigval-policy/trust/01"
         } ],
         "ext" : null,
         "iss_cert_ref" : {
@@ -401,9 +401,9 @@ Decoded JWT Claims
           "type" : "cert_hash"
         },
         "iss" : "https://swedenconnect.se/validator",
-        "time" : 1578338994,
-        "id" : "243821498e8ac72",
-        "type" : "http://id.swedenconnect.se/sva/timeval-type/pdf-sva-timestamp/01"
+        "time" : 1578395885,
+        "id" : "e2ecd1e9866f7cb",
+        "type" : "http://id.swedenconnect.se/svt/timeval-type/pdf-sva-timestamp/01"
       } ]
     } ],
     "ext" : {
