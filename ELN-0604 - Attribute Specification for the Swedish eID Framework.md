@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.6 - 2019-10-25 - *Draft version*
+### Version 1.6 - 2019-12-09 - *Draft version*
 
 *ELN-0604-v1.6*
 
@@ -45,6 +45,8 @@
     3.2.2. [The userCertificate, userSignature and authServerSignature Attributes](#the-usercertificate-and-usersignature-attributes)
 
     3.2.3. [The sad Attribute](#the-sad-attribute)
+    
+    3.2.4. [The signMessageDigest Attribute](#the-signmessagedigest-attribute)
 
     3.3. [Attributes for the eIDAS Framework](#attributes-for-the-eidas-framework)
 
@@ -304,6 +306,7 @@ The following attributes are defined for use within the attribute profile for th
 | userSignature | urn:oid:1.2.752.201.3.11 | User signature | Base64-encoding of a signature object applied by the user. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
 | authServerSignature | urn:oid:1.2.752.201.3.13 | Authentication server signature | Base64-encoding of a authentication server signature. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
 | sad | urn:oid:1.2.752.201.3.12 | Signature activation data | Signature activation data required by signature services. | NO | See [section 3.2.3](#the-sad-attribute) below. |
+| signMessageDigest | urn:oid:1.2.752.201.3.14 | Sign message digest | Included in assertions as a proof that a user sign message was displayed. | NO | See [section 3.2.4](#the-signmessagedigest-attribute) below. |
 | prid | urn:oid:1.2.752.201.3.4 | Provisional identifier | Unique identifier for an authentication performed against the eIDAS Framework. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | NO:5068907693 |
 | pridPersistence | urn:oid:1.2.752.201.3.5 | Provisional identifier persistence indicator | Indicator for the expected persistence of the prid attribute. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | A |
 | personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.example.se/presentedInPerson |
@@ -380,6 +383,47 @@ signature service in order to service a signature request in accordance
 with CEN EN 419 241-2. The `sad` attribute holds a single string
 attribute value. The format of the string value is defined in the "Signature Activation Protocol 
 for Federated Signing" specification \[[SigSAP](#sigsap)\].
+
+<a name="the-signmessagedigest-attribute"></a>
+#### 3.2.4. The signMessageDigest Attribute
+
+The `signMessageDigest` attribute is included in an assertion as a proof that an Identity Provider displayed
+a sign message for the user and that the user actively confirmed acceptance of this sign message. This sign 
+message is the `SignMessage` extension that may be included in an authentication request by Signature Service 
+Service Providers. See section 7 of \[[EidDeployProf](#eiddeployprof)\] for details.
+
+The attribute value format for the `signMessageDigest` attribute is `digest-message-uri;sign-message-digest`, where 
+`sign-message-digest` is `base64(digest(msg))`. The `msg` is the UTF-8 encoded bytes of the sign message that was displayed. It equals the `csig:Message` element value of the `csig:SignMessage` (\[[DSSExt](#dssext)\]). Thus, if the `csig:Message` element is encrypted into a `csig:EncryptedMessage`, the element value after decryption should be used.
+
+Entities compliant with this specification MUST use `http://www.w3.org/2001/04/xmlenc#sha256` as the digest algorithm, 
+unless the recipient of the `signMessageDigest` attribute has declared another digest algorithm as preferred in its
+metadata entry (see section 2.1.1.3 of [[EidDeployProf](#eiddeployprof)\]). In those cases this algorithm MAY be used.
+
+
+**Example:**
+
+Suppose that the unencrypted message is "I hereby confirm that I want to join example.com as a customer". This is
+represented as:
+
+```
+<csig:Message>
+  SSBoZXJlYnkgY29uZmlybSB0aGF0IEkgd2FudCB0byBqb2luIGV4YW1wbGUuY29tIGFzIGEgY3VzdG9tZXI=
+</csig:Message>
+```
+
+The input to the digesting operation is the value bytes of the `csig:Message` element which is UTF-8 encoded bytes
+of the actual sign message<sup>*</sup>.
+
+The `signMessageDigest` attribute for the above example will then be:
+
+```
+<saml2:Attribute FriendlyName="signMessageDigest" Name="urn:oid:1.2.752.201.3.14"
+  NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+  <saml2:AttributeValue xsi:type="xsd:string">
+    http://www.w3.org/2001/04/xmlenc#sha256;0yKaSVsYeh+PX2Q6diqO2w89+a3Dm303tp3AVjgxwj0=
+  </saml2:AttributeValue>
+</saml2:Attribute>
+```
 
 <a name="attributes-for-the-eidas-framework"></a>
 ### 3.3. Attributes for the eIDAS Framework
@@ -624,6 +668,10 @@ following attribute:
 **\[SigSAP\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
 
+<a name="dssext"></a>
+**\[DSSExt\]**
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
 
@@ -632,6 +680,8 @@ following attribute:
 - References were updated to point at the latest versions of the "Tillitsramverk för Svensk e-legitimation" and "eIDAS SAML Attribute Profile" specifications.
 
 - Section 2.5, "eIDAS Natural Person Attribute Set", was updated so that the `c` (country) attribute is a required attribute for this attribute set.
+
+- The attribute `signMessageDigest` was introduced (see section 3.2.4).
 
 **Changes between version 1.4 and version 1.5:**
 
