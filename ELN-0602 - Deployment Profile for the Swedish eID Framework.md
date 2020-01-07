@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2019-12-17 - **Draft version**
+### Version 1.6 - 2020-01-07 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -1495,7 +1495,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 - In order to facilitate algorithm interoperability between peers additions concerning "Metadata Profile for Algorithm Support" \[[SAML2MetaAlgSupport](#saml2metaalg)\] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.
 - Section 5.3, "Message Content", was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.
 - The `PrincipalSelection` and `RequestedPrincipalSelection` extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.
-- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
+- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 - This profile is no longer normatively dependent upon SAML2Int. Therefore, the profile has been updated with requirements that previously was implicit (due to the normative dependency to SAML2Int).
 - Section 8, "Cryptographic Algorithms", was introduced in order to clearly define the algorithm requirements for services that are conformant to this profile.
 - Section 2.1.1 was updated with elaborations concerning certificates in metadata.
