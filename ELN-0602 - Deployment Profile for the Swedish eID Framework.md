@@ -2,7 +2,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2020-01-07 - **Draft version**
+### Version 1.6 - 2020-01-08 - **Draft version**
 
 *ELN-0602-v1.6*
 
@@ -1260,7 +1260,7 @@ The sender of a secure message MUST NOT use an algorithm that is not listed as m
 
 A service processing a message in which an algorithm not listed below has been used MUST refuse to accept the message and respond with an error, unless this algorithm has been declared as preferred or supported by the service in its metadata entry.
 
-> This profile does not specify a complete list of blacklisted algorithms. However, there is a need to explicitly point out that the commonly used algorithms SHA-1 for digests and RSA PKCS#1.5 for key transport are considered broken and SHOULD not be used or accepted.
+> This profile does not specify a complete list of blacklisted algorithms. However, there is a need to explicitly point out that the commonly used algorithms SHA-1 for digests and RSA PKCS#1 v1.5 for key transport are considered broken and SHOULD not be used or accepted.
 
 The algorithms below are defined in \[[XMLEnc](#xmlenc)\], \[[XMLDSig](#xmldsig)\] and \[[RFC4051](#rfc4051)\].
 
