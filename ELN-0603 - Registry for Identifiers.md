@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-08-28 - *Draft version*
+### Version 1.7 - 2020-01-08 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -35,7 +35,7 @@
     3.1.3.2. [Entity Categories for Service Properties](#entity-categories-for-service-properties)
 
     3.1.3.3. [Entity Categories for Service Type](#entity-categories-for-service-type)
-    
+
     3.1.3.4. [Entity Categories for Service Contract](#entity-categories-for-service-contract)
 
     3.1.4. [SAML Protocol Status Codes](#saml-protocol-status-codes)
@@ -51,9 +51,9 @@
     3.1.9. [eIDAS Identifiers](#eidas-identifiers)
 
     3.1.9.1. [eIDAS Proxy Service Aliases](#eidas-proxy-service-aliases)
-    
+
     3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
-    
+
     3.2. [OID Identifiers](#oid-identifiers)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
@@ -173,8 +173,8 @@ The following category codes are defined:
 <a name="authentication-context-uris"></a>
 #### 3.1.1. Authentication Context URIs
 
-Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to 
-\[[TillitRamv](#tillitramv)\] and \[[EidDeploy](#eiddeploy)\]. 
+Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to
+\[[TillitRamv](#tillitramv)\] and \[[EidDeploy](#eiddeploy)\].
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
@@ -370,7 +370,7 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 ##### 3.1.9.2. eIDAS Connector Aliases
 
 A Swedish Identity Provider that delivers authentication services to eIDAS, via the Swedish eIDAS Proxy Service, will receive the entityID of the Service Provider from another country that has requested user authentication in a `<saml2p:RequesterID>` element of the authentication request. Along with this information, the Swedish Proxy Service will also include another `RequesterID` element that holds the "eIDAS Connector alias" URI, telling from which country the requesting Service Provider resides.
- 
+
 The format of this alias is as follows:
 
 **`http://id.swedenconnect.se/eidas/1.0/connector/{country-code}`**
@@ -398,6 +398,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | **OID** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | 1.2.752.201.5.1 | Authentication Context extension | \[[AuthContExt](#authcontext)\] |
+| 1.2.752.201.5.2 | Signature Validation Token extension | \[[SVT_PDF](#svtpdf)\] |
 | 1.2.752.201.3.1 | Organization Affiliation Attribute | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.2 | Transaction Identifier | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.3 | Authentication Context Parameters | \[[EidAttributes](#eidattributes)\] |
@@ -443,10 +444,10 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-prid-persistence     OBJECT IDENTIFIER ::= { id-attr 5 }    -- Provisional ID persistence indicator
     id-attr-pnr-binding          OBJECT IDENTIFIER ::= { id-attr 6 }    -- Personal Identity Number binding URI
     id-attr-eidas-pid            OBJECT IDENTIFIER ::= { id-attr 7 }    -- eIDAS Person Identifier
-    id-attr-birth-name           OBJECT IDENTIFIER ::= { id-attr 8 }    -- Birth name    
-    id-attr-eidas-np-address     OBJECT IDENTIFIER ::= { id-attr 9 }    -- eIDAS Natural Person Address    
-    id-attr-user-certificate     OBJECT IDENTIFIER ::= { id-attr 10 }   -- User certificate    
-    id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature    
+    id-attr-birth-name           OBJECT IDENTIFIER ::= { id-attr 8 }    -- Birth name
+    id-attr-eidas-np-address     OBJECT IDENTIFIER ::= { id-attr 9 }    -- eIDAS Natural Person Address
+    id-attr-user-certificate     OBJECT IDENTIFIER ::= { id-attr 10 }   -- User certificate
+    id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
 
@@ -463,7 +464,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 <a name="saml2core"></a>
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
-> Assertion Markup Language (SAML) V2.0, March 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
+> Assertion Markup Language (SAML) V2.0, March 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
 <a name="oasis-dss"></a>
 **\[OASIS-DSS\]**
@@ -472,11 +473,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf).
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
 
 <a name="authcontext"></a>
 **\[AuthContExt\]**
-> [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
+> [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773)
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
@@ -484,20 +485,20 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="eidentitycat"></a>
 **\[EidEntityCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html)
 
 <a name="eiddssext"></a>
 **\[EidDSSExt\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html)
 
 <a name="eidsigsap"></a>
 **\[EidSigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html)
 
 <a name="eidcsignprof"></a>
 **\[EidCSignProf\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html)
 
 <a name="certprof"></a>
 **\[CertProf\]**
@@ -505,7 +506,13 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
+
+<a name="svtpdf"></a>
+**\[SVT_PDF\]**
+> [PDF Profile for Signature Validation Tokens](http://elegnamnden.github.io/technical-framework/latest/ELN-0616_-_PDF_Profile_for_Signature_Validation_Tokens.html)
+
+
 
 <a name="eidas"></a>
 **\[eIDAS\]**
@@ -522,9 +529,13 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
 
+**Changes in version 1.7:**
+
+- Added object identifier (OID) for Signature Validation Token extensions
+
 **Changes between version 1.5 and version 1.6:**
 
-- The specification was renamed from "Registry for identifiers assigned by the Swedish e-identification board" to "Swedish eID Framework - Registry for identifiers". 
+- The specification was renamed from "Registry for identifiers assigned by the Swedish e-identification board" to "Swedish eID Framework - Registry for identifiers".
 
 - The authentication context URIs `http://id.swedenconnect.se/loa/1.0/uncertified-loa3` and `http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage` were introduced in sections 3.1.1 and 3.1.1.1, and the service entity category `http://id.swedenconnect.se/ec/sc/uncertified-loa3-pnr` was added to section 3.1.3.1.
 
