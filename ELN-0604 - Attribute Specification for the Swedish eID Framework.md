@@ -2,7 +2,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.6 - 2020-01-07 - *Draft version*
+### Version 1.6 - 2020-01-09 - *Draft version*
 
 *ELN-0604-v1.6*
 
@@ -33,6 +33,8 @@
     2.5. [eIDAS Natural Person Attribute Set](#eidas-natural-person-attribute-set)
 
     2.6. [eIDAS Legal Person Attribute Set](#eidas-legal-person-attribute-set)
+    
+    2.7. [Natural Person Identity with HSA-ID](#natural-person-identity-with-hsa-id)
 
 3. [**Attribute Definitions**](#attribute-definitions)
 
@@ -269,6 +271,22 @@ examples of “converted attributes”.
 
 Will be defined in future versions of this specification.
 
+<a name="natural-person-identity-with-hsa-id"></a>
+### 2.7. Natural Person Identity with HSA-ID
+
+Attribute set identifier: **DIGG-AP-HSAid-01**
+
+URI: `http://id.swedenconnect.se/ap/1.0/hsaid-01`
+
+The “Natural Person Identity with HSA-ID” attribute set provides basic personal identity information including a HSA-ID of the subject (see \[[SambiAttr](#sambiattr)\]).
+
+| Attribute requirement | Attributes |
+| :--- | :--- |
+| **REQUIRED** | `sn` (Surname) <br /> `givenName` (Given name) <br /> `displayName` (Display name) <br /> `employeeHsaId` (HSA-ID) |
+| **RECOMMENDED** | `dateOfBirth` (Date of birth) |
+
+**Typical use**: In an attribute release policy that provides basic user name information together with the person’s HSA-ID.
+
 <a name="attribute-definitions"></a>
 ## 3. Attribute Definitions
 
@@ -313,12 +331,14 @@ The following attributes are defined for use within the attribute profile for th
 | personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.example.se/presentedInPerson |
 | eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | NO | ES/AT/02635542Y (Spanish eID number for an Austrian SP) |
 | eidasNatural-<br/>PersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | NO | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
+| employeeHsaId | urn:oid:1.2.752.29.6.2.1 | HSA-ID | Person identifier used by Swedish health care organizations. | NO | See \[[SambiAttr](#sambiattr)\]. |
 
 All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the `xs:string` data type. Certain attributes such as `mail`, `personalIdentityNumber`, `organizationIdentifier`, `telephoneNumber` and `mobile` use a restricted character set according to its defined usage within this specification.
 
 All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 \[[X.520](#x520)\]. That is, case-insensitive comparison where insignificant spaces are ignored.
 
 Attributes with a “NO” value in the multivalued column MUST NOT have more than one `<AttributeValue>` sub-element. Attributes with a “YES” value in the multivalued column MAY have one or more `<AttributeValue>` sub-elements.
+
 
 <a name="saml-attribute-format"></a>
 ### 3.2. SAML Attribute Format
@@ -649,6 +669,10 @@ following attribute:
 > Codes for the representation of names of countries and their
 > subdivisions Part 1: Country codes, ISO standard, ISO 3166-1.
 
+<a name="sambiattr"></a>
+**\[SambiAttr\]**
+> [Sambi Attributspecifikation, version 1.5](https://www.sambi.se/wordpress/wp-content/uploads/2019/05/Sambi_Attributspecifikation_1.5.pdf).
+
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
 > [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
@@ -685,6 +709,8 @@ following attribute:
 - Section 2.5, "eIDAS Natural Person Attribute Set", was updated so that the `c` (country) attribute is a required attribute for this attribute set.
 
 - The attribute `signMessageDigest` was introduced (see section 3.2.4).
+
+- The HSA-ID attribute was specified.
 
 **Changes between version 1.4 and version 1.5:**
 
