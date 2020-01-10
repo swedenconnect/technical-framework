@@ -1,9 +1,9 @@
+<div style="padding-bottom:80px;">
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
 </p>
-
-<p><br /></p>
+</div>
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
