@@ -11,6 +11,44 @@
 ## Table of Contents
 
 ## 1. Introduction
+The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines a the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
+
+This document defines a profile for implementing SVT with a signed PDF document. This document defines the following aspect of SVT usage:
+
+- How to inlcude reference data related to PDF signatures and PDF documents in an SVT.
+- How to add an SVT token to a PDF document.
+
+<a name="requirements-notation"></a>
+### 1.1. Requirements Notation
+
+The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**, **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in BCP 14 \[[RFC2119](#rfc2119)\] \[[RFC8174](#rfc8174)\] when, and only when, they appear in all capitals, as shown here.
+
+These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
+
+
+<a name="definitions"></a>
+### 1.2. Definitions
+Definitions in \[[SVT](#svt)\] applies also to this document.
+
+## 2. SVT Claims
+
+### 2.1. Signature reference data
+
+Specify the source of signature and Signed Bytes
+
+
+### 2.2. Signed Data reference data
+
+Specify the number of SignedData objects.
+Specify what information that goes into the SignedData object.
+
+### 2.3. Signer certificate references
+
+Specify what type of cert reference to include for PDF signatures
+
+
+## 3. Inclusion of SVT in PDF documents
+
 
 
 <a name="normative-references"></a>
@@ -30,4 +68,4 @@
 
 <a name="svt"></a>
 **\[SVT\]**
-> [Signature Validation Token (SVT)](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+> [Signature Validation Token (SVT)](https://github.com/swedenconnect/technical-framework/blob/feature/is-109-sva-token/ELN-0615%20-%20Signature%20Validation%20Token%20-%20SVT.md)

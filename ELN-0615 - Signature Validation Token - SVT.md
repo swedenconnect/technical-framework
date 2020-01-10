@@ -235,7 +235,7 @@ The CertReference claims object allows reference to a single certificate or a ch
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
-`type` | **StringOrURI** | An identifier of the type of reference provided in the ref claim. The type identifier MUST be one of the identifiers defined below or a URI identifier | MANDATORY
+`type` | **StringOrURI** | An identifier of the type of reference provided in the ref claim. The type identifier MUST be either one of the identifiers defined below, an identifier speicified by the selected profile, or a URI identifier | MANDATORY
 `ref` | **\[String\]** | An array of string parameters according to conventions defined by the type identifier  | MANDATORY
 
 The following type identifiers are defined:
