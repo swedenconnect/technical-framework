@@ -1,7 +1,5 @@
-<p>
-<img align="left" src="img/sweden-connect.png"></img>
-<img align="right" src="img/digg_centered.png"></img>
-</p>
+<img align="left" src="img/sweden-connect.png"></img><img align="right" src="img/digg_centered.png"></img>
+
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
@@ -63,7 +61,8 @@
     
     2.2.2. [DSS Extension for Federated Central Signing Services](#dss-extensions)
     
-    2.2.3. [Certificate Profile for Certificates Issued by Central Signing Services](#certificate-profile-css)
+    2.2.3. [Certificate Profile for Certificates Issued by Central Signing Services
+](#certificate-profile-css)
     
     2.2.4. [Signature Activation Protocol for Federated Signing](#signature-activation)
 
