@@ -35,7 +35,7 @@
     3.1.3.2. [Entity Categories for Service Properties](#entity-categories-for-service-properties)
 
     3.1.3.3. [Entity Categories for Service Type](#entity-categories-for-service-type)
-    
+
     3.1.3.4. [Entity Categories for Service Contract](#entity-categories-for-service-contract)
 
     3.1.4. [SAML Protocol Status Codes](#saml-protocol-status-codes)
@@ -51,9 +51,9 @@
     3.1.9. [eIDAS Identifiers](#eidas-identifiers)
 
     3.1.9.1. [eIDAS Proxy Service Aliases](#eidas-proxy-service-aliases)
-    
+
     3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
-    
+
     3.2. [OID Identifiers](#oid-identifiers)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
@@ -173,8 +173,8 @@ The following category codes are defined:
 <a name="authentication-context-uris"></a>
 #### 3.1.1. Authentication Context URIs
 
-Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to 
-\[[TillitRamv](#tillitramv)\] and \[[EidDeploy](#eiddeploy)\]. 
+Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to
+\[[TillitRamv](#tillitramv)\] and \[[EidDeploy](#eiddeploy)\].
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
@@ -330,6 +330,7 @@ Identifiers associated with the Authentication Context X.509 extension
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema name space for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[AuthContExt](#authcontext)\] |
+| `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info` | XML schema name space for Extended Authentication Information in the Authentication Context X.509 certificate extension | \[[CertProf](#certprof)\] |
 
 <a name="sign-response-status-codes"></a>
 #### 3.1.7. Sign Response Status Codes
@@ -374,7 +375,7 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 ##### 3.1.9.2. eIDAS Connector Aliases
 
 A Swedish Identity Provider that delivers authentication services to eIDAS, via the Swedish eIDAS Proxy Service, will receive the entityID of the Service Provider from another country that has requested user authentication in a `<saml2p:RequesterID>` element of the authentication request. Along with this information, the Swedish Proxy Service will also include another `RequesterID` element that holds the "eIDAS Connector alias" URI, telling from which country the requesting Service Provider resides.
- 
+
 The format of this alias is as follows:
 
 **`http://id.swedenconnect.se/eidas/1.0/connector/{country-code}`**
@@ -448,10 +449,10 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-prid-persistence     OBJECT IDENTIFIER ::= { id-attr 5 }    -- Provisional ID persistence indicator
     id-attr-pnr-binding          OBJECT IDENTIFIER ::= { id-attr 6 }    -- Personal Identity Number binding URI
     id-attr-eidas-pid            OBJECT IDENTIFIER ::= { id-attr 7 }    -- eIDAS Person Identifier
-    id-attr-birth-name           OBJECT IDENTIFIER ::= { id-attr 8 }    -- Birth name    
-    id-attr-eidas-np-address     OBJECT IDENTIFIER ::= { id-attr 9 }    -- eIDAS Natural Person Address    
-    id-attr-user-certificate     OBJECT IDENTIFIER ::= { id-attr 10 }   -- User certificate    
-    id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature    
+    id-attr-birth-name           OBJECT IDENTIFIER ::= { id-attr 8 }    -- Birth name
+    id-attr-eidas-np-address     OBJECT IDENTIFIER ::= { id-attr 9 }    -- eIDAS Natural Person Address
+    id-attr-user-certificate     OBJECT IDENTIFIER ::= { id-attr 10 }   -- User certificate
+    id-attr-user-signature       OBJECT IDENTIFIER ::= { id-attr 11 }   -- User signature
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
@@ -530,7 +531,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 **Changes between version 1.5 and version 1.6:**
 
-- The specification was renamed from "Registry for identifiers assigned by the Swedish e-identification board" to "Swedish eID Framework - Registry for identifiers". 
+- The specification was renamed from "Registry for identifiers assigned by the Swedish e-identification board" to "Swedish eID Framework - Registry for identifiers".
 
 - The authentication context URIs `http://id.swedenconnect.se/loa/1.0/uncertified-loa3` and `http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage` were introduced in sections 3.1.1 and 3.1.1.1, and the service entity category `http://id.swedenconnect.se/ec/sc/uncertified-loa3-pnr` was added to section 3.1.3.1.
 
@@ -545,6 +546,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 - Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.
 
 - The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.
+
+- Added XML Schema name space identifier `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info`. This XML Schema defines XML extension to the Authentication Context Extension to provide extended authentication information.
 
 **Changes between version 1.4 and version 1.5:**
 

@@ -27,17 +27,17 @@
     2.3. [Certificate content](#certificate-content)
 
     2.3.1. [Subject attributes and name forms](#subject-attributes-and-name-forms)
-	
-    2.3.1.1. [Person identifier attributes](#person-identifier-attributes)    
 
-    2.3.1.1.1. [Data source](#data-source)    
+    2.3.1.1. [Person identifier attributes](#person-identifier-attributes)
 
-    2.3.1.1.2. [Data format](#data-format)    
+    2.3.1.1.1. [Data source](#data-source)
 
-    2.3.1.2. [Other attribute requirements](#other-attribute-requirements)    
+    2.3.1.1.2. [Data format](#data-format)
+
+    2.3.1.2. [Other attribute requirements](#other-attribute-requirements)
 
     2.3.2. [Authentication Context and Attribute mapping](#authentication-context-and-attribute-mapping)
-    
+
     2.3.3. [Certificate Policy](#certificate-policy)
 
 3. [**Normative References**](#normative-references)
@@ -148,7 +148,7 @@ When the identifier is a Swedish personal identity number (personnummer), or a c
 
 **Provisional ID**
 
-When the identifier is a provisional ID the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference "PI:SE". 
+When the identifier is a provisional ID the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference "PI:SE".
 
 > Example: PI:SE-NO:16043700158
 
@@ -182,6 +182,52 @@ The `<saci:SAMLAuthContext>` element SHALL contain both an `<saci:AuthContextInf
 The `<saci:IdAttributes>` element SHALL contain one `<saci:AttributeMapping>` element for each subject attribute or
 other name form that was obtained from a SAML attribute in the SAML assertion used to authenticate the signer as part of the signature creation process. Each `<saci:AttributeMapping>` element SHALL provide the `<saml:AttributeValue>` that
 were obtained from the SAML assertion.
+
+##### 2.3.2.1 Extended Authentication Information
+
+In addition to the attributes of `<sci:AuthContextInfo>` it is possible to provide additional authentication information through the extensibility of `<sci:AuthContextInfo>` which allows inclusion of a sequence of any element.
+
+One such element is defined in this section, the `<sacex:ExtAuthInfo>` element.
+
+This element MAY be included to provide a name of a parameter and its associated value. This element MAY be used to carry the value of any single valued attribute from the associated SAML Assertion as long as the SAML attribute value is not composed of a complex type. When used to carry a SAML attribute value, the value of the `<sacex:ExtAuthInfo>` element SHALL be identical to the content of the SAML attribute value element and the Name attribue SHALL hold the same value as the Name attribute of the corresponding SAML attribute.
+
+The `<sacex:ExtAuthInfo>` element is defined by the following XML Schema:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info"
+    xmlns:sacex="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info">
+    <xs:element name="ExtAuthInfo" type="sacex:ExtAuthInfoType"/>
+    <xs:complexType name="ExtAuthInfoType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="Name" type="xs:string" use="required"/>
+                <xs:anyAttribute namespace="##any" processContents="lax"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>
+```
+
+**Example:**
+
+The following example shows inclusion of the content of the transaction identifier SAML attribute as extended authentication information.
+
+```
+<saci:SAMLAuthContext
+    xmlns:saci="http://id.elegnamnden.se/auth-cont/1.0/saci"
+    xmlns:sacext="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info">
+    <saci:AuthContextInfo IdentityProvider="http://eid.litsec.se/testidp"
+        AuthenticationInstant="2020-01-10T17:02:46.000Z" ServiceID="FedSigning"
+        AuthnContextClassRef="http://id.elegnamnden.se/loa/1.0/loa3-sigmessage"
+        AssertionRef="_936e075dc2725b016de57b9a0624c766">
+        <sacext:ExtAuthInfo Name="urn:oid:1.2.752.201.3.2">dc6ac..89bfb51</sacext:ExtAuthInfo>
+    </saci:AuthContextInfo>
+    <saci:IdAttributes>...</saci:IdAttributes>
+</saci:SAMLAuthContext>
+```
+
 
 <a name="certificate-policy"></a>
 #### 2.3.3. Certificate Policy
@@ -278,6 +324,5 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 - Removed the requirement to store "personnummer" or "samordningsnummer".
 - Updated standards references to remove old deprecated standards and replace them with the currently published documents.
 - Specified optional support for using semantics identifiers in accordance with ETSI EN 319 412-1 to specify that the serialNumber attribute contains a Swedish "personnummer" or "samordningsnummer", Provisional ID or eIDAS person identifier.
-- Added requirement to specify ETSI policy identifiers. 
+- Added requirement to specify ETSI policy identifiers.
 - Fix of invalid links for SKV704 and SKV707.
-
