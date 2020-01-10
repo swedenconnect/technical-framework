@@ -1,9 +1,20 @@
-<div style="padding-bottom:80px;">
 <p>
-<img align="left" src="img/sweden-connect.png"></img>
-<img align="right" src="img/digg_centered.png"></img>
-</p>
+<div style="padding-bottom:80px;">
+<img align="left" src="https://raw.githubusercontent.com/swedenconnect/technical-framework/master/img/sweden-connect.png"></img>
+<img align="right" src="https://raw.githubusercontent.com/swedenconnect/technical-framework/feature/is-115-digg-logo/img/digg_centered.png"></img>
 </div>
+</p>
+
+<table style="borderstyle:none;">
+<tr>
+<td style="text-align:left">
+<img src="https://raw.githubusercontent.com/swedenconnect/technical-framework/master/img/sweden-connect.png"></img>
+</td>
+<td style="text-align:right">
+<img src="https://raw.githubusercontent.com/swedenconnect/technical-framework/feature/is-115-digg-logo/img/digg_centered.png"></img>
+</td>
+</tr>
+</table>
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
