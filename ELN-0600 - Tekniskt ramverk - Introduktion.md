@@ -1,10 +1,15 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2019-10-22
+### 2020-01-10
 
 *2019-267* 
+
+*Previous registration number: ELN-0600*
 
 ---
 
