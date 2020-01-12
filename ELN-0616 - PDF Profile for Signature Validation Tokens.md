@@ -30,24 +30,42 @@ These keywords are capitalized when used to unambiguously specify requirements o
 ### 1.2. Definitions
 Definitions in \[[SVT](#svt)\] applies also to this document.
 
-## 2. SVT Claims
+## 2. SVT in PDF documents
 
-### 2.1. Signature reference data
+PDF document signatures are added as incremental updates to the signed PDF document and signs all data of the PDF doucment up until the current signature. When more than one signature is added to a PDF document. The previous signature is signed by the next signature and can't be updated with additional data after this event.
+
+To minimize the impapact on PDF documetns with mutliple signatures and to stay backwards compatible with PDF software that do not under stand SVT, PDF docuements add one SVT token for all signatures of the PDF as an extension to a docuement timestamp added to the signed PDF as an incremental update. This SVT conevers all signatures of the signed SVT.
+
+The document timestamp extended with an SVT is a document timesatmp in accordance with ISO 32000-2:2017 (The PDF standard) holding an RFC 3161 time stamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT is stored in the time satmp token (TSTInfo) as an Extension object as defined in 2.1.1.
+
+### 2.1.1. SVT extension to time stamp tokens
+
+The SVT extension is identified by the following Object Identifier (OID).
+
+>
+
+
+
+
+
+
+
+
+
+## 3. SVT Claims
+### 3.1. Signature reference data
 
 Specify the source of signature and Signed Bytes
 
 
-### 2.2. Signed Data reference data
+### 3.2. Signed Data reference data
 
 Specify the number of SignedData objects.
 Specify what information that goes into the SignedData object.
 
-### 2.3. Signer certificate references
+### 3.3. Signer certificate references
 
 Specify what type of cert reference to include for PDF signatures
-
-
-## 3. Inclusion of SVT in PDF documents
 
 
 
