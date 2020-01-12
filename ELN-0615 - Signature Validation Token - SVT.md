@@ -54,6 +54,7 @@
 
 <a name="introduction"></a>
 ## 1. Introduction
+
 Electronic signatures have a limited lifespan where they can be validated and determined to be authentic. Many factors may contribute to make it harder to validate electronic signatures over time such as:
 
 - Trusted information about the validity of the signing certificate is not available
@@ -412,7 +413,6 @@ Decoded JWT Claims
     }
   }
 }
-
 ```
 
 > Note: The order of the JSON objects has been rearranged from the order they appear in the JWT to increase readablilty. Line breaks in the decoded example are also inserted for readablilty. These are not allowed in valid JSON data.
