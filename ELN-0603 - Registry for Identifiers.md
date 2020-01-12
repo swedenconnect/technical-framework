@@ -422,7 +422,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 Object Identifier Registry for Sweden Connect OID registry <sup>1</sup>
 
-    id-eleg OBJECT IDENTIFIER ::= {iso(1) member-body(2) se(752) swedenconnect(201)}
+    id-eleg OBJECT IDENTIFIER ::= {iso(1) member-body(2) se(752) e-legitimationsnamnden(201)}
 
     -- Sweden Connect arcs
     id-mod    OBJECT IDENTIFIER ::= { id-eleg 0 }    -- ASN.1 modules
@@ -463,7 +463,7 @@ Object Identifier Registry for Sweden Connect OID registry <sup>1</sup>
     id-ce-authContext  OBJECT IDENTIFIER ::= { id-ce 1 }    -- Auth context extension used in RFC 7773
     id-ce-svt          OBJECT IDENTIFIER ::= { id-ce 2 }    -- Signature Validation Token extension
 
-> 1. The OID 1.2.752.201 was assigned to the Swedish E-identification board. This organization is overtaken by the Swedish Agency for Digitization who uses this OID arc for the Sweden Connect technical framework.
+> 1. The OID 1.2.752.201 was assigned to the Swedish E-identification board. This organisation is overtaken by the Swedish Agency for Digital Government who uses this OID arc for the Sweden Connect technical framework.
 
 <a name="references"></a>
 ## 4. References
