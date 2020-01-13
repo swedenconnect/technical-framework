@@ -31,10 +31,8 @@
     2.4. [Organizational Identity for Natural Persons](#organizational-identity-for-natural-persons)
 
     2.5. [eIDAS Natural Person Attribute Set](#eidas-natural-person-attribute-set)
-
-    2.6. [eIDAS Legal Person Attribute Set](#eidas-legal-person-attribute-set)
     
-    2.7. [Natural Person Identity with HSA-ID](#natural-person-identity-with-hsa-id)
+    2.6. [Natural Person Identity with HSA-ID](#natural-person-identity-with-hsa-id)
 
 3. [**Attribute Definitions**](#attribute-definitions)
 
@@ -266,13 +264,8 @@ examples of “converted attributes”.
 
 > \[\*\*\*\]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.
 
-<a name="eidas-legal-person-attribute-set"></a>
-### 2.6. eIDAS Legal Person Attribute Set
-
-Will be defined in future versions of this specification.
-
 <a name="natural-person-identity-with-hsa-id"></a>
-### 2.7. Natural Person Identity with HSA-ID
+### 2.6. Natural Person Identity with HSA-ID
 
 Attribute set identifier: **DIGG-AP-HSAid-01**
 
