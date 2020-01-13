@@ -2,7 +2,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2019-11-01 - *Draft version*
+### Version 1.7 - 2020-01-09 - *Draft version*
 
 *ELN-0606-v1.7*
 
@@ -33,6 +33,8 @@
     2.4. [eidas-naturalperson](#eidas-naturalperson)
     
     2.5. [eidas-pnr-delivery](#eidas-pnr-delivery)
+    
+    2.6. [loa3-hsaid](#loa3-hsaid)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
@@ -320,6 +322,18 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 
 * `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`).
 
+<a name="loa3-hsaid"></a>
+### 2.6. loa3-hsaid
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-hsaid`
+
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Person Identity with HSA-ID” (DIGG-AP-HSAid-01).
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+
+**Attribute requirements**: DIGG-AP-HSAid-01 (`http://id.swedenconnect.se/ap/1.0/hsaid-01`)
+> Natural Person Identity with HSA-ID. 
+
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
 
@@ -536,6 +550,8 @@ from Service Providers that have declared this entity category in their metadata
 - Section 2.5, "eidas-pnr-delivery", was updated to also require attribute release of the `dateOfBirth`-attribute.
 
 - Section 2.1, "loa3-pnr", was updated with a restriction stating that the `personalIdentityNumber` only may contain a Swedish personal identity number ("personnummer") and not a coordination number ("samordningsnummer"), if attribute release is made in `loa3-pnr` scope.
+
+- The loa3-hsaid Service Entity Category was defined in section 2.6.
 
 **Changes between version 1.4 and version 1.5:**
 
