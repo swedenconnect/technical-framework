@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2019-11-01---*draft-version*">Version 1.7 - 2019-11-01 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2020-01-09---*draft-version*">Version 1.7 - 2020-01-09 - <em>Draft version</em></h3>
 <p><em>ELN-0606-v1.7</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -30,6 +30,7 @@
 <p> 2.3. <a href="#loa4-pnr">loa4-pnr</a></p>
 <p> 2.4. <a href="#eidas-naturalperson">eidas-naturalperson</a></p>
 <p> 2.5. <a href="#eidas-pnr-delivery">eidas-pnr-delivery</a></p>
+<p> 2.6. <a href="#loa3-hsaid">loa3-hsaid</a></p>
 </li>
 <li><p><a href="#definitions-for-service-property-categories"><strong>Definitions for Service Property Categories</strong></a></p>
 <p> 3.1. <a href="#mobile-auth">mobile-auth</a></p>
@@ -306,6 +307,15 @@ to the Swedish eIDAS-node.</p>
 <ul class="list">
 <li><code>dateOfBirth</code>-attribute (<code>urn:oid:1.3.6.1.5.5.7.9.1</code>).</li>
 </ul>
+<p><a name="loa3-hsaid"></a></p>
+<h3 id="2.6.-loa3-hsaid">2.6. loa3-hsaid</h3>
+<p><strong>URL</strong>: <code>http://id.swedenconnect.se/ec/1.0/loa3-hsaid</code></p>
+<p><strong>Description</strong>: User authentication according to assurance level 3 [<a href="#eidtillit">EidTillit</a>] and attribute release according to the attribute set “Natural Person Identity with HSA-ID” (DIGG-AP-HSAid-01).</p>
+<p><strong>LoA-identifier</strong>: <code>http://id.elegnamnden.se/loa/1.0/loa3</code></p>
+<p><strong>Attribute requirements</strong>: DIGG-AP-HSAid-01 (<code>http://id.swedenconnect.se/ap/1.0/hsaid-01</code>)</p>
+<blockquote>
+<p>Natural Person Identity with HSA-ID. </p>
+</blockquote>
 <p><a name="definitions-for-service-property-categories"></a></p>
 <h2 id="3.-definitions-for-service-property-categories">3. Definitions for Service Property Categories</h2>
 <p>A Service Property Entity Category identifier is specified as an
@@ -490,6 +500,8 @@ board</a>.</p>
 <li><p>Section 2.5, &quot;eidas-pnr-delivery&quot;, was updated to also require attribute release of the <code>dateOfBirth</code>-attribute.</p>
 </li>
 <li><p>Section 2.1, &quot;loa3-pnr&quot;, was updated with a restriction stating that the <code>personalIdentityNumber</code> only may contain a Swedish personal identity number (&quot;personnummer&quot;) and not a coordination number (&quot;samordningsnummer&quot;), if attribute release is made in <code>loa3-pnr</code> scope.</p>
+</li>
+<li><p>The loa3-hsaid Service Entity Category was defined in section 2.6.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>

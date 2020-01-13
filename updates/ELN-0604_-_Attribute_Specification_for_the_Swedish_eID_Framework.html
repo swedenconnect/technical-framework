@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.6---2020-01-07---*draft-version*">Version 1.6 - 2020-01-07 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2020-01-09---*draft-version*">Version 1.6 - 2020-01-09 - <em>Draft version</em></h3>
 <p><em>ELN-0604-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -29,7 +29,7 @@
 <p> 2.3. <a href="#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number (Personnummer)</a></p>
 <p> 2.4. <a href="#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a></p>
 <p> 2.5. <a href="#eidas-natural-person-attribute-set">eIDAS Natural Person Attribute Set</a></p>
-<p> 2.6. <a href="#eidas-legal-person-attribute-set">eIDAS Legal Person Attribute Set</a></p>
+<p> 2.6. <a href="#natural-person-identity-with-hsa-id">Natural Person Identity with HSA-ID</a></p>
 </li>
 <li><p><a href="#attribute-definitions"><strong>Attribute Definitions</strong></a></p>
 <p> 3.1. <a href="#attributes">Attributes</a></p>
@@ -310,9 +310,30 @@ examples of “converted attributes”.</p>
 <p>[**]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of an assertion) give a reference to the original assertion and authentication process.</p>
 <p>[***]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.</p>
 </blockquote>
-<p><a name="eidas-legal-person-attribute-set"></a></p>
-<h3 id="2.6.-eidas-legal-person-attribute-set">2.6. eIDAS Legal Person Attribute Set</h3>
-<p>Will be defined in future versions of this specification.</p>
+<p><a name="natural-person-identity-with-hsa-id"></a></p>
+<h3 id="2.6.-natural-person-identity-with-hsa-id">2.6. Natural Person Identity with HSA-ID</h3>
+<p>Attribute set identifier: <strong>DIGG-AP-HSAid-01</strong></p>
+<p>URI: <code>http://id.swedenconnect.se/ap/1.0/hsaid-01</code></p>
+<p>The “Natural Person Identity with HSA-ID” attribute set provides basic personal identity information including a HSA-ID of the subject (see [<a href="#sambiattr">SambiAttr</a>]).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Attribute requirement</th>
+<th style="text-align:left">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>REQUIRED</strong></td>
+<td style="text-align:left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name) <br /> <code>employeeHsaId</code> (HSA-ID)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>RECOMMENDED</strong></td>
+<td style="text-align:left"><code>dateOfBirth</code> (Date of birth)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Typical use</strong>: In an attribute release policy that provides basic user name information together with the person’s HSA-ID.</p>
 <p><a name="attribute-definitions"></a></p>
 <h2 id="3.-attribute-definitions">3. Attribute Definitions</h2>
 <p><a name="attributes"></a></p>
@@ -601,6 +622,14 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value.</td>
 <td style="text-align:center">NO</td>
 <td style="text-align:left">See <a href="#conversion-of-eidas-currentaddress">section 3.3.3.1</a> below.</td>
+</tr>
+<tr>
+<td style="text-align:left">employeeHsaId</td>
+<td style="text-align:left">urn:oid:1.2.752.29.6.2.1</td>
+<td style="text-align:left">HSA-ID</td>
+<td style="text-align:left">Person identifier used by Swedish health care organizations.</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:left">See [<a href="#sambiattr">SambiAttr</a>].</td>
 </tr>
 </tbody>
 </table>
@@ -913,6 +942,11 @@ October 2004. See <a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/
 <p>Codes for the representation of names of countries and their
 subdivisions Part 1: Country codes, ISO standard, ISO 3166-1.</p>
 </blockquote>
+<p><a name="sambiattr"></a>
+<strong>[SambiAttr]</strong></p>
+<blockquote>
+<p><a href="https://www.sambi.se/wordpress/wp-content/uploads/2019/05/Sambi_Attributspecifikation_1.5.pdf">Sambi Attributspecifikation, version 1.5</a>.</p>
+</blockquote>
 <p><a name="tillitramv"></a>
 <strong>[TillitRamv]</strong></p>
 <blockquote>
@@ -953,6 +987,8 @@ Framework</a>.</p>
 <li><p>Section 2.5, &quot;eIDAS Natural Person Attribute Set&quot;, was updated so that the <code>c</code> (country) attribute is a required attribute for this attribute set.</p>
 </li>
 <li><p>The attribute <code>signMessageDigest</code> was introduced (see section 3.2.4).</p>
+</li>
+<li><p>The HSA-ID attribute was specified.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>

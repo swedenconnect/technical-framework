@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.6---2019-12-16---*draft-version*">Version 1.6 - 2019-12-16 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2020-01-09---*draft-version*">Version 1.6 - 2020-01-09 - <em>Draft version</em></h3>
 <p><em>ELN-0603-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -394,6 +394,12 @@ Specification for the Swedish eID Framework.</p>
 <td style="text-align:left">Natural person identity for the eIDAS Framework.</td>
 <td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
+<tr>
+<td style="text-align:left">DIGG-AP-HSAid-01</td>
+<td style="text-align:left"><code>http://id.swedenconnect.se/ap/1.0/hsaid-01</code></td>
+<td style="text-align:left">Natural Person Identity with HSA-ID</td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
+</tr>
 </tbody>
 </table>
 <p><a name="entity-category-identifiers"></a></p>
@@ -440,6 +446,15 @@ Specification for the Swedish eID Framework.</p>
 <td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery</code></td>
 <td style="text-align:left">Service providing assertions to eIDAS services via Swedish eIDAS-node</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/ec/1.0/loa3-hsaid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/ec/sc/</code><br/><code>uncertified-loa3-hsaid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”.</td>
 </tr>
 </tbody>
 </table>
@@ -929,6 +944,8 @@ regulation and associated technical specifications.</p>
 <li><p>Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.</p>
 </li>
 <li><p>The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.</p>
+</li>
+<li><p>Added attribute set and service entity categories for HSA-ID.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
