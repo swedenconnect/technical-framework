@@ -10,6 +10,31 @@
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
+
+    1.1. [Requirements Notation](#requirements-notation)
+
+    1.2. [Definitions](#definitions)
+
+    1.2. [Notatioin](#notatioin)
+
+    1.2.1 [References to XML elements from XML Schemas](#references-to-xml-elements-from-xml-schemas)
+
+2. [**SVT in XML documents**](#svt-in-xml-documents)
+
+    2.1.1. [SignatureValidationToken Signature Property](#signaturevalidationtoken-signature-property)
+
+3. [**SVT Claims**](#svt-claims)
+
+    3.1. [Signature reference data](#signature-reference-data)
+
+    3.2. [Signed Data reference data](#signed-data-reference-data)
+
+    3.3. [Signer certificate references](#signer-certificate-references)
+
+4. [**Normative References**](#normative-references)
+
+<a name="introduction"></a>
 ## 1. Introduction
 The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
 
@@ -22,18 +47,22 @@ XML documents can have any number of signature elements, signing an arbitrary nu
 
 To provide a generic solution for any type of XML signature an SVT is added to each XML signature element within the XML signature `<ds:Object>` element.
 
+<a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
 The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**, **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in BCP 14 \[[RFC2119](#rfc2119)\] \[[RFC8174](#rfc8174)\] when, and only when, they appear in all capitals, as shown here.
 
 These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
+<a name="definitions"></a>
 ### 1.2. Definitions
 Definitions in \[[SVT](#svt)\] applies also to this document.
 
 
+<a name="notatioin"></a>
 ### 1.2. Notatioin
 
+<a name="references-to-xml-elements-from-xml-schemas"></a>
 #### 1.2.1 References to XML elements from XML Schemas
 
 When referring to elements from the W3C XML Signature namespace
@@ -51,12 +80,14 @@ When referring to elements defined in this document
 
 -  `<svt:Element>`
 
+<a name="svt-in-xml-documents"></a>
 ## 2. SVT in XML documents
 
 When SVT is provided for XML signatures then one SVT SHALL be provided for each XML signature.
 
 An SVT embedded within the XML signature element SHALL be placed in a  `<svt:SignatureValidationToken>` as defined in section 2.1.1.
 
+<a name="signaturevalidationtoken-signature-property"></a>
 ### 2.1.1. SignatureValidationToken Signature Property
 
 The `<svt:SignatureValidationToken>` element SHALL be placed in a `<ds:SignatureProperty>` element in accordance with \[[XMLDsig](xmldsig)\]. The `<ds:SignatureProperty>` element SHALL be placed inside a `<ds:SignatureProperties>` element inside a `<ds:Object>` element inside a `<ds:Signature>` element.
@@ -96,7 +127,9 @@ Example:
 
 ```
 
+<a name="svt-claims"></a>
 ## 3. SVT Claims
+<a name="signature-reference-data"></a>
 ### 3.1. Signature reference data
 
 The SVT SHALL contain a SigReference claims object that SHALL contain the following data:
@@ -108,6 +141,7 @@ Claim  | Value
 `sb_hash` | The hash over the canonicalized `<ds:SignedInfo>` element (The bytes the XML signature algorithm has signed to generated the signature value).
 
 
+<a name="signed-data-reference-data"></a>
 ### 3.2. Signed Data reference data
 
 An SVT according to this profile SHALL contain one instance of the SignedData claims object for each `<ds:Reference>` element in the `<ds:SignedInfo>` element. The SignedData claims object shall contain the following data:
@@ -118,6 +152,7 @@ Claim  | Value
 `hash`  |  The hash of all bytes identified corresponding `<ds:Reference>` element after applying all identified canonicalization and transformation algorithms. These are the same bytes that is hashed by the hash value in the `<ds:DigestValue>` element inside the `<ds:Reference>` element.
 
 
+<a name="signer-certificate-references"></a>
 ### 3.3. Signer certificate references
 
 The SVT SHALL contain a CertReference claims object. The type claim of the CertReference claims object SHALL be either `cert`, `chain`, `cert_hash` or `cert_and_chain_hash`.

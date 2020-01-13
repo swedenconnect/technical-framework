@@ -10,6 +10,27 @@
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
+
+    1.1. [Requirements Notation](#requirements-notation)
+
+    1.2. [Definitions](#definitions)
+
+2. [**SVT in PDF documents**](#svt-in-pdf-documents)
+
+    2.1.1. [SVT extension to time stamp tokens](#svt-extension-to-time-stamp-tokens)
+
+3. [**SVT Claims**](#svt-claims)
+
+    3.1. [Signature reference data](#signature-reference-data)
+
+    3.2. [Signed Data reference data](#signed-data-reference-data)
+
+    3.3. [Signer certificate references](#signer-certificate-references)
+
+4. [**Normative References**](#normative-references)
+
+<a name="introduction"></a>
 ## 1. Introduction
 The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines a the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
 
@@ -21,6 +42,7 @@ This document defines a profile for implementing SVT with a signed PDF document.
 PDF document signatures are added as incremental updates to the signed PDF document and signs all data of the PDF document up until the current signature. When more than one signature is added to a PDF document. The previous signature is signed by the next signature and can't be updated with additional data after this event.
 
 To minimize the impact on PDF documents with multiple signatures and to stay backwards compatible with PDF software that do not understand SVT, PDF documents add one SVT token for all signatures of the PDF as an extension to a document timestamp added to the signed PDF as an incremental update. This SVT covers all signatures of the signed SVT.
+
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
@@ -28,17 +50,18 @@ The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**, **SHALL** **N
 
 These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
-
 <a name="definitions"></a>
 ### 1.2. Definitions
 Definitions in \[[SVT](#svt)\] applies also to this document.
 
+<a name="svt-in-pdf-documents"></a>
 ## 2. SVT in PDF documents
 
 An SVT added to a signed PDF document SHALL be added to a document timestamp accordance with ISO 32000-2:2017 \[[PDF](pdf)\].
 
 The document timestamp contains an RFC 3161 time stamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in 2.1.1.
 
+<a name="svt-extension-to-time-stamp-tokens"></a>
 ### 2.1.1. SVT extension to time stamp tokens
 
 The SVT extension is an Extension suitable to be included in TSTInfo as defined by \[[RFC3161](rfc3161)\] <sup>1</sup>.
@@ -51,7 +74,10 @@ This extension SHALL NOT be marked critical.
 
 > 1. Extensions in time stamp tokens according to \[[RFC3161](rfc3161)\] are imported from the definition of X.509 certificate extensions defined in \[[RFC5280](rfc5280)\].
 
+<a name="svt-claims"></a>
 ## 3. SVT Claims
+
+<a name="signature-reference-data"></a>
 ### 3.1. Signature reference data
 
 The SVT SHALL contain a SigReference claims object that SHALL contain the following data:
@@ -63,6 +89,7 @@ Claim  | Value
 `sb_hash` | The hash over the DER encoded `SignedAttributes` in `SignerInfo`
 
 
+<a name="signed-data-reference-data"></a>
 ### 3.2. Signed Data reference data
 
 An SVT according to this profile SHALL contain exactly one instance of the SignedData claims object. The SignedData claims object shall contain the following data:
@@ -73,6 +100,7 @@ Claim  | Value
 `hash`  |  The hash of all bytes identified by the **ByteRange** value. This is the concatenation of all byte ranges identified by the **ByteRange** value.
 
 
+<a name="signer-certificate-references"></a>
 ### 3.3. Signer certificate references
 
 The SVT SHALL contain a CertReference claims object. The type claim of the CertReference claims object SHALL be either `cert`, `chain`, `cert_hash` or `cert_and_chain_hash`.
