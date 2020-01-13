@@ -11,14 +11,14 @@
 ## Table of Contents
 
 ## 1. Introduction
-The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines a the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
+The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
 
 This document defines a profile for implementing SVT with a signed XML document. This document defines the following aspect of SVT usage:
 
-- How to inlcude reference data related to XML signatures and XML documents in an SVT.
+- How to include reference data related to XML signatures and XML documents in an SVT.
 - How to add an SVT token to a XML signature.
 
-XML docuements can hav any number of signature elements, signing an arbitrary number of fragments of XML documents. The actual signatue element may be included in the signed XML document (enveloped), include the signed data (enveloping) or may be separate from the signed content (detached).
+XML documents can have any number of signature elements, signing an arbitrary number of fragments of XML documents. The actual signature element may be included in the signed XML document (enveloped), include the signed data (enveloping) or may be separate from the signed content (detached).
 
 To provide a generic solution for any type of XML signature an SVT is added to each XML signature element within the XML signature `<ds:Object>` element.
 
@@ -81,11 +81,11 @@ The SVT token SHALL be included as a string representation of the SVT JWT. Note 
 
 Example:
 ```
-<ds:Signature Id="_MySignatyreId">
+<ds:Signature Id="MySignatureId">
   ...
   <ds:Object>
     <ds:SignatureProperties>
-      <ds:SignatureProperty>
+      <ds:SignatureProperty Target="#MySignatureId">
         <svt:SignatureValidationToken>
               eyJ0eXAiOiJKV1QiLCJhb...2aNZ
         </svt:SignatureValidationToken>

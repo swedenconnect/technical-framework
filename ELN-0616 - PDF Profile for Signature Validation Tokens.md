@@ -15,12 +15,12 @@ The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines a the
 
 This document defines a profile for implementing SVT with a signed PDF document. This document defines the following aspect of SVT usage:
 
-- How to inlcude reference data related to PDF signatures and PDF documents in an SVT.
+- How to include reference data related to PDF signatures and PDF documents in an SVT.
 - How to add an SVT token to a PDF document.
 
-PDF document signatures are added as incremental updates to the signed PDF document and signs all data of the PDF doucment up until the current signature. When more than one signature is added to a PDF document. The previous signature is signed by the next signature and can't be updated with additional data after this event.
+PDF document signatures are added as incremental updates to the signed PDF document and signs all data of the PDF document up until the current signature. When more than one signature is added to a PDF document. The previous signature is signed by the next signature and can't be updated with additional data after this event.
 
-To minimize the impapact on PDF documetns with mutliple signatures and to stay backwards compatible with PDF software that do not under stand SVT, PDF docuements add one SVT token for all signatures of the PDF as an extension to a docuement timestamp added to the signed PDF as an incremental update. This SVT conevers all signatures of the signed SVT.
+To minimize the impact on PDF documents with multiple signatures and to stay backwards compatible with PDF software that do not understand SVT, PDF documents add one SVT token for all signatures of the PDF as an extension to a document timestamp added to the signed PDF as an incremental update. This SVT covers all signatures of the signed SVT.
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
@@ -37,7 +37,7 @@ Definitions in \[[SVT](#svt)\] applies also to this document.
 
 An SVT added to a signed PDF document SHALL be added to a document timestamp accordance with ISO 32000-2:2017 \[[PDF](pdf)\].
 
-The document timstamp contains an RFC 3161 time stamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the time satmp token (TSTInfo) as an Extension object as defined in 2.1.1.
+The document timestamp contains an RFC 3161 time stamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in 2.1.1.
 
 ### 2.1.1. SVT extension to time stamp tokens
 
@@ -79,7 +79,7 @@ The SVT SHALL contain a CertReference claims object. The type claim of the CertR
 
 - The `cert` type SHALL be used when signature validation was performed using a single certificate not present in the target PDF signature.
 - The `chain` type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain is not present in the target signature.
-- The `cert_hash` type SHALL be used when signature validation was performed using a single certificate thas is present in the target PDF signature.
+- The `cert_hash` type SHALL be used when signature validation was performed using a single certificate that is present in the target PDF signature.
 - The `cert_and_chain_hash` type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain is present in the target signature.
 
 
@@ -87,7 +87,7 @@ The SVT SHALL contain a CertReference claims object. The type claim of the CertR
 
 
 <a name="normative-references"></a>
-## 6. Normative References
+## 4. Normative References
 
 <a name="rfc2119"></a>
 **[RFC2119]**
