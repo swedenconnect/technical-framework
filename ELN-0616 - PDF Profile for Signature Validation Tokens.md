@@ -41,7 +41,7 @@ The document timstamp contains an RFC 3161 time stamp token (TSTInfo) in Encapsu
 
 ### 2.1.1. SVT extension to time stamp tokens
 
-The SVT extension is an Extension suitable to be included in TSTInfo as defined by \[[RFC3161](rfc3161)\].
+The SVT extension is an Extension suitable to be included in TSTInfo as defined by \[[RFC3161](rfc3161)\] <sup>1</sup>.
 
 The SVT extension is identified by the Object Identifier (OID) `1.2.752.201.5.2` as defined in \[[EidRegistry](eidregistry)\].
 
@@ -49,6 +49,7 @@ This extension data (OCTET STRING) holds the bytes of SVT JWT, represented by a 
 
 This extension SHALL NOT be marked critical.
 
+> 1. Extensions in time stamp tokens according to \[[RFC3161](rfc3161)\] are imported from the definition of X.509 certificate extensions defined in \[[RFC5280](rfc5280)\].
 
 ## 3. SVT Claims
 ### 3.1. Signature reference data
@@ -99,6 +100,13 @@ The SVT SHALL contain a CertReference claims object. The type claim of the CertR
 
 > [Adams, C., Cain, P., Pinkas, D., Zuccherato, R., Internet X.509 Public Key
 > Infrastructure Time-Stamp Protocol (TSP), August 2001](http://www.ietf.org/rfc/rfc3161.txt).
+
+<a name="rfc5280"></a>
+**[RFC5280]**
+
+> [D. Cooper, S. Santesson, S. Farrell, S. Boeyen, R. Housley, W. Polk, Internet
+> X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL)
+> Profile, May 2008](http://www.ietf.org/rfc/rfc5280.txt).
 
 <a name="rfc5035"></a>
 **[RFC5035]**

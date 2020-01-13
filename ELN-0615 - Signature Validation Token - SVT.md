@@ -232,7 +232,7 @@ Name | Data Type | Value | Presence
 <a name="the-certreference-claims-object"></a>
 ##### 2.2.3.7. The CertReference claims object
 
-The CertReference claims object allows reference to a single certificate or a chain of certificates, either by providing the actual certificate data or by providing a hash reference for certificates that can be located in the target signature.
+The CertReference claims object allows reference to a single X.509 certificate or a chain of certificates, either by providing the actual certificate data or by providing a hash reference for certificates that can be located in the target signature.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -243,11 +243,12 @@ The following type identifiers are defined:
 
 Identifer | Ref data content
 --- | ---
-`cert` |  One string holding a Base64 encoded X.509 certificate
-`chain` | Array of Base64 encoded X.509 certificates. The certificates MUST be stored in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array.
-`cert_hash` | Base64 encoded hash value over the target X.509 certificate
-`cert_and_chain_hash` | Two Base64 encoded hash values. The first hash value is the hash over the target end entity certificate and the next hash is the hash over the certificate chain included in the target signature. This type identifier MUST NOT be used if the certificate chain is not provided in the target signature. The chain hash is calculated over the concatenated bytes of the chain certificate exactly in the order they appear in the target signature. If an external chain not provided in the target signature was used, then the `chain` type SHOULD be used.
+`cert` |  One string holding a Base64 encoded X.509 certificate \[[RFC5280](#rfc5280)\]
+`chain` | Array of Base64 encoded X.509 certificates \[[RFC5280](#rfc5280)\]. The certificates MUST be stored in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array.
+`cert_hash` | Base64 encoded hash value over the target X.509 certificate \[[RFC5280](#rfc5280)\],
+`cert_and_chain_hash` | Two Base64 encoded hash values. The first hash value is the hash over the target end entity X.509 certificate \[[RFC5280](#rfc5280)\], and the next hash is the hash over the certificate chain included in the target signature. This type identifier MUST NOT be used if the certificate chain is not provided in the target signature. The chain hash is calculated over the concatenated bytes of the chain certificate exactly in the order they appear in the target signature. If an external chain not provided in the target signature was used, then the `chain` type SHOULD be used.
 
+> **Note**: All certificates referenced using the identifiers above are X.509 certificates. Profiles of this specification MAY define alternative types of public key containers. It should be noted however that a major function of these referenced certificates is not just to reference the public key, but also to provide the identity of the signer. It is therefore important for the full function of an SVT that the referenced public key container also provides the means to identify of the signer.
 
 
 <a name="svt-jose-header"></a>
@@ -425,6 +426,13 @@ Decoded JWT Claims
 
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
+
+<a name="rfc5280"></a>
+**[RFC5280]**
+
+> [D. Cooper, S. Santesson, S. Farrell, S. Boeyen, R. Housley, W. Polk, Internet
+> X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL)
+> Profile, May 2008](http://www.ietf.org/rfc/rfc5280.txt).
 
 <a name="rfc6931"></a>
 **[RFC6931]**
