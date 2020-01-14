@@ -1,0 +1,700 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>eIDAS Constructed Attributes Specification for the Swedish eID Framework</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="eidas-constructed-attributes-specification-for-the-swedish-eid-framework">eIDAS Constructed Attributes Specification for the Swedish eID Framework</h1>
+<h3 id="version-1.1---2019-08-30---*draft-version*">Version 1.1 - 2019-08-30 - <em>Draft version</em></h3>
+<p><em>2019-315</em></p>
+<blockquote>
+<p><em>Previous registration number: ELN-0611</em></p>
+</blockquote>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirement-key-words">Requirement key words</a></p>
+</li>
+<li><p><a href="#provisional-identifier"><strong>Provisional Identifier</strong></a></p>
+<p> 2.1. <a href="#provisional-identifier-prid-attribute">Provisional Identifier (prid) Attribute</a></p>
+<p> 2.2. <a href="#provisional-identifier-persistence-indicator-pridpersistence-attribute">Provisional Identifier Persistence Indicator (pridPersistence) Attribute</a></p>
+<p> 2.3. <a href="#algorithms">Algorithms</a></p>
+<p> 2.3.1. <a href="#algorithm-default-eidas">Algorithm: default-eIDAS</a></p>
+<p> 2.3.2. <a href="#algorithm-colresist-eidas">Algorithm: colresist-eIDAS</a></p>
+<p> 2.3.3. <a href="#special-characters-eidas">Algorithm: special-characters-eIDAS</a></p>
+<p> 2.4. <a href="#algorithm-selection-and-resulting-pridpersistence-value">Algorithm Selection and Resulting pridPersistence Value</a></p>
+</li>
+<li><p><a href="#references"><strong>References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<p>Appendix A. <a href="#countries-with-pridpersistence-of-class-a"><strong>Countries with pridPersistence of class A</strong></a></p>
+<p>Appendix B. <a href="#countries-with-pridpersistence-of-class-b"><strong>Countries with pridPersistence of class B</strong></a></p>
+<p>Appendix C. <a href="#prid-algorithm-implementations-java"><strong>PRID Algorithm implementations (Java)</strong></a></p>
+<p><a name="introduction"></a></p>
+<h2 id="1.-introduction">1. Introduction</h2>
+<p>This document extends “Attribute Specification for the Swedish eID
+Framework”, [<a href="#eidattributes">EidAttributes</a>], providing specifications for constructed
+attributes.</p>
+<p>The concept of constructed attributes is introduced in Swedish national
+authentication nodes (proxy nodes) delivering identity assertions to
+Swedish Service Providers based on user authentication with a foreign
+eID.</p>
+<p>A constructed attribute is an attribute that was not delivered by the
+foreign Identity Provider service, but was constructed in the Swedish
+authentication node by applying defined rules and algorithms to the
+authenticated user (subject) received from the foreign Identity Provider
+service (typically an eIDAS node).</p>
+<p><a name="requirement-key-words"></a></p>
+<h3 id="1.1.-requirement-key-words">1.1. Requirement key words</h3>
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
+“SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be
+interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify
+requirements over protocol features and behavior that affect the
+interoperability and security of implementations. When these words are
+not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="provisional-identifier"></a></p>
+<h2 id="2.-provisional-identifier">2. Provisional Identifier</h2>
+<p>The Attribute Specification for the Swedish eID Framework, [<a href="#eidattributes">EidAttributes</a>], defines the attributes <code>prid</code> and <code>pridPersistence</code>.</p>
+<p>The <code>prid</code> attribute holds a unique identifier for a person derived from
+attributes provided from another country. The purpose of this attribute
+is to provide a common unique attribute for an authenticated user
+independently of the attribute set or the characteristics of these
+attributes provided by the authentication service in the other country.</p>
+<p>The <code>pridPersistence</code> attribute provides an indicator of the expected
+persistence of the <code>prid</code> identifier over time. The value in this
+attribute is determined by assessing the persistence of underlying
+foreign attributes from a particular source used in a particular <code>prid</code>
+generation algorithm.</p>
+<p>This document defines a set of <code>prid</code> algorithms, when to use each
+algorithm and the resulting <code>pridPersistence</code> value.</p>
+<p><a name="provisional-identifier-prid-attribute"></a></p>
+<h3 id="2.1.-provisional-identifier-(prid)-attribute">2.1. Provisional Identifier (prid) Attribute</h3>
+<p>The provisional identifier (<code>prid</code>) attribute is a SAML attribute
+identified by the SAML attribute name <code>urn:oid:1.2.752.201.3.4</code>.</p>
+<p>The <code>prid</code> attribute holds a string value containing the following data:</p>
+<blockquote>
+<p><strong>{2 letter ISO 3166 country code of eID country}</strong> + <strong>”:“</strong> +
+<strong>{10..30 character identifier}</strong></p>
+</blockquote>
+<p>Syntactically, provisional ID is defined by the following regular
+expression:</p>
+<blockquote>
+<p><code>^[A-Z]{2}:[0-9a-z][0-9a-z-]{8,28}[0-9a-z]$</code></p>
+</blockquote>
+<p>Examples:</p>
+<blockquote>
+<p>NO:29078534891</p>
+<p>DK:09208-2002-2-194967071622</p>
+</blockquote>
+<p>The country code is the 2 letter ISO 3166 country code
+expressed in upper case letters, for example, “SE” for Sweden and “NO”
+for Norway. This identifies the country that issued the eID used to
+authenticate the user (i.e., provided the infrastructure to identify the
+person). This is not necessarily the person’s actual citizenship or
+country of residence.</p>
+<p>The identifier component holds a minimum of 10 and a maximum of 30
+characters. The primary reason for this is to provide an identifier that
+can be displayed to a user and still relatively convenient to write down
+or communicate by humans in case of problems. The characters in the
+identifier component are restricted to the numeric characters 0-9, the
+letters a-z and the hyphen character “-“ (0x2D) serving as delimiter.
+Letters “a-z” MUST be lower case. Should a provisional ID ever be
+presented with upper case letters then such letter should be matched
+using case insensitive matching (e.g. “a” is equivalent to “A”). The
+identifier component MUST NOT start or end with a hyphen character. The
+resulting ID MUST have at least 8 characters that are not a hyphen
+character, for example, the character sequence “1-2-3-4-56” is not
+allowed as it only holds 6 distinguishing ID characters.</p>
+<p><a name="provisional-identifier-persistence-indicator-pridpersistence-attribute"></a></p>
+<h3 id="2.2.-provisional-identifier-persistence-indicator-(pridpersistence)-attribute">2.2. Provisional Identifier Persistence Indicator (pridPersistence) Attribute</h3>
+<p>The provisional identifier (<code>pridPersistence</code>) attribute is a SAML
+attribute identified by the SAML attribute name <code>urn:oid:1.2.752.201.3.5</code>.</p>
+<p>The pridPersistence attribute holds a string value containing the
+following data:</p>
+<blockquote>
+<p><strong>{1 letter Identifier (A, B or C)}</strong></p>
+</blockquote>
+<p><strong>Examples:</strong></p>
+<blockquote>
+<p>A</p>
+<p>B</p>
+<p>C</p>
+</blockquote>
+<p><strong>Value definitions:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Value</th>
+<th style="text-align:left">Defined meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">A</td>
+<td style="text-align:left">Persistence over time is expected to be comparable or better than a Swedish personal identity number (personnummer). This means that the identifier typically is stable throughout the lifetime of the subject and is typically preserved even if the subject changes address, name or civil status.</td>
+</tr>
+<tr>
+<td style="text-align:left">B</td>
+<td style="text-align:left">Persistence over time is expected to be relatively stable, but lower than a Swedish personal identity number (personnummer). This means that the identifier typically remains unchanged as long as the person does not change address, name or civil status. Such or similar event may cause the identifier to change but the identifier will not change just because the subject gets a new eID (electronic identification means) or changes eID provider.</td>
+</tr>
+<tr>
+<td style="text-align:left">C</td>
+<td style="text-align:left">No expectations regarding persistence over time. The identifier may change if the subject changes eID or eID provider.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="algorithms"></a></p>
+<h3 id="2.3.-algorithms">2.3. Algorithms</h3>
+<p>This section defines algorithms for generating the identifier component
+of <code>prid</code> attribute values. The identifier component makes up the
+characters following the “:” (colon) character in the <code>prid</code>.</p>
+<p><a name="algorithm-default-eidas"></a></p>
+<h4 id="2.3.1.-algorithm:-default-eidas">2.3.1. Algorithm: default-eIDAS</h4>
+<p><strong>Name:</strong> <code>default-eIDAS</code></p>
+<p><strong>Input values</strong>:</p>
+<ul class="list">
+<li><code>eidasID</code> - The identifier string value from the eIDAS PersonIdentifier attribute from the attribute source (identified by the attribute name <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code>.</li>
+</ul>
+<p><strong>Calculated values</strong>:</p>
+<ul class="list">
+<li><p><code>strippedID</code> = <code>eidasID</code> after:</p>
+<ol class="list">
+<li>removing the 6 leading characters matching the regular expression <code>^[A-Za-z]{2}[\/](SE\|se)[\/]</code>  (e.g., ”NO/SE/”), and; </li>
+<li>removing any white space and non-printable characters.</li>
+</ol>
+</li>
+<li><p><code>normalizedID</code> = <code>strippedID</code> converted according to the following steps: </p>
+<ol class="list">
+<li>converting all upper case letters [A-Z] to lower case, and, </li>
+<li>replacing with a single “-“ character, all sequences of characters of length (1…n) that does not contain [0-9] or [a-z], and,</li>
+<li>remove any leading or trailing “-“ characters.</li>
+</ol>
+</li>
+</ul>
+<p><strong>Result</strong>:</p>
+<p>If length of <code>normalizedID</code> &lt; 10 characters:</p>
+<blockquote>
+<p>Return <code>normalizedID</code> padded with leading “0” (zero) characters until
+length = 10 characters.</p>
+</blockquote>
+<p>If length of <code>normalizedID</code> 10 - 30 characters:</p>
+<blockquote>
+<p>Return <code>normalizedID</code></p>
+</blockquote>
+<p>If length of <code>normalizedID</code> &gt; 30 characters<strong>:</strong></p>
+<blockquote>
+<p>Return the string representation of the first 30 hexadecimal digits of
+the SHA256 hash of the UTF-8 encoded bytes of <code>strippedID</code>.</p>
+</blockquote>
+<p><strong>Exceptions</strong>:</p>
+<blockquote>
+<p>If the following conditions occur in the process, prid generation
+fails:</p>
+</blockquote>
+<ol class="list">
+<li>Leading 6 characters of PersonIdentifier does not match regexp <code>^[A-Za-z]{2}[\/](SE|se)[\/]$</code></li>
+<li><code>normalizedID</code> &lt; 8 characters (not counting “-“ (hyphen) characters).</li>
+</ol>
+<p><strong>Collision resistance:</strong></p>
+<p>All eIDAS PersonIdentifier attributes are required to be unique. That
+uniqueness is preserved in this algorithm based on the assumption that
+distinguishing symbols in the PersonIdentifier are represented
+exclusively by case insensitive letters a-z and numbers 0-9. If this is
+not a case for the PersonIdentifier provided by a particular country,
+then this algorithm should not be selected due to the risk of ID
+collisions.</p>
+<p>In case the normalized identifier string exceeds 30 characters this
+algorithm falls back on providing a 30 hex digit representation of a
+concatenated SHA-2 hash value. The collision probability for such
+identifier among 2 users is 1 in 1,25 * 10\^36 (Calculated as 16\^30 –
+16\^29 since first digit can not be 0). For a population of 100 million
+people the probability of a collision is approximately 1 in 2.5 *
+10\^20 or 1 in 250 trillion countries of that population size<sup><a href="#footnote-2-3-1">1</a></sup>.</p>
+<p>Countries typically do not use ID attributes that exceed 30 characters
+in size, but it cannot be ruled out that some countries will generate an
+ID for cross-border use that is different from a national ID and that
+that ID may exceed 30 characters. This algorithm assumes that the
+collision resistance provided is sufficient given both the low
+probability combined with the fact that only a very small fraction of
+users from any country outside of Sweden is likely to authenticate to a
+Swedish e-service. A collision among all citizens would in most cases
+not be security critical since the unique eIDAS ID in its original form
+also is present in the assertion to the service provider, which
+guarantees that a transaction is traceable back to the right individual.</p>
+<p>In case these properties are not enough to guarantee sufficient
+collision resistance, the algorithm colresist-eIDAS should be used.</p>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">PersonIdentifier</th>
+<th style="text-align:left">Resulting prid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NO/SE/05068907693</td>
+<td style="text-align:left">NO:05068907693</td>
+</tr>
+<tr>
+<td style="text-align:left">DK/SE/09208-2002-2-194967071622</td>
+<td style="text-align:left">DK:09208-2002-2-194967071622</td>
+</tr>
+<tr>
+<td style="text-align:left">UK/DK/1234567890</td>
+<td style="text-align:left">UK:NULL (Failed: target country is not SE)</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/#12345-3456//ABC</td>
+<td style="text-align:left">DE:12345-3456-abc</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/aErf#(EAd9)</td>
+<td style="text-align:left">DE:0aerf-ead9</td>
+</tr>
+<tr>
+<td style="text-align:left">de/se/aErf#(EAd)</td>
+<td style="text-align:left">NULL (Failed: Less than 8 ID characters)</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/(1952 12 14-1122)</td>
+<td style="text-align:left">DE:19521214-1122</td>
+</tr>
+<tr>
+<td style="text-align:left">19521214-1122</td>
+<td style="text-align:left">NULL (Failed: Leading 6 character format error)</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/1234567890123456789012345678901</td>
+<td style="text-align:left">DE:3b7184c0ceaf76a9607a31e4e1f87f</td>
+</tr>
+</tbody>
+</table>
+<p><a name="footnote-2-3-1"></a></p>
+<blockquote>
+<p>[1]: Birthday paradox approximation p(<em>n</em>) ≈ <em>n</em>\^2 / 2<em>m</em>, where p(<em>n</em>) is the collision probability, <em>n</em> is the number of people and <em>m</em> is the number of possible ID combinations.</p>
+</blockquote>
+<p><a name="algorithm-colresist-eidas"></a></p>
+<h4 id="2.3.2.-algorithm:-colresist-eidas">2.3.2. Algorithm: colresist-eIDAS</h4>
+<p>This algorithm is identical to default-eIDAS except that the hashed
+expression of the ID in case the normalized ID exceeds 30 characters,
+has higher collision resistance by expressing the ID in radix 36 instead
+of radix 16 (Hexadecimal)<sup><a href="#footnote2-3-2">1</a></sup>.</p>
+<p><strong>Name:</strong> <code>colresist-eIDAS</code></p>
+<p><strong>Input values</strong>: Identical to <code>default-eIDAS</code></p>
+<p><strong>Calculated values</strong>: Identical to <code>default-eIDAS</code></p>
+<p><strong>Result</strong>:</p>
+<p>If length of normalizedID &lt; 10 characters:</p>
+<blockquote>
+<p>Identical to <code>default-eIDAS</code> result</p>
+</blockquote>
+<p>If length of normalizedID 10 - 30 characters:</p>
+<blockquote>
+<p>Identical to <code>default-eIDAS</code> result</p>
+</blockquote>
+<p>If length of normalizedID &gt; 30 characters<strong>:</strong></p>
+<blockquote>
+<p>Return the string representation of the first 30 radix 36 digits of the SHA256 hash of the UTF-8 encoded bytes of <code>strippedID</code>.</p>
+</blockquote>
+<p><strong>Exceptions</strong>: Identical to <code>default-eIDAS</code></p>
+<p><strong>Collision resistance:</strong></p>
+<p>Expression of this ID in hashed form use 30 radix 36 symbols. This
+reduces the collision resistance among 2 users to 1 in 4.75 * 10\^46.
+The collision probability among 100 million users is reduced to
+approximately 1 in 10\^31.</p>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">PersonIdentifier</th>
+<th style="text-align:left">Resulting prid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NO/SE/05068907693</td>
+<td style="text-align:left">NO:05068907693</td>
+</tr>
+<tr>
+<td style="text-align:left">DK/SE/09208-2002-2-194967071622</td>
+<td style="text-align:left">DK:09208-2002-2-194967071622</td>
+</tr>
+<tr>
+<td style="text-align:left">UK/DK/1234567890</td>
+<td style="text-align:left">UK:NULL (Failed: target country is not SE)</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/#12345-3456//ABC</td>
+<td style="text-align:left">DE:12345-3456-abc</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/aErf#(EAd9)</td>
+<td style="text-align:left">DE:0aerf-ead9</td>
+</tr>
+<tr>
+<td style="text-align:left">de/se/aErf#(EAd)</td>
+<td style="text-align:left">NULL (Failed: Less than 8 ID characters)</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/(1952 12 14-1122)</td>
+<td style="text-align:left">DE:19521214-1122</td>
+</tr>
+<tr>
+<td style="text-align:left">19521214-1122</td>
+<td style="text-align:left">NULL (Failed: Leading 6 character format error)</td>
+</tr>
+<tr>
+<td style="text-align:left">DE/SE/1234567890123456789012345678901</td>
+<td style="text-align:left">DE:1hc3tpoleczqu3t8jz2995k2rq7nt8</td>
+</tr>
+</tbody>
+</table>
+<p><a name="footnote2-3-2"></a></p>
+<blockquote>
+<p>[1]: Radix 36 express values ranging from 0 to 36 through a single character using the symbols ”0123456789abcdefghijklmnopqrstuvwxyz” in the presented order.</p>
+</blockquote>
+<p><a name="special-characters-eidas"></a></p>
+<h4 id="2.3.3.-algorithm:-special-characters-eidas">2.3.3. Algorithm: special-characters-eIDAS</h4>
+<p>The default-eIDAS and the colresist-eIDAS algoritms are suitable when the base identifier from the authenticating country is constructed from digits and basic case-insensitive characters. These algoritms do not work on identifiers constructed as a Base64 string of binary data, such as a hash of another identifier.</p>
+<p>The present algoritm is intended to be used where the base identifier contains case-sensitive characters and where characters other than a-z and 0-9 are used to add entropy to the identifier.</p>
+<p><strong>Name:</strong> <code>special-characters-eIDAS</code></p>
+<p><strong>Input values</strong>:  Identical to <code>default-eIDAS</code>.</p>
+<p><strong>Calculated values</strong>: Identical to <code>default-eIDAS</code> with the exception that <code>normalizedID</code> is not calculated and used.</p>
+<p><strong>Result</strong>:</p>
+<blockquote>
+<p>Return the string representation of the first 30 radix 36 digits of the SHA256 hash of the UTF-8 encoded bytes of <code>strippedID</code>.</p>
+</blockquote>
+<p><strong>Exceptions</strong>: </p>
+<blockquote>
+<p>If the following conditions occur in the process, prid generation fails:</p>
+</blockquote>
+<ol class="list">
+<li>Leading 6 characters of PersonIdentifier does not match regexp <code>^[A-Za-z]{2}[\/](SE|se)[\/]$</code></li>
+<li><code>strippedID</code> &lt; 16 characters.</li>
+</ol>
+<p><strong>Collision resistance:</strong> Identical to <code>colresist-eIDAS</code>.</p>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">PersonIdentifier</th>
+<th style="text-align:left">Resulting prid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AT/SE/Zk2ME2pjxwzQOjVeFGeqSIage34=</td>
+<td style="text-align:left">AT:50bwytdle2mzexopcolmdhmhznihms</td>
+</tr>
+</tbody>
+</table>
+<p><a name="algorithm-selection-and-resulting-pridpersistence-value"></a></p>
+<h3 id="2.4.-algorithm-selection-and-resulting-pridpersistence-value">2.4. Algorithm Selection and Resulting pridPersistence Value</h3>
+<p>This section defines the current algorithm selection rules and the
+resulting pridPersistence value. These rules are processed in the
+presented order. The first rule where the present conditions matches all
+the matching rules is selected.</p>
+<p>If the present conditions do not match any of the listed rules, then
+prid generation fails.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Rule 1</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Matching rule 1</td>
+<td style="text-align:left">Authenticated attributes are provided by an eIDAS node (proxy service).</td>
+</tr>
+<tr>
+<td style="text-align:left">Matching rule 2</td>
+<td style="text-align:left">Authenticated subject is a person and has a <code>PersonIdentifier</code> attribute.</td>
+</tr>
+<tr>
+<td style="text-align:left">Matching rule 3</td>
+<td style="text-align:left">Attributes provided by any of the countries listed in Appendix A.</td>
+</tr>
+<tr>
+<td style="text-align:left">Selected algorithm</td>
+<td style="text-align:left"><code>default-eIDAS</code></td>
+</tr>
+<tr>
+<td style="text-align:left">pridPersistence value</td>
+<td style="text-align:left">A</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Rule 2</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Matching rule 1</td>
+<td style="text-align:left">Authenticated attributes are provided by an eIDAS node (proxy service).</td>
+</tr>
+<tr>
+<td style="text-align:left">Matching rule 2</td>
+<td style="text-align:left">Authenticated subject is a person and has a <code>PersonIdentifier</code> attribute.</td>
+</tr>
+<tr>
+<td style="text-align:left">Matching rule 3</td>
+<td style="text-align:left">Attributes provided by any of the countries listed in Appendix B.</td>
+</tr>
+<tr>
+<td style="text-align:left">Selected algorithm</td>
+<td style="text-align:left"><code>default-eIDAS</code></td>
+</tr>
+<tr>
+<td style="text-align:left">pridPersistence value</td>
+<td style="text-align:left">B</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Rule 3</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Matching rule 1</td>
+<td style="text-align:left">Authenticated attributes are provided by an eIDAS node (proxy service).</td>
+</tr>
+<tr>
+<td style="text-align:left">Matching rule 2</td>
+<td style="text-align:left">Authenticated subject is a person and has a <code>PersonIdentifier</code> attribute.</td>
+</tr>
+<tr>
+<td style="text-align:left">Selected algorithm</td>
+<td style="text-align:left"><code>default-eIDAS</code></td>
+</tr>
+<tr>
+<td style="text-align:left">pridPersistence value</td>
+<td style="text-align:left">C</td>
+</tr>
+</tbody>
+</table>
+<p><a name="references"></a></p>
+<h2 id="3.-references">3. References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
+Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="saml2core"></a>
+<strong>[SAML2Core]</strong></p>
+<blockquote>
+<p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
+Assertion Markup Language (SAML) V2.0, March
+2005</a>.</p>
+</blockquote>
+<p><a name="saml-xsd"></a>
+<strong>[SAML-XSD]</strong></p>
+<blockquote>
+<p>S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005.
+Document ID saml-schema-assertion-2.0. See
+<a href="http://www.oasisopen.org/committees/security/">http://www.oasisopen.org/committees/security/</a>.</p>
+</blockquote>
+<p><a name="xml-schema"></a>
+<strong>[XML-Schema]</strong></p>
+<blockquote>
+<p>XML Schema Part 2: Datatypes Second Edition, W3C Recommendation, 28
+October 2004. See <a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a>.</p>
+</blockquote>
+<p><a name="eidattributes"></a>
+<strong>[EidAttributes]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="eidas-attr"></a>
+<strong>[eIDAS-Attr]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.2-FINAL.pdf">eIDAS SAML Attribute Profile, version 1.2, 21 May 2019</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="4.-changes-between-versions">4. Changes between versions</h2>
+<p><strong>Changes between version 1.0 and version 1.1:</strong></p>
+<ul class="list">
+<li><p>Update of logotype and fixes of minor typos.</p>
+</li>
+<li><p>Update of reference of eIDAS attribute profile to version 1.2.</p>
+</li>
+</ul>
+<p><a name="countries-with-pridpersistence-of-class-a"></a></p>
+<h2 id="appendix-a.-countries-with-pridpersistence-of-class-a">Appendix A. Countries with pridPersistence of class A</h2>
+<p>The following countries provide an eIDAS PersonIdentifier attribute that
+has been determined to match pridPersistence level A:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ISO 3166</th>
+<th style="text-align:left">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DK</td>
+<td style="text-align:left">Denmark</td>
+</tr>
+<tr>
+<td style="text-align:left">NO</td>
+<td style="text-align:left">Norway</td>
+</tr>
+<tr>
+<td style="text-align:left">SE</td>
+<td style="text-align:left">Sweden</td>
+</tr>
+</tbody>
+</table>
+<p><a name="countries-with-pridpersistence-of-class-b"></a></p>
+<h2 id="appendix-b.-countries-with-pridpersistence-of-class-b">Appendix B. Countries with pridPersistence of class B</h2>
+<p>The following countries provide an eIDAS PersonIdentifier attribute that
+has been determined to match pridPersistence level B:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ISO 3166</th>
+<th style="text-align:left">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DE</td>
+<td style="text-align:left">Germany</td>
+</tr>
+</tbody>
+</table>
+<p><a name="prid-algorithm-implementations-java"></a></p>
+<h2 id="appendix-c.-prid-algorithm-implementations-(java)">Appendix C. PRID Algorithm implementations (Java)</h2>
+<p><strong>default-eIDAS</strong></p>
+<pre class="hljs"><code>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> personIdentifierPrefixRegexp = <span class="hljs-string">"^[A-Za-z]{2}[\\/](SE|se)[\\/]"</span>;
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getPridIdentifierComponent(<span class="hljs-keyword">String</span> personIdentifier) {
+    <span class="hljs-keyword">if</span> (personIdentifier == <span class="hljs-keyword">null</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (!personIdentifier.substring(<span class="hljs-number">0</span>, <span class="hljs-number">6</span>).matches(personIdentifierPrefixRegexp)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-comment">// Get ID component without whitespace and non-printable characters</span>
+    <span class="hljs-keyword">String</span> strippedID = personIdentifier.substring(<span class="hljs-number">6</span>).replaceAll(<span class="hljs-string">"\\s+"</span>, <span class="hljs-string">""</span>);
+
+    <span class="hljs-comment">// Convert to lower case</span>
+    <span class="hljs-keyword">String</span> normalizedID = strippedID.toLowerCase();
+
+    <span class="hljs-comment">// Replace sequences of non ID characters to "-"</span>
+    normalizedID = normalizedID.replaceAll(<span class="hljs-string">"[^a-z0-9]+"</span>, <span class="hljs-string">"-"</span>);
+
+    <span class="hljs-comment">// Remove leading and trailing "-" </span>
+    normalizedID = normalizedID.replaceAll(<span class="hljs-string">"^-+"</span>, <span class="hljs-string">""</span>).replaceAll(<span class="hljs-string">"-+$"</span>, <span class="hljs-string">""</span>);
+    <span class="hljs-keyword">if</span> (normalizedID.replaceAll(<span class="hljs-string">"-"</span>, <span class="hljs-string">""</span>).length() &lt; <span class="hljs-number">8</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (normalizedID.length() &lt; <span class="hljs-number">10</span>) {
+      normalizedID = <span class="hljs-string">"0000000000"</span>.substring(normalizedID.length()) + normalizedID;
+    }
+    <span class="hljs-keyword">if</span> (normalizedID.length() &gt; <span class="hljs-number">30</span>) {
+      <span class="hljs-keyword">try</span> {
+        MessageDigest md = MessageDigest.getInstance(<span class="hljs-string">"SHA-256"</span>);
+        <span class="hljs-built_in">byte</span>[] digest = md.digest(strippedID.getBytes(Charset.forName(<span class="hljs-string">"UTF-8"</span>)));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BigInteger(<span class="hljs-number">1</span>, digest).toString(<span class="hljs-number">16</span>).substring(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>);
+      }
+      <span class="hljs-keyword">catch</span> (NoSuchAlgorithmException ex) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> normalizedID;
+  }</code></pre><p><strong>colresist-eIDAS</strong></p>
+<pre class="hljs"><code>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> personIdentifierPrefixRegexp = <span class="hljs-string">"^[A-Za-z]{2}[\\/](SE|se)[\\/]"</span>;
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">String</span> getPridIdentifierComponent(<span class="hljs-keyword">String</span> personIdentifier) {
+    <span class="hljs-keyword">if</span> (personIdentifier == <span class="hljs-keyword">null</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (!personIdentifier.substring(<span class="hljs-number">0</span>, <span class="hljs-number">6</span>).matches(personIdentifierPrefixRegexp)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+
+    <span class="hljs-comment">// Get ID component without whitespace and non-printable characters</span>
+    <span class="hljs-keyword">String</span> strippedID = personIdentifier.substring(<span class="hljs-number">6</span>).replaceAll(<span class="hljs-string">"\\s+"</span>, <span class="hljs-string">""</span>);
+
+    <span class="hljs-comment">// Convert to lower case</span>
+    <span class="hljs-keyword">String</span> normalizedID = strippedID.toLowerCase();
+
+    <span class="hljs-comment">// Replace sequences of non ID characters to "-"</span>
+    normalizedID = normalizedID.replaceAll(<span class="hljs-string">"[^a-z0-9]+"</span>, <span class="hljs-string">"-"</span>);
+
+    <span class="hljs-comment">// Remove leading and trailing "-" </span>
+    normalizedID = normalizedID.replaceAll(<span class="hljs-string">"^-+"</span>, <span class="hljs-string">""</span>).replaceAll(<span class="hljs-string">"-+$"</span>, <span class="hljs-string">""</span>);
+    <span class="hljs-keyword">if</span> (normalizedID.replaceAll(<span class="hljs-string">"-"</span>, <span class="hljs-string">""</span>).length() &lt; <span class="hljs-number">8</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (normalizedID.length() &lt; <span class="hljs-number">10</span>) {
+      normalizedID = <span class="hljs-string">"0000000000"</span>.substring(normalizedID.length()) + normalizedID;
+    }
+    <span class="hljs-keyword">if</span> (normalizedID.length() &gt; <span class="hljs-number">30</span>) {
+      <span class="hljs-keyword">try</span> {
+        MessageDigest md = MessageDigest.getInstance(<span class="hljs-string">"SHA-256"</span>);
+        <span class="hljs-built_in">byte</span>[] digest = md.digest(strippedID.getBytes(Charset.forName(<span class="hljs-string">"UTF-8"</span>)));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BigInteger(<span class="hljs-number">1</span>, digest).toString(<span class="hljs-number">36</span>).substring(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>);
+      } 
+      <span class="hljs-keyword">catch</span> (NoSuchAlgorithmException ex) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> normalizedID;
+  }</code></pre><p><strong>special-characters-eIDAS</strong></p>
+<pre class="hljs"><code>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> personIdentifierPrifixRegexp = <span class="hljs-string">"^[A-Za-z]{2}[\\/](SE|se)[\\/]"</span>;
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getPridIdentifierComponent(<span class="hljs-keyword">String</span> personIdentifier) {
+    <span class="hljs-keyword">if</span> (personIdentifier == <span class="hljs-keyword">null</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (!personIdentifier.substring(<span class="hljs-number">0</span>, <span class="hljs-number">6</span>).matches(personIdentifierPrifixRegexp)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+
+    <span class="hljs-comment">// Get ID component without whitespace and non-printable characters</span>
+    <span class="hljs-keyword">String</span> strippedID = personIdentifier.substring(<span class="hljs-number">6</span>).replaceAll(<span class="hljs-string">"\\s+"</span>, <span class="hljs-string">""</span>);
+    <span class="hljs-keyword">if</span> (strippedID.length() &lt; <span class="hljs-number">16</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+    <span class="hljs-keyword">try</span> {
+      MessageDigest md = MessageDigest.getInstance(<span class="hljs-string">"SHA-256"</span>);
+      <span class="hljs-built_in">byte</span>[] digest = md.digest(strippedID.getBytes(Charset.forName(<span class="hljs-string">"UTF-8"</span>)));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BigInteger(<span class="hljs-number">1</span>, digest).toString(<span class="hljs-number">36</span>).substring(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>);
+    }
+    <span class="hljs-keyword">catch</span> (NoSuchAlgorithmException ex) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+  }</code></pre>    </article>
+  </body>
+</html>
