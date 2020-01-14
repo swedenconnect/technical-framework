@@ -19,6 +19,12 @@
 
 - <http://elegnamnden.github.io/technical-framework/csig/csig-dss-extension-1.2.html> (Authoritative)
 
+**Document Registration Number:**
+
+> 2019-314
+
+> Previous registration number: ELN-0609
+
 **Technical Committee:**
 
 > The Swedish E-identification Board

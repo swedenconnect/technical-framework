@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Deployment Profile for the Swedish eID Framework
 
 ### Version 1.6 - 2020-01-08 - **Draft version**
 
-*ELN-0602-v1.6*
+*2019-308*
+
+> *Previous registration number: ELN-0602*
 
 ---
 

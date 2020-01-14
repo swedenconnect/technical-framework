@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Attribute Specification for the Swedish eID Framework
 
 ### Version 1.6 - 2020-01-09 - *Draft version*
 
-*ELN-0604-v1.6*
+*2019-310*
+
+> *Previous registration number: ELN-0604*
 
 ---
 

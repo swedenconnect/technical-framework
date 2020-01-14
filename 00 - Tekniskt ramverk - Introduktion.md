@@ -13,7 +13,7 @@
 
 *2019-267* 
 
-*Previous registration number: ELN-0600*
+> *Previous registration number: ELN-0600*
 
 ---
 
