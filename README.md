@@ -1,4 +1,11 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Technical Specifications for the Swedish eID Framework
 
@@ -25,7 +32,7 @@ The releases can also be found under <https://docs.swedenconnect.se/technical-fr
 
 ## Contents
 
-#### En introduktion till E-legitimationsnämndens Tekniska ramverk
+#### En introduktion till Sweden Connect Tekniskt ramverk
 
 An overview document (in Swedish) that describes the different parts of the Swedish eID Framework.
 
@@ -122,4 +129,4 @@ Older version of the specification are stored in the following branches:
 
 ---
 
-Copyright &copy; 2017-2019, [Sweden Connect](https://swedenconnect.se). Licensed under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
+Copyright &copy; 2017-2020, [Sweden Connect](https://swedenconnect.se). Licensed under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).

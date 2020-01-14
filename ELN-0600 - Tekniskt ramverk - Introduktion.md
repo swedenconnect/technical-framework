@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2019-10-22
+### 2020-01-14
 
 *2019-267* 
+
+*Previous registration number: ELN-0600*
 
 ---
 
@@ -58,7 +67,8 @@
     
     2.2.2. [DSS Extension for Federated Central Signing Services](#dss-extensions)
     
-    2.2.3. [Certificate Profile for Certificates Issued by Central Signing Services](#certificate-profile-css)
+    2.2.3. [Certificate Profile for Certificates Issued by Central Signing Services
+](#certificate-profile-css)
     
     2.2.4. [Signature Activation Protocol for Federated Signing](#signature-activation)
 
