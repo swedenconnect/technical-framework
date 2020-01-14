@@ -3,17 +3,17 @@
 
 | File | Version |
 | :--- | :---: |   
-| [ELN-0602 - Deployment Profile for the Swedish eID Framework](ELN-0602%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.6<br/>(draft version) |
-| [ELN-0603 - Registry for Identifiers](ELN-0603%20-%20Registry%20for%20Identifiers.md) | 1.6<br/>(draft version) |
-| [ELN-0604 - Attribute Specification for the Swedish eID Framework](ELN-0604%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.6<br/>(draft version) |
-| ~~ELN-0605 - Authentication Context Classes for Levels of Assurance for the Swedish eID Framework~~ (deprecated) | ~~1.1~~ |
-| [ELN-0606 - Entity Categories for the Swedish eID Framework](ELN-0606%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md) | 1.7<br/>(draft version) |
-| [ELN-0607 - Implementation Profile for using DSS in Central Signing Services](ELN-0607%20-%20Implementation%20Profile%20for%20using%20DSS%20in%20Central%20Signing%20Services.md) | 1.4<br/>(draft version) |
-| [ELN-0608 - Certificate Profile for Central Signing Services](ELN-0608%20-%20Certificate%20Profile%20for%20Central%20Signing%20Services.md) | 1.2<br/>(draft version) |
-| [ELN-0609 - DSS Extension for Federated Signing Services](ELN-0609%20-%20DSS%20Extension%20for%20Federated%20Signing%20Services.md) | 1.2 |
-| ~~ELN-0610 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
-| [ELN-0611 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](ELN-0611%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.1<br />(draft version) |
-| [ELN-0612 - BankID Profile for the Swedish eID Framework](ELN-0612%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.2<br/>(draft version) |
-| [ELN-0613 - Signature Activation Protocol for Federated Signing](ELN-0613%20-%20Signature%20Activation%20Protocol.md) | 1.1<br/>(draft version) |
-| [ELN-0614 - Principal Selection in SAML Authentication Requests](ELN-0614%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md) | 1.0<br/>(draft version) |
+| [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.6<br/>(draft version) |
+| [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md) | 1.6<br/>(draft version) |
+| [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.6<br/>(draft version) |
+| ~~05 - Authentication Context Classes for Levels of Assurance for the Swedish eID Framework~~ (deprecated) | ~~1.1~~ |
+| [06 - Entity Categories for the Swedish eID Framework](06%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md) | 1.7<br/>(draft version) |
+| [07 - Implementation Profile for using DSS in Central Signing Services](07%20-%20Implementation%20Profile%20for%20using%20DSS%20in%20Central%20Signing%20Services.md) | 1.4<br/>(draft version) |
+| [08 - Certificate Profile for Central Signing Services](08%20-%20Certificate%20Profile%20for%20Central%20Signing%20Services.md) | 1.2<br/>(draft version) |
+| [09 - DSS Extension for Federated Signing Services](09%20-%20DSS%20Extension%20for%20Federated%20Signing%20Services.md) | 1.2 |
+| ~~10 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
+| [11 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.1<br />(draft version) |
+| [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.2<br/>(draft version) |
+| [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md) | 1.1<br/>(draft version) |
+| [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md) | 1.0<br/>(draft version) |
 
