@@ -2,7 +2,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2019-12-16 - *Draft version*
+### Version 1.6 - 2020-01-14 - *Draft version*
 
 *ELN-0603-v1.6*
 
@@ -329,7 +329,7 @@ Identifiers associated with the Authentication Context X.509 extension
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema namespace for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[AuthContExt](#authcontext)\] |
+| `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema namespace for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[RFC7773](#rfc7773)\] |
 | `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info` | XML schema namespace for Extended Authentication Information in the Authentication Context X.509 certificate extension | \[[CertProf](#certprof)\] |
 
 <a name="sign-response-status-codes"></a>
@@ -547,7 +547,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 - The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.
 
-- Added XML Schema namespace identifier `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info`. This XML Schema defines an XML extension for the Authentication Context Extension to provide extended authentication information.
+- The XML Schema namespace identifier `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info` was added. This XML Schema defines an XML extension for the Authentication Context Extension to provide extended authentication information.
 
 **Changes between version 1.4 and version 1.5:**
 
