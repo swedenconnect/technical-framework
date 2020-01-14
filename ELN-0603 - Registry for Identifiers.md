@@ -353,7 +353,9 @@ Some protocols require a URI identifier to uniquely identify the entity responsi
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space. | \[[CertProf](#certprof)\] |
+| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[CertProf](#certprof)\] |
+
+> \[*\]: This also covers the Swedish Agency for Digital Government (DIGG) which has overtaken the Swedish E-identification Board's assignments.
 
 <a name="eidas-identifiers"></a>
 #### 3.1.9. eIDAS Identifiers
