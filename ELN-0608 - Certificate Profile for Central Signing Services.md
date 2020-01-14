@@ -2,7 +2,7 @@
 
 # Certificate Profile for Certificates Issued by Central Signing Services
 
-### Version 1.2 - 2018-08-29 - *Draft version*
+### Version 1.2 - 2020-01-14 - *Draft version*
 
 *ELN-0608-v1.2*
 
@@ -14,7 +14,7 @@
 
     1.1. [Requirement key words](#requirement-key-words)
 
-    1.2. [XML name space references](#xml-name-space-references)
+    1.2. [XML namespace references](#xml-namespace-references)
 
     1.3. [Structure](#structure)
 
@@ -24,20 +24,22 @@
 
     2.2. [Qualified and PKC Certificates](#qualified-and-pkc-certificates)
 
-    2.3. [Certificate content](#certificate-content)
+    2.3. [Certificate Content](#certificate-content)
 
-    2.3.1. [Subject attributes and name forms](#subject-attributes-and-name-forms)
-	
-    2.3.1.1. [Person identifier attributes](#person-identifier-attributes)    
+    2.3.1. [Subject Attributes and Name Forms](#subject-attributes-and-name-forms)
 
-    2.3.1.1.1. [Data source](#data-source)    
+    2.3.1.1. [Person Identifier Attributes](#person-identifier-attributes)
 
-    2.3.1.1.2. [Data format](#data-format)    
+    2.3.1.1.1. [Data Source](#data-source)
 
-    2.3.1.2. [Other attribute requirements](#other-attribute-requirements)    
+    2.3.1.1.2. [Data Format](#data-format)
 
-    2.3.2. [Authentication Context and Attribute mapping](#authentication-context-and-attribute-mapping)
+    2.3.1.2. [Other Attribute Requirements](#other-attribute-requirements)
+
+    2.3.2. [Authentication Context and Attribute Mapping](#authentication-context-and-attribute-mapping)
     
+    2.3.2.1. [Extended Authentication Information](#extended-authentication-information)
+
     2.3.3. [Certificate Policy](#certificate-policy)
 
 3. [**Normative References**](#normative-references)
@@ -66,12 +68,18 @@ requirements over protocol features and behavior that affect the
 interoperability and security of implementations. When these words are
 not capitalized, they are meant in their natural-language sense.
 
-<a name="xml-name-space-references"></a>
-### 1.2. XML name space references
+<a name="xml-namespace-references"></a>
+### 1.2. XML namespace references
 
-The prefix **saci:** stands for the SAML Authentication Context
-Information XML Schema namespace
-(`http://id.elegnamnden.se/auth-cont/1.0/saci`).
+The prefix **saci:** stands for the SAML Authentication Context Information XML Schema 
+namespace, `http://id.elegnamnden.se/auth-cont/1.0/saci`.
+
+> Schema location URL: https://docs.swedenconnect.se/schemas/cert-schemas/1.0/CertAuthContextExtension-SAML-1.0.xsd
+
+The prefix **sacex:** stands for the Extended Authentication Information XML Schema
+namespace, `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info`.
+
+> Schema location URL: https://docs.swedenconnect.se/schemas/cert-schemas/1.0/CertAuthContextExtension-ExtAuthInfo-1.0.xsd
 
 <a name="structure"></a>
 ### 1.3. Structure
@@ -108,47 +116,47 @@ This profile supports both Qualified Certificates as well as certificates that a
 All profile requirements apply to both Qualified Certificates and to PKC certificates unless it is explicitly stated that a particular requirement applies only to PKC or Qualified Certificates.
 
 <a name="certificate-content"></a>
-### 2.3. Certificate content
+### 2.3. Certificate Content
 
 All certificates SHALL be fully compliant with  \[[RFC5280](#rfc5280)\] and \[[EU-CERT-NP](#en-cert-np)\]. All Qualified Certificates SHALL also implement mandatory QC statements as defined in \[[EU-CERT-QC](#eu-cert-qc)\].
 
 <a name="subject-attributes-and-name-forms"></a>
-#### 2.3.1. Subject attributes and name forms
+#### 2.3.1. Subject Attributes and Name Forms
 
 <a name="person-identifier-attributes"></a>
-##### 2.3.1.1. Person identifier attributes
+##### 2.3.1.1. Person Identifier Attributes
 
 <a name="data-source"></a>
-###### 2.3.1.1.1. Data source
-All certificates SHALL contain a unique person identifier, carried in the `serialNumber` attribute (OID 2.5.4.5) in the subject field. The person identifier SHALL be obtained from the Identity Provider in the form of a SAML attribute. For PKC certificates the SAML attribute SHOULD be one of the attributes listed below. For Qualified Certificates the SAML attribute SHALL be one of the attributes listed below.
+###### 2.3.1.1.1. Data Source
+
+All certificates SHALL contain a unique person identifier, carried in the `serialNumber` attribute (OID 2.5.4.5) in the subject field. The person identifier SHALL be obtained from the Identity Provider in the form of a SAML attribute. For PKC certificates, the SAML attribute SHOULD be one of the attributes listed below. For Qualified Certificates, the SAML attribute SHALL be one of the attributes listed below.
 
 Attribute | Attribute name | Specification
 ---|---|---
-Swedish personal identity number (personnummer)<sup>1</sup>| urn:oid:1.2.752.29.4.13 | \[[AttrSpec](#attrspec)\]
+Swedish Personal Identity Number (personnummer) | urn:oid:1.2.752.29.4.13 | \[[AttrSpec](#attrspec)\]
 Provisional ID | urn:oid:1.2.752.201.3.4 | \[[AttrSpec](#attrspec)\]
-eIDAS person identifier | urn:oid:1.2.752.201.3.7 |\[[AttrSpec](#attrspec)\]
+eIDAS Person Identifier | urn:oid:1.2.752.201.3.7 |\[[AttrSpec](#attrspec)\]
 
-> \[1\]: The urn:oid:1.2.752.29.4.13 attribute is also defined to be able to hold a Swedish coordination number (samordningsnummer).
 
 <a name="data-format"></a>
-###### 2.3.1.1.1. Data format
+###### 2.3.1.1.1. Data Format
 
 The identifier data obtained from the SAML assertion SHALL be stored in the `serialNumber` attribute using one of the following formats:
 
 - using exactly the same format as it was obtained from the SAML attribute, or,
 - using conventions specified in \[[EU-CERT-GEN](#eu-cert-gen)\] as defined below.
 
-When storing person identifier in the `serialNumber` attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1. of  \[[EU-CERT-GEN](#eu-cert-gen)\].
+When storing a person identifier in the `serialNumber` attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1 of  \[[EU-CERT-GEN](#eu-cert-gen)\].
 
-**Swedish personal identity number (personnummer)**
+**Swedish Personal Identity Number (personnummer)**
 
-When the identifier is a Swedish personal identity number (personnummer), or a coordination number (samordningsnummer), the semantics identifier SHALL be a natural person semantics identifier using the identity type reference "PNO".
+When the identifier is a Swedish personal identity number (personnummer) the semantics identifier SHALL be a natural person semantics identifier using the identity type reference "PNO".
 
 > Example: PNOSE-194911172296
 
 **Provisional ID**
 
-When the identifier is a provisional ID the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference "PI:SE". 
+When the identifier is a provisional ID the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference "PI:SE".
 
 > Example: PI:SE-NO:16043700158
 
@@ -158,7 +166,7 @@ When the identity type reference is "PI:SE", the `nameRegistrationAuthorities` e
 
 > `http://id.elegnamnden.se/eln/name-registration-authority`
 
-**eIDAS person identifier**
+**eIDAS Person Identifier**
 
 eIDAS person identifier attributes MAY be stored in the serial number attribute having exactly the same format as received from the SAML attribute listed above, supported by providing a semantics identifier according to \[[EU-CERT-GEN](#eu-cert-gen)\] identified by the OID `0.4.0.194121.1.3`.
 
@@ -166,27 +174,80 @@ eIDAS person identifier attributes MAY be stored in the serial number attribute 
 > A new version of the \[[EU-CERT-GEN](#eu-cert-gen)\] is processed for approval at the time of publication of this document. The new version will specify a semantics identifier for storing eIDAS person identifier attributes using the semantics identifier OID `0.4.0.194121.1.3`. This semantics identifier (`id-etsi-qcs-semanticsId-eIDASNatural`) is not yet present in the latest published version of the standard.
 
 <a name="other-attribute-requirements"></a>
-##### 2.3.1.2. Other attribute requirements
+##### 2.3.1.2. Other Attribute Requirements
 
 An e-mail address, when present, SHALL be stored in a Subject Alternative Name extension as an rfc822Name.
 
 <a name="authentication-context-and-attribute-mapping"></a>
-#### 2.3.2. Authentication Context and Attribute mapping
+#### 2.3.2. Authentication Context and Attribute Mapping
 
-Certificates MUST include an `AuthContextExtension` according to \[[RFC7773](#rfc7773)\]. This extension SHALL include one SAML Authentication Context Information element identified by the XML schema name space identifier:
+Certificates MUST include an `AuthContextExtension` according to \[[RFC7773](#rfc7773)\]. This extension SHALL include one SAML Authentication Context Information element identified by the XML schema namespace identifier:
 
 > `http://id.elegnamnden.se/auth-cont/1.0/saci`
 
 The `<saci:SAMLAuthContext>` element SHALL contain both an `<saci:AuthContextInfo>` element as well as an `<saci:IdAttributes>` element.
 
-The `<saci:IdAttributes>` element SHALL contain one `<saci:AttributeMapping>` element for each subject attribute or
-other name form that was obtained from a SAML attribute in the SAML assertion used to authenticate the signer as part of the signature creation process. Each `<saci:AttributeMapping>` element SHALL provide the `<saml:AttributeValue>` that
-were obtained from the SAML assertion.
+The `<saci:IdAttributes>` element SHALL contain one `<saci:AttributeMapping>` element for each 
+subject attribute or other name form that was obtained from a SAML attribute in the SAML 
+assertion used to authenticate the signer as part of the signature creation process. Each
+`<saci:AttributeMapping>` element SHALL provide the `<saml:AttributeValue>` that were obtained from
+the SAML assertion.
+
+<a name="extended-authentication-information"></a>
+##### 2.3.2.1. Extended Authentication Information
+
+In addition to the attributes of `<saci:AuthContextInfo>` it is possible to provide additional authentication information through the extensibility of `<saci:AuthContextInfo>` which allows inclusion of a sequence of any element.
+
+One such element is defined in this section, the `<sacex:ExtAuthInfo>` element.
+
+This element MAY be included to provide a name of a parameter and its associated value. 
+
+This element MAY be used to carry the value of any single valued attribute from the associated SAML assertion as long as the SAML attribute value is not composed of a complex type. When used to carry a SAML attribute value, the value of the `<sacex:ExtAuthInfo>` element SHALL be identical to the content of the SAML attribute value element and the `Name` attribute SHALL hold the same value as the `Name` attribute of the corresponding SAML attribute.
+
+The `<sacex:ExtAuthInfo>` element is defined by the following XML Schema:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info"
+    xmlns:sacex="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info">
+    
+  <xs:element name="ExtAuthInfo" type="sacex:ExtAuthInfoType" />
+
+  <xs:complexType name="ExtAuthInfoType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Name" type="xs:string" use="required" />
+        <xs:anyAttribute namespace="##any" processContents="lax" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>
+```
+
+**Example:**
+
+The following example illustrates inclusion of the content of a transaction identifier SAML 
+attribute as extended authentication information.
+
+```
+<saci:SAMLAuthContext
+    xmlns:saci="http://id.elegnamnden.se/auth-cont/1.0/saci"
+    xmlns:sacext="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info">
+  <saci:AuthContextInfo IdentityProvider="http://eid.example.com/idp"
+      AuthenticationInstant="2020-01-10T17:02:46.000Z"
+      AuthnContextClassRef="http://id.elegnamnden.se/loa/1.0/loa3"
+      AssertionRef="_936e075dc2725b016de57b9a0624c766">
+    <sacext:ExtAuthInfo Name="urn:oid:1.2.752.201.3.2">dc6ac7656H89bfb51</sacext:ExtAuthInfo>
+  </saci:AuthContextInfo>
+  <saci:IdAttributes>...</saci:IdAttributes>
+</saci:SAMLAuthContext>
+```
 
 <a name="certificate-policy"></a>
 #### 2.3.3. Certificate Policy
 
-Certificates SHALL contain at least one referenced certificate policy. PKC certificates SHALL contain at least one reference to a policy idefined in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
+Certificates SHALL contain at least one referenced certificate policy. PKC certificates SHALL contain at least one reference to a policy identified in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
 
 
 <a name="normative-references"></a>
@@ -273,11 +334,12 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 
 - Update of logotype, fixes of typos and reference list.
 
+- Section 2.3.2.1, "Extended Authentication Information", was added.
+
 **Changes between version 1.0 and version 1.1:**
 
 - Removed the requirement to store "personnummer" or "samordningsnummer".
 - Updated standards references to remove old deprecated standards and replace them with the currently published documents.
 - Specified optional support for using semantics identifiers in accordance with ETSI EN 319 412-1 to specify that the serialNumber attribute contains a Swedish "personnummer" or "samordningsnummer", Provisional ID or eIDAS person identifier.
-- Added requirement to specify ETSI policy identifiers. 
+- Added requirement to specify ETSI policy identifiers.
 - Fix of invalid links for SKV704 and SKV707.
-
