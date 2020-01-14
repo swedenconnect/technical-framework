@@ -249,6 +249,7 @@ Specification for the Swedish eID Framework.
 | ELN-AP-Pnr-01 | `http://id.elegnamnden.se/ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | \[[EidAttributes](#eidattributes)\] |
 | ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/ap/1.0/org-person-01` | Organizational identity attribute set. | \[[EidAttributes](#eidattributes)\] |
 | ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | \[[EidAttributes](#eidattributes)\] |
+| DIGG-AP-HSAid-01 | `http://id.swedenconnect.se/ap/1.0/hsaid-01` | Natural Person Identity with HSA-ID | \[[EidAttributes](#eidattributes)\] |
 
 <a name="entity-category-identifiers"></a>
 #### 3.1.3. Entity Category Identifiers
@@ -268,6 +269,8 @@ Identifiers for entity categories representing alternative sets of requirements.
 | `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”. | |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -547,7 +550,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 - Section 3.1.9.2, "eIDAS Connector Aliases", defining the URI format for representing country affiliation of eIDAS connector services, was added.
 
-- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
+- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 
 - Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.
 
@@ -555,9 +558,11 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 - Associating the OID registry with Sweden Connect.
 
-- Aligned registered module OID:s with RFC 7773 .
+- Aligned registered module OID:s with RFC 7773.
 
 - Adding a new extension OID for Signature Validation Tokens in timestamp extensions.
+
+- Added attribute set and service entity categories for HSA-ID.
 
 **Changes between version 1.4 and version 1.5:**
 
