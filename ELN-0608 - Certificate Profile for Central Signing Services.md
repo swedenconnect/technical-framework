@@ -189,7 +189,7 @@ In addition to the attributes of `<sci:AuthContextInfo>` it is possible to provi
 
 One such element is defined in this section, the `<sacex:ExtAuthInfo>` element.
 
-This element MAY be included to provide a name of a parameter and its associated value. This element MAY be used to carry the value of any single valued attribute from the associated SAML Assertion as long as the SAML attribute value is not composed of a complex type. When used to carry a SAML attribute value, the value of the `<sacex:ExtAuthInfo>` element SHALL be identical to the content of the SAML attribute value element and the Name attribue SHALL hold the same value as the Name attribute of the corresponding SAML attribute.
+This element MAY be included to provide a name of a parameter and its associated value. This element MAY be used to carry the value of any single valued attribute from the associated SAML Assertion as long as the SAML attribute value is not composed of a complex type. When used to carry a SAML attribute value, the value of the `<sacex:ExtAuthInfo>` element SHALL be identical to the content of the SAML attribute value element and the `Name` attribue SHALL hold the same value as the `Name` attribute of the corresponding SAML attribute.
 
 The `<sacex:ExtAuthInfo>` element is defined by the following XML Schema:
 
