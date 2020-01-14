@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
 ### Version 1.2 - 2019-11-01 - **Draft version**
 
-*ELN-0612-v1.2*
+*2019-316*
+
+> *Previous registration number: ELN-0612*
 
 ---
 

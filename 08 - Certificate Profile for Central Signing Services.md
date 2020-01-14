@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Certificate Profile for Certificates Issued by Central Signing Services
 
 ### Version 1.2 - 2020-01-14 - *Draft version*
 
-*ELN-0608-v1.2*
+*2019-313*
+
+> *Previous registration number: ELN-0608*
 
 ---
 

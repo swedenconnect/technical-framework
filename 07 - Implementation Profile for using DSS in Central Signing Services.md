@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
 ### Version 1.4 - 2019-08-28 - *Draft version*
 
-*ELN-0607-v1.4*
+*2019-312*
+
+> *Previous registration number: ELN-0607*
 
 ---
 

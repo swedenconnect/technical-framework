@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Swedish eID Framework - Registry for identifiers
 
 ### Version 1.6 - 2020-01-14 - *Draft version*
 
-*ELN-0603-v1.6*
+*2019-309*
+
+> *Previous registration number: ELN-0603*
 
 ---
 

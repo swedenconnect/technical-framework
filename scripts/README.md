@@ -1,6 +1,6 @@
 ## Converting specifications into HTML
 
-All releases of the Swedish eID Framework are published to <http://elegnamnden.github.io/technical-framework>. We use the script `tohtml.sh` to produce HTML from our specifications written in Markdown. This script also sets up the CSS-files for printing the HTML-files.
+All releases of the Swedish eID Framework are published to <https://docs.swedenconnect.se/technical-framework>. We use the script `tohtml.sh` to produce HTML from our specifications written in Markdown. This script also sets up the CSS-files for printing the HTML-files.
 
 ### Prerequisites
 

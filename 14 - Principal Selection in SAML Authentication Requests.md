@@ -1,10 +1,17 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Principal Selection in SAML Authentication Requests 
 
 ### Version 1.0 - 2019-11-01 - *Draft version*
 
-*ELN-0614-v1.0*
+*2019-318*
 
 ---
 

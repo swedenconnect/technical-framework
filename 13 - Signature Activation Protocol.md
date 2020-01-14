@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # Signature Activation Protocol for Federated Signing
 
 ### Version 1.1 - 2019-08-30 - *Draft version*
 
-*ELN-0613-v1.1*
+*2019-317*
+
+> *Previous registration number: ELN-0613*
 
 ---
 

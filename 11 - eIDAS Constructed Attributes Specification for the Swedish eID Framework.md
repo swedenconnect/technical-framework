@@ -1,10 +1,19 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
 # eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
 ### Version 1.1 - 2019-08-30 - *Draft version*
 
-*ELN-0611-v1.1*
+*2019-315*
+
+> *Previous registration number: ELN-0611*
 
 ---
 
