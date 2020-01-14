@@ -12,7 +12,7 @@
   <body>
     <article class="markdown-body"><p><img src="img/sweden-connect.png"></img></p>
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.6---2020-01-09---*draft-version*">Version 1.6 - 2020-01-09 - <em>Draft version</em></h3>
+<h3 id="version-1.6---2020-01-14---*draft-version*">Version 1.6 - 2020-01-14 - <em>Draft version</em></h3>
 <p><em>ELN-0603-v1.6</em></p>
 <hr>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -123,14 +123,14 @@ the tree contains the following three arcs:</p>
 <p>Object identifiers are in this document represented as a string
 containing a sequence of integers separated by a dot (“.”), e.g.
 2.3.4.25, where each integer represents a node in the hierarchy.</p>
-<p>The node assigned to the Swedish e-identification board is: <strong>1.2.752.201</strong>.</p>
+<p>The node assigned to the Swedish E-identification Board/Sweden Connect is: <strong>1.2.752.201</strong>.</p>
 <p>This represents a hierarchical structure of nodes in the following
 sequence:</p>
 <ul class="list">
 <li>1 = ISO</li>
 <li>2 = ISO member body</li>
 <li>752 = The Swedish Standardization Institute (SIS-ITS)</li>
-<li>201 = Swedish e-identification board</li>
+<li>201 = Swedish E-identification Board (see note below)</li>
 </ul>
 <p>This node is used as the Prefix (root node) for all OID identifiers in
 this registry, using the following structure:</p>
@@ -140,6 +140,9 @@ category and an identifier node under this category node. No node in
 this structure is assigned as version node. Version is handled, when
 necessary, within the identifier portion of the OID, typically by
 assigning a new identifier.</p>
+<p><strong>Note</strong>: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but
+this organisation has been overtaken by the Swedish Agency for Digital Government (DIGG) who 
+now uses this OID arc for the Sweden Connect Technical Framework.</p>
 <p><a name="assigned-identifiers"></a></p>
 <h2 id="3.-assigned-identifiers">3. Assigned Identifiers</h2>
 <p><a name="url-identifiers"></a></p>
@@ -205,8 +208,8 @@ assigning a new identifier.</p>
 </table>
 <p><a name="authentication-context-uris"></a></p>
 <h4 id="3.1.1.-authentication-context-uris">3.1.1. Authentication Context URIs</h4>
-<p>Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to 
-[<a href="#tillitramv">TillitRamv</a>] and [<a href="#eiddeploy">EidDeploy</a>]. </p>
+<p>Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to
+[<a href="#tillitramv">TillitRamv</a>] and [<a href="#eiddeploy">EidDeploy</a>].</p>
 <table>
 <thead>
 <tr>
@@ -600,8 +603,13 @@ below extends the list of second-level status codes defined in section
 <tbody>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/auth-cont/1.0/saci</code></td>
-<td style="text-align:left">XML schema name space for SAML Authentication Context Information in the Authentication Context X.509 certificate extension</td>
-<td style="text-align:left">[<a href="#authcontext">AuthContExt</a>]</td>
+<td style="text-align:left">XML schema namespace for SAML Authentication Context Information in the Authentication Context X.509 certificate extension</td>
+<td style="text-align:left">[<a href="#rfc7773">RFC7773</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info</code></td>
+<td style="text-align:left">XML schema namespace for Extended Authentication Information in the Authentication Context X.509 certificate extension</td>
+<td style="text-align:left">[<a href="#certprof">CertProf</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -659,11 +667,14 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <tbody>
 <tr>
 <td style="text-align:left"><code>http://id.elegnamnden.se/eln/name-registration-authority</code></td>
-<td style="text-align:left">Identifying the Swedish e-Identification Board as name registration authority, responsible for a particular name space.</td>
+<td style="text-align:left">Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace.</td>
 <td style="text-align:left">[<a href="#certprof">CertProf</a>]</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>[*]: This also covers the Swedish Agency for Digital Government (DIGG) which has overtaken the Swedish E-identification Board&#39;s assignments.</p>
+</blockquote>
 <p><a name="eidas-identifiers"></a></p>
 <h4 id="3.1.9.-eidas-identifiers">3.1.9. eIDAS Identifiers</h4>
 <p>This section defines identifiers used within the Swedish eID Framework to integrate with the eIDAS Framework.</p>
@@ -734,7 +745,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <tr>
 <td style="text-align:left">1.2.752.201.5.1</td>
 <td style="text-align:left">Authentication Context extension</td>
-<td style="text-align:left">[<a href="#authcontext">AuthContExt</a>]</td>
+<td style="text-align:left">[<a href="#rfc7773">RFC7773</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.1</td>
@@ -810,11 +821,10 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 </table>
 <p><a name="asn1-declarations"></a></p>
 <h4 id="3.2.1.-asn.1-declarations">3.2.1. ASN.1 Declarations</h4>
-<pre class="hljs"><code><span class="hljs-comment">-- Object Identifier Registry for the Swedish E-identification board</span>
+<p>Object Identifier Registry for Sweden Connect<sup>*</sup></p>
+<pre class="hljs"><code><span class="hljs-built_in">id</span>-eleg OBJECT IDENTIFIER ::= {iso(<span class="hljs-number">1</span>) member-body(<span class="hljs-number">2</span>) se(<span class="hljs-number">752</span>) e-legitimationsnamnden(<span class="hljs-number">201</span>)}
 
-<span class="hljs-built_in">id</span>-eleg OBJECT IDENTIFIER ::= {iso(<span class="hljs-number">1</span>) member-body(<span class="hljs-number">2</span>) se(<span class="hljs-number">752</span>) e-legitimationsnamnden(<span class="hljs-number">201</span>)}
-
-<span class="hljs-comment">-- E-legnamnden arcs</span>
+<span class="hljs-comment">-- Sweden Connect arcs</span>
 <span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span>    OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-eleg <span class="hljs-number">0</span> }    <span class="hljs-comment">-- ASN.1 modules</span>
 <span class="hljs-built_in">id</span>-test   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-eleg <span class="hljs-number">1</span> }    <span class="hljs-comment">-- OIDs for test</span>
 <span class="hljs-built_in">id</span>-pol    OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-eleg <span class="hljs-number">2</span> }    <span class="hljs-comment">-- Policy</span>
@@ -822,15 +832,15 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <span class="hljs-built_in">id</span>-qcs    OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-eleg <span class="hljs-number">4</span> }    <span class="hljs-comment">-- QC Statement</span>
 <span class="hljs-built_in">id</span>-ce     OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-eleg <span class="hljs-number">5</span> }    <span class="hljs-comment">-- Cert Extensions</span>
 
-<span class="hljs-comment">-- E-legnamnden modules</span>
+<span class="hljs-comment">-- Sweden Connect Modules</span>
+<span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span>-auth-context<span class="hljs-number">-88</span> OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span> <span class="hljs-number">1</span> }    <span class="hljs-comment">-- Used in RFC 7773</span>
+<span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span>-auth-context<span class="hljs-number">-08</span> OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> }    <span class="hljs-comment">-- Used in RFC 7773</span>
 
-<span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span>-qcAuthContext OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-<span class="hljs-keyword">mod</span> <span class="hljs-number">1</span> }
+<span class="hljs-comment">-- Sweden Connect OIDs for test</span>
 
-<span class="hljs-comment">-- E-legnamnden OIDs for test</span>
+<span class="hljs-comment">-- Sweden Connect Policy</span>
 
-<span class="hljs-comment">-- E-legnamnden Policy</span>
-
-<span class="hljs-comment">-- E-legnamnden Attributes</span>
+<span class="hljs-comment">-- Sweden Connect Attributes</span>
 <span class="hljs-built_in">id</span>-attr-org-affiliation      OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">1</span> }    <span class="hljs-comment">-- Organizational affiliation</span>
 <span class="hljs-built_in">id</span>-attr-<span class="hljs-keyword">transaction</span>-<span class="hljs-built_in">id</span>       OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">2</span> }    <span class="hljs-comment">-- Transaction identifier</span>
 <span class="hljs-built_in">id</span>-attr-auth-context-params  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">3</span> }    <span class="hljs-comment">-- Authentication context parameters</span>
@@ -838,20 +848,24 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <span class="hljs-built_in">id</span>-attr-prid-persistence     OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">5</span> }    <span class="hljs-comment">-- Provisional ID persistence indicator</span>
 <span class="hljs-built_in">id</span>-attr-pnr-binding          OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">6</span> }    <span class="hljs-comment">-- Personal Identity Number binding URI</span>
 <span class="hljs-built_in">id</span>-attr-eidas-pid            OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">7</span> }    <span class="hljs-comment">-- eIDAS Person Identifier</span>
-<span class="hljs-built_in">id</span>-attr-birth-<span class="hljs-built_in">name</span>           OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">8</span> }    <span class="hljs-comment">-- Birth name    </span>
-<span class="hljs-built_in">id</span>-attr-eidas-np-address     OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">9</span> }    <span class="hljs-comment">-- eIDAS Natural Person Address    </span>
-<span class="hljs-built_in">id</span>-attr-user-certificate     OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">10</span> }   <span class="hljs-comment">-- User certificate    </span>
-<span class="hljs-built_in">id</span>-attr-user-signature       OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">11</span> }   <span class="hljs-comment">-- User signature    </span>
+<span class="hljs-built_in">id</span>-attr-birth-<span class="hljs-built_in">name</span>           OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">8</span> }    <span class="hljs-comment">-- Birth name</span>
+<span class="hljs-built_in">id</span>-attr-eidas-np-address     OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">9</span> }    <span class="hljs-comment">-- eIDAS Natural Person Address</span>
+<span class="hljs-built_in">id</span>-attr-user-certificate     OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">10</span> }   <span class="hljs-comment">-- User certificate</span>
+<span class="hljs-built_in">id</span>-attr-user-signature       OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">11</span> }   <span class="hljs-comment">-- User signature</span>
 <span class="hljs-built_in">id</span>-attr-sad                  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">12</span> }   <span class="hljs-comment">-- Signature activation data</span>
 <span class="hljs-built_in">id</span>-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">13</span> }   <span class="hljs-comment">-- Authentication server signature</span>
 <span class="hljs-built_in">id</span>-attr-sign-message-digest  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">14</span> }   <span class="hljs-comment">-- Sign message digest</span>
 
-<span class="hljs-comment">-- E-legnamnden QC Statement extension</span>
+<span class="hljs-comment">-- Sweden Connect QC Statement extension</span>
 <span class="hljs-built_in">id</span>-qcs-sid         OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">1</span> }   <span class="hljs-comment">-- Semantics Identifiers</span>
 <span class="hljs-built_in">id</span>-qcs-statement   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">2</span> }   <span class="hljs-comment">-- QC statements</span>
 
-<span class="hljs-comment">-- E-legnamnden Certificate Extensions</span>
-<span class="hljs-built_in">id</span>-ce-authContext  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-ce <span class="hljs-number">1</span> }</code></pre><p><a name="references"></a></p>
+<span class="hljs-comment">-- Sweden Connect Certificate Extensions</span>
+<span class="hljs-built_in">id</span>-ce-authContext  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-ce <span class="hljs-number">1</span> }    <span class="hljs-comment">-- Auth context extension used in RFC 7773</span>
+<span class="hljs-built_in">id</span>-ce-svt          OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-ce <span class="hljs-number">2</span> }    <span class="hljs-comment">-- Signature Validation Token extension</span></code></pre><blockquote>
+<p>[*]: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but this organisation has been overtaken by the Swedish Agency for Digital Government (DIGG) who now uses this OID arc for the Sweden Connect Technical Framework.</p>
+</blockquote>
+<p><a name="references"></a></p>
 <h2 id="4.-references">4. References</h2>
 <p><a name="saml2core"></a>
 <strong>[SAML2Core]</strong></p>
@@ -870,10 +884,10 @@ Version 1.0.</a></p>
 <blockquote>
 <p><a href="https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf">Tillitsramverk för Svensk e-legitimation - 2018-158</a>.</p>
 </blockquote>
-<p><a name="authcontext"></a>
-<strong>[AuthContExt]</strong></p>
+<p><a name="rfc7773"></a>
+<strong>[RFC7773]</strong></p>
 <blockquote>
-<p><a href="https://tools.ietf.org/html/rfc7773">RFC 7773: Authentication Context Certificate Extension</a>.</p>
+<p><a href="https://tools.ietf.org/html/rfc7773">RFC7773: Authentication Context Certificate Extension</a>.</p>
 </blockquote>
 <p><a name="eiddeploy"></a>
 <strong>[EidDeploy]</strong></p>
@@ -929,7 +943,7 @@ regulation and associated technical specifications.</p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
-<li><p>The specification was renamed from &quot;Registry for identifiers assigned by the Swedish e-identification board&quot; to &quot;Swedish eID Framework - Registry for identifiers&quot;. </p>
+<li><p>The specification was renamed from &quot;Registry for identifiers assigned by the Swedish e-identification board&quot; to &quot;Swedish eID Framework - Registry for identifiers&quot;.</p>
 </li>
 <li><p>The authentication context URIs <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> and <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3-sigmessage</code> were introduced in sections 3.1.1 and 3.1.1.1, and the service entity category <code>http://id.swedenconnect.se/ec/sc/uncertified-loa3-pnr</code> was added to section 3.1.3.1.</p>
 </li>
@@ -939,11 +953,19 @@ regulation and associated technical specifications.</p>
 </li>
 <li><p>Section 3.1.9.2, &quot;eIDAS Connector Aliases&quot;, defining the URI format for representing country affiliation of eIDAS connector services, was added.</p>
 </li>
-<li><p>The link for the &quot;Tillitsramverk för Svensk e-legitimation&quot; specification was updated.</p>
+<li><p>The link for the &quot;Tillitsramverk för Svensk e-legitimation&quot; specification was updated.</p>
 </li>
 <li><p>Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.</p>
 </li>
 <li><p>The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.</p>
+</li>
+<li><p>The XML Schema namespace identifier <code>http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info</code> was added. This XML Schema defines an XML extension for the Authentication Context Extension to provide extended authentication information.</p>
+</li>
+<li><p>Associating the OID registry with Sweden Connect.</p>
+</li>
+<li><p>Aligned registered module OID:s with RFC 7773.</p>
+</li>
+<li><p>Adding a new extension OID for Signature Validation Tokens in timestamp extensions.</p>
 </li>
 <li><p>Added attribute set and service entity categories for HSA-ID.</p>
 </li>
