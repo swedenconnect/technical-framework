@@ -126,7 +126,7 @@ Object identifiers are in this document represented as a string
 containing a sequence of integers separated by a dot (“.”), e.g.
 2.3.4.25, where each integer represents a node in the hierarchy.
 
-The node assigned to the Swedish e-identification board is: **1.2.752.201**.
+The node assigned to the Swedish E-identification Board/Sweden Connect is: **1.2.752.201**.
 
 This represents a hierarchical structure of nodes in the following
 sequence:
@@ -134,7 +134,7 @@ sequence:
 -   1 = ISO
 -   2 = ISO member body
 -   752 = The Swedish Standardization Institute (SIS-ITS)
--   201 = Swedish e-identification board
+-   201 = Swedish E-identification Board (see note below)
 
 This node is used as the Prefix (root node) for all OID identifiers in
 this registry, using the following structure:
@@ -146,6 +146,10 @@ category and an identifier node under this category node. No node in
 this structure is assigned as version node. Version is handled, when
 necessary, within the identifier portion of the OID, typically by
 assigning a new identifier.
+
+**Note**: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but
+this organisation has been overtaken by the Swedish Agency for Digital Government (DIGG) who 
+now uses this OID arc for the Sweden Connect Technical Framework.
 
 <a name="assigned-identifiers"></a>
 ## 3. Assigned Identifiers
@@ -245,6 +249,7 @@ Specification for the Swedish eID Framework.
 | ELN-AP-Pnr-01 | `http://id.elegnamnden.se/ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | \[[EidAttributes](#eidattributes)\] |
 | ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/ap/1.0/org-person-01` | Organizational identity attribute set. | \[[EidAttributes](#eidattributes)\] |
 | ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | \[[EidAttributes](#eidattributes)\] |
+| DIGG-AP-HSAid-01 | `http://id.swedenconnect.se/ap/1.0/hsaid-01` | Natural Person Identity with HSA-ID | \[[EidAttributes](#eidattributes)\] |
 
 <a name="entity-category-identifiers"></a>
 #### 3.1.3. Entity Category Identifiers
@@ -264,6 +269,8 @@ Identifiers for entity categories representing alternative sets of requirements.
 | `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”. | |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -404,7 +411,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 | **OID** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| 1.2.752.201.5.1 | Authentication Context extension | \[[AuthContExt](#authcontext)\] |
+| 1.2.752.201.5.1 | Authentication Context extension | \[[RFC7773](#rfc7773)\] |
 | 1.2.752.201.3.1 | Organization Affiliation Attribute | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.2 | Transaction Identifier | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.3 | Authentication Context Parameters | \[[EidAttributes](#eidattributes)\] |
@@ -423,11 +430,11 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
 
-    -- Object Identifier Registry for the Swedish E-identification board
+Object Identifier Registry for Sweden Connect<sup>*</sup>
 
     id-eleg OBJECT IDENTIFIER ::= {iso(1) member-body(2) se(752) e-legitimationsnamnden(201)}
 
-    -- E-legnamnden arcs
+    -- Sweden Connect arcs
     id-mod    OBJECT IDENTIFIER ::= { id-eleg 0 }    -- ASN.1 modules
     id-test   OBJECT IDENTIFIER ::= { id-eleg 1 }    -- OIDs for test
     id-pol    OBJECT IDENTIFIER ::= { id-eleg 2 }    -- Policy
@@ -435,15 +442,15 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-qcs    OBJECT IDENTIFIER ::= { id-eleg 4 }    -- QC Statement
     id-ce     OBJECT IDENTIFIER ::= { id-eleg 5 }    -- Cert Extensions
 
-    -- E-legnamnden modules
+    -- Sweden Connect Modules
+    id-mod-auth-context-88 OBJECT IDENTIFIER ::= { id-mod 1 }    -- Used in RFC 7773
+    id-mod-auth-context-08 OBJECT IDENTIFIER ::= { id-mod 2 }    -- Used in RFC 7773
 
-    id-mod-qcAuthContext OBJECT IDENTIFIER ::= { id-mod 1 }
+    -- Sweden Connect OIDs for test
 
-    -- E-legnamnden OIDs for test
+    -- Sweden Connect Policy
 
-    -- E-legnamnden Policy
-
-    -- E-legnamnden Attributes
+    -- Sweden Connect Attributes
     id-attr-org-affiliation      OBJECT IDENTIFIER ::= { id-attr 1 }    -- Organizational affiliation
     id-attr-transaction-id       OBJECT IDENTIFIER ::= { id-attr 2 }    -- Transaction identifier
     id-attr-auth-context-params  OBJECT IDENTIFIER ::= { id-attr 3 }    -- Authentication context parameters
@@ -458,13 +465,16 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
-
-    -- E-legnamnden QC Statement extension
+    
+    -- Sweden Connect QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
     id-qcs-statement   OBJECT IDENTIFIER ::= { id-qcs 2 }   -- QC statements
 
-    -- E-legnamnden Certificate Extensions
-    id-ce-authContext  OBJECT IDENTIFIER ::= { id-ce 1 }
+    -- Sweden Connect Certificate Extensions
+    id-ce-authContext  OBJECT IDENTIFIER ::= { id-ce 1 }    -- Auth context extension used in RFC 7773
+    id-ce-svt          OBJECT IDENTIFIER ::= { id-ce 2 }    -- Signature Validation Token extension
+
+> \[*\]: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but this organisation has been overtaken by the Swedish Agency for Digital Government (DIGG) who now uses this OID arc for the Sweden Connect Technical Framework.
 
 <a name="references"></a>
 ## 4. References
@@ -483,9 +493,9 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 **\[TillitRamv\]**
 > [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf).
 
-<a name="authcontext"></a>
-**\[AuthContExt\]**
-> [RFC 7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
+<a name="rfc7773"></a>
+**\[RFC7773\]**
+> [RFC7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
@@ -543,13 +553,21 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 - Section 3.1.9.2, "eIDAS Connector Aliases", defining the URI format for representing country affiliation of eIDAS connector services, was added.
 
-- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
+- The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 
 - Added the attribute SignMessageDigest (1.2.752.201.3.14) to section 3.2.
 
 - The Sign Message Authentication Context URIs defined in section 3.1.1.1 are deprecated.
 
 - The XML Schema namespace identifier `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info` was added. This XML Schema defines an XML extension for the Authentication Context Extension to provide extended authentication information.
+
+- Associating the OID registry with Sweden Connect.
+
+- Aligned registered module OID:s with RFC 7773.
+
+- Adding a new extension OID for Signature Validation Tokens in timestamp extensions.
+
+- Added attribute set and service entity categories for HSA-ID.
 
 **Changes between version 1.4 and version 1.5:**
 
