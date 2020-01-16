@@ -127,4 +127,4 @@ Older version of the specification are stored in the following branches:
 
 ---
 
-Copyright &copy; 2017-2020, [Sweden Connect](https://swedenconnect.se). Licensed under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
+Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2020. All Rights Reserved.
