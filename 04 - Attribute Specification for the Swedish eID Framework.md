@@ -9,13 +9,15 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.6 - 2020-01-09 - *Draft version*
+### Version 1.6 - 2020-01-17
 
-*2019-310*
-
-> *Previous registration number: ELN-0604*
+Registration number: **2019-310** (*previously: ELN-0604*)
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -629,7 +631,7 @@ following attribute:
 <a name="rfc2119"></a>
 **\[RFC2119\]**
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
-> Levels, March 1997.](http://www.ietf.org/rfc/rfc2119.txt)
+> Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="saml2core"></a>
 **\[SAML2Core\]**
@@ -682,12 +684,12 @@ following attribute:
 
 <a name="eiddeployprof"></a>
 **\[EidDeployProf\]**
-> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="constructedattr"></a>
 **\[ConstructedAttr\]**
 > [eIDAS Constructed Attributes Specification for the Swedish eID
-> Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
+> Framework](https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas-attr"></a>
 **\[eIDAS\_Attr\]**
@@ -695,11 +697,11 @@ following attribute:
 
 <a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/updates/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
 <a name="dssext"></a>
 **\[DSSExt\]**
-> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
