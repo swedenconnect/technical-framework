@@ -9,11 +9,9 @@
 
 # Certificate Profile for Certificates Issued by Central Signing Services
 
-### Version 1.2 - 2020-01-14 - *Draft version*
+### Version 1.2 - 2020-01-17
 
-*2019-313*
-
-> *Previous registration number: ELN-0608*
+Registration number: **2019-313** (*previously: ELN-0608*)
 
 ---
 
@@ -205,7 +203,7 @@ the SAML assertion.
 <a name="extended-authentication-information"></a>
 ##### 2.3.2.1. Extended Authentication Information
 
-In addition to the attributes of `<saci:AuthContextInfo>` it is possible to provide additional authentication information through the extensibility of `<saci:AuthContextInfo>` which allows inclusion of a sequence of any element.
+In addition to the attributes of `<saci:AuthContextInfo>` it is possible to provide additional authentication information through the extensibility of the `<saci:AuthContextInfo>` element which allows inclusion of a sequence of any element.
 
 One such element is defined in this section, the `<sacex:ExtAuthInfo>` element.
 
@@ -268,70 +266,59 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 
 <a name="dss-ext"></a>
 **[DSS-Ext]**
-> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="attrspec"></a>
 **[AttrSpec]**
-> [Attribute Specification for the Swedish eID Framework.](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
+> [Attribute Specification for the Swedish eID Framework.](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html)
 
 <a name="rfc2119"></a>
 **[RFC2119]**
-
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="rfc3739"></a>
 **[RFC3739]**
-
 > [Santesson, S., Nystrom, M., and T. Polk, "Internet X.509 Public Key
 > Infrastructure: Qualified Certificates Profile", RFC 3739, March
 > 2004](https://www.ietf.org/rfc/rfc3739.txt).
 
 <a name="rfc5280"></a>
 **[RFC5280]**
-
 > [Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
 > W. Polk, "Internet X.509 Public Key Infrastructure Certificate and
 > Certificate Revocation List (CRL) Profile", RFC 5280, May 2008](https://www.ietf.org/rfc/rfc5280.txt).
 
 <a name="rfc7773"></a>
 **[RFC7773]**
-
 > [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773)
 
 <a name="eu-pol-ncp"></a>
 **[EU-POL-NCP]**
-
 > ETSI EN 319 411-1, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 1: General requirements.
 
 <a name="eu-pol-ncp"></a>
 **[EU-POL-QC]**
-
 > ETSI EN 319 411-2, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 2: Requirements for trust service providers issuing EU qualified certificates
 
 <a name="eu-cert-gen"></a>
 **[EU-CERT-GEN]**
-
 > ETSI EN 319 412-1, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 1: Overview and common data structures.
 
 <a name="eu-cert-np"></a>
 **[EU-CERT-NP]**
-
 > ETSI EN 319 412-2, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 2: Certificate profile for certificates issued to natural persons.
 
 <a name="eu-cert-qc"></a>
 **[EU-CERT-QC]**
-
 > ETSI EN 319 412-5, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 5: QCStatements.
 
 <a name="skv704"></a>
 **[SKV704]**
-
 > [Skatteverket, SKV 704 utgåva 8, Personnummer, September
 > 2007](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf).
 
 <a name="skv707"></a>
 **[SKV707]**
-
 > [Skatteverket, SKV 707, Utgåva 2,
 > Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
 
