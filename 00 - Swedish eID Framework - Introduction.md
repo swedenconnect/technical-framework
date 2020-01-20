@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -10,6 +9,8 @@
 # Introduction to the Swedish eID Framework
 
 ### 2020-01-17
+
+Registration number: **2019-267** (*previously: ELN-0600*)
 
 ---
 
