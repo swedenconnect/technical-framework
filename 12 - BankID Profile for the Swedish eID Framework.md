@@ -15,6 +15,10 @@ Registration number: **2019-316** (*previously: ELN-0612*)
 
 ---
 
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
+
 ## Table of Contents
 
 1. [**Introduction**](#introduction)
