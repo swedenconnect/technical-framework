@@ -14,7 +14,7 @@ This repository comprises the specifications of the Swedish eID Framework.
 ### About
 
 The specifications in this branch are the latest development of the Swedish eID Framework. The latest official release
-can be found in the [june-2018 branch](https://github.com/swedenconnect/technical-framework/tree/june-2018).
+can be found in the [january-2020 branch](https://github.com/swedenconnect/technical-framework/tree/january-2020).
 
 ### Feedback and Questions
 
@@ -120,10 +120,11 @@ This specification defines an element that may be included in the Extensions ele
 
 Older version of the specification are stored in the following branches:
 
-+ june-2014 - For the June 2014 release
-+ april-2015 - For the April 2015 release
-+ october-2015 - For the October 2015 release
-+ march-2017 - For the March 2017 release
++ [june-2014](https://github.com/swedenconnect/technical-framework/tree/june-2014) - For the June 2014 release
++ [april-2015](https://github.com/swedenconnect/technical-framework/tree/april-2015) - For the April 2015 release
++ [october-2015](https://github.com/swedenconnect/technical-framework/tree/october-2015) - For the October 2015 release
++ [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) - For the March 2017 release
++ [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) - For the June 2018 release
 
 ---
 

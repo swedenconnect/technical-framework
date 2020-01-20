@@ -1,4 +1,11 @@
-<img src="../img/sweden-connect.png"></img>
+<p>
+<img align="left" src="../img/sweden-connect.png"></img>
+<img align="right" src="../img/digg_centered.png"></img>
+</div>
+</p>
+<p>
+<img align="center" src="../img/transparent.png"></img>
+</p>
 
 # Working Group for the Swedish eID Framework
 
