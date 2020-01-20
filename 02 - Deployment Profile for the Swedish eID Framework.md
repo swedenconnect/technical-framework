@@ -1481,8 +1481,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
-> [Registry for identifiers assigned by the Swedish e-identification
-> board](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
@@ -1496,7 +1495,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **\[EidDSS\]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
-<a name=""eiddssprofile"></a>
+<a name="seiddssprofile"></a>
 **\[EidDSS\_Profile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
 > Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).

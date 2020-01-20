@@ -529,8 +529,7 @@ from Service Providers that have declared this entity category in their metadata
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
-> [Registry for identifiers assigned by the Swedish e-identification
-> board](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
