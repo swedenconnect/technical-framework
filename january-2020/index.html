@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specifications for the Swedish eID Framework</title>
+<link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+<link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+<link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print">
+<link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print">
+</head>
+<body>
+	<article class="markdown-body">
+		<p>
+			<img align="left" src="img/sweden-connect.png"></img>
+			<img align="right" src="img/digg_centered.png"></img>
+		</div>
+		</p>
+		<p>
+			<img align="center" src="img/transparent.png"></img>
+		</p>
+
+		<h1 id="specifications-for-the-swedish-eid-framework">Specifications for the Swedish eID Framework</h1>
+		<h3 id="month,-year">January 2020</h3>
+		<hr>
+		<p>Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.</p>
+		<hr>
+		<p>
+		  This is the January 2020 version of the Swedish eID Framework. As of January 17th, 2020 it replaces the previous 
+      June 2018 release as the official version for the Swedish eID Framework.
+		</p>
+		<blockquote>
+			<p>
+				If you have feedback or questions regarding the Technical Framework make a post to the &quot;Tekniskt ramverk&quot;-thread on 
+				<a href="https://forum.eidasweb.se">https://forum.eidasweb.se</a>.
+			</p>
+		</blockquote>
+		<h3 id="changes-since-last-version">Changes since last version</h3>
+		<p>Below follows a listing of all significant changes since the June 2018 of the Swedish eID Framework.</p>
+		<ul class="list">
+			<li>
+			 The introduction document for the Swedish eID Framework is now also available in English. See 
+			 <a href="Swedish_eID_Framework_-_Introduction.html">00 - Introduction to the Swedish eID Framework</a>.
+		  </li>
+			<li>
+			  The <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a> 
+			  specification now contains the section <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#cryptographic-algorithms">Cryptographic Algorithms</a>
+			  listing the requirements for crypto algorithm support for being compliant with the Swedish eID Framework.
+			</li>
+			<li>
+			  The specification <a href="14_-_Principal_Selection_in_SAML_Authentication_Requests.html">Principal Selection in SAML Authentication Requests</a>
+			  was introduced. It defines a SAML extension that may be used by a service provider to inform an identity provider
+			  about a known identity of a user. The <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>
+			  defines how, and when, the extension may be used.
+			</li>
+			<li>The Swedish eID Framework is no longer normativaly dependent upon SAML2Int.</li>
+			<li>
+			 <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#authentication-for-signature">Section 7</a>, 
+			 <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#authentication-for-signature">Authentication for Signature</a>,
+			 of the "Deployment Profile for the Swedish eID Framework" specification was where "Sign Message Authentication Context URIs" were 
+			 deprecated and the use of the signMessageDigest attribute was introduced.
+			</li>
+			<li>
+			 In order to facilitate algorithm interoperability between peers, additions concerning "Metadata Profile for Algorithm Support" 
+			 [<a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-metadata-algsupport.html">SAML2MetaAlgSupport</a>] was added
+			 to the <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>
+			 specification. This includes requirements for how an entity should declare preferred algorithms in its metadata entry, and
+			 how a these should be interpreted. 
+			</li>
+			<li>
+			  The <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a> 
+			  specification now defines the <code>signMessageDigest</code> attribute that should be used instead of the special purpose
+			  sigmessage Authentication Context URI:s. The specification also adds a definition of a HSA-ID attribute.
+			</li>
+			<li>
+			  The <a href="06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a> 
+			  specification now defines the "secure-authenticator-binding" entity category. Its main purpose is that service providers
+			  may indicate in their metadata that they wishes that QR-codes is used for Mobile BankID (and Freja eID). The specification
+			  also defines the service entity category "loa3-hsaid" that is to be used as an alternative to loa3-pnr when HSA-ID is the
+			  primary user attribute (and not a personal identity number). 
+			</li>
+			<li>
+			  The <a href="08_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate Profile for Certificates Issued by Central Signing Services</a>
+			  specification was updated with the section <a href="08_-_Certificate_Profile_for_Central_Signing_Services.html#extended-authentication-information">
+			  Extended Authentication Information</a>. This extension makes it possible to store additional information about a user's
+			  authentication in a signing certificate (for example a transactionID).
+			</li>
+			<li>
+			  The <a href="12_-_BankID_Profile_for_the_Swedish_eID_Framework.html">Implementation Profile for BankID Identity Providers within the Swedish eID Framework</a> 
+			  specification was updated with the following:
+			  <ul>
+			    <li>
+			      Requirements for ensuring that only the intended user can see a sign message.
+			    </li>
+			    <li>
+			      Requirements that a BankID IdP should include the <code>&lt;psc:RequestedPrincipalSelection&gt;</code> element in its metadata,
+			      and recommendations and requirements for the <code>&lt;psc:PrincipalSelection&gt;</code> extension.
+			    </li>
+			    <li>
+			      Directives how to behave when a user cancels an operation.
+			    </li>
+			    <li>
+			      The requirements for how an identity provider should behave when it needs the user personal identity number.
+			      This includes QR-code handling and use of the <code>&lt;psc:PrincipalSelection&gt;</code> extension.
+			    </li>
+			  </ul>
+			</li>
+		</ul>
+    <p>
+      Each document also contains a "Changes between versions" section where you can see what has been updated for 
+      that particular specification.
+    </p>		
+		<p>
+			For a detailed list of changes you can view all changes in GitHub
+			using this link: <a
+				href="https://github.com/swedenconnect/technical-framework/compare/june-2018...january-2020">https://github.com/swedenconnect/technical-framework/compare</a>.
+		</p>
+    <p>
+      Check out the GitHub project for this release: <a href="https://github.com/swedenconnect/technical-framework/projects/3">https://github.com/swedenconnect/technical-framework/projects/3</a>.
+      Here you can see all the GitHub issues describing each change that was made to the specifications.
+    </p>
+    
+		<h3 id="introduction">Introduction</h3>
+		<p>Overview that describes the different parts of the Swedish eID
+			Framework.</p>
+		<blockquote>
+			<p>
+				<a href="00_-_Tekniskt_ramverk_-_Introduktion.html">Tekniskt ramverk - Introduktion</a> | <a href="pdf/00_-_Tekniskt_ramverk_-_Introduktion.pdf">pdf download</a> - In Swedish
+			</p>
+			<p>
+				<a href="00_-_Swedish_eID_Framework_-_Introduction.html">Introduction to the Swedish eID Framework</a> | <a href="pdf/00_-_Swedish_eID_Framework_-_Introduction.pdf">pdf download</a> - In English
+			</p>
+		</blockquote>
+		<h3 id="specifications">Specifications</h3>
+		<ul class="list">
+			<li>
+			  <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html"><strong>02 - Deployment Profile for the Swedish eID Framework</strong></a> - version 1.6 |
+				<a href="pdf/602_-_Deployment_Profile_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+		  </li>
+			<li>
+			  <a href="03_-_Registry_for_Identifiers.html"><strong>03 - Registry for Identifiers</strong></a> - version 1.6 | 
+			  <a href="pdf/03_-_Registry_for_Identifiers.pdf">pdf download</a>
+			</li>
+			<li>
+			  <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html"><strong>04 - Attribute Specification for the Swedish eID Framework</strong></a> - version 1.6 | 
+			  <a href="pdf/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+			</li>
+			<li>
+			  <a href="06_-_Entity_Categories_for_the_Swedish_eID_Framework.html"><strong>06 - Entity Categories for the Swedish eID Framework</strong></a> - version 1.7 |
+				<a href="pdf/06_-_Entity_Categories_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+		  </li>
+			<li>
+			  <a href="07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html"><strong>07 - Implementation Profile for using DSS in Central Signing Services</strong></a> - version 1.4 | 
+				<a
+				href="pdf/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.pdf">pdf download</a>
+		  </li>
+			<li>
+			  <a href="08_-_Certificate_Profile_for_Central_Signing_Services.html"><strong>08 - Certificate Profile for Central Signing Services</strong></a> - version 1.2 |
+				<a href="pdf/08_-_Certificate_Profile_for_Central_Signing_Services.pdf">pdf download</a>
+		  </li>
+			<li>
+			  <a href="09_-_DSS_Extension_for_Federated_Signing_Services.html"><strong>09 - DSS Extension for Federated Signing Services</strong></a> - version 1.3 | 
+			  <a href="pdf/09_-_DSS_Extension_for_Federated_Signing_Services.pdf">pdf download</a>
+			</li>
+			<li>
+			  <a href="11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html"><strong>11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework</strong></a> - version 1.1 | 
+			  <a href="pdf/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+			</li>
+			<li>
+			  <a href="12_-_BankID_Profile_for_the_Swedish_eID_Framework.html"><strong>12 - BankID Profile for the Swedish eID Framework</strong></a> - version 1.2 | 
+			  <a href="pdf/12_-_BankID_Profile_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+			</li>
+			<li>
+			  <a href="13_-_Signature_Activation_Protocol.html"><strong>13 - Signature Activation Protocol</strong></a> - version 1.1 | 
+			  <a href="pdf/13_-_Signature_Activation_Protocol.pdf">pdf download</a>
+			</li>
+			<li>
+			  <a href="14_-_Principal_Selection_in_SAML_Authentication_Requests.html"><strong>14 - Principal Selection in SAML Authentication Requests</strong></a> - version 1.0 | 
+			  <a href="pdf/14_-_Principal_Selection_in_SAML_Authentication_Requests.pdf">pdf download</a>
+			</li>
+		</ul>
+		<p>
+			<a href="pdf/eid-specifications-jan2020.zip"><img src="img/pdf.png" /></a> <a href="pdf/eid-specifications-jan2020.zip">Download a ZIP-file of all specifications in PDF-format</a>.
+		</p>
+		<blockquote>
+			<p>
+				All specifications are also available in Markdown format on GitHub -
+				<a href="https://github.com/swedenconnect/technical-framework">https://github.com/swedenconnect/technical-framework</a>.
+				Here you can follow the further development of the Swedish eID Framework.
+			</p>
+		</blockquote>
+	</article>
+</body>
+</html>

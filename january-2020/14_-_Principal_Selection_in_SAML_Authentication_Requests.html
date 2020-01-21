@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Principal Selection in SAML Authentication Requests</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="principal-selection-in-saml-authentication-requests">Principal Selection in SAML Authentication Requests</h1>
+<h3 id="version-1.0---2020-01-17">Version 1.0 - 2020-01-17</h3>
+<p>Registration number: <strong>2019-318</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation">Requirements Notation</a></p>
+<p> 1.2. <a href="#xml-namespace-references">XML Namespace References</a></p>
+<p> 1.3. <a href="#structure">Structure</a></p>
+</li>
+<li><p><a href="#data-elements"><strong>Data elements</strong></a></p>
+<p> 2.1. <a href="#principalselection">PrincipalSelection</a></p>
+<p> 2.1.1. <a href="#matchvalue">MatchValue</a></p>
+<p> 2.2. <a href="#requestedprincipalselection">RequestedPrincipalSelection</a></p>
+</li>
+<li><p><a href="#examples"><strong>Examples</strong></a></p>
+<p> 3.1. <a href="#authentication-requests">Authentication Requests</a></p>
+<p> 3.2. <a href="#metadata-extension">Metadata Extension</a></p>
+</li>
+<li><p><a href="#schemas"><strong>Schemas</strong></a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<p><a name="introduction"></a></p>
+<h2 id="1.-introduction">1. Introduction</h2>
+<p>When a Service Provider requests authentication of a user (principal), the Service Provider may have prior knowledge about the user to be authenticated, for example, when re-authenticating an already authenticated user, or when a user authenticates to a signature service where the user signs a document in a context where he or she already has been authenticated.</p>
+<p>This specification defines the <code>&lt;psc:PrincipalSelection&gt;</code> element that may be included in the <code>&lt;saml2p:Extensions&gt;</code> element of a SAML <code>&lt;saml2p:AuthnRequest&gt;</code> where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.</p>
+<p>The specification also defines the <code>&lt;psc:RequestedPrincipalSelection&gt;</code> element that should be used by Identity Providers that may need information about a known user in order to avoid prompting for the user ID<sup>1</sup>. The element should be included as an extension in the Identity Provider metadata under the <code>&lt;md:IDPSSODescriptor&gt;</code> element.</p>
+<p>Even though the main purpose of the <code>&lt;psc:PrincipalSelection&gt;</code> extension is to aid the Identity Provider
+in selecting a particular subject for the authentication, an Identity Provider MAY also compare the match 
+values present in the extension with the resulting attributes from the user authentication, and in case of a 
+mismatch, respond with an error. In these cases the second-level SAML status code MUST be set to
+<code>urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal</code> [<a href="#saml2core">SAML2Core</a>].</p>
+<blockquote>
+<p>[1]: The typical use case is when a user once has authenticated for a service and provided his or hers user ID to the Identity Provider, and is about to perform a signature. If the Identity Provider prompts the user for the user ID once again the user experience is poor and the Service Provider will receive customer complaints.</p>
+</blockquote>
+<p><a name="requirements-notation"></a></p>
+<h3 id="1.1.-requirements-notation">1.1. Requirements Notation</h3>
+<p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>,
+<strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>,
+<strong>MAY</strong>, and <strong>OPTIONAL</strong> are to be interpreted as described in
+[<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="xml-namespace-references"></a></p>
+<h3 id="1.2.-xml-namespace-references">1.2. XML Namespace References</h3>
+<p>The prefix <strong>psc:</strong> stands for the Principal Selection Criteria XML schema namespace <code>http://id.swedenconnect.se/authn/1.0/principal-selection/ns</code>. </p>
+<p>The prefix <strong>saml2:</strong> stands for the OASIS SAML 2 Assertion schema namespace <code>urn:oasis:names:tc:SAML:2.0:assertion</code>.</p>
+<p>The prefix <strong>saml2p:</strong> stands for the OASIS SAML 2 Protocol schema namespace <code>urn:oasis:names:tc:SAML:2.0:protocol</code>.</p>
+<p>The prefix <strong>md:</strong> stands for the OASIS SAML 2 Metadata schema namespace <code>urn:oasis:names:tc:SAML:2.0:metadata</code>.</p>
+<p><a name="structure"></a></p>
+<h3 id="1.3.-structure">1.3. Structure</h3>
+<p>This specification uses the following typographical conventions in text:
+<code>&lt;LocalElement&gt;</code>, <code>&lt;ns:ForeignElement&gt;</code>, <code>Attribute</code>, <strong>Datatype</strong>,
+<code>OtherCode</code>.</p>
+<p><a name="data-elements"></a></p>
+<h2 id="2.-data-elements">2. Data elements</h2>
+<p>This specification defines the element <code>&lt;PrincipalSelection&gt;</code> to be included in the <code>&lt;Extensions&gt;</code> element of an <code>AuthnRequest</code>. </p>
+<p>This element MAY be used by an Identity Provider to select the subject to authenticate. </p>
+<p><a name="principalselection"></a></p>
+<h3 id="2.1.-principalselection">2.1. PrincipalSelection</h3>
+<p>The Principal Selection Criteria is provided in a <code>&lt;PrincipalSelection&gt;</code> element. The element has the following elements and attributes:</p>
+<p><code>&lt;MatchValue&gt;</code> [One or more]</p>
+<blockquote>
+<p>This element holds values that MAY be used by the Identity Provider to match against a principal to be authenticated.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;PrincipalSelection&gt;</code> element:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"PrincipalSelection"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"psc:PrincipalSelectionType"</span>/&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"PrincipalSelectionType"</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> maxOccurs=<span class="hljs-string">"unbounded"</span> name=<span class="hljs-string">"MatchValue"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"psc:MatchValueType"</span> minOccurs=<span class="hljs-string">"1"</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="matchvalue"></a></p>
+<h4 id="2.1.1-matchvalue">2.1.1 MatchValue</h4>
+<p>The <code>&lt;MatchValue&gt;</code> element contains a string value to be matched against the selected principal. This element has the following attributes which determines the meaning of the match value:</p>
+<p><code>Name</code> [Required]</p>
+<blockquote>
+<p>The identifying name of the type of identifier value expressed in the <code>MatchValue</code> element. This is analogous to the <code>Name</code> attribute of a SAML <code>&lt;saml2:Attribute&gt;</code> element.</p>
+</blockquote>
+<p><code>NameFormat</code> [Default <code>urn:oasis:names:tc:SAML:2.0:attrname-format:uri</code>]</p>
+<blockquote>
+<p>Attribute specifying the format of the <code>Name</code> attribute value. This attribute is analogous to the <code>NameFormat</code> attribute of a SAML <code>&lt;saml2:Attribute&gt;</code> element.</p>
+</blockquote>
+<p><code>##any</code> [Optional]</p>
+<blockquote>
+<p>Extension point for any attribute in accordance with local conventions and future specifications.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;MatchValueType&gt;</code> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"MatchValueType"</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"xs:string"</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"NameFormat"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:anyURI"</span>
+          default=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">"##any"</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="requestedprincipalselection"></a></p>
+<h3 id="2.2.-requestedprincipalselection">2.2. RequestedPrincipalSelection</h3>
+<p>An Identity Provider uses the <code>&lt;RequestedPrincipalSelection&gt;</code> element to declare that it wishes to receive the <code>&lt;PrincipalSelection&gt;</code> extension element in authentication requests. The contained <code>MatchValue</code> elements should contain no values, only the attribute name of a <code>MatchValue</code> element is relevant to declare which attributes of a known user that is interest for the Identity Provider.</p>
+<p>The following schema fragment defines the <code>&lt;RequestedPrincipalSelection&gt;</code> element:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"RequestedPrincipalSelection"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"psc:RequestedPrincipalSelectionType"</span> /&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"RequestedPrincipalSelectionType"</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexContent</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"psc:PrincipalSelectionType"</span> /&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexContent</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="examples"></a></p>
+<h2 id="3.-examples">3. Examples</h2>
+<p>Attributes in the examples below are specified in [<a href="eidattributes">EidAttributes</a>].</p>
+<p><a name="authentication-requests"></a></p>
+<h3 id="3.1.-authentication-requests">3.1. Authentication Requests</h3>
+<pre class="hljs"><code>...
+<span class="hljs-tag">&lt;<span class="hljs-name">saml2p:Extensions</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">psc:PrincipalSelection</span> <span class="hljs-attr">xmlns:psc</span>=<span class="hljs-string">"http://id.swedenconnect.se/authn/1.0/principal-selection/ns"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">psc:MatchValue</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.29.4.13"</span>&gt;</span>197309069289<span class="hljs-tag">&lt;/<span class="hljs-name">psc:MatchValue</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">psc:PrincipalSelection</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">saml2p:Extensions</span>&gt;</span>
+...</code></pre><p>Example of a <code>PrincipalSelection</code> specifying a Swedish personal identity number (personnummer) as match attribute.</p>
+<pre class="hljs"><code>...
+<span class="hljs-tag">&lt;<span class="hljs-name">saml2p:Extensions</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">psc:PrincipalSelection</span> <span class="hljs-attr">xmlns:psc</span>=<span class="hljs-string">"http://id.swedenconnect.se/authn/1.0/principal-selection/ns"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">psc:MatchValue</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.29.4.13"</span>&gt;</span>198906059483<span class="hljs-tag">&lt;/<span class="hljs-name">psc:MatchValue</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">psc:MatchValue</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.201.3.4"</span>&gt;</span>NO:05068907693<span class="hljs-tag">&lt;/<span class="hljs-name">psc:MatchValue</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">psc:PrincipalSelection</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">saml2p:Extensions</span>&gt;</span>
+...</code></pre><p>Example of a <code>PrincipalSelection</code> specifying two alternative matching policies. The first policy specifies a Swedish personal identity number (personnummer) and the second specifies a ProvisionalID attribute.</p>
+<p><a name="metadata-extension"></a></p>
+<h3 id="3.2.-metadata-extension">3.2. Metadata Extension</h3>
+<pre class="hljs"><code>...
+<span class="hljs-tag">&lt;<span class="hljs-name">md:IDPSSODescriptor</span> <span class="hljs-attr">WantAuthnRequestsSigned</span>=<span class="hljs-string">"true"</span>
+     <span class="hljs-attr">protocolSupportEnumeration</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:protocol"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">md:Extensions</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mdui:UIInfo</span> <span class="hljs-attr">xmlns:mdui</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:metadata:ui"</span>&gt;</span>
+      ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">mdui:UIInfo</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">psc:RequestedPrincipalSelection</span> 
+         <span class="hljs-attr">xmlns:psc</span>=<span class="hljs-string">"http://id.swedenconnect.se/authn/1.0/principal-selection/ns"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">psc:MatchValue</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.29.4.13"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">psc:RequestedPrincipalSelection</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">md:Extensions</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">md:KeyDescriptor</span> <span class="hljs-attr">use</span>=<span class="hljs-string">"signing"</span>&gt;</span>
+    ...</code></pre><p>Example of how an Identity Provider advertises, it its metadata, that it wishes to receive the Swedish personal identity number (personnummer) of the user in a <code>&lt;PrincipalSelection&gt;</code> extension element of the authentication request if this information is known to the requestor.</p>
+<p><a name="schemas"></a></p>
+<h2 id="4.-schemas">4. Schemas</h2>
+<p>The following XML schema defines the <code>http://id.swedenconnect.se/authn/1.0/principal-selection/ns</code> namespace:</p>
+<pre class="hljs"><code>&lt;?xml <span class="hljs-keyword">version</span>=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span>?&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span> xmln<span class="hljs-variable">s:xs</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> elementFormDefault=<span class="hljs-string">"qualified"</span>
+  targetNamespace=<span class="hljs-string">"http://id.swedenconnect.se/authn/1.0/principal-selection/ns"</span>
+  xmln<span class="hljs-variable">s:psc</span>=<span class="hljs-string">"http://id.swedenconnect.se/authn/1.0/principal-selection/ns"</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+      Schema location URL: http<span class="hljs-variable">s:</span>//docs.swedenconnect.<span class="hljs-keyword">se</span>/schemas/authn/<span class="hljs-number">1.0</span>/PrincipalSelection-<span class="hljs-number">1.0</span>.xsd
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"PrincipalSelection"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"psc:PrincipalSelectionType"</span> /&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"PrincipalSelectionType"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"MatchValue"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"psc:MatchValueType"</span> minOccurs=<span class="hljs-string">"1"</span> maxOccurs=<span class="hljs-string">"unbounded"</span> /&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"RequestedPrincipalSelection"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"psc:RequestedPrincipalSelectionType"</span> /&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"RequestedPrincipalSelectionType"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexContent</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"psc:PrincipalSelectionType"</span> /&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexContent</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"MatchValueType"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"xs:string"</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"NameFormat"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:anyURI"</span> 
+            default=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span> /&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span> /&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">"##any"</span> /&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span>&gt;</code></pre><p><a name="normative-references"></a></p>
+<h2 id="5.-normative-references">5. Normative References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
+Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="saml2core"></a>
+<strong>[SAML2Core]</strong></p>
+<blockquote>
+<p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
+Assertion Markup Language (SAML) V2.0, March
+2005</a>.</p>
+</blockquote>
+<p><a name="eidattributes"></a>
+<strong>[EidAttributes]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="6.-changes-between-versions">6. Changes between versions</h2>
+<p>This is the first version of this specification.</p>
+    </article>
+  </body>
+</html>

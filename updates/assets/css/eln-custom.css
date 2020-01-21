@@ -9,6 +9,12 @@
   line-height: 1.4;
 }
 
+.markdown-body .copyright-statement {
+    display: block;
+    position: absolute;
+    bottom: 0;
+}
+    
 .markdown-body h2 {
     page-break-before: always;
 }
