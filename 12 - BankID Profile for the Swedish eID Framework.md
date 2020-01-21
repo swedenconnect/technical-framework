@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -9,13 +8,15 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.2 - 2019-11-01 - **Draft version**
+### Version 1.2 - 2020-01-17
 
-*2019-316*
-
-> *Previous registration number: ELN-0612*
+Registration number: **2019-316** (*previously: ELN-0612*)
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -553,19 +554,19 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="eid-profile"></a>
 **\[EidProfile\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eid-attributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidentcat"></a>
 **\[EidEntCat\]**
-> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="principalsel"></a>
 **\[PrincipalSel\]**
-> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html).
+> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html).
 > 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions

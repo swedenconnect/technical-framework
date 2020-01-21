@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -9,11 +8,15 @@
 
 # Principal Selection in SAML Authentication Requests 
 
-### Version 1.0 - 2019-11-01 - *Draft version*
+### Version 1.0 - 2020-01-17
 
-*2019-318*
+Registration number: **2019-318**
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -233,7 +236,6 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/princ
 
 <a name="rfc2119"></a>
 **[RFC2119]**
-
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
@@ -241,12 +243,11 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/princ
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
-> 2005.](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
+> 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
 <a name="eidattributes"></a>
 **[EidAttributes]**
-
-> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions

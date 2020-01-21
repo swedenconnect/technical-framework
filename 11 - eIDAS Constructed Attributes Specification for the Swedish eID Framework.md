@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -9,13 +8,15 @@
 
 # eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
-### Version 1.1 - 2019-08-30 - *Draft version*
+### Version 1.1 - 2020-01-17
 
-*2019-315*
-
-> *Previous registration number: ELN-0611*
+Registration number: **2019-315** (*previously: ELN-0611*)
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -43,11 +44,7 @@
 
 4. [**Changes between versions**](#changes-between-versions)
 
-Appendix A. [**Countries with pridPersistence of class A**](#countries-with-pridpersistence-of-class-a)
-
-Appendix B. [**Countries with pridPersistence of class B**](#countries-with-pridpersistence-of-class-b)
-
-Appendix C. [**PRID Algorithm implementations (Java)**](#prid-algorithm-implementations-java)
+Appendix A. [**PRID Algorithm implementations (Java)**](#prid-algorithm-implementations-java)
 
 
 <a name="introduction"></a>
@@ -367,7 +364,7 @@ prid generation fails.
 | :--- | :--- |
 | Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service). |
 | Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute. |
-| Matching rule 3 | Attributes provided by any of the countries listed in Appendix A. |
+| Matching rule 3 | Attributes provided by any of the countries that issue identities according to persistance class A. |
 | Selected algorithm | `default-eIDAS` |
 | pridPersistence value | A |
 
@@ -375,7 +372,7 @@ prid generation fails.
 | :--- | :--- |
 | Matching rule 1 | Authenticated attributes are provided by an eIDAS node (proxy service). |
 | Matching rule 2 | Authenticated subject is a person and has a `PersonIdentifier` attribute. |
-| Matching rule 3 | Attributes provided by any of the countries listed in Appendix B. |
+| Matching rule 3 | Attributes provided by any of the countries that issue identities according to persistance class B. |
 | Selected algorithm | `default-eIDAS` |
 | pridPersistence value | B |
 
@@ -391,38 +388,32 @@ prid generation fails.
 
 <a name="rfc2119"></a>
 **[RFC2119]**
-
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="saml2core"></a>
 **[SAML2Core]**
-
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
 > Assertion Markup Language (SAML) V2.0, March
 > 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
 <a name="saml-xsd"></a>
 **[SAML-XSD]**
-
 > S. Cantor et al., SAML assertions schema. OASIS SSTC, March 2005.
 > Document ID saml-schema-assertion-2.0. See
 > <http://www.oasisopen.org/committees/security/>.
 
 <a name="xml-schema"></a>
 **[XML-Schema]**
-
 > XML Schema Part 2: Datatypes Second Edition, W3C Recommendation, 28
 > October 2004. See <http://www.w3.org/TR/xmlschema-2/>.
 
 <a name="eidattributes"></a>
 **[EidAttributes]**
-
-> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas-attr"></a>
 **[eIDAS-Attr]**
-
 > [eIDAS SAML Attribute Profile, version 1.2, 21 May 2019](https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.2-FINAL.pdf).
 
 <a name="changes-between-versions"></a>
@@ -434,42 +425,22 @@ prid generation fails.
 
 - Update of reference of eIDAS attribute profile to version 1.2.
 
-<a name="countries-with-pridpersistence-of-class-a"></a>
-## Appendix A. Countries with pridPersistence of class A
-
-The following countries provide an eIDAS PersonIdentifier attribute that
-has been determined to match pridPersistence level A:
-
-| ISO 3166 | Name |
-| :--- | :--- |
-| DK | Denmark |
-| NO | Norway |
-| SE | Sweden |
-
-<a name="countries-with-pridpersistence-of-class-b"></a>
-## Appendix B. Countries with pridPersistence of class B
-
-The following countries provide an eIDAS PersonIdentifier attribute that
-has been determined to match pridPersistence level B:
-
-| ISO 3166 | Name |
-| :--- | :--- |
-| DE | Germany |
+- Removed Appendix A, "Countries with pridPersistence of class A" and Appendix B, "Countries with pridPersistence of class B". This information is continuously updated and maintained on https://swedenconnect.se.
 
 <a name="prid-algorithm-implementations-java"></a>
-## Appendix C. PRID Algorithm implementations (Java)
+## Appendix A. PRID Algorithm implementations (Java)
 
 **default-eIDAS**
 
 ```
   private static final String personIdentifierPrefixRegexp = "^[A-Za-z]{2}[\\/](SE|se)[\\/]";
 
-  public String getPridIdentifierComponent(String personIdentifier) {
+  public String getPridIdentifierComponent(String personIdentifier) throws PridGenerationException {
     if (personIdentifier == null) {
-      return null;
+      throw new PridGenerationException("Missing personIdentifier");
     }
     if (!personIdentifier.substring(0, 6).matches(personIdentifierPrefixRegexp)) {
-      return null;
+      throw new PridGenerationException("Invalid ID format");
     }
     // Get ID component without whitespace and non-printable characters
     String strippedID = personIdentifier.substring(6).replaceAll("\\s+", "");
@@ -483,7 +454,7 @@ has been determined to match pridPersistence level B:
     // Remove leading and trailing "-" 
     normalizedID = normalizedID.replaceAll("^-+", "").replaceAll("-+$", "");
     if (normalizedID.replaceAll("-", "").length() < 8) {
-      return null;
+      throw new PridGenerationException("Invalid ID format");
     }
     if (normalizedID.length() < 10) {
       normalizedID = "0000000000".substring(normalizedID.length()) + normalizedID;
@@ -495,7 +466,7 @@ has been determined to match pridPersistence level B:
         return new BigInteger(1, digest).toString(16).substring(0, 30);
       }
       catch (NoSuchAlgorithmException ex) {
-        return null;
+        throw new PridGenerationException(e);
       }
     }
     return normalizedID;
@@ -508,12 +479,12 @@ has been determined to match pridPersistence level B:
 ```
   private static final String personIdentifierPrefixRegexp = "^[A-Za-z]{2}[\\/](SE|se)[\\/]";
   
-  public static String getPridIdentifierComponent(String personIdentifier) {
+  public static String getPridIdentifierComponent(String personIdentifier) throws PridGenerationException {
     if (personIdentifier == null) {
-      return null;
+      throw new PridGenerationException("Missing personIdentifier");
     }
     if (!personIdentifier.substring(0, 6).matches(personIdentifierPrefixRegexp)) {
-      return null;
+      throw new PridGenerationException("Invalid ID format");
     }
     
     // Get ID component without whitespace and non-printable characters
@@ -528,7 +499,7 @@ has been determined to match pridPersistence level B:
     // Remove leading and trailing "-" 
     normalizedID = normalizedID.replaceAll("^-+", "").replaceAll("-+$", "");
     if (normalizedID.replaceAll("-", "").length() < 8) {
-      return null;
+      throw new PridGenerationException("Invalid ID format");
     }
     if (normalizedID.length() < 10) {
       normalizedID = "0000000000".substring(normalizedID.length()) + normalizedID;
@@ -540,7 +511,7 @@ has been determined to match pridPersistence level B:
         return new BigInteger(1, digest).toString(36).substring(0, 30);
       } 
       catch (NoSuchAlgorithmException ex) {
-        return null;
+        throw new PridGenerationException(e);
       }
     }
     return normalizedID;
@@ -552,18 +523,18 @@ has been determined to match pridPersistence level B:
 ```
   private static final String personIdentifierPrifixRegexp = "^[A-Za-z]{2}[\\/](SE|se)[\\/]";
 
-  public String getPridIdentifierComponent(String personIdentifier) {
+  public String getPridIdentifierComponent(String personIdentifier) throws PridGenerationException {
     if (personIdentifier == null) {
-      return null;
+      throw new PridGenerationException("Missing personIdentifier");
     }
     if (!personIdentifier.substring(0, 6).matches(personIdentifierPrifixRegexp)) {
-      return null;
+      throw new PridGenerationException("Invalid ID format");
     }
     
     // Get ID component without whitespace and non-printable characters
     String strippedID = personIdentifier.substring(6).replaceAll("\\s+", "");
     if (strippedID.length() < 16) {
-      return null;
+      throw new PridGenerationException("Invalid ID format");
     }
     try {
       MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -571,7 +542,7 @@ has been determined to match pridPersistence level B:
       return new BigInteger(1, digest).toString(36).substring(0, 30);
     }
     catch (NoSuchAlgorithmException ex) {
-      return null;
+      throw new PridGenerationException(e);
     }
   }
 ```

@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -9,13 +8,15 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2020-01-14 - *Draft version*
+### Version 1.6 - 2020-01-17
 
-*2019-309*
-
-> *Previous registration number: ELN-0603*
+Registration number: **2019-309** (*previously: ELN-0603*)
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -508,32 +509,32 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eidentitycat"></a>
 **\[EidEntityCat\]**
-> [Entity Categories for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/updates/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="eiddssext"></a>
 **\[EidDSSExt\]**
-> [DSS Extension for Federated Central Signing Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="eidsigsap"></a>
 **\[EidSigSAP\]**
-> [Signature Activation Protocol for Federated Signing](http://elegnamnden.github.io/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
 <a name="eidcsignprof"></a>
 **\[EidCSignProf\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](http://elegnamnden.github.io/technical-framework/latest/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 <a name="certprof"></a>
 **\[CertProf\]**
-> [Certificate profile for certificates issued by Central Signing services](http://elegnamnden.github.io/technical-framework/latest/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html)
+> [Certificate profile for certificates issued by Central Signing services](https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html)
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](http://elegnamnden.github.io/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas"></a>
 **\[eIDAS\]**

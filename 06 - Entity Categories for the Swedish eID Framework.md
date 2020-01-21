@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -9,13 +8,16 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2020-01-09 - *Draft version*
+### Version 1.7 - 2020-01-17
 
-*2019-311*
 
-> *Previous registration number: ELN-0606*
+Registration number: **2019-311** (*previously: ELN-0606*)
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -505,7 +507,7 @@ from Service Providers that have declared this entity category in their metadata
 
 <a name="entcat"></a>
 **\[EntCat\]**
-> [RFC8409 - The Entity Category Security Assertion Markup Language (SAML) Attribute Types, August 2018](https://tools.ietf.org/html/rfc8409).
+> [RFC8409 - The Entity Category Security Assertion Markup Language (SAML) Attribute Types](https://tools.ietf.org/html/rfc8409).
 
 <a name="skv704"></a>
 **\[SKV704\]**
@@ -519,24 +521,23 @@ from Service Providers that have declared this entity category in their metadata
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation, version 1.4](https://docs.swedenconnect.se/technical-framework/mirror/elegnamnden/Tillitsramverk-for-Svensk-e-legitimation-1.4.pdf).
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
-> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
-> [Registry for identifiers assigned by the Swedish e-identification
-> board](https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
-> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="sigsap"></a>
 **\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/ELN-0613_-_Signature_Activation_Protocol.html).
+> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
@@ -551,6 +552,8 @@ from Service Providers that have declared this entity category in their metadata
 - Chapter 6, "General Entity Categories", introduced a general entity category type for miscellaneous purposes.
 
 - Section 6.1, "secure-authenticator-binding", was added defining the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` entity category.
+
+- Section 2.6, "loa3-hsaid", was added. This section defines a service entity category for LoA3 where HSA-ID is the primary identity attribute.
 
 **Changes between version 1.5 and version 1.6:**
 

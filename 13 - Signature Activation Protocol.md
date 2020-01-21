@@ -1,7 +1,6 @@
 <p>
 <img align="left" src="img/sweden-connect.png"></img>
 <img align="right" src="img/digg_centered.png"></img>
-</div>
 </p>
 <p>
 <img align="center" src="img/transparent.png"></img>
@@ -9,13 +8,15 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.1 - 2019-08-30 - *Draft version*
+### Version 1.1 - 2020-01-17
 
-*2019-317*
-
-> *Previous registration number: ELN-0613*
+Registration number: **2019-317** (*previously: ELN-0613*)
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -23,7 +24,7 @@
 
     1.1. [Requirement key words](#requirement-key-words)
 
-    1.2. [XML name space references](#xml-name-space-references)
+    1.2. [XML namespace references](#xml-namespace-references)
 
     1.3. [Structure](#structure)
 
@@ -31,23 +32,23 @@
 
     2.1. [Scope](#scope)
 
-    2.2. [Data exchange](#data-exchange)
+    2.2. [Data Exchange](#data-exchange)
 
 3. [**Data elements**](#data-elements)
 
     3.1. [SADRequest](#sadrequest)
 
-    3.1.1 [Syntax](#syntax)
+    3.1.1. [Syntax](#syntax)
 
-    3.1.2 [Example](#example)
+    3.1.2. [Example](#example)
 
     3.2. [Signature Activation Data](#signature-activation-data)
 
     3.2.1. [SAD JSON Web Token](#sad-json-web-token)
 
-    3.2.1.1. [Registered JWT claims](#registered-jwt-claims)
+    3.2.1.1. [Registered JWT Claims](#registered-jwt-claims)
 
-    3.2.1.2. [SAD Extension claim](#sad-extension-claim)
+    3.2.1.2. [SAD Extension Claim](#sad-extension-claim)
 
     3.2.2. [Example](#example)
     
@@ -84,8 +85,8 @@ requirements over protocol features and behavior that affect the
 interoperability and security of implementations. When these words are
 not capitalized, they are meant in their natural-language sense.
 
-<a name="xml-name-space-references"></a>
-### 1.2. XML name space references
+<a name="xml-namespace-references"></a>
+### 1.2. XML namespace references
 
 The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace `http://id.elegnamnden.se/csig/1.1/sap/ns` (https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd). 
 
@@ -148,7 +149,7 @@ The SAD request and the SAD specified in this section specifies the data that ne
 ### 3.1. SADRequest
 
 <a name="syntax"></a>
-#### 3.1.1 Syntax
+#### 3.1.1. Syntax
 
 The SAD Request is provided in a `<sap:SADRequest>` element. The element has the following elements and attributes:
 
@@ -186,10 +187,10 @@ The following schema fragment defines the `<sap:SADRequest>` element:
         <xs:element name="SignRequestID" type="xs:string" />
         <xs:element name="DocCount" type="xs:int" />
         <xs:element name="RequestedVersion" type="xs:string" minOccurs="0" default="1.0" />
-        <xs:element minOccurs="0" name="RequestParams">
+        <xs:element name="RequestParams" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" minOccurs="0" name="Parameter" type="sap:ParameterType" />
+              <xs:element name="Parameter" type="sap:ParameterType" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -207,7 +208,7 @@ The following schema fragment defines the `<sap:SADRequest>` element:
 
 
 <a name="example"></a>
-#### 3.1.2 Example
+#### 3.1.2. Example
 
     <sap:SADRequest ID="_a74a068d0548a919e503e5f9ef901851" xmlns:sap="http://id.elegnamnden.se/csig/1.1/sap/ns">
       <sap:RequesterID>http://www.example.com/sigservice</sap:RequesterID>
@@ -231,7 +232,7 @@ This section specifies a JSON Web Token (JWT) in accordance with [[RFC7519](#rfc
 The SAD JWT MUST have the form of a signed JWS (JSON Web Signature).
 
 <a name="registered-jwt-claims"></a>
-##### 3.2.1.1. Registered JWT claims
+##### 3.2.1.1. Registered JWT Claims
 The data signed by the SAD JWT is carried in the JWS payload in the form of JWT claims using registered claim names (as specified in [[RFC7519](#rfc7519)]) in addition to one private claim name (`seElnSadext`) specified in section [3.2.1.2](#sad-extension-claim). The following table defines the use of registered claims.
 
 name | Content
@@ -244,7 +245,7 @@ name | Content
 **jti** | Unique identifier of this SAD.
 
 <a name="sad-extension-claim"></a>
-##### 3.2.1.2. SAD Extension claim
+##### 3.2.1.2. SAD Extension Claim
 A private claim name is defined in this specification which extends the registered claims with additional SAD data:
 
 > `seElnSadext`
@@ -355,7 +356,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
         
       <xs:annotation>
         <xs:documentation>
-          Schema location URL: https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd
+          Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCsigSAP-1.1.xsd
         </xs:documentation>
       </xs:annotation>
 
@@ -370,7 +371,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
           <xs:element minOccurs="0" name="RequestParams">
             <xs:complexType>
               <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" name="Parameter" type="sap:ParameterType" />
+                <xs:element name="Parameter" type="sap:ParameterType" minOccurs="0" maxOccurs="unbounded" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -392,34 +393,28 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
 
 <a name="rfc2119"></a>
 **[RFC2119]**
-
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="rfc7519"></a>
 **[RFC7519]**
-
 > [Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015](http://www.rfc-editor.org/info/rfc7519).
 
 <a name="eidattributes"></a>
 **[EidAttributes]**
-
-> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+> [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="dss-ext"></a>
 **[DSS-Ext]**
-
-> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="rsig-pp-1"></a>
 **[RSIG-PP-1]**
-
 > European Standard prEN 419241-1 - Trustworthy Systems Supporting Server Signing - Part 1:
 General System Security Requirements
 
 <a name="rsig-pp-2"></a>
-**[RSIG-PP-2]**
-
+**[RSIG-PP-2]*s
 > European Standard prEN 419241-2 - Trustworthy Systems Supporting Server Signing - Part 2:
 Protection profile for QSCD for Server Signing
 
