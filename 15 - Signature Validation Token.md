@@ -140,9 +140,9 @@ Claims Data Type |JSON Data Type | Description
 **Long**  | number  |  A 64-bit signed integer value (from -2<sup>63</sup> to 2<sup>63</sup> - 1).
 **NumericDate**  |  number |  As defined in \[[RFC7519](#rfc7519)\].<br />A JSON numeric value representing the number of seconds from 1970-01-01T00:00:00Z UTC until the specified UTC date/time, ignoring leap seconds.
 **Boolean**  | boolean  | The explicit value true or false.
-**Object\<Class\>**  | object  | A JSON object holding a claims object of a class defined in this specification (see [section 2.2.2](#signature-validation-token-jwt-claims)).
-**Map\<Type\>**  | object  | A JSON object with name-value pairs where the value is an object of the specified Type in the notation.<br />Example: Map\<String\> according to this notation is a JSON object with name value pairs where all values are of type String.
-**Array**  | array  |  An array of values of a specific data type as defined in this table. An array is expressed in this specification by square brackets. For example: **\[String\]** indicates an array of String values and **\[Object\<DocHash\>\]** indicates an array of DocHash objects.
+**Object&lt;Class&gt;**  | object  | A JSON object holding a claims object of a class defined in this specification (see [section 2.2.2](#signature-validation-token-jwt-claims)).
+**Map&lt;Type&gt;**  | object  | A JSON object with name-value pairs where the value is an object of the specified Type in the notation.<br />Example: Map&lt;String&gt; according to this notation is a JSON object with name value pairs where all values are of type String.
+**Array**  | array  |  An array of values of a specific data type as defined in this table. An array is expressed in this specification by square brackets. For example: **\[String\]** indicates an array of String values and **\[Object&lt;DocHash&gt;\]** indicates an array of DocHash objects.
 **Null** | null | Representing an absent value. A claim with a null value is equivalent with an absent claim in this specification.
 
 <a name="signature-validation-token-jwt-claims"></a>
@@ -157,7 +157,7 @@ Name | Data Type | Value | Presence
 `iat`  | **NumericDate**  | An "Issued At" registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when this SVT was issued.  | MANDATORY
 `aud`  | **\[StringOrURI\]** or **StringOrURI** | An "Audience" registered claim according to \[[RFC7519](#rfc7519)\]. The audience claim is an array of one or more identifiers, identifying intended recipients of the SVT. Each identifier MAY identify a single entity, a group of entities or a common policy adopted by a group of entities. If only one value is provided it MAY be provided as a single **StringOrURI** value instead of as an array of values.| OPTIONAL
 `exp`  | **NumericDate**  | An "Expiration Time" registered claim according to \[[RFC7519](#rfc7519)\] expressing the time when services and responsibilities related to this SVT is no longer provided by the SVT issuer. The precise meaning of the expiration time claim is defined by local policies. See implementation note below.   | OPTIONAL
-`sig_val_claims` | **Object\<SigValidation\>**  | Signature validation claims for this SVT extending the standard registered JTW claims above. | MANDATORY
+`sig_val_claims` | **Object&lt;SigValidation&gt;**  | Signature validation claims for this SVT extending the standard registered JTW claims above. | MANDATORY
 
 > **Note**: An SVT asserts that a certain validation process was undertaken at a certain instance of time. This fact never changes and never expires. However, some aspects of the SVT such as liability for false claims or service provision related to a specific SVT may expire after a certain period of time, such as a service where an old SVT can be upgraded to a new SVT signed with fresh keys and algorithms.
 
@@ -175,9 +175,9 @@ Name | Data Type | Value | Presence
 `ver` | **String** | Version. This version is indicated by the value "1.0". | MANDATORY
 `profile`| **StringOrURI** | Name of a profile applied to this specification that defines conventions of content of specific claims and extension points.| OPTIONAL
 `hash_algo` | **URI** | The URI identifier of the hash algorithm used to provide hash values within the SVT. The URI identifier SHALL be one defined in \[[RFC6931](#rfc6931)\] or in the IANA registry defined by this RFC. | MANDATORY
-`cert_ref`  | **Object\<CertReference\>**  | Information about certificates that MAY be used to validate the signature on this SVT. | OPTIONAL
-`sig`  | **\[Object\<Signature\>\]**   | Information about validated signatures as an array of **Signature** objects. If the SVT contains signature validation evidence for more than one signature, then each signature is represented by a separate **Signature** object. At least one **Signature** object MUST be present. | MANDATORY
-`ext` | **Map\<String\>** | Extension point for additional claims related to the SVT. Extension claims are added at the discretion of the SVT issuer but MUST follow any conventions defined in a profile of this specification (see [section 3](#profiles)). |  OPTIONAL
+`cert_ref`  | **Object&lt;CertReference&gt;**  | Information about certificates that MAY be used to validate the signature on this SVT. | OPTIONAL
+`sig`  | **\[Object&lt;Signature&gt;\]**   | Information about validated signatures as an array of **Signature** objects. If the SVT contains signature validation evidence for more than one signature, then each signature is represented by a separate **Signature** object. At least one **Signature** object MUST be present. | MANDATORY
+`ext` | **Map&lt;String&gt;** | Extension point for additional claims related to the SVT. Extension claims are added at the discretion of the SVT issuer but MUST follow any conventions defined in a profile of this specification (see [section 3](#profiles)). | OPTIONAL
 
 <a name="the-signature-claims-object"></a>
 ##### 2.2.3.2. The Signature Claims Object
@@ -186,12 +186,12 @@ The **Signature** object contains claims related to signature validation evidenc
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
-`sig_ref`  | **Object\<SigReference\>** | Reference information identifying the target signature. | MANDATORY
-|`sig_data` | **\[Object\<SignedData\>\]** | Array of references to Signed Data signed by the target signature. | MANDATORY
-|`signer_cert_ref` | **Object\<CertReference\>** | Reference to signer certificate and optionally reference to a supporting certificate chain that was used to validate the target signature. | MANDATORY
-|`sig_val` | **\[Object\<PolicyValidation\>\]** | Array of results of signature validation according to defined validation procedures. | MANDATORY
-|`time_val` | **\[Object\<TimeValidation\>\]**  | Array of results of time verification validating proof that the target signature has existed at specific instances of time in the past. | OPTIONAL
-`ext` | **MAP\<String\>** | Extension point for additional claims related to the target signature. Extension claims are added at the discretion of the SVT Issuer but MUST follow any conventions defined in a profile of this specification (see [section 3](#profiles)). |  OPTIONAL
+`sig_ref`  | **Object&lt;SigReference&gt;** | Reference information identifying the target signature. | MANDATORY
+`sig_data` | **\[Object&lt;SignedData&gt;\]** | Array of references to Signed Data signed by the target signature. | MANDATORY
+`signer_cert_ref` | **Object&lt;CertReference&gt;** | Reference to signer certificate and optionally reference to a supporting certificate chain that was used to validate the target signature. | MANDATORY
+`sig_val` | **\[Object&lt;PolicyValidation&gt;\]** | Array of results of signature validation according to defined validation procedures. | MANDATORY
+`time_val` | **\[Object&lt;TimeValidation&gt;\]**  | Array of results of time verification validating proof that the target signature has existed at specific instances of time in the past. | OPTIONAL
+`ext` | **MAP&lt;String&gt;** | Extension point for additional claims related to the target signature. Extension claims are added at the discretion of the SVT Issuer but MUST follow any conventions defined in a profile of this specification (see [section 3](#profiles)). | OPTIONAL
 
 <a name="the-sigreference-claims-object"></a>
 ##### 2.2.3.3. The SigReference Claims Object
@@ -224,7 +224,7 @@ Name | Data Type | Value | Presence
 `pol`  | **StringOrURI** | Identifier of the policy governing the validation process. | MANDATORY
 `res`  | **String** | Result of the validation process. The value MUST be one of "PASSED", "FAILED" or "INDETERMINATE" as defined by \[[ETSI EN 319 102-1](#etsi319102-1)\]. | MANDATORY
 `msg` | **String** | An optional message describing the result. | OPTIONAL
-`ext` | **Map\<String\>** | Extension for additional information about the validation result. | OPTIONAL
+`ext` | **Map&lt;String&gt;** | Extension for additional information about the validation result. | OPTIONAL
 
 <a name="the-timeverification-claims-object"></a>
 ##### 2.2.3.6. The TimeVerification Claims Object
@@ -236,10 +236,10 @@ Name | Data Type | Value | Presence
 `time`  | **NumericDate** | The verified time. | MANDATORY
 `type`  | **StringOrURI** | Identifier of the type of evidence of time. | MANDATORY
 `iss` | **StringOrURI** | Identifier of the entity that issued the evidence of time. | MANDATORY
-`iss_cert_ref`  | **Object\<CertReference\>** | Reference to the certificate and certificate chain used to validate the signature on the validated evidence of time. | OPTIONAL
+`iss_cert_ref`  | **Object&lt;CertReference&gt;** | Reference to the certificate and certificate chain used to validate the signature on the validated evidence of time. | OPTIONAL
 `id` | **String** | Unique identifier assigned to the evidence of time. |  OPTIONAL
-`val` | **\[Object\<PolicyValidation\>\]**  | Array of results of validation of the time evidence according to defined validation procedures. | OPTIONAL
-`ext` | **Map\<String\>** | Extension for additional information about the signature validation result. | OPTIONAL
+`val` | **\[Object&lt;PolicyValidation&gt;\]**  | Array of results of validation of the time evidence according to defined validation procedures. | OPTIONAL
+`ext` | **Map&lt;String&gt;** | Extension for additional information about the signature validation result. | OPTIONAL
 
 <a name="the-certreference-claims-object"></a>
 ##### 2.2.3.7. The CertReference Claims Object
@@ -268,7 +268,7 @@ Identifer | Ref Data Content
 
 The SVT JWT MUST contain the following JOSE header parameters in accordance with section 5 of \[[RFC7519](#rfc7519)\].
 
-JOSE Header | value
+JOSE Header | Value
 --- | ---
 `typ`  | This parameter MUST have the string value "JWT" (upper case).
 `alg`  | Specifying the algorithm used to sign the SVT JWT using a value specified in \[[RFC7518](#rfc7518)\]. The specified signature hash algorithm SHOULD be identical to, and MUST be of equivalent or better strength compared with, the hash algorithm specified in the **SigValAssertion** claims object `hash_algo` claim.
