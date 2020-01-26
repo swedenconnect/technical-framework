@@ -1,12 +1,22 @@
-<img src="img/sweden-connect.png"></img>
+<p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
 
-# XML Profile for Signature Validation Assertion (SVA) Tokens
+# XML Profile for Signature Validation Tokens
 
-### Version 0.1 - 2020-01-06 - *Draft version*
+### Version 1.0 - 2020-01-24 - *Draft version*
 
-*ELN-0617-v1.0*
+Registration number: **2020-62**
 
 ---
+
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
 
 ## Table of Contents
 
@@ -16,29 +26,32 @@
 
     1.2. [Definitions](#definitions)
 
-    1.2. [Notatioin](#notatioin)
+    1.2. [Notation](#notation)
 
-    1.2.1 [References to XML elements from XML Schemas](#references-to-xml-elements-from-xml-schemas)
+    1.2.1 [References to XML Elements from XML Schemas](#references-to-xml-elements-from-xml-schemas)
 
-2. [**SVT in XML documents**](#svt-in-xml-documents)
+2. [**SVT in XML Documents**](#svt-in-xml-documents)
 
     2.1.1. [SignatureValidationToken Signature Property](#signaturevalidationtoken-signature-property)
 
 3. [**SVT Claims**](#svt-claims)
 
-    3.1. [Signature reference data](#signature-reference-data)
+    3.1. [Signature Reference Data](#signature-reference-data)
 
-    3.2. [Signed Data reference data](#signed-data-reference-data)
+    3.2. [Signed Data Reference Data](#signed-data-reference-data)
 
-    3.3. [Signer certificate references](#signer-certificate-references)
+    3.3. [Signer Certificate References](#signer-certificate-references)
 
 4. [**Normative References**](#normative-references)
 
+---
+
 <a name="introduction"></a>
 ## 1. Introduction
-The Signature Validation Token (SVT) specification \[[SVT](#svt)\] defines the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
 
-This document defines a profile for implementing SVT with a signed XML document. This document defines the following aspect of SVT usage:
+The "Signature Validation Token" specification \[[SVT](#svt)\] defines the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
+
+This specification defines a profile for implementing SVT with a signed XML document, and defines the following aspects of SVT usage:
 
 - How to include reference data related to XML signatures and XML documents in an SVT.
 - How to add an SVT token to a XML signature.
@@ -56,14 +69,14 @@ These keywords are capitalized when used to unambiguously specify requirements o
 
 <a name="definitions"></a>
 ### 1.2. Definitions
-Definitions in \[[SVT](#svt)\] applies also to this document.
 
+The definitions in \[[SVT](#svt)\] apply also to this document.
 
-<a name="notatioin"></a>
-### 1.2. Notatioin
+<a name="notation"></a>
+### 1.2. Notation
 
 <a name="references-to-xml-elements-from-xml-schemas"></a>
-#### 1.2.1 References to XML elements from XML Schemas
+#### 1.2.1 References to XML Elements from XML Schemas
 
 When referring to elements from the W3C XML Signature namespace
 (`http://www.w3.org/2000/09/xmldsig\#`) the following syntax is used:
@@ -75,17 +88,17 @@ When referring to elements from the ETSI XAdES XML Signature namespace
 
 -  `<xades:CertDigest>`
 
-When referring to elements defined in this document
+When referring to elements defined in this specification
 (`http://id.swedenconnect.se/svt/1.0/sig-prop/ns`) the following syntax is used:
 
 -  `<svt:Element>`
 
 <a name="svt-in-xml-documents"></a>
-## 2. SVT in XML documents
+## 2. SVT in XML Documents
 
 When SVT is provided for XML signatures then one SVT SHALL be provided for each XML signature.
 
-An SVT embedded within the XML signature element SHALL be placed in a  `<svt:SignatureValidationToken>` as defined in section 2.1.1.
+An SVT embedded within the XML signature element SHALL be placed in a  `<svt:SignatureValidationToken>` as defined in [section 2.1.1](#signaturevalidationtoken-signature-property).
 
 <a name="signaturevalidationtoken-signature-property"></a>
 ### 2.1.1. SignatureValidationToken Signature Property
@@ -99,12 +112,16 @@ The `<svt:SignatureValidationToken>` element is defined by the following XML Sch
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://id.swedenconnect.se/svt/1.0/sig-prop/ns"
     xmlns:svt="http://id.swedenconnect.se/svt/1.0/sig-prop/ns">
-    <xs:element name="SignatureValidationToken" type="svt:SignatureValidationTokenType"/>
-    <xs:complexType name="SignatureValidationTokenType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string"> </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
+    
+  <xs:element name="SignatureValidationToken" type="svt:SignatureValidationTokenType" />
+  
+  <xs:complexType name="SignatureValidationTokenType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
 </xs:schema>
 ```
 
@@ -124,81 +141,73 @@ Example:
     </ds:SignatureProperties>
   </ds:Object>
 </ds:Signature>
-
 ```
 
 <a name="svt-claims"></a>
 ## 3. SVT Claims
+
 <a name="signature-reference-data"></a>
-### 3.1. Signature reference data
+### 3.1. Signature Reference Data
 
-The SVT SHALL contain a SigReference claims object that SHALL contain the following data:
+The SVT SHALL contain a **SigReference** claims object that SHALL contain the following data:
 
-Claim  | Value
---|--
-`id` | The Id of the XML signature, if present
-`sig_hash` | The hash over the signature value bytes
-`sb_hash` | The hash over the canonicalized `<ds:SignedInfo>` element (The bytes the XML signature algorithm has signed to generated the signature value).
+Claim | Value
+--- | ---
+`id` | The Id-attribute of the XML signature, if present.
+`sig_hash` | The hash over the signature value bytes.
+`sb_hash` | The hash over the canonicalized `<ds:SignedInfo>` element (the bytes the XML signature algorithm has signed to generated the signature value).
 
 
 <a name="signed-data-reference-data"></a>
-### 3.2. Signed Data reference data
+### 3.2. Signed Data Reference Data
 
-An SVT according to this profile SHALL contain one instance of the SignedData claims object for each `<ds:Reference>` element in the `<ds:SignedInfo>` element. The SignedData claims object shall contain the following data:
+An SVT according to this profile SHALL contain one instance of the **SignedData** claims object for each `<ds:Reference>` element in the `<ds:SignedInfo>` element. The **SignedData** claims object shall contain the following data:
 
-Claim  | Value
---|--
-`ref`  |  The value of the URI attribute of the corresponding `<ds:Reference>` element.
-`hash`  |  The hash of all bytes identified corresponding `<ds:Reference>` element after applying all identified canonicalization and transformation algorithms. These are the same bytes that is hashed by the hash value in the `<ds:DigestValue>` element inside the `<ds:Reference>` element.
-
+Claim | Value
+--- | ---
+`ref` | The value of the URI attribute of the corresponding `<ds:Reference>` element.
+`hash` | The hash of all bytes identified corresponding `<ds:Reference>` element after applying all identified canonicalization and transformation algorithms. These are the same bytes that is hashed by the hash value in the `<ds:DigestValue>` element inside the `<ds:Reference>` element.
 
 <a name="signer-certificate-references"></a>
-### 3.3. Signer certificate references
+### 3.3. Signer Certificate References
 
-The SVT SHALL contain a CertReference claims object. The type claim of the CertReference claims object SHALL be either `cert`, `chain`, `cert_hash` or `cert_and_chain_hash`.
+The SVT SHALL contain a **CertReference** claims object. The `type` claim of the **CertReference** claims object SHALL be either `cert`, `chain`, `cert_hash` or `cert_and_chain_hash`.
 
 - The `cert` type SHALL be used when signature validation was performed using a single certificate not present in the target XML signature.
-- The `chain` type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain is not present in the target signature.
+- The `chain` type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain are not present in the target signature.
 - The `cert_hash` type SHALL be used when signature validation was performed using a single certificate that is present in the target XML signature.
-- The `cert_and_chain_hash` type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain is present in the target signature.
-
+- The `cert_and_chain_hash` type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain are present in the target signature.
 
 **Note:** The `cert` type MUST NOT be used with a XAdES signatures where the signing certificate in the target signature is bound to the signature through a `<xades:CertDigest>` element.
-
 
 <a name="normative-references"></a>
 ## 4. Normative References
 
 <a name="rfc2119"></a>
 **[RFC2119]**
-
 > [Bradner, S., Key words for use in RFCs to Indicate Requirement
 > Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
 
 <a name="rfc5280"></a>
 **[RFC5280]**
-
 > [D. Cooper, S. Santesson, S. Farrell, S. Boeyen, R. Housley, W. Polk, Internet
 > X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL)
 > Profile, May 2008](http://www.ietf.org/rfc/rfc5280.txt).
 
 <a name="rfc8174"></a>
 **[RFC8174]**
-
 > [Leiba, B., Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words,
 > May 2017](http://www.ietf.org/rfc/rfc8174.txt).
 
 <a name="xmldsig"></a>
 **[XMLDsig]**
-
 > [XML Signature Syntax and Processing Version 1.1 - W3C Recommendation 11
 > April 2013](https://www.w3.org/TR/2013/REC-xmldsig-core1-20130411/).
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
-> [Registry for identifiers assigned by the Swedish e-identification
-> board](https://docs.swedenconnect.se/technical-framework/updates/ELN-0603_-_Registry_for_Identifiers.html).
+> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="svt"></a>
 **\[SVT\]**
-> [Signature Validation Token (SVT)](https://github.com/swedenconnect/technical-framework/blob/feature/is-109-sva-token/ELN-0615%20-%20Signature%20Validation%20Token%20-%20SVT.md)
+> [Signature Validation Token](https://docs.swedenconnect.se/technical-framework/updates/15_-_Signature_Validation%_Token.html).
