@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XML Profile for Signature Validation Tokens</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="xml-profile-for-signature-validation-tokens">XML Profile for Signature Validation Tokens</h1>
+<h3 id="version-1.0---2020-01-24---*draft-version*">Version 1.0 - 2020-01-24 - <em>Draft version</em></h3>
+<p>Registration number: <strong>2020-62</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation">Requirements Notation</a></p>
+<p> 1.2. <a href="#definitions">Definitions</a></p>
+<p> 1.2. <a href="#notation">Notation</a></p>
+<p> 1.2.1 <a href="#references-to-xml-elements-from-xml-schemas">References to XML Elements from XML Schemas</a></p>
+</li>
+<li><p><a href="#svt-in-xml-documents"><strong>SVT in XML Documents</strong></a></p>
+<p> 2.1.1. <a href="#signaturevalidationtoken-signature-property">SignatureValidationToken Signature Property</a></p>
+</li>
+<li><p><a href="#svt-claims"><strong>SVT Claims</strong></a></p>
+<p> 3.1. <a href="#signature-reference-data">Signature Reference Data</a></p>
+<p> 3.2. <a href="#signed-data-reference-data">Signed Data Reference Data</a></p>
+<p> 3.3. <a href="#signer-certificate-references">Signer Certificate References</a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+</ol>
+<hr>
+<p><a name="introduction"></a></p>
+<h2 id="1.-introduction">1. Introduction</h2>
+<p>The &quot;Signature Validation Token&quot; specification [<a href="#svt">SVT</a>] defines the basic token to support signature validation in a way that can significantly extend the lifetime of a signature.</p>
+<p>This specification defines a profile for implementing SVT with a signed XML document, and defines the following aspects of SVT usage:</p>
+<ul class="list">
+<li>How to include reference data related to XML signatures and XML documents in an SVT.</li>
+<li>How to add an SVT token to a XML signature.</li>
+</ul>
+<p>XML documents can have any number of signature elements, signing an arbitrary number of fragments of XML documents. The actual signature element may be included in the signed XML document (enveloped), include the signed data (enveloping) or may be separate from the signed content (detached).</p>
+<p>To provide a generic solution for any type of XML signature an SVT is added to each XML signature element within the XML signature <code>&lt;ds:Object&gt;</code> element.</p>
+<p><a name="requirements-notation"></a></p>
+<h3 id="1.1.-requirements-notation">1.1. Requirements Notation</h3>
+<p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>, <strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>, <strong>MAY</strong>, and <strong>OPTIONAL</strong> in this document are to be interpreted as described in BCP 14 [<a href="#rfc2119">RFC2119</a>] [<a href="#rfc8174">RFC8174</a>] when, and only when, they appear in all capitals, as shown here.</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="definitions"></a></p>
+<h3 id="1.2.-definitions">1.2. Definitions</h3>
+<p>The definitions in [<a href="#svt">SVT</a>] apply also to this document.</p>
+<p><a name="notation"></a></p>
+<h3 id="1.2.-notation">1.2. Notation</h3>
+<p><a name="references-to-xml-elements-from-xml-schemas"></a></p>
+<h4 id="1.2.1-references-to-xml-elements-from-xml-schemas">1.2.1 References to XML Elements from XML Schemas</h4>
+<p>When referring to elements from the W3C XML Signature namespace
+(<code>http://www.w3.org/2000/09/xmldsig\#</code>) the following syntax is used:</p>
+<ul class="list">
+<li><code>&lt;ds:Signature&gt;</code></li>
+</ul>
+<p>When referring to elements from the ETSI XAdES XML Signature namespace
+(<code>http://uri.etsi.org/01903/v1.3.2#</code>) the following syntax is used:</p>
+<ul class="list">
+<li><code>&lt;xades:CertDigest&gt;</code></li>
+</ul>
+<p>When referring to elements defined in this specification
+(<code>http://id.swedenconnect.se/svt/1.0/sig-prop/ns</code>) the following syntax is used:</p>
+<ul class="list">
+<li><code>&lt;svt:Element&gt;</code></li>
+</ul>
+<p><a name="svt-in-xml-documents"></a></p>
+<h2 id="2.-svt-in-xml-documents">2. SVT in XML Documents</h2>
+<p>When SVT is provided for XML signatures then one SVT SHALL be provided for each XML signature.</p>
+<p>An SVT embedded within the XML signature element SHALL be placed in a  <code>&lt;svt:SignatureValidationToken&gt;</code> as defined in <a href="#signaturevalidationtoken-signature-property">section 2.1.1</a>.</p>
+<p><a name="signaturevalidationtoken-signature-property"></a></p>
+<h3 id="2.1.1.-signaturevalidationtoken-signature-property">2.1.1. SignatureValidationToken Signature Property</h3>
+<p>The <code>&lt;svt:SignatureValidationToken&gt;</code> element SHALL be placed in a <code>&lt;ds:SignatureProperty&gt;</code> element in accordance with [<a href="xmldsig">XMLDsig</a>]. The <code>&lt;ds:SignatureProperty&gt;</code> element SHALL be placed inside a <code>&lt;ds:SignatureProperties&gt;</code> element inside a <code>&lt;ds:Object&gt;</code> element inside a <code>&lt;ds:Signature&gt;</code> element.</p>
+<p>The <code>&lt;svt:SignatureValidationToken&gt;</code> element is defined by the following XML Schema:</p>
+<pre class="hljs"><code>&lt;?xml <span class="hljs-keyword">version</span>=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span>?&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span> xmln<span class="hljs-variable">s:xs</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> elementFormDefault=<span class="hljs-string">"qualified"</span>
+    targetNamespace=<span class="hljs-string">"http://id.swedenconnect.se/svt/1.0/sig-prop/ns"</span>
+    xmln<span class="hljs-variable">s:svt</span>=<span class="hljs-string">"http://id.swedenconnect.se/svt/1.0/sig-prop/ns"</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"SignatureValidationToken"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"svt:SignatureValidationTokenType"</span> /&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"SignatureValidationTokenType"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"xs:string"</span>&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span>&gt;</code></pre><p>The SVT token SHALL be included as a string representation of the SVT JWT. Note that this is the string representation of the JWT without further encoding. The SVT MUST NOT be represented by the Base64 encoded bytes of the JWT string.</p>
+<p>Example:</p>
+<pre class="hljs"><code>&lt;d<span class="hljs-variable">s:Signature</span> Id=<span class="hljs-string">"MySignatureId"</span>&gt;
+  ...
+  &lt;d<span class="hljs-variable">s:Object</span>&gt;
+    &lt;d<span class="hljs-variable">s:SignatureProperties</span>&gt;
+      &lt;d<span class="hljs-variable">s:SignatureProperty</span> Target=<span class="hljs-string">"#MySignatureId"</span>&gt;
+        &lt;<span class="hljs-keyword">sv</span><span class="hljs-variable">t:SignatureValidationToken</span>&gt;
+              eyJ0eXAiOiJKV1QiLCJhb...<span class="hljs-number">2</span>aNZ
+        &lt;/<span class="hljs-keyword">sv</span><span class="hljs-variable">t:SignatureValidationToken</span>&gt;
+      &lt;/d<span class="hljs-variable">s:SignatureProperty</span>&gt;
+    &lt;/d<span class="hljs-variable">s:SignatureProperties</span>&gt;
+  &lt;/d<span class="hljs-variable">s:Object</span>&gt;
+&lt;/d<span class="hljs-variable">s:Signature</span>&gt;</code></pre><p><a name="svt-claims"></a></p>
+<h2 id="3.-svt-claims">3. SVT Claims</h2>
+<p><a name="signature-reference-data"></a></p>
+<h3 id="3.1.-signature-reference-data">3.1. Signature Reference Data</h3>
+<p>The SVT SHALL contain a <strong>SigReference</strong> claims object that SHALL contain the following data:</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>The Id-attribute of the XML signature, if present.</td>
+</tr>
+<tr>
+<td><code>sig_hash</code></td>
+<td>The hash over the signature value bytes.</td>
+</tr>
+<tr>
+<td><code>sb_hash</code></td>
+<td>The hash over the canonicalized <code>&lt;ds:SignedInfo&gt;</code> element (the bytes the XML signature algorithm has signed to generated the signature value).</td>
+</tr>
+</tbody>
+</table>
+<p><a name="signed-data-reference-data"></a></p>
+<h3 id="3.2.-signed-data-reference-data">3.2. Signed Data Reference Data</h3>
+<p>An SVT according to this profile SHALL contain one instance of the <strong>SignedData</strong> claims object for each <code>&lt;ds:Reference&gt;</code> element in the <code>&lt;ds:SignedInfo&gt;</code> element. The <strong>SignedData</strong> claims object shall contain the following data:</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ref</code></td>
+<td>The value of the URI attribute of the corresponding <code>&lt;ds:Reference&gt;</code> element.</td>
+</tr>
+<tr>
+<td><code>hash</code></td>
+<td>The hash of all bytes identified corresponding <code>&lt;ds:Reference&gt;</code> element after applying all identified canonicalization and transformation algorithms. These are the same bytes that is hashed by the hash value in the <code>&lt;ds:DigestValue&gt;</code> element inside the <code>&lt;ds:Reference&gt;</code> element.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="signer-certificate-references"></a></p>
+<h3 id="3.3.-signer-certificate-references">3.3. Signer Certificate References</h3>
+<p>The SVT SHALL contain a <strong>CertReference</strong> claims object. The <code>type</code> claim of the <strong>CertReference</strong> claims object SHALL be either <code>cert</code>, <code>chain</code>, <code>cert_hash</code> or <code>cert_and_chain_hash</code>.</p>
+<ul class="list">
+<li>The <code>cert</code> type SHALL be used when signature validation was performed using a single certificate not present in the target XML signature.</li>
+<li>The <code>chain</code> type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain are not present in the target signature.</li>
+<li>The <code>cert_hash</code> type SHALL be used when signature validation was performed using a single certificate that is present in the target XML signature.</li>
+<li>The <code>cert_and_chain_hash</code> type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain are present in the target signature.</li>
+</ul>
+<p><strong>Note:</strong> The <code>cert</code> type MUST NOT be used with a XAdES signatures where the signing certificate in the target signature is bound to the signature through a <code>&lt;xades:CertDigest&gt;</code> element.</p>
+<p><a name="normative-references"></a></p>
+<h2 id="4.-normative-references">4. Normative References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
+Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="rfc5280"></a>
+<strong>[RFC5280]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc5280.txt">D. Cooper, S. Santesson, S. Farrell, S. Boeyen, R. Housley, W. Polk, Internet
+X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL)
+Profile, May 2008</a>.</p>
+</blockquote>
+<p><a name="rfc8174"></a>
+<strong>[RFC8174]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc8174.txt">Leiba, B., Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words,
+May 2017</a>.</p>
+</blockquote>
+<p><a name="xmldsig"></a>
+<strong>[XMLDsig]</strong></p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/2013/REC-xmldsig-core1-20130411/">XML Signature Syntax and Processing Version 1.1 - W3C Recommendation 11
+April 2013</a>.</p>
+</blockquote>
+<p><a name="eidregistry"></a>
+<strong>[EidRegistry]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html">Swedish eID Framework - Registry for identifiers</a>.</p>
+</blockquote>
+<p><a name="svt"></a>
+<strong>[SVT]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/15_-_Signature_Validation%_Token.html">Signature Validation Token</a>.</p>
+</blockquote>
+    </article>
+  </body>
+</html>
