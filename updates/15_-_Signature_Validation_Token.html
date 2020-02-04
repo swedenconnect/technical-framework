@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="signature-validation-token">Signature Validation Token</h1>
-<h3 id="version-1.0---2020-01-24---*draft-version*">Version 1.0 - 2020-01-24 - <em>Draft version</em></h3>
+<h3 id="version-1.0---2020-02-04---*draft-version*">Version 1.0 - 2020-02-04 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2020-60</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -275,12 +275,6 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <td><strong>URI</strong></td>
 <td>The URI identifier of the hash algorithm used to provide hash values within the SVT. The URI identifier SHALL be one defined in [<a href="#rfc6931">RFC6931</a>] or in the IANA registry defined by this RFC.</td>
 <td>MANDATORY</td>
-</tr>
-<tr>
-<td><code>cert_ref</code></td>
-<td><strong>Object&lt;CertReference&gt;</strong></td>
-<td>Information about certificates that MAY be used to validate the signature on this SVT.</td>
-<td>OPTIONAL</td>
 </tr>
 <tr>
 <td><code>sig</code></td>
@@ -581,6 +575,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </tr>
 </tbody>
 </table>
+<p>The SVT header MUST contain a public key or a reference to a public key used to verify the signature on the SVT in accordance with [<a href="#rfc7515">RFC7515</a>]. Each profile (See section 3.) MUST define the requirements for how the key or key reference is included in the header.</p>
 <p><a name="profiles"></a></p>
 <h2 id="3.-profiles">3. Profiles</h2>
 <p>Each signed document and signature type will have to define the precise content and use of several claims in the SVT.</p>
@@ -588,7 +583,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <ul class="list">
 <li>How to specify reference to Signed Data content of the signed document.</li>
 <li>How to make reference to the target signature and the Signed Bytes of the signature.</li>
-<li>How references should be made to certificates supporting the signature.</li>
+<li>How references should be made to certificates supporting each siganture.</li>
+<li>How public keys or reference to public keys supporting validation of the signed SVT is included in the SVT.</li>
 <li>Whether each signature is supported by it&#39;s own SVT, or whether one SVT may support multiple signatures of the same document.</li>
 <li>Explicit information on how to perform signature validation based on an SVT, if applicable.</li>
 <li>How to attach an SVT to a document signature or signed document, if applicable.</li>
@@ -619,65 +615,40 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <h2 id="5.-examples">5. Examples</h2>
 <p>The following example illustrates a basic SVT according to this specification issued for a signed PDF document.</p>
 <p>Signature validation token JWT:</p>
-<pre class="hljs"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJhdWQiOiJodHRwOlwvXC9leGFtcGxlLmNvbVwvYXVkaWVuY2UxIiw
-iaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlkYXRvciIsImlhdCI6MTU3ODM5NTg5MywianRpIjo
-iM2UwNjEwNzlhOTkxMDcxYTVkMmRjZmQyZWUxYzY3OTQiLCJzaWdfdmFsX2NsYWltcyI6eyJzaWciOlt7ImV4dCI6bnV
-sbCwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25hdHVyZSB2YWxpZGF0aW9uIiwiZXh0IjpudWxsLCJ
-yZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5jb25uZWN0LnNlXC9zdnRcL3NpZ3ZhbC1wb2xpY3l
-cL2NoYWluXC8wMSJ9XSwic2lnX3JlZiI6eyJzaWdfaGFzaCI6IlwvejU1NjZ1VURPZCtVMU4xdmR0bkhHK0xQNEY0aTJ
-yeFBocU5DN2V2MnBnTVZlM1ZxRzMxa2VjZ1gwT3BpdVwvZnhlV0Y0NlZFejN6cmo4eFNLRXpHS0E9PSIsImlkIjpudWx
-sLCJzYl9oYXNoIjoiQUVSZTlFNkVmZ3ViSmlOY1pwSU05QkJFVmdIeCtDY2p2R3FiMnVsMjgwUkN2SjJ5TVZOZUZoUnk
-zZWZ4WlIrYkZHYUFQY1J6SEJlNll3ZDU0QUhlUFE9PSJ9LCJzaWduZXJfY2VydF9yZWYiOnsicmVmIjpbIk5TdUZNXC9
-<span class="hljs-number">2</span>SitiZUJsUXRRVHptY1loNXg3TDhXQzlFMUtQSFJBMWlvTk9sS1ZHYmxhOVVSelljc2lzQXgyYmNzcU9oa3ZWVGMzbUs
-<span class="hljs-number">5</span>RTZhZzA3aGZhdz09Il0sInR5cGUiOiJjZXJ0X2hhc2gifSwic2lnX2RhdGFfcmVmIjpbeyJyZWYiOiIwIDc0Njk3IDc
-<span class="hljs-number">5</span>Njk5IDM3ODgxIiwiaGFzaCI6ImI4RUwxTW9VNHF4WUkxcmtpc2s4b3E4aVEzTHJEb3lja1pub0hWY05jUFNaaUd5Nkt
-<span class="hljs-number">1</span>XC8rUVBaeGdKcGdsRnk1RFIrYmJ2Mmplak56NkErZjl6ZVN3Zz09In1dLCJ0aW1lX3ZhbCI6W3sidmFsIjpbeyJtc2c
-iOm51bGwsImV4dCI6bnVsbCwicmVzIjoiUEFTU0VEIiwicG9sIjoiaHR0cDpcL1wvaWQuc3dlZGVuY29ubmVjdC5zZVw
-vc3Z0XC9zaWd2YWwtcG9saWN5XC90cnVzdFwvMDEifV0sImV4dCI6bnVsbCwiaXNzX2NlcnRfcmVmIjp7InJlZiI6WyJ
-PZW5JKzQzNEpoYnZmRG50ZlZcLzhyT3hHN0ZrdnlqYUtWSmFWcUlGQlhvaFZoQWU1Zks4YW5vdjFTNjg4cjdLYmFsK2Z
-<span class="hljs-number">2</span>cGFIMWo4aWJnNTJRQnkxUFE9PSJdLCJ0eXBlIjoiY2VydF9oYXNoIn0sImlzcyI6Imh0dHBzOlwvXC9zd2VkZW5jb25
-uZWN0LnNlXC92YWxpZGF0b3IiLCJ0aW1lIjoxNTc4Mzk1ODg1LCJpZCI6ImUyZWNkMWU5ODY2ZjdjYiIsInR5cGUiOiJ
-odHRwOlwvXC9pZC5zd2VkZW5jb25uZWN0LnNlXC9zdnRcL3RpbWV2YWwtdHlwZVwvcGRmLXN2YS10aW1lc3RhbXBcLzA
-xIn1dfV0sImV4dCI6eyJuYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4wIiwicHJvZmlsZSI6IlB
-ERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC94bWxlbmMjc2hhNTEyIiwiY2VydF9
-yZWYiOnsicmVmIjpbIk1JSUI2VENDQVV1Z0F3SUJBZ0lFWEhBWHVEQUtCZ2dxaGtqT1BRUURBakE1TVFzd0NRWURWUVF
-HRXdKVFJURU9NQXdHQTFVRUNnd0ZTVVJ6WldNeEdqQVlCZ05WQkFNTUVVOXdaVzVUUVUxTUlFVkRReUJVWlhOME1CNFh
-EVEU1TURJeU1qRTFNemt6TmxvWERUSXdNREl5TWpFMU16a3pObG93T1RFTE1Ba0dBMVVFQmhNQ1UwVXhEakFNQmdOVkJ
-Bb01CVWxFYzJWak1Sb3dHQVlEVlFRRERCRlBjR1Z1VTBGTlRDQkZRME1nVkdWemREQ0JtekFRQmdjcWhrak9QUUlCQmd
-VcmdRUUFJd09CaGdBRUFad0RBTlZTWFA1ZU53T1Y5OFo5YXF6Tlwvd0haQVVpOGFqdWMwcFNtMGxJSTV2QU1wU0V2a3l
-iVHpTV0VkXC9kUkRQdVJibkcxcXd1UnhEekJJcVdvY0hHNkFHMGNsZGhMVkNsNHZWM1Q4OVBVQUw5ZEdSYjE4dVdud1R
-VT1lidTljOFp5dUU3OVlPd2ZqSUpzcUtBXC9QQmNjcGkyRGczNTE5bzZTMkl5d3hXTkhOUHdLTUFvR0NDcUdTTTQ5QkF
-NQ0E0R0xBRENCaHdKQ0FOY1F4bWVRNG44elkybHFydGpobzlNUUttYll1T3pvV3o1Sm9cLzRkKzlPT1JaMFU5UTB6OEQ
-rSUV0S1Q0ZGREZm9VTDBiMG9DR09WN08weGMzanpMbEFOQWtFOGs0dlYwODdjYjRaNktYMlF0TkVIZjFxWW95RXliNVF
-LWW51OGtqRmt2RmtoUTdWcTNHRFFGM2RHa0wyNkZFYVNMMGc2Q3ZwWUd6YjNlXC9jcVdvekY1Zz09Il0sInR5cGUiOiJ
-jZXJ0In19fQ.ABX86yxICFISWcuEZeGnxV-H-F4eWcVvTUegS7wdR2znB4Nj_xvg6laMGFOByMlZCp4ck2H7WukKYhNC
-<span class="hljs-number">7</span>qfPbXDXARtjhhVrb_1qyQhs3aGnZsvvBaq9oKw52EibdgSutLDEndcpEo-d719M8RDxdwPXIQzCUTTUJT8R94m9xyL6
-<span class="hljs-number">2</span>aNZ</code></pre><p>Decoded JWT Header:</p>
+<pre class="hljs"><code>eyJraWQiOiJPZW5JKzQzNEpoYnZmRG50ZlZcLzhyT3hHN0ZrdnlqYUtWSmFWcUlGQlhvaFZoQWU1Zks4YW5vdjFTNjg4
+cjdLYmFsK2Z2cGFIMWo4aWJnNTJRQnkxUFE9PSIsInR5cCI6IkpXVCIsImFsZyI6IlJTNTEyIn0.eyJhdWQiOiJodHRw
+OlwvXC9leGFtcGxlLmNvbVwvYXVkaWVuY2UxIiwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlk
+YXRvciIsImlhdCI6MTU4MDgwMjU2OSwianRpIjoiOWQ5MGRjYjY3ODQ2ZjJiYTk5ZTIxZmE1Zjc2YjNhMWEiLCJzaWdf
+dmFsX2NsYWltcyI6eyJzaWciOlt7ImV4dCI6bnVsbCwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25h
+dHVyZSB2YWxpZGF0aW9uIiwiZXh0IjpudWxsLCJyZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5j
+b25uZWN0LnNlXC9zdnRcL3NpZ3ZhbC1wb2xpY3lcL2NoYWluXC8wMSJ9XSwic2lnX3JlZiI6eyJzaWdfaGFzaCI6IlZk
+eXB6dTBTZmVDaUIrRk5EaWNUSGJxN2U4b0tLRVQrMW5XZ0Mranp5WmdqbUdPZldYaVwvNVwvM0VsMFdtbk5KZlo2NUUr
+ZUxqa3BlQThnV0gyM1VOVnc9PSIsImlkIjpudWxsLCJzYl9oYXNoIjoiM0dIVjczZ0VsV2sxeVBaUmpGdENQdEVmRUFH
+UlhcL2thSldMM0k1Zm00M3RrRm8zKzFGS2RxSUE2YXBZRlp6N3hUMmF3alwvenZXdWRIYTRPeUJhUDdhQT09In0sInNp
+Z25lcl9jZXJ0X3JlZiI6eyJyZWYiOlsiTlN1Rk1cL3ZKK2JlQmxRdFFUem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xL
+VkdibGE5VVJ6WWNzaXNBeDJiY3NxT2hrdlZUYzNtSzlFNmFnMDdoZmF3PT0iXSwidHlwZSI6ImNlcnRfaGFzaCJ9LCJz
+aWdfZGF0YV9yZWYiOlt7InJlZiI6IjAgNzQ2OTcgNzk2OTkgMzc5MDgiLCJoYXNoIjoiVHczcmVQZ0FoWVNIdGNjWUp5
+UlJTelNxRUlXTUtrdEk1TldKUHpmK0tKMUNEVURybUhwTzlSU0t2d2RNRm9yRjBnWU5Bdnp1VXBFWUN6SnhnS3ZTYXc9
+PSJ9XSwidGltZV92YWwiOltdfV0sImV4dCI6eyJuYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4w
+IiwicHJvZmlsZSI6IlBERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC94bWxlbmMj
+c2hhNTEyIn19.Ok6UDMOxNqNZ4zXQ1ppC2D-osI1Lwcoffxr6VT__sa-SZMCrVUwFkraESnq0cBQBJr9fpsMy9wIbl-J
+ngqig3MzyxwSpq77LnBld7YjN0FemP6kKtEOfWeVeaMXpA8QMVAWUZQO0hU99xHcBz2toh5Voj6wTo9MwrQ9vovVznk_
+dLotfub2rMr20f9s8McWMZQ6BMZXPgeaqUwonx1zahMPPKNU3PTBcIfo-I9jdfbJSxkc6R4Vi_4GVY9OJXLBROp96Us8
+yagWEJFfHzB-eSwWipJdGVUIAIKNs11pkV4j7j9yRlBNmCono0e5xBb3bE-uAewMhiU-u9nxR1mu7KJhvhU4IS-UZud3
+RuETagw3vBb7RzhHyk0RnooJsnIXgILj0jO7-Iun2v6hxLOOp88cMNLOO8byVy0Bg634uqe6pUvshII98kQFxtHjJ_H8
+L0TcOT6uAjFvG2BKDIdfMu-43f6nfuPk_2j8y6YQCqMg7dW5EPHEMqHqKd7DzRExr</code></pre><p>Decoded JWT Header:</p>
 <pre class="hljs"><code>{
-  <span class="hljs-attr">"typ"</span> : <span class="hljs-string">"JWT"</span>,
-  <span class="hljs-attr">"alg"</span> : <span class="hljs-string">"ES512"</span>
+  <span class="hljs-string">"kid"</span>:<span class="hljs-string">"OenI+434JhbvfDntfV\/8rOxG7FkvyjaKVJaVqIFBXohVhAe5fK8anov1S688r7Kbal+fvpaH1j8ibg52QB</span>
+         y1PQ==<span class="hljs-string">",</span>
+  <span class="hljs-string">"typ"</span> : <span class="hljs-string">"JWT"</span>,
+  <span class="hljs-string">"alg"</span> : <span class="hljs-string">"RS512"</span>
 }</code></pre><p>Decoded JWT Claims:</p>
 <pre class="hljs"><code>{
-  <span class="hljs-string">"jti"</span> : <span class="hljs-string">"3e061079a991071a5d2dcfd2ee1c6794"</span>,
-  <span class="hljs-string">"iss"</span> : <span class="hljs-string">"https://swedenconnect.se/validator"</span>,
-  <span class="hljs-string">"iat"</span> : <span class="hljs-number">1578395893</span>,
   <span class="hljs-string">"aud"</span> : <span class="hljs-string">"http://example.com/audience1"</span>,
+  <span class="hljs-string">"iss"</span> : <span class="hljs-string">"https://swedenconnect.se/validator"</span>,
+  <span class="hljs-string">"iat"</span> : <span class="hljs-number">1580802569</span>,
+  <span class="hljs-string">"jti"</span> : <span class="hljs-string">"9d90dcb67846f2ba99e21fa5f76b3a1a"</span>,
   <span class="hljs-string">"sig_val_claims"</span> : {
-    <span class="hljs-string">"ver"</span> : <span class="hljs-string">"1.0"</span>,
-    <span class="hljs-string">"profile"</span> : <span class="hljs-string">"PDF"</span>,
-    <span class="hljs-string">"hash_algo"</span> : <span class="hljs-string">"http://www.w3.org/2001/04/xmlenc#sha512"</span>,
-    <span class="hljs-string">"cert_ref"</span> : {
-      <span class="hljs-string">"ref"</span> : [ <span class="hljs-string">"MIIB6TCCAUugAwIBAgIEXHAXuDAKBggqhkjOPQQDAjA5MQswCQYDVQQGEwJTRTEOMAwGA1UECgw
-                 FSURzZWMxGjAYBgNVBAMMEU9wZW5TQU1MIEVDQyBUZXN0MB4XDTE5MDIyMjE1MzkzNloXDTIwMD
-                 IyMjE1MzkzNlowOTELMAkGA1UEBhMCU0UxDjAMBgNVBAoMBUlEc2VjMRowGAYDVQQDDBFPcGVuU
-                 0FNTCBFQ0MgVGVzdDCBmzAQBgcqhkjOPQIBBgUrgQQAIwOBhgAEAZwDANVSXP5eNwOV98Z9aqzN
-                 /wHZAUi8ajuc0pSm0lII5vAMpSEvkybTzSWEd/dRDPuRbnG1qwuRxDzBIqWocHG6AG0cldhLVCl
-                 4vV3T89PUAL9dGRb18uWnwTUOYbu9c8ZyuE79YOwfjIJsqKA/PBccpi2Dg3519o6S2IywxWNHNP
-                 wKMAoGCCqGSM49BAMCA4GLADCBhwJCANcQxmeQ4n8zY2lqrtjho9MQKmbYuOzoWz5Jo/4d+9OOR
-                 Z0U9Q0z8D+IEtKT4ddDfoUL0b0oCGOV7O0xc3jzLlANAkE8k4vV087cb4Z6KX2QtNEHf1qYoyEy
-                 b5QKYnu8kjFkvFkhQ7Vq3GDQF3dGkL26FEaSL0g6CvpYGzb3e/cqWozF5g=="</span> ],
-      <span class="hljs-string">"type"</span> : <span class="hljs-string">"cert"</span>
-    },
     <span class="hljs-string">"sig"</span> : [ {
       <span class="hljs-string">"ext"</span> : null,
       <span class="hljs-string">"sig_val"</span> : [ {
@@ -687,11 +658,11 @@ jZXJ0In19fQ.ABX86yxICFISWcuEZeGnxV-H-F4eWcVvTUegS7wdR2znB4Nj_xvg6laMGFOByMlZCp4c
         <span class="hljs-string">"pol"</span> : <span class="hljs-string">"http://id.swedenconnect.se/svt/sigval-policy/chain/01"</span>
       } ],
       <span class="hljs-string">"sig_ref"</span> : {
-        <span class="hljs-string">"sig_hash"</span> : <span class="hljs-string">"/z5566uUDOd+U1N1vdtnHG+LP4F4i2rxPhqNC7ev2pgMVe3VqG31kecgX0Opiu/fxeWF46
-                      VEz3zrj8xSKEzGKA=="</span>,
+        <span class="hljs-string">"sig_hash"</span> : <span class="hljs-string">"Vdypzu0SfeCiB+FNDicTHbq7e8oKKET+1nWgC+jzyZgjmGOfWXi/5/3El0WmnNJfZ65E+e
+                      LjkpeA8gWH23UNVw=="</span>,
         <span class="hljs-string">"id"</span> : null,
-        <span class="hljs-string">"sb_hash"</span> : <span class="hljs-string">"AERe9E6EfgubJiNcZpIM9BBEVgHx+CcjvGqb2ul280RCvJ2yMVNeFhRy3efxZR+bFGaAPcR
-                     zHBe6Ywd54AHePQ=="</span>
+        <span class="hljs-string">"sb_hash"</span> : <span class="hljs-string">"3GHV73gElWk1yPZRjFtCPtEfEAGRX/kaJWL3I5fm43tkFo3+1FKdqIA6apYFZz7xT2awj/z
+                     vWudHa4OyBaP7aA=="</span>
       },
       <span class="hljs-string">"signer_cert_ref"</span> : {
         <span class="hljs-string">"ref"</span> : [ <span class="hljs-string">"NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisAx2bcsqOhkvVTc3
@@ -699,36 +670,22 @@ jZXJ0In19fQ.ABX86yxICFISWcuEZeGnxV-H-F4eWcVvTUegS7wdR2znB4Nj_xvg6laMGFOByMlZCp4c
         <span class="hljs-string">"type"</span> : <span class="hljs-string">"cert_hash"</span>
       },
       <span class="hljs-string">"sig_data_ref"</span> : [ {
-        <span class="hljs-string">"ref"</span> : <span class="hljs-string">"0 74697 79699 37881"</span>,
-        <span class="hljs-string">"hash"</span> : <span class="hljs-string">"b8EL1MoU4qxYI1rkisk8oq8iQ3LrDoyckZnoHVcNcPSZiGy6Ku/+QPZxgJpglFy5DR+bbv2jej
-                  Nz6A+f9zeSwg=="</span>
+        <span class="hljs-string">"ref"</span> : <span class="hljs-string">"0 74697 79699 37908"</span>,
+        <span class="hljs-string">"hash"</span> : <span class="hljs-string">"Tw3rePgAhYSHtccYJyRRSzSqEIWMKktI5NWJPzf+KJ1CDUDrmHpO9RSKvwdMForF0gYNAvzuUp
+                  EYCzJxgKvSaw=="</span>
       } ],
-      <span class="hljs-string">"time_val"</span> : [ {
-        <span class="hljs-string">"val"</span> : [ {
-          <span class="hljs-string">"msg"</span> : null,
-          <span class="hljs-string">"ext"</span> : null,
-          <span class="hljs-string">"res"</span> : <span class="hljs-string">"PASSED"</span>,
-          <span class="hljs-string">"pol"</span> : <span class="hljs-string">"http://id.swedenconnect.se/svt/sigval-policy/trust/01"</span>
-        } ],
-        <span class="hljs-string">"ext"</span> : null,
-        <span class="hljs-string">"iss_cert_ref"</span> : {
-          <span class="hljs-string">"ref"</span> : [ <span class="hljs-string">"OenI+434JhbvfDntfV/8rOxG7FkvyjaKVJaVqIFBXohVhAe5fK8anov1S688r7Kbal+fvpa
-                     H1j8ibg52QBy1PQ=="</span> ],
-          <span class="hljs-string">"type"</span> : <span class="hljs-string">"cert_hash"</span>
-        },
-        <span class="hljs-string">"iss"</span> : <span class="hljs-string">"https://swedenconnect.se/validator"</span>,
-        <span class="hljs-string">"time"</span> : <span class="hljs-number">1578395885</span>,
-        <span class="hljs-string">"id"</span> : <span class="hljs-string">"e2ecd1e9866f7cb"</span>,
-        <span class="hljs-string">"type"</span> : <span class="hljs-string">"http://id.swedenconnect.se/svt/timeval-type/pdf-sva-timestamp/01"</span>
-      } ]
+      <span class="hljs-string">"time_val"</span> : [ ]
     } ],
     <span class="hljs-string">"ext"</span> : {
       <span class="hljs-string">"name2"</span> : <span class="hljs-string">"val2"</span>,
       <span class="hljs-string">"name1"</span> : <span class="hljs-string">"val1"</span>
-    }
+    },
+    <span class="hljs-string">"ver"</span> : <span class="hljs-string">"1.0"</span>,
+    <span class="hljs-string">"profile"</span> : <span class="hljs-string">"PDF"</span>,
+    <span class="hljs-string">"hash_algo"</span> : <span class="hljs-string">"http://www.w3.org/2001/04/xmlenc#sha512"</span>
   }
 }</code></pre><blockquote>
-<p>Note: The order of the JSON objects has been rearranged from the order they appear in the JWT to increase readablilty. Line breaks in the decoded example are also inserted for readablilty. These are not allowed in valid JSON data.</p>
+<p>Note: Line breaks in the decoded example are inserted for readablilty. These are not allowed in valid JSON data.</p>
 </blockquote>
 <p><a name="normative-references"></a></p>
 <h2 id="6.-normative-references">6. Normative References</h2>
@@ -750,6 +707,11 @@ Profile, May 2008</a>.</p>
 <blockquote>
 <p><a href="https://www.ietf.org/rfc/rfc6931.txt">Eastlake 3rd, D., Additional XML Security Uniform Resource Identifiers
 (URIs), April 2013</a>.</p>
+</blockquote>
+<p><a name="rfc7515"></a>
+<strong>[RFC7515]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc7515.txt">Jones, M., Bradley, J., Sakimura, N., JSON Web Signature (JWS), May 2015</a>.</p>
 </blockquote>
 <p><a name="rfc7518"></a>
 <strong>[RFC7518]</strong></p>
