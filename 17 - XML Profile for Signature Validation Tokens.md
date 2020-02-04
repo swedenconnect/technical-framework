@@ -20,6 +20,34 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
+
+    1.1. [Requirements Notation](#requirements-notation)
+
+    1.2. [Definitions](#definitions)
+
+    1.2. [Notation](#notation)
+
+    1.2.1 [References to XML Elements from XML Schemas](#references-to-xml-elements-from-xml-schemas)
+
+2. [**SVT in XML Documents**](#svt-in-xml-documents)
+
+    2.1.1. [SignatureValidationToken Signature Property](#signaturevalidationtoken-signature-property)
+
+3. [**SVT Claims**](#svt-claims)
+
+    3.1. [Signature Reference Data](#signature-reference-data)
+
+    3.2. [Signed Data Reference Data](#signed-data-reference-data)
+
+    3.3. [Signer Certificate References](#signer-certificate-references)
+
+4. [**JOSE header**](#jose-header)
+
+    4.1. [SVT signing key reference](#svt-signing-key-reference)
+
+5. [**Normative References**](#normative-references)
+
 ---
 
 <a name="introduction"></a>
@@ -157,8 +185,10 @@ The SVT SHALL contain a **CertReference** claims object. The `type` claim of the
 **Note:** The `cert` type MUST NOT be used with a XAdES signatures where the signing certificate in the target signature is bound to the signature through a `<xades:CertDigest>` element.
 
 
+<a name="jose-header"></a>
 ## 4. JOSE header
 
+<a name="svt-signing-key-reference"></a>
 ### 4.1. SVT signing key reference
 
 The SVT JOSE Header MUST contain one of the following header parameters in accordance with \[[RFC7515](#rfc7515)\], for storing a reference to the public key used to verify the signature on the SVT:

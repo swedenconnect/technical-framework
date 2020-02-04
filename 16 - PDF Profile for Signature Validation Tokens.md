@@ -20,6 +20,29 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 ## Table of Contents
 
+1. [**Introduction**](#introduction)
+
+    1.1. [Requirements Notation](#requirements-notation)
+
+    1.2. [Definitions](#definitions)
+
+2. [**SVT in PDF Documents**](#svt-in-pdf-documents)
+
+    2.1.1. [SVT Extension to Timestamp Tokens](#svt-extension-to-timestamp-tokens)
+
+3. [**SVT Claims**](#svt-claims)
+
+    3.1. [Signature Reference Data](#signature-reference-data)
+
+    3.2. [Signed Data Reference Data](#signed-data-reference-data)
+
+    3.3. [Signer Certificate References](#signer-certificate-references)
+
+4. [**JOSE header**](#jose-header)
+
+    4.1. [SVT signing key reference](#svt-signing-key-reference)
+
+5. [**Normative References**](#normative-references)
 
 ---
 
@@ -106,8 +129,10 @@ The SVT SHALL contain a **CertReference** claims object. The `type` claim of the
 **Note:** The `cert` type MUST NOT be used with a PAdES signatures (SubFiler in the signature dictionary is set to "ETSI.CAdES.detached") where the signing certificate in the target signature is bound to the signature through ESSCertID or ESSCertIDv2 \[[RFC5035](rfc55035)\].
 
 
+<a name="jose-header"></a>
 ## 4. JOSE header
 
+<a name="svt-signing-key-reference"></a>
 ### 4.1. SVT signing key reference
 
 The SVT JOSE Header must contain one of the following header parameters in accordance with \[[RFC7515](#rfc7515)\], for storing a reference to the public key used to verify the signature on the SVT:
