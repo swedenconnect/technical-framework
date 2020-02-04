@@ -20,30 +20,6 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 ## Table of Contents
 
-1. [**Introduction**](#introduction)
-
-    1.1. [Requirements Notation](#requirements-notation)
-
-    1.2. [Definitions](#definitions)
-
-    1.2. [Notation](#notation)
-
-    1.2.1 [References to XML Elements from XML Schemas](#references-to-xml-elements-from-xml-schemas)
-
-2. [**SVT in XML Documents**](#svt-in-xml-documents)
-
-    2.1.1. [SignatureValidationToken Signature Property](#signaturevalidationtoken-signature-property)
-
-3. [**SVT Claims**](#svt-claims)
-
-    3.1. [Signature Reference Data](#signature-reference-data)
-
-    3.2. [Signed Data Reference Data](#signed-data-reference-data)
-
-    3.3. [Signer Certificate References](#signer-certificate-references)
-
-4. [**Normative References**](#normative-references)
-
 ---
 
 <a name="introduction"></a>
@@ -112,9 +88,9 @@ The `<svt:SignatureValidationToken>` element is defined by the following XML Sch
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://id.swedenconnect.se/svt/1.0/sig-prop/ns"
     xmlns:svt="http://id.swedenconnect.se/svt/1.0/sig-prop/ns">
-    
+
   <xs:element name="SignatureValidationToken" type="svt:SignatureValidationTokenType" />
-  
+
   <xs:complexType name="SignatureValidationTokenType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
@@ -180,8 +156,20 @@ The SVT SHALL contain a **CertReference** claims object. The `type` claim of the
 
 **Note:** The `cert` type MUST NOT be used with a XAdES signatures where the signing certificate in the target signature is bound to the signature through a `<xades:CertDigest>` element.
 
+
+## 4. JOSE header
+
+### 4.1. SVT signing key reference
+
+The SVT JOSE Header MUST contain one of the following header parameters in accordance with \[[RFC7515](#rfc7515)\], for storing a reference to the public key used to verify the signature on the SVT:
+
+Header Parameter | Value
+--- | ---
+`x5c` | Holds an X.509 certificate \[[RFC5280](rfc5280)\] or a chain of certificates. The certificte holding the public key that verifies the signature on the SVT MUST be the first certificate in the chain.
+`kid`  | A key identifier holding the Base64 encoded hash value of the certificate that can verify the signature on the SVT. The hash algorithm MUST be the same hash algorithm used when signing the SVT as specified by the `alg` header parameter.
+
 <a name="normative-references"></a>
-## 4. Normative References
+## 5. Normative References
 
 <a name="rfc2119"></a>
 **[RFC2119]**

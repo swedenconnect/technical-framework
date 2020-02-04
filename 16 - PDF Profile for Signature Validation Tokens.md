@@ -20,25 +20,6 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 ## Table of Contents
 
-1. [**Introduction**](#introduction)
-
-    1.1. [Requirements Notation](#requirements-notation)
-
-    1.2. [Definitions](#definitions)
-
-2. [**SVT in PDF Documents**](#svt-in-pdf-documents)
-
-    2.1.1. [SVT Extension to Timestamp Tokens](#svt-extension-to-timestamp-tokens)
-
-3. [**SVT Claims**](#svt-claims)
-
-    3.1. [Signature Reference Data](#signature-reference-data)
-
-    3.2. [Signed Data Reference Data](#signed-data-reference-data)
-
-    3.3. [Signer Certificate References](#signer-certificate-references)
-
-4. [**Normative References**](#normative-references)
 
 ---
 
@@ -125,8 +106,20 @@ The SVT SHALL contain a **CertReference** claims object. The `type` claim of the
 **Note:** The `cert` type MUST NOT be used with a PAdES signatures (SubFiler in the signature dictionary is set to "ETSI.CAdES.detached") where the signing certificate in the target signature is bound to the signature through ESSCertID or ESSCertIDv2 \[[RFC5035](rfc55035)\].
 
 
+## 4. JOSE header
+
+### 4.1. SVT signing key reference
+
+The SVT JOSE Header must contain one of the following header parameters in accordance with \[[RFC7515](#rfc7515)\], for storing a reference to the public key used to verify the signature on the SVT:
+
+Header Parameter | Value
+--- | ---
+`x5c` | Holds an X.509 certificate \[[RFC5280](rfc5280)\] or a chain of certificates. The certificte holding the public key that verifies the signature on the SVT MUST be the first certificate in the chain.
+`kid`  | A key identifier holding the Base64 encoded hash value of the certificate that can verify the signature on the SVT. The hash algorithm MUST be the same hash algorithm used when signing the SVT as specified by the `alg` header parameter. The referenced certificate SHOULD be the same certificate taht was used to sign the document timestamp that contains the SVT.
+
+
 <a name="normative-references"></a>
-## 4. Normative References
+## 5. Normative References
 
 <a name="rfc2119"></a>
 **[RFC2119]**
@@ -148,6 +141,10 @@ The SVT SHALL contain a **CertReference** claims object. The `type` claim of the
 **[RFC5035]**
 > [Shaad, J., Enhanced Security Services (ESS) Update: Adding CertID Algorithm
 > Agility, August 2007](http://www.ietf.org/rfc/rfc5035.txt).
+
+<a name="rfc7515"></a>
+**[RFC7515]**
+> [Jones, M., Bradley, J., Sakimura, N., JSON Web Signature (JWS), May 2015](https://www.ietf.org/rfc/rfc7515.txt).
 
 <a name="rfc8174"></a>
 **[RFC8174]**
