@@ -8,7 +8,7 @@
 
 # XML Profile for Signature Validation Tokens
 
-### Version 1.0 - 2020-01-24 - *Draft version*
+### Version 1.0 - 2020-02-04 - *Draft version*
 
 Registration number: **2020-62**
 
@@ -42,9 +42,9 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     3.3. [Signer Certificate References](#signer-certificate-references)
 
-4. [**JOSE header**](#jose-header)
+4. [**JOSE Header**](#jose-header)
 
-    4.1. [SVT signing key reference](#svt-signing-key-reference)
+    4.1. [SVT Signing Key Reference](#svt-signing-key-reference)
 
 5. [**Normative References**](#normative-references)
 
@@ -186,16 +186,16 @@ The SVT SHALL contain a **CertReference** claims object. The `type` claim of the
 
 
 <a name="jose-header"></a>
-## 4. JOSE header
+## 4. JOSE Header
 
 <a name="svt-signing-key-reference"></a>
-### 4.1. SVT signing key reference
+### 4.1. SVT Signing Key Reference
 
-The SVT JOSE Header MUST contain one of the following header parameters in accordance with \[[RFC7515](#rfc7515)\], for storing a reference to the public key used to verify the signature on the SVT:
+The SVT JOSE header MUST contain one of the following header parameters in accordance with \[[RFC7515](#rfc7515)\], for storing a reference to the public key used to verify the signature on the SVT:
 
 Header Parameter | Value
 --- | ---
-`x5c` | Holds an X.509 certificate \[[RFC5280](rfc5280)\] or a chain of certificates. The certificte holding the public key that verifies the signature on the SVT MUST be the first certificate in the chain.
+`x5c` | Holds an X.509 certificate \[[RFC5280](#rfc5280)\] or a chain of certificates. The certificate holding the public key that verifies the signature on the SVT MUST be the first certificate in the chain.
 `kid`  | A key identifier holding the Base64 encoded hash value of the certificate that can verify the signature on the SVT. The hash algorithm MUST be the same hash algorithm used when signing the SVT as specified by the `alg` header parameter.
 
 <a name="normative-references"></a>

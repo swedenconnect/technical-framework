@@ -8,7 +8,7 @@
 
 # Signature Validation Token
 
-### Version 1.0 - 2020-01-24 - *Draft version*
+### Version 1.0 - 2020-02-04 - *Draft version*
 
 Registration number: **2020-60**
 
