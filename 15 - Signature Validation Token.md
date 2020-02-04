@@ -270,7 +270,7 @@ The SVT JWT MUST contain the following JOSE header parameters in accordance with
 JOSE Header | Value
 --- | ---
 `typ`  | This parameter MUST have the string value "JWT" (upper case).
-`alg`  | Specifying the algorithm used to sign the SVT JWT using a value specified in \[[RFC7518](#rfc7518)\]. The specified signature hash algorithm SHOULD be identical to, and MUST be of equivalent or better strength compared with, the hash algorithm specified in the **SigValAssertion** claims object `hash_algo` claim.
+`alg`  | Specifying the algorithm used to sign the SVT JWT using a value specified in \[[RFC7518](#rfc7518)\]. The specified signature hash algorithm MUST be identical to the hash algorithm specified in the **SigValAssertion** claims object `hash_algo` claim.
 
 The SVT header MUST contain a public key or a reference to a public key used to verify the signature on the SVT in accordance with \[[RFC7515](#rfc7515)\]. Each profile (See section 3.) MUST define the requirements for how the key or key reference is included in the header.
 
