@@ -254,10 +254,8 @@ The following type identifiers are defined:
 
 Identifer | Ref Data Content
 --- | ---
-`cert` | One string holding a Base64 encoded X.509 certificate \[[RFC5280](#rfc5280)\].
 `chain` | Array of Base64 encoded X.509 certificates \[[RFC5280](#rfc5280)\]. The certificates MUST be stored in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array.
-`cert_hash` | Base64 encoded hash value over the target X.509 certificate \[[RFC5280](#rfc5280)\].
-`cert_and_chain_hash` | Two Base64 encoded hash values. The first hash value is the hash over the target end entity X.509 certificate \[[RFC5280](#rfc5280)\], and the second hash is the hash over the certificate chain included in the target signature. This type identifier MUST NOT be used if the certificate chain is not provided in the target signature. The chain hash is calculated over the concatenated bytes of the chain certificate exactly in the order they appear in the target signature. If an external chain not provided in the target signature was used, then the `chain` type SHOULD be used.
+`chain_hash` | An array of one or two Base64 encoded hash values. The first hash value MUST be present and holds the hash over the signer's end entity X.509 certificate \[[RFC5280](#rfc5280)\]. The second OPTIONAL hash is the Base64 encoded hash over the certificate chain included in the target signature. The chain hash is calculated over the concatenated bytes of the chain certificate exactly in the order they appear in the target signature. If the second hash value is absent, this implies that no certificate chain was used to validate the signer's end entity certificate.
 
 > **Note**: All certificates referenced using the identifiers above are X.509 certificates. Profiles of this specification MAY define alternative types of public key containers. It should be noted however that a major function of these referenced certificates is not just to reference the public key, but also to provide the identity of the signer. It is therefore important for the full function of an SVT that the referenced public key container also provides the means to identify of the signer.
 
@@ -323,25 +321,25 @@ Signature validation token JWT:
 eyJraWQiOiJPZW5JKzQzNEpoYnZmRG50ZlZcLzhyT3hHN0ZrdnlqYUtWSmFWcUlGQlhvaFZoQWU1Zks4YW5vdjFTNjg4
 cjdLYmFsK2Z2cGFIMWo4aWJnNTJRQnkxUFE9PSIsInR5cCI6IkpXVCIsImFsZyI6IlJTNTEyIn0.eyJhdWQiOiJodHRw
 OlwvXC9leGFtcGxlLmNvbVwvYXVkaWVuY2UxIiwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlk
-YXRvciIsImlhdCI6MTU4MDgwMjU2OSwianRpIjoiOWQ5MGRjYjY3ODQ2ZjJiYTk5ZTIxZmE1Zjc2YjNhMWEiLCJzaWdf
-dmFsX2NsYWltcyI6eyJzaWciOlt7ImV4dCI6bnVsbCwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25h
-dHVyZSB2YWxpZGF0aW9uIiwiZXh0IjpudWxsLCJyZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5j
-b25uZWN0LnNlXC9zdnRcL3NpZ3ZhbC1wb2xpY3lcL2NoYWluXC8wMSJ9XSwic2lnX3JlZiI6eyJzaWdfaGFzaCI6IlZk
-eXB6dTBTZmVDaUIrRk5EaWNUSGJxN2U4b0tLRVQrMW5XZ0Mranp5WmdqbUdPZldYaVwvNVwvM0VsMFdtbk5KZlo2NUUr
-ZUxqa3BlQThnV0gyM1VOVnc9PSIsImlkIjpudWxsLCJzYl9oYXNoIjoiM0dIVjczZ0VsV2sxeVBaUmpGdENQdEVmRUFH
-UlhcL2thSldMM0k1Zm00M3RrRm8zKzFGS2RxSUE2YXBZRlp6N3hUMmF3alwvenZXdWRIYTRPeUJhUDdhQT09In0sInNp
-Z25lcl9jZXJ0X3JlZiI6eyJyZWYiOlsiTlN1Rk1cL3ZKK2JlQmxRdFFUem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xL
-VkdibGE5VVJ6WWNzaXNBeDJiY3NxT2hrdlZUYzNtSzlFNmFnMDdoZmF3PT0iXSwidHlwZSI6ImNlcnRfaGFzaCJ9LCJz
-aWdfZGF0YV9yZWYiOlt7InJlZiI6IjAgNzQ2OTcgNzk2OTkgMzc5MDgiLCJoYXNoIjoiVHczcmVQZ0FoWVNIdGNjWUp5
-UlJTelNxRUlXTUtrdEk1TldKUHpmK0tKMUNEVURybUhwTzlSU0t2d2RNRm9yRjBnWU5Bdnp1VXBFWUN6SnhnS3ZTYXc9
-PSJ9XSwidGltZV92YWwiOltdfV0sImV4dCI6eyJuYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4w
-IiwicHJvZmlsZSI6IlBERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC94bWxlbmMj
-c2hhNTEyIn19.Ok6UDMOxNqNZ4zXQ1ppC2D-osI1Lwcoffxr6VT__sa-SZMCrVUwFkraESnq0cBQBJr9fpsMy9wIbl-J
-ngqig3MzyxwSpq77LnBld7YjN0FemP6kKtEOfWeVeaMXpA8QMVAWUZQO0hU99xHcBz2toh5Voj6wTo9MwrQ9vovVznk_
-dLotfub2rMr20f9s8McWMZQ6BMZXPgeaqUwonx1zahMPPKNU3PTBcIfo-I9jdfbJSxkc6R4Vi_4GVY9OJXLBROp96Us8
-yagWEJFfHzB-eSwWipJdGVUIAIKNs11pkV4j7j9yRlBNmCono0e5xBb3bE-uAewMhiU-u9nxR1mu7KJhvhU4IS-UZud3
-RuETagw3vBb7RzhHyk0RnooJsnIXgILj0jO7-Iun2v6hxLOOp88cMNLOO8byVy0Bg634uqe6pUvshII98kQFxtHjJ_H8
-L0TcOT6uAjFvG2BKDIdfMu-43f6nfuPk_2j8y6YQCqMg7dW5EPHEMqHqKd7DzRExr
+YXRvciIsImlhdCI6MTU4MjczMDY0NSwianRpIjoiZTIyYzViZTZkZDZjYzZkYjgzNGJjY2QwNjZmNWUyZTMiLCJzaWdf
+dmFsX2NsYWltcyI6eyJzaWciOlt7ImV4dCI6bnVsbCwic2lnX3ZhbCI6W3sibXNnIjoiSW52YWxpZCBzaWduYXR1cmUi
+LCJleHQiOm51bGwsInJlcyI6IkZBSUxFRCIsInBvbCI6Imh0dHA6XC9cL2lkLnN3ZWRlbmNvbm5lY3Quc2VcL3N2dFwv
+c2lndmFsLXBvbGljeVwvY2hhaW5cLzAxIn1dLCJzaWdfcmVmIjp7InNpZ19oYXNoIjoiQmh1RTlCQ1lkcUxneW93bDJQ
+Ym1uSzlkSkFtaVZ0VDF1OVZnaUY5OWgyaFZQekU0WExXdmJDUGU0YUNKM0l6RmZvTDlrM3RXcjBXK3d5OUJlcWlyY1E9
+PSIsImlkIjpudWxsLCJzYl9oYXNoIjoiYnVlcTVIVE8xYnRwQ3JYUlg3VHpFS1VyTkpRaEdHOHFCaDR3eEVTcVJMM0J6
+bjRjbHZLMzdqWXUwS2pNTWtnSlFFTWZBMWIzaW1peTc5dDdoK1loOHc9PSJ9LCJzaWduZXJfY2VydF9yZWYiOnsicmVm
+IjpbIk5TdUZNXC92SitiZUJsUXRRVHptY1loNXg3TDhXQzlFMUtQSFJBMWlvTk9sS1ZHYmxhOVVSelljc2lzQXgyYmNz
+cU9oa3ZWVGMzbUs5RTZhZzA3aGZhdz09Il0sInR5cGUiOiJjaGFpbl9oYXNoIn0sInNpZ19kYXRhX3JlZiI6W3sicmVm
+IjoiMCAxMjI5MzUgMTI3OTM3IDI3NDMwIiwiaGFzaCI6Imt1VWI4NkZzTU5tSmwzdjRiUUswOUZrUWd2bzlReDAxbk5S
+eVFLVVppaEdFdW1kVnF0dUJLTlBxWkkxVHpDUWV3Nm44b0ZNak5oQjhDMFhNSmxrRE9RPT0ifV0sInRpbWVfdmFsIjpb
+XX1dLCJleHQiOnsibmFtZTIiOiJ2YWwyIiwibmFtZTEiOiJ2YWwxIn0sInZlciI6IjEuMCIsInByb2ZpbGUiOiJQREYi
+LCJoYXNoX2FsZ28iOiJodHRwOlwvXC93d3cudzMub3JnXC8yMDAxXC8wNFwveG1sZW5jI3NoYTUxMiJ9fQ.DhrCRxT_U
+8LeqK1BU9-5Bqui2cs5n21PrSqPnDtVa7mxUtqTnouOXjVfuWR0lfNAjEkc1y2QSX5x2dmMdCpNLWX127UHYiAm8NzeY
+uoWqdnxKiy61hZ1l0Jldnk52ngG_2UNDnrCGBo9OgC90kG2bFQimZB3WgVtE7ad_HAwIXwd-vEHt6Sf2yWXlUTYqQ1Dx
+gq6pTKQnuf5ahsHVyeDihgNeix8-cGx1MEvvHNUpCcIXBx67BEcZ-SrqRoIZkVqEcW83KFMgqKWmWDgp4z_CKM5ix2dV
+zwp1GvYOM6M3QUKYgmiNA6dMWJvXeJZ-KKi5A-6gEqfgOsixuZechcDon_3nMzEeNBSJFXU7ohkvxIJN9LXNFAxzAT2U
+mASxrL9wvaQMmJHYMeet-vUsOPWcsq07eKO5bnsYwrs9igYeotgcT_Nl74Rmf9uMye_IgyzlS_NLL4xq9Aaf6LPXWZ0S
+_plugvfzv7HuzXNOY994voq8sOpO9xKYhqYnzbdDFKU
 ```
 Decoded JWT Header:
 ```
@@ -358,33 +356,33 @@ Decoded JWT Claims:
 {
   "aud" : "http://example.com/audience1",
   "iss" : "https://swedenconnect.se/validator",
-  "iat" : 1580802569,
-  "jti" : "9d90dcb67846f2ba99e21fa5f76b3a1a",
+  "iat" : 1582730645,
+  "jti" : "e22c5be6dd6cc6db834bccd066f5e2e3",
   "sig_val_claims" : {
     "sig" : [ {
       "ext" : null,
       "sig_val" : [ {
-        "msg" : "Passed basic signature validation",
+        "msg" : "Invalid signature",
         "ext" : null,
-        "res" : "PASSED",
+        "res" : "FAILED",
         "pol" : "http://id.swedenconnect.se/svt/sigval-policy/chain/01"
       } ],
       "sig_ref" : {
-        "sig_hash" : "Vdypzu0SfeCiB+FNDicTHbq7e8oKKET+1nWgC+jzyZgjmGOfWXi/5/3El0WmnNJfZ65E+e
-                      LjkpeA8gWH23UNVw==",
+        "sig_hash" : "BhuE9BCYdqLgyowl2PbmnK9dJAmiVtT1u9VgiF99h2hVPzE4XLWvbCPe4aCJ3IzFfoL9k3
+                      tWr0W+wy9BeqircQ==",
         "id" : null,
-        "sb_hash" : "3GHV73gElWk1yPZRjFtCPtEfEAGRX/kaJWL3I5fm43tkFo3+1FKdqIA6apYFZz7xT2awj/z
-                     vWudHa4OyBaP7aA=="
+        "sb_hash" : "bueq5HTO1btpCrXRX7TzEKUrNJQhGG8qBh4wxESqRL3Bzn4clvK37jYu0KjMMkgJQEMfA1b
+                     3imiy79t7h+Yh8w=="
       },
       "signer_cert_ref" : {
         "ref" : [ "NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisAx2bcsqOhkvVTc3
                    mK9E6ag07hfaw==" ],
-        "type" : "cert_hash"
+        "type" : "chain_hash"
       },
       "sig_data_ref" : [ {
-        "ref" : "0 74697 79699 37908",
-        "hash" : "Tw3rePgAhYSHtccYJyRRSzSqEIWMKktI5NWJPzf+KJ1CDUDrmHpO9RSKvwdMForF0gYNAvzuUp
-                  EYCzJxgKvSaw=="
+        "ref" : "0 122935 127937 27430",
+        "hash" : "kuUb86FsMNmJl3v4bQK09FkQgvo9Qx01nNRyQKUZihGEumdVqtuBKNPqZI1TzCQew6n8oFMjNh
+                  B8C0XMJlkDOQ=="
       } ],
       "time_val" : [ ]
     } ],
