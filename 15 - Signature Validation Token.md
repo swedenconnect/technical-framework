@@ -235,7 +235,6 @@ Name | Data Type | Value | Presence
 `time`  | **NumericDate** | The verified time. | MANDATORY
 `type`  | **StringOrURI** | Identifier of the type of evidence of time. | MANDATORY
 `iss` | **StringOrURI** | Identifier of the entity that issued the evidence of time. | MANDATORY
-`iss_cert_ref`  | **Object&lt;CertReference&gt;** | Reference to the certificate and certificate chain used to validate the signature on the validated evidence of time. | OPTIONAL
 `id` | **String** | Unique identifier assigned to the evidence of time. |  OPTIONAL
 `val` | **\[Object&lt;PolicyValidation&gt;\]**  | Array of results of validation of the time evidence according to defined validation procedures. | OPTIONAL
 `ext` | **Map&lt;String&gt;** | Extension for additional information about the signature validation result. | OPTIONAL
