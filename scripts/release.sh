@@ -26,19 +26,19 @@ fi
 INPUT_DIR=${1%/}
 OUTPUT_DIR=${2%/}
 
-declare -a SPECIFICATIONS=("ELN-0600 - Tekniskt ramverk - Introduktion"
-    "ELN-0600 - Swedish eID Framework - Introduction.md"
-    "ELN-0602 - Deployment Profile for the Swedish eID Framework"
-    "ELN-0603 - Registry for Identifiers"
-    "ELN-0604 - Attribute Specification for the Swedish eID Framework"
-    "ELN-0606 - Entity Categories for the Swedish eID Framework"
-    "ELN-0607 - Implementation Profile for using DSS in Central Signing Services"
-    "ELN-0608 - Certificate Profile for Central Signing Services"
-    "ELN-0609 - DSS Extension for Federated Signing Services"
-    "ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework"
-    "ELN-0612 - BankID Profile for the Swedish eID Framework"
-    "ELN-0613 - Signature Activation Protocol"
-    "ELN-0614 - Principal Selection in SAML Authentication Requests.md")
+declare -a SPECIFICATIONS=("00 - Tekniskt ramverk - Introduktion"
+    "00 - Swedish eID Framework - Introduction"
+    "02 - Deployment Profile for the Swedish eID Framework"
+    "03 - Registry for Identifiers"
+    "04 - Attribute Specification for the Swedish eID Framework"
+    "06 - Entity Categories for the Swedish eID Framework"
+    "07 - Implementation Profile for using DSS in Central Signing Services"
+    "08 - Certificate Profile for Central Signing Services"
+    "09 - DSS Extension for Federated Signing Services"
+    "11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework"
+    "12 - BankID Profile for the Swedish eID Framework"
+    "13 - Signature Activation Protocol"
+    "14 - Principal Selection in SAML Authentication Requests")
 
 #
 # Produce HTML
@@ -47,7 +47,7 @@ for spec in "${SPECIFICATIONS[@]}"
 do
     echo "Processing ${spec}.md ..."
     ORIENTATION="p"
-    if [ "${spec}" == "ELN-0603 - Registry for Identifiers" ] || [ "${spec}" == "ELN-0604 - Attribute Specification for the Swedish eID Framework" ];
+    if [ "${spec}" == "03 - Registry for Identifiers" ] || [ "${spec}" == "04 - Attribute Specification for the Swedish eID Framework" ];
     then
 	ORIENTATION="l"
     fi

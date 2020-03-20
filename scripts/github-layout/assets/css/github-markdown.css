@@ -531,3 +531,15 @@ body {
     padding: 30px;
   }
 }
+
+@media (max-width: 576px) {
+  .markdown-body p:first-of-type img {
+    height: auto;
+    max-width: 45%;
+  }
+  
+  .markdown-body p:nth-of-type(2) img {
+    max-height:30px;
+  }
+}
+
