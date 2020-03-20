@@ -4,7 +4,7 @@
 | File | Version |
 | :--- | :---: |   
 | [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.6 |
-| [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md) | 1.6 |
+| [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md) | 1.7<br />(draft) |
 | [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.6 |
 | ~~05 - Authentication Context Classes for Levels of Assurance for the Swedish eID Framework~~ (deprecated) | ~~1.1~~ |
 | [06 - Entity Categories for the Swedish eID Framework](06%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md) | 1.7 |
@@ -16,4 +16,9 @@
 | [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.2 |
 | [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md) | 1.1 |
 | [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md) | 1.0 |
+| [15 - Signature Validation Token](15%20-%20Signature%20Validation%20Token.md) | 1.0<br/>(draft) |
+| [16 - PDF Profile for Signature Validation Tokens](16%20-%20PDF%20Profile%20for%20Signature%20Validation%20Tokens.md) | 1.0<br/>(draft) |
+| [17 - XML Profile for Signature Validation Tokens](17%20-%20XML%20Profile%20for%20Signature%20Validation%20Tokens.md) | 1.0<br/>(draft) |
+
+
 

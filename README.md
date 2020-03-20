@@ -113,6 +113,25 @@ This specification defines an element that may be included in the Extensions ele
 
 > [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
 
+#### Signature Validation Token
+
+The "Signature Validation Token" specification defines a basic token to support signature validation in a way that can significantly extend the lifetime of a signature.
+
+> [15 - Signature Validation Token](15%20-%20Signature%20Validation%20Token.md) - *Draft*
+
+#### PDF Profile for Signature Validation Tokens
+
+Defines a profile for implementing SVT with a signed PDF document, covering how to include reference data related to PDF signatures and PDF documents in an SVT and how to add an SVT token to a PDF document.
+
+> [16 - PDF Profile for Signature Validation Tokens](16%20-%20PDF%20Profile%20for%20Signature%20Validation%20Tokens.md) - *Draft*
+
+#### XML Profile for Signature Validation Tokens
+
+Defines a profile for implementing SVT with a signed XML document, covering how to include reference data related to XML signatures and XML documents in an SVT and how to add an SVT token to a XML signature.
+
+> [17 - XML Profile for Signature Validation Tokens](17%20-%20XML%20Profile%20for%20Signature%20Validation%20Tokens.md) - *Draft*
+
+
 ---
 
 ## Older versions

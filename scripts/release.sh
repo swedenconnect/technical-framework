@@ -38,7 +38,10 @@ declare -a SPECIFICATIONS=("00 - Tekniskt ramverk - Introduktion"
     "11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework"
     "12 - BankID Profile for the Swedish eID Framework"
     "13 - Signature Activation Protocol"
-    "14 - Principal Selection in SAML Authentication Requests")
+    "14 - Principal Selection in SAML Authentication Requests"
+    "15 - Signature Validation Token"
+    "16 - PDF Profile for Signature Validation Tokens"
+    "17 - XML Profile for Signature Validation Tokens")
 
 #
 # Produce HTML
