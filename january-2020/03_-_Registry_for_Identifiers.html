@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.6---2020-01-17">Version 1.6 - 2020-01-17</h3>
+<h3 id="version-1.7---2020-03-20---*draft-version*">Version 1.7 - 2020-03-20 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-309</strong> (<em>previously: ELN-0603</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -755,8 +755,13 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <tbody>
 <tr>
 <td style="text-align:left">1.2.752.201.5.1</td>
-<td style="text-align:left">Authentication Context extension</td>
+<td style="text-align:left">Authentication Context Extension</td>
 <td style="text-align:left">[<a href="#rfc7773">RFC7773</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left">1.2.752.201.5.2</td>
+<td style="text-align:left">Signature Validation Token Extension</td>
+<td style="text-align:left">[<a href="#svt-pdf">SVT-PDF</a>]</td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.1</td>
@@ -882,7 +887,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <strong>[SAML2Core]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
-Assertion Markup Language (SAML) V2.0, March 2005</a>.</p>
+Assertion Markup Language (SAML) V2.0, March 2005</a></p>
 </blockquote>
 <p><a name="oasis-dss"></a>
 <strong>[OASIS-DSS]</strong></p>
@@ -893,7 +898,7 @@ Version 1.0.</a></p>
 <p><a name="tillitramv"></a>
 <strong>[TillitRamv]</strong></p>
 <blockquote>
-<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf">Tillitsramverk för Svensk e-legitimation - 2018-158</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf">Tillitsramverk för Svensk e-legitimation - 2018-158</a></p>
 </blockquote>
 <p><a name="rfc7773"></a>
 <strong>[RFC7773]</strong></p>
@@ -923,8 +928,7 @@ Version 1.0.</a></p>
 <p><a name="eidcsignprof"></a>
 <strong>[EidCSignProf]</strong></p>
 <blockquote>
-<p><a href="https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing
-Services</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for Using OASIS DSS in Central Signing Services</a>.</p>
 </blockquote>
 <p><a name="certprof"></a>
 <strong>[CertProf]</strong></p>
@@ -935,6 +939,11 @@ Services</a>.</p>
 <strong>[EidAttributes]</strong></p>
 <blockquote>
 <p><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="svt-pdf"></a>
+<strong>[SVT-PDF]</strong></p>
+<blockquote>
+<p><a href="http://docs.swedenconnect.se/technical-framework/updates/16_-_PDF_Profile_for_Signature_Validation_Tokens.html">PDF Profile for Signature Validation Tokens</a>.</p>
 </blockquote>
 <p><a name="eidas"></a>
 <strong>[eIDAS]</strong></p>
@@ -952,6 +961,10 @@ regulation and associated technical specifications.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
+<p><strong>Changes between version 1.6 and version 1.7:</strong></p>
+<ul class="list">
+<li>In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.</li>
+</ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
 <li><p>The specification was renamed from &quot;Registry for identifiers assigned by the Swedish e-identification board&quot; to &quot;Swedish eID Framework - Registry for identifiers&quot;.</p>

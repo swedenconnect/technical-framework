@@ -17,9 +17,13 @@
 <p>
 <img align="center" src="img/transparent.png"></img>
 </p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
 
 <h1 id="signature-validation-token">Signature Validation Token</h1>
-<h3 id="version-1.0---2020-02-04---*draft-version*">Version 1.0 - 2020-02-04 - <em>Draft version</em></h3>
+<h3 id="version-1.0---2020-03-12---*draft-version*">Version 1.0 - 2020-03-12 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2020-60</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -472,12 +476,6 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <td>MANDATORY</td>
 </tr>
 <tr>
-<td><code>iss_cert_ref</code></td>
-<td><strong>Object&lt;CertReference&gt;</strong></td>
-<td>Reference to the certificate and certificate chain used to validate the signature on the validated evidence of time.</td>
-<td>OPTIONAL</td>
-</tr>
-<tr>
 <td><code>id</code></td>
 <td><strong>String</strong></td>
 <td>Unique identifier assigned to the evidence of time.</td>
@@ -534,20 +532,12 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </thead>
 <tbody>
 <tr>
-<td><code>cert</code></td>
-<td>One string holding a Base64 encoded X.509 certificate [<a href="#rfc5280">RFC5280</a>].</td>
-</tr>
-<tr>
 <td><code>chain</code></td>
 <td>Array of Base64 encoded X.509 certificates [<a href="#rfc5280">RFC5280</a>]. The certificates MUST be stored in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array.</td>
 </tr>
 <tr>
-<td><code>cert_hash</code></td>
-<td>Base64 encoded hash value over the target X.509 certificate [<a href="#rfc5280">RFC5280</a>].</td>
-</tr>
-<tr>
-<td><code>cert_and_chain_hash</code></td>
-<td>Two Base64 encoded hash values. The first hash value is the hash over the target end entity X.509 certificate [<a href="#rfc5280">RFC5280</a>], and the second hash is the hash over the certificate chain included in the target signature. This type identifier MUST NOT be used if the certificate chain is not provided in the target signature. The chain hash is calculated over the concatenated bytes of the chain certificate exactly in the order they appear in the target signature. If an external chain not provided in the target signature was used, then the <code>chain</code> type SHOULD be used.</td>
+<td><code>chain_hash</code></td>
+<td>An array of one or two Base64 encoded hash values. The first hash value MUST be present and holds the hash over the signer&#39;s end entity X.509 certificate [<a href="#rfc5280">RFC5280</a>]. The second hash is the Base64 encoded hash over the complete certificate chain included in the target signature (including the signer&#39;s certificate). The chain hash is calculated over the concatenated bytes of the chain certificates exactly in the order they appear in the target signature. If the second hash value MAY be absent if the chain only contains the signer&#39;s certificate. The secound hash value MUST be present if the chain contains any certificates other than the signer&#39;s certificate.</td>
 </tr>
 </tbody>
 </table>
@@ -615,28 +605,28 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <h2 id="5.-examples">5. Examples</h2>
 <p>The following example illustrates a basic SVT according to this specification issued for a signed PDF document.</p>
 <p>Signature validation token JWT:</p>
-<pre class="hljs"><code>eyJraWQiOiJPZW5JKzQzNEpoYnZmRG50ZlZcLzhyT3hHN0ZrdnlqYUtWSmFWcUlGQlhvaFZoQWU1Zks4YW5vdjFTNjg4
-cjdLYmFsK2Z2cGFIMWo4aWJnNTJRQnkxUFE9PSIsInR5cCI6IkpXVCIsImFsZyI6IlJTNTEyIn0.eyJhdWQiOiJodHRw
-OlwvXC9leGFtcGxlLmNvbVwvYXVkaWVuY2UxIiwiaXNzIjoiaHR0cHM6XC9cL3N3ZWRlbmNvbm5lY3Quc2VcL3ZhbGlk
-YXRvciIsImlhdCI6MTU4MDgwMjU2OSwianRpIjoiOWQ5MGRjYjY3ODQ2ZjJiYTk5ZTIxZmE1Zjc2YjNhMWEiLCJzaWdf
-dmFsX2NsYWltcyI6eyJzaWciOlt7ImV4dCI6bnVsbCwic2lnX3ZhbCI6W3sibXNnIjoiUGFzc2VkIGJhc2ljIHNpZ25h
-dHVyZSB2YWxpZGF0aW9uIiwiZXh0IjpudWxsLCJyZXMiOiJQQVNTRUQiLCJwb2wiOiJodHRwOlwvXC9pZC5zd2VkZW5j
-b25uZWN0LnNlXC9zdnRcL3NpZ3ZhbC1wb2xpY3lcL2NoYWluXC8wMSJ9XSwic2lnX3JlZiI6eyJzaWdfaGFzaCI6IlZk
-eXB6dTBTZmVDaUIrRk5EaWNUSGJxN2U4b0tLRVQrMW5XZ0Mranp5WmdqbUdPZldYaVwvNVwvM0VsMFdtbk5KZlo2NUUr
-ZUxqa3BlQThnV0gyM1VOVnc9PSIsImlkIjpudWxsLCJzYl9oYXNoIjoiM0dIVjczZ0VsV2sxeVBaUmpGdENQdEVmRUFH
-UlhcL2thSldMM0k1Zm00M3RrRm8zKzFGS2RxSUE2YXBZRlp6N3hUMmF3alwvenZXdWRIYTRPeUJhUDdhQT09In0sInNp
-Z25lcl9jZXJ0X3JlZiI6eyJyZWYiOlsiTlN1Rk1cL3ZKK2JlQmxRdFFUem1jWWg1eDdMOFdDOUUxS1BIUkExaW9OT2xL
-VkdibGE5VVJ6WWNzaXNBeDJiY3NxT2hrdlZUYzNtSzlFNmFnMDdoZmF3PT0iXSwidHlwZSI6ImNlcnRfaGFzaCJ9LCJz
-aWdfZGF0YV9yZWYiOlt7InJlZiI6IjAgNzQ2OTcgNzk2OTkgMzc5MDgiLCJoYXNoIjoiVHczcmVQZ0FoWVNIdGNjWUp5
-UlJTelNxRUlXTUtrdEk1TldKUHpmK0tKMUNEVURybUhwTzlSU0t2d2RNRm9yRjBnWU5Bdnp1VXBFWUN6SnhnS3ZTYXc9
-PSJ9XSwidGltZV92YWwiOltdfV0sImV4dCI6eyJuYW1lMiI6InZhbDIiLCJuYW1lMSI6InZhbDEifSwidmVyIjoiMS4w
-IiwicHJvZmlsZSI6IlBERiIsImhhc2hfYWxnbyI6Imh0dHA6XC9cL3d3dy53My5vcmdcLzIwMDFcLzA0XC94bWxlbmMj
-c2hhNTEyIn19.Ok6UDMOxNqNZ4zXQ1ppC2D-osI1Lwcoffxr6VT__sa-SZMCrVUwFkraESnq0cBQBJr9fpsMy9wIbl-J
-ngqig3MzyxwSpq77LnBld7YjN0FemP6kKtEOfWeVeaMXpA8QMVAWUZQO0hU99xHcBz2toh5Voj6wTo9MwrQ9vovVznk_
-dLotfub2rMr20f9s8McWMZQ6BMZXPgeaqUwonx1zahMPPKNU3PTBcIfo-I9jdfbJSxkc6R4Vi_4GVY9OJXLBROp96Us8
-yagWEJFfHzB-eSwWipJdGVUIAIKNs11pkV4j7j9yRlBNmCono0e5xBb3bE-uAewMhiU-u9nxR1mu7KJhvhU4IS-UZud3
-RuETagw3vBb7RzhHyk0RnooJsnIXgILj0jO7-Iun2v6hxLOOp88cMNLOO8byVy0Bg634uqe6pUvshII98kQFxtHjJ_H8
-L0TcOT6uAjFvG2BKDIdfMu-43f6nfuPk_2j8y6YQCqMg7dW5EPHEMqHqKd7DzRExr</code></pre><p>Decoded JWT Header:</p>
+<pre class="hljs"><code>eyJraWQiOiJPZW<span class="hljs-number">5</span>JKzQzNEpoYnZmRG<span class="hljs-number">50</span>ZlZcLzhyT<span class="hljs-number">3</span>hHN<span class="hljs-number">0</span>ZrdnlqYUtWSmFWcUlGQlhvaFZoQWU<span class="hljs-number">1</span>Zks<span class="hljs-number">4</span>YW<span class="hljs-number">5</span>vdjFTNjg<span class="hljs-number">4</span>
+cjdLYmFsK<span class="hljs-number">2</span>Z<span class="hljs-number">2</span>cGFIMWo<span class="hljs-number">4</span>aWJnNTJRQnkxUFE<span class="hljs-number">9</span>PSIsInR<span class="hljs-number">5</span>cCI<span class="hljs-number">6</span>IkpXVCIsImFsZyI<span class="hljs-number">6</span>IlJTNTEyIn<span class="hljs-number">0</span>.eyJhdWQiOiJodHRw
+OlwvXC<span class="hljs-number">9</span>leGFtcGxlLmNvbVwvYXVkaWVuY<span class="hljs-number">2</span>UxIiwiaXNzIjoiaHR<span class="hljs-number">0</span>cHM<span class="hljs-number">6</span>XC<span class="hljs-number">9</span>cL<span class="hljs-number">3</span>N<span class="hljs-number">3</span>ZWRlbmNvbm<span class="hljs-number">5</span>lY<span class="hljs-number">3</span>Quc<span class="hljs-number">2</span>VcL<span class="hljs-number">3</span>ZhbGlk
+YXRvciIsImlhdCI<span class="hljs-number">6</span>MTU<span class="hljs-number">4</span>MjczMDY<span class="hljs-number">0</span>NSwianRpIjoiZTIyYzViZTZkZDZjYzZkYjgzNGJjY<span class="hljs-number">2</span>QwNjZmNWUyZTMiLCJzaWdf
+dmFsX<span class="hljs-number">2</span>NsYWltcyI<span class="hljs-number">6</span>eyJzaWciOlt<span class="hljs-number">7</span>ImV<span class="hljs-number">4</span>dCI<span class="hljs-number">6</span>bnVsbCwic<span class="hljs-number">2</span>lnX<span class="hljs-number">3</span>ZhbCI<span class="hljs-number">6</span>W<span class="hljs-number">3</span>sibXNnIjoiSW<span class="hljs-number">52</span>YWxpZCBzaWduYXR<span class="hljs-number">1</span>cmUi
+LCJleHQiOm<span class="hljs-number">51</span>bGwsInJlcyI<span class="hljs-number">6</span>IkZBSUxFRCIsInBvbCI<span class="hljs-number">6</span>Imh<span class="hljs-number">0</span>dHA<span class="hljs-number">6</span>XC<span class="hljs-number">9</span>cL<span class="hljs-number">2</span>lkLnN<span class="hljs-number">3</span>ZWRlbmNvbm<span class="hljs-number">5</span>lY<span class="hljs-number">3</span>Quc<span class="hljs-number">2</span>VcL<span class="hljs-number">3</span>N<span class="hljs-number">2</span>dFwv
+<span class="hljs-keyword">c</span><span class="hljs-number">2</span>lndmFsLXBvbGljeVwvY<span class="hljs-number">2</span>hhaW<span class="hljs-number">5</span>cLzAxIn<span class="hljs-number">1</span>dLCJzaWdfcmVmIjp<span class="hljs-number">7</span>InNpZ<span class="hljs-number">19</span>oYXNoIjoiQmh<span class="hljs-number">1</span>RTlCQ<span class="hljs-number">1</span>lkcUxneW<span class="hljs-number">93</span>bDJQ
+Ym<span class="hljs-number">1</span>uSzlkSkFtaVZ<span class="hljs-number">0</span>VDF<span class="hljs-number">1</span>OVZnaUY<span class="hljs-number">5</span>OWgyaFZQekU<span class="hljs-number">0</span>WExXdmJDUGU<span class="hljs-number">0</span>YUNKM<span class="hljs-number">0</span>l<span class="hljs-number">6</span>RmZvTDlrM<span class="hljs-number">3</span>RXcjBXK<span class="hljs-number">3</span>d<span class="hljs-number">5</span>OUJlcWlyY<span class="hljs-number">1E9</span>
+PSIsImlkIjpudWxsLCJzYl<span class="hljs-number">9</span>oYXNoIjoiYnVlcTVIVE<span class="hljs-number">8</span>xYnRwQ<span class="hljs-number">3</span>JYUlg<span class="hljs-number">3</span>VHpFS<span class="hljs-number">1</span>VyTkpRaEdHOHFCaDR<span class="hljs-number">3</span>eEVTcVJMM<span class="hljs-number">0</span>J<span class="hljs-number">6</span>
+bjRjbHZLMzdqWXUwS<span class="hljs-number">2</span>pNTWtnSlFFTWZBMWIzaW<span class="hljs-number">1</span>peTc<span class="hljs-number">5</span>dDdoK<span class="hljs-number">1</span>loOHc<span class="hljs-number">9</span>PSJ<span class="hljs-number">9</span>LCJzaWduZXJfY<span class="hljs-number">2</span>VydF<span class="hljs-number">9</span>yZWYiOnsicmVm
+IjpbIk<span class="hljs-number">5</span>TdUZNXC<span class="hljs-number">92</span>SitiZUJsUXRRVHptY<span class="hljs-number">1</span>loNXg<span class="hljs-number">3</span>TDhXQzlFMUtQSFJBMWlvTk<span class="hljs-number">9</span>sS<span class="hljs-number">1</span>ZHYmxhOVVSelljc<span class="hljs-number">2</span>lzQXgyYmNz
+cU<span class="hljs-number">9</span>oa<span class="hljs-number">3</span>ZWVGMzbUs<span class="hljs-number">5</span>RTZhZzA<span class="hljs-number">3</span>aGZhdz<span class="hljs-number">09</span>Il<span class="hljs-number">0</span>sInR<span class="hljs-number">5</span>cGUiOiJjaGFpbl<span class="hljs-number">9</span>oYXNoIn<span class="hljs-number">0</span>sInNpZ<span class="hljs-number">19</span>kYXRhX<span class="hljs-number">3</span>JlZiI<span class="hljs-number">6</span>W<span class="hljs-number">3</span>sicmVm
+IjoiMCAxMjI<span class="hljs-number">5</span>MzUgMTI<span class="hljs-number">3</span>OTM<span class="hljs-number">3</span>IDI<span class="hljs-number">3</span>NDMwIiwiaGFzaCI<span class="hljs-number">6</span>Imt<span class="hljs-number">1</span>VWI<span class="hljs-number">4</span>NkZzTU<span class="hljs-number">5</span>tSmwzdjRiUUswOUZrUWd<span class="hljs-number">2</span>bzlReDAxbk<span class="hljs-number">5</span>S
+eVFLVVppaEdFdW<span class="hljs-number">1</span>kVnF<span class="hljs-number">0</span>dUJLTlBxWkkxVHpDUWV<span class="hljs-number">3</span>Nm<span class="hljs-number">44</span>b<span class="hljs-number">0</span>ZNak<span class="hljs-number">5</span>oQjhDMFhNSmxrRE<span class="hljs-number">9</span>RPT<span class="hljs-number">0</span>ifV<span class="hljs-number">0</span>sInRpbWVfdmFsIjpb
+XX<span class="hljs-number">1</span>dLCJleHQiOnsibmFtZTIiOiJ<span class="hljs-number">2</span>YWwyIiwibmFtZTEiOiJ<span class="hljs-number">2</span>YWwxIn<span class="hljs-number">0</span>sInZlciI<span class="hljs-number">6</span>IjEuMCIsInByb<span class="hljs-number">2</span>ZpbGUiOiJQREYi
+LCJoYXNoX<span class="hljs-number">2</span>FsZ<span class="hljs-number">28</span>iOiJodHRwOlwvXC<span class="hljs-number">93</span>d<span class="hljs-number">3</span>cudzMub<span class="hljs-number">3</span>JnXC<span class="hljs-number">8</span>yMDAxXC<span class="hljs-number">8</span>wNFwveG<span class="hljs-number">1</span>sZW<span class="hljs-number">5</span>jI<span class="hljs-number">3</span>NoYTUxMiJ<span class="hljs-number">9</span>fQ.DhrCRxT_U
+<span class="hljs-number">8</span>LeqK<span class="hljs-number">1</span>BU<span class="hljs-number">9</span><span class="hljs-number">-5</span>Bqu<span class="hljs-keyword">i2</span>cs<span class="hljs-number">5</span>n<span class="hljs-number">21</span>PrSqPnDtVa<span class="hljs-number">7</span>mxUtqTnouOXjVfuWR<span class="hljs-number">0</span>lfNAjEkc<span class="hljs-number">1</span>y<span class="hljs-number">2</span>QSX<span class="hljs-number">5</span><span class="hljs-keyword">x</span><span class="hljs-number">2</span>dmMdCpNLWX<span class="hljs-number">127</span>UHYiAm<span class="hljs-number">8</span>NzeY
+uoWqdnxKiy<span class="hljs-number">61</span>hZ<span class="hljs-number">1</span>l<span class="hljs-number">0</span>Jldnk<span class="hljs-number">52</span>ngG_<span class="hljs-number">2</span>UNDnrCGBo<span class="hljs-number">9</span>OgC<span class="hljs-number">90</span>kG<span class="hljs-number">2</span>bFQimZB<span class="hljs-number">3</span>WgVtE<span class="hljs-number">7</span>ad_HAwIXwd-vEHt<span class="hljs-number">6</span>Sf<span class="hljs-number">2</span>yWXlUTYqQ<span class="hljs-number">1</span>Dx
+gq<span class="hljs-number">6</span>pTKQnuf<span class="hljs-number">5</span>ahsHVyeDihgNeix<span class="hljs-number">8</span>-cGx<span class="hljs-number">1</span>MEvvHNUpCcIXBx<span class="hljs-number">67</span>BEcZ-SrqRoIZkVqEcW<span class="hljs-number">83</span>KFMgqKWmWDgp<span class="hljs-number">4</span>z_CKM<span class="hljs-number">5</span>ix<span class="hljs-number">2</span>dV
+zwp<span class="hljs-number">1</span>GvYOM<span class="hljs-number">6</span>M<span class="hljs-number">3</span>QUKYgmiNA<span class="hljs-number">6</span>dMWJvXeJZ-KK<span class="hljs-keyword">i5</span>A<span class="hljs-number">-6</span>gEqfgOsixuZechcDon_<span class="hljs-number">3</span>nMzEeNBSJFXU<span class="hljs-number">7</span>ohkvxIJN<span class="hljs-number">9</span>LXNFAxzAT<span class="hljs-number">2</span>U
+mASxrL<span class="hljs-number">9</span>wvaQMmJHYMeet-vUsOPWcsq<span class="hljs-number">07</span>eKO<span class="hljs-number">5</span>bnsYwrs<span class="hljs-number">9</span>igYeotgcT_Nl<span class="hljs-number">74</span>Rmf<span class="hljs-number">9</span>uMye_IgyzlS_NLL<span class="hljs-number">4</span>xq<span class="hljs-number">9</span>Aaf<span class="hljs-number">6</span>LPXWZ<span class="hljs-number">0</span>S
+_plugvfzv<span class="hljs-number">7</span>HuzXNOY<span class="hljs-number">994</span>voq<span class="hljs-number">8</span>sOpO<span class="hljs-number">9</span>xKYhqYnzbdDFKU</code></pre><p>Decoded JWT Header:</p>
 <pre class="hljs"><code>{
   <span class="hljs-string">"kid"</span>:<span class="hljs-string">"OenI+434JhbvfDntfV\/8rOxG7FkvyjaKVJaVqIFBXohVhAe5fK8anov1S688r7Kbal+fvpaH1j8ibg52QB</span>
          y1PQ==<span class="hljs-string">",</span>
@@ -646,33 +636,33 @@ L0TcOT6uAjFvG2BKDIdfMu-43f6nfuPk_2j8y6YQCqMg7dW5EPHEMqHqKd7DzRExr</code></pre><p
 <pre class="hljs"><code>{
   <span class="hljs-string">"aud"</span> : <span class="hljs-string">"http://example.com/audience1"</span>,
   <span class="hljs-string">"iss"</span> : <span class="hljs-string">"https://swedenconnect.se/validator"</span>,
-  <span class="hljs-string">"iat"</span> : <span class="hljs-number">1580802569</span>,
-  <span class="hljs-string">"jti"</span> : <span class="hljs-string">"9d90dcb67846f2ba99e21fa5f76b3a1a"</span>,
+  <span class="hljs-string">"iat"</span> : <span class="hljs-number">1582730645</span>,
+  <span class="hljs-string">"jti"</span> : <span class="hljs-string">"e22c5be6dd6cc6db834bccd066f5e2e3"</span>,
   <span class="hljs-string">"sig_val_claims"</span> : {
     <span class="hljs-string">"sig"</span> : [ {
       <span class="hljs-string">"ext"</span> : null,
       <span class="hljs-string">"sig_val"</span> : [ {
-        <span class="hljs-string">"msg"</span> : <span class="hljs-string">"Passed basic signature validation"</span>,
+        <span class="hljs-string">"msg"</span> : <span class="hljs-string">"Invalid signature"</span>,
         <span class="hljs-string">"ext"</span> : null,
-        <span class="hljs-string">"res"</span> : <span class="hljs-string">"PASSED"</span>,
+        <span class="hljs-string">"res"</span> : <span class="hljs-string">"FAILED"</span>,
         <span class="hljs-string">"pol"</span> : <span class="hljs-string">"http://id.swedenconnect.se/svt/sigval-policy/chain/01"</span>
       } ],
       <span class="hljs-string">"sig_ref"</span> : {
-        <span class="hljs-string">"sig_hash"</span> : <span class="hljs-string">"Vdypzu0SfeCiB+FNDicTHbq7e8oKKET+1nWgC+jzyZgjmGOfWXi/5/3El0WmnNJfZ65E+e
-                      LjkpeA8gWH23UNVw=="</span>,
+        <span class="hljs-string">"sig_hash"</span> : <span class="hljs-string">"BhuE9BCYdqLgyowl2PbmnK9dJAmiVtT1u9VgiF99h2hVPzE4XLWvbCPe4aCJ3IzFfoL9k3
+                      tWr0W+wy9BeqircQ=="</span>,
         <span class="hljs-string">"id"</span> : null,
-        <span class="hljs-string">"sb_hash"</span> : <span class="hljs-string">"3GHV73gElWk1yPZRjFtCPtEfEAGRX/kaJWL3I5fm43tkFo3+1FKdqIA6apYFZz7xT2awj/z
-                     vWudHa4OyBaP7aA=="</span>
+        <span class="hljs-string">"sb_hash"</span> : <span class="hljs-string">"bueq5HTO1btpCrXRX7TzEKUrNJQhGG8qBh4wxESqRL3Bzn4clvK37jYu0KjMMkgJQEMfA1b
+                     3imiy79t7h+Yh8w=="</span>
       },
       <span class="hljs-string">"signer_cert_ref"</span> : {
         <span class="hljs-string">"ref"</span> : [ <span class="hljs-string">"NSuFM/vJ+beBlQtQTzmcYh5x7L8WC9E1KPHRA1ioNOlKVGbla9URzYcsisAx2bcsqOhkvVTc3
                    mK9E6ag07hfaw=="</span> ],
-        <span class="hljs-string">"type"</span> : <span class="hljs-string">"cert_hash"</span>
+        <span class="hljs-string">"type"</span> : <span class="hljs-string">"chain_hash"</span>
       },
       <span class="hljs-string">"sig_data_ref"</span> : [ {
-        <span class="hljs-string">"ref"</span> : <span class="hljs-string">"0 74697 79699 37908"</span>,
-        <span class="hljs-string">"hash"</span> : <span class="hljs-string">"Tw3rePgAhYSHtccYJyRRSzSqEIWMKktI5NWJPzf+KJ1CDUDrmHpO9RSKvwdMForF0gYNAvzuUp
-                  EYCzJxgKvSaw=="</span>
+        <span class="hljs-string">"ref"</span> : <span class="hljs-string">"0 122935 127937 27430"</span>,
+        <span class="hljs-string">"hash"</span> : <span class="hljs-string">"kuUb86FsMNmJl3v4bQK09FkQgvo9Qx01nNRyQKUZihGEumdVqtuBKNPqZI1TzCQew6n8oFMjNh
+                  B8C0XMJlkDOQ=="</span>
       } ],
       <span class="hljs-string">"time_val"</span> : [ ]
     } ],
