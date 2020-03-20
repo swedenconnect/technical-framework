@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.6 - 2020-01-17
+### Version 1.7 - 2020-03-20 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -421,7 +421,8 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 
 | **OID** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| 1.2.752.201.5.1 | Authentication Context extension | \[[RFC7773](#rfc7773)\] |
+| 1.2.752.201.5.1 | Authentication Context Extension | \[[RFC7773](#rfc7773)\] |
+| 1.2.752.201.5.2 | Signature Validation Token Extension | \[[SVT-PDF](#svt-pdf)\] |
 | 1.2.752.201.3.1 | Organization Affiliation Attribute | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.2 | Transaction Identifier | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.3 | Authentication Context Parameters | \[[EidAttributes](#eidattributes)\] |
@@ -492,7 +493,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 <a name="saml2core"></a>
 **\[SAML2Core\]**
 > [OASIS Standard, Assertions and Protocols for the OASIS Security
-> Assertion Markup Language (SAML) V2.0, March 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
+> Assertion Markup Language (SAML) V2.0, March 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
 
 <a name="oasis-dss"></a>
 **\[OASIS-DSS\]**
@@ -501,7 +502,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf).
+> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
 
 <a name="rfc7773"></a>
 **\[RFC7773\]**
@@ -525,8 +526,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="eidcsignprof"></a>
 **\[EidCSignProf\]**
-> [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> [Implementation Profile for Using OASIS DSS in Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 <a name="certprof"></a>
 **\[CertProf\]**
@@ -535,6 +535,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+
+<a name="svt-pdf"></a>
+**\[SVT-PDF\]**
+> [PDF Profile for Signature Validation Tokens](http://docs.swedenconnect.se/technical-framework/updates/16_-_PDF_Profile_for_Signature_Validation_Tokens.html).
 
 <a name="eidas"></a>
 **\[eIDAS\]**
@@ -550,6 +554,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.6 and version 1.7:**
+
+- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.
 
 **Changes between version 1.5 and version 1.6:**
 
