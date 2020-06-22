@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.3 - 2020-01-17
+### Version 1.4 - 2020-06-22 - *Draft version*
 
 Registration number: **2019-314** (*previously: ELN-0609*)
 
@@ -333,11 +333,11 @@ element in a DSS Sign Request. This element's
 **SignRequestExtensionType** complex type includes the following
 attributes and elements:
 
-`Version` \[Optional\] (Default `1.1`)
+`Version` \[Optional\] (Default `1.2`)
 
 > The version of this specification. If absent, the version value
-> defaults to "1.1". This attribute provides means for the receiving
-> service to determine the expected syntax of the request based on the
+> defaults to "1.2". This attribute provides means for the receiving
+> service to determine the expected semantics of the request based on the
 > protocol version.
 
 `<RequestTime>` \[Required\]
@@ -424,7 +424,7 @@ element and its **SignRequestExtensionType** complex type:
     <xs:element minOccurs="0" ref="csig:SignMessage" maxOccurs="unbounded" />
     <xs:element minOccurs="0" ref="csig:OtherRequestInfo" />
   </xs:sequence>
-  <xs:attribute name="Version" type="xs:string" use="optional" default="1.1" />
+  <xs:attribute name="Version" type="xs:string" use="optional" default="1.2" />
 </xs:complexType>
 ```
 
@@ -451,14 +451,22 @@ attributes and elements:
 
 `<saml:AuthnContextClassRef>` \[Optional\]
 
-> A URI identifying the requested level of assurance that authentication
+> URI(s) identifying the requested level of assurance that authentication
 > of the signature certificate subject MUST comply with in order to
 > complete signing and certificate issuance. A Signing Service MUST NOT
 > issue signature certificates and generate the requested signature
 > unless the authentication process used to authenticate the requested
-> signer meets the requested level of assurance expressed in this
-> element. If this element is absent, the locally configured policy of
-> the Signing Service is assumed.
+> signer meets one of the requested level of assurance URI:s expressed 
+> in this element. 
+>
+> If this element is absent, the locally configured policy of
+> the Signing Service is assumed. This can either mean that the Signing Service
+> includes one or more locally configured URI:s in the `saml:RequestedAuthnContext` element
+> of the `saml:AuthnRequest` issued to authenticate the user, or that no 
+> `saml:RequestedAuthnContext` element is included in the `saml:AuthnRequest`.
+> In the latter case the Signature Service puts no requirements on the
+> required level of assurance.
+
 
 `<RequestedCertAttributes>` \[Optional\]
 
@@ -478,9 +486,9 @@ complex type:
 ```
 <xs:complexType name="CertRequestPropertiesType">
   <xs:sequence>
-    <xs:element minOccurs="0" ref="saml:AuthnContextClassRef"/>
-    <xs:element minOccurs="0" ref="csig:RequestedCertAttributes"/>
-    <xs:element minOccurs="0" ref="csig:OtherProperties"/>
+    <xs:element ref="saml:AuthnContextClassRef" minOccurs="0" maxOccurs="unbounded" />
+    <xs:element ref="csig:RequestedCertAttributes" minOccurs="0" />
+    <xs:element ref="csig:OtherProperties" minOccurs="0" />
   </xs:sequence>
   <xs:attribute default="PKC" name="CertType">
     <xs:simpleType>
@@ -750,11 +758,11 @@ element.
 This element's **SignResponseExtensionType** complex type includes the
 following attributes and elements:
 
-`Version` \[Optional\] (Default `1.1`)
+`Version` \[Optional\] (Default `1.2`)
 
 > The version of this specification. If absent, the version value
-> defaults to "1.1". This attribute provides means for the receiving
-> service to determine the expected syntax of the response based on the
+> defaults to "1.2". This attribute provides means for the receiving
+> service to determine the expected semantics of the response based on the
 > protocol version.
 
 `<ResponseTime>` \[Required\]
@@ -806,7 +814,7 @@ element and the **SignResponseExtensionType** complex type:
     <xs:element ref="csig:SignatureCertificateChain" minOccurs="0" />
     <xs:element ref="csig:OtherResponseInfo" minOccurs="0" />
   </xs:sequence>
-  <xs:attribute name="Version" type="xs:string" default="1.1" />
+  <xs:attribute name="Version" type="xs:string" default="1.2" />
 </xs:complexType>
 
 <xs:element name="ResponseTime" type="xs:dateTime" />
@@ -1217,6 +1225,8 @@ signature and MUST check that the signature covers all data in the
 **\[Csig-XSD\]**
 > This specification's DSS Extensions schema Version 1.1, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd, August 2015.
 
+> See also the draft version: https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd, June 2020.
+
 <a name="dss"></a>
 **\[OASIS-DSS\]**
 > [Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, OASIS, 11 April 2007](https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html).
@@ -1269,6 +1279,10 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 <a name="changes-between-versions"></a>
 ## 7. Changes between versions
 
+**Changes between version 1.3 and 1.4:**
+
+- Section 3.1.1, "Type CertRequestPropertiesType", was updated so that more than one `<saml:AuthnContextClassRef>` element can be included. The schema was also updated accordingly. 
+
 **Changes between version 1.2 and 1.3:**
 
 - No functional changes. The document has been re-branded with the Sweden Connect- and DIGG logotypes and the document format has been changed from OASIS-style to the style used by all other specifications within the Swedish eID Framework. Some typos were also fixed.
@@ -1291,19 +1305,21 @@ sections above, the XML Schema in this appendix is the normative one.
 
 The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd.
 
+> See also: https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd.
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-    targetNamespace="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"
+    targetNamespace="http://id.elegnamnden.se/csig/1.2/dss-ext/ns"
     xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
-    xmlns:csig="http://id.elegnamnden.se/csig/1.1/dss-ext/ns">
+    xmlns:csig="http://id.elegnamnden.se/csig/1.2/dss-ext/ns">
 
   <xs:annotation>
     <xs:documentation>
-      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd
+      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd
     </xs:documentation>
   </xs:annotation>
 
@@ -1541,12 +1557,12 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       <xs:element ref="csig:SignMessage" minOccurs="0" maxOccurs="1" />
       <xs:element ref="csig:OtherRequestInfo" minOccurs="0" />
     </xs:sequence>
-    <xs:attribute name="Version" type="xs:string" use="optional" default="1.1">
+    <xs:attribute name="Version" type="xs:string" use="optional" default="1.2">
       <xs:annotation>
         <xs:documentation>
-          The version of this specification. If absent, the version value defaults to "1.1". 
+          The version of this specification. If absent, the version value defaults to "1.2". 
           This attribute provide means for the receiving service to determine the 
-          expected syntax of the response based on protocol version.
+          expected semantics of the response based on protocol version.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -1560,12 +1576,12 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       <xs:element ref="csig:SignatureCertificateChain" minOccurs="0" />
       <xs:element ref="csig:OtherResponseInfo" minOccurs="0" />
     </xs:sequence>
-    <xs:attribute name="Version" type="xs:string" default="1.1">
+    <xs:attribute name="Version" type="xs:string" default="1.2">
       <xs:annotation>
         <xs:documentation>
-          The version of this specification. If absent, the version value defaults to "1.1". 
+          The version of this specification. If absent, the version value defaults to "1.2". 
           This attribute provide means for the receiving service to determine the 
-          expected syntax of the response based on protocol version.
+          expected semantics of the response based on protocol version.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -1700,10 +1716,10 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
 
   <xs:complexType name="CertRequestPropertiesType">
     <xs:sequence>
-      <xs:element ref="saml:AuthnContextClassRef" minOccurs="0">
+      <xs:element ref="saml:AuthnContextClassRef" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
-            The URI reference to the requested level of assurance with which the 
+            The URI reference(s) to the requested level of assurance with which the 
             certificate subject should be authenticated.
           </xs:documentation>
         </xs:annotation>
