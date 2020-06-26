@@ -17,7 +17,10 @@ can be found in the [january-2020 branch](https://github.com/swedenconnect/techn
 
 ### Feedback and Questions
 
-If you have feedback or questions regarding the Technical Framework make a post to the "Tekniskt ramverk"-thread on <https://forum.eidasweb.se>.
+If you have feedback or questions regarding the Technical Framework join the 
+[Sweden Connect Slack Workspace](https://swedenconnect.slack.com).
+
+Click <a href="mailto:martin@idsec.se?subject= I would like to join the SwedenConnect Slack Workspace">here</a> to ask for an invitation.
 
 ### The Working Group
 
