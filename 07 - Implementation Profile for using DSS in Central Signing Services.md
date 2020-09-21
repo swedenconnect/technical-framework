@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.4 - 2020-01-17
+### Version 1.5 - 2020-09-21 - *Draft version*
 
 Registration number: **2019-312** (*previously: ELN-0607*)
 
@@ -78,7 +78,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.2.4. [DSS Extension](#dss-extension)
 
-    2.2.4.1. [Version](#version)
+    2.2.4.1. [Version](#version2)
 
     2.2.4.2. [ResponseTime](#responsetime)
 
@@ -219,9 +219,13 @@ conditions of the following subsections.
 <a name="version"></a>
 ##### 2.1.3.1. Version
 
-The version of the \[[DSS-Ext](#dss-ext)\] specification MUST be "1.1" (default).
-The version attribute MUST either be absent (default value) or MUST
-specify the value “1.1”.
+The `Version` attribute giving the version number of the \[[DSS-Ext](#dss-ext)\] specification
+SHOULD be set to the version number that is supported by the sender.
+If absent, the default value "1.1" MUST be assumed.
+
+If a version, not supported by the Signature Service, is requested, the Signature Service MUST 
+refuse to process the request and respond with an error message where `<dss:ResultMajor>` is set to `urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError` and the `<dss:ResultMinor>` is set
+to `urn:oasis:names:tc:dss:1.0:resultminor:NotSupported`.
 
 <a name="conditions"></a>
 ##### 2.1.3.2. Conditions
@@ -341,12 +345,12 @@ in the `AuthnRequest` sent to the Identity Provider when authenticating
 the user for signing:
 
 1. Determine requested LoA (Level of Assurance) by either:
-  1. Get the LoA from the `AuthnContextClassRef` specified in the sign request as `CertRequestProperties`, or
+  1. Get the LoA, or LoA:s, from the `AuthnContextClassRef` specified in the sign request as `CertRequestProperties`, or
   2. if the LoA reference from the sign request is absent then use the default LoA according to the governing policy.
   
-2. Include the LoA URI from the step above as `RequestedAuthnContext` if supported by the Identity Provider.
-   If this LoA is not supported by the Identity Provider, fail signing and return an error sign response,
-   indicating a request failure (the requested LoA was inconsistent with the specified Identity Provider).
+2. Include the LoA URI(s) from the step above as `RequestedAuthnContext` if supported by the Identity Provider.
+   If none of the LoA:s are supported by the Identity Provider, fail signing and return an error sign response,
+   indicating a request failure (the requested LoA(s) was inconsistent with the specified Identity Provider).
 
 
 **Deprecated process:**
@@ -433,9 +437,8 @@ When the `CertType` attribute is present with a value of `QC/SSCD` the signature
 <a name="authncontextclassref"></a>
 ###### 2.1.3.9.1. AuthnContextClassRef
 
-This element MAY be present to specify the Level of Assurance required
-in order to issue the signing certificate. This element serves only to
-determine the Level of Assurance required.
+This element MAY be present to specify the Level of Assurance(s) required
+in order to issue the signing certificate. 
 
 <a name="requestedcertattributes"></a>
 ###### 2.1.3.9.2. RequestedCertAttributes
@@ -525,12 +528,15 @@ The `<dss:OptionalInput>` element of the sign response MUST contain
 a `<SignResponseExtension>` element according to requirements and
 conditions of the following subsections.
 
-<a name="version"></a>
+<a name="version2"></a>
 ##### 2.2.4.1. Version
 
-The version of the DSS-Ext specification MUST be "1.1" (default).
-The version attribute MUST either be absent (default value) or MUST
-specify the value “1.1”.
+The version of the \[[DSS-Ext](#dss-ext)\] specification under which the 
+request was processed and response was constructed. This version MUST be the same
+version as given in the `SignRequestExtension` (see section [2.1.3.1](#version), "[Version](#version))".
+
+For backwards compatibility reasons that attribute MAY be absent if version "1.1" was requested. 
+Otherwise it MUST be set.
 
 <a name="responsetime"></a>
 ##### 2.2.4.2. ResponseTime
@@ -727,7 +733,7 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="dss-ext"></a>
 **[DSS-Ext]**
-> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/updates/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="eid-registry"></a>
 **[Eid-Registry]**
@@ -742,6 +748,10 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.4 and version 1.5:**
+
+- Sections 2.1.3.1 and 2.2.4.1 defining the requirements concerning the use of the `Version` attribute in `SignRequestExtension` and `SignResponseExtension` elements were updated in order to implement support for newer versions of the DSS extension specification.
 
 **Changes between version 1.3 and version 1.4:**
 

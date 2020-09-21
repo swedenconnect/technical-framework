@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.4 - 2020-06-22 - *Draft version*
+### Version 1.4 - 2020-09-21 - *Draft version*
 
 Registration number: **2019-314** (*previously: ELN-0609*)
 
@@ -179,7 +179,10 @@ This schema is associated with the following XML namespace:
 
 `http://id.elegnamnden.se/csig/1.1/dss-ext/ns`
 
-If a future version of this specification is needed, it will use a
+Compliance with this specification requires support of the latest version of 
+the \[[Csig-XSD](#csig-xsd)\] schema which is 1.1.2.
+
+If a future, non backwards compatible, version of this specification is needed, it will use a
 different namespace.
 
 Conventional XML namespace prefixes are used in the schema:
@@ -333,12 +336,15 @@ element in a DSS Sign Request. This element's
 **SignRequestExtensionType** complex type includes the following
 attributes and elements:
 
-`Version` \[Optional\] (Default `1.2`)
+`Version` \[Optional\] (Default `1.1`)
 
-> The version of this specification. If absent, the version value
-> defaults to "1.2". This attribute provides means for the receiving
+> The version of this specification supported by the sender. If absent, 
+> the version value defaults to "1.1". 
+
+> This attribute provides means for the receiving
 > service to determine the expected semantics of the request based on the
-> protocol version.
+> protocol version. The receiving service MUST use the same version
+> in the resulting response, see [section 3.2](#element-signresponseextension).
 
 `<RequestTime>` \[Required\]
 
@@ -424,7 +430,7 @@ element and its **SignRequestExtensionType** complex type:
     <xs:element minOccurs="0" ref="csig:SignMessage" maxOccurs="unbounded" />
     <xs:element minOccurs="0" ref="csig:OtherRequestInfo" />
   </xs:sequence>
-  <xs:attribute name="Version" type="xs:string" use="optional" default="1.2" />
+  <xs:attribute name="Version" type="xs:string" use="optional" default="1.1" />
 </xs:complexType>
 ```
 
@@ -466,6 +472,8 @@ attributes and elements:
 > `saml:RequestedAuthnContext` element is included in the `saml:AuthnRequest`.
 > In the latter case the Signature Service puts no requirements on the
 > required level of assurance.
+
+> **Note:** If more than one URI is given, the `Version` attribute of the `SignRequestExtension` element MUST be set to "1.4" or higher. Implementations prior to version 1.4 of this specification assume that this element may only contain one URI.
 
 
 `<RequestedCertAttributes>` \[Optional\]
@@ -758,12 +766,16 @@ element.
 This element's **SignResponseExtensionType** complex type includes the
 following attributes and elements:
 
-`Version` \[Optional\] (Default `1.2`)
+`Version` \[Optional\] (Default `1.1`)
 
-> The version of this specification. If absent, the version value
-> defaults to "1.2". This attribute provides means for the receiving
+> The version of this specification under which the response message was produced. 
+> If absent, the version value
+> defaults to "1.1". This attribute provides means for the receiving
 > service to determine the expected semantics of the response based on the
 > protocol version.
+
+> **Note:** The sender MUST use the same version number as received in the `Version`
+> attribute of the `SignRequestExtension` (see [section 3.1](#element-signrequestextension)).
 
 `<ResponseTime>` \[Required\]
 
@@ -1225,7 +1237,7 @@ signature and MUST check that the signature covers all data in the
 **\[Csig-XSD\]**
 > This specification's DSS Extensions schema Version 1.1, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd, August 2015.
 
-> See also the draft version: https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd, June 2020.
+> See also the draft version: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd, June 2020.
 
 <a name="dss"></a>
 **\[OASIS-DSS\]**
@@ -1281,7 +1293,9 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 
 **Changes between version 1.3 and 1.4:**
 
-- Section 3.1.1, "Type CertRequestPropertiesType", was updated so that more than one `<saml:AuthnContextClassRef>` element can be included. The schema was also updated accordingly. 
+- Section 3.1 and 3.2 was updated to clarify the use of the `Version` attribute in the `SignRequestExtension` and `SignResponseExtension` elements.
+
+- Section 3.1.1, "Type CertRequestPropertiesType", was updated so that more than one `<saml:AuthnContextClassRef>` element can be included. The schema was also updated (to version 1.1.2 but keeping the same namespace identifier). 
 
 **Changes between version 1.2 and 1.3:**
 
@@ -1305,21 +1319,23 @@ sections above, the XML Schema in this appendix is the normative one.
 
 The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd.
 
-> See also: https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd.
+> See also: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    version="1.1.2"
     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-    targetNamespace="http://id.elegnamnden.se/csig/1.2/dss-ext/ns"
+    targetNamespace="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"
     xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:dss="urn:oasis:names:tc:dss:1.0:core:schema"
-    xmlns:csig="http://id.elegnamnden.se/csig/1.2/dss-ext/ns">
+    xmlns:csig="http://id.elegnamnden.se/csig/1.1/dss-ext/ns">
 
   <xs:annotation>
     <xs:documentation>
-      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd
+      Version: 1.1.2
+      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd
     </xs:documentation>
   </xs:annotation>
 
@@ -1557,12 +1573,10 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       <xs:element ref="csig:SignMessage" minOccurs="0" maxOccurs="1" />
       <xs:element ref="csig:OtherRequestInfo" minOccurs="0" />
     </xs:sequence>
-    <xs:attribute name="Version" type="xs:string" use="optional" default="1.2">
+    <xs:attribute name="Version" type="xs:string" use="optional" default="1.1">
       <xs:annotation>
         <xs:documentation>
-          The version of this specification. If absent, the version value defaults to "1.2". 
-          This attribute provide means for the receiving service to determine the 
-          expected semantics of the response based on protocol version.
+          The version of the DSS specification. If absent, the version value defaults to "1.1".
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -1576,12 +1590,10 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       <xs:element ref="csig:SignatureCertificateChain" minOccurs="0" />
       <xs:element ref="csig:OtherResponseInfo" minOccurs="0" />
     </xs:sequence>
-    <xs:attribute name="Version" type="xs:string" default="1.2">
+    <xs:attribute name="Version" type="xs:string" default="1.1">
       <xs:annotation>
         <xs:documentation>
-          The version of this specification. If absent, the version value defaults to "1.2". 
-          This attribute provide means for the receiving service to determine the 
-          expected semantics of the response based on protocol version.
+          The version of the DSS specification. If absent, the version value defaults to "1.1".
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
