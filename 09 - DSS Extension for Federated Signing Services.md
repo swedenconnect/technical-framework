@@ -343,8 +343,14 @@ attributes and elements:
 
 > This attribute provides means for the receiving
 > service to determine the expected semantics of the request based on the
-> protocol version. The receiving service MUST use the same version
+> protocol version. 
+
+> The receiving service MUST use the same version
 > in the resulting response, see [section 3.2](#element-signresponseextension).
+> If the receiving service does not support the requested version, the service 
+> MUST refuse to process the request and respond with an error message where 
+> `<dss:ResultMajor>` is set to `urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError`
+> and the `<dss:ResultMinor>` is set to `urn:oasis:names:tc:dss:1.0:resultminor:NotSupported`.
 
 `<RequestTime>` \[Required\]
 

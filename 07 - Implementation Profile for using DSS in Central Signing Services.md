@@ -223,10 +223,6 @@ The `Version` attribute giving the version number of the \[[DSS-Ext](#dss-ext)\]
 SHOULD be set to the version number that is supported by the sender.
 If absent, the default value "1.1" MUST be assumed.
 
-If a version, not supported by the Signature Service, is requested, the Signature Service MUST 
-refuse to process the request and respond with an error message where `<dss:ResultMajor>` is set to `urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError` and the `<dss:ResultMinor>` is set
-to `urn:oasis:names:tc:dss:1.0:resultminor:NotSupported`.
-
 <a name="conditions"></a>
 ##### 2.1.3.2. Conditions
 
