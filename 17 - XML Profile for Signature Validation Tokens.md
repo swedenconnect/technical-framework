@@ -8,7 +8,7 @@
 
 # XML Profile for Signature Validation Tokens
 
-### Version 1.0 - 2020-02-04 - *Draft version*
+### Version 1.0 - 2020-09-24 - *Draft version*
 
 Registration number: **2020-62**
 
@@ -109,9 +109,9 @@ An SVT embedded within the XML signature element SHALL be placed in a  `<svt:Sig
 <a name="signaturevalidationtoken-signature-property"></a>
 ### 2.1.1. SignatureValidationToken Signature Property
 
-The `<svt:SignatureValidationToken>` element SHALL be placed in a `<ds:SignatureProperty>` element in accordance with \[[XMLDsig](xmldsig)\]. The `<ds:SignatureProperty>` element SHALL be placed inside a `<ds:SignatureProperties>` element inside a `<ds:Object>` element inside a `<ds:Signature>` element.
+The `<svt:SignatureValidationToken>` element SHALL be placed in a `<ds:SignatureProperty>` element in accordance with \[[XMLDsig](#xmldsig)\]. The `<ds:SignatureProperty>` element SHALL be placed inside a `<ds:SignatureProperties>` element inside a `<ds:Object>` element inside a `<ds:Signature>` element.
 
-**Note**: \[[XMLDsig](xmldsig)\] requires the **Target** attribute to be present in `<ds:SignatureProperty>`, referencing the signature targeted by this signature property. If an SVT is added to a signature that do not have an **Id** attribute, implementations SHOULD add an **Id** attribute to the `<ds:Signature>` element and reference that **Id** in the **Target** attribute. This **Id** attribute and **Target** attribute value matching is required by the \[[XMLDsig](xmldsig)\] standard, but it is redundant in the context of SVT validation as the SVT already contains information that uniquely identifies the target signature. Validation application SHOULD not reject an SVT token because of **Id** and **Target** attribute mismatch, and MUST rely on matching against signatue using signed information in the SVT itself.
+**Note**: \[[XMLDsig](#xmldsig)\] requires the `Target` attribute to be present in `<ds:SignatureProperty>`, referencing the signature targeted by this signature property. If an SVT is added to a signature that do not have an **Id** attribute, implementations SHOULD add an `Id` attribute to the `<ds:Signature>` element and reference that `Id` in the `Target` attribute. This `Id` attribute and `Target` attribute value matching is required by the \[[XMLDsig](#xmldsig)\] standard, but it is redundant in the context of SVT validation as the SVT already contains information that uniquely identifies the target signature. Validation applications SHOULD not reject an SVT token because of `Id` and `Target` attribute mismatch, and MUST rely on matching against signature using signed information in the SVT itself.
 
 The `<svt:SignatureValidationToken>` element is defined by the following XML Schema:
 
@@ -155,9 +155,9 @@ Example:
 ### 2.1.2 Multiple SVT in a signature
 If a new SVT is stored in a signature which already contains a previously issued SVT, implementations can choose to either replace the existing SVT or to store the new SVT in addition to the existing SVT.
 
-If the new SVT is stored in addition to the old SVT, then it SHOULD be stored in a new `<ds:SignatureProperty>` element inside the existing `<ds:SignatureProperties>` element where the old SVT is located.
+If the new SVT is stored in addition to the old SVT, it SHOULD be stored in a new `<ds:SignatureProperty>` element inside the existing `<ds:SignatureProperties>` element where the old SVT is located.
 
-For interoperability robustness, signature validation application MUST be able to handle signatures also where the new SVT is located in a new `<ds:Object>` element.
+For interoperability robustness, signature validation applications MUST be able to handle signatures where the new SVT is located in a new `<ds:Object>` element.
 
 <a name="svt-claims"></a>
 ## 3. SVT Claims
