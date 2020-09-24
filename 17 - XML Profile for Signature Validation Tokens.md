@@ -34,6 +34,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.1.1. [SignatureValidationToken Signature Property](#signaturevalidationtoken-signature-property)
 
+    2.1.2. [Multiple SVT in a signature](#multiple-svt-tokens)
+
 3. [**SVT Claims**](#svt-claims)
 
     3.1. [Signature Reference Data](#signature-reference-data)
@@ -109,7 +111,7 @@ An SVT embedded within the XML signature element SHALL be placed in a  `<svt:Sig
 
 The `<svt:SignatureValidationToken>` element SHALL be placed in a `<ds:SignatureProperty>` element in accordance with \[[XMLDsig](xmldsig)\]. The `<ds:SignatureProperty>` element SHALL be placed inside a `<ds:SignatureProperties>` element inside a `<ds:Object>` element inside a `<ds:Signature>` element.
 
-Note: \[[XMLDsig](xmldsig)\] requires the Target attribute to be present in `<ds:SignatureProperty>`, referencing the signature targeted by this signature property. If an SVT is added to a signature that do not have an Id attribute, implementations SHOULD add an Id attribute to the `<ds:Signature>` element and reference that Id in the Target attribute.
+**Note**: \[[XMLDsig](xmldsig)\] requires the **Target** attribute to be present in `<ds:SignatureProperty>`, referencing the signature targeted by this signature property. If an SVT is added to a signature that do not have an **Id** attribute, implementations SHOULD add an **Id** attribute to the `<ds:Signature>` element and reference that **Id** in the **Target** attribute. This **Id** attribute and **Target** attribute value matching is required by the \[[XMLDsig](xmldsig)\] standard, but it is redundant in the context of SVT validation as the SVT already contains information that uniquely identifies the target signature. Validation application SHOULD not reject an SVT token because of **Id** and **Target** attribute mismatch, and MUST rely on matching against signatue using signed information in the SVT itself.
 
 The `<svt:SignatureValidationToken>` element is defined by the following XML Schema:
 
