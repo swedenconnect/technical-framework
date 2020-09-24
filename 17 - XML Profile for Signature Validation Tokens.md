@@ -102,12 +102,14 @@ When referring to elements defined in this specification
 
 When SVT is provided for XML signatures then one SVT SHALL be provided for each XML signature.
 
-An SVT embedded within the XML signature element SHALL be placed in a  `<svt:SignatureValidationToken>` as defined in [section 2.1.1](#signaturevalidationtoken-signature-property).
+An SVT embedded within the XML signature element SHALL be placed in a  `<svt:SignatureValidationToken>` element as defined in [section 2.1.1](#signaturevalidationtoken-signature-property).
 
 <a name="signaturevalidationtoken-signature-property"></a>
 ### 2.1.1. SignatureValidationToken Signature Property
 
 The `<svt:SignatureValidationToken>` element SHALL be placed in a `<ds:SignatureProperty>` element in accordance with \[[XMLDsig](xmldsig)\]. The `<ds:SignatureProperty>` element SHALL be placed inside a `<ds:SignatureProperties>` element inside a `<ds:Object>` element inside a `<ds:Signature>` element.
+
+Note: \[[XMLDsig](xmldsig)\] requires the Target attribute to be present in `<ds:SignatureProperty>`, referencing the signature targeted by this signature property. If an SVT is added to a signature that do not have an Id attribute, implementations SHOULD add an Id attribute to the `<ds:Signature>` element and reference that Id in the Target attribute.
 
 The `<svt:SignatureValidationToken>` element is defined by the following XML Schema:
 
@@ -146,6 +148,14 @@ Example:
   </ds:Object>
 </ds:Signature>
 ```
+
+<a name="multiple-svt-tokens"></a>
+### 2.1.2 Multiple SVT in a signature
+If a new SVT is stored in a signature which already contains a previously issued SVT, implementations can choose to either replace the existing SVT or to store the new SVT in addition to the existing SVT.
+
+If the new SVT is stored in addition to the old SVT, then it SHOULD be stored in a new `<ds:SignatureProperty>` element inside the existing `<ds:SignatureProperties>` element where the old SVT is located.
+
+For interoperability robustness, signature validation application MUST be able to handle signatures also where the new SVT is located in a new `<ds:Object>` element.
 
 <a name="svt-claims"></a>
 ## 3. SVT Claims
