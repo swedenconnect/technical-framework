@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.5 - 2020-09-21 - *Draft version*
+### Version 1.5 - 2020-09-29 - *Draft version*
 
 Registration number: **2019-312** (*previously: ELN-0607*)
 
@@ -542,9 +542,9 @@ The `<ResponseTime>` element MUST be present in the response.
 <a name="request"></a>
 ##### 2.2.4.3. Request
 
-The `<Request>` element MUST be present in all responses where a
-corresponding request could be parsed and authenticated to originate
-from a legitimate requester.
+The `<Request>` element MAY be present in a response. However, it is RECOMMENDED not to include this
+element since it makes the response message unnecessary large. Instead the requester of a sign operation
+is expected to save the request message in its session for later use when processing a response message.
 
 <a name="signerassertioninfo"></a>
 ##### 2.2.4.4. SignerAssertionInfo
@@ -746,6 +746,8 @@ EidSignResponse | Base64 encoded sign response.
 ## 5. Changes between versions
 
 **Changes between version 1.4 and version 1.5:**
+
+- The requirements in section 2.2.4.3, "Request", were updated. The `Request` element is no longer mandatory to include in a response message.
 
 - Sections 2.1.3.1 and 2.2.4.1 defining the requirements concerning the use of the `Version` attribute in `SignRequestExtension` and `SignResponseExtension` elements were updated in order to implement support for newer versions of the DSS extension specification.
 
