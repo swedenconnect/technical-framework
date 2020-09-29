@@ -799,7 +799,7 @@ following attributes and elements:
 `<Request>` \[Optional\]
 
 > A base64 encoded signed `<dss:SignRequest>` element that contains
-> the request related to this sign response. This element MUST be
+> the request related to this sign response. This element MAY be
 > present if signing was successful.
 
 `<SignerAssertionInfo>` \[Optional\]
@@ -837,11 +837,11 @@ element and the **SignResponseExtensionType** complex type:
   <xs:sequence>
     <xs:element ref="csig:ResponseTime" />
     <xs:element ref="csig:Request" minOccurs="0" />
-    <xs:element ref="csig:SignerAssertionInfo" maxOccurs="1" minOccurs="0" />
+    <xs:element ref="csig:SignerAssertionInfo" minOccurs="0" maxOccurs="1" />
     <xs:element ref="csig:SignatureCertificateChain" minOccurs="0" />
     <xs:element ref="csig:OtherResponseInfo" minOccurs="0" />
   </xs:sequence>
-  <xs:attribute name="Version" type="xs:string" default="1.2" />
+  <xs:attribute name="Version" type="xs:string" default="1.1" />
 </xs:complexType>
 
 <xs:element name="ResponseTime" type="xs:dateTime" />
@@ -865,7 +865,7 @@ The **SignerAssertionInfoType** complex type has the following elements:
 `<saml:AttributeStatement>` \[Required\]
 
 > This element of type **saml:AttributeStatementType** (see
-> \[[*SAML2.0*](#saml)\]) holds subject attributes obtained from the
+> \[[SAML2.0](#saml)\]) holds subject attributes obtained from the
 > SAML assertion used to authenticate the signer at the Signing Service.
 > For integrity reasons, this element SHOULD only provide information
 > about SAML attribute values that maps to subject identity information
@@ -885,7 +885,7 @@ complex type:
   <xs:sequence>
     <xs:element ref="csig:ContextInfo" />
     <xs:element ref="saml:AttributeStatement" />
-    <xs:element minOccurs="0" ref="csig:SamlAssertions" />
+    <xs:element ref="csig:SamlAssertions" minOccurs="0" />
   </xs:sequence>
 </xs:complexType>
 
@@ -931,7 +931,7 @@ The **ContextInfoType** complex type has the following elements:
 
 ```
 <xs:complexType name="ContextInfoType">
-  <xs:sequence maxOccurs="1" minOccurs="0">
+  <xs:sequence minOccurs="0" maxOccurs="1">
     <xs:element name="IdentityProvider" type="saml:NameIDType" />
     <xs:element name="AuthenticationInstant" type="xs:dateTime" />
     <xs:element ref="saml:AuthnContextClassRef" />
@@ -1307,6 +1307,8 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 ## 7. Changes between versions
 
 **Changes between version 1.3 and 1.4:**
+
+- In section 3.2, "Element SignResponseExtension", the requirement for the `Request` element was changed so that it is optional to include even if the signature was successful.
 
 - Section 3.1, "Element SignRequestExtension", was updated with the element `AuthnProfile`.
 
