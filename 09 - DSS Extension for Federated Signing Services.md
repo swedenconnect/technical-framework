@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.4 - 2020-09-28 - *Draft version*
+### Version 1.4 - 2020-09-29 - *Draft version*
 
 Registration number: **2019-314** (*previously: ELN-0609*)
 
@@ -437,7 +437,7 @@ element and its **SignRequestExtensionType** complex type:
     <xs:element ref="saml:Conditions" />
     <xs:element ref="csig:Signer" minOccurs="0" />
     <xs:element ref="csig:IdentityProvider" />
-    <xs:element name="AuthnProfile" type="xs:string" minOccurs="0" />
+    <xs:element ref="csig:AuthnProfile" minOccurs="0" />
     <xs:element ref="csig:SignRequester" />
     <xs:element ref="csig:SignService" />
     <xs:element ref="csig:RequestedSignatureAlgorithm" minOccurs="0" />
@@ -1411,6 +1411,16 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
     </xs:annotation>
   </xs:element>
 
+  <xs:element name="AuthnProfile" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        An opaque string that can be used to inform the Signing Service about 
+        specific requirements regarding the user authentication at the given 
+        Identity Provider.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
   <xs:element name="SignRequester" type="saml:NameIDType">
     <xs:annotation>
       <xs:documentation>
@@ -1583,16 +1593,13 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       </xs:element>
       <xs:element ref="csig:Signer" minOccurs="0" />
       <xs:element ref="csig:IdentityProvider" />
-      <xs:element name="AuthnProfile" type="xs:string" minOccurs="0">
+      <xs:element ref="csig:AuthnProfile" minOccurs="0">
         <xs:annotation>
           <xs:documentation>
-            An opaque string that can be used to inform the Signing Service about 
-            specific requirements regarding the user authentication at the given 
-            Identity Provider (see above).
             If set, the Version attribute MUST be 1.4 or higher.
           </xs:documentation>
         </xs:annotation>
-      </xs:element>      
+      </xs:element>
       <xs:element ref="csig:SignRequester" />
       <xs:element ref="csig:SignService" />
       <xs:element ref="csig:RequestedSignatureAlgorithm" minOccurs="0" />
