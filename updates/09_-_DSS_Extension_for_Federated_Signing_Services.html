@@ -18,9 +18,8 @@
 <img align="center" src="img/transparent.png"></img>
 </p>
 
-
 <h1 id="dss-extension-for-federated-central-signing-services">DSS Extension for Federated Central Signing Services</h1>
-<h3 id="version-1.4---2020-06-22---*draft-version*">Version 1.4 - 2020-06-22 - <em>Draft version</em></h3>
+<h3 id="version-1.4---2020-09-29---*draft-version*">Version 1.4 - 2020-09-29 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-314</strong> (<em>previously: ELN-0609</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -148,7 +147,9 @@ listings in the current document are excerpts from the complete XML
 schema. </p>
 <p>This schema is associated with the following XML namespace:</p>
 <p><code>http://id.elegnamnden.se/csig/1.1/dss-ext/ns</code></p>
-<p>If a future version of this specification is needed, it will use a
+<p>Compliance with this specification requires support of the latest version of 
+the [<a href="#csig-xsd">Csig-XSD</a>] schema which is 1.1.2.</p>
+<p>If a future, non backwards compatible, version of this specification is needed, it will use a
 different namespace.</p>
 <p>Conventional XML namespace prefixes are used in the schema:</p>
 <ul class="list">
@@ -270,12 +271,19 @@ present, this element MUST be included in the <code>&lt;dss:OptionalInputs&gt;</
 element in a DSS Sign Request. This element&#39;s
 <strong>SignRequestExtensionType</strong> complex type includes the following
 attributes and elements:</p>
-<p><code>Version</code> [Optional] (Default <code>1.2</code>)</p>
+<p><code>Version</code> [Optional] (Default <code>1.1</code>)</p>
 <blockquote>
-<p>The version of this specification. If absent, the version value
-defaults to &quot;1.2&quot;. This attribute provides means for the receiving
+<p>The version of this specification supported by the sender. If absent, 
+the version value defaults to &quot;1.1&quot;. </p>
+<p>This attribute provides means for the receiving
 service to determine the expected semantics of the request based on the
-protocol version.</p>
+protocol version. </p>
+<p>The receiving service MUST use the same version
+in the resulting response, see <a href="#element-signresponseextension">section 3.2</a>.
+If the receiving service does not support the requested version, the service 
+MUST refuse to process the request and respond with an error message where 
+<code>&lt;dss:ResultMajor&gt;</code> is set to <code>urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError</code>
+and the <code>&lt;dss:ResultMinor&gt;</code> is set to <code>urn:oasis:names:tc:dss:1.0:resultminor:NotSupported</code>.</p>
 </blockquote>
 <p><code>&lt;RequestTime&gt;</code> [Required]</p>
 <blockquote>
@@ -307,6 +315,13 @@ authenticate the signer before signing. The entitID value is specified
 using the <strong>saml:NameIDType</strong> complex type and MUST include a <code>Format</code>
 attribute with the value
 <code>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>.</p>
+</blockquote>
+<p><code>&lt;AuthnProfile&gt;</code> [Optional]</p>
+<blockquote>
+<p>An opaque string that can be used to inform the Signing Service about specific
+requirements regarding the user authentication at the given Identity Provider (see above).
+This specification does not define any possible values or semantics for the element.</p>
+<p><strong>Note:</strong> If this element is set, the <code>Version</code> attribute of the <code>SignRequestExtension</code> element MUST be set to &quot;1.4&quot; or higher. Implementations prior to version 1.4 of this specification do not support the element.</p>
 </blockquote>
 <p><code>&lt;SignRequester&gt;</code> [Required]</p>
 <blockquote>
@@ -351,14 +366,15 @@ element and its <strong>SignRequestExtensionType</strong> complex type:</p>
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"saml:Conditions"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:Signer"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:IdentityProvider"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:AuthnProfile"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignRequester"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignService"</span> /&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> ref=<span class="hljs-string">"csig:RequestedSignatureAlgorithm"</span> /&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> ref=<span class="hljs-string">"csig:CertRequestProperties"</span> /&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> ref=<span class="hljs-string">"csig:SignMessage"</span> maxOccurs=<span class="hljs-string">"unbounded"</span> /&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> ref=<span class="hljs-string">"csig:OtherRequestInfo"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:RequestedSignatureAlgorithm"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:CertRequestProperties"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignMessage"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:OtherRequestInfo"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
-  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"optional"</span> default=<span class="hljs-string">"1.2"</span> /&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"optional"</span> default=<span class="hljs-string">"1.1"</span> /&gt;
 &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="type-certrequestpropertiestype"></a></p>
 <h4 id="3.1.1.-type-certrequestpropertiestype">3.1.1. Type CertRequestPropertiesType</h4>
 <p>The <strong>CertRequestPropertiesType</strong> complex type is used to specify
@@ -393,6 +409,7 @@ of the <code>saml:AuthnRequest</code> issued to authenticate the user, or that n
 <code>saml:RequestedAuthnContext</code> element is included in the <code>saml:AuthnRequest</code>.
 In the latter case the Signature Service puts no requirements on the
 required level of assurance.</p>
+<p><strong>Note:</strong> If more than one URI is given, the <code>Version</code> attribute of the <code>SignRequestExtension</code> element MUST be set to &quot;1.4&quot; or higher. Implementations prior to version 1.4 of this specification assume that this element may only contain one URI.</p>
 </blockquote>
 <p><code>&lt;RequestedCertAttributes&gt;</code> [Optional]</p>
 <blockquote>
@@ -645,12 +662,15 @@ to the sign response. When present, this element MUST be included in the
 element.</p>
 <p>This element&#39;s <strong>SignResponseExtensionType</strong> complex type includes the
 following attributes and elements:</p>
-<p><code>Version</code> [Optional] (Default <code>1.2</code>)</p>
+<p><code>Version</code> [Optional] (Default <code>1.1</code>)</p>
 <blockquote>
-<p>The version of this specification. If absent, the version value
-defaults to &quot;1.2&quot;. This attribute provides means for the receiving
+<p>The version of this specification under which the response message was produced. 
+If absent, the version value
+defaults to &quot;1.1&quot;. This attribute provides means for the receiving
 service to determine the expected semantics of the response based on the
 protocol version.</p>
+<p><strong>Note:</strong> The sender MUST use the same version number as received in the <code>Version</code>
+attribute of the <code>SignRequestExtension</code> (see <a href="#element-signrequestextension">section 3.1</a>).</p>
 </blockquote>
 <p><code>&lt;ResponseTime&gt;</code> [Required]</p>
 <blockquote>
@@ -659,7 +679,7 @@ protocol version.</p>
 <p><code>&lt;Request&gt;</code> [Optional]</p>
 <blockquote>
 <p>A base64 encoded signed <code>&lt;dss:SignRequest&gt;</code> element that contains
-the request related to this sign response. This element MUST be
+the request related to this sign response. This element MAY be
 present if signing was successful.</p>
 </blockquote>
 <p><code>&lt;SignerAssertionInfo&gt;</code> [Optional]</p>
@@ -695,11 +715,11 @@ element and the <strong>SignResponseExtensionType</strong> complex type:</p>
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:ResponseTime"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:Request"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignerAssertionInfo"</span> maxOccurs=<span class="hljs-string">"1"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignerAssertionInfo"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignatureCertificateChain"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:OtherResponseInfo"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
-  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> default=<span class="hljs-string">"1.2"</span> /&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> default=<span class="hljs-string">"1.1"</span> /&gt;
 &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
 
 &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"ResponseTime"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:dateTime"</span> /&gt;
@@ -718,7 +738,7 @@ assertion.</p>
 <p><code>&lt;saml:AttributeStatement&gt;</code> [Required]</p>
 <blockquote>
 <p>This element of type <strong>saml:AttributeStatementType</strong> (see
-[<a href="#saml"><em>SAML2.0</em></a>]) holds subject attributes obtained from the
+[<a href="#saml">SAML2.0</a>]) holds subject attributes obtained from the
 SAML assertion used to authenticate the signer at the Signing Service.
 For integrity reasons, this element SHOULD only provide information
 about SAML attribute values that maps to subject identity information
@@ -736,7 +756,7 @@ complex type:</p>
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:ContextInfo"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"saml:AttributeStatement"</span> /&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> minOccurs=<span class="hljs-string">"0"</span> ref=<span class="hljs-string">"csig:SamlAssertions"</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SamlAssertions"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
 &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
 
@@ -776,7 +796,7 @@ any other reference that can be used to locate and identify the
 assertion.</p>
 </blockquote>
 <pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"ContextInfoType"</span>&gt;
-  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span> maxOccurs=<span class="hljs-string">"1"</span> minOccurs=<span class="hljs-string">"0"</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"IdentityProvider"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"saml:NameIDType"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"AuthenticationInstant"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:dateTime"</span> /&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"saml:AuthnContextClassRef"</span> /&gt;
@@ -1047,7 +1067,7 @@ signature and MUST check that the signature covers all data in the
 <strong>[Csig-XSD]</strong></p>
 <blockquote>
 <p>This specification&#39;s DSS Extensions schema Version 1.1, <a href="https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd">https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd</a>, August 2015.</p>
-<p>See also the draft version: <a href="https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd">https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd</a>, June 2020.</p>
+<p>See also the draft version: <a href="https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd">https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd</a>, June 2020.</p>
 </blockquote>
 <p><a name="dss"></a>
 <strong>[OASIS-DSS]</strong></p>
@@ -1114,7 +1134,14 @@ Recommendation 26 November 2008</a>.</p>
 <h2 id="7.-changes-between-versions">7. Changes between versions</h2>
 <p><strong>Changes between version 1.3 and 1.4:</strong></p>
 <ul class="list">
-<li>Section 3.1.1, &quot;Type CertRequestPropertiesType&quot;, was updated so that more than one <code>&lt;saml:AuthnContextClassRef&gt;</code> element can be included. The schema was also updated accordingly. </li>
+<li><p>In section 3.2, &quot;Element SignResponseExtension&quot;, the requirement for the <code>Request</code> element was changed so that it is optional to include even if the signature was successful.</p>
+</li>
+<li><p>Section 3.1, &quot;Element SignRequestExtension&quot;, was updated with the element <code>AuthnProfile</code>.</p>
+</li>
+<li><p>Section 3.1 and 3.2 was updated to clarify the use of the <code>Version</code> attribute in the <code>SignRequestExtension</code> and <code>SignResponseExtension</code> elements.</p>
+</li>
+<li><p>Section 3.1.1, &quot;Type CertRequestPropertiesType&quot;, was updated so that more than one <code>&lt;saml:AuthnContextClassRef&gt;</code> element can be included. The schema was also updated (to version 1.1.2 but keeping the same namespace identifier). </p>
+</li>
 </ul>
 <p><strong>Changes between version 1.2 and 1.3:</strong></p>
 <ul class="list">
@@ -1136,20 +1163,22 @@ between the XML Schema in this appendix and XML Scema fragments in the
 sections above, the XML Schema in this appendix is the normative one.</p>
 <p>The schema can also be downloaded from <a href="https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd">https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd</a>.</p>
 <blockquote>
-<p>See also: <a href="https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd">https://docs.swedenconnect.se/schemas/csig/1.2/EidCentralSigDssExt-1.2-DRAFT.xsd</a>.</p>
+<p>See also: <a href="https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd">https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd</a>.</p>
 </blockquote>
 <pre class="hljs"><code>&lt;?xml <span class="hljs-keyword">version</span>=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span>?&gt;
 &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span> xmln<span class="hljs-variable">s:xs</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> elementFormDefault=<span class="hljs-string">"qualified"</span>
+    <span class="hljs-keyword">version</span>=<span class="hljs-string">"1.1.2"</span>
     xmln<span class="hljs-variable">s:ds</span>=<span class="hljs-string">"http://www.w3.org/2000/09/xmldsig#"</span>
-    targetNamespace=<span class="hljs-string">"http://id.elegnamnden.se/csig/1.2/dss-ext/ns"</span>
+    targetNamespace=<span class="hljs-string">"http://id.elegnamnden.se/csig/1.1/dss-ext/ns"</span>
     xmln<span class="hljs-variable">s:saml</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:assertion"</span>
     xmln<span class="hljs-variable">s:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>
     xmln<span class="hljs-variable">s:dss</span>=<span class="hljs-string">"urn:oasis:names:tc:dss:1.0:core:schema"</span>
-    xmln<span class="hljs-variable">s:csig</span>=<span class="hljs-string">"http://id.elegnamnden.se/csig/1.2/dss-ext/ns"</span>&gt;
+    xmln<span class="hljs-variable">s:csig</span>=<span class="hljs-string">"http://id.elegnamnden.se/csig/1.1/dss-ext/ns"</span>&gt;
 
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
-      Schema location URL: http<span class="hljs-variable">s:</span>//docs.swedenconnect.<span class="hljs-keyword">se</span>/schemas/csig/<span class="hljs-number">1.2</span>/EidCentralSigDssExt-<span class="hljs-number">1.2</span>-DRAFT.xsd
+      Version: <span class="hljs-number">1.1</span>.<span class="hljs-number">2</span>
+      Schema location URL: http<span class="hljs-variable">s:</span>//docs.swedenconnect.<span class="hljs-keyword">se</span>/schemas/csig/<span class="hljs-number">1.1</span>/EidCentralSigDssExt-<span class="hljs-number">1.1</span>.<span class="hljs-number">2</span>-DRAFT.xsd
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
 
@@ -1204,6 +1233,16 @@ sections above, the XML Schema in this appendix is the normative one.</p>
         authenticate the signer before signing. The EntitID value <span class="hljs-keyword">is</span> specified 
         using the sam<span class="hljs-variable">l:NameIDType</span> complex <span class="hljs-built_in">type</span> <span class="hljs-built_in">and</span> MUST include <span class="hljs-keyword">a</span> Format 
         attribute with the value urn:oasi<span class="hljs-variable">s:names</span>:<span class="hljs-keyword">tc</span>:SAML:<span class="hljs-number">2.0</span>:nameid-forma<span class="hljs-variable">t:entity</span>.
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">"AuthnProfile"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+        An opaque <span class="hljs-built_in">string</span> that can <span class="hljs-keyword">be</span> used <span class="hljs-keyword">to</span> inform the Signing Service about 
+        specific requirements regarding the user authentication at the given 
+        Identity Provider.
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span>&gt;
@@ -1380,6 +1419,13 @@ sections above, the XML Schema in this appendix is the normative one.</p>
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:Signer"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:IdentityProvider"</span> /&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:AuthnProfile"</span> minOccurs=<span class="hljs-string">"0"</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+          &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+            If <span class="hljs-keyword">set</span>, the Version attribute MUST <span class="hljs-keyword">be</span> <span class="hljs-number">1.4</span> <span class="hljs-built_in">or</span> higher.
+          &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+        &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignRequester"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignService"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:RequestedSignatureAlgorithm"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
@@ -1387,12 +1433,10 @@ sections above, the XML Schema in this appendix is the normative one.</p>
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignMessage"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:OtherRequestInfo"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"optional"</span> default=<span class="hljs-string">"1.2"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"optional"</span> default=<span class="hljs-string">"1.1"</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
         &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
-          The <span class="hljs-keyword">version</span> of this specification. If absent, the <span class="hljs-keyword">version</span> value defaults <span class="hljs-keyword">to</span> <span class="hljs-string">"1.2"</span>. 
-          This attribute provide means <span class="hljs-keyword">for</span> the receiving service <span class="hljs-keyword">to</span> determine the 
-          expected semantics of the response based <span class="hljs-keyword">on</span> protocol <span class="hljs-keyword">version</span>.
+          The <span class="hljs-keyword">version</span> of the DSS specification. If absent, the <span class="hljs-keyword">version</span> value defaults <span class="hljs-keyword">to</span> <span class="hljs-string">"1.1"</span>.
         &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
@@ -1406,12 +1450,10 @@ sections above, the XML Schema in this appendix is the normative one.</p>
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:SignatureCertificateChain"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">"csig:OtherResponseInfo"</span> minOccurs=<span class="hljs-string">"0"</span> /&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
-    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> default=<span class="hljs-string">"1.2"</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Version"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> default=<span class="hljs-string">"1.1"</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
         &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
-          The <span class="hljs-keyword">version</span> of this specification. If absent, the <span class="hljs-keyword">version</span> value defaults <span class="hljs-keyword">to</span> <span class="hljs-string">"1.2"</span>. 
-          This attribute provide means <span class="hljs-keyword">for</span> the receiving service <span class="hljs-keyword">to</span> determine the 
-          expected semantics of the response based <span class="hljs-keyword">on</span> protocol <span class="hljs-keyword">version</span>.
+          The <span class="hljs-keyword">version</span> of the DSS specification. If absent, the <span class="hljs-keyword">version</span> value defaults <span class="hljs-keyword">to</span> <span class="hljs-string">"1.1"</span>.
         &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
       &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
     &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;

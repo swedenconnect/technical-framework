@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="xml-profile-for-signature-validation-tokens">XML Profile for Signature Validation Tokens</h1>
-<h3 id="version-1.0---2020-02-04---*draft-version*">Version 1.0 - 2020-02-04 - <em>Draft version</em></h3>
+<h3 id="version-1.0---2020-09-24---*draft-version*">Version 1.0 - 2020-09-24 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2020-62</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -36,6 +36,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </li>
 <li><p><a href="#svt-in-xml-documents"><strong>SVT in XML Documents</strong></a></p>
 <p> 2.1.1. <a href="#signaturevalidationtoken-signature-property">SignatureValidationToken Signature Property</a></p>
+<p> 2.1.2. <a href="#multiple-svt-tokens">Multiple SVT in a signature</a></p>
 </li>
 <li><p><a href="#svt-claims"><strong>SVT Claims</strong></a></p>
 <p> 3.1. <a href="#signature-reference-data">Signature Reference Data</a></p>
@@ -88,10 +89,11 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p><a name="svt-in-xml-documents"></a></p>
 <h2 id="2.-svt-in-xml-documents">2. SVT in XML Documents</h2>
 <p>When SVT is provided for XML signatures then one SVT SHALL be provided for each XML signature.</p>
-<p>An SVT embedded within the XML signature element SHALL be placed in a  <code>&lt;svt:SignatureValidationToken&gt;</code> as defined in <a href="#signaturevalidationtoken-signature-property">section 2.1.1</a>.</p>
+<p>An SVT embedded within the XML signature element SHALL be placed in a  <code>&lt;svt:SignatureValidationToken&gt;</code> element as defined in <a href="#signaturevalidationtoken-signature-property">section 2.1.1</a>.</p>
 <p><a name="signaturevalidationtoken-signature-property"></a></p>
 <h3 id="2.1.1.-signaturevalidationtoken-signature-property">2.1.1. SignatureValidationToken Signature Property</h3>
-<p>The <code>&lt;svt:SignatureValidationToken&gt;</code> element SHALL be placed in a <code>&lt;ds:SignatureProperty&gt;</code> element in accordance with [<a href="xmldsig">XMLDsig</a>]. The <code>&lt;ds:SignatureProperty&gt;</code> element SHALL be placed inside a <code>&lt;ds:SignatureProperties&gt;</code> element inside a <code>&lt;ds:Object&gt;</code> element inside a <code>&lt;ds:Signature&gt;</code> element.</p>
+<p>The <code>&lt;svt:SignatureValidationToken&gt;</code> element SHALL be placed in a <code>&lt;ds:SignatureProperty&gt;</code> element in accordance with [<a href="#xmldsig">XMLDsig</a>]. The <code>&lt;ds:SignatureProperty&gt;</code> element SHALL be placed inside a <code>&lt;ds:SignatureProperties&gt;</code> element inside a <code>&lt;ds:Object&gt;</code> element inside a <code>&lt;ds:Signature&gt;</code> element.</p>
+<p><strong>Note</strong>: [<a href="#xmldsig">XMLDsig</a>] requires the <code>Target</code> attribute to be present in <code>&lt;ds:SignatureProperty&gt;</code>, referencing the signature targeted by this signature property. If an SVT is added to a signature that do not have an <code>Id</code> attribute, implementations SHOULD add an <code>Id</code> attribute to the <code>&lt;ds:Signature&gt;</code> element and reference that <code>Id</code> in the <code>Target</code> attribute. This <code>Id</code> attribute and <code>Target</code> attribute value matching is required by the [<a href="#xmldsig">XMLDsig</a>] standard, but it is redundant in the context of SVT validation as the SVT already contains information that uniquely identifies the target signature. Validation applications SHOULD not reject an SVT token because of <code>Id</code> and <code>Target</code> attribute mismatch, and MUST rely on matching against signature using signed information in the SVT itself.</p>
 <p>The <code>&lt;svt:SignatureValidationToken&gt;</code> element is defined by the following XML Schema:</p>
 <pre class="hljs"><code>&lt;?xml <span class="hljs-keyword">version</span>=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span>?&gt;
 &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span> xmln<span class="hljs-variable">s:xs</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> elementFormDefault=<span class="hljs-string">"qualified"</span>
@@ -120,7 +122,12 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
       &lt;/d<span class="hljs-variable">s:SignatureProperty</span>&gt;
     &lt;/d<span class="hljs-variable">s:SignatureProperties</span>&gt;
   &lt;/d<span class="hljs-variable">s:Object</span>&gt;
-&lt;/d<span class="hljs-variable">s:Signature</span>&gt;</code></pre><p><a name="svt-claims"></a></p>
+&lt;/d<span class="hljs-variable">s:Signature</span>&gt;</code></pre><p><a name="multiple-svt-tokens"></a></p>
+<h3 id="2.1.2-multiple-svt-in-a-signature">2.1.2 Multiple SVT in a signature</h3>
+<p>If a new SVT is stored in a signature which already contains a previously issued SVT, implementations can choose to either replace the existing SVT or to store the new SVT in addition to the existing SVT.</p>
+<p>If the new SVT is stored in addition to the old SVT, it SHOULD be stored in a new <code>&lt;ds:SignatureProperty&gt;</code> element inside the existing <code>&lt;ds:SignatureProperties&gt;</code> element where the old SVT is located.</p>
+<p>For interoperability robustness, signature validation applications MUST be able to handle signatures where the new SVT is located in a new <code>&lt;ds:Object&gt;</code> element.</p>
+<p><a name="svt-claims"></a></p>
 <h2 id="3.-svt-claims">3. SVT Claims</h2>
 <p><a name="signature-reference-data"></a></p>
 <h3 id="3.1.-signature-reference-data">3.1. Signature Reference Data</h3>

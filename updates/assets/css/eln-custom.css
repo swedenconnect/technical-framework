@@ -10,19 +10,23 @@
 }
 
 .markdown-body .copyright-statement {
-    display: block;
-    position: absolute;
-    bottom: 0;
+  display: block;
+  position: absolute;
+  bottom: 0;
 }
-    
+
+.markdown-body h1 {
+  margin-top: 100px;
+}
+
 .markdown-body h2 {
-    page-break-before: always;
+  page-break-before: always;
 }
 
 .markdown-body h3, 
 .markdown-body h4, 
 .markdown-body h5, 
 .markdown-body h6 {
-    page-break-after: avoid !important;
+  page-break-after: avoid !important;
 }
 
