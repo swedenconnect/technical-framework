@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.4 - 2020-09-21 - *Draft version*
+### Version 1.4 - 2020-09-29 - *Draft version*
 
 Registration number: **2019-314** (*previously: ELN-0609*)
 
@@ -384,6 +384,14 @@ attributes and elements:
 > attribute with the value
 > `urn:oasis:names:tc:SAML:2.0:nameid-format:entity`.
 
+`<AuthnProfile>` \[Optional\]
+
+> An opaque string that can be used to inform the Signing Service about specific
+> requirements regarding the user authentication at the given Identity Provider (see above).
+> This specification does not define any possible values or semantics for the element.
+
+> **Note:** If this element is set, the `Version` attribute of the `SignRequestExtension` element MUST be set to "1.4" or higher. Implementations prior to version 1.4 of this specification do not support the element.
+
 `<SignRequester>` \[Required\]
 
 > The SAML entityID of the service that sends this request to the
@@ -429,12 +437,13 @@ element and its **SignRequestExtensionType** complex type:
     <xs:element ref="saml:Conditions" />
     <xs:element ref="csig:Signer" minOccurs="0" />
     <xs:element ref="csig:IdentityProvider" />
+    <xs:element ref="csig:AuthnProfile" minOccurs="0" />
     <xs:element ref="csig:SignRequester" />
     <xs:element ref="csig:SignService" />
-    <xs:element minOccurs="0" ref="csig:RequestedSignatureAlgorithm" />
-    <xs:element minOccurs="0" ref="csig:CertRequestProperties" />
-    <xs:element minOccurs="0" ref="csig:SignMessage" maxOccurs="unbounded" />
-    <xs:element minOccurs="0" ref="csig:OtherRequestInfo" />
+    <xs:element ref="csig:RequestedSignatureAlgorithm" minOccurs="0" />
+    <xs:element ref="csig:CertRequestProperties" minOccurs="0" />
+    <xs:element ref="csig:SignMessage" minOccurs="0" />
+    <xs:element ref="csig:OtherRequestInfo" minOccurs="0" />
   </xs:sequence>
   <xs:attribute name="Version" type="xs:string" use="optional" default="1.1" />
 </xs:complexType>
@@ -1299,6 +1308,8 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 
 **Changes between version 1.3 and 1.4:**
 
+- Section 3.1, "Element SignRequestExtension", was updated with the element `AuthnProfile`.
+
 - Section 3.1 and 3.2 was updated to clarify the use of the `Version` attribute in the `SignRequestExtension` and `SignResponseExtension` elements.
 
 - Section 3.1.1, "Type CertRequestPropertiesType", was updated so that more than one `<saml:AuthnContextClassRef>` element can be included. The schema was also updated (to version 1.1.2 but keeping the same namespace identifier). 
@@ -1396,6 +1407,16 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
         authenticate the signer before signing. The EntitID value is specified 
         using the saml:NameIDType complex type and MUST include a Format 
         attribute with the value urn:oasis:names:tc:SAML:2.0:nameid-format:entity.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:element name="AuthnProfile" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        An opaque string that can be used to inform the Signing Service about 
+        specific requirements regarding the user authentication at the given 
+        Identity Provider.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -1572,6 +1593,13 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       </xs:element>
       <xs:element ref="csig:Signer" minOccurs="0" />
       <xs:element ref="csig:IdentityProvider" />
+      <xs:element ref="csig:AuthnProfile" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            If set, the Version attribute MUST be 1.4 or higher.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element ref="csig:SignRequester" />
       <xs:element ref="csig:SignService" />
       <xs:element ref="csig:RequestedSignatureAlgorithm" minOccurs="0" />
