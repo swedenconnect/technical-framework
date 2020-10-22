@@ -48,7 +48,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.2.3.5. [The PolicyValidation Claims Object](#the-policyvalidation-claims-object)
 
-    2.2.3.6. [The TimeVerification Claims Object](#the-timeverification-claims-object)
+    2.2.3.6. [The TimeVerification Claims Object](#the-timevalidation-claims-object)
 
     2.2.3.7. [The CertReference Claims Object](#the-certreference-claims-object)
 
@@ -225,10 +225,10 @@ Name | Data Type | Value | Presence
 `msg` | **String** | An optional message describing the result. | OPTIONAL
 `ext` | **Map&lt;String&gt;** | Extension for additional information about the validation result. | OPTIONAL
 
-<a name="the-timeverification-claims-object"></a>
-##### 2.2.3.6. The TimeVerification Claims Object
+<a name="the-timevalidation-claims-object"></a>
+##### 2.2.3.6. The TimeValidation Claims Object
 
-The **TimeVerification** claims object provide information about the result of validating time evidence asserting that the target signature existed at a particular time in the past.
+The **TimeValidation** claims object provide information about the result of validating time evidence asserting that the target signature existed at a particular time in the past.
 
 Name | Data Type | Value | Presence
 --- | --- | --- | ---
@@ -254,7 +254,7 @@ The following type identifiers are defined:
 Identifer | Ref Data Content
 --- | ---
 `chain` | Array of Base64 encoded X.509 certificates \[[RFC5280](#rfc5280)\]. The certificates MUST be stored in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array.
-`chain_hash` | An array of one or two Base64 encoded hash values. The first hash value MUST be present and holds the hash over the signer's end entity X.509 certificate \[[RFC5280](#rfc5280)\]. The second hash is the Base64 encoded hash over the complete certificate chain included in the target signature (including the signer's certificate). The chain hash is calculated over the concatenated bytes of the chain certificates exactly in the order they appear in the target signature. If the second hash value MAY be absent if the chain only contains the signer's certificate. The secound hash value MUST be present if the chain contains any certificates other than the signer's certificate.
+`chain_hash`  | The ref contains an array of one or more Base64 encoded hash values where each hash value is a hash over a X.509 certificate \[[RFC5280](#rfc5280)\] used to validate the signature. The certificates MUST be provided in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array. This option MUST NOT be used unless all hashed certificates are present in the target electronic signature.
 
 > **Note**: All certificates referenced using the identifiers above are X.509 certificates. Profiles of this specification MAY define alternative types of public key containers. It should be noted however that a major function of these referenced certificates is not just to reference the public key, but also to provide the identity of the signer. It is therefore important for the full function of an SVT that the referenced public key container also provides the means to identify of the signer.
 
