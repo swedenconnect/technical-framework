@@ -8,7 +8,7 @@
 
 # PDF Profile for Signature Validation Tokens
 
-### Version 1.0 - 2020-02-04 - *Draft version*
+### Version 1.0 - 2020-10-23 - *Draft version*
 
 Registration number: **2020-61**
 
@@ -28,7 +28,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 2. [**SVT in PDF Documents**](#svt-in-pdf-documents)
 
-    2.1.1. [SVT Extension to Timestamp Tokens](#svt-extension-to-timestamp-tokens)
+    2.1. [SVT Extension to Timestamp Tokens](#svt-extension-to-timestamp-tokens)
 
 3. [**SVT Claims**](#svt-claims)
 
@@ -79,7 +79,7 @@ An SVT added to a signed PDF document SHALL be added to a document timestamp acc
 The document timestamp contains an RFC 3161 timestamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in [section 2.1.1](#svt-extension-to-timestamp-tokens).
 
 <a name="svt-extension-to-timestamp-tokens"></a>
-### 2.1.1. SVT Extension to Timestamp Tokens
+### 2.1. SVT Extension to Timestamp Tokens
 
 The SVT extension is an Extension suitable to be included in TSTInfo as defined by \[[RFC3161](rfc3161)\]<sup>*</sup>.
 
@@ -121,10 +121,8 @@ Claim  | Value
 
 The SVT SHALL contain a **CertReference** claims object. The `type` claim of the **CertReference** claims object SHALL be either `cert`, `chain`, `cert_hash` or `cert_and_chain_hash`.
 
-- The `cert` type SHALL be used when signature validation was performed using a single certificate not present in the target PDF signature.
-- The `chain` type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain are not present in the target signature.
-- The `cert_hash` type SHALL be used when signature validation was performed using a single certificate that is present in the target PDF signature.
-- The `cert_and_chain_hash` type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain are present in the target signature.
+- The `chain` type SHALL be used when signature validation was performed using one or more certificates where some or all of the certificates in the chain are not present in the target signature.
+- The `chain_hash` type SHALL be used when signature validation was performed using one or more certificates where all of the certificates are present in the target signature.
 
 **Note:** The `cert` type MUST NOT be used with a PAdES signatures (SubFiler in the signature dictionary is set to "ETSI.CAdES.detached") where the signing certificate in the target signature is bound to the signature through ESSCertID or ESSCertIDv2 \[[RFC5035](rfc55035)\].
 
