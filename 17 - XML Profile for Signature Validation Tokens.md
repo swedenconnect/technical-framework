@@ -8,7 +8,7 @@
 
 # XML Profile for Signature Validation Tokens
 
-### Version 1.0 - 2020-09-24 - *Draft version*
+### Version 1.0 - 2020-12-16 - *Draft version*
 
 Registration number: **2020-62**
 
@@ -187,14 +187,10 @@ Claim | Value
 <a name="signer-certificate-references"></a>
 ### 3.3. Signer Certificate References
 
-The SVT SHALL contain a **CertReference** claims object. The `type` claim of the **CertReference** claims object SHALL be either `cert`, `chain`, `cert_hash` or `cert_and_chain_hash`.
+The SVT SHALL contain a **CertReference** claims object. The `type` claim of the **CertReference** claims object SHALL be either `chain` or `chain_hash`.
 
-- The `cert` type SHALL be used when signature validation was performed using a single certificate not present in the target XML signature.
-- The `chain` type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain are not present in the target signature.
-- The `cert_hash` type SHALL be used when signature validation was performed using a single certificate that is present in the target XML signature.
-- The `cert_and_chain_hash` type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain are present in the target signature.
-
-**Note:** The `cert` type MUST NOT be used with a XAdES signatures where the signing certificate in the target signature is bound to the signature through a `<xades:CertDigest>` element.
+- The `chain` type SHALL be used when signature validation was performed using one or more certificates where some or all of the certificates in the chain are not present in the target signature.
+- The `chain_hash` type SHALL be used when signature validation was performed using one or more certificates where all of the certificates are present in the target signature.
 
 
 <a name="jose-header"></a>
