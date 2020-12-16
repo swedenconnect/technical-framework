@@ -8,7 +8,7 @@
 
 # PDF Profile for Signature Validation Tokens
 
-### Version 1.0 - 2020-10-23 - *Draft version*
+### Version 1.0 - 2020-12-16 - *Draft version*
 
 Registration number: **2020-61**
 
@@ -76,7 +76,7 @@ The definitions in \[[SVT](#svt)\] apply also to this document.
 
 An SVT added to a signed PDF document SHALL be added to a document timestamp accordance with ISO 32000-2:2017 \[[PDF](pdf)\].
 
-The document timestamp contains an RFC 3161 timestamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in [section 2.1.1](#svt-extension-to-timestamp-tokens).
+The document timestamp contains an RFC 3161 timestamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in [section 2.1](#svt-extension-to-timestamp-tokens).
 
 <a name="svt-extension-to-timestamp-tokens"></a>
 ### 2.1. SVT Extension to Timestamp Tokens

@@ -8,7 +8,7 @@
 
 # XML Profile for Signature Validation Tokens
 
-### Version 1.0 - 2020-10-23 - *Draft version*
+### Version 1.0 - 2020-12-16 - *Draft version*
 
 Registration number: **2020-62**
 

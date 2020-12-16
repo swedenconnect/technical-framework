@@ -8,7 +8,7 @@
 
 # Signature Validation Token
 
-### Version 1.0 - 2020-10-23 - *Draft version*
+### Version 1.0 - 2020-12-16 - *Draft version*
 
 Registration number: **2020-60**
 
@@ -48,7 +48,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.2.3.5. [The PolicyValidation Claims Object](#the-policyvalidation-claims-object)
 
-    2.2.3.6. [The TimeVerification Claims Object](#the-timevalidation-claims-object)
+    2.2.3.6. [The TimeValidation Claims Object](#the-timevalidation-claims-object)
 
     2.2.3.7. [The CertReference Claims Object](#the-certreference-claims-object)
 
