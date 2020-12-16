@@ -8,7 +8,7 @@
 
 # eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
-### Version 1.1 - 2020-01-17
+### Version 1.2 - 2020-12-16 - *Draft version*
 
 Registration number: **2019-315** (*previously: ELN-0611*)
 
@@ -214,7 +214,7 @@ If length of `normalizedID` &gt; 30 characters**:**
 > fails:
 
 1.  Leading 6 characters of PersonIdentifier does not match regexp `^[A-Za-z]{2}[\/](SE|se)[\/]$`
-2.  `normalizedID` &lt; 8 characters (not counting “-“ (hyphen) characters).
+2.  `normalizedID` &lt; 6 characters (not counting “-“ (hyphen) characters).
 
 **Collision resistance:**
 
@@ -258,7 +258,7 @@ collision resistance, the algorithm colresist-eIDAS should be used.
 | UK/DK/1234567890 | UK:NULL (Failed: target country is not SE) |
 | DE/SE/\#12345-3456//ABC | DE:12345-3456-abc |
 | DE/SE/aErf\#(EAd9) | DE:0aerf-ead9 |
-| de/se/aErf\#(EAd) | NULL (Failed: Less than 8 ID characters) |
+| de/se/aErf\#(E) | NULL (Failed: Less than 6 ID characters) |
 | DE/SE/(1952 12 14-1122) | DE:19521214-1122 |
 | 19521214-1122 | NULL (Failed: Leading 6 character format error) |
 | DE/SE/1234567890123456789012345678901 | DE:3b7184c0ceaf76a9607a31e4e1f87f |
@@ -309,7 +309,7 @@ approximately 1 in 10\^31.
 | UK/DK/1234567890 | UK:NULL (Failed: target country is not SE) |
 | DE/SE/\#12345-3456//ABC | DE:12345-3456-abc |
 | DE/SE/aErf\#(EAd9) | DE:0aerf-ead9 |
-| de/se/aErf\#(EAd) | NULL (Failed: Less than 8 ID characters) |
+| de/se/aErf\#(E) | NULL (Failed: Less than 6 ID characters) |
 | DE/SE/(1952 12 14-1122) | DE:19521214-1122 |
 | 19521214-1122 | NULL (Failed: Leading 6 character format error) |
 | DE/SE/1234567890123456789012345678901 | DE:1hc3tpoleczqu3t8jz2995k2rq7nt8 |
@@ -419,6 +419,10 @@ prid generation fails.
 <a name="changes-between-versions"></a>
 ## 4. Changes between versions
 
+**Changes between version 1.1 and version 1.2:**
+
+- The length requirement for identifier characters has been changed from 8 to 6. This applies to the default-eIDAS and colresist-eIDAS algorithms.
+
 **Changes between version 1.0 and version 1.1:**
 
 - Update of logotype and fixes of minor typos.
@@ -453,7 +457,7 @@ prid generation fails.
     
     // Remove leading and trailing "-" 
     normalizedID = normalizedID.replaceAll("^-+", "").replaceAll("-+$", "");
-    if (normalizedID.replaceAll("-", "").length() < 8) {
+    if (normalizedID.replaceAll("-", "").length() < 6) {
       throw new PridGenerationException("Invalid ID format");
     }
     if (normalizedID.length() < 10) {
@@ -498,7 +502,7 @@ prid generation fails.
     
     // Remove leading and trailing "-" 
     normalizedID = normalizedID.replaceAll("^-+", "").replaceAll("-+$", "");
-    if (normalizedID.replaceAll("-", "").length() < 8) {
+    if (normalizedID.replaceAll("-", "").length() < 6) {
       throw new PridGenerationException("Invalid ID format");
     }
     if (normalizedID.length() < 10) {
