@@ -12,7 +12,7 @@
 | [08 - Certificate Profile for Central Signing Services](08%20-%20Certificate%20Profile%20for%20Central%20Signing%20Services.md) | 1.2 |
 | [09 - DSS Extension for Federated Signing Services](09%20-%20DSS%20Extension%20for%20Federated%20Signing%20Services.md) | 1.4<br />(draft) |
 | ~~10 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
-| [11 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.1 |
+| [11 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.2<br/>(draft) |
 | [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.2 |
 | [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md) | 1.1 |
 | [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md) | 1.0 |
