@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="pdf-profile-for-signature-validation-tokens">PDF Profile for Signature Validation Tokens</h1>
-<h3 id="version-1.0---2020-02-04---*draft-version*">Version 1.0 - 2020-02-04 - <em>Draft version</em></h3>
+<h3 id="version-1.0---2020-12-16---*draft-version*">Version 1.0 - 2020-12-16 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2020-61</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -33,7 +33,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 1.2. <a href="#definitions">Definitions</a></p>
 </li>
 <li><p><a href="#svt-in-pdf-documents"><strong>SVT in PDF Documents</strong></a></p>
-<p> 2.1.1. <a href="#svt-extension-to-timestamp-tokens">SVT Extension to Timestamp Tokens</a></p>
+<p> 2.1. <a href="#svt-extension-to-timestamp-tokens">SVT Extension to Timestamp Tokens</a></p>
 </li>
 <li><p><a href="#svt-claims"><strong>SVT Claims</strong></a></p>
 <p> 3.1. <a href="#signature-reference-data">Signature Reference Data</a></p>
@@ -67,9 +67,9 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p><a name="svt-in-pdf-documents"></a></p>
 <h2 id="2.-svt-in-pdf-documents">2. SVT in PDF Documents</h2>
 <p>An SVT added to a signed PDF document SHALL be added to a document timestamp accordance with ISO 32000-2:2017 [<a href="pdf">PDF</a>].</p>
-<p>The document timestamp contains an RFC 3161 timestamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in <a href="#svt-extension-to-timestamp-tokens">section 2.1.1</a>.</p>
+<p>The document timestamp contains an RFC 3161 timestamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in <a href="#svt-extension-to-timestamp-tokens">section 2.1</a>.</p>
 <p><a name="svt-extension-to-timestamp-tokens"></a></p>
-<h3 id="2.1.1.-svt-extension-to-timestamp-tokens">2.1.1. SVT Extension to Timestamp Tokens</h3>
+<h3 id="2.1.-svt-extension-to-timestamp-tokens">2.1. SVT Extension to Timestamp Tokens</h3>
 <p>The SVT extension is an Extension suitable to be included in TSTInfo as defined by [<a href="rfc3161">RFC3161</a>]<sup>*</sup>.</p>
 <p>The SVT extension is identified by the Object Identifier (OID) <code>1.2.752.201.5.2</code> as defined in [<a href="eidregistry">EidRegistry</a>].</p>
 <p>This extension data (OCTET STRING) holds the bytes of SVT JWT, represented as a UTF-8 encoded string.</p>
@@ -129,10 +129,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <h3 id="3.3.-signer-certificate-references">3.3. Signer Certificate References</h3>
 <p>The SVT SHALL contain a <strong>CertReference</strong> claims object. The <code>type</code> claim of the <strong>CertReference</strong> claims object SHALL be either <code>cert</code>, <code>chain</code>, <code>cert_hash</code> or <code>cert_and_chain_hash</code>.</p>
 <ul class="list">
-<li>The <code>cert</code> type SHALL be used when signature validation was performed using a single certificate not present in the target PDF signature.</li>
-<li>The <code>chain</code> type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain are not present in the target signature.</li>
-<li>The <code>cert_hash</code> type SHALL be used when signature validation was performed using a single certificate that is present in the target PDF signature.</li>
-<li>The <code>cert_and_chain_hash</code> type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain are present in the target signature.</li>
+<li>The <code>chain</code> type SHALL be used when signature validation was performed using one or more certificates where some or all of the certificates in the chain are not present in the target signature.</li>
+<li>The <code>chain_hash</code> type SHALL be used when signature validation was performed using one or more certificates where all of the certificates are present in the target signature.</li>
 </ul>
 <p><strong>Note:</strong> The <code>cert</code> type MUST NOT be used with a PAdES signatures (SubFiler in the signature dictionary is set to &quot;ETSI.CAdES.detached&quot;) where the signing certificate in the target signature is bound to the signature through ESSCertID or ESSCertIDv2 [<a href="rfc55035">RFC5035</a>].</p>
 <p><a name="jose-header"></a></p>

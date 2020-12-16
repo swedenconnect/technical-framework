@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="xml-profile-for-signature-validation-tokens">XML Profile for Signature Validation Tokens</h1>
-<h3 id="version-1.0---2020-09-24---*draft-version*">Version 1.0 - 2020-09-24 - <em>Draft version</em></h3>
+<h3 id="version-1.0---2020-12-16---*draft-version*">Version 1.0 - 2020-12-16 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2020-62</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -177,14 +177,11 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </table>
 <p><a name="signer-certificate-references"></a></p>
 <h3 id="3.3.-signer-certificate-references">3.3. Signer Certificate References</h3>
-<p>The SVT SHALL contain a <strong>CertReference</strong> claims object. The <code>type</code> claim of the <strong>CertReference</strong> claims object SHALL be either <code>cert</code>, <code>chain</code>, <code>cert_hash</code> or <code>cert_and_chain_hash</code>.</p>
+<p>The SVT SHALL contain a <strong>CertReference</strong> claims object. The <code>type</code> claim of the <strong>CertReference</strong> claims object SHALL be either <code>chain</code> or <code>chain_hash</code>.</p>
 <ul class="list">
-<li>The <code>cert</code> type SHALL be used when signature validation was performed using a single certificate not present in the target XML signature.</li>
-<li>The <code>chain</code> type SHALL be used when signature validation was performed using a certificate chain where some or all of the certificates in the chain are not present in the target signature.</li>
-<li>The <code>cert_hash</code> type SHALL be used when signature validation was performed using a single certificate that is present in the target XML signature.</li>
-<li>The <code>cert_and_chain_hash</code> type SHALL be used when signature validation was performed using a certificate chain where all of the certificates in the chain are present in the target signature.</li>
+<li>The <code>chain</code> type SHALL be used when signature validation was performed using one or more certificates where some or all of the certificates in the chain are not present in the target signature.</li>
+<li>The <code>chain_hash</code> type SHALL be used when signature validation was performed using one or more certificates where all of the certificates are present in the target signature.</li>
 </ul>
-<p><strong>Note:</strong> The <code>cert</code> type MUST NOT be used with a XAdES signatures where the signing certificate in the target signature is bound to the signature through a <code>&lt;xades:CertDigest&gt;</code> element.</p>
 <p><a name="jose-header"></a></p>
 <h2 id="4.-jose-header">4. JOSE Header</h2>
 <p><a name="svt-signing-key-reference"></a></p>

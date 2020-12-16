@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="signature-validation-token">Signature Validation Token</h1>
-<h3 id="version-1.0---2020-03-12---*draft-version*">Version 1.0 - 2020-03-12 - <em>Draft version</em></h3>
+<h3 id="version-1.0---2020-12-16---*draft-version*">Version 1.0 - 2020-12-16 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2020-60</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -43,7 +43,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 2.2.3.3. <a href="#the-sigreference-claims-object">The SigReference Claims Object</a></p>
 <p> 2.2.3.4. <a href="#the-signeddata-claims-object">The SignedData Claims Object</a></p>
 <p> 2.2.3.5. <a href="#the-policyvalidation-claims-object">The PolicyValidation Claims Object</a></p>
-<p> 2.2.3.6. <a href="#the-timeverification-claims-object">The TimeVerification Claims Object</a></p>
+<p> 2.2.3.6. <a href="#the-timevalidation-claims-object">The TimeValidation Claims Object</a></p>
 <p> 2.2.3.7. <a href="#the-certreference-claims-object">The CertReference Claims Object</a></p>
 <p> 2.2.4. <a href="#svt-jose-header">SVT JOSE Header</a></p>
 </li>
@@ -440,9 +440,9 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </tr>
 </tbody>
 </table>
-<p><a name="the-timeverification-claims-object"></a></p>
-<h5 id="2.2.3.6.-the-timeverification-claims-object">2.2.3.6. The TimeVerification Claims Object</h5>
-<p>The <strong>TimeVerification</strong> claims object provide information about the result of validating time evidence asserting that the target signature existed at a particular time in the past.</p>
+<p><a name="the-timevalidation-claims-object"></a></p>
+<h5 id="2.2.3.6.-the-timevalidation-claims-object">2.2.3.6. The TimeValidation Claims Object</h5>
+<p>The <strong>TimeValidation</strong> claims object provide information about the result of validating time evidence asserting that the target signature existed at a particular time in the past.</p>
 <table>
 <thead>
 <tr>
@@ -533,7 +533,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </tr>
 <tr>
 <td><code>chain_hash</code></td>
-<td>An array of one or two Base64 encoded hash values. The first hash value MUST be present and holds the hash over the signer&#39;s end entity X.509 certificate [<a href="#rfc5280">RFC5280</a>]. The second hash is the Base64 encoded hash over the complete certificate chain included in the target signature (including the signer&#39;s certificate). The chain hash is calculated over the concatenated bytes of the chain certificates exactly in the order they appear in the target signature. If the second hash value MAY be absent if the chain only contains the signer&#39;s certificate. The secound hash value MUST be present if the chain contains any certificates other than the signer&#39;s certificate.</td>
+<td>The ref contains an array of one or more Base64 encoded hash values where each hash value is a hash over a X.509 certificate [<a href="#rfc5280">RFC5280</a>] used to validate the signature. The certificates MUST be provided in the order starting with the end entity certificate. Any following certificate must be able to validate the signature on the previous certificate in the array. This option MUST NOT be used unless all hashed certificates are present in the target electronic signature.</td>
 </tr>
 </tbody>
 </table>
