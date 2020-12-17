@@ -8,7 +8,7 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.2 - 2020-01-17
+### Version 1.3 - 2020-12-17 - *Draft*
 
 Registration number: **2019-316** (*previously: ELN-0612*)
 
@@ -377,7 +377,8 @@ The Sign-method parameter `userVisibleData` holds data that will be signed by th
 
 If the `<saml2p:AuthnRequest>` message contains a `SignMessage` extension, the contents of this message MUST be assigned to the `userVisibleData` parameter (after necessary encoding).
 
-A BankID Identity Provider MUST only process `SignMessage` elements having their `MimeType` attribute set to `text`<sup>1</sup> . For any other values (`text/html` or `text/markdown`), the Identity Provider MUST respond with an error.If the `<saml2p:AuthnRequest>` message does not contain a `SignMessage` extension, the Identity Provider MUST assign a sensible default signature message to the `userVisibleData` parameter. How this message is constructed is the responsibility of the Identity Provider, but it must be obvious for the user who is the requesting party, i.e., the Service Provider that has ordered the signature operation<sup>2</sup>.
+A BankID Identity Provider MUST support `SignMessage` elements having their `MimeType` attribute set to `text`, and SHOULD support
+Markdown (`text/markdown`) according to [BankID - Guidelines for Formatted Text](#bankid-md), \[[BankID_MD](#bankid-md)\], and section 14.1.2 of \[[BankID_Spec](#bankid_spec)\]. For other values (`text/html`), the Identity Provider MUST respond with an error.If the `<saml2p:AuthnRequest>` message does not contain a `SignMessage` extension, the Identity Provider MUST assign a sensible default signature message to the `userVisibleData` parameter. How this message is constructed is the responsibility of the Identity Provider, but it must be obvious for the user who is the requesting party, i.e., the Service Provider that has ordered the signature operation<sup>2</sup>.
 > \[1\]: If the `MimeType` attribute is not set, `text` is the default value.
 > 
 > \[2\]: For this purpose, the `<mdui:DisplayName>` element of the Signature Service’s metadata entry, is a good and generic choice.  
@@ -548,8 +549,14 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="bankid-spec"></a>
 **\[BankID_Spec\]**
-> [BankID Relying Party Guidelines, version 3.2.2](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.2.2.pdf).
+> [BankID Relying Party Guidelines, version 3.5](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.5.pdf).
 > 
+> *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
+
+<a name="bankid-md"></a>
+**\[BankID_MD\]**
+> [BankID - Guidelines for Formatted Text, version 1.1](https://www.bankid.com/assets/bankid/rp/guidelines-for-formatted-text-v1.1.pdf).
+
 > *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
 
 <a name="eid-profile"></a>
@@ -570,6 +577,10 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 > 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
+
+**Changes between version 1.2 and 1.3:**
+
+- Section 4.2.1.1, "userVisibleData - Signature Message", was updated with information about the usage of Markdown in visible sign data.
 
 **Changes between version 1.1 and 1.2:**
 
