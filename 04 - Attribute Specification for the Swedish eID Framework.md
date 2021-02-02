@@ -8,14 +8,14 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.6 - 2020-01-17
+### Version 1.7 - 2021-02-12 - *Draft version*
 
 Registration number: **2019-310** (*previously: ELN-0604*)
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -57,6 +57,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.2.3. [The sad Attribute](#the-sad-attribute)
     
     3.2.4. [The signMessageDigest Attribute](#the-signmessagedigest-attribute)
+    
+    3.2.5. [The orgAffiliation Attribute](#the-orgaffiliation-attribute)
 
     3.3. [Attributes for the eIDAS Framework](#attributes-for-the-eidas-framework)
 
@@ -210,14 +212,23 @@ Attribute set identifier: **ELN-AP-OrgPerson-01**
 
 URI: `http://id.elegnamnden.se/ap/1.0/org-person-01`
 
-The “Organizational Identity for Natural Persons” attribute set provides basic organizational identity information about a person. The organizational identity does not necessarily imply that the subject has any particular relationship with or standing within the organization, but rather that this identity has been issued/provided by that organization for any particular reason (employee, customer, consultant, etc.)
+The “Organizational Identity for Natural Persons” attribute set provides basic organizational identity information about a person. The organizational identity does not necessarily imply that the subject has any particular relationship with or standing within the organization, but rather that this identity has been issued/provided by that organization for any particular reason (employee, customer, consultant, etc.).
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
-| **REQUIRED** | `sn` (Surname) <br /> `givenName` (Given name) <br /> `displayName` (Display name) <br /> `orgAffiliation` (Personal identifier and organizational identifier code) <br /> `o` (Organization name) |
-| **RECOMMENDED** | `organizationIdentifier` (Organizational identifier code) <br /> `ou` (Organizational unit name) |
+| **REQUIRED** | `displayName` (Display name)<sup>*</sup> <br /> `orgAffiliation` (Personal identifier and organizational identifier code)<sup>**</sup> <br /> `o` (Organization name) |
+| **RECOMMENDED** | `organizationIdentifier` (Organizational identifier code)<sup>***</sup> |
 
 **Typical use**: In an attribute release policy that provides basic organizational identity information about a natural person.
+
+The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish
+eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
+
+> \[*\]: The `displayName` attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, "Administrator 123". This is decided by the issuing organization.
+
+> \[\*\*\]: This specification does not impose any specific requirements concerning the user identity part of the `orgAffiliation` attribute. However, the attribute provider MUST ensure that the 
+
+> \[\*\*\*]: The organizational identifier can always be derived from the mandatory `orgAffiliation` attribute, but an attribute provider supporting the "Organizational Identity for Natural Persons" attribute set SHOULD also release the `organizationIdentifier` attribute individually. 
 
 <a name="eidas-natural-person-attribute-set"></a>
 ### 2.5. eIDAS Natural Person Attribute Set
@@ -321,7 +332,7 @@ The following attributes are defined for use within the attribute profile for th
 | o | urn:oid:2.5.4.10 | Organization name | Registered organization name. | NO | Skatteverket |
 | ou | urn:oid:2.5.4.11 | Organizational unit name | Organizational unit name. | YES | IT-Avdelningen |
 | organizationIdentifier | urn:oid:2.5.4.97 | Organizational identifier code | Swedish “organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | NO | 5562265719 |
-| orgAffiliation | urn:oid:1.2.752.201.3.1 | &lt;uid&gt;@&lt;orgnr&gt; | *Personal ID* @ Swedish ”organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | YES | vlindman@5562265719 |
+| orgAffiliation | urn:oid:1.2.752.201.3.1 | &lt;uid&gt;@&lt;orgnr&gt; | *Personal ID* @ Swedish ”organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | YES | vlindman@5562265719<br />See [section 3.2.5](#the-orgaffiliation-attribute) below. |
 | transactionIdentifier | urn:oid:1.2.752.201.3.2 | Transaction identifier | Transaction identifier for an event, e.g. an authentication process. | NO | *9878HJ6687 (arbitrary string)* |
 | authContextParams | urn:oid:1.2.752.201.3.3 | Authentication Context Parameters. | Key-value pairs from an authentication process. Defined by issuing entity. | NO | See [section 3.2.1](#the-authcontextparams-attribute) below. |
 | userCertificate | urn:oid:1.2.752.201.3.10 | User certificate | Base64-encoding of a user certificate. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
@@ -425,7 +436,6 @@ Entities compliant with this specification MUST use `http://www.w3.org/2001/04/x
 unless the recipient of the `signMessageDigest` attribute has declared another digest algorithm as preferred in its
 metadata entry (see section 2.1.1.3 of [[EidDeployProf](#eiddeployprof)\]). In those cases this algorithm MAY be used.
 
-
 **Example:**
 
 Suppose that the unencrypted message is "I hereby confirm that I want to join example.com as a customer". This is
@@ -450,6 +460,16 @@ The `signMessageDigest` attribute for the above example will then be:
   </saml2:AttributeValue>
 </saml2:Attribute>
 ```
+
+<a name="the-orgaffiliation-attribute"></a>
+#### 3.2.5. The orgAffiliation Attribute
+
+The `orgAffiliation` attribute is intended to be used as a primary identity attribute for personal organizational identities. It consists of a personal identifier **and** an organizational identifier code (`organizationIdentifier`). 
+
+This specification does not impose any specific requirements concerning the personal identifier part of the attribute other than that it MUST be unique for the given organization.
+
+**Note**: In the general case, an attribute consumer MUST NOT assume a particular format or meaning of the personal identifier part since different organizations may use different formats. An attribute consumer should also be aware that a personal identifier separated from its organizational identifier code can not be regarded as unique. 
+
 
 <a name="attributes-for-the-eidas-framework"></a>
 ### 3.3. Attributes for the eIDAS Framework
@@ -704,6 +724,12 @@ following attribute:
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.6 and version 1.7:**
+
+- Section 2.4, "Organizational Identity for Natural Persons", was updated to define a minimum set of attributes for providing personal orgazational identity information.
+
+- Section 3.2.5, "The orgAffiliation Attribute", was introduced.
 
 **Changes between version 1.5 and version 1.6:**
 
