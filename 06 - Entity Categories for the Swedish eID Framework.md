@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2020-01-17
+### Version 1.8 - 2020-02-13 - *Draft version*
 
 
 Registration number: **2019-311** (*previously: ELN-0606*)
@@ -16,7 +16,7 @@ Registration number: **2019-311** (*previously: ELN-0606*)
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -46,6 +46,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     2.5. [eidas-pnr-delivery](#eidas-pnr-delivery)
     
     2.6. [loa3-hsaid](#loa3-hsaid)
+    
+    2.7. [loa3-orgid](#loa3-orgid)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
@@ -345,6 +347,18 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 **Attribute requirements**: DIGG-AP-HSAid-01 (`http://id.swedenconnect.se/ap/1.0/hsaid-01`)
 > Natural Person Identity with HSA-ID. 
 
+<a name="loa3-orgid"></a>
+### 2.7. loa3-orgid
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-orgid`
+
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons” (ELN-AP-OrgPerson-01).
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+
+**Attribute requirements**: ELN-AP-OrgPerson-01 (`http://id.elegnamnden.se/ap/1.0/org-person-01`)
+> Organizational Identity for Natural Persons. 
+
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
 
@@ -541,6 +555,10 @@ from Service Providers that have declared this entity category in their metadata
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
+
+**Changes between version 1.7 and version 1.8:**
+
+- Section 2.7, loa3-orgid, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-orgid`.
 
 **Changes between version 1.6 and version 1.7:**
 

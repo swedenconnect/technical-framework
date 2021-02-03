@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-02-12 - *Draft version*
+### Version 1.7 - 2021-02-03 - *Draft version*
 
 Registration number: **2019-310** (*previously: ELN-0604*)
 
