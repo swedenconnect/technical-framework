@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-02-03 - *Draft version*
+### Version 1.8 - 2021-02-04 - *Draft version*
 
 
 Registration number: **2019-311** (*previously: ELN-0606*)
@@ -48,6 +48,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     2.6. [loa3-hsaid](#loa3-hsaid)
     
     2.7. [loa3-orgid](#loa3-orgid)
+    
+    2.8. [loa3-name](#loa3-name)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
@@ -358,8 +360,17 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
 
-**Attribute requirements**: ELN-AP-OrgPerson-01 (`http://id.elegnamnden.se/ap/1.0/org-person-01`)
-> Organizational Identity for Natural Persons. 
+**Attribute requirements**: ELN-AP-OrgPerson-01 (`http://id.elegnamnden.se/ap/1.0/org-person-01`)
+
+<a name="loa3-name"></a>
+### 2.8. loa3-name
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number” (ELN-AP-NaturalPerson-01).
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+
+**Attribute requirements**: ELN-AP-NaturalPerson-01 (`http://id.elegnamnden.se/ap/1.0/natural-person-01`)
+> Natural Personal Identity without Civic Registration Number. 
 
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
@@ -561,6 +572,8 @@ from Service Providers that have declared this entity category in their metadata
 **Changes between version 1.7 and version 1.8:**
 
 - Section 2.7, loa3-orgid, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-orgid`.
+
+- Section 2.8, loa3-name, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-name`.
 
 **Changes between version 1.6 and version 1.7:**
 
