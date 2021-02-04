@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-02-03 - *Draft version*
+### Version 1.7 - 2021-02-04 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
@@ -940,6 +940,11 @@ has expressed a specific attribute requirement using the `<md:RequestedAttribute
 element of a matching `<md:AttributeConsumingService>` element in its metadata
 and assigned the `isRequired`-attribute to `true`, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.
 
+For privacy reasons, an Identity Provider MUST NOT release identity attributes<sup>*</sup> that are not requested by the Service Provider via its metadata declarations
+ (service entity categories or `<md:RequestedAttribute>` elements).
+
+> [\*\]: This requirement does not apply to attributes that are not "identity" attributes, for example transaction identifiers or any other attribute that does not directly belong to a user's identity.
+
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
 
@@ -1531,6 +1536,8 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **Changes between version 1.6 and 1.7:**
 
 - Sections 2.1.2 and 2.1.3 were updated with clarifications for how a Service Provider declares requested attributes and how an Identity Provider declares its ability to deliver attributes.
+
+- Section 6.2.1, "Attribute Release Rules", was updated with a privacy requirement that tells that an Identity Provider must not release identity attributes not requested by the Service Provider.
 
 **Changes between version 1.5 and 1.6:**
 
