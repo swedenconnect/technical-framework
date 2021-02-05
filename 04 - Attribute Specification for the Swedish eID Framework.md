@@ -226,7 +226,7 @@ eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
 
 > \[*\]: The `displayName` attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, "Administrator 123". This is decided by the issuing organization.
 
-> \[\*\*\]: This specification does not impose any specific requirements concerning the user identity part of the `orgAffiliation` attribute. However, the attribute provider MUST ensure that the 
+> \[\*\*\]: This specification does not impose any specific requirements concerning the user identity part of the `orgAffiliation` attribute. However, the attribute provider MUST ensure that it is unique for the given organization. 
 
 > \[\*\*\*]: The organizational identifier can always be derived from the mandatory `orgAffiliation` attribute, but an attribute provider supporting the "Organizational Identity for Natural Persons" attribute set SHOULD also release the `organizationIdentifier` attribute individually. 
 
