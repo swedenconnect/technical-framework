@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2020-03-20 - *Draft version*
+### Version 1.7 - 2021-02-10 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -281,6 +281,8 @@ Identifiers for entity categories representing alternative sets of requirements.
 | `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.swedenconnect.se/ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”. | |
+| `http://id.swedenconnect.se/ec/1.0/loa3-orgid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-OrgPerson-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/ec/1.0/loa3-name` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-NaturalPerson-01”. | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -558,6 +560,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 **Changes between version 1.6 and version 1.7:**
 
 - In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.
+
+- Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
 
 **Changes between version 1.5 and version 1.6:**
 
