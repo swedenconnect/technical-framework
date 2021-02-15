@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-02-03 - *Draft version*
+### Version 1.7 - 2021-02-15 - *Draft version*
 
 Registration number: **2019-310** (*previously: ELN-0604*)
 
@@ -221,12 +221,11 @@ The “Organizational Identity for Natural Persons” attribute set provides bas
 
 **Typical use**: In an attribute release policy that provides basic organizational identity information about a natural person.
 
-The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish
-eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
+The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
 
 > \[*\]: The `displayName` attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, "Administrator 123". This is decided by the issuing organization.
 
-> \[\*\*\]: This specification does not impose any specific requirements concerning the user identity part of the `orgAffiliation` attribute. However, the attribute provider MUST ensure that it is unique for the given organization. 
+> \[\*\*\]: See section [3.2.5](#the-orgaffiliation-attribute).
 
 > \[\*\*\*]: The organizational identifier can always be derived from the mandatory `orgAffiliation` attribute, but an attribute provider supporting the "Organizational Identity for Natural Persons" attribute set SHOULD also release the `organizationIdentifier` attribute individually. 
 
