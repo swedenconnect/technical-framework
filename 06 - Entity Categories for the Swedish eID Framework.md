@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.7 - 2020-01-17
+### Version 1.8 - 2021-02-15 - *Draft version*
 
 
 Registration number: **2019-311** (*previously: ELN-0606*)
@@ -16,7 +16,7 @@ Registration number: **2019-311** (*previously: ELN-0606*)
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -46,6 +46,10 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     2.5. [eidas-pnr-delivery](#eidas-pnr-delivery)
     
     2.6. [loa3-hsaid](#loa3-hsaid)
+    
+    2.7. [loa3-orgid](#loa3-orgid)
+    
+    2.8. [loa3-name](#loa3-name)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
@@ -175,7 +179,7 @@ These differences are outlined in the following table:
 
 | EC type | Consuming service | Providing service | Service matching rule |
 | :--- | :--- | :--- | :--- |
-| **Service Entity Category** | Each declared category represents an alternative set of requirements for the service. | Represents the ability to deliver assertions in accordance with each declared category. | At least one of the service entity categories declared by the consuming service MUST be declared by the providing service. |
+| **Service Entity Category** | Each declared category represents a set of requirements for the service. | Represents the ability to deliver assertions in accordance with each declared category. | At least one of the service entity categories declared by the consuming service MUST be declared by the providing service. |
 | **Service Property** | Represents a property of this service. | Represents the ability to deliver assertions to a consuming service that has the declared property. | All properties declared by the consuming service MUST be declared by the providing service. |
 | **Service Type** | Declares the type of service provided by this consuming service. | Not applicable. | No matching rule. |
 | **Service Contract** | Each declared category represents a contract, or business agreement, that the service is affiliated to. | Represents the contracts, or business agreements, under which the providing service may deliver services. | At least one of the service contract identifiers declared by a providing service must be declared by the consuming service. A providing service that does not declare any service contract identifiers match all consuming services regarding service contract matching. |
@@ -249,7 +253,9 @@ All service entity category identifiers are prefixed with
 
 A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes. For contract- or business agreement requirements [Service Contract Categories](#service-contract-categories) should be used.
 
-**Note**: This specification does not impose any limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The purpose of the service entity category is limited to service matching in accordance with  [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
+A providing service declaring a service entity category that consists of both a level of assurance requirement and an attribute set MUST guarantee that the release of the given attributes are consistent with the level of assurance requirement.
+
+This specification does not impose any other limitations on what requirements or conditions that can be identified by a service entity category and there are no defined technical mechanisms to ensure that any service correctly implement any of these requirements. The main purpose of the service entity category is service matching in accordance with [section 1.3](#consuming-and-providing-services) and any requirements and conditions that serves this purpose are considered valid.
 
 **Note**: A providing service that does not comply with any of the defined service entity categories may define its own service entity category identifier in order to utilize the entity category matching rules. Any service entity category identifier defined outside of this specification should use the prefix `http://id.swedenconnect.se/ec/<org>`, where `org` is the defining organization's identifier.
 
@@ -344,6 +350,27 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 
 **Attribute requirements**: DIGG-AP-HSAid-01 (`http://id.swedenconnect.se/ap/1.0/hsaid-01`)
 > Natural Person Identity with HSA-ID. 
+
+<a name="loa3-orgid"></a>
+### 2.7. loa3-orgid
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-orgid`
+
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons” (ELN-AP-OrgPerson-01).
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+
+**Attribute requirements**: ELN-AP-OrgPerson-01 (`http://id.elegnamnden.se/ap/1.0/org-person-01`)
+
+<a name="loa3-name"></a>
+### 2.8. loa3-name
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number” (ELN-AP-NaturalPerson-01).
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+
+**Attribute requirements**: ELN-AP-NaturalPerson-01 (`http://id.elegnamnden.se/ap/1.0/natural-person-01`)
+> Natural Personal Identity without Civic Registration Number. 
 
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
@@ -541,6 +568,12 @@ from Service Providers that have declared this entity category in their metadata
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
+
+**Changes between version 1.7 and version 1.8:**
+
+- Section 2.7, loa3-orgid, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-orgid`.
+
+- Section 2.8, loa3-name, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-name`.
 
 **Changes between version 1.6 and version 1.7:**
 

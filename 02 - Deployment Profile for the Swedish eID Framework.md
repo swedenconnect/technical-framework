@@ -8,14 +8,14 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.6 - 2020-01-17
+### Version 1.7 - 2021-02-15 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -306,7 +306,7 @@ If a Service Provider does not have any attribute requirements other than those
 implicitly requested by inclusion of one or more service entity categories, the
 metadata entry of the Service Provider SHOULD NOT include a
 `<md:AttributeConsumingService>` element (with `<md:RequestedAttribute>` 
-elements).
+elements). 
 
 Any needs for particular attributes from Identify Providers, when
 present, MUST be expressed through present service entity categories in
@@ -316,6 +316,9 @@ Provider metadata. The `<md:RequestedAttribute>` elements in the
 Service Provider metadata, when present, hold a list of requested and/or
 required attributes. This list of attributes MUST be interpreted in the
 context of present service entity categories defined in \[[EidEntCat](#eidentcat)\].
+
+> Note: Only the requirements for attributes that are not implicitly requested through a declared
+service entity category need to be expressed as `<md:RequestedAttribute>` elements.
 
 A Service Provider MAY sign authentication request messages sent to
 Identity Providers. A Service Provider that signs authentication
@@ -358,7 +361,12 @@ entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
 \[[EidEntCat](#eidentcat)\], defining the Identity Provider ability to deliver
-assertions.
+assertions (defining the level of assurance and attribute release).
+
+If an Identity Provider has the ability to release attributes, other than those
+implicitly given by the declared service entity categories, it is RECOMMENDED that 
+those attributes are declared as `<saml:Attribute>` elements under the 
+`<md:IDPSSODescriptor>` element. 
 
 The `<mdattr:EntityAttributes>` element of an Identity Provider’s
 metadata SHALL contain an attribute according to
@@ -932,6 +940,11 @@ has expressed a specific attribute requirement using the `<md:RequestedAttribute
 element of a matching `<md:AttributeConsumingService>` element in its metadata
 and assigned the `isRequired`-attribute to `true`, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.
 
+For privacy reasons, an Identity Provider SHOULD NOT release identity attributes<sup>*</sup> that are not requested by the Service Provider via its metadata declarations
+ (service entity categories or `<md:RequestedAttribute>` elements).
+
+> [\*\]: This requirement does not apply to attributes that are not "identity" attributes, for example transaction identifiers or any other attribute that does not directly belong to a user's identity.
+
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
 
@@ -1444,7 +1457,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="saml2metaiop"></a>
 **\[SAML2MetaIOP\]**
-> [OASIS Committee Specification, SAML V2.0 Metadata Interoperability Profile Version 1.0, August 2009](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-iop.pdf).
+> [OASIS Standard, SAML V2.0 Metadata Interoperability Profile Version 1.0, October 2019](http://docs.oasis-open.org/security/saml/Post2.0/sstc-metadata-iop.pdf).
 
 <a name="saml2metaui"></a>
 **\[SAML2MetaUI\]**
@@ -1519,6 +1532,12 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="changes-between-versions"></a>
 ## 10. Changes between versions
+
+**Changes between version 1.6 and 1.7:**
+
+- Sections 2.1.2 and 2.1.3 were updated with clarifications for how a Service Provider declares requested attributes and how an Identity Provider declares its ability to deliver attributes.
+
+- Section 6.2.1, "Attribute Release Rules", was updated with a privacy requirement that tells that an Identity Provider must not release identity attributes not requested by the Service Provider.
 
 **Changes between version 1.5 and 1.6:**
 
