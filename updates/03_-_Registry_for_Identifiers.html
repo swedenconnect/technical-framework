@@ -19,11 +19,11 @@
 </p>
 
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.7---2020-03-20---*draft-version*">Version 1.7 - 2020-03-20 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-02-15---*draft-version*">Version 1.7 - 2021-02-15 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-309</strong> (<em>previously: ELN-0603</em>)</p>
 <hr>
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -469,6 +469,17 @@ Specification for the Swedish eID Framework.</p>
 <tr>
 <td style="text-align:left"><code>http://id.swedenconnect.se/ec/sc/</code><br/><code>uncertified-loa3-hsaid</code></td>
 <td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”.</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-OrgPerson-01”.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/ec/1.0/loa3-name</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-NaturalPerson-01”.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 </tbody>
 </table>
@@ -963,7 +974,10 @@ regulation and associated technical specifications.</p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.6 and version 1.7:</strong></p>
 <ul class="list">
-<li>In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.</li>
+<li><p>In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.</p>
+</li>
+<li><p>Added service entity categories <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> and <code>http://id.swedenconnect.se/ec/1.0/loa3-name</code> to section 3.1.3.1.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
