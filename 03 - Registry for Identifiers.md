@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-02-15 - *Draft version*
+### Version 1.7 - 2021-09-03 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -47,6 +47,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1.3.3. [Entity Categories for Service Type](#entity-categories-for-service-type)
 
     3.1.3.4. [Entity Categories for Service Contract](#entity-categories-for-service-contract)
+    
+    3.1.3.5. [General Entity Categories](#general-entity-categories)
 
     3.1.4. [SAML Protocol Status Codes](#saml-protocol-status-codes)
 
@@ -314,6 +316,16 @@ All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/c
 
 The Swedish eID Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
 
+<a name="general-entity-categories"></a>
+##### 3.1.3.5. General Entity Categories
+
+An entity category of the General Entity Category type is a category that does not fit into any of the other category types regarding definitions and matching rules.
+
+General category identifiers are prefixed with `http://id.swedenconnect.se/general-ec`.
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/general-ec/`<br />`1.0/secure-authenticator-binding` | Indicator that a secure authenticator binding is required, or supported.  | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
@@ -558,6 +570,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 ## 5. Changes between versions
 
 **Changes between version 1.6 and version 1.7:**
+
+- Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` was added.
 
 - In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.
 
