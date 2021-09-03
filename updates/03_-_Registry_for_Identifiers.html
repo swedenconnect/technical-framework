@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.7---2021-02-15---*draft-version*">Version 1.7 - 2021-02-15 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-09-03---*draft-version*">Version 1.7 - 2021-09-03 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-309</strong> (<em>previously: ELN-0603</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -44,6 +44,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 3.1.3.2. <a href="#entity-categories-for-service-properties">Entity Categories for Service Properties</a></p>
 <p> 3.1.3.3. <a href="#entity-categories-for-service-type">Entity Categories for Service Type</a></p>
 <p> 3.1.3.4. <a href="#entity-categories-for-service-contract">Entity Categories for Service Contract</a></p>
+<p> 3.1.3.5. <a href="#general-entity-categories">General Entity Categories</a></p>
 <p> 3.1.4. <a href="#saml-protocol-status-codes">SAML Protocol Status Codes</a></p>
 <p> 3.1.5. <a href="#central-signing">Central Signing</a></p>
 <p> 3.1.6. <a href="#authentication-context">Authentication Context</a></p>
@@ -541,6 +542,26 @@ Specification for the Swedish eID Framework.</p>
 <p>Service Contract Entity Category identifiers are indented for performing service matching based on contracts, or business agreements, between providing and consuming services.</p>
 <p>All Service Contract identifiers are prefixed with <code>http://id.swedenconnect.se/contract/&lt;org&gt;</code>, where <code>org</code> is the identifier for the defining organization.</p>
 <p>The Swedish eID Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.</p>
+<p><a name="general-entity-categories"></a></p>
+<h5 id="3.1.3.5.-general-entity-categories">3.1.3.5. General Entity Categories</h5>
+<p>An entity category of the General Entity Category type is a category that does not fit into any of the other category types regarding definitions and matching rules.</p>
+<p>General category identifiers are prefixed with <code>http://id.swedenconnect.se/general-ec</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>URL</strong></th>
+<th style="text-align:left"><strong>Object</strong></th>
+<th style="text-align:left"><strong>Reference</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/general-ec/</code><br /><code>1.0/secure-authenticator-binding</code></td>
+<td style="text-align:left">Indicator that a secure authenticator binding is required, or supported.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+</tbody>
+</table>
 <p><a name="saml-protocol-status-codes"></a></p>
 <h4 id="3.1.4.-saml-protocol-status-codes">3.1.4. SAML Protocol Status Codes</h4>
 <p>Status code identifiers for use in SAML Response messages. The list
@@ -974,6 +995,8 @@ regulation and associated technical specifications.</p>
 <h2 id="5.-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.6 and version 1.7:</strong></p>
 <ul class="list">
+<li><p>Section, 3.1.3.5, &quot;General Entity Categories&quot;, was introduced and <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> was added.</p>
+</li>
 <li><p>In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.</p>
 </li>
 <li><p>Added service entity categories <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> and <code>http://id.swedenconnect.se/ec/1.0/loa3-name</code> to section 3.1.3.1.</p>
