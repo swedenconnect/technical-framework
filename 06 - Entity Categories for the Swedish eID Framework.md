@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-02-15 - *Draft version*
+### Version 1.8 - 2021-09-06 - *Draft version*
 
 
 Registration number: **2019-311** (*previously: ELN-0606*)
@@ -442,14 +442,14 @@ All Service Type identifiers are prefixed with
 
 **URL**: `http://id.elegnamnden.se/st/1.0/public-sector-sp`
 
-**Description**: A service type that indicates that a Service Provider is a "public sector" SP. This category MUST be used by public sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
+**Description**: A service type that indicates that a Service Provider is a "public sector" SP. This category MUST be used by public sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request. For other types of Service Providers its use is determined by the federation policy.
 
 <a name="private-sector-sp"></a>
 ### 4.3. private-sector-sp
 
 **URL**: `http://id.elegnamnden.se/st/1.0/private-sector-sp`
 
-**Description**: A service type that indicates that a Service Provider is a "private sector" SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request.
+**Description**: A service type that indicates that a Service Provider is a "private sector" SP. This category MUST be used by private sector Service Providers wishing to use eIDAS authentication so that the Swedish eIDAS connector may include this information in the eIDAS authentication request. For other types of Service Providers its use is determined by the federation policy.
 
 <a name="service-contract-categories"></a>
 ## 5. Service Contract Categories
