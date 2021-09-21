@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-09-15 - *Draft version*
+### Version 1.7 - 2021-09-21 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
@@ -945,7 +945,7 @@ details.
 
 An Identity Provider releasing scoped attributes, see section 3.1.3 of \[[EidAttributes](#eidattributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
 
-Consequently, a Service Provider consuming a scoped attribute MUST verify that the issuing Identity Provider has been authorized to release attributes for the given scope by asserting its presence in the Identity Provider's metadata, see section [2.1.3.1](#declaring-authorized-scopes) and section 3.5.2 of \[[SAML2SubjIdAttr](#saml2subjidattr)\].
+Consequently, a Service Provider consuming a scoped attribute SHOULD verify that the issuing Identity Provider has been authorized to release attributes for the given scope by asserting its presence in the Identity Provider's metadata, see section [2.1.3.1](#declaring-authorized-scopes) and section 3.5.2 of \[[SAML2SubjIdAttr](#saml2subjidattr)\]. A scoped attribute that fails this check MUST NOT be accepted by the Service Provider.
 
 The Service Provider is responsible for checking that an Identity
 Provider is capable of providing necessary attributes before sending a

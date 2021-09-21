@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-09-15 *Draft version*
+### Version 1.7 - 2021-09-21 *Draft version*
 
 Registration number: **2019-310** (*previously: ELN-0604*)
 
@@ -352,7 +352,7 @@ The following attributes are defined for use within the attribute profile for th
 | eidasNatural-<br/>PersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | No | No | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
 | employeeHsaId | urn:oid:1.2.752.29.6.2.1 | HSA-ID | Person identifier used by Swedish health care organizations. | No | No | See \[[SambiAttr](#sambiattr)\]. |
 
-> \[\*\]: The `mail` attribute is regarded as a scoped attribute (see [3.1.3](#scoped-attributes) below) if it is released under an attribute policy that defines it to be scoped, otherwise it is regarded as non-scoped.
+> \[\*\]: The `mail` attribute should be regarded as a scoped attribute (see [3.1.3](#scoped-attributes) below) if the attribute release policy in use has stated it as scoped. Such a policy can for example be that the attribute is part of an attribute set (see [section 2](#attribute-sets)) that documents the attribute as scoped. In all other cases the attribute is regarded as non-scoped.
 
 <a name="attribute-string-values"></a>
 #### 3.1.1. Attribute String Values
@@ -373,7 +373,7 @@ Attributes with a "Yes" value in the column "Scoped" are scoped attributes. A sc
 
 An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider's metadata entry. See section 2.1.3.1 of \[[EidDeployProf](#eiddeployprof)\] for details.	
 
-A Service Provider consuming a scoped attribute MUST assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[EidDeployProf](#eiddeployprof)\].
+A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[EidDeployProf](#eiddeployprof)\]. 
 
 <a name="saml-attribute-format"></a>
 ### 3.2. SAML Attribute Format
