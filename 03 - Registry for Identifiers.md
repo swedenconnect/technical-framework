@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-09-20 - *Draft version*
+### Version 1.7 - 2021-09-21 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -222,7 +222,9 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 
 -   `http://eidas.europa.eu/NotNotified/LoA/high` (for non-notified eID schemes)
 
-> \[*\]: Only the official eIDAS-connector is allowed to issue assertions containing any of the eIDAS authentication context URI:s listed.
+> \[*\]: The authentication context URI:s are intended to be used to represent authentication over the eIDAS
+authentication framework using an official eIDAS-connector. Authorization to issue assertions using these 
+authentication context URI:s is determined by declaration of the "assurance certification" for the connector (see section 2.1.3 of \[[EidDeploy](#eiddeploy)\]).
 
 <a name="sign-message-authentication-context-uris"></a>
 #### 3.1.1.1. Sign Message Authentication Context URIs (deprecated)
