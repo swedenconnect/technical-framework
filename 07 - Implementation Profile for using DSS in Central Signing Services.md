@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.5 - 2020-09-29 - *Draft version*
+### Version 1.5 - 2021-09-17 - *Draft version*
 
 Registration number: **2019-312** (*previously: ELN-0607*)
 
@@ -233,11 +233,14 @@ contain any information in addition to what is defined in section 3.1 of
 <a name="signer"></a>
 ##### 2.1.3.3. Signer
 
-The `<Signer>` element MUST contain at least the SAML attributes
-that are necessary in order to uniquely identify the signer. The present
-attributes MUST match the attributes that are provided for this signer
-when authenticating the signer using the Identity Provider specified in
-the `<IdentityProvider>` element.
+The Requesting Service MAY include a `<Signer>` element containing the SAML attributes that 
+are necessary in order to uniquely identify the signer. The present attributes MUST match the attributes
+that are provided for this signer when authenticating the signer using the Identity Provider specified in the `<IdentityProvider>` element.
+
+It is RECOMMENDED that a Signature Requester that has authenticated the user before sending a 
+signature request includes relevant SAML attributes in the `<Signer>` element. If this is not done, 
+the identity of the signer needs to be verified after the signature process has completed in order to ensure
+that the authenticated user was the signer.
 
 The Signing Service MUST match all attribute values provided in the
 `<Signer>` element with SAML attributes provided for this signer
@@ -247,7 +250,7 @@ Provider.
 If any of the attributes specified in the `<Signer>` element cannot
 be found or matched with a corresponding attribute value from an
 obtained assertion from the specified Identity Provider, the Signing
-Service MUST reject the sign request.
+Service MUST reject the sign request.  
 
 <a name="identityprovider"></a>
 ##### 2.1.3.4. IdentityProvider
@@ -750,6 +753,8 @@ EidSignResponse | Base64 encoded sign response.
 - The requirements in section 2.2.4.3, "Request", were updated. The `Request` element is no longer mandatory to include in a response message.
 
 - Sections 2.1.3.1 and 2.2.4.1 defining the requirements concerning the use of the `Version` attribute in `SignRequestExtension` and `SignResponseExtension` elements were updated in order to implement support for newer versions of the DSS extension specification.
+
+- Section 2.1.3.3, "Signer", was updated so that it is no longer required to supply the `<csig:Signer>` element. This enables use cases where the user is not known at the time of signature initiation.  
 
 **Changes between version 1.3 and version 1.4:**
 
