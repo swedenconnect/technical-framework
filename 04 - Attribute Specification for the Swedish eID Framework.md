@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-02-15 - *Draft version*
+### Version 1.7 - 2021-09-21 *Draft version*
 
 Registration number: **2019-310** (*previously: ELN-0604*)
 
@@ -47,6 +47,12 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 3. [**Attribute Definitions**](#attribute-definitions)
 
     3.1. [Attributes](#attributes)
+    
+    3.1.1. [Attribute String Values](#attribute-string-values)
+
+    3.1.2. [Multi-valued Attributes](#multi-valued-attributes)
+
+    3.1.3. [Scoped Attributes](#scoped-attributes)
 
     3.2. [SAML Attribute Format](#saml-attribute-format)
 
@@ -140,14 +146,14 @@ for each attribute set as means for other documents to reference
 specific attribute sets.
 
 Each attribute set defines a number of mandatory attributes that MUST be
-released by an Attribute Provider<sup>*</sup> that provides attributes according
+released by an Attribute Provider<sup>\*</sup> that provides attributes according
 to the given attribute set, and optionally recommended attributes that
 SHOULD be released as part of the attribute set if they are available to
 the provider.
 
 **Note**: An Attribute Provider may also release other attributes, not
 specified by the defined attribute sets it supports. See further section
-6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish
+6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish
 eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
 
 In order to comply with a defined attribute set, the following attribute
@@ -216,12 +222,12 @@ The “Organizational Identity for Natural Persons” attribute set provides bas
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
-| **REQUIRED** | `displayName` (Display name)<sup>*</sup> <br /> `orgAffiliation` (Personal identifier and organizational identifier code)<sup>**</sup> <br /> `o` (Organization name) |
-| **RECOMMENDED** | `organizationIdentifier` (Organizational identifier code)<sup>***</sup> |
+| **REQUIRED** | `displayName` (Display name)<sup>\*</sup> <br /> `orgAffiliation` (Personal identifier and organizational identifier code)<sup>\*\*</sup> <br /> `o` (Organization name) |
+| **RECOMMENDED** | `organizationIdentifier` (Organizational identifier code)<sup>\*\*\*</sup> |
 
 **Typical use**: In an attribute release policy that provides basic organizational identity information about a natural person.
 
-The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
+The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
 
 > \[*\]: The `displayName` attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, "Administrator 123". This is decided by the issuing organization.
 
@@ -242,7 +248,7 @@ Framework.
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
-| **REQUIRED**<sup>*</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `c` (Country code for the eIDAS country that authenticated the subject) <br />`transactionIdentifier` (ID of assertion issued by the member state node)<sup>\*\*</sup> |
+| **REQUIRED**<sup>\*</sup> | `prid` (Provisional ID) <br /> `pridPersistence` (Provisional ID persistence indicator) <br /> `eidasPersonIdentifier` (Mapping of the eIDAS PersonIdentifier attribute) <br /> `dateOfBirth` (Date of birth) <br /> `sn` (Surname) <br /> `givenName` (Given name) <br /> `c` (Country code for the eIDAS country that authenticated the subject) <br />`transactionIdentifier` (ID of assertion issued by the member state node)<sup>\*\*</sup> |
 | **REQUIRED**<br />(if available)<sup>\*\*\*</sup> | `birthName` (Birth name) <br /> `placeOfBirth` (Place of birth) <br /> `eidasNaturalPersonAddress` (Address for natural person) <br /> `gender` (Gender) |
 | **RECOMMENDED** | `personalIdentityNumber` (National civic registration number) <br /> `personalIdentityNumberBinding` (National civic registration number Binding URI) |
 
@@ -308,50 +314,66 @@ The “Natural Person Identity with HSA-ID” attribute set provides basic perso
 
 The following attributes are defined for use within the attribute profile for the Swedish eID Framework:
 
-| Attribute abbreviation | SAML attribute name | Description | Use within this specification | Multi-valued | Example |
-| :--- | :--- | :--- | :--- | :---: | :--- |
-| sn | urn:oid:2.5.4.4 | Surname | Registered surname. | NO | Lindeman |
-| givenName | urn:oid:2.5.4.42 | Given Name | Registered given name. | NO | Valfrid |
-| displayName | urn:oid:2.16.840.1.<br/>113730.3.1.241 | Display Name | A name in any preferred presentation format. | NO | Valfrid Lindeman |
-| gender | urn:oid:1.3.6.1.5.5.7.9.3 | Gender | A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender. | NO | M |
-| personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](#skv704) and [SKV 707](#skv707). 12 digits without hyphen. | NO | 195006262546 |
-| dateOfBirth | urn:oid:1.3.6.1.5.5.7.9.1 | Date of birth | Date of birth expressed using the format YYYY-MM-DD. | NO | 1950-06-26 |
-| birthName | urn:oid:1.2.752.201.3.8 | Name at the time of birth | Full name of a person at birth. | NO | Valfrid Danielsson |
-| street | urn:oid:2.5.4.9 | Street address | Street address. | NO | Mosebacke torg 3 |
-| postOfficeBox | urn:oid:2.5.4.18 | Post box | Post box. | NO | Box 1122 |
-| postalCode | urn:oid:2.5.4.17 | Postal code | Postal code. | NO | 11826 |
-| l | urn:oid:2.5.4.7 | Locality | Locality. | NO | Stockholm |
-| c | urn:oid:2.5.4.6 | Country | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code. | NO | SE |
-| placeOfBirth | urn:oid:1.3.6.1.5.5.7.9.2 | Place of birth | A string representing the place of birth | NO | Stockholm |
-| countryOfCitizenship | urn:oid:1.3.6.1.5.5.7.9.4 | Country of citizenship | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing a country of citizenship. | YES | SE |
-| countryOfResidence | urn:oid:1.3.6.1.5.5.7.9.5 | Country of Residence | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing the country of residence. | NO | SE |
-| telephoneNumber | urn:oid:2.5.4.20 | Telephone number | Telephone number. | YES | +46890510 |
-| mobile | urn:oid:0.9.2342.<br/>19200300.100.1.41 | Mobile number | Mobile number. | YES | +46703419886 |
-| mail | urn:oid:0.9.2342.<br/>19200300.100.1.3 | E-mail address | E-mail address. | YES | vfl@mosebackemonarki.se |
-| o | urn:oid:2.5.4.10 | Organization name | Registered organization name. | NO | Skatteverket |
-| ou | urn:oid:2.5.4.11 | Organizational unit name | Organizational unit name. | YES | IT-Avdelningen |
-| organizationIdentifier | urn:oid:2.5.4.97 | Organizational identifier code | Swedish “organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | NO | 5562265719 |
-| orgAffiliation | urn:oid:1.2.752.201.3.1 | &lt;uid&gt;@&lt;orgnr&gt; | *Personal ID* @ Swedish ”organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | YES | vlindman@5562265719<br />See [section 3.2.5](#the-orgaffiliation-attribute) below. |
-| transactionIdentifier | urn:oid:1.2.752.201.3.2 | Transaction identifier | Transaction identifier for an event, e.g. an authentication process. | NO | *9878HJ6687 (arbitrary string)* |
-| authContextParams | urn:oid:1.2.752.201.3.3 | Authentication Context Parameters. | Key-value pairs from an authentication process. Defined by issuing entity. | NO | See [section 3.2.1](#the-authcontextparams-attribute) below. |
-| userCertificate | urn:oid:1.2.752.201.3.10 | User certificate | Base64-encoding of a user certificate. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
-| userSignature | urn:oid:1.2.752.201.3.11 | User signature | Base64-encoding of a signature object applied by the user. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
-| authServerSignature | urn:oid:1.2.752.201.3.13 | Authentication server signature | Base64-encoding of a authentication server signature. | NO | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
-| sad | urn:oid:1.2.752.201.3.12 | Signature activation data | Signature activation data required by signature services. | NO | See [section 3.2.3](#the-sad-attribute) below. |
-| signMessageDigest | urn:oid:1.2.752.201.3.14 | Sign message digest | Included in assertions as a proof that a user sign message was displayed. | NO | See [section 3.2.4](#the-signmessagedigest-attribute) below. |
-| prid | urn:oid:1.2.752.201.3.4 | Provisional identifier | Unique identifier for an authentication performed against the eIDAS Framework. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | NO:5068907693 |
-| pridPersistence | urn:oid:1.2.752.201.3.5 | Provisional identifier persistence indicator | Indicator for the expected persistence of the prid attribute. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | NO | A |
-| personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | NO | http://eid.example.se/presentedInPerson |
-| eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | NO | ES/AT/02635542Y (Spanish eID number for an Austrian SP) |
-| eidasNatural-<br/>PersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | NO | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
-| employeeHsaId | urn:oid:1.2.752.29.6.2.1 | HSA-ID | Person identifier used by Swedish health care organizations. | NO | See \[[SambiAttr](#sambiattr)\]. |
+| Attribute abbreviation | SAML attribute name | Description | Use within this specification | Multi-valued | Scoped | Example |
+| :--- | :--- | :--- | :--- | :---: | :--- | :-- |
+| sn | urn:oid:2.5.4.4 | Surname | Registered surname. | No | No | Lindeman |
+| givenName | urn:oid:2.5.4.42 | Given Name | Registered given name. | No | No | Valfrid |
+| displayName | urn:oid:2.16.840.1.<br/>113730.3.1.241 | Display Name | A name in any preferred presentation format. | No | No | Valfrid Lindeman |
+| gender | urn:oid:1.3.6.1.5.5.7.9.3 | Gender | A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender. | No | No | M |
+| personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](#skv704) and [SKV 707](#skv707). 12 digits without hyphen. | No | No | 195006262546 |
+| dateOfBirth | urn:oid:1.3.6.1.5.5.7.9.1 | Date of birth | Date of birth expressed using the format YYYY-MM-DD. | No | No | 1950-06-26 |
+| birthName | urn:oid:1.2.752.201.3.8 | Name at the time of birth | Full name of a person at birth. | No | No | Valfrid Danielsson |
+| street | urn:oid:2.5.4.9 | Street address | Street address. | No | No | Mosebacke torg 3 |
+| postOfficeBox | urn:oid:2.5.4.18 | Post box | Post box. | No | No | Box 1122 |
+| postalCode | urn:oid:2.5.4.17 | Postal code | Postal code. | No | No | 11826 |
+| l | urn:oid:2.5.4.7 | Locality | Locality. | No | No | Stockholm |
+| c | urn:oid:2.5.4.6 | Country | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code. | No | No | SE |
+| placeOfBirth | urn:oid:1.3.6.1.5.5.7.9.2 | Place of birth | A string representing the place of birth | No | No | Stockholm |
+| countryOfCitizenship | urn:oid:1.3.6.1.5.5.7.9.4 | Country of citizenship | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing a country of citizenship. | Yes | No | SE |
+| countryOfResidence | urn:oid:1.3.6.1.5.5.7.9.5 | Country of Residence | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing the country of residence. | No | No | SE |
+| telephoneNumber | urn:oid:2.5.4.20 | Telephone number | Telephone number. | Yes | No | +46890510 |
+| mobile | urn:oid:0.9.2342.<br/>19200300.100.1.41 | Mobile number | Mobile number. | Yes | No | +46703419886 |
+| mail | urn:oid:0.9.2342.<br/>19200300.100.1.3 | E-mail address | E-mail address. | Yes | Yes/No<sup>\*</sup> | vfl@mosebackemonarki.se |
+| o | urn:oid:2.5.4.10 | Organization name | Registered organization name. | No | No | Skatteverket |
+| ou | urn:oid:2.5.4.11 | Organizational unit name | Organizational unit name. | Yes | No | IT-Avdelningen |
+| organizationIdentifier | urn:oid:2.5.4.97 | Organizational identifier code | Swedish “organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | No | No | 5562265719 |
+| orgAffiliation | urn:oid:1.2.752.201.3.1 | &lt;uid&gt;@&lt;orgnr&gt; | *Personal ID* @ Swedish ”organisationsnummer” according to [SKV 709](#skv709). 10 digits without hyphen. | Yes | Yes | vlindman@5562265719<br />See [section 3.2.5](#the-orgaffiliation-attribute) below. |
+| transactionIdentifier | urn:oid:1.2.752.201.3.2 | Transaction identifier | Transaction identifier for an event, e.g. an authentication process. | No | No | *9878HJ6687 (arbitrary string)* |
+| authContextParams | urn:oid:1.2.752.201.3.3 | Authentication Context Parameters. | Key-value pairs from an authentication process. Defined by issuing entity. | No | No | See [section 3.2.1](#the-authcontextparams-attribute) below. |
+| userCertificate | urn:oid:1.2.752.201.3.10 | User certificate | Base64-encoding of a user certificate. | No | No | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
+| userSignature | urn:oid:1.2.752.201.3.11 | User signature | Base64-encoding of a signature object applied by the user. | No | No | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
+| authServerSignature | urn:oid:1.2.752.201.3.13 | Authentication server signature | Base64-encoding of a authentication server signature. | No | No | See [section 3.2.2](#the-usercertificate-and-usersignature-attributes) below. |
+| sad | urn:oid:1.2.752.201.3.12 | Signature activation data | Signature activation data required by signature services. | No | No | See [section 3.2.3](#the-sad-attribute) below. |
+| signMessageDigest | urn:oid:1.2.752.201.3.14 | Sign message digest | Included in assertions as a proof that a user sign message was displayed. | No | No | See [section 3.2.4](#the-signmessagedigest-attribute) below. |
+| prid | urn:oid:1.2.752.201.3.4 | Provisional identifier | Unique identifier for an authentication performed against the eIDAS Framework. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | No | No | NO:5068907693 |
+| pridPersistence | urn:oid:1.2.752.201.3.5 | Provisional identifier persistence indicator | Indicator for the expected persistence of the prid attribute. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | No | No | A |
+| personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-personalidentitynumberbinding-attribute) below. | No | No | http://eid.example.se/presentedInPerson |
+| eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | No | No | ES/AT/02635542Y (Spanish eID number for an Austrian SP) |
+| eidasNatural-<br/>PersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | No | No | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
+| employeeHsaId | urn:oid:1.2.752.29.6.2.1 | HSA-ID | Person identifier used by Swedish health care organizations. | No | No | See \[[SambiAttr](#sambiattr)\]. |
+
+> \[\*\]: The `mail` attribute should be regarded as a scoped attribute (see [3.1.3](#scoped-attributes) below) if the attribute release policy in use has stated it as scoped. Such a policy can for example be that the attribute is part of an attribute set (see [section 2](#attribute-sets)) that documents the attribute as scoped. In all other cases the attribute is regarded as non-scoped.
+
+<a name="attribute-string-values"></a>
+#### 3.1.1. Attribute String Values
 
 All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the `xs:string` data type. Certain attributes such as `mail`, `personalIdentityNumber`, `organizationIdentifier`, `telephoneNumber` and `mobile` use a restricted character set according to its defined usage within this specification.
 
 All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 \[[X.520](#x520)\]. That is, case-insensitive comparison where insignificant spaces are ignored.
 
-Attributes with a “NO” value in the multivalued column MUST NOT have more than one `<AttributeValue>` sub-element. Attributes with a “YES” value in the multivalued column MAY have one or more `<AttributeValue>` sub-elements.
+<a name="multi-valued-attributes"></a>
+#### 3.1.2. Multi-valued Attributes
 
+Attributes with a “No” value in the column "Multi-valued" MUST NOT have more than one `<AttributeValue>` sub-element. Attributes with a “Yes” value in the column "Multi-valued" MAY have one or more `<AttributeValue>` sub-elements.
+
+<a name="scoped-attributes"></a>
+#### 3.1.3. Scoped Attributes
+
+Attributes with a "Yes" value in the column "Scoped" are scoped attributes. A scoped attribute expresses values in a string-valued attribute of the form `value@scope`, where `scope` takes the form of a domain name or something similar such as an organizational identifier.
+
+An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider's metadata entry. See section 2.1.3.1 of \[[EidDeployProf](#eiddeployprof)\] for details.	
+
+A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[EidDeployProf](#eiddeployprof)\]. 
 
 <a name="saml-attribute-format"></a>
 ### 3.2. SAML Attribute Format
@@ -403,7 +425,7 @@ The `userCertificate` attribute holds, as its value, a base64-encoding of
 the X.509 certificate presented by the subject during authentication.
 
 The `userSignature` attribute contains a base64-encoding of a signature
-object that was created by the subject during the authentication<sup>*</sup>
+object that was created by the subject during the authentication<sup>\*</sup>
 process.
 
 The `authServerSignature` may be included in assertions in cases where there are requirements to include a digitally signed proof from the authentication server at which the end user authenticated. This is mainly useful in cases where the SAML Identity Provider delegates end user authentication to a subordinate authentication server.
@@ -447,7 +469,7 @@ represented as:
 ```
 
 The input to the digesting operation is the value bytes of the `csig:Message` element which is UTF-8 encoded bytes
-of the actual sign message<sup>*</sup>.
+of the actual sign message<sup>\*</sup>.
 
 The `signMessageDigest` attribute for the above example will then be:
 
@@ -468,6 +490,8 @@ The `orgAffiliation` attribute is intended to be used as a primary identity attr
 This specification does not impose any specific requirements concerning the personal identifier part of the attribute other than that it MUST be unique for the given organization.
 
 **Note**: In the general case, an attribute consumer MUST NOT assume a particular format or meaning of the personal identifier part since different organizations may use different formats. An attribute consumer should also be aware that a personal identifier separated from its organizational identifier code can not be regarded as unique. 
+
+**Note**: The `orgAffiliation` is a [scoped attribute](#scoped-attributes) meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of \[[EidDeployProf](#eiddeployprof)\].
 
 
 <a name="attributes-for-the-eidas-framework"></a>
@@ -657,6 +681,10 @@ following attribute:
 > Assertion Markup Language (SAML) V2.0, March
 > 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
+<a name="saml2subjattr"></a>
+**\[SAML2SubjAttr\]**
+> [OASIS Standard, SAML V2.0 Subject Identifier Attributes Profile Version 1.0, January 2019](https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.pdf).
+
 <a name="skv704"></a>
 **\[SKV704\]**
 > [Skatteverket, SKV 704 Utgåva 8,
@@ -729,6 +757,8 @@ following attribute:
 - Section 2.4, "Organizational Identity for Natural Persons", was updated to define a minimum set of attributes for providing personal orgazational identity information.
 
 - Section 3.2.5, "The orgAffiliation Attribute", was introduced.
+
+- The concept of "scoped attributes" was introduced, see section 3.1.3.
 
 **Changes between version 1.5 and version 1.6:**
 

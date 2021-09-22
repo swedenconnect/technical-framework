@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-02-15 - *Draft version*
+### Version 1.7 - 2021-09-21 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
@@ -74,7 +74,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     6.2. [Message Content](#message-content2)
 
-    6.2.1. [Attribute Release Rules](#attribute-release-rules)
+    6.2.1. [Attribute Release and Consuming Rules](#attribute-release-and-consuming-rules)
 
     6.3. [Processing Requirements](#processing-requirements2)
 
@@ -179,6 +179,10 @@ the following syntax is used:
 When referring to elements from the "Identity Provider Discovery Service Protocol and Profile" specification \[[IdpDisco](#idpdisco)\], the following syntax is used:
 
 - `<idpdisc:DiscoveryResponse>`
+
+When referring to the `Scope` element defined in the "Subject Identifier Attributes Profile" specification, \[[SAML2SubjIdAttr](#saml2subjidattr)\], the following syntax is used:
+
+- `<shibmd:Scope>`
 
 When referring to elements from the W3C XML Signature namespace
 (`http://www.w3.org/2000/09/xmldsig\#`) the following syntax is used:
@@ -419,6 +423,23 @@ Identity Providers SHALL advertise support for the SAP protocol according to \[[
 
 An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension in authentication requests SHOULD include the `<psc:RequestedPrincipalSelection>` extension extending the `<md:IDPSSODescriptor>` element. In this extension the Identity Provider declares which attribute value(s) it wants to receive in authentication requests from requestors using the `<psc:PrincipalSelection>` authentication request extension. See [section 5.3.3](#principal-selection) and \[[PrincipalSel](#principalsel)\].
 
+<a name="declaring-authorized-scopes"></a>
+##### 2.1.3.1. Declaring Authorized Scopes
+
+An Identity Provider that releases "scoped attributes", see section 3.1.3 of \[[EidAttributes](#eidattributes)\],
+MUST be authorized to do so by the federation operator. Each authorized scope MUST be declared in the Identity Provider metadata entry using a `<shibmd:Scope>` element, see section 3.5.2, "Scope Filtering", in \[[SAML2SubjIdAttr](#saml2subjidattr)\]. The `<shibmd:Scope>` elements MUST appear within the `<md:Extensions>` element of the `<md:IDPSSODescriptor>`.
+
+```
+<md:IDPSSODescriptor ...>
+  <md:Extensions>
+    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0>2021006883</shibmd:Scope>
+    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0>2021006255</shibmd:Scope>
+    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0>example.com</shibmd:Scope>
+    ...
+```
+
+*Example of how an Identity Provider declares that it is authorized to deliver scoped attributes for three different scopes; two organizational numbers and one domain.*
+
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
 
@@ -478,7 +499,7 @@ SAML 2.0 messages or assertions SHOULD be limited to a single child text
 node.
 
 For requirements regarding attribute inclusion in SAML assertions, see
-section [6.2.1](#attribute-release-rules), “[Attribute Release Rules](#attribute-release-rules)”, below.
+section [6.2.1](#attribute-release-and-consuming-rules), “[Attribute Release and Consuming Rules](#attribute-release-and-consuming-rules)”, below.
 
 <a name="authentication-requests"></a>
 ## 5. Authentication Requests
@@ -902,8 +923,8 @@ An Identity Provider that acts as a proxy for other Identity Providers SHOULD in
 ```
 *Example of how the entityID of an Identity Provider that provided the authentication for the principal is included in an authentication statement.*
 
-<a name="attribute-release-rules"></a>
-#### 6.2.1. Attribute Release Rules
+<a name="attribute-release-and-consuming-rules"></a>
+#### 6.2.1. Attribute Release and Consuming Rules
 
 An Identity Provider determines which attributes to include in the
 `<saml2:AttributeStatement>` element of an assertion based on the
@@ -921,6 +942,10 @@ sets. For all declared service entity categories, the Identity Provider
 MUST possess the ability to deliver the mandatory attributes of the
 underlying attribute set. See \[[EidEntCat](#eidentcat)\] and \[[EidAttributes](#eidattributes)\] for
 details.
+
+An Identity Provider releasing scoped attributes, see section 3.1.3 of \[[EidAttributes](#eidattributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
+
+Consequently, a Service Provider consuming a scoped attribute SHOULD verify that the issuing Identity Provider has been authorized to release attributes for the given scope by asserting its presence in the Identity Provider's metadata, see section [2.1.3.1](#declaring-authorized-scopes) and section 3.5.2 of \[[SAML2SubjIdAttr](#saml2subjidattr)\]. A scoped attribute that fails this check MUST NOT be accepted by the Service Provider.
 
 The Service Provider is responsible for checking that an Identity
 Provider is capable of providing necessary attributes before sending a
@@ -1484,6 +1509,10 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 > Protocol and Profile, March
 > 2008](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.pdf).
 
+<a name="saml2subjidattr"></a>
+**\[SAML2SubjIdAttr\]**
+> [OASIS Committee Specification, SAML V2.0 Subject Identifier Attributes Profile Version 1.0, January 2019](https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.pdf).
+
 <a name="eiddeploy_15"></a>
 **\[EidDeploy_1.5\]**
 > [Deployment Profile for the Swedish eID Framework, version 1.5](https://docs.swedenconnect.se/technical-framework/june-2018/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
@@ -1537,7 +1566,9 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 - Sections 2.1.2 and 2.1.3 were updated with clarifications for how a Service Provider declares requested attributes and how an Identity Provider declares its ability to deliver attributes.
 
-- Section 6.2.1, "Attribute Release Rules", was updated with a privacy requirement that tells that an Identity Provider must not release identity attributes not requested by the Service Provider.
+- Section 6.2.1, "Attribute Release and Consuming Rules", was updated with a privacy requirement that tells that an Identity Provider must not release identity attributes not requested by the Service Provider.
+
+- Section 2.1.3.1, "Declaring Authorized Scopes", was introduced in order to define how an Identity Provider declares authorized scopes. Section 6.2.1, "Attribute Release and Consuming Rules", was updated with release and consumption rules for scoped attributes.
 
 **Changes between version 1.5 and 1.6:**
 
