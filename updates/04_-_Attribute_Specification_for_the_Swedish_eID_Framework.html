@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2021-02-15---*draft-version*">Version 1.7 - 2021-02-15 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-09-21-*draft-version*">Version 1.7 - 2021-09-21 <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-310</strong> (<em>previously: ELN-0604</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -44,6 +44,9 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </li>
 <li><p><a href="#attribute-definitions"><strong>Attribute Definitions</strong></a></p>
 <p> 3.1. <a href="#attributes">Attributes</a></p>
+<p> 3.1.1. <a href="#attribute-string-values">Attribute String Values</a></p>
+<p> 3.1.2. <a href="#multi-valued-attributes">Multi-valued Attributes</a></p>
+<p> 3.1.3. <a href="#scoped-attributes">Scoped Attributes</a></p>
 <p> 3.2. <a href="#saml-attribute-format">SAML Attribute Format</a></p>
 <p> 3.2.1. <a href="#the-authcontextparams-attribute">The authContextParams Attribute</a></p>
 <p> 3.2.2. <a href="#the-usercertificate-and-usersignature-attributes">The userCertificate, userSignature and authServerSignature Attributes</a></p>
@@ -160,7 +163,7 @@ SHOULD be released as part of the attribute set if they are available to
 the provider.</p>
 <p><strong>Note</strong>: An Attribute Provider may also release other attributes, not
 specified by the defined attribute sets it supports. See further section
-6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish
+6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish
 eID Framework” ([<a href="#eiddeployprof">EidDeployProf</a>]).</p>
 <p>In order to comply with a defined attribute set, the following attribute
 requirements apply:</p>
@@ -252,16 +255,16 @@ than those listed as required or recommended.</p>
 <tbody>
 <tr>
 <td style="text-align:left"><strong>REQUIRED</strong></td>
-<td style="text-align:left"><code>displayName</code> (Display name)<sup><em></sup> <br /> <code>orgAffiliation</code> (Personal identifier and organizational identifier code)<sup>*</em></sup> <br /> <code>o</code> (Organization name)</td>
+<td style="text-align:left"><code>displayName</code> (Display name)<sup>*</sup> <br /> <code>orgAffiliation</code> (Personal identifier and organizational identifier code)<sup>**</sup> <br /> <code>o</code> (Organization name)</td>
 </tr>
 <tr>
 <td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left"><code>organizationIdentifier</code> (Organizational identifier code)<sup><em>*</em></sup></td>
+<td style="text-align:left"><code>organizationIdentifier</code> (Organizational identifier code)<sup>***</sup></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic organizational identity information about a natural person.</p>
-<p>The &quot;Organizational Identity for Natural Persons&quot; attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release Rules”, of “Deployment Profile for the Swedish eID Framework” ([<a href="#eiddeployprof">EidDeployProf</a>]).</p>
+<p>The &quot;Organizational Identity for Natural Persons&quot; attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish eID Framework” ([<a href="#eiddeployprof">EidDeployProf</a>]).</p>
 <blockquote>
 <p>[*]: The <code>displayName</code> attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, &quot;Administrator 123&quot;. This is decided by the issuing organization.</p>
 <p>[**]: See section <a href="#the-orgaffiliation-attribute">3.2.5</a>.</p>
@@ -365,6 +368,7 @@ examples of “converted attributes”.</p>
 <th style="text-align:left">Description</th>
 <th style="text-align:left">Use within this specification</th>
 <th style="text-align:center">Multi-valued</th>
+<th style="text-align:left">Scoped</th>
 <th style="text-align:left">Example</th>
 </tr>
 </thead>
@@ -374,7 +378,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.4</td>
 <td style="text-align:left">Surname</td>
 <td style="text-align:left">Registered surname.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Lindeman</td>
 </tr>
 <tr>
@@ -382,7 +387,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.42</td>
 <td style="text-align:left">Given Name</td>
 <td style="text-align:left">Registered given name.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Valfrid</td>
 </tr>
 <tr>
@@ -390,7 +396,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.16.840.1.<br/>113730.3.1.241</td>
 <td style="text-align:left">Display Name</td>
 <td style="text-align:left">A name in any preferred presentation format.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Valfrid Lindeman</td>
 </tr>
 <tr>
@@ -398,7 +405,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.3</td>
 <td style="text-align:left">Gender</td>
 <td style="text-align:left">A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">M</td>
 </tr>
 <tr>
@@ -406,7 +414,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.29.4.13</td>
 <td style="text-align:left">National civic registration number/code</td>
 <td style="text-align:left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="#skv704">SKV 704</a> and <a href="#skv707">SKV 707</a>. 12 digits without hyphen.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">195006262546</td>
 </tr>
 <tr>
@@ -414,7 +423,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.1</td>
 <td style="text-align:left">Date of birth</td>
 <td style="text-align:left">Date of birth expressed using the format YYYY-MM-DD.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">1950-06-26</td>
 </tr>
 <tr>
@@ -422,7 +432,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.8</td>
 <td style="text-align:left">Name at the time of birth</td>
 <td style="text-align:left">Full name of a person at birth.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Valfrid Danielsson</td>
 </tr>
 <tr>
@@ -430,7 +441,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.9</td>
 <td style="text-align:left">Street address</td>
 <td style="text-align:left">Street address.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Mosebacke torg 3</td>
 </tr>
 <tr>
@@ -438,7 +450,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.18</td>
 <td style="text-align:left">Post box</td>
 <td style="text-align:left">Post box.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Box 1122</td>
 </tr>
 <tr>
@@ -446,7 +459,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.17</td>
 <td style="text-align:left">Postal code</td>
 <td style="text-align:left">Postal code.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">11826</td>
 </tr>
 <tr>
@@ -454,7 +468,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.7</td>
 <td style="text-align:left">Locality</td>
 <td style="text-align:left">Locality.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Stockholm</td>
 </tr>
 <tr>
@@ -462,7 +477,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.6</td>
 <td style="text-align:left">Country</td>
 <td style="text-align:left">ISO 3166-1 alpha-2 [ISO3166] two letter country code.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">SE</td>
 </tr>
 <tr>
@@ -470,7 +486,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.2</td>
 <td style="text-align:left">Place of birth</td>
 <td style="text-align:left">A string representing the place of birth</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Stockholm</td>
 </tr>
 <tr>
@@ -478,7 +495,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.4</td>
 <td style="text-align:left">Country of citizenship</td>
 <td style="text-align:left">ISO 3166-1 alpha-2 [ISO3166] two letter country code representing a country of citizenship.</td>
-<td style="text-align:center">YES</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">SE</td>
 </tr>
 <tr>
@@ -486,7 +504,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.5</td>
 <td style="text-align:left">Country of Residence</td>
 <td style="text-align:left">ISO 3166-1 alpha-2 [ISO3166] two letter country code representing the country of residence.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">SE</td>
 </tr>
 <tr>
@@ -494,7 +513,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.20</td>
 <td style="text-align:left">Telephone number</td>
 <td style="text-align:left">Telephone number.</td>
-<td style="text-align:center">YES</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">+46890510</td>
 </tr>
 <tr>
@@ -502,7 +522,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:0.9.2342.<br/>19200300.100.1.41</td>
 <td style="text-align:left">Mobile number</td>
 <td style="text-align:left">Mobile number.</td>
-<td style="text-align:center">YES</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">+46703419886</td>
 </tr>
 <tr>
@@ -510,7 +531,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:0.9.2342.<br/>19200300.100.1.3</td>
 <td style="text-align:left">E-mail address</td>
 <td style="text-align:left">E-mail address.</td>
-<td style="text-align:center">YES</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Yes/No<sup>*</sup></td>
 <td style="text-align:left">vfl@mosebackemonarki.se</td>
 </tr>
 <tr>
@@ -518,7 +540,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.10</td>
 <td style="text-align:left">Organization name</td>
 <td style="text-align:left">Registered organization name.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Skatteverket</td>
 </tr>
 <tr>
@@ -526,7 +549,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.11</td>
 <td style="text-align:left">Organizational unit name</td>
 <td style="text-align:left">Organizational unit name.</td>
-<td style="text-align:center">YES</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">IT-Avdelningen</td>
 </tr>
 <tr>
@@ -534,7 +558,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:2.5.4.97</td>
 <td style="text-align:left">Organizational identifier code</td>
 <td style="text-align:left">Swedish “organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">5562265719</td>
 </tr>
 <tr>
@@ -542,7 +567,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.1</td>
 <td style="text-align:left">&lt;uid&gt;@&lt;orgnr&gt;</td>
 <td style="text-align:left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
-<td style="text-align:center">YES</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left">vlindman@5562265719<br />See <a href="#the-orgaffiliation-attribute">section 3.2.5</a> below.</td>
 </tr>
 <tr>
@@ -550,7 +576,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.2</td>
 <td style="text-align:left">Transaction identifier</td>
 <td style="text-align:left">Transaction identifier for an event, e.g. an authentication process.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left"><em>9878HJ6687 (arbitrary string)</em></td>
 </tr>
 <tr>
@@ -558,7 +585,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.3</td>
 <td style="text-align:left">Authentication Context Parameters.</td>
 <td style="text-align:left">Key-value pairs from an authentication process. Defined by issuing entity.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#the-authcontextparams-attribute">section 3.2.1</a> below.</td>
 </tr>
 <tr>
@@ -566,7 +594,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.10</td>
 <td style="text-align:left">User certificate</td>
 <td style="text-align:left">Base64-encoding of a user certificate.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
 </tr>
 <tr>
@@ -574,7 +603,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.11</td>
 <td style="text-align:left">User signature</td>
 <td style="text-align:left">Base64-encoding of a signature object applied by the user.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
 </tr>
 <tr>
@@ -582,7 +612,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.13</td>
 <td style="text-align:left">Authentication server signature</td>
 <td style="text-align:left">Base64-encoding of a authentication server signature.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
 </tr>
 <tr>
@@ -590,7 +621,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.12</td>
 <td style="text-align:left">Signature activation data</td>
 <td style="text-align:left">Signature activation data required by signature services.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#the-sad-attribute">section 3.2.3</a> below.</td>
 </tr>
 <tr>
@@ -598,7 +630,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.14</td>
 <td style="text-align:left">Sign message digest</td>
 <td style="text-align:left">Included in assertions as a proof that a user sign message was displayed.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#the-signmessagedigest-attribute">section 3.2.4</a> below.</td>
 </tr>
 <tr>
@@ -606,7 +639,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.4</td>
 <td style="text-align:left">Provisional identifier</td>
 <td style="text-align:left">Unique identifier for an authentication performed against the eIDAS Framework. See <a href="#the-prid-and-pridpersistence-attributes">section 3.3.1</a> below.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">NO:5068907693</td>
 </tr>
 <tr>
@@ -614,7 +648,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.5</td>
 <td style="text-align:left">Provisional identifier persistence indicator</td>
 <td style="text-align:left">Indicator for the expected persistence of the prid attribute. See <a href="#the-prid-and-pridpersistence-attributes">section 3.3.1</a> below.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">A</td>
 </tr>
 <tr>
@@ -622,7 +657,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.6</td>
 <td style="text-align:left">National civic registration number/code binding URI</td>
 <td style="text-align:left">The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See <a href="#the-personalidentitynumberbinding-attribute">section 3.3.2</a> below.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left"><a href="http://eid.example.se/presentedInPerson">http://eid.example.se/presentedInPerson</a></td>
 </tr>
 <tr>
@@ -630,7 +666,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.7</td>
 <td style="text-align:left">eIDAS uniqueness identifier for natural persons</td>
 <td style="text-align:left">Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">ES/AT/02635542Y (Spanish eID number for an Austrian SP)</td>
 </tr>
 <tr>
@@ -638,7 +675,8 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.201.3.9</td>
 <td style="text-align:left">eIDAS Natural Person Address</td>
 <td style="text-align:left">Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See <a href="#conversion-of-eidas-currentaddress">section 3.3.3.1</a> below.</td>
 </tr>
 <tr>
@@ -646,14 +684,27 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">urn:oid:1.2.752.29.6.2.1</td>
 <td style="text-align:left">HSA-ID</td>
 <td style="text-align:left">Person identifier used by Swedish health care organizations.</td>
-<td style="text-align:center">NO</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">See [<a href="#sambiattr">SambiAttr</a>].</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>[*]: The <code>mail</code> attribute should be regarded as a scoped attribute (see <a href="#scoped-attributes">3.1.3</a> below) if the attribute release policy in use has stated it as scoped. Such a policy can for example be that the attribute is part of an attribute set (see <a href="#attribute-sets">section 2</a>) that documents the attribute as scoped. In all other cases the attribute is regarded as non-scoped.</p>
+</blockquote>
+<p><a name="attribute-string-values"></a></p>
+<h4 id="3.1.1.-attribute-string-values">3.1.1. Attribute String Values</h4>
 <p>All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the <code>xs:string</code> data type. Certain attributes such as <code>mail</code>, <code>personalIdentityNumber</code>, <code>organizationIdentifier</code>, <code>telephoneNumber</code> and <code>mobile</code> use a restricted character set according to its defined usage within this specification.</p>
 <p>All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 [<a href="#x520">X.520</a>]. That is, case-insensitive comparison where insignificant spaces are ignored.</p>
-<p>Attributes with a “NO” value in the multivalued column MUST NOT have more than one <code>&lt;AttributeValue&gt;</code> sub-element. Attributes with a “YES” value in the multivalued column MAY have one or more <code>&lt;AttributeValue&gt;</code> sub-elements.</p>
+<p><a name="multi-valued-attributes"></a></p>
+<h4 id="3.1.2.-multi-valued-attributes">3.1.2. Multi-valued Attributes</h4>
+<p>Attributes with a “No” value in the column &quot;Multi-valued&quot; MUST NOT have more than one <code>&lt;AttributeValue&gt;</code> sub-element. Attributes with a “Yes” value in the column &quot;Multi-valued&quot; MAY have one or more <code>&lt;AttributeValue&gt;</code> sub-elements.</p>
+<p><a name="scoped-attributes"></a></p>
+<h4 id="3.1.3.-scoped-attributes">3.1.3. Scoped Attributes</h4>
+<p>Attributes with a &quot;Yes&quot; value in the column &quot;Scoped&quot; are scoped attributes. A scoped attribute expresses values in a string-valued attribute of the form <code>value@scope</code>, where <code>scope</code> takes the form of a domain name or something similar such as an organizational identifier.</p>
+<p>An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider&#39;s metadata entry. See section 2.1.3.1 of [<a href="#eiddeployprof">EidDeployProf</a>] for details.    </p>
+<p>A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider&#39;s metadata entry as described in section 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>]. </p>
 <p><a name="saml-attribute-format"></a></p>
 <h3 id="3.2.-saml-attribute-format">3.2. SAML Attribute Format</h3>
 <p>The <code>&lt;saml:Attribute&gt;</code> element representing an attribute in <a href="#attributes">3.1</a> SHALL comply with the following requirements:</p>
@@ -735,6 +786,7 @@ of the actual sign message<sup>*</sup>.</p>
 <p>The <code>orgAffiliation</code> attribute is intended to be used as a primary identity attribute for personal organizational identities. It consists of a personal identifier <strong>and</strong> an organizational identifier code (<code>organizationIdentifier</code>). </p>
 <p>This specification does not impose any specific requirements concerning the personal identifier part of the attribute other than that it MUST be unique for the given organization.</p>
 <p><strong>Note</strong>: In the general case, an attribute consumer MUST NOT assume a particular format or meaning of the personal identifier part since different organizations may use different formats. An attribute consumer should also be aware that a personal identifier separated from its organizational identifier code can not be regarded as unique. </p>
+<p><strong>Note</strong>: The <code>orgAffiliation</code> is a <a href="#scoped-attributes">scoped attribute</a> meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>].</p>
 <p><a name="attributes-for-the-eidas-framework"></a></p>
 <h3 id="3.3.-attributes-for-the-eidas-framework">3.3. Attributes for the eIDAS Framework</h3>
 <p><a name="the-prid-and-pridpersistence-attributes"></a></p>
@@ -924,6 +976,11 @@ Levels, March 1997</a>.</p>
 Assertion Markup Language (SAML) V2.0, March
 2005</a>.</p>
 </blockquote>
+<p><a name="saml2subjattr"></a>
+<strong>[SAML2SubjAttr]</strong></p>
+<blockquote>
+<p><a href="https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.pdf">OASIS Standard, SAML V2.0 Subject Identifier Attributes Profile Version 1.0, January 2019</a>.</p>
+</blockquote>
 <p><a name="skv704"></a>
 <strong>[SKV704]</strong></p>
 <blockquote>
@@ -1008,6 +1065,8 @@ Framework</a>.</p>
 <li><p>Section 2.4, &quot;Organizational Identity for Natural Persons&quot;, was updated to define a minimum set of attributes for providing personal orgazational identity information.</p>
 </li>
 <li><p>Section 3.2.5, &quot;The orgAffiliation Attribute&quot;, was introduced.</p>
+</li>
+<li><p>The concept of &quot;scoped attributes&quot; was introduced, see section 3.1.3.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
