@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS DSS in Central Signing Services</h1>
-<h3 id="version-1.5---2020-09-29---*draft-version*">Version 1.5 - 2020-09-29 - <em>Draft version</em></h3>
+<h3 id="version-1.5---2021-09-17---*draft-version*">Version 1.5 - 2021-09-17 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-312</strong> (<em>previously: ELN-0607</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -209,11 +209,13 @@ contain any information in addition to what is defined in section 3.1 of
 [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p><a name="signer"></a></p>
 <h5 id="2.1.3.3.-signer">2.1.3.3. Signer</h5>
-<p>The <code>&lt;Signer&gt;</code> element MUST contain at least the SAML attributes
-that are necessary in order to uniquely identify the signer. The present
-attributes MUST match the attributes that are provided for this signer
-when authenticating the signer using the Identity Provider specified in
-the <code>&lt;IdentityProvider&gt;</code> element.</p>
+<p>The Requesting Service MAY include a <code>&lt;Signer&gt;</code> element containing the SAML attributes that 
+are necessary in order to uniquely identify the signer. The present attributes MUST match the attributes
+that are provided for this signer when authenticating the signer using the Identity Provider specified in the <code>&lt;IdentityProvider&gt;</code> element.</p>
+<p>It is RECOMMENDED that a Signature Requester that has authenticated the user before sending a 
+signature request includes relevant SAML attributes in the <code>&lt;Signer&gt;</code> element. If this is not done, 
+the identity of the signer needs to be verified after the signature process has completed in order to ensure
+that the authenticated user was the signer.</p>
 <p>The Signing Service MUST match all attribute values provided in the
 <code>&lt;Signer&gt;</code> element with SAML attributes provided for this signer
 subject in a valid assertion obtained from the specified Identity
@@ -221,7 +223,7 @@ Provider.</p>
 <p>If any of the attributes specified in the <code>&lt;Signer&gt;</code> element cannot
 be found or matched with a corresponding attribute value from an
 obtained assertion from the specified Identity Provider, the Signing
-Service MUST reject the sign request.</p>
+Service MUST reject the sign request.  </p>
 <p><a name="identityprovider"></a></p>
 <h5 id="2.1.3.4.-identityprovider">2.1.3.4. IdentityProvider</h5>
 <p>This element MUST be present, specifying the SAML entityID of the
@@ -760,6 +762,8 @@ the value “post”.</p>
 <li><p>The requirements in section 2.2.4.3, &quot;Request&quot;, were updated. The <code>Request</code> element is no longer mandatory to include in a response message.</p>
 </li>
 <li><p>Sections 2.1.3.1 and 2.2.4.1 defining the requirements concerning the use of the <code>Version</code> attribute in <code>SignRequestExtension</code> and <code>SignResponseExtension</code> elements were updated in order to implement support for newer versions of the DSS extension specification.</p>
+</li>
+<li><p>Section 2.1.3.3, &quot;Signer&quot;, was updated so that it is no longer required to supply the <code>&lt;csig:Signer&gt;</code> element. This enables use cases where the user is not known at the time of signature initiation.  </p>
 </li>
 </ul>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
