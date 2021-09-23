@@ -1,5 +1,5 @@
 
-## Version numbers on specifications ##
+## Version Numbers on Swedish eID Framework Specifications ##
 
 | File | Version |
 | :--- | :---: |   
@@ -16,9 +16,9 @@
 | [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.3<br />(draft) |
 | [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md) | 1.1 |
 | [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md) | 1.0 |
-| [15 - Signature Validation Token](15%20-%20Signature%20Validation%20Token.md) | 1.0<br/>(draft) |
-| [16 - PDF Profile for Signature Validation Tokens](16%20-%20PDF%20Profile%20for%20Signature%20Validation%20Tokens.md) | 1.0<br/>(draft) |
-| [17 - XML Profile for Signature Validation Tokens](17%20-%20XML%20Profile%20for%20Signature%20Validation%20Tokens.md) | 1.0<br/>(draft) |
+| ~~15 - Signature Validation Token~~<br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt/ | ~~1.0<br/>(draft)~~ |
+| ~~16 - PDF Profile for Signature Validation Tokens~~<br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/ | ~~1.0<br/>(draft)~~ |
+| ~~17 - XML Profile for Signature Validation Tokens~~ <br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt-xml/ | ~~1.0<br/>(draft)~~ |
 
 
 
