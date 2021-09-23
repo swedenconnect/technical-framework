@@ -116,7 +116,7 @@ This specification defines an element that may be included in the Extensions ele
 
 > [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
 
-#### Signature Validation Tokens
+#### *Signature Validation Tokens*
 
 The draft specifications "15 - Signature Validation Token", "16 - PDF Profile for Signature Validation Tokens" and "17 - XML Profile for Signature Validation Tokens" are no longer part of the Swedish eID Framework specifications, and have been replaced by the following IETF drafts:
 
@@ -130,7 +130,7 @@ See https://github.com/swedenconnect/IETF-SVT for the repository that is hosting
 
 ## Older versions
 
-Older version of the specification are stored in the following branches:
+Older version of the specifications are stored in the following branches:
 
 + [june-2014](https://github.com/swedenconnect/technical-framework/tree/june-2014) - For the June 2014 release
 + [april-2015](https://github.com/swedenconnect/technical-framework/tree/april-2015) - For the April 2015 release
