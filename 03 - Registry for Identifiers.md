@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-09-21 - *Draft version*
+### Version 1.7 - 2021-09-23 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -556,7 +556,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="svt-pdf"></a>
 **\[SVT-PDF\]**
-> [PDF Profile for Signature Validation Tokens](http://docs.swedenconnect.se/technical-framework/updates/16_-_PDF_Profile_for_Signature_Validation_Tokens.html).
+> [PDF Signature Validation Token](https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/).
 
 <a name="eidas"></a>
 **\[eIDAS\]**
