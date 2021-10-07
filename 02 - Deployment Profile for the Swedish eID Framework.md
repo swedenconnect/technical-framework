@@ -1115,16 +1115,7 @@ about the subject that is not represented as SAML attributes in the
 The reason for this is to ensure the privacy of the user and not release identity information that is not requested by the Service Provider (see section [6.2.1](#attribute-release-and-consuming-rules) above).
 
 In these cases the `<ds:X509Certificate>` MUST NOT be used, and the Identity Provider 
-SHOULD represent the user X.509 certificate using a `<ds:x509SKI>` element instead (as
-specified in section 2.4.1 of \[[SAML2HokAP](#saml2hokap)\]).
-
-In the rare cases where the user X.509 certificate is not a version 3 certificate or if
-the Subject Key Identifier (SKI) extension is not present in the certificate, the
-Identity Provider SHOULD use the `<ds:X509IssuerSerial>` element instead. However, for
-the `<ds:X509IssuerSerial>` element to be usable the Service Provider MUST trust the
-X.509 certificate issuer (see section 2.3 of \[[SAML2HokAP](#saml2hokap)\]). How this
-is communicated between Service and Identity Provider is outside of the scope of this
-profile.
+SHOULD include a `<ds:KeyValue>` representing the public key of the user certificate.
 
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
@@ -1194,7 +1185,9 @@ validation phase.
 If the `<saml2:SubjectConfirmation>` element has a `Method` set to
 `urn:oasis:names:tc:SAML:2.0:cm:holder-of-key` its containing 
 `<saml2:SubjectConfirmationData>` element MUST be processed according to
-section 2.5 of \[[SAML2HokAP](#saml2hokap)\].
+section 2.5 of \[[SAML2HokAP](#saml2hokap)\]. The Service Provider MUST also
+be able to verify the holder-of-key assertion if the `<saml2:SubjectConfirmationData>`
+element contains a `<ds:KeyValue>` element, see [6.2.2](#message-content-requirements-for-holder-of-key).
 
 <a name="conditions"></a>
 #### 6.3.3. Conditions
