@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-09-21 - *Draft version*
+### Version 1.7 - 2021-10-11 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
@@ -75,6 +75,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     6.2. [Message Content](#message-content2)
 
     6.2.1. [Attribute Release and Consuming Rules](#attribute-release-and-consuming-rules)
+    
+    6.2.2. [Message Content Requirements for Holder-of-key](#message-content-requirements-for-holder-of-key)
 
     6.3. [Processing Requirements](#processing-requirements2)
 
@@ -122,10 +124,11 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 ## 1. Introduction
 
 This profile specifies behaviour and options that deployments of the SAML
-V2.0 Web Browser SSO Profile \[[SAML2Prof](#saml2prof)\]
+V2.0 Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)\], and the SAML V2.0 Holder-of-key
+Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\],
 are required or permitted to rely on. The requirements specified in this profile
 are in addition to the underlying normative requirements of \[[SAML2Prof](#saml2prof)\]
-(as modified by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
+and \[[SAML2HokProf](#saml2hokprof)\] (including updates to these specifications provided by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
 
 > Note: The profile is influenced by, but not normatively dependent on, [SAML2Int](https://kantarainitiative.github.io/SAMLprofiles/saml2int.html).
 
@@ -157,7 +160,7 @@ with caution.
 ### 1.2. References to SAML 2.0 Standards and Profiles
 
 When referring to elements from the SAML 2.0 core specification
-\[[7.2.](#saml2core)\], the following syntax is used:
+\[[SAML2Core](#saml2core)\], the following syntax is used:
 
 -   `<saml2p:Protocolelement>` – for elements from the SAML 2.0
     Protocol namespace.
@@ -175,6 +178,10 @@ the following syntax is used:
 -   `<mdattr:Element>` – for elements defined in \[[SAML2MetaAttr](#saml2metaattr)\].
 
 -  `<alg:Element>` – for elements defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\].
+
+When referring to elements from the SAML V2.0 Holder-of-key Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)], the following syntax is used:
+
+- `<hoksso:ProtocolBinding>` - for elements from the SAML V2.0 Web Browser Holder-of-key namespace.
 
 When referring to elements from the "Identity Provider Discovery Service Protocol and Profile" specification \[[IdpDisco](#idpdisco)\], the following syntax is used:
 
@@ -357,6 +364,31 @@ separate from the response.
 
 A Service Provider wishing to make use of a central discovery service as specified in the "Identity Provider Discovery Service Protocol Profile" \[[IdPDisco](#idpdisco)\] MUST include at least one `<idpdisc:DiscoveryResponse>` element as an extension under the `<md:SPSSODescriptor>` element. 
 
+<a name="sp-holder-of-key-support"></a>
+##### 2.1.2.1. Holder of Key Support
+
+A Service Provider that sends authentication requests using the Holder-of-key Web Browser SSO Profile MUST include a `<md:AssertionConsumerService>` element in its metadata according to section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
+
+If the Service Provider also makes use of the ordinary Web Browser SSO Profile at least one `<md:AssertionConsumerService>` element according to section 2.4.4 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Service Provider metadata. 
+
+In those cases, where a Service Provider supports both profiles, it is RECOMMENDED that the a `<md:AssertionConsumerService>` element for ordinary Web Browser SSO Profile is marked as default.
+
+```
+<md:AssertionConsumerService index="0" isDefault="true"
+  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+  Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+  Location="https://sp.example.org/path1" />
+
+<md:AssertionConsumerService index="1" isDefault="false"   
+  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"   
+  xmlns:hoksso="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser" 
+  hoksso:ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+  Binding="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser" 
+  Location="https://sp.example.org/path2" />
+```
+
+*Example of a Service Provider's declared AssertionConsumerService elements; one for receiving assertions according the Web Browser SSO Profile and one for receiving assertions according to the Holder-of-key Web Browser SSO Profile.*
+
 <a name="identity-providers"></a>
 #### 2.1.3. Identity Providers
 
@@ -377,9 +409,9 @@ metadata SHALL contain an attribute according to
 \[[SAML2IAP](#saml2iap)\] with its `Name` attribute set to 
 `urn:oasis:names:tc:SAML:attribute:assurance-certification`
 and holding at least one attribute value identifying a Level of Assurance
-(LoA) for which the Identity Provider has been approved and where
-the value is one of the identifiers defined in section 3.1.1 of
-\[[EidRegistry](#eidregistry)\] and whose meaning are defined in \[[EidTillit](#eidtillit)\].
+(LoA) for which the Identity Provider has been approved. 
+The Swedish eID Framework defines such identifier values in section 3.1.1 of
+\[[EidRegistry](#eidregistry)\] and their meanings are defined in \[[EidTillit](#eidtillit)\].
 
 ```
 <md:Extensions>
@@ -439,6 +471,43 @@ MUST be authorized to do so by the federation operator. Each authorized scope MU
 ```
 
 *Example of how an Identity Provider declares that it is authorized to deliver scoped attributes for three different scopes; two organizational numbers and one domain.*
+
+<a name="idp-holder-of-key-support"></a>
+##### 2.1.3.2. Holder of Key Support
+
+An Identity Provider that supports the Holder-of-key Web Browser SSO Profile MUST declare `<md:SingleSignOnService>` elements<sup>\*</sup> in its metadata according to section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
+
+If the Identity Provider also supports authentication according the ordinary Web Browser SSO Profile `<md:SingleSignOnService>` elements<sup>\*</sup> according to section 2.4.3 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Identity Provider metadata.
+
+```
+<md:SingleSignOnService
+  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+  Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+  Location="https://idp.example.org/path1" />
+  
+<md:SingleSignOnService
+  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+  Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+  Location="https://idp.example.org/path2" />
+  
+<md:SingleSignOnService
+  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+  xmlns:hoksso="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser"
+  hoksso:ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" 
+  Binding="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser"
+  Location="https://idp.example.org/path2" />
+  
+<md:SingleSignOnService
+  xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+  xmlns:hoksso="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser"
+  hoksso:ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+  Binding="urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser"
+  Location="https://idp.example.org/path2" />
+```
+
+*Example of an Identity Provider's declared SingleSignOnService elements; two for receiving requests according to the Web Browser SSO Profile and two for receiving requests according to the Holder-of-key Web Browser SSO Profile.*
+
+> \[\*\]: This profile requires an Identity Provider to support both the POST and Redirect bindings, see section [5.2](#binding-and-security-requirements) below.
 
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
@@ -504,6 +573,10 @@ section [6.2.1](#attribute-release-and-consuming-rules), “[Attribute Release a
 <a name="authentication-requests"></a>
 ## 5. Authentication Requests
 
+This profile supports two different SSO profiles; the Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)], and the Holder-of-key Web Browser Profile, \[[SAML2HokProf](#saml2hokprof)]. 
+
+The profile in use is determined by how an authentication process is initiated, meaning to which Identity Provider endpoint an `<saml2p:AuthnRequest>` message is sent, see [2.1.3.2](#idp-holder-of-key-support).
+
 <a name="discovery"></a>
 ### 5.1. Discovery
 
@@ -520,10 +593,18 @@ section [2.1.2](##service-providers), "[Service Providers](#service-providers)".
 
 The endpoints, at which an Identity Provider receives a
 `<saml2p:AuthnRequest>` message, and all subsequent exchanges with
-the user agent, MUST be protected by TLS/SSL.
+the user agent, MUST be protected by TLS. 
+
+If the Identity Provider supports the Holder-of-key Web Browser SSO Profile, the
+dedicated endpoints for this profile (see section [2.1.3.2](#idp-holder-of-key-support))
+MUST be configured to require a 
+client X.509 certificate being presented as part of the TLS handshake (mTLS, mutual TLS), 
+see section 2.4 of \[[SAML2HokProf](#saml2hokprof)\]. If the Identity Provider receives
+a request on a Holder-of-key endpoint and is unable to retrieve the client X.509
+certificate it MUST respond with an error, see section 2.6.4 of \[[SAML2HokProf](#saml2hokprof)\].
 
 A Service Provider sending an `<saml2p:AuthnRequest>` message to an Identity Provider
-may do so using either the HTTP-Redirect or HTTP-POST binding \[[SAML2Bind](#saml2bind)\]<sup>*</sup>,
+may do so using either the HTTP-Redirect or HTTP-POST binding \[[SAML2Bind](#saml2bind)\]<sup>\*</sup>,
 meaning that Identity Providers conformant with this profile MUST support the
 HTTP-Redirect and the HTTP-POST binding.
 
@@ -545,7 +626,7 @@ will only send signed request messages (see [2.1.2](#service-providers) above) M
 with an error.
 
 The signature for authentication request messages is applied differently
-depending on the binding. The HTTP-REDIRECT binding requires the
+depending on the binding. The HTTP-Redirect binding requires the
 signature to be applied to the URL-encoded value rather than being
 placed within the XML-message (see section 3.4.4.1 of
 \[[SAML2Bind](#saml2bind)\]).
@@ -555,7 +636,7 @@ be signed using a `<ds:Signature>` element within the
 
 Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider's metadata (`<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Swedish eID Framework during the signature operation.
 
-> \[*\]: A Service Provider should be aware of web browser, or web server, size limitations
+> \[\*\]: A Service Provider should be aware of web browser, or web server, size limitations
 of URL:s, and it is RECOMMENDED that a Service Provider use the HTTP-POST binding in cases where 
 the `<saml2p:AuthnRequest>` message becomes very large. This may be the case when a `SignMessage`
 extension containing much data is used, or when a complete certificate chain is attached to the signature 
@@ -567,14 +648,12 @@ of the message.
 An `<saml2p:AuthnRequest>` message MUST NOT contain a Document Type Definition (DTD).
 
 The `<saml2p:AuthnRequest>` message SHOULD contain an
-`AssertionConsumerServiceURL` attribute identifying the desired response
+`AssertionConsumerServiceURL`<sup>\*</sup> attribute identifying the desired response
 location. The Service Provider MUST NOT use any other values for this
 attribute than those listed in its metadata record as
 `<md:AssertionConsumerService>` elements for the HTTP-POST binding
 (see section 4.1.6 of \[[SAML2Prof](#saml2prof)\]), and URL
 canonicalization or normalization MUST NOT be required.
-
-A Service Provider MUST NOT include an `AssertionConsumerServiceIndex` attribute.
 
 The `Destination` attribute of the `<saml2p:AuthnRequest>` message
 MUST contain the URL to which the Service Provider has instructed the
@@ -592,6 +671,8 @@ Service Providers SHOULD include the `ForceAuthn` attribute in all
 to avoid accidental SSO.
 
 If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
+
+> \[\*\]: The `AssertionConsumerServiceURL` attribute is mutually exclusive with the `AssertionConsumerServiceIndex` attribute, meaning that a `<saml2p:AuthnRequest>` message MUST NOT contain both attributes. 
 
 <a name="requested-authentication-context"></a>
 #### 5.3.1. Requested Authentication Context
@@ -701,16 +782,40 @@ consistent with URLs configured in the Identity Provider’s metadata.
 If the `AssertionConsumerServiceURL` attribute is present in the
 `<saml2p:AuthnRequest>` message, its value MUST be verified to be
 consistent with one of the `<md:AssertionConsumerService>` elements
-having the HTTP-POST binding found in the Service Provider’s metadata
-entry. If this is not the case, the request must be rejected.
+having the HTTP-POST binding<sup>\*</sup> found in the Service Provider’s metadata
+entry and matching the SSO profile<sup>\*\*</sup> in use 
+(see [section 2.1.2.1](#sp-holder-of-key-support)). If this is not the case, 
+the request must be rejected.
+
+If the `AssertionConsumerServiceIndex` attribute is present in the
+`<saml2p:AuthnRequest>` message, a `<md:AssertionConsumerService>` matching this
+index MUST be present in the Service Provider’s metadata. This
+`<md:AssertionConsumerService>` element MUST also match the binding and SSO
+profile in use as defined above. If this is not the case, 
+the request must be rejected.
+
+> This means that an Identity Provider that services an authentication request
+received on an `SingleSignOnService` endpoint dedicated for the Holder-of-key
+Web Browser Profile MUST NOT allow an `<md:AssertionConsumerService>` element
+that is not intended for the Holder-of-key profile, see section 2.8 of 
+\[[SAML2HokProf](#saml2hokprof)\].
 
 If the attribute is not present in the `<saml2p:AuthnRequest>`
 message, the Identity Provider MUST obtain the desired response location
-from the Service Provider’s metadata entry. This location is found in an
-`<md:AssertionConsumerService>` element with HTTP-POST binding that
-is marked as default (has the `isDefault` attribute set), or if no element
-has the `isDefault` attribute set, the one with the lowest index value
-(see section 2.4.4.1 of \[[SAML2Meta](#saml2meta)\]).
+from the Service Provider’s metadata entry.  This location is determined by first 
+finding all the `<md:AssertionConsumerService>` 
+elements that matches the SSO profile<sup>\*\*</sup> in use (see 
+[section 2.1.2.1](#sp-holder-of-key-support)) and the binding<sup>\*</sup> (HTTP-POST), 
+and then selecting the element that is marked as default (has the `isDefault` attribute set), 
+or if no matching element is marked as default, the one with the lowest index value (see 
+section 2.4.4.1 of \[[SAML2Meta](#saml2meta)\] and section 2.8 of 
+\[[SAML2HokProf](#saml2hokprof)\]). If no matching `<md:AssertionConsumerService>`
+element is found the request must be rejected.
+
+> \[\*\]: For Holder-of-key `<md:AssertionConsumerService>` elements the actual binding
+is given by the `hoksso:ProtocolBinding` attribute, see section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
+
+> \[\*\*\]: The Web Browser SSO Profile or the Holder-of-key Web Browser SSO Profile are possible profiles.
 
 <a name="identity-provider-user-interface"></a>
 #### 5.4.3. Identity Provider User Interface
@@ -780,6 +885,17 @@ NOT re-use an already existing security context in the following cases:
     establishment of the security context, was performed using another
     Level of Assurance that what is requested in the current
     `<saml2p:AuthnRequest>` message.
+    
+-   If the original authentication was performed according to the Holder-of-key
+    Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\], and
+    no certificate, or a certificate not matching the certificate included
+    in the `<saml2:SubjectConfirmation>` element of the original assertion, 
+    is presented in along with the current `<saml2p:AuthnRequest>` message. 
+    
+-   If the original authentication was performed according to the Web Browser SSO
+    Profile, \[[SAML2Prof](#saml2prof)\] and the current request is made 
+    according to the Holder-of-key Web Browser SSO Profile, 
+    \[[SAML2HokProf](#saml2hokprof)\].
 
 If the Identity Provider user interface contains some sort of user
 consent, or information, concerning which attributes, or any other
@@ -798,7 +914,14 @@ interface for consent/information in these cases.
 ### 6.1. Security Requirements
 
 The endpoint(s) at which a Service Provider receives a
-`<saml2p:Response>` message MUST be protected by TLS/SSL.
+`<saml2p:Response>` message MUST be protected by TLS.
+
+If a Service Provider wants to make use of the Holder-of-key Web Browser SSO Profile
+it needs to provide a dedicated endpoint for this purpose, see section [2.1.2.1](#sp-holder-of-key-support). This endpoint MUST be configured to require a client X.509 certificate
+being presented as part of the TLS handshake (mTLS, mutual TLS), see section 2.4 of 
+\[[SAML2HokProf](#saml2hokprof)\]. If the Service Provider receives a `<saml2p:Response>`
+on a Holder-of-key endpoint and is unable to retrieve the client X.509 certificate it MUST 
+reject the message and not create a security context for the principal, see section 2.6.6 of \[[SAML2HokProf](#saml2hokprof)\].
 
 The `<saml2p:Response>` message issued by the Identity Provider MUST
 be signed using a `<ds:Signature>` element within the
@@ -825,8 +948,7 @@ Service Providers SHOULD NOT accept unsolicited `<saml2p:Response>`
 messages (i.e., responses that are not the result of an earlier
 `<saml2p:AuthnRequest>` message). Service Providers that do accept
 unsolicited response messages MUST ensure, by other means, that the
-security and processing requirements of this profile ([section 6.3](#processing-requirements)) can
-be fully satisfied.
+security and processing requirements of this profile ([section 6.3](#processing-requirements)) can be fully satisfied.
 
 <a name="message-content2"></a>
 ### 6.2. Message Content
@@ -862,22 +984,27 @@ subject, which SHALL be:
     of the subject.
 
 The `<saml2:Subject>` element MUST contain one
-`<saml2:SubjectConfirmation>` element containing a `Method` of
-`urn:oasis:names:tc:SAML:2.0:cm:bearer`. This element MUST contain a
-`<saml2:SubjectConfirmationData>` element that contains at least the
-following:
+`<saml2:SubjectConfirmation>` element containing a `Method` attribute having the value
+of `urn:oasis:names:tc:SAML:2.0:cm:bearer` if the Web Browser SSO Profile was used,
+and `urn:oasis:names:tc:SAML:2.0:cm:holder-of-key` if the Holder-of-key Web Browser 
+SSO Profile was used. This element MUST contain a `<saml2:SubjectConfirmationData>` 
+element that contains at least the following:
 
 -   An `InResponseTo` attribute matching the request’s ID.
 
 -   A `Recipient` attribute containing the Service Provider’s assertion
-    consumer service URL (see sections [5.3](#message-content) and [5.4.1](#validation-of-destination)).
+    consumer service URL (see sections [5.3](#message-content) and 
+    [5.4.1](#validation-of-destination)).
 
 -   A `NotOnOrAfter` attribute containing a time instant at which the
     subject no longer can be confirmed.
+    
+-   An `Address` attribute containing the network address from which an attesting entity
+    (user) can present the assertion.
 
-The `<saml2:SubjectConfirmationData>` MUST also contain an `Address`
-attribute containing the network address from which an attesting entity
-(user) can present the assertion.
+-   If the Holder-of-key Web Browser SSO Profile was used to authenticate the
+    principal a `<ds:KeyInfo>` element identifying the X.509 certificate presented
+    to the Identity Provider. See section [6.2.2](#message-content-requirements-for-holder-of-key) below.
 
 The assertion MUST contain a `<saml2:Conditions>` element containing
 the following attributes and elements:
@@ -940,8 +1067,7 @@ An Identity Provider declares service entity categories in order to
 publish its ability to deliver attributes according to certain attribute
 sets. For all declared service entity categories, the Identity Provider
 MUST possess the ability to deliver the mandatory attributes of the
-underlying attribute set. See \[[EidEntCat](#eidentcat)\] and \[[EidAttributes](#eidattributes)\] for
-details.
+underlying attribute set. See \[[EidEntCat](#eidentcat)\] and \[[EidAttributes](#eidattributes)\] for details.
 
 An Identity Provider releasing scoped attributes, see section 3.1.3 of \[[EidAttributes](#eidattributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
 
@@ -969,6 +1095,24 @@ For privacy reasons, an Identity Provider SHOULD NOT release identity attributes
  (service entity categories or `<md:RequestedAttribute>` elements).
 
 > [\*\]: This requirement does not apply to attributes that are not "identity" attributes, for example transaction identifiers or any other attribute that does not directly belong to a user's identity.
+
+<a name="message-content-requirements-for-holder-of-key"></a>
+#### 6.2.2. Message Content Requirements for Holder-of-key
+
+When the Holder-of-key Web Browser SSO Profile has been used during the authentication
+of the user, information about the X.509 certificate presented by the user MUST be 
+included in a `<ds:KeyInfo>` element placed in the `<saml2:SubjectConfirmationData>` element. Section 2.4 of \[[SAML2HokAP](#saml2hokap)\] defines the requirements for this.
+
+This profile adds the following requirements to what is specified in \[[SAML2HokAP](#saml2hokap)\]:
+
+The user X.509 certificate SHOULD be represented using a `<ds:X509Certificate>` element
+in all cases, except for the cases when this certificate contains identity information 
+about the subject that is not represented as SAML attributes in the 
+`<saml2:AttributeStatement>` element.
+The reason for this is to ensure the privacy of the user and not release identity information that is not requested by the Service Provider (see section [6.2.1](#attribute-release-and-consuming-rules) above).
+
+In these cases the `<ds:X509Certificate>` MUST NOT be used, and the Identity Provider 
+SHOULD include a `<ds:KeyValue>` representing the public key of the user certificate.
 
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
@@ -1015,26 +1159,32 @@ to obtain the corresponding `<saml2p:AuthnRequest>` message, or a
 secure context containing corresponding information from the request
 (for future processing of the assertion).
 
-The `Recipient` attribute from the bearer
-`<saml2:SubjectConfirmationData>` element MUST match the location to
-which the `<saml2p:Response>` message was delivered **and** match
-the value the `AssertionConsumerServiceURL` attribute included in the
+The `Recipient` attribute from the `<saml2:SubjectConfirmationData>` element 
+MUST match the location to which the `<saml2p:Response>` message was delivered 
+**and** match the value the `AssertionConsumerServiceURL` attribute included in the
 request message, or if this attribute was not provided in the request
 message, the default response location specified in the Service
 Provider’s metadata entry, as described in [section 5.4.2](#validation-of-assertion-consumer-addresses).
 
-The time from the `NotOnOrAfter` attribute from the bearer
+The time from the `NotOnOrAfter` attribute from the
 `<saml2:SubjectConfirmationData>` MUST NOT have passed compared with
 the time instant at which the subject is confirmed (i.e., when the
 assertion is validated). A reasonable allowable clock skew between the
 providers should be taken in account.
 
-If the `Address` attribute is assigned to the bearer
+If the `Address` attribute is assigned to the
 `<saml2:SubjectConfirmationData>` element, the Service Provider MAY
 choose to check the user agent’s client address against it. Practical
 issues regarding the Service Provider’s network setup and the risk of
 introducing false negatives makes this an optional step in the
 validation phase.
+
+If the `<saml2:SubjectConfirmation>` element has a `Method` set to
+`urn:oasis:names:tc:SAML:2.0:cm:holder-of-key` its containing 
+`<saml2:SubjectConfirmationData>` element MUST be processed according to
+section 2.5 of \[[SAML2HokAP](#saml2hokap)\]. The Service Provider MUST also
+be able to verify the holder-of-key assertion if the `<saml2:SubjectConfirmationData>`
+element contains a `<ds:KeyValue>` element, see [6.2.2](#message-content-requirements-for-holder-of-key).
 
 <a name="conditions"></a>
 #### 6.3.3. Conditions
@@ -1513,6 +1663,14 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **\[SAML2SubjIdAttr\]**
 > [OASIS Committee Specification, SAML V2.0 Subject Identifier Attributes Profile Version 1.0, January 2019](https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.pdf).
 
+<a name="saml2hokprof"></a>
+**\[SAML2HokProf\]**
+> [OASIS Committee Specification, SAML V2.0 Holder-of-Key Web Browser SSO Profile Version 1.0, August 2010](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf).
+
+<a name="saml2hokap"></a>
+**\[SAML2HokAP\]**
+> [OASIS Committee Specification, SAML V2.0 Holder-of-Key Assertion Profile Version 1.0, January 2010](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml2-holder-of-key.pdf).
+
 <a name="eiddeploy_15"></a>
 **\[EidDeploy_1.5\]**
 > [Deployment Profile for the Swedish eID Framework, version 1.5](https://docs.swedenconnect.se/technical-framework/june-2018/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
@@ -1569,6 +1727,8 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 - Section 6.2.1, "Attribute Release and Consuming Rules", was updated with a privacy requirement that tells that an Identity Provider must not release identity attributes not requested by the Service Provider.
 
 - Section 2.1.3.1, "Declaring Authorized Scopes", was introduced in order to define how an Identity Provider declares authorized scopes. Section 6.2.1, "Attribute Release and Consuming Rules", was updated with release and consumption rules for scoped attributes.
+
+- Support for the Holder-of-key Web Browser SSO Profile has been added.
 
 **Changes between version 1.5 and 1.6:**
 
