@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-10-06 - *Draft version*
+### Version 1.7 - 2021-10-11 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
@@ -128,7 +128,7 @@ V2.0 Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)\], and the SAML V2.0 Hol
 Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\],
 are required or permitted to rely on. The requirements specified in this profile
 are in addition to the underlying normative requirements of \[[SAML2Prof](#saml2prof)\]
-and \[[SAML2HokProf](#saml2hokprof)\] (as modified by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
+and \[[SAML2HokProf](#saml2hokprof)\] (including updates to these specifications provided by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
 
 > Note: The profile is influenced by, but not normatively dependent on, [SAML2Int](https://kantarainitiative.github.io/SAMLprofiles/saml2int.html).
 
@@ -369,7 +369,7 @@ A Service Provider wishing to make use of a central discovery service as specifi
 
 A Service Provider that sends authentication requests using the Holder-of-key Web Browser SSO Profile MUST include a `<md:AssertionConsumerService>` element in its metadata according to section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
 
-If the Service Provider also makes use of the ordinary Web Browser SSO Profile, which is the most common case, at least one `<md:AssertionConsumerService>` element according to section 2.4.4 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Service Provider metadata. 
+If the Service Provider also makes use of the ordinary Web Browser SSO Profile at least one `<md:AssertionConsumerService>` element according to section 2.4.4 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Service Provider metadata. 
 
 In those cases, where a Service Provider supports both profiles, it is RECOMMENDED that the a `<md:AssertionConsumerService>` element for ordinary Web Browser SSO Profile is marked as default.
 
@@ -477,7 +477,7 @@ MUST be authorized to do so by the federation operator. Each authorized scope MU
 
 An Identity Provider that supports the Holder-of-key Web Browser SSO Profile MUST declare `<md:SingleSignOnService>` elements<sup>\*</sup> in its metadata according to section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
 
-If the Identity Provider also supports authentication according the ordinary Web Browser SSO Profile, which is the most common case, `<md:SingleSignOnService>` elements<sup>\*</sup> according to section 2.4.3 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Identity Provider metadata.
+If the Identity Provider also supports authentication according the ordinary Web Browser SSO Profile `<md:SingleSignOnService>` elements<sup>\*</sup> according to section 2.4.3 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Identity Provider metadata.
 
 ```
 <md:SingleSignOnService
@@ -575,10 +575,7 @@ section [6.2.1](#attribute-release-and-consuming-rules), “[Attribute Release a
 
 This profile supports two different SSO profiles; the Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)], and the Holder-of-key Web Browser Profile, \[[SAML2HokProf](#saml2hokprof)]. 
 
-The profile in use is determined by how an authentication process is initiated, meaning to which Identity Provider endpoint an `<saml2p:AuthnRequest>` message is sent. If the message is received on an `SingleSignOnService` endpoint having the
-`urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser` binding (see [2.1.3.2](#idp-holder-of-key-support).), the Holder-of-key 
-Web Browser Profile is activated, and in all other cases the ordinary Web Browser SSO Profile 
-is active.
+The profile in use is determined by how an authentication process is initiated, meaning to which Identity Provider endpoint an `<saml2p:AuthnRequest>` message is sent, see [2.1.3.2](#idp-holder-of-key-support).
 
 <a name="discovery"></a>
 ### 5.1. Discovery
