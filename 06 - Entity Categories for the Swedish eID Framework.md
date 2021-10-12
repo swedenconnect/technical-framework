@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-09-06 - *Draft version*
+### Version 1.8 - 2021-10-11 - *Draft version*
 
 
 Registration number: **2019-311** (*previously: ELN-0606*)
@@ -70,6 +70,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 6. [**General Entity Categories**](#general-entity-categories)
 
     6.1. [secure-authenticator-binding](#secure-authenticator-binding)
+
+    6.2. [accepts-coordination-number](#accepts-coordination-number)
 
 7. [**References**](#references)
 
@@ -264,42 +266,42 @@ This specification does not impose any other limitations on what requirements or
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa3-pnr`
 
-**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
 
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
-> Natural Personal Identity with Civic Registration Number (personnummer).
-> 
-> **Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute, which is defined to hold either a Swedish identity personal number (”personnummer”) defined in \[[SKV 704](#skv704)\], or a Swedish coordination number (”samordningsnummer”) as defined in \[[SKV 707](#skv707)\]. 
-> 
-> However, since a Swedish coordination number (”samordningsnummer”) is not consistent with assurance level 3, the `personalIdentityNumber` attribute is only allowed to hold a Swedish personal identity number ("personnummer") if the scope of the `loa3-pnr` service entity category.
+> Natural Personal Identity with Civic Registration Number.
+
+**Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute. 
 
 <a name="loa2-pnr"></a>
 ### 2.2. loa2-pnr
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa2-pnr`
 
-**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
 
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
-> Natural Personal Identity with Civic Registration Number (personnummer).
+> Natural Personal Identity with Civic Registration Number.
+
+**Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
 
 <a name="loa4-pnr"></a>
 ### 2.3. loa4-pnr
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa4-pnr`
 
-**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number (personnummer)” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number” (ELN-AP-Pnr-01).
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
 
 **Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
-> Natural Personal Identity with Civic Registration Number (personnummer)
->
-> **Note**: See the restriction described in section [2.1](#loa3-pnr), [loa3-pnr](#loa3-pnr).
+> Natural Personal Identity with Civic Registration Number
+
+**Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
 
 
 <a name="eidas-naturalperson"></a>
@@ -316,6 +318,8 @@ This specification does not impose any other limitations on what requirements or
 
 **Attribute requirements**: ELN-AP-eIDAS-NatPer-01 (`http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`)
 > eIDAS Natural Person Attribute Set
+
+**Note**: Attribute release according to the `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` attribute set may include the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
 
 <a name="eidas-pnr-delivery"></a>
 ### 2.5. eidas-pnr-delivery
@@ -506,6 +510,23 @@ category in its metadata.
 An Identity Provider that has declared the `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` category in its metadata MUST perform a secure authenticator binding for requests sent
 from Service Providers that have declared this entity category in their metadata entries.
 
+<a name="accepts-coordination-number"></a>
+### 6.2. accepts-coordination-number
+
+**URL**: `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number`
+
+**Description**: A special purpose entity category that is declared by Service Providers
+to announce that they accept a Swedish coordination number (samordningsnummer), \[[SKV707](#skv707)\], being delivered in the `personalIdentityNumber` (`urn:oid:1.2.752.29.4.13`) attribute.
+
+The `personalIdentityNumber` is defined in section 3.1 of \[[EidAttributes](eidattributes)\] to contain either a Swedish personal identity number, \[[SKV704](#skv704)\], or a Swedish coordination number, \[[SKV707](#skv707)\]. However, how to utilize coordination numbers in
+electronic services is, or has been, unclear. Not all Service Providers want, or are able to, use these types of identifiers. Therefore, this specification defines the "accepts coordination
+number" category as an opt-in feature for those Service Providers that can accept a `personalIdentityNumber` attribute to contain a coordination number as well as a personal identity number.
+
+An Identity Provider conformant with this specification MUST NOT deliver a coordination number
+in the `personalIdentityNumber` attribute unless the receiving Service Provider has declared 
+the `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` entity category
+in its metadata.
+
 <a name="references"></a>
 ## 7. References
 
@@ -574,6 +595,11 @@ from Service Providers that have declared this entity category in their metadata
 - Section 2.7, loa3-orgid, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-orgid`.
 
 - Section 2.8, loa3-name, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-name`.
+
+- Section 6.2, accepts-coordination-number, defining the general entity category 
+`http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
+This category introduces an opt-in feature for accepting Swedish coordination numbers
+delivered in the `personalIdentityNumber` attribute.
 
 **Changes between version 1.6 and version 1.7:**
 

@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-09-23 - *Draft version*
+### Version 1.7 - 2021-10-11 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -330,6 +330,7 @@ General category identifiers are prefixed with `http://id.swedenconnect.se/gener
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.swedenconnect.se/general-ec/`<br />`1.0/secure-authenticator-binding` | Indicator that a secure authenticator binding is required, or supported.  | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/general-ec/`<br />`1.0/accepts-coordination-number` | Category for opt-in for the acceptance of Swedish coordination numbers in the personalIdentityNumber attribute.  | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
@@ -455,6 +456,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | 1.2.752.201.3.12 | Signature Activation Data | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.13 | Authentication Server Signature | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.14 | Sign Message Digest | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.15 | Previous Personal Identity Number | \[[EidAttributes](#eidattributes)\] |
 
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
@@ -494,6 +496,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
     id-attr-sad                  OBJECT IDENTIFIER ::= { id-attr 12 }   -- Signature activation data
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
+    id-attr-previous-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }   -- Previous personal identity number
     
     -- Sweden Connect QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
@@ -575,11 +578,13 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 **Changes between version 1.6 and version 1.7:**
 
-- Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` was added.
+- Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` and `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
 
 - In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.
 
 - Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
+
+- In section 3.2, the attribute for "previous personal identity number" (`1.2.752.201.3.15`) was added.
 
 **Changes between version 1.5 and version 1.6:**
 
