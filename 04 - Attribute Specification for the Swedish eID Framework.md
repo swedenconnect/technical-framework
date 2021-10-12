@@ -498,16 +498,18 @@ This specification does not impose any specific requirements concerning the pers
 <a name="the-previouspersonalidentitynumber-attribute"></a>
 #### 3.2.6. The previousPersonalIdentityNumber Attribute
 
-The `personalIdentityNumber` attribute can contain a Swedish personal identity number (personnummer), \[[SKV704](#skv704)\], or a Swedish coordination number (samordningsnummer), \[[SKV707](#skv707)\]. A personal identity number is assigned to all individuals registered
-(folkbokförda) in Sweden, and a coordination number may be assigned to a person that is not
-registered, but has official errands in Sweden (students, refugees, foreign business owners, etc.).
+The `personalIdentityNumber` attribute can contain a Swedish personal identity number (personnummer), \[[SKV704](#skv704)\], or a Swedish coordination number (samordningsnummer), \[[SKV707](#skv707)\]. All individuals born in Sweden or moving to Sweden with the intention 
+of staying one year or longer is assigned a personal identity number and registered in the
+population register. A coordination number may be assigned to a person that is not registered, 
+but has the need to communicate with various government authorities, healthcare institutions,
+higher education and banks.
 
 In some cases a person may hold a coordination number during a period before he or she is
 assigned a personal identity number. A typical use case is a person that seeks asylum and
 later is given a residence permit. In this case the person first may hold a coordination number
 and if a residence permit is given a personal identity number will be assigned.
 
-For a service provider this may lead to problems since the primary identity for a person
+For a service provider this may lead to problems since the primary identifier for a person
 has changed. A login with the newly assigned identifier will not match the user account
 previously used by this individual.
 
