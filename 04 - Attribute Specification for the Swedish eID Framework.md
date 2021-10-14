@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-09-21 *Draft version*
+### Version 1.7 - 2021-10-11 *Draft version*
 
 Registration number: **2019-310** (*previously: ELN-0604*)
 
@@ -36,7 +36,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.2. [Natural Personal Identity without Civic Registration Number](#natural-personal-identity-without-civic-registration-number)
 
-    2.3. [Natural Personal Identity with Civic Registration Number (Personnummer)](#natural-personal-identity-with-civic-registration-number)
+    2.3. [Natural Personal Identity with Civic Registration Number](#natural-personal-identity-with-civic-registration-number)
 
     2.4. [Organizational Identity for Natural Persons](#organizational-identity-for-natural-persons)
 
@@ -65,6 +65,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.2.4. [The signMessageDigest Attribute](#the-signmessagedigest-attribute)
     
     3.2.5. [The orgAffiliation Attribute](#the-orgaffiliation-attribute)
+    
+    3.2.6. [The previousPersonalIdentityNumber Attribute](#the-previouspersonalidentitynumber-attribute)
 
     3.3. [Attributes for the eIDAS Framework](#attributes-for-the-eidas-framework)
 
@@ -196,8 +198,7 @@ The “Personal Identity without Civic Registration Number” attribute set prov
 **Typical use**: In an attribute release policy that provides basic user name information together with a persistent `NameID` identifier in the assertion.
 
 <a name="natural-personal-identity-with-civic-registration-number"></a>
-### 2.3. Natural Personal Identity with Civic Registration Number (Personnummer)
-
+### 2.3. Natural Personal Identity with Civic Registration Number
 Attribute set identifier: **ELN-AP-Pnr-01**
 
 URI: `http://id.elegnamnden.se/ap/1.0/pnr-01`
@@ -321,6 +322,7 @@ The following attributes are defined for use within the attribute profile for th
 | displayName | urn:oid:2.16.840.1.<br/>113730.3.1.241 | Display Name | A name in any preferred presentation format. | No | No | Valfrid Lindeman |
 | gender | urn:oid:1.3.6.1.5.5.7.9.3 | Gender | A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender. | No | No | M |
 | personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](#skv704) and [SKV 707](#skv707). 12 digits without hyphen. | No | No | 195006262546 |
+| previousPersonal-<br/>IdentityNumber | 1.2.752.201.3.15 | A user's previous national civic registration number, see [section 3.2.6](#the-previouspersonalidentitynumber-attribute) below. | See `personalIdentityNumber` above. | No | No | 197010632391 |
 | dateOfBirth | urn:oid:1.3.6.1.5.5.7.9.1 | Date of birth | Date of birth expressed using the format YYYY-MM-DD. | No | No | 1950-06-26 |
 | birthName | urn:oid:1.2.752.201.3.8 | Name at the time of birth | Full name of a person at birth. | No | No | Valfrid Danielsson |
 | street | urn:oid:2.5.4.9 | Street address | Street address. | No | No | Mosebacke torg 3 |
@@ -493,6 +495,31 @@ This specification does not impose any specific requirements concerning the pers
 
 **Note**: The `orgAffiliation` is a [scoped attribute](#scoped-attributes) meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of \[[EidDeployProf](#eiddeployprof)\].
 
+<a name="the-previouspersonalidentitynumber-attribute"></a>
+#### 3.2.6. The previousPersonalIdentityNumber Attribute
+
+The `personalIdentityNumber` attribute can contain a Swedish personal identity number (personnummer), \[[SKV704](#skv704)\], or a Swedish coordination number (samordningsnummer), \[[SKV707](#skv707)\]. All individuals born in Sweden or moving to Sweden with the intention 
+of staying one year or longer is assigned a personal identity number and registered in the
+population register. A coordination number may be assigned to a person that is not registered, 
+but has the need to communicate with various government authorities, healthcare institutions,
+higher education and banks.
+
+In some cases a person may hold a coordination number during a period before he or she is
+assigned a personal identity number. A typical use case is a person that seeks asylum and
+later is given a residence permit. In this case the person first may hold a coordination number
+and if a residence permit is given a personal identity number will be assigned.
+
+For a service provider this may lead to problems since the primary identifier for a person
+has changed. A login with the newly assigned identifier will not match the user account
+previously used by this individual.
+
+This profile defines the `previousPersonalIdentityNumber` attribute to enable matching a
+previously held identity number to a newly assigned identity number. The `previousPersonalIdentityNumber` attribute is typically released together with the "new" 
+`personalIdentityNumber` attribute in order to facilitate account matching at a service provider.
+
+This attribute is not part of any attribute sets defined in the profile. Attribute consumers
+wishing to receive the attribute should declare the these requirement in their metadata entries
+(using a `<md:RequestedAttribute>` element).
 
 <a name="attributes-for-the-eidas-framework"></a>
 ### 3.3. Attributes for the eIDAS Framework
@@ -759,6 +786,8 @@ following attribute:
 - Section 3.2.5, "The orgAffiliation Attribute", was introduced.
 
 - The concept of "scoped attributes" was introduced, see section 3.1.3.
+
+- The `previousPersonalIdentityNumber` attribute was added, see section 3.2.6.
 
 **Changes between version 1.5 and version 1.6:**
 
