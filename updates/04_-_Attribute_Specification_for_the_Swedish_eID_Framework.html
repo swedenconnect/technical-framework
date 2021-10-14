@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2021-09-21-*draft-version*">Version 1.7 - 2021-09-21 <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-10-11-*draft-version*">Version 1.7 - 2021-10-11 <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-310</strong> (<em>previously: ELN-0604</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -37,7 +37,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <li><p><a href="#attribute-sets"><strong>Attribute Sets</strong></a></p>
 <p> 2.1. <a href="#pseudonym-identity">Pseudonym Identity</a></p>
 <p> 2.2. <a href="#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a></p>
-<p> 2.3. <a href="#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number (Personnummer)</a></p>
+<p> 2.3. <a href="#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a></p>
 <p> 2.4. <a href="#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a></p>
 <p> 2.5. <a href="#eidas-natural-person-attribute-set">eIDAS Natural Person Attribute Set</a></p>
 <p> 2.6. <a href="#natural-person-identity-with-hsa-id">Natural Person Identity with HSA-ID</a></p>
@@ -53,6 +53,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 3.2.3. <a href="#the-sad-attribute">The sad Attribute</a></p>
 <p> 3.2.4. <a href="#the-signmessagedigest-attribute">The signMessageDigest Attribute</a></p>
 <p> 3.2.5. <a href="#the-orgaffiliation-attribute">The orgAffiliation Attribute</a></p>
+<p> 3.2.6. <a href="#the-previouspersonalidentitynumber-attribute">The previousPersonalIdentityNumber Attribute</a></p>
 <p> 3.3. <a href="#attributes-for-the-eidas-framework">Attributes for the eIDAS Framework</a></p>
 <p> 3.3.1. <a href="#the-prid-and-pridpersistence-attributes">The prid and pridPersistence Attributes</a></p>
 <p> 3.3.2. <a href="#the-personalidentitynumberbinding-attribute">The personalIdentityNumberBinding Attribute</a></p>
@@ -217,7 +218,7 @@ than those listed as required or recommended.</p>
 </table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic user name information together with a persistent <code>NameID</code> identifier in the assertion.</p>
 <p><a name="natural-personal-identity-with-civic-registration-number"></a></p>
-<h3 id="2.3.-natural-personal-identity-with-civic-registration-number-(personnummer)">2.3. Natural Personal Identity with Civic Registration Number (Personnummer)</h3>
+<h3 id="2.3.-natural-personal-identity-with-civic-registration-number">2.3. Natural Personal Identity with Civic Registration Number</h3>
 <p>Attribute set identifier: <strong>ELN-AP-Pnr-01</strong></p>
 <p>URI: <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code></p>
 <p>The “Personal Identity with Civic Registration Number” attribute set provides basic personal identity information including a Swedish civic registration number of the subject.</p>
@@ -417,6 +418,15 @@ examples of “converted attributes”.</p>
 <td style="text-align:center">No</td>
 <td style="text-align:left">No</td>
 <td style="text-align:left">195006262546</td>
+</tr>
+<tr>
+<td style="text-align:left">previousPersonal-<br/>IdentityNumber</td>
+<td style="text-align:left">1.2.752.201.3.15</td>
+<td style="text-align:left">A user&#39;s previous national civic registration number, see <a href="#the-previouspersonalidentitynumber-attribute">section 3.2.6</a> below.</td>
+<td style="text-align:left">See <code>personalIdentityNumber</code> above.</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">197010632391</td>
 </tr>
 <tr>
 <td style="text-align:left">dateOfBirth</td>
@@ -787,6 +797,26 @@ of the actual sign message<sup>*</sup>.</p>
 <p>This specification does not impose any specific requirements concerning the personal identifier part of the attribute other than that it MUST be unique for the given organization.</p>
 <p><strong>Note</strong>: In the general case, an attribute consumer MUST NOT assume a particular format or meaning of the personal identifier part since different organizations may use different formats. An attribute consumer should also be aware that a personal identifier separated from its organizational identifier code can not be regarded as unique. </p>
 <p><strong>Note</strong>: The <code>orgAffiliation</code> is a <a href="#scoped-attributes">scoped attribute</a> meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>].</p>
+<p><a name="the-previouspersonalidentitynumber-attribute"></a></p>
+<h4 id="3.2.6.-the-previouspersonalidentitynumber-attribute">3.2.6. The previousPersonalIdentityNumber Attribute</h4>
+<p>The <code>personalIdentityNumber</code> attribute can contain a Swedish personal identity number (personnummer), [<a href="#skv704">SKV704</a>], or a Swedish coordination number (samordningsnummer), [<a href="#skv707">SKV707</a>]. All individuals born in Sweden or moving to Sweden with the intention 
+of staying one year or longer is assigned a personal identity number and registered in the
+population register. A coordination number may be assigned to a person that is not registered, 
+but has the need to communicate with various government authorities, healthcare institutions,
+higher education and banks.</p>
+<p>In some cases a person may hold a coordination number during a period before he or she is
+assigned a personal identity number. A typical use case is a person that seeks asylum and
+later is given a residence permit. In this case the person first may hold a coordination number
+and if a residence permit is given a personal identity number will be assigned.</p>
+<p>For a service provider this may lead to problems since the primary identifier for a person
+has changed. A login with the newly assigned identifier will not match the user account
+previously used by this individual.</p>
+<p>This profile defines the <code>previousPersonalIdentityNumber</code> attribute to enable matching a
+previously held identity number to a newly assigned identity number. The <code>previousPersonalIdentityNumber</code> attribute is typically released together with the &quot;new&quot; 
+<code>personalIdentityNumber</code> attribute in order to facilitate account matching at a service provider.</p>
+<p>This attribute is not part of any attribute sets defined in the profile. Attribute consumers
+wishing to receive the attribute should declare the these requirement in their metadata entries
+(using a <code>&lt;md:RequestedAttribute&gt;</code> element).</p>
 <p><a name="attributes-for-the-eidas-framework"></a></p>
 <h3 id="3.3.-attributes-for-the-eidas-framework">3.3. Attributes for the eIDAS Framework</h3>
 <p><a name="the-prid-and-pridpersistence-attributes"></a></p>
@@ -1067,6 +1097,8 @@ Framework</a>.</p>
 <li><p>Section 3.2.5, &quot;The orgAffiliation Attribute&quot;, was introduced.</p>
 </li>
 <li><p>The concept of &quot;scoped attributes&quot; was introduced, see section 3.1.3.</p>
+</li>
+<li><p>The <code>previousPersonalIdentityNumber</code> attribute was added, see section 3.2.6.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
