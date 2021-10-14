@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS DSS in Central Signing Services</h1>
-<h3 id="version-1.5---2021-09-17---*draft-version*">Version 1.5 - 2021-09-17 - <em>Draft version</em></h3>
+<h3 id="version-1.5---2021-10-14---*draft-version*">Version 1.5 - 2021-10-14 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-312</strong> (<em>previously: ELN-0607</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -311,22 +311,12 @@ message and MUST NOT contain any JavaScript in any form.</p>
 <p><a name="requesting-identity-provider-to-display-signmessage"></a></p>
 <h6 id="2.1.3.8.2.-requesting-identity-provider-to-display-signmessage">2.1.3.8.2. Requesting Identity Provider to Display SignMessage</h6>
 <p>The means through which the Service Provider requests the Identity
-Provider to display a sign message is defined in section 7.2.1 of “Deployment Profile
+Provider to display a sign message is defined in section 7.1.1 of “Deployment Profile
 for the Swedish eID Framework” [<a href="#eid-profile">Eid-Profile</a>].</p>
-<p>As of version 1.6 of the “Deployment Profile for the Swedish eID Framework” [<a href="#eid-profile">Eid-Profile</a>] specification, the use of the special purpose Authentication Context URI:s for sign messages has been deprecated
-and replaced by the issuance of the <code>signMessageDigest</code> attribute (see section 7 of [<a href="#eid-profile">Eid-Profile</a>]).</p>
-<blockquote>
-<p><strong>Note:</strong> Identity Providers compliant with the Swedish eID Framework MUST support a new version of a Swedish eID Framework specification within 180 days from its publishing date. Before this time has passed, a Signature Service needs to have knowledge about whether a particular Identity Provider is compliant with version 1.6 
-of [<a href="#eid-profile">Eid-Profile</a>] in order to apply a process to determine which <code>AuthnContextClassRef</code> 
-URI to include in the <code>AuthnRequest</code> sent to the Identity Provider when authenticating
-the user for signing. Therefore, the previously required steps for this process are listed at the end of this section.</p>
-<p>Also, [<a href="#eid-profile">Eid-Profile</a>] states that all compliant Identity Providers MUST support processing of the special purpose sigmessage URI:s according to previous versions of the specification
-up until the 31th of December 2020.</p>
-</blockquote>
-<p>In addition to the requirements in section 7.2.1 of [<a href="#eid-profile">Eid-Profile</a>] the Signature Service 
-MUST apply the following process regarding the inclusion of the <code>AuthnContextClassRef</code> URI to include
-in the <code>AuthnRequest</code> sent to the Identity Provider when authenticating
-the user for signing:</p>
+<p>In addition to the requirements in section 7.1.1 of [<a href="#eid-profile">Eid-Profile</a>] the 
+Signature Service MUST apply the following process regarding the inclusion of the
+<code>AuthnContextClassRef</code> URI to include in the <code>AuthnRequest</code> sent to the Identity Provider 
+when authenticating the user for signing:</p>
 <ol class="list">
 <li><p>Determine requested LoA (Level of Assurance) by either:</p>
 <ol class="list">
@@ -339,128 +329,11 @@ If none of the LoA:s are supported by the Identity Provider, fail signing and re
 indicating a request failure (the requested LoA(s) was inconsistent with the specified Identity Provider).</p>
 </li>
 </ol>
-<p><strong>Deprecated process:</strong></p>
-<p><em>Must not be used after the 31th of December 2020, when all Identity Providers compliant with the Swedish
-eID Framework may drop support of the special purpose Authentication Context URI:s for sign messages.</em></p>
-<blockquote>
-<p>In addition to the requirements in section 7.2.1 of [<a href="#eid-profile">Eid-Profile</a>] the Signature Service 
-MUST apply the following process to determine which <code>AuthnContextClassRef</code> URI to include
-in the <code>AuthnRequest</code> sent to the Identity Provider when authenticating
-the user for signing:</p>
-<p><img src="img/dssprof-sign-msg-flow.png"></img></p>
-<p>The input data for the process is:</p>
-<table>
-<thead>
-<tr>
-<th>Input</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ClassRef</code></td>
-<td>The <code>AuthnContextClassRef</code> specified in the sign request as <code>CertRequestProperties</code>.</td>
-</tr>
-<tr>
-<td><code>SignMessage</code></td>
-<td>The <code>SignMessage</code> element in the sign request.</td>
-</tr>
-<tr>
-<td><code>MustShow</code></td>
-<td>The <code>MustShow</code> attribute of the <code>SignMessage</code> element.</td>
-</tr>
-<tr>
-<td><code>AuthnContextClassRef</code> URIs</td>
-<td>URIs supported by the Identity Provider, retrieved from the Identity Provider&#39;s metadata.</td>
-</tr>
-</tbody>
-</table>
-<p>Functions and values:</p>
-<table>
-<thead>
-<tr>
-<th>Functions</th>
-<th>Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>getLoa</strong>(ClassRef)</td>
-<td>Returns the Level of Assurance represented by a specified AuthnContextClassRef URI.</td>
-</tr>
-<tr>
-<td><strong>ClassRef</strong>(LoA)</td>
-<td>The default AuthnContextClassRef URI specified for a specified LoA with no requirements to display a sign message.</td>
-</tr>
-<tr>
-<td><strong>ClassRef</strong>(LoA + SM)</td>
-<td>The AuthnContextClassRef URI specified for a specified LoA with requirements to display a sign message.</td>
-</tr>
-<tr>
-<td>Default LoA</td>
-<td>The default Level of Assurance according to the governing policy.</td>
-</tr>
-</tbody>
-</table>
-<p><strong><em>Process steps:</em></strong></p>
-<ol class="list">
-<li><p>Determine requested LoA (Level of Assurance) by either:</p>
-<ol class="list">
-<li>Get the LoA from the <code>ClassRef</code> URI specified in the sign request, if present, or</li>
-<li>if the <code>ClassRef</code> from the sign request is absent (NULL) then
-use the default LoA.</li>
-</ol>
-</li>
-<li><p>If no <code>SignMessage</code> is present in the sign request:</p>
-<ol class="list">
-<li>Request <strong>ClassRef</strong>(LoA) as <code>RequestedAuthnContext</code> if supported by the Identity Provider.</li>
-<li>Otherwise fail signing and return an error sign response, indicating a request failure (the requested LoA was inconsistent with the specified Identity Provider).</li>
-<li>End.</li>
-</ol>
-</li>
-<li><p>If the Identity Provider supports <strong>ClassRef</strong>(LoA + SM):</p>
-<ol class="list">
-<li>Include sign message in the <code>AuthnRequest</code> to the Identity Provider.</li>
-<li>Request <strong>ClassRef</strong>(LoA + SM) as <code>RequestedAuthnContext</code>.</li>
-<li>End.</li>
-</ol>
-</li>
-<li><p>If <code>MustShow</code> = <code>true</code>:</p>
-<ol class="list">
-<li>Fail signing and return an error 
-sign response, indicating a request failure (a sign message included a requirement 
-to be displayed but the specified Identity Provider does not support display of sign 
-messages).  </li>
-<li>End.</li>
-</ol>
-</li>
-<li><p>Proceed with normal authentication:</p>
-<ol class="list">
-<li>Include sign message in the <code>AuthnRequest</code> to the Identity
-Provider (just in case the Identity Provider can make use of
-this information anyway).</li>
-<li>Request <strong>ClassRef</strong>(LoA) as <code>RequestedAuthnContext</code> if supported
-by the Identity Provider.</li>
-<li>Otherwise fail signing and return an error sign response,
-indicating a request failure (the requested LoA was inconsistent
-with the specified Identity Provider).</li>
-<li>End.</li>
-</ol>
-</li>
-</ol>
-<p>Note: The process defined above requires that the <strong>ClassRef</strong>(LoA + SM)
-MUST be used when the sign request includes a sign message and the
-Identity Provider has declared that it supports display of sign
-messages. This allows a requesting service to send a sign request with a
-sign message with <code>MustShow</code> = <code>false</code> and still obtain proof of display of
-sign message from those Identity Providers that do support display of
-sign messages.</p>
-</blockquote>
 <p><a name="certrequestproperties"></a></p>
 <h5 id="2.1.3.9.-certrequestproperties">2.1.3.9. CertRequestProperties</h5>
 <p>This element MAY be present to provide requested properties of generated
 signature certificates according with section 3.1.1 of [<a href="#dss-ext">DSS-Ext</a>].</p>
-<p>When the <code>CertType</code> attribute is present with a value of <code>QC/SSCD</code> the signature service MUST request authentication in accordance with section 7.2.2 of “Deployment Profile for the Swedish eID Framework” [<a href="#eid-profile">Eid-Profile</a>], or reject the request.</p>
+<p>When the <code>CertType</code> attribute is present with a value of <code>QC/SSCD</code> the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” [<a href="#eid-profile">Eid-Profile</a>], or reject the request.</p>
 <p><a name="authncontextclassref"></a></p>
 <h6 id="2.1.3.9.1.-authncontextclassref">2.1.3.9.1. AuthnContextClassRef</h6>
 <p>This element MAY be present to specify the Level of Assurance(s) required
