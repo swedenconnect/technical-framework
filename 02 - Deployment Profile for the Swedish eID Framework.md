@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-10-11 - *Draft version*
+### Version 1.7 - 2021-10-14 - *Draft version*
 
 Registration number: **2019-308** (*previously: ELN-0602*)
 
@@ -94,15 +94,13 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 7. [**Authentication for Signature**](#authentication-for-signature)
 
-    7.1. [Authentication Context URIs for Signature Services (deprecated)](#authentication-context-uris-for-signature-services)
+    7.1. [Authentication Requests](#authentication-requests2)
 
-    7.2. [Authentication Requests](#authentication-requests2)
-
-    7.2.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
+    7.1.1. [Requesting Display of Signature Message](#requesting-display-of-signature-message)
     
-    7.2.2. [Requesting SCAL2 Signature Activation Data](#requesting-scal2-signature-activation-data)
+    7.1.2. [Requesting SCAL2 Signature Activation Data](#requesting-scal2-signature-activation-data)
 
-    7.3. [Authentication Responses](#authentication-responses2)
+    7.2. [Authentication Responses](#authentication-responses2)
 
 8. [**Cryptographic Algorithms**](#cryptographic-algorithms)
 
@@ -1297,41 +1295,8 @@ these requirements for the “authentication for signature” process.
 
 > \[*\]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.
 
-<a name="authentication-context-uris-for-signature-services"></a>
-### 7.1. Authentication Context URIs for Signature Services (deprecated)
-
-Earlier versions of the Swedish eID Framework defined a set of Authentication Context URI:s with the following meaning:
-
-- for Signature Services, a means to require that a sign message would be displayed by the Identity Provider processing the authentication request, and,
-
-- for Identity Providers, to include in issued assertions as an evidence that the sign message was displayed for the user.
-
-Implementations using the special purpose Authentication Context URI:s for sign message turned out to be complex as the number of authentication context classes expands to align with eIDAS and other federations. Usage of these special purpose Authentication Context URI:s has therefore been deprecated and replaced with a more straightforward method of requesting and asserting the displaying of sign messages, see sections [7.2.1](#requesting-display-of-signature-message) and [7.3](#authentication-responses2) below.
-
-However, for backwards compatibility reasons, up until the 31th of December 2020, Identity Providers MUST support processing of the special purpose sigmessage URI:s according to version 1.5 of "Deployment Profile for the Swedish eID Framework", \[[EidDeploy_1.5](#eiddeploy_15)\]. 
-
-<b>Deprecated requirements:</b>
-
-> The Swedish eID Framework defines additional authentication context URIs
-to be used in `<saml2p:AuthnRequest>` and `<saml2:Assertion>`
-elements during “authentication for signature”. These authentication
-context URIs are applicable when the Identity Provider is required to
-display a sign message as part of the authentication process. They
-are refered to as "Sign Message Authentication Context URIs" and
-are defined in section 3.1.1.1 of \[[EidRegistry](#eidregistry)\].
-
-> A sign message authentication context URI extends the corresponding authentication context URI used to represent a Level of Assurance identifier (as defined in section 3.1.1 of \[[EidRegistry](#eidregistry)\]) with requirements listed in the sections below.
-
-> For example, the `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage` URI is the sign message authentication context URI corresponding to the `http://id.elegnamnden.se/loa/1.0/loa3` Level of Assurance identifier.
-
-> A Signature Service MAY use any of the defined authentication context
-URIs. The URIs listed in section 3.1.1.1 of \[[EidRegistry](#eidregistry)\] are only used when 
-there is an explicit requirement for the Identity Provider to display a sign message provided
-in the authentication request.
-
-
 <a name="authentication-requests2"></a>
-### 7.2. Authentication Requests
+### 7.1. Authentication Requests
 
 Authentication requests from a Signature Service SHALL meet the
 following requirements:
@@ -1363,7 +1328,7 @@ end user is performing a signature.
 > \[*\]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the `http://id.elegnamnden.se/st/1.0/sigservice` URI as a service type entity category in its metadata (see [2.1.4](#signature-service)).
 
 <a name="requesting-display-of-signature-message"></a>
-#### 7.2.1. Requesting Display of Signature Message
+#### 7.1.1. Requesting Display of Signature Message
 
 \[[EidDSS\_Profile](#eiddssprofile)\] specifies that a Signature Requestor may include a
 `SignMessage` element (as defined by \[[EidDSS](#eiddss)\]) in a signature request.
@@ -1388,7 +1353,7 @@ it SHOULD ensure that the contents of the `<psc:PrincipalSelection>` extension m
 principal identity. If there is a mismatch, the Identity Provider MUST NOT display the
 sign message, and if the request states that the sign message must be displayed, fail with
 an error response where the second-level status code is set to
-`urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal` \[[SAML2Core](#saml2core)\].
+`urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal` (\[[SAML2Core](#saml2core)\]).
 
 > Typical scenarios where the above requirement apply is for the Swedish eIDAS connector that first authenticates a principal and then displays the sign message, and for Identity Providers that prompt the user for its user identity as part of its authentication scheme. In those scenarios the Identity Providers must compare the principal identity with the contents of `<psc:PrincipalSelection>`, if received in the authentication request. 
 
@@ -1414,19 +1379,9 @@ from signature services):
   consistent with the requested authentication context which includes display of a sign message,
   even if the request has no present `ForceAuthn` attribute or includes a `ForceAuthn` attribute set 
   to the value `false`.  
-
-> **Note:** For backwards compatibility reasons, up until the 31th of December 2020, Identity Providers MUST also
-apply the above requirements when processing a request with a requested authentication context that is a 
-"Sign Message Authentication Context URI" along with the following (deprecated) requirement:
-
-> -   The authentication request SHALL contain a sign message that can be
-    extracted by the Identity Provider. If the Identity Provider fails
-    to locate, decrypt or extract the sign message in clear text form,
-    it must return an error response.
-
     
 <a name="requesting-scal2-signature-activation-data"></a>
-#### 7.2.2. Requesting SCAL2 Signature Activation Data
+#### 7.1.2. Requesting SCAL2 Signature Activation Data
 
 The type of signature requested in a signature request is, according to \[[EidDSS_Profile](#eiddssprofile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SigSAP](#sigsap)\]. An authentication request message that includes this `SADRequest` extension MUST also include the `SignMessage` extension (as described above).
 
@@ -1437,33 +1392,11 @@ A SAD returned from the Identity Provider MUST have a signature which can be ver
 Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of \[[SigSAP](#sigsap)\].
 
 <a name="authentication-responses2"></a>
-### 7.3. Authentication Responses
+### 7.2. Authentication Responses
 
 By including the `signMessageDigest` attribute (see section 3.2.4 of \[[EidAttributes](#eidattributes)\]) 
 in the SAML assertion, the Identity Provider asserts that it has successfully displayed the sign message
-received in the request for the user and that the user has accepted to sign under the context of this sign message. This attribute MUST be included in the issued assertion if a sign message was displayed for, and
-accepted by, the user.
-
-Up until the 31th of December 2020, Identity Providers MUST also support the deprecated requirements stated below.
-
-**Deprecated requirements:**
-
-> By including a sign message authentication context URI, as described in [section 7.1](#authentication-context-uris-for-signature-services), in the SAML assertion under the
-`<saml2:AuthnContextClassRef>` element of the
-`<saml2:AuthnStatement>` element in the response, the Identity
-Provider asserts that it has successfully displayed the sign message
-received in the request for the user and that the user has accepted to
-sign under the context of this sign message<sup>*</sup>.
-
-> An Identity Provider MUST NOT return an authentication context URI in an
-assertion, other than those defined in section 3.1.1.1 of \[[EidRegistry](#eidregistry)\], 
-if the request included one of these URIs as the requested authentication context. If
-the Identity Provider failed to display the sign message or the user
-failed to accept it, and the request indicated that the sign message
-MUST be displayed, then the Identity Provider MUST return an error
-response with the status code `urn:oasis:names:tc:SAML:2.0:status:AuthnFailed`.
-
-> \[*\]: As defined in [section 5.3.1](#requested-authentication-context), only exact matching of authentication context URIs are allowed. As a consequence the Identity Provider can only assert a sign message authentication context URI according to [section 7.1](#authentication-context-uris-for-signature-services) if such an authentication context was requested in the authentication request. It is therefore the responsibility of the Signature Service requesting authentication to always request a sign message authentication context if it requires evidence that the sign message has been displayed to the user.
+received in the request for the user and that the user has accepted to sign under the context of this sign message. This attribute MUST be included in the issued assertion if a sign message was displayed for, and accepted by, the user.
 
 <a name="cryptographic-algorithms"></a>
 ## 8. Cryptographic Algorithms
@@ -1671,10 +1604,6 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **\[SAML2HokAP\]**
 > [OASIS Committee Specification, SAML V2.0 Holder-of-Key Assertion Profile Version 1.0, January 2010](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml2-holder-of-key.pdf).
 
-<a name="eiddeploy_15"></a>
-**\[EidDeploy_1.5\]**
-> [Deployment Profile for the Swedish eID Framework, version 1.5](https://docs.swedenconnect.se/technical-framework/june-2018/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
-
 <a name="eidtillit"></a>
 **\[EidTillit\]**
 > [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
@@ -1729,6 +1658,8 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 - Section 2.1.3.1, "Declaring Authorized Scopes", was introduced in order to define how an Identity Provider declares authorized scopes. Section 6.2.1, "Attribute Release and Consuming Rules", was updated with release and consumption rules for scoped attributes.
 
 - Support for the Holder-of-key Web Browser SSO Profile has been added.
+
+- Removed text in section 7, "Authentication for Signature", regarding the use of the deprecated sigmessage URI:s.
 
 **Changes between version 1.5 and 1.6:**
 
