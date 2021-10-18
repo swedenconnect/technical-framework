@@ -430,6 +430,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | 1.2.752.201.3.13 | Authentication Server Signature | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.14 | Sign Message Digest | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.15 | Previous Personal Identity Number | \[[EidAttributes](#eidattributes)\] |
+| 1.2.752.201.3.16 | Mapped Personal Identity Number | \[[EidAttributes](#eidattributes)\] |
 
 <a name="asn1-declarations"></a>
 #### 3.2.1. ASN.1 Declarations
@@ -470,6 +471,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
     id-attr-previous-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }   -- Previous personal identity number
+    id-attr-mapped-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }     -- Mapped personal identity number
     
     -- Sweden Connect QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
@@ -557,7 +559,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 - Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
 
-- In section 3.2, the attribute for "previous personal identity number" (`1.2.752.201.3.15`) was added.
+- In section 3.2, the attributes for "previous personal identity number" (`1.2.752.201.3.15`) and  "mapped personal identity number" (`1.2.752.201.3.16`) were added.
 
 **Changes between version 1.5 and version 1.6:**
 

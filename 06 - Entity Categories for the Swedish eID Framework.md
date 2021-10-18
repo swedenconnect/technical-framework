@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-10-11 - *Draft version*
+### Version 1.8 - 2021-10-14 - *Draft version*
 
 
 Registration number: **2019-311** (*previously: ELN-0606*)
@@ -319,7 +319,7 @@ This specification does not impose any other limitations on what requirements or
 **Attribute requirements**: ELN-AP-eIDAS-NatPer-01 (`http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`)
 > eIDAS Natural Person Attribute Set
 
-**Note**: Attribute release according to the `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` attribute set may include the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
+**Note**: Attribute release according to the `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` attribute set may include the `mappedPersonalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
 
 <a name="eidas-pnr-delivery"></a>
 ### 2.5. eidas-pnr-delivery
@@ -526,6 +526,10 @@ An Identity Provider conformant with this specification MUST NOT deliver a coord
 in the `personalIdentityNumber` attribute unless the receiving Service Provider has declared 
 the `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` entity category
 in its metadata.
+
+**Note**: This entity category also applies to the eIDAS specific attribute
+`mappedPersonalIdentityNumber`, see section 3.3.2 of \[[EidAttributes](eidattributes)\].
+
 
 <a name="references"></a>
 ## 7. References
