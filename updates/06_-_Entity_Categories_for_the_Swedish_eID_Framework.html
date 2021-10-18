@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-1.8---2021-10-11---*draft-version*">Version 1.8 - 2021-10-11 - <em>Draft version</em></h3>
+<h3 id="version-1.8---2021-10-14---*draft-version*">Version 1.8 - 2021-10-14 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-311</strong> (<em>previously: ELN-0606</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -302,7 +302,7 @@ to the Swedish eIDAS-node.</p>
 <blockquote>
 <p>eIDAS Natural Person Attribute Set</p>
 </blockquote>
-<p><strong>Note</strong>: Attribute release according to the <code>http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01</code> attribute set may include the <code>personalIdentityNumber</code> attribute. See section <a href="#accepts-coordination-number">6.2</a>, &quot;<a href="#accepts-coordination-number">accepts-coordination-number</a>&quot;, for specific requirements concerning delivering a coordination number in this attribute.</p>
+<p><strong>Note</strong>: Attribute release according to the <code>http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01</code> attribute set may include the <code>mappedPersonalIdentityNumber</code> attribute. See section <a href="#accepts-coordination-number">6.2</a>, &quot;<a href="#accepts-coordination-number">accepts-coordination-number</a>&quot;, for specific requirements concerning delivering a coordination number in this attribute.</p>
 <p><a name="eidas-pnr-delivery"></a></p>
 <h3 id="2.5.-eidas-pnr-delivery">2.5. eidas-pnr-delivery</h3>
 <p><strong>URL</strong>: <code>http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery</code></p>
@@ -450,6 +450,8 @@ number&quot; category as an opt-in feature for those Service Providers that can 
 in the <code>personalIdentityNumber</code> attribute unless the receiving Service Provider has declared 
 the <code>http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number</code> entity category
 in its metadata.</p>
+<p><strong>Note</strong>: This entity category also applies to the eIDAS specific attribute
+<code>mappedPersonalIdentityNumber</code>, see section 3.3.2 of [<a href="eidattributes">EidAttributes</a>].</p>
 <p><a name="references"></a></p>
 <h2 id="7.-references">7. References</h2>
 <p><a name="rfc2119"></a>

@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.7---2021-10-11-*draft-version*">Version 1.7 - 2021-10-11 <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-10-14-*draft-version*">Version 1.7 - 2021-10-14 <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-310</strong> (<em>previously: ELN-0604</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -56,7 +56,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 3.2.6. <a href="#the-previouspersonalidentitynumber-attribute">The previousPersonalIdentityNumber Attribute</a></p>
 <p> 3.3. <a href="#attributes-for-the-eidas-framework">Attributes for the eIDAS Framework</a></p>
 <p> 3.3.1. <a href="#the-prid-and-pridpersistence-attributes">The prid and pridPersistence Attributes</a></p>
-<p> 3.3.2. <a href="#the-personalidentitynumberbinding-attribute">The personalIdentityNumberBinding Attribute</a></p>
+<p> 3.3.2. <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes</a></p>
 <p> 3.3.3. <a href="#conversion-of-eidas-attributes">Conversion of eIDAS Attributes</a></p>
 <p> 3.3.3.1. <a href="#conversion-of-eidas-currentaddress">Conversion of eIDAS CurrentAddress</a></p>
 </li>
@@ -296,17 +296,17 @@ Framework.</p>
 </tr>
 <tr>
 <td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left"><code>personalIdentityNumber</code> (National civic registration number) <br /> <code>personalIdentityNumberBinding</code> (National civic registration number Binding URI)</td>
+<td style="text-align:left"><code>mappedPersonalIdentityNumber</code> (Mapped national civic registration number) <br /> <code>personalIdentityNumberBinding</code> (National civic registration number Binding URI)</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Typical use</strong>: In an attribute release policy implemented by an eIDAS
 connector that provides a complete set of attributes to a requesting
 Service Provider.</p>
-<p><strong>Note</strong>: The <code>personalIdentityNumber</code> and <code>personalIdentityNumberBinding</code>
+<p><strong>Note</strong>: The <code>mappedPersonalIdentityNumber</code> and <code>personalIdentityNumberBinding</code>
 attributes will be part of the attribute release if the attribute
-provider has access to enough information to provide a reliable binding
-between eIDAS attributes and an Swedish identity number (see <a href="#the-personalidentitynumberbinding-attribute">section
+provider has access to enough information to provide a binding
+between eIDAS attributes and a Swedish identity number (see <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section
 3.3.2</a>).</p>
 <p>The eIDAS attribute set comprises of “added” and “converted” attributes.</p>
 <p><strong>Added attributes</strong>: Attributes that are not provided by the member
@@ -666,10 +666,19 @@ examples of “converted attributes”.</p>
 <td style="text-align:left">personalIdentity-<br/>NumberBinding</td>
 <td style="text-align:left">urn:oid:1.2.752.201.3.6</td>
 <td style="text-align:left">National civic registration number/code binding URI</td>
-<td style="text-align:left">The type of binding performed of personalIdentityNumber attribute added by eIDAS connector. See <a href="#the-personalidentitynumberbinding-attribute">section 3.3.2</a> below.</td>
+<td style="text-align:left">The type of binding performed of mappedPersonalIdentityNumber attribute added by eIDAS connector. See <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section 3.3.2</a> below.</td>
 <td style="text-align:center">No</td>
 <td style="text-align:left">No</td>
 <td style="text-align:left"><a href="http://eid.example.se/presentedInPerson">http://eid.example.se/presentedInPerson</a></td>
+</tr>
+<tr>
+<td style="text-align:left">mappedPersonal-<br />IdentityNumber</td>
+<td style="text-align:left">urn:oid:1.2.752.201.3.16</td>
+<td style="text-align:left">Mapped national civic registration number</td>
+<td style="text-align:left">A &quot;mapped&quot; personalIdentityNumber, see <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section 3.3.2</a>.</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">195006262546</td>
 </tr>
 <tr>
 <td style="text-align:left">eidasPersonIdentifier</td>
@@ -855,26 +864,37 @@ of their user account, should their <code>prid</code> change in the future.</p>
 Swedish eID Framework”, [<a href="#constructedattr">ConstructedAttr</a>], declares the details for
 how the <code>prid</code> and <code>pridPersistence</code> attributes are generated and how they
 should be processed.</p>
-<p><a name="the-personalidentitynumberbinding-attribute"></a></p>
-<h4 id="3.3.2.-the-personalidentitynumberbinding-attribute">3.3.2. The personalIdentityNumberBinding Attribute</h4>
+<p><a name="the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute"></a></p>
+<h4 id="3.3.2.-the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attributes">3.3.2. The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes</h4>
 <p>When an authentication for a natural person is performed against the
-eIDAS Framework the <code>personalIdentityNumber</code> attribute (Swedish
-“personnummer” or “samordningsnummer”) MAY be included in the assertion
-being delivered to the requesting Service Provider. The member state
-eIDAS node does not provide this attribute, but instead the assertion
-may be extended by the Swedish eIDAS connector, that in some cases knows
-how to map from the eIDAS attributes to a <code>personalIdentityNumber</code>
-attribute.</p>
-<p>This binding can be performed using a number of different processes,
+eIDAS Framework the Swedish eIDAS connector may attempt to perform a
+mapping of the received eIDAS identity to a Swedish civic registration
+number. If such a mapping is performed and is successful, the
+assertion is extended with a <code>mappedPersonalIdentityNumber</code> attribute holding the
+&quot;mapped&quot; Swedish civic registration number (&quot;personnummer&quot; or &quot;samordningsnummer&quot;).</p>
+<p>This mapping, or binding, can be performed using a number of different processes,
 where some are considered to be strong and where others only may be a
-“good guess”. Therefore, an eIDAS connector that extends an assertion
-with a <code>personalIdentityNumber</code> attribute MUST also include the
+“good guess” or even supplied by the user. Therefore, an eIDAS connector that 
+extends an assertion with a <code>mappedPersonalIdentityNumber</code> attribute MUST also include the
 <code>personalIdentityNumberBinding</code> attribute. This attribute contains a value
 that is an URI that identifies the process that was used to link a set
-of eIDAS attributes to a <code>personalIdentityNumber</code> attribute.</p>
+of eIDAS attributes to a <code>mappedPersonalIdentityNumber</code> attribute. </p>
+<p>If this binding is acceptable for a Service Provider processing an assertion
+(containing the <code>mappedPersonalIdentityNumber</code> attribute), the Service Provider 
+MAY treat the contents of the <code>mappedPersonalIdentityNumber</code>
+attribute as it would have received the <code>personalIdentityNumber</code> attribute, otherwise
+the Service Provider SHOULD NOT use the identity found in the <code>mappedPersonalIdentityNumber</code>
+attribute to login the user.</p>
 <p>This specification does not specify any defined URI identifiers that may
 be included in this attribute. Such URI identifiers will be specified in
 documents specifying appropriate binding mechanisms.</p>
+<blockquote>
+<p><strong>Note</strong>: The reason that an ordinary <code>personalIdentityNumber</code> attribute is not
+used to represent a mapped civic registration number is that it is essential that
+the consuming entity always verifies that the binding process under which the 
+mapping was performed is acceptable, before proceeding with the authentication 
+process.</p>
+</blockquote>
 <p><a name="conversion-of-eidas-attributes"></a></p>
 <h4 id="3.3.3.-conversion-of-eidas-attributes">3.3.3. Conversion of eIDAS Attributes</h4>
 <p>The attributes specified within eIDAS ([<a href="#eidas-attr">eIDAS_Attr</a>]) does not use
@@ -1099,6 +1119,12 @@ Framework</a>.</p>
 <li><p>The concept of &quot;scoped attributes&quot; was introduced, see section 3.1.3.</p>
 </li>
 <li><p>The <code>previousPersonalIdentityNumber</code> attribute was added, see section 3.2.6.</p>
+</li>
+<li><p>The <code>mappedPersonalIdentityNumber</code> attribute was added (see section 3.3.2), and the
+attribute set &quot;eIDAS Natural Person Attribute Set&quot; (section 2.5) was changed so that
+a <code>mappedPersonalIdentityNumber</code> attribute is delivered instead of a 
+<code>personalIdentityNumber</code> attribute if the eIDAS identity can be mapped to a Swedish 
+identity number.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>

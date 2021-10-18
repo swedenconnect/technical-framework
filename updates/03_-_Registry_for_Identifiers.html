@@ -818,6 +818,11 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <td style="text-align:left">Previous Personal Identity Number</td>
 <td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
 </tr>
+<tr>
+<td style="text-align:left">1.2.752.201.3.16</td>
+<td style="text-align:left">Mapped Personal Identity Number</td>
+<td style="text-align:left">[<a href="#eidattributes">EidAttributes</a>]</td>
+</tr>
 </tbody>
 </table>
 <p><a name="asn1-declarations"></a></p>
@@ -857,6 +862,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <span class="hljs-built_in">id</span>-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">13</span> }   <span class="hljs-comment">-- Authentication server signature</span>
 <span class="hljs-built_in">id</span>-attr-sign-message-digest  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">14</span> }   <span class="hljs-comment">-- Sign message digest</span>
 <span class="hljs-built_in">id</span>-attr-previous-pid-<span class="hljs-built_in">number</span>  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">15</span> }   <span class="hljs-comment">-- Previous personal identity number</span>
+<span class="hljs-built_in">id</span>-attr-mapped-pid-<span class="hljs-built_in">number</span>  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">15</span> }     <span class="hljs-comment">-- Mapped personal identity number</span>
 
 <span class="hljs-comment">-- Sweden Connect QC Statement extension</span>
 <span class="hljs-built_in">id</span>-qcs-sid         OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">1</span> }   <span class="hljs-comment">-- Semantics Identifiers</span>
@@ -955,7 +961,7 @@ regulation and associated technical specifications.</p>
 </li>
 <li><p>Added service entity categories <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> and <code>http://id.swedenconnect.se/ec/1.0/loa3-name</code> to section 3.1.3.1.</p>
 </li>
-<li><p>In section 3.2, the attribute for &quot;previous personal identity number&quot; (<code>1.2.752.201.3.15</code>) was added.</p>
+<li><p>In section 3.2, the attributes for &quot;previous personal identity number&quot; (<code>1.2.752.201.3.15</code>) and  &quot;mapped personal identity number&quot; (<code>1.2.752.201.3.16</code>) were added.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
