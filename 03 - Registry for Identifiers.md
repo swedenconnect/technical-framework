@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-10-14 - *Draft version*
+### Version 1.7 - 2021-10-18 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -252,16 +252,20 @@ Identifiers for entity categories representing alternative sets of requirements.
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.elegnamnden.se/ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-pnr` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”ELN-AP-Pnr-01”. | |
-| `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”. | |
-| `http://id.swedenconnect.se/ec/1.0/loa3-orgid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-OrgPerson-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/1.0/loa3-name` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-NaturalPerson-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/sc/uncertified-loa3-pnr` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ´http://id.swedenconnect.se/ap/1.0/hsaid-01´. |  |
+| `http://id.swedenconnect.se/`<br />`ec/sc/uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ´http://id.swedenconnect.se/ap/1.0/hsaid-01´. | |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa2-orgid` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-orgid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa4-orgid` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa2-name` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-name` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa4-name` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -560,6 +564,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 - Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
 
 - In section 3.2, the attributes for "previous personal identity number" (`1.2.752.201.3.15`) and  "mapped personal identity number" (`1.2.752.201.3.16`) were added.
+
+- Section 3.1.3.1, "Service Entity Categories", was updated with categories for loaX-name and loaX-orgid.
 
 **Changes between version 1.5 and version 1.6:**
 
