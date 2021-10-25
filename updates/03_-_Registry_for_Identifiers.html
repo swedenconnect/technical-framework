@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.7---2021-10-14---*draft-version*">Version 1.7 - 2021-10-14 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-10-18---*draft-version*">Version 1.7 - 2021-10-18 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-309</strong> (<em>previously: ELN-0603</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -376,53 +376,73 @@ Specification for the Swedish eID Framework.</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa2-pnr</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
+<td style="text-align:left"><code>http://id.elegnamnden.se/</code><br /><code>ec/1.0/loa2-pnr</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 2, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa3-pnr</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
+<td style="text-align:left"><code>http://id.elegnamnden.se/</code><br /><code>ec/1.0/loa3-pnr</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.swedenconnect.se/ec/sc/</code><br/><code>uncertified-loa3-pnr</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/sc/uncertified-loa3-pnr</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>.</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/loa4-pnr</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”.</td>
+<td style="text-align:left"><code>http://id.elegnamnden.se/</code><br /><code>ec/1.0/loa4-pnr</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 4, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code>.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/eidas-naturalperson</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”.</td>
+<td style="text-align:left"><code>http://id.elegnamnden.se/</code><br /><code>ec/1.0/eidas-naturalperson</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01</code>.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery</code></td>
+<td style="text-align:left"><code>http://id.elegnamnden.se/</code><br /><code>ec/1.0/eidas-pnr-delivery</code></td>
 <td style="text-align:left">Service providing assertions to eIDAS services via Swedish eIDAS-node</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.swedenconnect.se/ec/1.0/loa3-hsaid</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”.</td>
-<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>http://id.swedenconnect.se/ec/sc/</code><br/><code>uncertified-loa3-hsaid</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”.</td>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa3-hsaid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ´<a href="http://id.swedenconnect.se/ap/1.0/hsaid-01´">http://id.swedenconnect.se/ap/1.0/hsaid-01´</a>.</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-OrgPerson-01”.</td>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/sc/uncertified-loa3-hsaid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ´<a href="http://id.swedenconnect.se/ap/1.0/hsaid-01´">http://id.swedenconnect.se/ap/1.0/hsaid-01´</a>.</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa2-orgid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 2, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/org-person-01</code>.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>http://id.swedenconnect.se/ec/1.0/loa3-name</code></td>
-<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-NaturalPerson-01”.</td>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa3-orgid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/org-person-01</code>.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa4-orgid</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 4, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/org-person-01</code>.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa2-name</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 2, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/natural-person-01</code>.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa3-name</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 3, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/natural-person-01</code>.</td>
+<td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>http://id.swedenconnect.se/</code><br /><code>ec/1.0/loa4-name</code></td>
+<td style="text-align:left">Service consuming/providing assertions based on assurance level 4, implementing the attribute set <code>http://id.elegnamnden.se/ap/1.0/natural-person-01</code>.</td>
 <td style="text-align:left">[<a href="#eidentitycat">EidEntityCat</a>]</td>
 </tr>
 </tbody>
@@ -962,6 +982,8 @@ regulation and associated technical specifications.</p>
 <li><p>Added service entity categories <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> and <code>http://id.swedenconnect.se/ec/1.0/loa3-name</code> to section 3.1.3.1.</p>
 </li>
 <li><p>In section 3.2, the attributes for &quot;previous personal identity number&quot; (<code>1.2.752.201.3.15</code>) and  &quot;mapped personal identity number&quot; (<code>1.2.752.201.3.16</code>) were added.</p>
+</li>
+<li><p>Section 3.1.3.1, &quot;Service Entity Categories&quot;, was updated with categories for loaX-name and loaX-orgid.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
