@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-10-18 - *Draft version*
+### Version 1.7 - 2021-10-29 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -64,7 +64,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
 
-    3.2. [OID Identifiers](#oid-identifiers)
+    3.2. [OID Identifiers](#oid-identifiers3)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
 
@@ -399,7 +399,7 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 
 > A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.
 
-<a name="oid-identifiers"></a>
+<a name="oid-identifiers3"></a>
 ### 3.2. OID Identifiers
 
 Defined categories:
@@ -419,6 +419,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | :--- | :--- | :--- |
 | 1.2.752.201.5.1 | Authentication Context Extension | \[[RFC7773](#rfc7773)\] |
 | 1.2.752.201.5.2 | Signature Validation Token Extension | \[[SVT-PDF](#svt-pdf)\] |
+| 1.2.752.201.2.1 | Object identifier for the Signature Validation Token RFC 3161 timestamp policy | |
 | 1.2.752.201.3.1 | Organization Affiliation Attribute | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.2 | Transaction Identifier | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.3 | Authentication Context Parameters | \[[EidAttributes](#eidattributes)\] |
@@ -457,7 +458,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
     -- Sweden Connect OIDs for test
 
-    -- Sweden Connect Policy
+    -- Sweden Connect Policies
+    id-pol-svt-ts-policy         OBJECT IDENTIFIER ::= { id-pol 1 }     -- SVT RFC 3161 timestamp policy
 
     -- Sweden Connect Attributes
     id-attr-org-affiliation      OBJECT IDENTIFIER ::= { id-attr 1 }    -- Organizational affiliation
@@ -475,7 +477,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
     id-attr-previous-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }   -- Previous personal identity number
-    id-attr-mapped-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }     -- Mapped personal identity number
+    id-attr-mapped-pid-number    OBJECT IDENTIFIER ::= { id-attr 16 }   -- Mapped personal identity number
     
     -- Sweden Connect QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
@@ -559,7 +561,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 - Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` and `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
 
-- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.
+- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added and one OID for a SVT timestamp policy.
 
 - Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
 
