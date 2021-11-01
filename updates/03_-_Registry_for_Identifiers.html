@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-1.7---2021-10-18---*draft-version*">Version 1.7 - 2021-10-18 - <em>Draft version</em></h3>
+<h3 id="version-1.7---2021-10-29---*draft-version*">Version 1.7 - 2021-10-29 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-309</strong> (<em>previously: ELN-0603</em>)</p>
 <hr>
 <p class="copyright-statement">
@@ -52,7 +52,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 3.1.9. <a href="#eidas-identifiers">eIDAS Identifiers</a></p>
 <p> 3.1.9.1. <a href="#eidas-proxy-service-aliases">eIDAS Proxy Service Aliases</a></p>
 <p> 3.1.9.2. <a href="#eidas-connector-aliases">eIDAS Connector Aliases</a></p>
-<p> 3.2. <a href="#oid-identifiers">OID Identifiers</a></p>
+<p> 3.2. <a href="#oid-identifiers3">OID Identifiers</a></p>
 <p> 3.2.1. <a href="#asn1-declarations">ASN.1 Declarations</a></p>
 </li>
 <li><p><a href="#references"><strong>References</strong></a></p>
@@ -706,7 +706,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <blockquote>
 <p>A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.</p>
 </blockquote>
-<p><a name="oid-identifiers"></a></p>
+<p><a name="oid-identifiers3"></a></p>
 <h3 id="3.2.-oid-identifiers">3.2. OID Identifiers</h3>
 <p>Defined categories:</p>
 <table>
@@ -762,6 +762,11 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <td style="text-align:left">1.2.752.201.5.2</td>
 <td style="text-align:left">Signature Validation Token Extension</td>
 <td style="text-align:left">[<a href="#svt-pdf">SVT-PDF</a>]</td>
+</tr>
+<tr>
+<td style="text-align:left">1.2.752.201.2.1</td>
+<td style="text-align:left">Object identifier for the Signature Validation Token RFC 3161 timestamp policy</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">1.2.752.201.3.1</td>
@@ -864,7 +869,8 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 
 <span class="hljs-comment">-- Sweden Connect OIDs for test</span>
 
-<span class="hljs-comment">-- Sweden Connect Policy</span>
+<span class="hljs-comment">-- Sweden Connect Policies</span>
+<span class="hljs-built_in">id</span>-pol-svt-ts-policy         OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-pol <span class="hljs-number">1</span> }     <span class="hljs-comment">-- SVT RFC 3161 timestamp policy</span>
 
 <span class="hljs-comment">-- Sweden Connect Attributes</span>
 <span class="hljs-built_in">id</span>-attr-org-affiliation      OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">1</span> }    <span class="hljs-comment">-- Organizational affiliation</span>
@@ -882,7 +888,7 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <span class="hljs-built_in">id</span>-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">13</span> }   <span class="hljs-comment">-- Authentication server signature</span>
 <span class="hljs-built_in">id</span>-attr-sign-message-digest  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">14</span> }   <span class="hljs-comment">-- Sign message digest</span>
 <span class="hljs-built_in">id</span>-attr-previous-pid-<span class="hljs-built_in">number</span>  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">15</span> }   <span class="hljs-comment">-- Previous personal identity number</span>
-<span class="hljs-built_in">id</span>-attr-mapped-pid-<span class="hljs-built_in">number</span>  OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">15</span> }     <span class="hljs-comment">-- Mapped personal identity number</span>
+<span class="hljs-built_in">id</span>-attr-mapped-pid-<span class="hljs-built_in">number</span>    OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-attr <span class="hljs-number">16</span> }   <span class="hljs-comment">-- Mapped personal identity number</span>
 
 <span class="hljs-comment">-- Sweden Connect QC Statement extension</span>
 <span class="hljs-built_in">id</span>-qcs-sid         OBJECT IDENTIFIER ::= { <span class="hljs-built_in">id</span>-qcs <span class="hljs-number">1</span> }   <span class="hljs-comment">-- Semantics Identifiers</span>
@@ -977,7 +983,7 @@ regulation and associated technical specifications.</p>
 <ul class="list">
 <li><p>Section, 3.1.3.5, &quot;General Entity Categories&quot;, was introduced and <code>http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding</code> and <code>http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number</code> was added.</p>
 </li>
-<li><p>In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.</p>
+<li><p>In section 3.2, an object identifier (OID) for Signature Validation Token extension was added and one OID for a SVT timestamp policy.</p>
 </li>
 <li><p>Added service entity categories <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> and <code>http://id.swedenconnect.se/ec/1.0/loa3-name</code> to section 3.1.3.1.</p>
 </li>
