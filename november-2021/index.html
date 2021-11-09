@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specifications for the Swedish eID Framework</title>
+<link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+<link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+<link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print">
+<link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print">
+</head>
+<body>
+	<article class="markdown-body">
+		<p>
+			<img align="left" src="img/sweden-connect.png"></img>
+			<img align="right" src="img/digg_centered.png"></img>
+		</div>
+		</p>
+		<p>
+			<img align="center" src="img/transparent.png"></img>
+		</p>
+
+		<h1 id="specifications-for-the-swedish-eid-framework">Specifications for the Swedish eID Framework</h1>
+		<h3 id="month,-year">November 2021</h3>
+		<hr>
+		<p>Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.</p>
+		<hr>
+		<p>
+		  This is the November 2021 version of the Swedish eID Framework. It replaces the previous 
+      January 2020 release as the official version for the Swedish eID Framework.
+		</p>
+		<h3 id="changes-since-last-version">Changes since last version</h3>
+		<p>Below follows a listing of all significant changes since the January 2020 release of the Swedish eID Framework.</p>
+		<ul class="list">
+		  <li>
+		    Support for the SAML V2.0 Holder-of-key Web Browser SSO Profile has been added to facilitate delivery of assertions according to 
+		    Level of Assurance 4. See <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.
+		  </li>
+		  <li>
+		    Changes has been made to the attribute set "Organizational Identity for Natural Persons", see chapter 2.4 of 
+		    <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Attribute Specification for the Swedish eID Framework</a>. This change also involves the usage of "scoped attributes"
+		    that are defined in section 3.1.3 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#scoped-attributes">Attribute Specification for the Swedish eID Framework</a>
+		    and in sections 2.1.3.1 and 6.2.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.
+		  </li>
+		  <li>
+		    The attribute <i>mappedPersonalIdentityNumber</i> was introduced and the attribute set "eIDAS Natural Person Attribute Set" was changed
+		    to contain this attribute. The reason for this change is that we want to ensure that a service provider consuming an identity assertion
+		    received from an eIDAS authentication checks whether the process under which the personal identity number was added to the assertion is
+		    acceptable before using it. See sections 2.5 and 3.3.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.
+		  </li>
+		  <li>
+		    A Swedish coordination number (samordningsnummer) may now be released in the <i>personalIdentityNumber</i> attribute. Since not all
+		    service providers consuming assertions can handle, and process, a coordination number we have added an opt-in feature for this feature.
+		    Service providers that can handle both Swedish identity numbers (personnummer) <b>and</b> Swedish coordination numbers (samordningsnummer)
+		    being delivered in the <i>personalIdentityNumber</i> attribute should declare the entity category <code>http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number</code> in its metadata. An identity provider MUST only deliver a coordination number in the <i>personalIdentityNumber</i> attribute
+		    if the service provider has declared the <i>accepts-coordination-number</i> entity category.<br />
+		    See section 6.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#accepts-coordination-number">Entity Categories for the Swedish eID Framework</a>.
+		  </li>
+		  <li>
+		    In section 3.2.6 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#the-previouspersonalidentitynumber-attribute">Attribute Specification for the Swedish eID Framework</a> the attribute <i>previousPersonalIdentityNumber</i> was introduced. It is intended to be used in the cases when a user has a Swedish coordination number (samordningsnummer) and later gets a Swedish 
+		    identity number (personnummer). In these cases the identity provider can delivere both the previous and the current identity in an assertion. 
+		    This requires that the service provider explicitly declares that it want to receive this attribute in its metadata.
+		  </li>
+		  <li>
+		    Section 6.2.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#attribute-release-and-consuming-rules">Deployment Profile for the Swedish eID Framework</a> was updated with a privacy requirement that tells 
+		    that an Identity Provider must not release identity attributes not requested by the Service Provider.
+		  </li>
+		  <li>
+		    New entity categories for the delivery of organizational identities and identities without a Swedish personal identity number was introduced
+		    in <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.
+		  </li>
+		  <li>
+		    For signing, <a href="https://docs.swedenconnect.se/technical-framework/updates/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for using OASIS DSS in Central Signing Services</a> has been updated
+		    with the following:
+		    <ul>
+		      <li>The <code>Request</code> element is no longer mandatory to include in a response message.</li>
+		      <li>
+            It is no longer required to supply the <code>Signer</code> element. This enables use cases where the user is not known at the time of signature initiation.
+		      </li>
+		    </ul>
+		  </li>
+		</ul>
+    <p>
+      Each document also contains a "Changes between versions" section where you can see what has been updated for 
+      that particular specification.
+    </p>		
+		<p>
+			For a detailed list of changes you can view all changes in GitHub
+			using this link: <a
+				href="https://github.com/swedenconnect/technical-framework/compare/january-2020...november-2021">https://github.com/swedenconnect/technical-framework/compare</a>.
+		</p>
+    <p>
+      Check out the GitHub project for this release: <a href="https://github.com/swedenconnect/technical-framework/projects/4">https://github.com/swedenconnect/technical-framework/projects/4</a>.
+      Here you can see all the GitHub issues describing each change that was made to the specifications.
+    </p>
+    
+		<h3 id="introduction">Introduction</h3>
+		<p>Overview that describes the different parts of the Swedish eID Framework.</p>
+		<blockquote>
+			<p>
+				<a href="00_-_Tekniskt_ramverk_-_Introduktion.html">Tekniskt ramverk - Introduktion</a> - In Swedish
+			</p>
+			<p>
+				<a href="00_-_Swedish_eID_Framework_-_Introduction.html">Introduction to the Swedish eID Framework</a> - In English
+			</p>
+		</blockquote>
+		<h3 id="specifications">Specifications</h3>
+		<ul class="list">
+			<li>
+			  <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html"><strong>02 - Deployment Profile for the Swedish eID Framework</strong></a> - version 1.7
+		  </li>
+			<li>
+			  <a href="03_-_Registry_for_Identifiers.html"><strong>03 - Registry for Identifiers</strong></a> - version 1.7
+			</li>
+			<li>
+			  <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html"><strong>04 - Attribute Specification for the Swedish eID Framework</strong></a> - version 1.7
+			</li>
+			<li>
+			  <a href="06_-_Entity_Categories_for_the_Swedish_eID_Framework.html"><strong>06 - Entity Categories for the Swedish eID Framework</strong></a> - version 1.8
+		  </li>
+			<li>
+			  <a href="07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html"><strong>07 - Implementation Profile for using DSS in Central Signing Services</strong></a> - version 1.5
+		  </li>
+			<li>
+			  <a href="08_-_Certificate_Profile_for_Central_Signing_Services.html"><strong>08 - Certificate Profile for Central Signing Services</strong></a> - version 1.2
+		  </li>
+			<li>
+			  <a href="09_-_DSS_Extension_for_Federated_Signing_Services.html"><strong>09 - DSS Extension for Federated Signing Services</strong></a> - version 1.4
+			</li>
+			<li>
+			  <a href="11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html"><strong>11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework</strong></a> - version 1.2
+			</li>
+			<li>
+			  <a href="12_-_BankID_Profile_for_the_Swedish_eID_Framework.html"><strong>12 - BankID Profile for the Swedish eID Framework</strong></a> - version 1.3
+			</li>
+			<li>
+			  <a href="13_-_Signature_Activation_Protocol.html"><strong>13 - Signature Activation Protocol</strong></a> - version 1.1
+			</li>
+			<li>
+			  <a href="14_-_Principal_Selection_in_SAML_Authentication_Requests.html"><strong>14 - Principal Selection in SAML Authentication Requests</strong></a> - version 1.0
+			</li>
+		</ul>
+		<blockquote>
+			<p>
+				All specifications are also available in Markdown format on GitHub -
+				<a href="https://github.com/swedenconnect/technical-framework">https://github.com/swedenconnect/technical-framework</a>.
+				Here you can follow the further development of the Swedish eID Framework.
+			</p>
+		</blockquote>
+	</article>
+</body>
+</html>
