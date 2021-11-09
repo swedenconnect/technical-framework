@@ -34,19 +34,22 @@
 		<ul class="list">
 		  <li>
 		    Support for the SAML V2.0 Holder-of-key Web Browser SSO Profile has been added to facilitate delivery of assertions according to 
-		    Level of Assurance 4. See <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.
+		    Level of Assurance 4. See <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.
 		  </li>
 		  <li>
 		    Changes has been made to the attribute set "Organizational Identity for Natural Persons", see chapter 2.4 of 
-		    <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Attribute Specification for the Swedish eID Framework</a>. This change also involves the usage of "scoped attributes"
-		    that are defined in section 3.1.3 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#scoped-attributes">Attribute Specification for the Swedish eID Framework</a>
-		    and in sections 2.1.3.1 and 6.2.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.
+		    <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Attribute 
+		    Specification for the Swedish eID Framework</a>. This change also involves the usage of "scoped attributes"
+		    that are defined in section 3.1.3 of <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#scoped-attributes">
+		    Attribute Specification for the Swedish eID Framework</a> and in sections 2.1.3.1 and 6.2.1 of 
+		    <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.
 		  </li>
 		  <li>
 		    The attribute <i>mappedPersonalIdentityNumber</i> was introduced and the attribute set "eIDAS Natural Person Attribute Set" was changed
 		    to contain this attribute. The reason for this change is that we want to ensure that a service provider consuming an identity assertion
 		    received from an eIDAS authentication checks whether the process under which the personal identity number was added to the assertion is
-		    acceptable before using it. See sections 2.5 and 3.3.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.
+		    acceptable before using it. See sections 2.5 and 3.3.2 of <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">
+		    Attribute Specification for the Swedish eID Framework</a>.
 		  </li>
 		  <li>
 		    A Swedish coordination number (samordningsnummer) may now be released in the <i>personalIdentityNumber</i> attribute. Since not all
@@ -54,24 +57,28 @@
 		    Service providers that can handle both Swedish identity numbers (personnummer) <b>and</b> Swedish coordination numbers (samordningsnummer)
 		    being delivered in the <i>personalIdentityNumber</i> attribute should declare the entity category <code>http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number</code> in its metadata. An identity provider MUST only deliver a coordination number in the <i>personalIdentityNumber</i> attribute
 		    if the service provider has declared the <i>accepts-coordination-number</i> entity category.<br />
-		    See section 6.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#accepts-coordination-number">Entity Categories for the Swedish eID Framework</a>.
+		    See section 6.2 of <a href="06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#accepts-coordination-number">Entity Categories 
+		    for the Swedish eID Framework</a>.
 		  </li>
 		  <li>
-		    In section 3.2.6 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#the-previouspersonalidentitynumber-attribute">Attribute Specification for the Swedish eID Framework</a> the attribute <i>previousPersonalIdentityNumber</i> was introduced. It is intended to be used in the cases when a user has a Swedish coordination number (samordningsnummer) and later gets a Swedish 
+		    In section 3.2.6 of <a href="04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#the-previouspersonalidentitynumber-attribute">
+		    Attribute Specification for the Swedish eID Framework</a> the attribute <i>previousPersonalIdentityNumber</i> was introduced. It is intended 
+		    to be used in the cases when a user has a Swedish coordination number (samordningsnummer) and later gets a Swedish 		    
 		    identity number (personnummer). In these cases the identity provider can delivere both the previous and the current identity in an assertion. 
 		    This requires that the service provider explicitly declares that it want to receive this attribute in its metadata.
 		  </li>
 		  <li>
-		    Section 6.2.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#attribute-release-and-consuming-rules">Deployment Profile for the Swedish eID Framework</a> was updated with a privacy requirement that tells 
+		    Section 6.2.1 of <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#attribute-release-and-consuming-rules">
+		    Deployment Profile for the Swedish eID Framework</a> was updated with a privacy requirement that tells 
 		    that an Identity Provider must not release identity attributes not requested by the Service Provider.
 		  </li>
 		  <li>
 		    New entity categories for the delivery of organizational identities and identities without a Swedish personal identity number was introduced
-		    in <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.
+		    in <a href="06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.
 		  </li>
 		  <li>
-		    For signing, <a href="https://docs.swedenconnect.se/technical-framework/updates/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for using OASIS DSS in Central Signing Services</a> has been updated
-		    with the following:
+		    For signing, <a href="07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for using 
+		    OASIS DSS in Central Signing Services</a> has been updated with the following:
 		    <ul>
 		      <li>The <code>Request</code> element is no longer mandatory to include in a response message.</li>
 		      <li>
