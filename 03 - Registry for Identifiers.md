@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-10-29 - *Draft version*
+### Version 1.7 - 2021-11-09 - *Draft version*
 
 Registration number: **2019-309** (*previously: ELN-0603*)
 
@@ -33,6 +33,10 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1. [URL Identifiers](#url-identifiers)
 
     3.1.1. [Authentication Context URIs](#authentication-context-uris)
+    
+    3.1.1.1. [Authentication Context URIs for Swedish Non-residents](#authentication-context-uris-for-swedish-non-residents)
+    
+    3.1.1.2. [Authentication Context URIs for Uncertified Providers](#authentication-context-uris-for-uncertified-providers)
 
     3.1.2. [Attribute Sets](#attribute-sets)
 
@@ -195,7 +199,6 @@ Authentication Context URIs representing assurance levels (Tillitsnivåer) relev
 | `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | \[[TillitRamv](#tillitramv)\] |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | |
 | `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-low`<sup>\*</sup> | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-sub`<sup>\*</sup> | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
@@ -220,10 +223,60 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 
 -   `http://eidas.europa.eu/NotNotified/LoA/high` (for non-notified eID schemes)
 
-> \[*\]: The authentication context URI:s are intended to be used to represent authentication over the eIDAS
-authentication framework using an official eIDAS-connector. Authorization to issue assertions using these 
-authentication context URI:s is determined by declaration of the "assurance certification" for the connector (see section 2.1.3 of \[[EidDeploy](#eiddeploy)\]).
+> \[*\]: The authentication context URI:s are intended to be used to represent authentication
+over the eIDAS authentication framework using an official eIDAS-connector. Authorization to 
+issue assertions using these authentication context URI:s is determined by declaration of the
+"assurance certification" for the connector (see section 2.1.3 of \[[EidDeploy](#eiddeploy)\]).
 
+<a name="authentication-context-uris-for-swedish-non-residents"></a>
+##### 3.1.1.1. Authentication Context URIs for Swedish Non-residents
+
+The Swedish assurance framework, \[[TillitRamv](#tillitramv)\], states that a Swedish eID
+according to any of the defined assurance levels must only be issued to an individual holding
+a Swedish personal identity number (personnummer) or a Swedish coordination number 
+(samordningsnummer).
+
+In some cases, a certified eID-issuer may also issue eIDs to persons that do not hold
+a Swedish identity number (non-residents). If this is the case, and the original 
+identification of the person has a strength that corresponds to the requirements 
+put in \[[TillitRamv](#tillitramv)\], a certified Identity Provider MAY use the URIs
+defined below:
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa2-nonresident` | A URI that is indented to be used by a level 2-certified providers that authenticate a non-resident eID holder according to assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa3-nonresident` | A URI that is indented to be used by a level 3-certified providers that authenticate a non-resident eID holder according to assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa4-nonresident` | A URI that is indented to be used by a level 4-certified providers that authenticate a non-resident eID holder according to assurance level 4 - `http://id.elegnamnden.se/loa/1.0/loa4`. | This document |
+
+**Note:** An Identity Provider that includes any of the above URIs in an issued assertion
+MUST NOT provide the `personalIdentityNumber` attribute in the assertion. This is per
+definition since these URIs are intended to be used for non-residents (i.e., they do not hold
+a Swedish identity number).
+
+<a name="authentication-context-uris-for-uncertified-providers"></a>
+##### 3.1.1.2. Authentication Context URIs for Uncertified Providers
+
+The assurance levels defined in section [3.1.1](#authentication-context-uris) may only be 
+used by Identity Providers that have been reviewed and approved by the Swedish Agency for 
+Digital Government (DIGG) according to \[[TillitRamv](#tillitramv)\]. For Identity Providers 
+that have not undergone a review process but make a self declaration to be compliant 
+with \[[TillitRamv](#tillitramv)\] this specification defines the following authentication
+context URIs:
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
+
+Proxy Identity Providers that have eIDAS authentication as an option MUST NOT use the eIDAS
+authentication context URIs defined in section [3.1.1](#authentication-context-uris). 
+Instead they should use:
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-low` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-low` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-sub` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-sub` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-high` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-high` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` in an assertion from the official Swedish eIDAS-connector. | This document |
 
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
@@ -504,7 +557,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="rfc7773"></a>
 **\[RFC7773\]**
@@ -568,6 +621,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 - In section 3.2, the attributes for "previous personal identity number" (`1.2.752.201.3.15`) and  "mapped personal identity number" (`1.2.752.201.3.16`) were added.
 
 - Section 3.1.3.1, "Service Entity Categories", was updated with categories for loaX-name and loaX-orgid.
+
+- Authentication context URIs for non-residents and uncertified providers were added to sections 3.1.1.1 and 3.1.1.2.
 
 **Changes between version 1.5 and version 1.6:**
 
