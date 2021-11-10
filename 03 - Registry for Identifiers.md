@@ -268,7 +268,7 @@ context URIs:
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
 
-Proxy Identity Providers that have eIDAS authentication as an option may not use the eIDAS
+Proxy Identity Providers that have eIDAS authentication as an option MUST NOT use the eIDAS
 authentication context URIs defined in section [3.1.1](#authentication-context-uris). 
 Instead they should use:
 
@@ -277,8 +277,6 @@ Instead they should use:
 | `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-low` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-low` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` in an assertion from the official Swedish eIDAS-connector. | This document |
 | `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-sub` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-sub` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` in an assertion from the official Swedish eIDAS-connector. | This document |
 | `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-high` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-high` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` in an assertion from the official Swedish eIDAS-connector. | This document |
-
-**Note:** The Swedish Agency for Digital Government (DIGG) or the Sweden Connect federation operator does not take any responsibility for the use of any of the above URIs. 
 
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
