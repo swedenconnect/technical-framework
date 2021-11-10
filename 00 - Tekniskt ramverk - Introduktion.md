@@ -8,14 +8,14 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2020-01-17
+### 2021-11-11
 
-Diarienummer: **2019-267** (*tidigare: ELN-0600*)
+Diarienummer: **2019-267**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2015-2020.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2015-2021.
 </p>
 
 ## Innehållsförteckning
@@ -328,7 +328,7 @@ i kapitlet 1.7.3 nedan.
 
 > \[1\]: Egentligen väljer användaren till vilken ”eIDAS Proxy-tjänst” som begäran ska skickas vidare till. Detta är beroende landstillhörigheten för användarens e-legitimationsutfärdare.
 
-> \[2\]: I skrivande stund (september 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
+> \[2\]: I skrivande stund finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
 
 
 <a name="underskrifter-med-utlaendska-e-legitimationer"></a>
@@ -409,20 +409,17 @@ det finns ett registrerat personnummer för den
 legitimerade personen och kan, om så är fallet, påföra sådan information
 i det identitetsintyg som skickas till e-tjänsten.
 
-> \[1\]: I skrivande stund (september 2019) finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
+> \[1\]: I skrivande stund finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
 
 <a name="svenska-e-legitimationer-i-utlaendska-e-tjaenster"></a>
 #### 1.7.4. Svenska e-legitimationer i utländska e-tjänster
 
-Sverige har möjlighet att anmäla svenska e-legitimationer på tillitsnivå låg (low), väsentlig (substantial) och hög (high) enligt eIDAS. Det finns en politisk vilja i Sverige att låta innehavare av svenska e-legitimationer logga in i utländska tjänster<sup>1</sup>.
+Sverige har anmält svenska e-legitimationer på tillitsnivå väsentlig (substantial) och hög (high) enligt eIDAS. 
  
 En begäran om legitimering från en utländsk e-tjänst ställs till den svenska eIDAS-noden (proxy-tjänst) via en s.k. eIDAS-connector i e-tjänstens land. 
 I den svenska eIDAS-noden väljer användaren med vilken svensk e-legitimation denne önskar autentisera sig, varpå en legitimeringsbegäran till den legitimeringstjänst (*Identity Provider*) som hanterar vald e-legitimation skickas. Denna begäran är utformad enligt tekniskt ramverk vilket innebär att en svensk legitimeringstjänst inte behöver förhålla sig till eIDAS tekniska specifikationer.
 
 Användaren autentiseras hos den svenska legitimeringstjänsten och ett identitetsintyg ställs ut (enligt tekniskt ramverk). Detta intyg mottas av den svenska eIDAS Proxy-tjänsten och omvandlas till ett intyg enligt eIDAS specifikationer innan det skickas vidare till den utländska eIDAS-connectorn och därpå till den anropande e-tjänsten (*Service Provider*).
- 
-> \[1\]: Projektet för att anmäla svenska e-legitimationer för användande inom eIDAS-samarbetet
-påbörjades under september 2019. 
 
 <a name="tekniska-specifikationer"></a>
 ## 2. Tekniska specifikationer
@@ -438,12 +435,12 @@ tekniskt ramverk.
 ### 2.1. SAML-profiler
 
 Identitetsfederationer som följer Sweden Connect tekniska ramverk är uppbyggda
-kring ”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\]. Denna profil är influerad av, men inte normativt beroende på, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. [\[EidProfile](#eidprofile)\] innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
+kring ”Deployment Profile for the Swedish eID Framework”, \[[EidProfile](#eidprofile)\]. Denna profil är influerad av, men inte normativt beroende på, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. \[[EidProfile](#eidprofile)\] innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
 
 <a name="deployment-profile-for-the-swedish-eid-framework"></a>
 #### 2.1.1. Deployment Profile for the Swedish eID Framework
 
-”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\], är huvuddokumentet för tekniskt ramverk och specificerar bland annat:
+”Deployment Profile for the Swedish eID Framework”, \[[EidProfile](#eidprofile)\], är huvuddokumentet för tekniskt ramverk och specificerar bland annat:
 
 - Hur SAML metadata ska byggas upp och tolkas.
 
@@ -530,8 +527,8 @@ ramverk.
 
 Implementationsprofilen ”Implementation Profile for Using OASIS DSS in
 Central Signing Services”, \[[EidDSSProfile](#eiddssprofile)\], specificerar en profil för
-underskriftsbegäran och respons enligt OASIS standarden ”Digital
-Signature Service Core Protocols, Elements, and Bindings”,
+underskriftsbegäran och respons enligt OASIS standarden "Digital
+Signature Service Core Protocols, Elements, and Bindings",
 \[[DSS](#dss)\].
 
 <a name="dss-extensions"></a>
@@ -561,7 +558,7 @@ Specifikationen "Signature Activation Protocol for Federated Signing", \[[EidSig
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="eidprofile"></a>
 **\[EidProfile\]**
@@ -594,8 +591,7 @@ Specifikationen "Signature Activation Protocol for Federated Signing", \[[EidSig
 
 <a name="eiddssprofile"></a>
 **\[EidDSSProfile\]**
-> [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> [Implementation Profile for Using OASIS DSS in Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 <a name="eiddssext"></a>
 **\[EidDSSExt\]**

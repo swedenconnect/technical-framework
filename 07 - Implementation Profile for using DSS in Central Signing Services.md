@@ -8,14 +8,14 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.5 - 2021-10-14 - *Draft version*
+### Version 1.5 - 2021-11-11
 
-Registration number: **2019-312** (*previously: ELN-0607*)
+Registration number: **2019-312**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -648,7 +648,7 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="dss-ext"></a>
 **[DSS-Ext]**
-> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/updates/09_-_DSS_Extension_for_Federated_Signing_Services.html).
+> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="eid-registry"></a>
 **[Eid-Registry]**
