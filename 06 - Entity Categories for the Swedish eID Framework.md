@@ -636,7 +636,7 @@ in its metadata.
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för kvalitetsmärket Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**

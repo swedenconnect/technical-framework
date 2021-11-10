@@ -559,7 +559,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för kvalitetsmärket Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="rfc7773"></a>
 **\[RFC7773\]**
