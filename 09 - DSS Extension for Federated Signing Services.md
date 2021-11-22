@@ -8,9 +8,9 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.4 - 2020-09-29 - *Draft version*
+### Version 1.4 - 2021-11-11
 
-Registration number: **2019-314** (*previously: ELN-0609*)
+Registration number: **2019-314**
 
 ---
 
@@ -1250,9 +1250,7 @@ signature and MUST check that the signature covers all data in the
 
 <a name="csig-xsd"></a>
 **\[Csig-XSD\]**
-> This specification's DSS Extensions schema Version 1.1, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd, August 2015.
-
-> See also the draft version: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd, June 2020.
+> This specification's DSS Extensions schema Version 1.1.2, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2.xsd, June 2020.
 
 <a name="dss"></a>
 **\[OASIS-DSS\]**

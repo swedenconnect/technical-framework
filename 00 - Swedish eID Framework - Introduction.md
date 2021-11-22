@@ -8,14 +8,14 @@
 
 # Introduction to the Swedish eID Framework
 
-### 2020-01-17
+### 2021-11-11
 
-Registration number: **2019-267** (*previously: ELN-0600*)
+Registration number: **2019-267**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -299,7 +299,7 @@ section 1.7.3 below.
 Service to send the request to. This is dependent on the nationality of the user's
 eID issuer.
 
-> \[2\]: At the time of writing (September 2019) there is no attribute authority available
+> \[2\]: At the time of writing there is no attribute authority available
 providing Swedish personal identity numbers based on eIDAS attributes.
 
 
@@ -372,15 +372,13 @@ whether there exists a registered Swedish personal identity number for the perso
 being authenticated, and may, if this is the case, add this information to the identity
 assertion that is sent back to the Swedish service provider.
 
-> \[1\]: At the time of writing (September 2019) there is no attribute authority available
+> \[1\]: At the time of writing there is no attribute authority available
 providing Swedish personal identity numbers based on eIDAS attributes.
 
 <a name="swedish-eids-in-foreign-services"></a>
 #### 1.7.4. Swedish eID:s in Foreign Services
 
-The eIDAS regulations states that Sweden has the possibility to notify Swedish eID:s 
-according to the assurance levels low, substantial and high. There is a political will
-in Sweden to allow holders of Swedish eID:s log in to foreign e-services<sup>1</sup>.
+Sweden has notified Swedish eID:s according to the assurance levels substantial and high. 
 
 A request for authentication from a foreign service provider is sent to the Swedish 
 eIDAS node (*eIDAS proxy service*) via an eIDAS connector in the service provider country. 
@@ -395,9 +393,6 @@ is issued (according to the Swedish eID Framework). This assertion is received b
 Swedish eIDAS node (proxy service), and transformed to an assertion according to the
 eIDAS specifications before being sent to the foreign eIDAS connector, and then to the
 initiating foreign service provider.
- 
-> \[1\]: The project for notifying Swedish eID for use within the eIDAS cooperation began 
-in September 2019.
 
 <a name="technical-specifications"></a>
 ## 2. Technical Specifications
@@ -412,13 +407,13 @@ otherwise stated.
 ### 2.1. SAML Profiles
 
 Identity federations conforming to the Swedish eID Framework are built around
-”Deployment Profile for the Swedish eID Framework”, [\[EidProfile](#eidprofile)\].
-This profile is influenced by, but not normatively dependent on, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. [\[EidProfile](#eidprofile)\] also contains rules and guidelines specific for the Swedish eID Framework.
+”Deployment Profile for the Swedish eID Framework”, \[[EidProfile](#eidprofile)\].
+This profile is influenced by, but not normatively dependent on, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. \[[EidProfile](#eidprofile)\] also contains rules and guidelines specific for the Swedish eID Framework.
 
 <a name="deployment-profile-for-the-swedish-eid-framework"></a>
 #### 2.1.1. Deployment Profile for the Swedish eID Framework
 
-The ”Deployment Profile for the Swedish eID Framework” specification, [\[EidProfile](#eidprofile)\], 
+The ”Deployment Profile for the Swedish eID Framework” specification, \[[EidProfile](#eidprofile)\], 
 is the main specification of the eID Framework and comprises of:
 
 - How SAML metadata is constructed and interpreted.
@@ -545,7 +540,7 @@ defines a "Signature Activation Protocol" (SAP) for implementation of "Sole Cont
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="eidprofile"></a>
 **\[EidProfile\]**

@@ -8,10 +8,10 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-11-09 - *Draft version*
+### Version 1.8 - 2021-11-01
 
 
-Registration number: **2019-311** (*previously: ELN-0606*)
+Registration number: **2019-311**
 
 ---
 

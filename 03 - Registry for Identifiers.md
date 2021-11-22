@@ -8,9 +8,9 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-11-09 - *Draft version*
+### Version 1.7 - 2021-11-11
 
-Registration number: **2019-309** (*previously: ELN-0603*)
+Registration number: **2019-309**
 
 ---
 

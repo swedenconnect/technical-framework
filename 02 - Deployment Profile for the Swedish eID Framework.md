@@ -8,9 +8,9 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-10-14 - *Draft version*
+### Version 1.7 - 2021-11-11
 
-Registration number: **2019-308** (*previously: ELN-0602*)
+Registration number: **2019-308**
 
 ---
 
@@ -1606,7 +1606,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="eidregistry"></a>
 **\[EidRegistry\]**
@@ -1626,8 +1626,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="seiddssprofile"></a>
 **\[EidDSS\_Profile\]**
-> [Implementation Profile for Using OASIS DSS in Central Signing
-> Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
+> [Implementation Profile for Using OASIS DSS in Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
 <a name="sigsap"></a>
 **\[SigSAP\]**

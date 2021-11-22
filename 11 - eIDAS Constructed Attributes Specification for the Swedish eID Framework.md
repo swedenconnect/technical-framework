@@ -8,14 +8,14 @@
 
 # eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
-### Version 1.2 - 2020-12-16 - *Draft version*
+### Version 1.2 - 2021-11-11
 
-Registration number: **2019-315** (*previously: ELN-0611*)
+Registration number: **2019-315**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -440,6 +440,7 @@ prid generation fails.
   private static final String personIdentifierPrefixRegexp = "^[A-Za-z]{2}[\\/](SE|se)[\\/]";
 
   public String getPridIdentifierComponent(String personIdentifier) throws PridGenerationException {
+    
     if (personIdentifier == null) {
       throw new PridGenerationException("Missing personIdentifier");
     }
