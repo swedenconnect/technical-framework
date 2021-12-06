@@ -8,9 +8,9 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-10-14 *Draft version*
+### Version 1.7 - 2021-11-11
 
-Registration number: **2019-310** (*previously: ELN-0604*)
+Registration number: **2019-310**
 
 ---
 
@@ -322,7 +322,7 @@ The following attributes are defined for use within the attribute profile for th
 | displayName | urn:oid:2.16.840.1.<br/>113730.3.1.241 | Display Name | A name in any preferred presentation format. | No | No | Valfrid Lindeman |
 | gender | urn:oid:1.3.6.1.5.5.7.9.3 | Gender | A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender. | No | No | M |
 | personalIdentity-<br/>Number | urn:oid:1.2.752.29.4.13 | National civic registration number/code | Swedish ”personnummer” or ”samordningsnummer” according to [SKV 704](#skv704) and [SKV 707](#skv707). 12 digits without hyphen. | No | No | 195006262546 |
-| previousPersonal-<br/>IdentityNumber | 1.2.752.201.3.15 | A user's previous national civic registration number, see [section 3.2.6](#the-previouspersonalidentitynumber-attribute) below. | See `personalIdentityNumber` above. | No | No | 197010632391 |
+| previousPersonal-<br/>IdentityNumber | urn:oid:1.2.752.201.3.15 | A user's previous national civic registration number, see [section 3.2.6](#the-previouspersonalidentitynumber-attribute) below. | See `personalIdentityNumber` above. | No | No | 197010632391 |
 | dateOfBirth | urn:oid:1.3.6.1.5.5.7.9.1 | Date of birth | Date of birth expressed using the format YYYY-MM-DD. | No | No | 1950-06-26 |
 | birthName | urn:oid:1.2.752.201.3.8 | Name at the time of birth | Full name of a person at birth. | No | No | Valfrid Danielsson |
 | street | urn:oid:2.5.4.9 | Street address | Street address. | No | No | Mosebacke torg 3 |
@@ -762,8 +762,7 @@ following attribute:
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
-
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="eiddeployprof"></a>
 **\[EidDeployProf\]**
@@ -771,8 +770,7 @@ following attribute:
 
 <a name="constructedattr"></a>
 **\[ConstructedAttr\]**
-> [eIDAS Constructed Attributes Specification for the Swedish eID
-> Framework](https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
+> [eIDAS Constructed Attributes Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas-attr"></a>
 **\[eIDAS\_Attr\]**

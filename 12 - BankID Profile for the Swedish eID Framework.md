@@ -8,14 +8,14 @@
 
 # Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-### Version 1.3 - 2020-12-17 - *Draft*
+### Version 1.3 - 2021-11-11
 
-Registration number: **2019-316** (*previously: ELN-0612*)
+Registration number: **2019-316**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -549,15 +549,13 @@ It is RECOMMENDED that a Signature Service explicitly requires release of the `u
 
 <a name="bankid-spec"></a>
 **\[BankID_Spec\]**
-> [BankID Relying Party Guidelines, version 3.5](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.5.pdf).
-> 
-> *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
+> [BankID Relying Party Guidelines, version 3.6](https://www.bankid.com/assets/bankid/rp/bankid-relying-party-guidelines-v3.6.pdf).
+
+> Check <https://www.bankid.com/utvecklare/guider> for the latest version.
 
 <a name="bankid-md"></a>
 **\[BankID_MD\]**
-> [BankID - Guidelines for Formatted Text, version 1.1](https://www.bankid.com/assets/bankid/rp/guidelines-for-formatted-text-v1.1.pdf).
-
-> *Check [www.bankid.com/rp/info](https://www.bankid.com/rp/info) for lastest version.*
+> [BankID - Guidelines for Formatting Text](https://www.bankid.com/utvecklare/guider/formatera-text).
 
 <a name="eid-profile"></a>
 **\[EidProfile\]**

@@ -8,10 +8,10 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-10-14 - *Draft version*
+### Version 1.8 - 2021-11-01
 
 
-Registration number: **2019-311** (*previously: ELN-0606*)
+Registration number: **2019-311**
 
 ---
 
@@ -35,21 +35,35 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 2. [**Definitions for Service Entity Categories**](#definitions-for-service-entity-categories)
 
-    2.1. [loa3-pnr](#loa3-pnr)
+    2.1. [Natural Personal Identity with Civic Registration Number](#natural-personal-identity-with-civic-registration-number)
+    
+    2.1.1. [loa2-pnr](#loa2-pnr)
+    
+    2.1.2. [loa3-pnr](#loa3-pnr)
 
-    2.2. [loa2-pnr](#loa2-pnr)
+    2.1.3. [loa4-pnr](#loa4-pnr)
+    
+    2.1.4. [eidas-pnr-delivery](#eidas-pnr-delivery)
+    
+    2.2. [eIDAS Natural Person Attribute Set](#eidas-natural-person-attribute-set)
 
-    2.3. [loa4-pnr](#loa4-pnr)
+    2.2.1. [eidas-naturalperson](#eidas-naturalperson)
+    
+    2.3. [Organizational Identity for Natural Persons](#organizational-identity-for-natural-persons)
+    
+    2.3.1. [loa2-orgid](#loa2-orgid)
+    
+    2.3.2. [loa3-orgid](#loa3-orgid)
+    
+    2.3.3. [loa4-orgid](#loa4-orgid)
+    
+    2.4. [Natural Personal Identity without Civic Registration Number](#natural-personal-identity-without-civic-registration-number)
 
-    2.4. [eidas-naturalperson](#eidas-naturalperson)
+    2.4.1. [loa2-name](#loa2-name)
+        
+    2.4.2. [loa3-name](#loa3-name)
     
-    2.5. [eidas-pnr-delivery](#eidas-pnr-delivery)
-    
-    2.6. [loa3-hsaid](#loa3-hsaid)
-    
-    2.7. [loa3-orgid](#loa3-orgid)
-    
-    2.8. [loa3-name](#loa3-name)
+    2.4.3. [loa4-name](#loa4-name)
 
 3. [**Definitions for Service Property Categories**](#definitions-for-service-property-categories)
 
@@ -93,12 +107,12 @@ under the `<mdattr:EntityAttributes>` element
 (\[[SAML2MetaAttr](#saml2metaattr)\]) for an `<md:Extensions>` element
 (\[[SAML2Meta](#saml2meta)\]).
 
-    <md:EntityDescriptor entityID="https://eid2.example.com/entityid">
+    <md:EntityDescriptor entityID="https://eid.example.com/entityid">
       <md:Extensions>
         <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
         ... 
           <saml:Attribute Name="http://macedir.org/entity-category"
-                                   NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                          NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">
               http://id.elegnamnden.se/ec/1.0/loa3-pnr
             </saml:AttributeValue>    
@@ -227,7 +241,7 @@ single entity category attribute.
         <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">    
         ...    
           <saml:Attribute Name="http://macedir.org/entity-category"
-                                   NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">    
+                          NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">    
             <saml:AttributeValue xsi:type="xs:string">
               http://id.elegnamnden.se/ec/1.0/loa3-pnr
             </saml:AttributeValue>
@@ -247,8 +261,9 @@ single entity category attribute.
 <a name="definitions-for-service-entity-categories"></a>
 ## 2. Definitions for Service Entity Categories
 
-This section contains a listing of all Service Entity Categories that
-are defined within the framework for Swedish eID.
+This section contains a listing of Service Entity Categories that are defined within 
+the Swedish eID Framework. This listing may not be complete, and the federation operator
+may define additional categories.
 
 All service entity category identifiers are prefixed with
 `http://id.elegnamnden.se/ec` or `http://id.swedenconnect.se/ec` (defined after Aug. 2018).
@@ -261,72 +276,57 @@ This specification does not impose any other limitations on what requirements or
 
 **Note**: A providing service that does not comply with any of the defined service entity categories may define its own service entity category identifier in order to utilize the entity category matching rules. Any service entity category identifier defined outside of this specification should use the prefix `http://id.swedenconnect.se/ec/<org>`, where `org` is the defining organization's identifier.
 
-<a name="loa3-pnr"></a>
-### 2.1. loa3-pnr
+<a name="natural-personal-identity-with-civic-registration-number"></a>
+### 2.1. Natural Personal Identity with Civic Registration Number
 
-**URL**: `http://id.elegnamnden.se/ec/1.0/loa3-pnr`
-
-**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number” (ELN-AP-Pnr-01).
-
-**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
-
-**Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
-> Natural Personal Identity with Civic Registration Number.
+This section define Service Entity Categories that has attribute requirements 
+according to the "Natural Personal Identity with Civic Registration Number" 
+(`http://id.elegnamnden.se/ap/1.0/pnr-01`) attribute set as defined in section 2.3 
+of \[[EidAttributes](#eidattributes)\].
 
 **Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute. 
 
 <a name="loa2-pnr"></a>
-### 2.2. loa2-pnr
+#### 2.1.1. loa2-pnr
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa2-pnr`
 
-**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
+> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
 
-**Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
-> Natural Personal Identity with Civic Registration Number.
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01`
 
-**Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
+<a name="loa3-pnr"></a>
+#### 2.1.2. loa3-pnr
+
+**URL**: `http://id.elegnamnden.se/ec/1.0/loa3-pnr`
+
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
+
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01`
 
 <a name="loa4-pnr"></a>
-### 2.3. loa4-pnr
+#### 2.1.3. loa4-pnr
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa4-pnr`
 
-**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number” (ELN-AP-Pnr-01).
+**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
 
-**Attribute requirements**: ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`)
-> Natural Personal Identity with Civic Registration Number
-
-**Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
-
-
-<a name="eidas-naturalperson"></a>
-### 2.4. eidas-naturalperson
-
-**URL**: `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson`
-
-**Description**: User authentication according to any of the eIDAS assurance levels and attribute release according to “eIDAS Natural Person Attribute Set” (ELN-AP-eIDAS-NatPer-01).
-
-**LoA-identifier**:   Not applicable
-> It does not make sense to specify the level of assurance for a Service
-> Entity Categories intended for eIDAS since this information is not known
-> to the Swedish eIDAS-node.
-
-**Attribute requirements**: ELN-AP-eIDAS-NatPer-01 (`http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`)
-> eIDAS Natural Person Attribute Set
-
-**Note**: Attribute release according to the `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` attribute set may include the `mappedPersonalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01`
 
 <a name="eidas-pnr-delivery"></a>
-### 2.5. eidas-pnr-delivery
+#### 2.1.4. eidas-pnr-delivery
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery`
 
-**Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entity other than Identity Provider providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
+**Description**: For asserting a Swedish identity to a foreign service provider via the Swedish eIDAS Proxy Service. This entity category MUST NOT be set by any entities other than Identity Providers providing identity assertions to the Swedish eIDAS Proxy Service and by the Swedish eIDAS Proxy Service itself.
 
 Attribute release is based on the "Natural Personal Identity with Civic Registration Number" attribute set with the addition of a mandatory `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`). The reason for the mandatory `dateOfBirth`-attribute is that this information is required by the eIDAS minimum dataset and therefore must be obtained by the receiving eIDAS Proxy Service. Date of birth can not always reliably be derived from the `personalIdentityNumber` attribute.
 
@@ -335,46 +335,109 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 **LoA-identifier**: Not applicable
 > An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[[EidRegistry](#eidregistry)\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[[EidDeploy](#eiddeploy)\].
 
-**Attribute requirements**: 
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01` where the `dateOfBirth` attribute (`urn:oid:1.3.6.1.5.5.7.9.1`) is mandatory.
 
-- ELN-AP-Pnr-01 (`http://id.elegnamnden.se/ap/1.0/pnr-01`) 
+<a name="eidas-natural-person-attribute-set"></a>
+### 2.2. eIDAS Natural Person Attribute Set
 
-> Natural Personal Identity with Civic Registration Number (personnummer)
+<a name="eidas-naturalperson"></a>
+#### 2.2.1. eidas-naturalperson
 
-* `dateOfBirth`-attribute (`urn:oid:1.3.6.1.5.5.7.9.1`).
+**URL**: `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson`
 
-<a name="loa3-hsaid"></a>
-### 2.6. loa3-hsaid
+**Description**: User authentication according to any of the eIDAS assurance levels and attribute release according to “eIDAS Natural Person Attribute Set” (see section 2.5 of \[[EidAttributes](#eidattributes)\]).
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-hsaid`
+**LoA-identifier**:   Not applicable
+> It does not make sense to specify the level of assurance for a Service
+> Entity Categories intended for eIDAS since this information is not known
+> to the Swedish eIDAS-node.
 
-**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Person Identity with HSA-ID” (DIGG-AP-HSAid-01).
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`
 
-**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+**Note**: Attribute release according to the `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` attribute set may include the `mappedPersonalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute.
 
-**Attribute requirements**: DIGG-AP-HSAid-01 (`http://id.swedenconnect.se/ap/1.0/hsaid-01`)
-> Natural Person Identity with HSA-ID. 
+<a name="organizational-identity-for-natural-persons"></a>
+### 2.3. Organizational Identity for Natural Persons
+
+This section define Service Entity Categories that has attribute requirements 
+according to the "Organizational Identity for Natural Persons" 
+(`http://id.elegnamnden.se/ap/1.0/org-person-01`) attribute set as defined in section 2.4 
+of \[[EidAttributes](#eidattributes)\].
+
+<a name="loa2-orgid"></a>
+#### 2.3.1. loa2-orgid
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa2-orgid`
+
+**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
+> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
+
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/org-person-01`
 
 <a name="loa3-orgid"></a>
-### 2.7. loa3-orgid
+#### 2.3.2. loa3-orgid
 
 **URL**: `http://id.swedenconnect.se/ec/1.0/loa3-orgid`
 
-**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons” (ELN-AP-OrgPerson-01).
+**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
 
-**Attribute requirements**: ELN-AP-OrgPerson-01 (`http://id.elegnamnden.se/ap/1.0/org-person-01`)
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/org-person-01`
+
+<a name="loa4-orgid"></a>
+#### 2.3.3. loa4-orgid
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa4-orgid`
+
+**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
+> Or a corresponding LoA 4 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
+
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/org-person-01`
+
+<a name="natural-personal-identity-without-civic-registration-number"></a>
+### 2.4. Natural Personal Identity without Civic Registration Number
+
+This section define Service Entity Categories that has attribute requirements 
+according to the "Natural Personal Identity without Civic Registration Number" 
+(`http://id.elegnamnden.se/ap/1.0/natural-person-01`) attribute set as defined in section 2.2 
+of \[[EidAttributes](#eidattributes)\].
+
+<a name="loa2-name"></a>
+### 2.4.1. loa2-name
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa2-name`**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
+> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
+
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/natural-person-01`
 
 <a name="loa3-name"></a>
-### 2.8. loa3-name
+### 2.4.2. loa3-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number” (ELN-AP-NaturalPerson-01).
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
+> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
 
-**Attribute requirements**: ELN-AP-NaturalPerson-01 (`http://id.elegnamnden.se/ap/1.0/natural-person-01`)
-> Natural Personal Identity without Civic Registration Number. 
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/natural-person-01`
+
+<a name="loa4-name"></a>
+### 2.4.3. loa4-name
+
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa4-name`**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+
+**LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
+> Or a corresponding LoA 4 URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\].
+
+**Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/natural-person-01`
+
 
 <a name="definitions-for-service-property-categories"></a>
 ## 3. Definitions for Service Property Categories
@@ -573,7 +636,7 @@ in its metadata.
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf).
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**
@@ -596,14 +659,18 @@ in its metadata.
 
 **Changes between version 1.7 and version 1.8:**
 
-- Section 2.7, loa3-orgid, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-orgid`.
+- Section 2 was re-structured where new entity categories for loaX-orgid and loaX-name.
 
-- Section 2.8, loa3-name, was added defining the service entity category `http://id.swedenconnect.se/ec/1.0/loa3-name`.
+- The Service Entity Category loa3-hsaid was removed. Its use is out of scope for 
+  the Swedish eID Framework. However, it may be defined by the federation operator.
 
 - Section 6.2, accepts-coordination-number, defining the general entity category 
 `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
 This category introduces an opt-in feature for accepting Swedish coordination numbers
 delivered in the `personalIdentityNumber` attribute.
+
+- For many services entity categories we have added the following text under the "LoA-identifier" requirement: "Or a corresponding LoA X URI". This means that the service entity category
+also applies to variants to the official LoA URI (defined in \[[EidRegistry](#eidregistry)\]).
 
 **Changes between version 1.6 and version 1.7:**
 

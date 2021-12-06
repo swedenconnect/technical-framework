@@ -8,9 +8,9 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-10-14 - *Draft version*
+### Version 1.7 - 2021-11-11
 
-Registration number: **2019-309** (*previously: ELN-0603*)
+Registration number: **2019-309**
 
 ---
 
@@ -33,6 +33,10 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1. [URL Identifiers](#url-identifiers)
 
     3.1.1. [Authentication Context URIs](#authentication-context-uris)
+    
+    3.1.1.1. [Authentication Context URIs for Swedish Non-residents](#authentication-context-uris-for-swedish-non-residents)
+    
+    3.1.1.2. [Authentication Context URIs for Uncertified Providers](#authentication-context-uris-for-uncertified-providers)
 
     3.1.2. [Attribute Sets](#attribute-sets)
 
@@ -64,7 +68,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
 
-    3.2. [OID Identifiers](#oid-identifiers)
+    3.2. [OID Identifiers](#oid-identifiers3)
 
     3.2.1. [ASN.1 Declarations](#asn1-declarations)
 
@@ -195,7 +199,6 @@ Authentication Context URIs representing assurance levels (Tillitsnivåer) relev
 | `http://id.elegnamnden.se/loa/1.0/loa1` | Assurance level 1. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa2` | Assurance level 2. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/loa3` | Assurance level 3. | \[[TillitRamv](#tillitramv)\] |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | A URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | |
 | `http://id.elegnamnden.se/loa/1.0/loa4` | Assurance level 4. | \[[TillitRamv](#tillitramv)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-low`<sup>\*</sup> | Authentication accordance to eIDAS assurance level low for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
 | `http://id.elegnamnden.se/loa/1.0/eidas-sub`<sup>\*</sup> | Authentication accordance to eIDAS assurance level substantial for non-notified and notified eID schemes. | \[[eIDAS](#eidas)\] |
@@ -220,10 +223,60 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 
 -   `http://eidas.europa.eu/NotNotified/LoA/high` (for non-notified eID schemes)
 
-> \[*\]: The authentication context URI:s are intended to be used to represent authentication over the eIDAS
-authentication framework using an official eIDAS-connector. Authorization to issue assertions using these 
-authentication context URI:s is determined by declaration of the "assurance certification" for the connector (see section 2.1.3 of \[[EidDeploy](#eiddeploy)\]).
+> \[*\]: The authentication context URI:s are intended to be used to represent authentication
+over the eIDAS authentication framework using an official eIDAS-connector. Authorization to 
+issue assertions using these authentication context URI:s is determined by declaration of the
+"assurance certification" for the connector (see section 2.1.3 of \[[EidDeploy](#eiddeploy)\]).
 
+<a name="authentication-context-uris-for-swedish-non-residents"></a>
+##### 3.1.1.1. Authentication Context URIs for Swedish Non-residents
+
+The Swedish assurance framework, \[[TillitRamv](#tillitramv)\], states that a Swedish eID
+according to any of the defined assurance levels must only be issued to an individual holding
+a Swedish personal identity number (personnummer) or a Swedish coordination number 
+(samordningsnummer).
+
+In some cases, a certified eID-issuer may also issue eIDs to persons that do not hold
+a Swedish identity number (non-residents). If this is the case, and the original 
+identification of the person has a strength that corresponds to the requirements 
+put in \[[TillitRamv](#tillitramv)\], a certified Identity Provider MAY use the URIs
+defined below:
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa2-nonresident` | A URI that is indented to be used by a level 2-certified providers that authenticate a non-resident eID holder according to assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa3-nonresident` | A URI that is indented to be used by a level 3-certified providers that authenticate a non-resident eID holder according to assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa4-nonresident` | A URI that is indented to be used by a level 4-certified providers that authenticate a non-resident eID holder according to assurance level 4 - `http://id.elegnamnden.se/loa/1.0/loa4`. | This document |
+
+**Note:** An Identity Provider that includes any of the above URIs in an issued assertion
+MUST NOT provide the `personalIdentityNumber` attribute in the assertion. This is per
+definition since these URIs are intended to be used for non-residents (i.e., they do not hold
+a Swedish identity number).
+
+<a name="authentication-context-uris-for-uncertified-providers"></a>
+##### 3.1.1.2. Authentication Context URIs for Uncertified Providers
+
+The assurance levels defined in section [3.1.1](#authentication-context-uris) may only be 
+used by Identity Providers that have been reviewed and approved by the Swedish Agency for 
+Digital Government (DIGG) according to \[[TillitRamv](#tillitramv)\]. For Identity Providers 
+that have not undergone a review process but make a self declaration to be compliant 
+with \[[TillitRamv](#tillitramv)\] this specification defines the following authentication
+context URIs:
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
+
+Proxy Identity Providers that have eIDAS authentication as an option MUST NOT use the eIDAS
+authentication context URIs defined in section [3.1.1](#authentication-context-uris). 
+Instead they should use:
+
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-low` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-low` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-sub` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-sub` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-high` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-high` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` in an assertion from the official Swedish eIDAS-connector. | This document |
 
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
@@ -252,16 +305,20 @@ Identifiers for entity categories representing alternative sets of requirements.
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.elegnamnden.se/ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-pnr` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”ELN-AP-Pnr-01”. | |
-| `http://id.elegnamnden.se/ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set ”ELN-AP-Pnr-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set “ELN-AP-eIDAS-NatPer-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.elegnamnden.se/ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”DIGG-AP-HSAid-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/sc/`<br/>`uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ”DIGG-AP-HSAid-01”. | |
-| `http://id.swedenconnect.se/ec/1.0/loa3-orgid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-OrgPerson-01”. | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/ec/1.0/loa3-name` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ”ELN-AP-NaturalPerson-01”. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/loa2-pnr` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/loa3-pnr` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/sc/uncertified-loa3-pnr` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.elegnamnden.se/`<br />`ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ´http://id.swedenconnect.se/ap/1.0/hsaid-01´. |  |
+| `http://id.swedenconnect.se/`<br />`ec/sc/uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ´http://id.swedenconnect.se/ap/1.0/hsaid-01´. | |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa2-orgid` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-orgid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa4-orgid` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa2-name` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-name` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa4-name` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
 
 <a name="entity-categories-for-service-properties"></a>
 ##### 3.1.3.2. Entity Categories for Service Properties
@@ -395,7 +452,7 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 
 > A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.
 
-<a name="oid-identifiers"></a>
+<a name="oid-identifiers3"></a>
 ### 3.2. OID Identifiers
 
 Defined categories:
@@ -415,6 +472,7 @@ The following OIDs are defined in the ASN.1 declarations in [3.2.1](#asn1-declar
 | :--- | :--- | :--- |
 | 1.2.752.201.5.1 | Authentication Context Extension | \[[RFC7773](#rfc7773)\] |
 | 1.2.752.201.5.2 | Signature Validation Token Extension | \[[SVT-PDF](#svt-pdf)\] |
+| 1.2.752.201.2.1 | Object identifier for the Signature Validation Token RFC 3161 timestamp policy | |
 | 1.2.752.201.3.1 | Organization Affiliation Attribute | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.2 | Transaction Identifier | \[[EidAttributes](#eidattributes)\] |
 | 1.2.752.201.3.3 | Authentication Context Parameters | \[[EidAttributes](#eidattributes)\] |
@@ -453,7 +511,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
     -- Sweden Connect OIDs for test
 
-    -- Sweden Connect Policy
+    -- Sweden Connect Policies
+    id-pol-svt-ts-policy         OBJECT IDENTIFIER ::= { id-pol 1 }     -- SVT RFC 3161 timestamp policy
 
     -- Sweden Connect Attributes
     id-attr-org-affiliation      OBJECT IDENTIFIER ::= { id-attr 1 }    -- Organizational affiliation
@@ -471,7 +530,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
     id-attr-auth-srv-signature   OBJECT IDENTIFIER ::= { id-attr 13 }   -- Authentication server signature
     id-attr-sign-message-digest  OBJECT IDENTIFIER ::= { id-attr 14 }   -- Sign message digest
     id-attr-previous-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }   -- Previous personal identity number
-    id-attr-mapped-pid-number  OBJECT IDENTIFIER ::= { id-attr 15 }     -- Mapped personal identity number
+    id-attr-mapped-pid-number    OBJECT IDENTIFIER ::= { id-attr 16 }   -- Mapped personal identity number
     
     -- Sweden Connect QC Statement extension
     id-qcs-sid         OBJECT IDENTIFIER ::= { id-qcs 1 }   -- Semantics Identifiers
@@ -498,7 +557,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverk för Svensk e-legitimation - 2018-158](https://docs.swedenconnect.se/technical-framework/mirror/digg/Tillitsramverk-for-Svensk-e-legitimation-2018-158.pdf)
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
 
 <a name="rfc7773"></a>
 **\[RFC7773\]**
@@ -555,11 +614,15 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 - Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` and `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
 
-- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added.
+- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added and one OID for a SVT timestamp policy.
 
 - Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
 
 - In section 3.2, the attributes for "previous personal identity number" (`1.2.752.201.3.15`) and  "mapped personal identity number" (`1.2.752.201.3.16`) were added.
+
+- Section 3.1.3.1, "Service Entity Categories", was updated with categories for loaX-name and loaX-orgid.
+
+- Authentication context URIs for non-residents and uncertified providers were added to sections 3.1.1.1 and 3.1.1.2.
 
 **Changes between version 1.5 and version 1.6:**
 
