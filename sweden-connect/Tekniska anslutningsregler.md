@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2021-12-10
+### 2021-12-12 - Utkast
 
 ---
 
@@ -32,7 +32,39 @@ Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvalt
    
    1.2. [Tillitsnivåer och identifierare för legitimering](#tillitsnivaer)
    
+   1.2.1. [Svenska tillitsnivåer](#svenska-tillitsnivaer)
+   
+   1.2.2. [Tillitsnivåer enligt eIDAS](#tillitsnivaer-enligt-eidas)
+   
+   1.2.3. [Identifierare för tillitsnivåer](#identifierare-for-tillitsnivaer)
+   
+   1.3. [Legitimeringstjänster inom Sweden Connect](#legitimeringstjanster-inom-sweden-connect)
+   
+   1.3.1. [Granskning avseende uppfyllnad av Tekniskt ramverk](#granskning-avseende-uppfyllnad-av-tekniskt-ramverk)
+   
+   1.3.2. [Publicering av instanser till Sweden Connect-miljöer](#publicering-av-instanser-till-sweden-connect-miljeer)
+   
+   1.3.3. [Specifika krav för aktörsspecifika legitimeringstjänster](#aktorsspecifika-legitimeringstjanster)
+   
+   1.3.4. [Uppfyllnad av Tekniskt ramverk över tid](#uppfyllnad-av-tekniskt-ramverk-over-tid)
+   
 2. [**Legitimering och leverans av identitetsintyg**](#legitimering-och-leverans-av-identitetsintyg)
+
+   2.1. [Användargränssnitt](#anvandargranssnitt)
+
+   2.1.1. [Felhantering och rapportering](#felhantering-och-rapportering)
+   
+   2.1.2. [Information om identitetsattribut](#information-om-identitetsattribut)
+   
+   2.2. [Krav rörande Single-sign-on](#krav-rorande-single-sign-on)
+   
+   2.3. [Krav på attributleverans](#krav-pa-attributleverans)
+   
+   2.3.1. [Leverans av intyg till den svenska eIDAS-noden](#leverans-av-intyg-till-den-svenska-eidas-noden)
+
+   2.3.2. [Övriga attribut](#ovriga-attribut)
+   
+   2.4. [Specifika krav rörande Tillitsnivå 4](#specifika-krav-rorande-tillitsniva-4)
    
 3. [**Metadata**](#metadata)
 
@@ -98,18 +130,21 @@ krav baserat på avtalens utformning och de tekniska kraven i [Sweden Connect - 
 ### 1.1. Avtal
 
 Deltagare inom Sweden Connect-federationen har tecknat ett, eller flera, anslutningsavtal. 
-Dessa avtal definierar vilken typ av legitimering som levereras/efterfrågas, samt frågor 
-såsom avgifter och ansvarsfrågor. Denna specifikation berör endast de tekniska aspekterna av de olika avtalen, d.v.s., hur legitimering går till och vilka krav som ställs på en viss aktör
+Dessa avtal definierar vilken typ av legitimering som levereras/efterfrågas, samt områden 
+såsom avgifter och ansvarsfrågor. Denna specifikation berör endast de tekniska aspekterna av
+de olika avtalen, d.v.s., hur legitimering går till och vilka krav som ställs på en viss aktör
 rörande registrering etc.
 
 <a name="valfrihetssystem-2017"></a>
 #### 1.1.1. Valfrihetssystem 2017
 
-[Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) är ett avtal som ger förlitande parter tillgång till godkända, och granskade, legitimeringstjänst(er) som levererar identitetsintyg utställda enligt tillitsnivå 3 (eller 4), och innehållande personnummerinformation. Legitimeringstjänster som levererar 
-enligt Valfrihetssystem 2017 har tecknat [Anslutningsavtal för leverantör avseende
-Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/dokument/digital-identitet/e-legitimering/valfrihetssystem-2017-e-legitimering/anslutningsavtal-leverantor-valfrihetssystem-2017.docx).
+[Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) är ett avtal som ger förlitande parter tillgång till godkända, och granskade, legitimeringstjänst(er) som levererar identitetsintyg utställda enligt tillitsnivå 3 (eller 4), och innehållande personnummerinformation. 
 
 > Endast offentliga aktörer kan teckna detta avtal.
+
+Legitimeringstjänster som levererar enligt Valfrihetssystem 2017 har tecknat 
+[Anslutningsavtal för leverantör avseende
+Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/dokument/digital-identitet/e-legitimering/valfrihetssystem-2017-e-legitimering/anslutningsavtal-leverantor-valfrihetssystem-2017.docx).
 
 <a name="internationell-legitimering-eidas"></a>
 #### 1.1.2. Internationell legitimering - eIDAS
@@ -123,21 +158,23 @@ Detta avtal ger en förlitande part rätt att nyttja den svenska eIDAS-noden fö
 <a name="eid-for-medarbetare"></a>
 #### 1.1.3. eID för medarbetare
 
-Avtalet [Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstlegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 3 eller 4
+[Avtal för förlitandepart - Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstlegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 3 eller 4
 och att de levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4a7622/globalassets/dokument/digital-identitet/eid-for-medarbetare/2021-09-17-anslutningsavtal-leverantor.pdf).
 
-> Endast offentliga aktörer kan teckna detta avtal.
+> Endast offentliga förlitande parter kan teckna [Avtal för förlitandepart - Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf).
 
 <a name="bilaterala-avtal-om-legitimering"></a>
 #### 1.1.4. Bilaterala avtal om legitimering
 
 En förlitande part som har tecknat något av de ovanstående DIGG-avtalen kan också
 teckna bilaterala avtal med leverantörer angående legitimeringstjänster som inte
-erbjuds via de befintliga DIGG-avtalen. Detta kan till exempel vara en tredjeparts-legitimeringstjänst för BankID (som inte finns som officiell legitimeringstjänst i Sweden Connect).
+erbjuds via de befintliga DIGG-avtalen. Detta kan till exempel vara en 
+tredjeparts-legitimeringstjänst för BankID (som inte finns som officiell legitimeringstjänst 
+i Sweden Connect).
 
 Aktören har i dessa fall rätt att begära av federationsoperatören (DIGG) att dessa 
 "aktörsspecifika" legitimeringstjänster publicerar sin metadata i Sweden Connect-federationen
-(under aktörens ansvar). Se kapitel [1.3.2](#aktorsspecifika-legitimeringstjanster) nedan.
+(under aktörens ansvar). Se kapitel [1.3.3](#aktorsspecifika-legitimeringstjanster) nedan.
 
 > Notera: Leverantörer som levererar t.ex. BankID-tjänster inom Sweden Connect kan ha
 avtal med flera olika förlitande parter. Leverantören kan då ha **en** instans av en
@@ -154,31 +191,28 @@ samt de olika identifierare som används för att representera olika typer av le
 <a name="svenska-tillitsnivaer"></a>
 #### 1.2.1. Svenska tillitsnivåer
 
-DIGG:s tillitsramverk, [Tillitsramverk för kvalitetsmärket Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket) definierar
-tre tillitsnivåer; 2, 3 or 4, varav tillitsnivå 3 och 4 för närvarande används inom
-Sweden Connect.
+DIGG:s tillitsramverk, [Tillitsramverk för kvalitetsmärket Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket), definierar tre tillitsnivåer; 2, 3 or 4, 
+varav tillitsnivå 3 och 4 för närvarande används inom Sweden Connect.
 
 För att en legitimeringstjänst skall ha tillåtelse att legitimera och utfärda intyg
 enligt någon av dessa nivåer måste eID-utfärdaren **och** legitimeringstjänsten ha
-granskats och godkänds av DIGG. 
+granskats och godkänts av DIGG. 
 
 Se https://www.digg.se/digital-identitet/e-legitimering/leverantor för mer information angående ansökan om granskning.
 
 <a name="tillitsnivaer-enligt-eidas"></a>
 #### 1.2.2. Tillitsnivåer enligt eIDAS
 
-TODO
+EU-förordningen eIDAS, [nr 910/2014](https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX%3A32014R0910),
+definierar tre olika tillitsnivåer: "low", "substantial" och "high". Dessa motsvarar i princip
+de svenska nivåerna 2, 3 och 4, men det finns vissa skillnader vilket gör att en översättning mellan 
+nivåerna inte låter sig göras.
 
-<a name="ovrig-legitimering"></a>
-#### 1.2.3. Övrig legitimering
-
-Inom Sweden Connect tillåts även tredjeparts-legitimeringstjänster som inte nödvändigtvis
-är granskade och godkända enligt någon av de svenska tillitsnivåerna som beskrivs ovan.
-
-TODO
+Svenska förlitande parts som legitimerar individer genom eIDAS-legitimering, via den svenska eIDAS-noden,
+måste därför kunna hantera tillitsidentifierare för eIDAS (se nedan).
 
 <a name="identifierare-for-tillitsnivaer"></a>
-#### 1.2.4. Identifierare för tillitsnivåer
+#### 1.2.3. Identifierare för tillitsnivåer
 
 Inom Sweden Connect representeras en legitimeringoperation genom s.k. 
 "Authentication Context URI:er". Dessa beskrivs i kapitel 3.1.1 av 
@@ -231,7 +265,7 @@ typer av eID:n skall då använda följande identifierare:
 I båda ovanstående fall krävs att utfärdandet av e-legitimationen följer tillitsramverket med
 undantag av kravet på personnummer/samordningsnummer.
 
-Kapitel [1.1.4](#bilaterala-avtal-om-legitimering) och [1.3.2](#aktorsspecifika-legitimeringstjanster) redogör för hur icke-tillitsgranskade legitimeringstjänster kan
+Kapitel [1.1.4](#bilaterala-avtal-om-legitimering) och [1.3.3](#aktorsspecifika-legitimeringstjanster) redogör för hur icke-tillitsgranskade legitimeringstjänster kan
 användas inom Sweden Connect-federationen. Eftersom dessa legitimeringstjänster inte
 är godkända enligt det svenska [tillitsramverket](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket) får de inte inkludera någon av de ovanstående
 identifierarna i identitetsintyg. Det står en tredjeparts-legitimeringstjänst fritt att
@@ -260,42 +294,237 @@ Notera att de inte finns möjlighet att begära granskning av en proxy-tjänst s
 den kan leverera de officiella identifierarna för eIDAS. Detta kan endast den officiella
 svenska eIDAS-noden göra.
 
-
+<a name="legitimeringstjanster-inom-sweden-connect"></a>
 ### 1.3. Legitimeringstjänster inom Sweden Connect
 
-#### 1.3.1. Tillitsgranskade legitimeringstjänster
+Kommande kapitel redogör för krav och regler gällande legitimering och metadataregistrering för 
+legitimeringstjänster och förlitande parter inom Sweden Connect-federationen. Detta kapitel går 
+igenom specifika regler som gäller för att en legitimeringstjänst skall få ansluta till
+Sweden Connect.
+
+<a name="granskning-avseende-uppfyllnad-av-tekniskt-ramverk"></a>
+#### 1.3.1. Granskning avseende uppfyllnad av Tekniskt ramverk
+
+Gemensamt för alla legitimeringstjänster, oavsett om de har genomgått en tillitsgranskning
+eller inte, är att de måste granskas och godkännas med avseende på uppfyllnad av [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/) innan anslutning kan ske.
+
+Begäran om en sådan granskning görs genom en dialog med DIGG.
+
+Följande steg ska genomföras:
+
+- Leverantören skall innan granskningen genomföra egna tester och verifiera stöd för de krav som ställs
+i [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/).
+
+- Leverantören skall tillhandahålla en IdP-instans som i största möjliga mån är konfigurerad och
+uppsatt som en "riktig" produktionstjänst (med undantag att testanvändare istället för riktiga
+individer ska användas för test av legitimering). Denna instans skall publiceras till Sweden Connect
+Sandbox-federationen (https://sandbox.swedenconnect.se), och den skall konsumera all SAML-metadata
+för alla förlitande parter däri.
+
+- Under testningen ska leverantören bistå med resurser kring uppkomna frågeställningar.
+
+När granskningen har slutförts och resultaten är godkända kan leverantören gå vidare för publicering
+av sin IdP-instans i Sweden Connect QA (se nedan).
+
+<a name="publicering-av-instanser-till-sweden-connect-miljeer"></a>
+#### 1.3.2. Publicering av instanser till Sweden Connect-miljöer
+
+Sweden Connect har tre olika miljöer:
+
+- Sweden Connect Sandbox - En testmiljö för initial testning. Alla aktörer, oavsett avtal, har rätt
+att ansluta till denna miljö. Se vidare https://sandbox.swedenconnect.se.
+
+- Sweden Connect QA - Sweden Connect:s officiella testmiljö. Endast aktörer som har avtal med DIGG
+har rätt att publicera metadata till denna miljö. Denna miljö ska vara en spegling av produktionsmiljön
+med det viktiga undantaget att endast testanvändare får förekomma (d.v.s., inga riktiga personnummer eller
+liknande tillåts). 
+
+- Sweden Connect produktion - Produktionsmiljön.
+
+En legitimeringstjänst som ansluter sig till Sweden Connect-federationen förbinder sig till att
+publicera en instans i Sweden Connect QA-federationen. Denna instans ska erbjuda samma funktionalitet som
+motsvarande instans i produktionsfederationen, med undantaget att endast testidentiteter får användas.
+
+> Det är alltså inte tillåtet att testa "nästa version av IdP:n" i Sweden Connect QA. Funktionaliteten
+måste motsvara produktionsfederationen. Testing av kommande versioner kan däremot med fördel utföras
+i Sweden Connect Sandbox.
+
+Först när en lyckosam publicering av tjänsten utförts i Sweden Connect QA tillåts leverantören 
+ansluta till Sweden Connect produktion.
 
 <a name="aktorsspecifika-legitimeringstjanster"></a>
-#### 1.3.2. Aktörsspecifika legitimeringstjänster 
+#### 1.3.3. Specifika krav för aktörsspecifika legitimeringstjänster 
 
-> Måste granskas med avseende på uppfyllnad av tekniskt ramverk
+Med en "aktörsspecifik" legitimeringstjänst avses en tjänst som inte ingår som leverantör enligt
+något av de avtal som DIGG tillhandahåller, utan är en legitimeringstjänst som läggs in i Sweden
+Connect under en förlitande parts ansvar (och avtal).
 
-> Gå igenom de regler som gäller för tredjeparts-IdP:er.
+Även dessa legitimeringstjänster måste uppfylla [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/) och övriga regler som gäller för legitimeringstjänster inom federationen.
 
-> Ta upp krav på proxy.
+Tredjeparts-legitimeringstjänster som levererar BankID-legitimering måste uppfylla de krav som
+anges i [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html).
 
-> BankID. Måste följa specen
+<a name="uppfyllnad-av-tekniskt-ramverk-over-tid"></a>
+#### 1.3.4. Uppfyllnad av Tekniskt ramverk över tid
 
+Nya versioner av [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/)
+kommer periodiskt att publiceras av DIGG. En legitimeringstjänst inom Sweden Connect måste stödja
+den senast publicerade versionen senast 180 dagar efter versionen publicerats.
+
+> DIGG kan komma att begära omgranskning av legitimeringstjänster efter en ny version av det Tekniska
+ramverket publicerats. 
 
 <a name="legitimering-och-leverans-av-identitetsintyg"></a>
 ## 2. Legitimering och leverans av identitetsintyg
 
-### 2.1. Allmänt
+[Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html) definierar hur en legitimeringsbegäran ("authentication request") ska byggas upp och hur leverans av identitetsintyg ska ske. Detta avsnitt kompletterar och förtydligar
+denna specifikation.
 
-[Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html) definierar hur en legitimeringsbegäran ("authentication request") ska byggas upp och hur leverans av identitetsintyg ska ske. Detta avsnitt går igenom detaljer rörande:
+<a name="anvandargranssnitt"></a>
+### 2.1. Användargränssnitt
 
-- Regler för hur legitimeringstjänster legitimerar användare, samt leverans av intyg.
+Legitimeringstjänstens användargränssnitt måste utformas på ett sådant sätt att det tydligt framgår 
+vilken förlitande part som har begärt legitimering. Visningsnamn och logotyp för den förlitande parten
+skall hämtas från den förlitande partens metadatapost, se kapitel [3.2](#registrering-av-visningsnamn-och-logotyp)
+nedan.
 
-- Råd och anvisningar kring hur en legitimeringsbegäran byggs upp.
+<a name="felhantering-och-rapportering"></a>
+#### 2.1.1. Felhantering och rapportering
+
+Eventuella fel som uppkommer under en legitimeringsprocess ska beskrivas tydligt för användaren,
+och användaren ska alltid ha en möjlighet att bekräfta att denne har tagit del av felmeddelandet.
+Då användaren bekräftar, d.v.s., klickar på “OK”, eller “Jag förstår”-knappen, skall ett SAML-responsmeddelande
+som indikerar felaktig autentisering postas tillbaka till den förlitande parten. 
+Se vidare kapitel 6.4 av [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#error-responses).
+
+<a name="information-om-identitetsattribut"></a>
+#### 2.1.2. Information om identitetsattribut
+
+En legitimeringstjänst bör i dess användargränssnitt upplysa användaren om vilka identitetsattribut
+som levereras för en given legitimering. Då legitimering sker enligt avtalet [Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering), eller motsvarande
+bilateralt avral, är detta inte ett strikt krav eftersom användaren i dessa fall förväntas förstå att 
+personnummer levereras. 
+
+Om legitimeringstjänsten levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4a7622/globalassets/dokument/digital-identitet/eid-for-medarbetare/2021-09-17-anslutningsavtal-leverantor.pdf), d.v.s., e-legitimationenen som används är anskaffad via 
+arbetsgivare, skall däremot legitimeringstjänsten alltid informera användaren om vilka identitetsinformation
+som levereras i ett intyg innan detta skickas tillbaka till den förlitande parten. Legitimeringstjänsten
+skall också erbjuda användaren ett sätt att avbryta legitimeringen efter denna information har visats.
+
+
+Anledningen för detta krav är att beroende på den förlitande partens krav kring attributleverans kan intyget
+innehålla endast organisationsidentitet, både organisationsidentitet och personnummerinformation, eller 
+enbart personnummerinformation. Eftersom vissa användare kan vara ovilliga att använda sitt personnummer i
+sin tjänsteutövning skall legitimeringstjänsten därför informera om vilka attribut som efterfrågas och 
+inkluderas i intyget.
+
+Legitimeringstjänsten är tillåten att “komma ihåg” eventuella svar kring tillåten attributleverans och inte
+visa upp denna information om användaren tidigare har godkänt attributleverans. Dock måste detta implementeras
+per förlitande part, d.v.s., per e-tjänst som användaren loggar in till.
+
+<a name="krav-rorande-single-sign-on"></a>
+### 2.2. Krav rörande Single-sign-on
+
+En legitimeringstjänst i Sweden Connect kan välja att stödja Single-sign-on, d.v.s., utställande av intyg 
+baserat på en tidigare utförd legitimering. Detta får ske om en legitimeringsbegäran inkommer inom 60
+minuter sedan den ursprungliga legitimeringen utfördes. En legitimeringstjänst kan välja att ha en kortare
+sessionstid, men gränsen på 60 minuter får inte överskridas.
+
+Varje gång en användare utför en fullständig legitimering hos legitimeringstjänsten flyttas tiden för
+den s.k. "ursprungslegitimeringen".
+
+Kapitel 5.4.5 av [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#single-sign-on-processing) 
+redogör för krav rörande återanvänd legitimering. Detta kapitel utökar dessa krav med följande:
+
+Om krav på visning av vilka identitetsattribut som levereras (se [2.1.2](#information-om-identitetsattribut) ovan)
+gäller för en viss legitimeringsbegäran, så gäller detta även om intyget som ställs ut baseras på en tidigare 
+utförd legitimering, d.v.s., användaren måste informeras även identitetsattribut även om ingen egentlig 
+legitimering utförs.
+
+<a name="krav-pa-attributleverans"></a>
+### 2.3. Krav på attributleverans
+
+Specifikationen [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html) deklarerar ett 
+antal "attribute sets", eller attributuppsättningar. Attributen som refereras i dessa uppsättningar har
+en koppling också till den tillitsnivå som en legitimeringstjänst är granskad och godkänd enligt. Utöver
+dessa attribut definieras också ett antal övriga attribut i [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html). Hur dessa kan användas inom Sweden Connect-federationen
+redogörs för i kapitel [2.3.2](#ovriga-attribut) nedan.
+
+Kraven på attributleverans baserat på DIGG:s leveransavtal är enligt följande:
+
+[Anslutningsavtal för leverantör avseende
+Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/dokument/digital-identitet/e-legitimering/valfrihetssystem-2017-e-legitimering/anslutningsavtal-leverantor-valfrihetssystem-2017.docx)
+
+> En legitimeringstjänst som levererar legitimering för förlitande parter som tecknat [Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) skall stödja följande attributuppsättningar:
+
+> - [Natural Personal Identity with Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number) - Personnummer/samordningsnummer samt för- och efternamn samt användarens "visningsnamn". 
+
+> - [Natural Personal Identity without Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number) - Användarens för- och efternamn samt "visningsnamn".
+
+[Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4a7622/globalassets/dokument/digital-identitet/eid-for-medarbetare/2021-09-17-anslutningsavtal-leverantor.pdf)
+
+> En legitimeringstjänst som levererar legitimering för förlitande parter som tecknat 
+[Avtal för förlitandepart - Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf) skall stödja följande 
+attributuppsättningar:
+
+> - [Organizational Identity for Natural Persons](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons) - Organisationsidentitet, organisationsnamn och användarens "visningsnamn".
+
+> - [Natural Personal Identity with Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number) - Personnummer/samordningsnummer samt för- och efternamn samt användarens "visningsnamn". 
+
+> - [Natural Personal Identity without Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number) - Användarens för- och efternamn samt "visningsnamn".
+
+Den svenska eIDAS-connectorn
+
+> Den svenska eIDAS-connectorn (eIDAS-noden) levererar enligt följande attributuppsättning:
+
+> - [eIDAS Natural Person Attribute Set](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#eidas-natural-person-attribute-set)
+
 
 <a name="leverans-av-intyg-till-den-svenska-eidas-noden"></a>
-### 2.X. Leverans av intyg till den svenska eIDAS-noden
+#### 2.3.1. Leverans av intyg till den svenska eIDAS-noden
 
-### 2.2. Personnummer
+De legitimeringstjänster som har en överenskommelse med DIGG om att kunna leverera identitetsintyg
+till den svenska eIDAS Proxy Service-noden (d.v.s., den eIDAS-nod som legitimerar innehavare av
+svenska e-legitimationer för inloggning i utländska e-tjänster) skall leverera enligt 
+attributuppsättningen [Natural Personal Identity with Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number) med det tillägg att också födelsedatum krävs.
 
-### 2.3. Organisationsidentitet
 
-### 2.4. eIDAS
+<a name="ovriga-attribut"></a>
+#### 2.3.2. Övriga attribut
+
+Kapitel 3 i [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#attribute-definitions) definierar
+fler attribut än vad som pekas ut i de attributuppsättningar som refereras tidigare i detta kapitel.
+En legitimeringstjänst i Sweden Connect har rätt att leverera andra attribut än de som ingår i de attributuppsättningar
+som refereras ovan under följande förutsättningar:
+
+- Det finns en bilateral överenskommelse mellan legitimeringstjänst och förlitande part rörande leverans av ytterligare attribut.
+
+- En förlitande part inkluderar en, eller flera, `RequestedAttribute`-element i sin metadata där leverans
+av attribut utöver attributuppsättningar (som styrs av deklarerade entitetskategorier, se nedan) begärs, se
+exempel nedan.
+
+```
+<md:AttributeConsumingService index="0" isDefault="true">
+  ...
+  <md:RequestedAttribute Name="urn:oid:0.9.2342.19200300.100.1.3" isRequired="false" />
+  <md:RequestedAttribute Name="urn:oid:2.5.4.20" isRequired="false" />
+</md:AttributeConsumingService>
+```
+
+*Exempel på hur en förlitande part begär leverans av attributen `mail` and `telephoneNumber`. Notera att
+`isRequired` är satt till `false` vilket innebär att den förlitande parten även accepterar intyg vilka
+inte inkluderar de önskade attributen.*
+
+
+<a name="specifika-krav-rorande-tillitsniva-4"></a>
+### 2.4. Specifika krav rörande Tillitsnivå 4
+
+För Legitimeringsbegäran och leverans av identitetsintyg enligt enligt tillitsnivå 4 är kravet
+att SAML-profilen [SAML V2.0 Holder-of-key Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf) används. Användandet av "Holder-of-key" enligt Sweden Connect Tekniskt Ramverk specificeras i [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+
+För att den höjda säkerheten med användandet av "Holder-of-key" ska bibehållas är det viktigt att både
+legitimeringstjänsten (vid begäran) och den förlitande parten (vid intygsleverans) kräver att ett 
+TLS-klientcertifikat presenteras. Se kapitel [3.9](#metadataregler-gallande-tillitsniva-4) nedan.
+
 
 <a name="metadata"></a>
 ## 3. Metadata
@@ -340,7 +569,7 @@ nedanstående punkt).
 
 - I de fall en offentlig aktör som har tecknat något form av Sweden Connect-avtal har begärt att 
 en tredjeparts-legitimeringstjänst registreras i metadata under aktörens avtal behöver `OrganizationName`
-inte ange den offentliga aktörens registrerade namn (se XXX ovan). Orsaken till detta är att det
+inte ange den offentliga aktörens registrerade namn. Orsaken till detta är att det
 i många fall är flera offentliga aktörer som använder samma tredjeparts-legitimeringstjänst. Dock
 skall aktören meddela kopplingen mellan aktören och legitimeringstjänsten.
 
@@ -696,7 +925,7 @@ IdP mot dess förlitande parter. Dessa Proxy-IdP:er tillåts också deklarera de
 
 En specialkategori som endast används av de legitimeringstjänster som leverarar intyg till den svenska 
 eIDAS-noden (connector), samt den officiella eIDAS proxy-service som agerar förlitande part mot Sweden
-Connect. Se [Leverans av intyg till den svenska eIDAS-noden](#leverans-av-intyg-till-den-svenska-eidas-noden).
+Connect. Se kapitel [2.3.1](#leverans-av-intyg-till-den-svenska-eidas-noden).
 
 **Regler och rutiner vid registrering av metadata**:
 
@@ -917,6 +1146,6 @@ legitimering enligt tillitsnivå 4<sup>\*\*</sup> måste också deklarera ett `A
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
 
-- 2021-12-10: Första utkast
+- 2021-12-12: Första utkast
 
 
