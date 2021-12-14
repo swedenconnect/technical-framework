@@ -8,9 +8,10 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2021-12-12 - Utkast
+### 2021-12-14
 
-Diarienummer: -
+Specifikation gällande aktörer som ansluter till
+DIGG:s identitetsfederation Sweden Connect.
 
 ---
 
@@ -1146,6 +1147,6 @@ legitimering enligt tillitsnivå 4<sup>\*\*</sup> måste också deklarera ett `A
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
 
-- 2021-12-12: Första utkast
+- 2021-12-14: Första versionen
 
 
