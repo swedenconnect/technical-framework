@@ -140,9 +140,9 @@ rörande registrering etc.
 <a name="valfrihetssystem-2017"></a>
 #### 1.1.1. Valfrihetssystem 2017
 
-[Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) är ett avtal som ger förlitande parter tillgång till godkända, och granskade, legitimeringstjänst(er) som levererar identitetsintyg utställda enligt tillitsnivå 3 (eller 4), och innehållande personnummerinformation. 
+[Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) är ett avtal som ger förlitande parter tillgång till godkända, och granskade, legitimeringstjänst(er) som levererar identitetsintyg utställda enligt tillitsnivå 3 (eller 4), och innehållande person- eller samordningsnummer. 
 
-> Endast offentliga aktörer kan teckna detta avtal.
+> Endast offentliga förlitande parter kan teckna detta avtal.
 
 Legitimeringstjänster som levererar enligt Valfrihetssystem 2017 har tecknat 
 [Anslutningsavtal för leverantör avseende
@@ -151,7 +151,8 @@ Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/do
 <a name="internationell-legitimering-eidas"></a>
 #### 1.1.2. Internationell legitimering - eIDAS
 
-För att en förlitande part ska få tillgång till eIDAS-legitimering tecknas avtalet [Avtal med förlitande part beträffande funktioner för elektronisk identifiering - Sweden Connect](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/internationell-e-legitimering).
+För att en svensk förlitande part ska få tillgång till eIDAS-legitimering tecknas avtalet
+[Avtal med förlitande part beträffande funktioner för elektronisk identifiering - Sweden Connect](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/internationell-e-legitimering).
 
 Detta avtal ger en förlitande part rätt att nyttja den svenska eIDAS-noden för legitimering av personer som innehar ett utländskt eID.
 
@@ -160,7 +161,7 @@ Detta avtal ger en förlitande part rätt att nyttja den svenska eIDAS-noden fö
 <a name="eid-for-medarbetare"></a>
 #### 1.1.3. eID för medarbetare
 
-[Avtal för förlitandepart - Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstlegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 3 eller 4
+[Avtal för förlitandepart - Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstelegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 2, 3 eller 4
 och att de levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4a7622/globalassets/dokument/digital-identitet/eid-for-medarbetare/2021-09-17-anslutningsavtal-leverantor.pdf).
 
 > Endast offentliga förlitande parter kan teckna [Avtal för förlitandepart - Förbetald elektronisk identifiering](https://www.digg.se/4a762d/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-eid-for-medarbetare_2021-09-17.pdf).
@@ -168,7 +169,7 @@ och att de levererar enligt [Anslutningsavtal för utfärdare av e-tjänstele
 <a name="bilaterala-avtal-om-legitimering"></a>
 #### 1.1.4. Bilaterala avtal om legitimering
 
-En förlitande part som har tecknat något av de ovanstående DIGG-avtalen kan också
+En förlitande part som har tecknat [Avtal med förlitande part beträffande funktioner för elektronisk identifiering - Sweden Connect](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/internationell-e-legitimering) kan också
 teckna bilaterala avtal med leverantörer angående legitimeringstjänster som inte
 erbjuds via de befintliga DIGG-avtalen. Detta kan till exempel vara en 
 tredjeparts-legitimeringstjänst för BankID (som inte finns som officiell legitimeringstjänst 
@@ -207,11 +208,9 @@ Se https://www.digg.se/digital-identitet/e-legitimering/leverantor för mer info
 
 EU-förordningen eIDAS, [nr 910/2014](https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX%3A32014R0910),
 definierar tre olika tillitsnivåer: "low", "substantial" och "high". Dessa motsvarar i princip
-de svenska nivåerna 2, 3 och 4, men det finns vissa skillnader vilket gör att en översättning mellan 
-nivåerna inte låter sig göras.
+de svenska nivåerna 2, 3 och 4, men det finns vissa skillnader vilket gör att en översättning mellan nivåerna inte låter sig göras.
 
-Svenska förlitande parts som legitimerar individer genom eIDAS-legitimering, via den svenska eIDAS-noden,
-måste därför kunna hantera tillitsidentifierare för eIDAS (se nedan).
+Svenska förlitande parter som legitimerar individer genom eIDAS-legitimering, via den svenska eIDAS-noden, måste därför kunna hantera tillitsidentifierare för eIDAS (se nedan).
 
 <a name="identifierare-for-tillitsnivaer"></a>
 #### 1.2.3. Identifierare för tillitsnivåer
@@ -248,8 +247,7 @@ land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt e
 - `http://id.elegnamnden.se/loa/1.0/eidas-high` - eIDAS "high" utfärdat av notifierat eller ett icke-notifierat<sup>*</sup> land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/high`.
 
 \[\*\]: För närvarande har den svenska eIDAS-noden ingen koppling mot annat än notifierade
-eIDAS-länder. Med notifierad avses att ett land har granskats och godkänts i en s.k. peer-review
-inom eIDAS-samarbetet.
+eIDAS-länder. Med notifierad avses att landets e-legitimationer är anmälda (eng. notified) enligt EU:s eIDAS-förordning.
 
 Det svenska [tillitsramverket](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket) kräver att en individ som erhåller ett eID innehar
 ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimationer 
@@ -265,7 +263,7 @@ typer av eID:n skall då använda följande identifierare:
 - `http://id.swedenconnect.se/loa/1.0/loa4-nonresident` - Legitimering enligt tillitsnivå 4 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).
 
 I båda ovanstående fall krävs att utfärdandet av e-legitimationen följer tillitsramverket med
-undantag av kravet på personnummer/samordningsnummer.
+undantag av kravet på personnummer/samordningsnummer och med tilläggskraven för "non-resident".
 
 Kapitel [1.1.4](#bilaterala-avtal-om-legitimering) och [1.3.3](#aktorsspecifika-legitimeringstjanster) redogör för hur icke-tillitsgranskade legitimeringstjänster kan
 användas inom Sweden Connect-federationen. Eftersom dessa legitimeringstjänster inte
@@ -484,7 +482,7 @@ Den svenska eIDAS-connectorn
 <a name="leverans-av-intyg-till-den-svenska-eidas-noden"></a>
 #### 2.3.1. Leverans av intyg till den svenska eIDAS-noden
 
-De legitimeringstjänster som har en överenskommelse med DIGG om att kunna leverera identitetsintyg
+De legitimeringstjänster som har ett tillägsavtal med DIGG om att kunna leverera identitetsintyg
 till den svenska eIDAS Proxy Service-noden (d.v.s., den eIDAS-nod som legitimerar innehavare av
 svenska e-legitimationer för inloggning i utländska e-tjänster) skall leverera enligt 
 attributuppsättningen [Natural Personal Identity with Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number) med det tillägg att också födelsedatum krävs.
@@ -690,7 +688,7 @@ Ponera att en förlitande part önskar personnummer och organisationsidentiet i 
 både `loa3-pnr` och `loa3-orgid` (se nedan) i sin metadata. Men vad händer om den i vissa fall är intresserad av 
 att erhålla personnummer, och i andra fall organisationsidentitet, men inte både attributen i samma intyg?
 
-Lösningen i detta fall behöver tyvärr vara så att den givna organisationen skapar två förlitande parter (SAML SP)
+Lösningen i detta fall behöver vara så att den givna organisationen skapar två förlitande parter (SAML SP)
 och deklarerar `loa3-pnr` i metadata för den ena SP:n och `loa3-orgid` i metadata för den andra. Baserat på
 vilken typ av identitetsintyg som önskas i olika fall används korrekt SP.
 
