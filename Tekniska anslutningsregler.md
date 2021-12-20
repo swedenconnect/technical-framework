@@ -232,23 +232,21 @@ som är godkända enligt [tillitsramverkets](https://www.digg.se/digital-identit
 denna identifierare. [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/) ställer också ytterligare krav rörande tillitsnivå där SAML-profilen "Holder-of-key"
 krävs.
 
-- `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` - eIDAS "low" utfärdat av notifierat land -
+- `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` - eIDAS "low" utfärdat av eID som anmälts till EU enligt eIDAS-förordningen -
 Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/LoA/low`.
 
-- `http://id.elegnamnden.se/loa/1.0/eidas-low` - eIDAS "low" utfärdat av notifierat eller ett icke-notifierat<sup>*</sup> land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/low`.
+- `http://id.elegnamnden.se/loa/1.0/eidas-low` - eIDAS "low" utfärdat av anmält eller ett icke anmält<sup>*</sup> eID - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/low`.
 
-- `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` - eIDAS "substantial" utfärdat av notifierat
-land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/LoA/substantial`.
+- `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` - eIDAS "substantial" utfärdat av eID som anmälts till EU enligt eIDAS-förordningen - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/LoA/substantial`.
 
-- `http://id.elegnamnden.se/loa/1.0/eidas-sub` - eIDAS "substantial" utfärdat av notifierat eller ett icke-notifierat<sup>*</sup> land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/substantial`.
+- `http://id.elegnamnden.se/loa/1.0/eidas-sub` - eIDAS "substantial" utfärdat av anmält eller ett icke anmält<sup>*</sup> eID - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/substantial`.
 
-- `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` - eIDAS "high" utfärdat av notifierat
-land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/LoA/high`.
+- `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` - eIDAS "high" utfärdat av av eID som anmälts till EU enligt eIDAS-förordningen - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/LoA/high`.
 
-- `http://id.elegnamnden.se/loa/1.0/eidas-high` - eIDAS "high" utfärdat av notifierat eller ett icke-notifierat<sup>*</sup> land - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/high`.
+- `http://id.elegnamnden.se/loa/1.0/eidas-high` - eIDAS "high" utfärdat av anmält eller ett icke anmält<sup>*</sup> eID - Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/NotNotified/LoA/high`.
 
-\[\*\]: För närvarande har den svenska eIDAS-noden ingen koppling mot annat än notifierade
-eIDAS-länder. Med notifierad avses att landets e-legitimationer är anmälda (eng. notified) enligt EU:s eIDAS-förordning.
+\[\*\]: För närvarande har den svenska eIDAS-noden ingen koppling mot annat än anmälda
+eID (eng. notified) enligt EU:s eIDAS-förordning.
 
 Det svenska [tillitsramverket](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket) kräver att en individ som erhåller ett eID innehar
 ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimationer 
@@ -368,12 +366,13 @@ anges i [Implementation Profile for BankID Identity Providers within the Swedish
 <a name="uppfyllnad-av-tekniskt-ramverk-over-tid"></a>
 #### 1.3.4. Uppfyllnad av Tekniskt ramverk över tid
 
-Nya versioner av [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/)
+Nya versioner av de specifikationer som ingår i [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/)
 kommer periodiskt att publiceras av DIGG. En legitimeringstjänst inom Sweden Connect måste stödja
-den senast publicerade versionen senast 180 dagar efter versionen publicerats.
+senast publicerade versioner senast 180 dagar efter versionen publicerats.
 
-> DIGG kan komma att begära omgranskning av legitimeringstjänster efter en ny version av det Tekniska
-ramverket publicerats. 
+> DIGG kan komma att begära omgranskning av legitimeringstjänster efter en ny version av en specifikation i det Tekniska
+ramverket publicerats som är relevant för legitimeringstjänstens anslutningsavtal.
+
 
 <a name="legitimering-och-leverans-av-identitetsintyg"></a>
 ## 2. Legitimering och leverans av identitetsintyg
@@ -488,6 +487,9 @@ till den svenska eIDAS Proxy Service-noden (d.v.s., den eIDAS-nod som legitimera
 svenska e-legitimationer för inloggning i utländska e-tjänster) skall leverera enligt 
 attributuppsättningen [Natural Personal Identity with Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number) med det tillägg att också födelsedatum krävs.
 
+Legitimeringstjänsten kan välja att även upplysa användaren om att identitetsuppgifter kommer att skickas till det land och den e-tjänst som begär legitimering samt inhämta användarens medgivande till att så sker. En legitimeringstjänst som utför detta steg kan legitimera användare utan att användaren behöver göra samma medgivande till den svenska eIDAS noden för en bättre harmoniserad användarupplevelse. Legitimeringstjänstens val att tillhandahålla medgivande på detta sätt regleras direkt med DIGG då det inte specificeras genom legitimeringstjänstens metadata.
+
+Legitimeringstjänsten kan välja att ta emot begäran om legitimering från andra länder som begärts av privat aktör eller om begäran från privat aktör skall blockeras. Om legitimeringstjänsten väljer att at emot begäran om legitimering från privat aktör från andra länder så är det upp till legitimeringstjänsten själv att avgör vilka privata aktörer som accepteras och hur ersättning för utförd legitimering skall ske. Legitimeringstjänstens val att acceptera begäran från privat aktör regleras direkt med DIGG då det inte specificeras genom legitimeringstjänstens metadata.
 
 <a name="ovriga-attribut"></a>
 #### 2.3.2. Övriga attribut
