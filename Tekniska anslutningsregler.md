@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2022-01-10
+### 2022-04-01
 
 Specifikation gällande aktörer som ansluter till
 DIGG:s identitetsfederation Sweden Connect.
@@ -16,7 +16,7 @@ DIGG:s identitetsfederation Sweden Connect.
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2021.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2021-2022.
 </p>
 
 ## Innehållsförteckning
@@ -171,7 +171,7 @@ Se vidare:
 
 - E-legitimering för medarbetare - https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/tjanstelegitimation
 
-- Leverantör av e-tjänstelegitimationer - https://www.digg.se/digital-identitet/e-legitimering/leverantor/leverantor-av-e-tjanstelegitimationer
+- Leverantör av e-tjänstelegitimationer - https://www.digg.se/digital-identitet/e-legitimering/leverantor/leverera--e-tjanstelegitimationer
 
 <a name="bilaterala-avtal-om-legitimering"></a>
 #### 1.1.4. Bilaterala avtal om legitimering
@@ -1162,6 +1162,9 @@ legitimering enligt tillitsnivå 4<sup>\*\*</sup> måste också deklarera ett `A
 
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
+
+- 2022-04-01: 
+	- Korrigering av felaktig länk.
 
 - 2022-01-10: 
 
