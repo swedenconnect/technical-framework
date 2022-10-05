@@ -8,14 +8,14 @@
 
 # Introduction to the Swedish eID Framework
 
-### 2021-11-11
+### 2022-10-05
 
 Registration number: **2019-267**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -275,18 +275,14 @@ The flow is as follows:
 
 6.  When the user has authenticated an identity assertion, according to the
     eIDAS specifications, is created. This assertion contains eIDAS specific
-    attribute that identify the user.
+    attribute that identify the user. This assertion is now posted back to the 
+    Swedish eIDAS node.
 
-7.  This assertion is now posted back to the Swedish eIDAS node. The node receives
-    the assertion and validates its validity. In conjunction with that the assertion
-    is transformed from eIDAS format to a assertion according to Swedish standards
-    the node will also invoke an *Attribute Authority*, to, if possible, obtain
-    a Swedish personal identity number based on the attributes received<sup>2</sup>.
+7.  The node receives the assertion and validates its validity. The assertion is
+    transformed from eIDAS format to an assertion according to the Swedish eID Framework
+    and is posted back to the service provider.
 
-8.  Finally, an assertion, formatted according to the Swedish eID Framework, is posted
-    back to the service provider.
-
-9.  The service provider may now complement the data with additional information
+8.  The service provider may now complement the data with additional information
     in order to decide whether the user should be granted access to the service.
 
 Thus, Swedish services only have to implement support according to the Swedish eID
@@ -298,9 +294,6 @@ section 1.7.3 below.
 > \[1\]: The correct way to describe this would be to ask the user to which eIDAS Proxy
 Service to send the request to. This is dependent on the nationality of the user's
 eID issuer.
-
-> \[2\]: At the time of writing there is no attribute authority available
-providing Swedish personal identity numbers based on eIDAS attributes.
 
 
 <a name="signing-using-a-foreign-eid"></a>

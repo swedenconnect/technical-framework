@@ -8,14 +8,14 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2021-11-11
+### 2022-10-05
 
 Diarienummer: **2019-267**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2015-2021.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2015-2022.
 </p>
 
 ## Innehållsförteckning
@@ -119,7 +119,7 @@ kräver såväl personnummer som ytterligare information, även om
 e-legitimationen inte innehåller några specifika personuppgifter 
 (t.ex. koddosor för generering av engångslösenord).
 
-![](img/sweeid-overview1.jpg)
+![](img/sweeid-overview1.png)
 
 Figur 1: *Illustration av kommunikationen mellan de olika tjänsterna inom
 en identitetsfederation.*
@@ -267,7 +267,7 @@ mellan andra länder och den svenska federationen då en person autentiseras
 med en utländsk e-legitimation mot en svensk e-tjänst.
 Den svenska eIDAS-noden följer tekniskt ramverk.
 
-![](img/eidas-flow.jpg)
+![](img/eidas-flow.png)
 
 Flödet är enligt följande:
 
@@ -301,19 +301,13 @@ Flödet är enligt följande:
 
 6.  Då en autentisering utförts skapas ett intyg (*Assertion*) enligt
     eIDAS specifikationer. Detta intyg innehåller bl.a. eIDAS-specifika
-    attribut som identifierar användaren.
+    attribut som identifierar användaren. Detta intyg styrs nu vidare till
+    den svenska eIDAS-noden.
 
-7.  Detta intyg styrs nu vidare till den svenska eIDAS-noden. Noden tar
-    emot intyget och validerar dess korrekthet. I samband med att
-    intyget transformeras från eIDAS-format till ett intyg utformat
-    enligt tekniskt ramverk anropar noden också
-    en attributtjänst för att, om möjligt, givet eIDAS-attribut erhålla
-    attribut som stöds av den svenska e-tjänsten (t.ex. slå upp ett
-    svenskt personnummer givet ett eIDAS *PersonIdentifier*-attribut)<sup>2</sup>.
-
-8.  Slutligen postas ett intyg, på ett format som uppfyller
-    tekniskt ramverk, till e-tjänsten.
-
+7.  Noden tar emot intyget och validerar dess korrekthet. Detta intyg
+    transformeras från eIDAS-format till ett intyg utformat
+    enligt tekniskt ramverk och postas till e-tjänsten.
+    
 9.  Förlitande part kompletterar eventuellt med ytterligare information
     och avgör om användaren ska ges till åtkomst till tjänsten.
 
@@ -327,9 +321,6 @@ presenterade identitet inte går att använda hos e-tjänsten. Mer om detta
 i kapitlet 1.7.3 nedan.
 
 > \[1\]: Egentligen väljer användaren till vilken ”eIDAS Proxy-tjänst” som begäran ska skickas vidare till. Detta är beroende landstillhörigheten för användarens e-legitimationsutfärdare.
-
-> \[2\]: I skrivande stund finns ingen attributtjänst som utför koppling mellan eIDAS-identiteter och svenska personnummer.
-
 
 <a name="underskrifter-med-utlaendska-e-legitimationer"></a>
 #### 1.7.2. Underskrifter med utländska e-legitimationer
