@@ -8,7 +8,7 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.1 - 2020-01-17
+### Version 1.2 - 2022-10-18
 
 Registration number: **2019-317** (*previously: ELN-0613*)
 
@@ -51,7 +51,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.2.1.2. [SAD Extension Claim](#sad-extension-claim)
 
     3.2.2. [Example](#example)
-    
+
     3.2.3 [Verification of a SAD](#verification-of-a-sad)
 
 4. [**Schemas**](#schemas)
@@ -88,7 +88,7 @@ not capitalized, they are meant in their natural-language sense.
 <a name="xml-namespace-references"></a>
 ### 1.2. XML namespace references
 
-The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace `http://id.elegnamnden.se/csig/1.1/sap/ns` (https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd). 
+The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace `http://id.elegnamnden.se/csig/1.1/sap/ns` (https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd).
 
 The prefix **saml2:** stands for the OASIS SAML 2 Assertion Schema namespace `urn:oasis:names:tc:SAML:2.0:assertion`.
 
@@ -116,7 +116,7 @@ The federated signing model does not use pre-assigned signing keys. Instead, a n
 
 - the signer's identity,
 - information about how the signer was authenticated and by whom, and,
-- reference to the data to be signed.
+- reference to the signature request, binding this instance of authentication to the specific instance of signing, the data being signed and the agreement to sign.
 
 This implements the scenario where the Identity Provider is the sole entity which can verify the signer's private credentials via the SIC (Signer’s Interaction Component). This instance of authentication is used by the Identity Provider to generate the SAD in accordance with section 5.10 of [[RSIG-PP-1](#rsig-pp-1)].
 
@@ -136,9 +136,8 @@ When an Identity Provider returns a SAD, as defined in section [3.2](#signature-
 
 The SAD requested in the SAP binds the documents to be signed to the intent by the signer to sign. This is accomplished by the interaction of a number of independent information attributes and elements as follows:
 
-- **Sign request ID**. Identifies the sign request message for signing specific documents. This sign request is sent to the signing service from the service provider requesting the signature. The sign request bound by this identifier contains all detailed data about what is being signed.
-- **Sign message**. A description of what is being signed that is passed from the service provider requesting signing to the Identity Provider, via the signing service. The sign message is included in the sign request as well as in the SAML authentication request sent to the Identity Provider.
-- **LoA**. The level of assurance declaration asserting the level of security used to authenticate the user and asserting that the user read and accepted the sign message and approved to sign the document/s.
+- **Sign request ID**. Identifies the sign request for signing specific documents. This sign request is sent to the signing service from the service provider requesting the signature. The sign request bound by this identifier contains all detailed data about what is being signed.
+- **LoA**. The level of assurance declaration asserting the level of security used to authenticate the user.
 - **Number of documents to sign**. Ensures that the user is aware whether more than one document is being signed. This allows adaptations of the signing UI displayed by the Identity Provider.
 - **Identity of the signer**. Allows verification that the signature is bound to the appropriate signer.
 - **SAD Request ID**. Unique identifier for the `SADRequest` element. This identifier is later included in the SAD in order to accomplish a binding between the request and the issued SAD.
@@ -180,7 +179,7 @@ The SAD Request is provided in a `<sap:SADRequest>` element. The element has the
 The following schema fragment defines the `<sap:SADRequest>` element:
 
     <xs:element name="SADRequest" type="sap:SADRequestType" />
-    
+
     <xs:complexType name="SADRequestType">
       <xs:sequence>
         <xs:element name="RequesterID" type="xs:string" />
@@ -197,7 +196,7 @@ The following schema fragment defines the `<sap:SADRequest>` element:
       </xs:sequence>
       <xs:attribute name="ID" type="xs:ID" use="required" />
     </xs:complexType>
-    
+
     <xs:complexType name="ParameterType">
       <xs:simpleContent>
         <xs:extension base="xs:string">
@@ -258,7 +257,7 @@ The claim identified by this name has the value of a JSON object holding name-va
 | **irt** | String | In Response To - holds the identifier of the SAD request (`ID` attribute) that was used to request this SAD. |
 | **attr** | String | Attribute - holds the URI identifier of the attribute specifying the users unique identifier value. |
 | **loa** | String | LevelOfAssurance - holds the URI identifier of the level of assurance (LoA) used to authenticate the signer. |
-| **reqid** | String | RequestID - holds the ID of the sign request associated with this SAD. |
+| **reqid** | String | RequestID - holds the ID of the sign request associated with this SAD. Inclusion of this ID assert that the authenticated subject agrees to sign the docuements identified by this sign reqeust.|
 | **docs** | Integer | Specifies the number of documents to be signed in the associated sign request. |
 
 <a name="example"></a>
@@ -270,23 +269,23 @@ The following example illustrates a claim binding the following claim values:
 
 Name | Value
 ---|---
-**sub** | `196302052383`
-**aud** | `http://www.example.com/sigservice`
-**iss** | `https://idp.svelegtest.se/idp`
-**exp** | `1516195657` (2018-01-17 13:27:37 GMT)
-**iat** | `1516195357` (2018-01-17 13:22:37 GMT)
-**jti** | `d4073fc74b1b9199`
+**sub** | `197802031877`
+**aud** | `https://sandbox.swedenconnect.se/eid2cssp`
+**iss** | `http://dev.test.swedenconnect.se/idp`
+**exp** | `1666128029` (Oct 18, 2022, 23:20:29 CET)
+**iat** | `1666127729` (Oct 18, 2022, 23:15:29 CET)
+**jti** | `NbnmpGA1gwtL3AgtKPfe77Ia`
 
 **seElnSadext Claim**
 
 Name | Value
 ---|---
 **ver** | `1.0`
-**irt** | `_a74a068d0548a919e503e5f9ef901851`
+**irt** | `752c30b3-30c1-49f0-ab04-a28909dc3b67`
 **attr** | `urn:oid:1.2.752.29.4.13`
-**loa** | `http://id.elegnamnden.se/loa/1.0/loa3-sigmessage`
-**reqid** | `f6e7d061a23293b0053dc7b038a04dad`
-**docs** | `1`
+**loa** | `http://id.elegnamnden.se/loa/1.0/loa3`
+**reqid** | `70fabf30-d474-4d21-8463-2c6811005ce0`
+**docs** | `4`
 
 **JWS Header**
 
@@ -298,32 +297,35 @@ The Header of the JWS specifies that it is a JWT by the "typ" parameter and the 
 
 The JWS payload holding the JWT claims is represented by the following JSON object:
 
-    {
-        "sub" : "196302052383",
-        "aud" : "http://www.example.com/sigservice",
-        "iss" : "https://idp.svelegtest.se/idp",
-        "exp" : 1516195657,
-        "iat" : 1516195357,
-        "jti" : "d4073fc74b1b9199",
-        "seElnSadext" : {
-            "ver" : "1.0",
-            "irt" : "_a74a068d0548a919e503e5f9ef901851",
-            "attr" : "urn:oid:1.2.752.29.4.13",
-            "loa" : "http://id.elegnamnden.se/loa/1.0/loa3-sigmessage",
-            "reqid" : "f6e7d061a23293b0053dc7b038a04dad",
-            "docs" : 1
-        }
+```
+{
+    "sub": "197802031877",
+    "aud": "https://sandbox.swedenconnect.se/eid2cssp",
+    "iss": "http://dev.test.swedenconnect.se/idp",
+    "exp": 1666128029,
+    "iat": 1666127729,
+    "jti": "NbnmpGA1gwtL3AgtKPfe77Ia",
+    "seElnSadext": {
+        "ver": "1.0",
+        "irt": "752c30b3-30c1-49f0-ab04-a28909dc3b67",
+        "attr": "urn:oid:1.2.752.29.4.13",
+        "loa": "http://id.elegnamnden.se/loa/1.0/loa3",
+        "reqid": "70fabf30-d474-4d21-8463-2c6811005ce0",
+        "docs": 4
     }
+}
+
+```
 
 This payload is represented by the following Base64 URL-encoded string:
 
-> eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUyMDUwNDExMCwiaWF0IjoxNTIwNTAzODEwLCJqdGkiOiIyeGlUdEZOSE5iTWpweE1yUTh0RWZHY3AiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiJfYTc0YTA2OGQwNTQ4YTkxOWU1MDNlNWY5ZWY5MDE4NTEiLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzLXNpZ21lc3NhZ2UiLCJyZXFpZCI6ImY2ZTdkMDYxYTIzMjkzYjAwNTNkYzdiMDM4YTA0ZGFkIiwiZG9jcyI6MX19
+> eyJzdWIiOiIxOTc4MDIwMzE4NzciLCJhdWQiOiJodHRwczovL3NhbmRib3guc3dlZGVuY29ubmVjdC5zZS9laWQyY3NzcCIsImlzcyI6Imh0dHA6Ly9kZXYudGVzdC5zd2VkZW5jb25uZWN0LnNlL2lkcCIsImV4cCI6MTY2NjEyODAyOSwiaWF0IjoxNjY2MTI3NzI5LCJqdGkiOiJOYm5tcEdBMWd3dEwzQWd0S1BmZTc3SWEiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiI3NTJjMzBiMy0zMGMxLTQ5ZjAtYWIwNC1hMjg5MDlkYzNiNjciLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzIiwicmVxaWQiOiI3MGZhYmYzMC1kNDc0LTRkMjEtODQ2My0yYzY4MTEwMDVjZTAiLCJkb2NzIjo0fX0
 
 **JWT**
 
 The complete SAD JWT including signature:
 
-> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOTYzMDIwNTIzODMiLCJhdWQiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tL3NpZ3NlcnZpY2UiLCJpc3MiOiJodHRwczovL2lkcC5zdmVsZWd0ZXN0LnNlL2lkcCIsImV4cCI6MTUyMDUwNDExMCwiaWF0IjoxNTIwNTAzODEwLCJqdGkiOiIyeGlUdEZOSE5iTWpweE1yUTh0RWZHY3AiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiJfYTc0YTA2OGQwNTQ4YTkxOWU1MDNlNWY5ZWY5MDE4NTEiLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzLXNpZ21lc3NhZ2UiLCJyZXFpZCI6ImY2ZTdkMDYxYTIzMjkzYjAwNTNkYzdiMDM4YTA0ZGFkIiwiZG9jcyI6MX19.jL0ccMQJmGx3UMDrNkVhFUF5iIHiLD1r-roSJsSzyUsEfEDaIBdbmjw7IpBILb2j69YTA_2z3WNBRkzTvHbYsDYucShMPQB7hbk41_oItKqTI038Y3FQXyExaNDZ7sHYK4HSQQc53JPBplu1iMsjm9VTTI9VVrWahj-1-aFbC8LmdhVNFenLuJrs_tmPIGUa_mQC61-46uKxs2Xq4NFpwdUToApAPawzIg2DktztotBVdJFvJj8nrQ9La8quHIdXaGyg5i2jG7YPA-t3Khuooie_Ja0RTAte6bvTC4YGZhj-hQUsZ4M3CDrwdyRJ5zF_HXSmviLlwvjEDekFEP_j3g
+> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxOTc4MDIwMzE4NzciLCJhdWQiOiJodHRwczovL3NhbmRib3guc3dlZGVuY29ubmVjdC5zZS9laWQyY3NzcCIsImlzcyI6Imh0dHA6Ly9kZXYudGVzdC5zd2VkZW5jb25uZWN0LnNlL2lkcCIsImV4cCI6MTY2NjEyODAyOSwiaWF0IjoxNjY2MTI3NzI5LCJqdGkiOiJOYm5tcEdBMWd3dEwzQWd0S1BmZTc3SWEiLCJzZUVsblNhZGV4dCI6eyJ2ZXIiOiIxLjAiLCJpcnQiOiI3NTJjMzBiMy0zMGMxLTQ5ZjAtYWIwNC1hMjg5MDlkYzNiNjciLCJhdHRyIjoidXJuOm9pZDoxLjIuNzUyLjI5LjQuMTMiLCJsb2EiOiJodHRwOi8vaWQuZWxlZ25hbW5kZW4uc2UvbG9hLzEuMC9sb2EzIiwicmVxaWQiOiI3MGZhYmYzMC1kNDc0LTRkMjEtODQ2My0yYzY4MTEwMDVjZTAiLCJkb2NzIjo0fX0.Qn-K-5V5-979GMITVSXgqWOrSVQfYFUMLv0P8PLUMSZzF6s6Zk05SOztH3XGN-4AjmjQeBHcqylpzoqG26eIXW7kuJZB9zodhAyTcvOogQj62XUFsoun5wfWpou8v8-Cpw1G4cwFZdMKt-oRbN43ViZ8u7EIZHBjzYMxfJNgMv2YGmzMQDPQLmtIW-f_O0nE_NPcFsaweYGJXcEWxi7fE3wzNnOR2rPBgQ3L0oehF2mP9dhenlptKrugH6Ru6eLZH66yFaAtR5RRA2m1wh2fXnwXJWO0-8jrvIZiZ9GLDt9W0r1Hs5Le--KPeuPcStli0nIi5YVLoAiGUaHc-Eb_DILwdqYpHS6mxJL3lb8j8u5JsIdEj9FEpqD8MlCbVM4HaWDL_wIiU16QVUOrxPUjoo3wyxLYhW6x3WnQ2an8fhIgahck7m9gS6_rVHKG1OAL_jn4h5jZzP-gX9yZeNcfTmhSiEdwrObydZ4dKx7JGEbmKn4EK1-8Pc65SOj9Zg5jTsRsl6uo9dMoJ-35Tb-x5IKsGs9Y1_94NCuqJH_a7HgC8nORfHBDOTPjzG008FLEFHSRmql6hYSYEd9F3kvR5816KixZpLT_BEED1m4RNdufa8nYEgEroi6X_AvmjpZKiwXCgnJyW6_80IIV89EMViiQ-BjTSSt8AK5KxxpTLkA
 
 <a name="verification-of-a-sad"></a>
 #### 3.2.3. Verification of a SAD
@@ -353,7 +355,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
         targetNamespace="http://id.elegnamnden.se/csig/1.1/sap/ns"
         xmlns:sap="http://id.elegnamnden.se/csig/1.1/sap/ns">
-        
+
       <xs:annotation>
         <xs:documentation>
           Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCsigSAP-1.1.xsd
@@ -361,7 +363,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
       </xs:annotation>
 
       <xs:element name="SADRequest" type="sap:SADRequestType" />
-        
+
       <xs:complexType name="SADRequestType">
         <xs:sequence>
           <xs:element name="RequesterID" type="xs:string" />
@@ -378,7 +380,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
         </xs:sequence>
         <xs:attribute name="ID" type="xs:ID" use="required" />
       </xs:complexType>
-        
+
       <xs:complexType name="ParameterType">
         <xs:simpleContent>
           <xs:extension base="xs:string">
@@ -426,3 +428,7 @@ Protection profile for QSCD for Server Signing
 
 - The `RequestedVersion` element of the `SADRequestType` is now marked as optional in the schema definition.
 
+**Changes between version 1.1 and 1.2:**
+
+- The use of "signmessage" LoA was removed.
+- The protocol logic was clarified by removing reference to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
