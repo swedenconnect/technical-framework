@@ -2,8 +2,8 @@
 ## Version Numbers on Swedish eID Framework Specifications ##
 
 | File | Version |
-| :--- | :---: |   
-| [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.7 |
+| :--- | :---: |
+| [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.8<br>(draft) |
 | [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md) | 1.7 |
 | [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.7 |
 | ~~05 - Authentication Context Classes for Levels of Assurance for the Swedish eID Framework~~ (deprecated) | ~~1.1~~ |
@@ -14,11 +14,8 @@
 | ~~10 - Discovery within the Swedish eID Framework~~ | ~~1.1~~ |
 | [11 - eIDAS Attribute Mapping Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.2 |
 | [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.3 |
-| [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md) | 1.1 |
+| [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md) | 1.2<br>(draft) |
 | [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md) | 1.0 |
 | ~~15 - Signature Validation Token~~<br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt/ | ~~1.0<br/>(draft)~~ |
 | ~~16 - PDF Profile for Signature Validation Tokens~~<br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/ | ~~1.0<br/>(draft)~~ |
 | ~~17 - XML Profile for Signature Validation Tokens~~ <br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt-xml/ | ~~1.0<br/>(draft)~~ |
-
-
-

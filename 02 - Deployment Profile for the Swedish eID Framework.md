@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.7 - 2021-11-11
+### Version 1.8 - 2022-10-19 - Draft version
 
 Registration number: **2019-308**
 
@@ -1383,7 +1383,7 @@ from signature services):
 <a name="requesting-scal2-signature-activation-data"></a>
 #### 7.1.2. Requesting SCAL2 Signature Activation Data
 
-The type of signature requested in a signature request is, according to \[[EidDSS_Profile](#eiddssprofile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SigSAP](#sigsap)\]. An authentication request message that includes this `SADRequest` extension MUST also include the `SignMessage` extension (as described above).
+The type of signature requested in a signature request is, according to \[[EidDSS_Profile](#eiddssprofile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SigSAP](#sigsap)\], and MUST include the `SignMessage` extension (as described above).
 
 As pointed out in [section 2.1.3](#identity-providers) an Identity Provider that supports processing of SAD requests and issuance of SAD-attributes SHALL advertise this by declaring the service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that has declared this entity category MUST return a SAD attribute in an issued assertion if the corresponding `<saml2p:AuthnRequest>` message contains the `<sap:SADRequest>` extension.
 
@@ -1647,6 +1647,10 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="changes-between-versions"></a>
 ## 10. Changes between versions
+
+**Changes between version 1.7 and 1.8:**
+
+- Section 7.1.2 was updated to state that the requirement to include both a SAD and a SignMessage extension only applies when the requested CertType is "QC/SSCD". Voluntary use of SAD for other types of signatures (e.g. non qualified signatures) does not automatically trigger a requirement to include SignMessage.
 
 **Changes between version 1.6 and 1.7:**
 
