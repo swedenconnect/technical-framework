@@ -424,11 +424,11 @@ Protection profile for QSCD for Server Signing
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
 
-**Changes between version 1.0 and 1.1:**
-
-- The `RequestedVersion` element of the `SADRequestType` is now marked as optional in the schema definition.
-
 **Changes between version 1.1 and 1.2:**
 
 - The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
 - Updated examples where the use of "signmessage" LoA URI:s was removed.
+
+**Changes between version 1.0 and 1.1:**
+
+- The `RequestedVersion` element of the `SADRequestType` is now marked as optional in the schema definition.
