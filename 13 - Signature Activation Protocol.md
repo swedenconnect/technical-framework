@@ -8,7 +8,7 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.2 - 2022-10-18
+### Version 1.2 - 2022-10-19 - Draft version
 
 Registration number: **2019-317** (*previously: ELN-0613*)
 
@@ -430,5 +430,5 @@ Protection profile for QSCD for Server Signing
 
 **Changes between version 1.1 and 1.2:**
 
-- The use of "signmessage" LoA was removed.
-- The protocol logic was clarified by removing reference to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
+- The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
+- Updated examples where the use of "signmessage" LoA URI:s was removed.
