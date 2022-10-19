@@ -8,14 +8,14 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.8 - 2022-10-19 - Draft version
+### Version 1.8 - 2022-10-19 - *Draft version*
 
 Registration number: **2019-308**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
 </p>
 
 ## Table of Contents
