@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2022-04-01
+### 2022-12-20
 
 Specifikation gällande aktörer som ansluter till
 DIGG:s identitetsfederation Sweden Connect.
@@ -147,7 +147,8 @@ rörande registrering etc.
 
 Legitimeringstjänster som levererar enligt Valfrihetssystem 2017 har tecknat 
 [Anslutningsavtal för leverantör avseende
-Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/dokument/digital-identitet/e-legitimering/valfrihetssystem-2017-e-legitimering/anslutningsavtal-leverantor-valfrihetssystem-2017.docx).
+Valfrihetssystem 2017 e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e844b9/1650367183306/anslutningsavtal-leverantor-valfrihetssystem-2017.docx).
+
 
 <a name="internationell-legitimering-eidas"></a>
 #### 1.1.2. Internationell legitimering - eIDAS
@@ -162,16 +163,16 @@ Detta avtal ger en förlitande part rätt att nyttja den svenska eIDAS-noden fö
 <a name="eid-for-medarbetare"></a>
 #### 1.1.3. eID för medarbetare
 
-[Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/4b00bf/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-forbetald-e-legitimering.docx) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstelegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 2, 3 eller 4
-och att de levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx).
+[Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstelegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 2, 3 eller 4
+och att de levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx).
 
-> Endast offentliga förlitande parter kan teckna [Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/4b00bf/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-forbetald-e-legitimering.docx).
+> Endast offentliga förlitande parter kan teckna [Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx).
 
 Se vidare:
 
 - E-legitimering för medarbetare - https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/tjanstelegitimation
 
-- Leverantör av e-tjänstelegitimationer - https://www.digg.se/digital-identitet/e-legitimering/leverantor/leverera--e-tjanstelegitimationer
+- Leverantör av e-tjänstelegitimationer - https://www.digg.se/digitala-tjanster/e-legitimering/e-legitimering-for-dig-som-leverantor/leverera-e-tjanstelegitimationer
 
 <a name="bilaterala-avtal-om-legitimering"></a>
 #### 1.1.4. Bilaterala avtal om legitimering
@@ -208,7 +209,7 @@ För att en legitimeringstjänst skall ha tillåtelse att legitimera och utfärd
 enligt någon av dessa nivåer måste eID-utfärdaren **och** legitimeringstjänsten ha
 granskats och godkänts av DIGG. 
 
-Se https://www.digg.se/digital-identitet/e-legitimering/leverantor för mer information angående ansökan om granskning.
+Se https://www.digg.se/digitala-tjanster/e-legitimering/e-legitimering-for-dig-som-leverantor för mer information angående ansökan om granskning.
 
 <a name="tillitsnivaer-enligt-eidas"></a>
 #### 1.2.2. Tillitsnivåer enligt eIDAS
@@ -257,7 +258,7 @@ eID (eng. notified) enligt EU:s eIDAS-förordning.
 Det svenska [tillitsramverket](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket) kräver att en individ som erhåller ett eID innehar
 ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimationer 
 anskaffas av arbetsgivare enligt [E-legitimering för medarbetare](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/tjanstelegitimation), och intygsleverans
-sker av legitimeringstjänst som leverarer enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx) kan det förekomma att individer som inte innehar ett svenskt personnummer
+sker av legitimeringstjänst som leverarer enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx) kan det förekomma att individer som inte innehar ett svenskt personnummer
 eller samordningsnummer tilldelas ett eID. Då dessa eID:n används för legitimering inom
 Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 3 eller 4 användas. En
 legitimeringstjänst som är godkänd för nivå 3 eller 4, och som utfärdar intyg för dessa
@@ -411,7 +412,7 @@ som levereras för en given legitimering. Då legitimering sker enligt avtalet [
 bilateralt avral, är detta inte ett strikt krav eftersom användaren i dessa fall förväntas förstå att 
 personnummer levereras. 
 
-Om legitimeringstjänsten levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4a7622/globalassets/dokument/digital-identitet/eid-for-medarbetare/2021-09-17-anslutningsavtal-leverantor.pdf), d.v.s., e-legitimationenen som används är anskaffad via 
+Om legitimeringstjänsten levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx), d.v.s., e-legitimationenen som används är anskaffad via 
 arbetsgivare, skall däremot legitimeringstjänsten alltid informera användaren om vilka identitetsinformation
 som levereras i ett intyg innan detta skickas tillbaka till den förlitande parten. Legitimeringstjänsten
 skall också erbjuda användaren ett sätt att avbryta legitimeringen efter denna information har visats.
@@ -458,7 +459,7 @@ redogörs för i kapitel [2.3.2](#ovriga-attribut) nedan.
 Kraven på attributleverans baserat på DIGG:s leveransavtal är enligt följande:
 
 [Anslutningsavtal för leverantör avseende
-Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/dokument/digital-identitet/e-legitimering/valfrihetssystem-2017-e-legitimering/anslutningsavtal-leverantor-valfrihetssystem-2017.docx)
+Valfrihetssystem 2017 e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e844b9/1650367183306/anslutningsavtal-leverantor-valfrihetssystem-2017.docx)
 
 > En legitimeringstjänst som levererar legitimering för förlitande parter som tecknat [Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) skall stödja följande attributuppsättningar:
 
@@ -466,10 +467,10 @@ Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/do
 
 > - [Natural Personal Identity without Civic Registration Number](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number) - Användarens för- och efternamn samt "visningsnamn".
 
-[Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald elektronisk identifiering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx)
+[Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx)
 
 > En legitimeringstjänst som levererar legitimering för förlitande parter som tecknat 
-[Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/4b00bf/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-forbetald-e-legitimering.docx) skall stödja följande 
+[Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx) skall stödja följande 
 attributuppsättningar:
 
 > - [Organizational Identity for Natural Persons](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons) - Organisationsidentitet, organisationsnamn och användarens "visningsnamn".
@@ -1022,7 +1023,7 @@ identifierare skall sedan deklareras av både förlitande part och legitimerings
 **Identifierare**: `http://id.swedenconnect.se/contract/sc/eid-choice-2017`
 
 Skall deklareras av förlitande parter som tecknat avtalet [Valfrihetssystem 2017](https://www.digg.se/digital-identitet/e-legitimering/offentlig-aktor/nationell-e-legitimering) och av legitimeringstjänster som
-levererar enligt [Anslutningsavtal för leverantör avseende Valfrihetssystem 2017 e-legitimering](https://www.digg.se/49d5f2/globalassets/dokument/digital-identitet/e-legitimering/valfrihetssystem-2017-e-legitimering/anslutningsavtal-leverantor-valfrihetssystem-2017.docx).
+levererar enligt [Anslutningsavtal för leverantör avseende Valfrihetssystem 2017 e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e844b9/1650367183306/anslutningsavtal-leverantor-valfrihetssystem-2017.docx).
 
 **Regler och rutiner vid registrering av metadata**:
 
@@ -1162,6 +1163,9 @@ legitimering enligt tillitsnivå 4<sup>\*\*</sup> måste också deklarera ett `A
 
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
+
+- 2022-12-20:
+	- Korrigering efter att DIGG:s webbteam ändrat länkar till diverse avtal.
 
 - 2022-04-01: 
 	- Korrigering av felaktig länk.

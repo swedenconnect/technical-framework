@@ -463,7 +463,7 @@ A Service Provider requesting an attribute that is not supported by all Identity
 
 It is RECOMMENDED that Service Providers communicating with BankID Identity Providers include the `transactionIdentifier` attribute as a requested attribute.
 
-As described in section [1.4](#relying-party-configuration), "[Relying Party Configuration]("#relying-party-configuration"), a Service Provider may declare an entity category telling the BankID Identity Provider that it wishes QR codes to be used instead of prompting for the user personal identity number.
+As described in section [1.4](#relying-party-configuration), "[Relying Party Configuration](#relying-party-configuration)", a Service Provider may declare an entity category telling the BankID Identity Provider that it wishes QR codes to be used instead of prompting for the user personal identity number.
 
     <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
       <saml:Attribute Name="http://macedir.org/entity-category" 

@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.8 - 2021-11-01
+### Version 1.9 - 2022-20-20 - *Draft version*
 
 
 Registration number: **2019-311**
@@ -581,7 +581,7 @@ from Service Providers that have declared this entity category in their metadata
 **Description**: A special purpose entity category that is declared by Service Providers
 to announce that they accept a Swedish coordination number (samordningsnummer), \[[SKV707](#skv707)\], being delivered in the `personalIdentityNumber` (`urn:oid:1.2.752.29.4.13`) attribute.
 
-The `personalIdentityNumber` is defined in section 3.1 of \[[EidAttributes](eidattributes)\] to contain either a Swedish personal identity number, \[[SKV704](#skv704)\], or a Swedish coordination number, \[[SKV707](#skv707)\]. However, how to utilize coordination numbers in
+The `personalIdentityNumber` is defined in section 3.1 of \[[EidAttributes](#eidattributes)\] to contain either a Swedish personal identity number, \[[SKV704](#skv704)\], or a Swedish coordination number, \[[SKV707](#skv707)\]. However, how to utilize coordination numbers in
 electronic services is, or has been, unclear. Not all Service Providers want, or are able to, use these types of identifiers. Therefore, this specification defines the "accepts coordination
 number" category as an opt-in feature for those Service Providers that can accept a `personalIdentityNumber` attribute to contain a coordination number as well as a personal identity number.
 
@@ -591,7 +591,7 @@ the `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` enti
 in its metadata.
 
 **Note**: This entity category also applies to the eIDAS specific attribute
-`mappedPersonalIdentityNumber`, see section 3.3.2 of \[[EidAttributes](eidattributes)\].
+`mappedPersonalIdentityNumber`, see section 3.3.2 of \[[EidAttributes](#eidattributes)\].
 
 
 <a name="references"></a>
@@ -656,6 +656,10 @@ in its metadata.
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
+
+**Changes between version 1.8 and version 1.9:**
+
+- Fixed some broken links.
 
 **Changes between version 1.7 and version 1.8:**
 

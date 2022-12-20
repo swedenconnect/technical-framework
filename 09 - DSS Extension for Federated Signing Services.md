@@ -8,14 +8,14 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.4 - 2021-11-11
+### Version 1.5 - 2022-12-20 - *Draft version*
 
 Registration number: **2019-314**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -1304,6 +1304,10 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 <a name="changes-between-versions"></a>
 ## 7. Changes between versions
 
+**Changes between version 1.4 and 1.5:**
+
+- Links in the appendix pointed to a draft version of the schema. This was fixed.
+
 **Changes between version 1.3 and 1.4:**
 
 - In section 3.2, "Element SignResponseExtension", the requirement for the `Request` element was changed so that it is optional to include even if the signature was successful.
@@ -1331,12 +1335,10 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 
 This appendix provides the full XML Schema declaration for the DSS
 protocol extension defined in this document. In case of differences
-between the XML Schema in this appendix and XML Scema fragments in the
+between the XML Schema in this appendix and XML Schema fragments in the
 sections above, the XML Schema in this appendix is the normative one.
 
-The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.xsd.
-
-> See also: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd.
+The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2.xsd.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1352,7 +1354,7 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
   <xs:annotation>
     <xs:documentation>
       Version: 1.1.2
-      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2-DRAFT.xsd
+      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2.xsd
     </xs:documentation>
   </xs:annotation>
 
