@@ -8,14 +8,14 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.7 - 2021-11-11
+### Version 1.8 - 2022-12-20 - *Draft version*
 
 Registration number: **2019-310**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -758,7 +758,7 @@ following attribute:
 
 <a name="sambiattr"></a>
 **\[SambiAttr\]**
-> [Sambi Attributspecifikation, version 1.5](https://www.sambi.se/wordpress/wp-content/uploads/2019/05/Sambi_Attributspecifikation_1.5.pdf).
+> [Sambi Attributspecifikation](https://www.sambi.se/attributes/).
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
@@ -786,6 +786,10 @@ following attribute:
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.7 and version 1.8:**
+
+- Updated link to Sambi attribute specification.
 
 **Changes between version 1.6 and version 1.7:**
 

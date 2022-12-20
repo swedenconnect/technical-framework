@@ -8,7 +8,7 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.2 - 2022-10-19 - *Draft version*
+### Version 1.2 - 2022-12-20 - *Draft version*
 
 Registration number: **2019-317**
 
@@ -88,7 +88,7 @@ not capitalized, they are meant in their natural-language sense.
 <a name="xml-namespace-references"></a>
 ### 1.2. XML namespace references
 
-The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace `http://id.elegnamnden.se/csig/1.1/sap/ns` (https://elegnamnden.github.io/schemas/csig/1.1/EidCsigSAP-1.1.xsd).
+The prefix **sap:** stands for the Signature Activation Protocol XML Schema namespace `http://id.elegnamnden.se/csig/1.1/sap/ns` (https://docs.swedenconnect.se/schemas/csig/1.1/EidCsigSAP-1.1.xsd).
 
 The prefix **saml2:** stands for the OASIS SAML 2 Assertion Schema namespace `urn:oasis:names:tc:SAML:2.0:assertion`.
 
@@ -427,7 +427,10 @@ Protection profile for QSCD for Server Signing
 **Changes between version 1.1 and 1.2:**
 
 - The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
+
 - Updated examples where the use of "signmessage" LoA URI:s was removed.
+
+- Updated broken links.
 
 **Changes between version 1.0 and 1.1:**
 
