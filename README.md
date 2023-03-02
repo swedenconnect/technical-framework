@@ -42,29 +42,59 @@ An overview document that describes the different parts of the Swedish eID Frame
 
 > [Tekniskt ramverk - Introduktion](00%20-%20Tekniskt%20ramverk%20-%20Introduktion.md) (in Swedish)
 
-#### Deployment Profile for the Swedish eID Framework
-
-This is the main specification for the Swedish eID Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services.
-
-> [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
-
 #### Swedish eID Framework - Registry for identifiers
 
 This document defines the structure for identifiers assigned by the Swedish Agency for Digital Government (DIGG) and provides a registry for assigned identifiers.
 
 > [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md)
 
-#### Attribute Specification for the Swedish eID Framework
+### Authentication Specifications
+
+Below follows a listing of all specifications concerning user authentication.
+
+> OpenID Connect will be introduced as an alternative to SAML. Therefore we point out the protocol for the specifications below.
+
+#### SAML: Deployment Profile for the Swedish eID Framework
+
+This is the main specification for the Swedish eID Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services.
+
+> [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
+
+#### SAML: Attribute Specification for the Swedish eID Framework
 
 This document specifies an attribute profile for the Swedish eID Framework. The attribute profile defines attributes for use within the Swedish eID Framework, and a number of defined attribute sets that may be referenced by other documents as means to specify specific attribute release requirements.
 
 > [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### Entity Categories for the Swedish eID Framework
+#### SAML: Entity Categories for the Swedish eID Framework
 
 This specification contains the Entity Category definitions that are defined for the Swedish eID Framework and that should be supported by Service Providers and Identity Providers that are part of the federation.
 
 > [06 - Entity Categories for the Swedish eID Framework](06%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md)
+
+#### eIDAS Constructed Attribute Specification for the Swedish eID Framework
+
+This document extends “Attribute Specification for the Swedish eID Framework”, providing specifications for constructed attributes.
+
+The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes) delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
+
+> [11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
+
+#### SAML: Implementation Profile for BankID Identity Providers within the Swedish eID Framework
+
+SAML implementation profile for Identity Providers implementing BankID support.
+
+> [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
+
+#### SAML: Principal Selection in SAML Authentication Requests
+
+This specification defines an element that may be included in the Extensions element of a SAML AuthnRequest where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
+
+> [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
+
+### Signature Specifications
+
+Below follows a listing of the specifications we define for Federated Central Signing Services.
 
 #### Implementation Profile for using OASIS DSS in Central Signing Services
 
@@ -84,37 +114,11 @@ This specification defines elements that extend the `<dss:SignRequest>` and `<ds
 
 > [09 - DSS Extension for Federated Signing Services](09%20-%20DSS%20Extension%20for%20Federated%20Signing%20Services.md)
 
-#### Discovery within the Swedish eID Framework
-
-Current version is deprecated. Currently the Swedish eID Framework does not impose any requirements on how service discovery should be performed.
-
-Work is ongoing to present an updated specification for discovery.
-
-#### eIDAS Constructed Attribute Specification for the Swedish eID Framework
-
-This document extends “Attribute Specification for the Swedish eID Framework”, providing specifications for constructed attributes.
-
-The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes) delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
-
-> [11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
-
-#### Implementation Profile for BankID Identity Providers within the Swedish eID Framework
-
-Implementation profile for Identity Providers implementing BankID support.
-
-> [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
-
 #### Signature Activation Protocol for Federated Signing
 
 This document specifies a Signature Activation Protocol (SAP) and its data elements for implementation of Sole Control Assurance Level 2 (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting Server Signing.
 
 > [13 - Signature Activation Protocol for Federated Signing](13%20-%20Signature%20Activation%20Protocol.md)
-
-#### Principal Selection in SAML Authentication Requests
-
-This specification defines an element that may be included in the Extensions element of a SAML AuthnRequest where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
-
-> [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
 
 #### *Signature Validation Tokens*
 
@@ -141,4 +145,4 @@ Older version of the specifications are stored in the following branches:
 
 ---
 
-Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2021. All Rights Reserved.
+Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2023. All Rights Reserved.
