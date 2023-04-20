@@ -4,7 +4,7 @@
 | File | Version |
 | :--- | :---: |
 | [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md) | 1.8<br>(draft) |
-| [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md) | 1.7 |
+| [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md) | 1.8<br />(draft) |
 | [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md) | 1.8<br />(draft) |
 | ~~05 - Authentication Context Classes for Levels of Assurance for the Swedish eID Framework~~ (deprecated) | ~~1.1~~ |
 | [06 - Entity Categories for the Swedish eID Framework](06%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md) | 1.9<br />(draft> |
