@@ -8,14 +8,14 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.8 - 2022-12-20 - *Draft version*
+### Version 1.8 - 2023-04-20 - *Draft version*
 
 Registration number: **2019-310**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2023. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -349,7 +349,7 @@ The following attributes are defined for use within the attribute profile for th
 | signMessageDigest | urn:oid:1.2.752.201.3.14 | Sign message digest | Included in assertions as a proof that a user sign message was displayed. | No | No | See [section 3.2.4](#the-signmessagedigest-attribute) below. |
 | prid | urn:oid:1.2.752.201.3.4 | Provisional identifier | Unique identifier for an authentication performed against the eIDAS Framework. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | No | No | NO:5068907693 |
 | pridPersistence | urn:oid:1.2.752.201.3.5 | Provisional identifier persistence indicator | Indicator for the expected persistence of the prid attribute. See [section 3.3.1](#the-prid-and-pridpersistence-attributes) below. | No | No | A |
-| personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | The type of binding performed of mappedPersonalIdentityNumber attribute added by eIDAS connector. See [section 3.3.2](#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute) below. | No | No | http://eid.example.se/presentedInPerson |
+| personalIdentity-<br/>NumberBinding | urn:oid:1.2.752.201.3.6 | National civic registration number/code binding URI | URI identifying the binding performed of the `mappedPersonalIdentityNumber` attribute added by eIDAS connector. See [section 3.3.2](#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute) below. | No | No | `http://id.swedenconnect.se/`<br />`id-binding/enhanced` |
 | mappedPersonal-<br />IdentityNumber | urn:oid:1.2.752.201.3.16 | Mapped national civic registration number | A "mapped" personalIdentityNumber, see [section 3.3.2](#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute). | No | No | 195006262546 |
 | eidasPersonIdentifier | urn:oid:1.2.752.201.3.7 | eIDAS uniqueness identifier for natural persons | Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set. | No | No | ES/AT/02635542Y (Spanish eID number for an Austrian SP) |
 | eidasNatural-<br/>PersonAddress | urn:oid:1.2.752.201.3.9 | eIDAS Natural Person Address | Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value. | No | No | See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
@@ -570,18 +570,35 @@ should be processed.
 <a name="the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute"></a>
 #### 3.3.2. The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes
 
-When an authentication for a natural person is performed against theeIDAS Framework the Swedish eIDAS connector may attempt to perform a
-mapping of the received eIDAS identity to a Swedish civic registration
-number. If such a mapping is performed and is successful, the
+When an authentication for a natural person is performed against theeIDAS Framework, the Swedish eIDAS connector will query an identity binding service
+for a binding between the attributes found in the assertion received from the foreign
+eIDAS-node and a Swedish personal identity number.  If such a mapping exists, the
 assertion is extended with a `mappedPersonalIdentityNumber` attribute holding the
 "mapped" Swedish civic registration number ("personnummer" or "samordningsnummer").
 This mapping, or binding, can be performed using a number of different processes,
-where some are considered to be strong and where others only may be a
-“good guess” or even supplied by the user. Therefore, an eIDAS connector that 
-extends an assertion with a `mappedPersonalIdentityNumber` attribute MUST also include the
-`personalIdentityNumberBinding` attribute. This attribute contains a value
-that is an URI that identifies the process that was used to link a set
-of eIDAS attributes to a `mappedPersonalIdentityNumber` attribute. 
+where some are considered to be strong and where others are less trustworthy.
+Therefore, an eIDAS connector that extends an assertion with a 
+`mappedPersonalIdentityNumber` attribute MUST also include the
+`personalIdentityNumberBinding` attribute. This attribute contains an URI that
+identifies the strength of the binding process.
+
+The following values are defined:
+
+- `http://id.swedenconnect.se/id-binding/basic` - A basic binding where the identity
+attributes received from the foreign eIDAS-node matches an individual's record in the
+population register.
+
+- `http://id.swedenconnect.se/id-binding/enhanced` - Enhanced binding. Apart from meeting
+all requirements for the basic level, the binding has been strengthened with additional steps
+such as attestation of a relative, the person's use of a Swedish eID, controls against foreign
+registers, etc.
+
+- `http://id.swedenconnect.se/id-binding/verified` - Verified binding. The binding has 
+been verified with strong and trustworthy processes such as passport scanning or personal
+meetings.
+
+> The exact meaning of the above defined levels as well as descriptions of how an eIDAS
+identity is bound to a Swedish identity number can be found at https://www.swedenconnect.se.
 
 If this binding is acceptable for a Service Provider processing an assertion
 (containing the `mappedPersonalIdentityNumber` attribute), the Service Provider 
@@ -589,10 +606,6 @@ MAY treat the contents of the `mappedPersonalIdentityNumber`
 attribute as it would have received the `personalIdentityNumber` attribute, otherwise
 the Service Provider SHOULD NOT use the identity found in the `mappedPersonalIdentityNumber`
 attribute to login the user.
-
-This specification does not specify any defined URI identifiers that may
-be included in this attribute. Such URI identifiers will be specified in
-documents specifying appropriate binding mechanisms.
 
 > **Note**: The reason that an ordinary `personalIdentityNumber` attribute is not
 used to represent a mapped civic registration number is that it is essential that
@@ -790,6 +803,10 @@ following attribute:
 **Changes between version 1.7 and version 1.8:**
 
 - Updated link to Sambi attribute specification.
+
+- Section 3.3.2, "The mappedPersonalIdentityNumber and personalIdentityNumberBinding
+Attributes", was updated with possible values for the `personalIdentityNumberBinding`
+attribute.
 
 **Changes between version 1.6 and version 1.7:**
 

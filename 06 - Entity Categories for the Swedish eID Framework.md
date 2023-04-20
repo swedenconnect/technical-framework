@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.9 - 2022-20-20 - *Draft version*
+### Version 1.9 - 2023-04-20 - *Draft version*
 
 
 Registration number: **2019-311**
@@ -590,8 +590,10 @@ in the `personalIdentityNumber` attribute unless the receiving Service Provider 
 the `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` entity category
 in its metadata.
 
-**Note**: This entity category also applies to the eIDAS specific attribute
+**Note**: This entity category does **not** apply to the eIDAS specific attribute
 `mappedPersonalIdentityNumber`, see section 3.3.2 of \[[EidAttributes](#eidattributes)\].
+Thus, a coordination number may be included in this attribute even if the Service Provider
+has not declared the entity category. 
 
 
 <a name="references"></a>
@@ -660,6 +662,9 @@ in its metadata.
 **Changes between version 1.8 and version 1.9:**
 
 - Fixed some broken links.
+
+- Section 6.2, "accepts-coordination-number", was updated with changed logic for
+the `mappedPersonalIdentityNumber` attribute.
 
 **Changes between version 1.7 and version 1.8:**
 
