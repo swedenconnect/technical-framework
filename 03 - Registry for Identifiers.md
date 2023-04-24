@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.8 - 2023-04-20 - *Draft version*
+### Version 1.8 - 2023-04-24 - *Draft version*
 
 Registration number: **2019-309**
 
@@ -460,13 +460,14 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 Section 3.3.2 of \[[EidAttributes](#eidattributes)\] defines three possible values
 for the `personalIdentityNumberBinding` attribute. These are:
 
-| **URI** | **Meaning** |
-| :--- | :--- |
-| `http://id.swedenconnect.se/id-binding/basic` | A basic binding where the identity attributes received from the foreign eIDAS-node matches an individual's record in the population register. |
-| `http://id.swedenconnect.se/id-binding/enhanced` | Apart from meeting all requirements for the basic level, the binding has been strengthened with additional steps such as attestation of a relative, the person's use of a Swedish eID, controls against foreign registers, etc. | 
-| `http://id.swedenconnect.se/id-binding/verified` | The binding has been verified with strong and trustworthy processes such as passport scanning or personal meetings. |
+| **URI** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/`</br />`id-binding/level/basic` | Basic identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`</br />`id-binding/level/enhanced` | Enhanced identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`</br />`id-binding/level/verified` | Verified identity binding. | \[[ID-Binding](#id-binding)\] |
 
-> The exact meaning of the above defined levels an be found at https://www.swedenconnect.se.
+The [Binding of eIDAS Attributes to Swedish Personal Identity Numbers](#id-binding) 
+(\[[ID-Binding](#id-binding)\]) document defines the above levels in detail. 
 
 <a name="oid-identifiers3"></a>
 ### 3.2. OID Identifiers
@@ -606,6 +607,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+
+<a name="id-binding"></a>
+**\[ID-Binding\]**
+> [Binding of eIDAS Attributes to Swedish Personal Identity Numbers](https://docs.swedenconnect.se/technical-framework/Identity_Binding.html)
 
 <a name="svt-pdf"></a>
 **\[SVT-PDF\]**
