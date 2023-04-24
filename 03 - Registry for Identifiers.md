@@ -8,14 +8,14 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.7 - 2021-11-11
+### Version 1.8 - 2023-04-24 - *Draft version*
 
 Registration number: **2019-309**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2023. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -67,6 +67,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1.9.1. [eIDAS Proxy Service Aliases](#eidas-proxy-service-aliases)
 
     3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
+    
+    3.1.9.3. [Identity Binding Levels](#identity-binding-levels)
 
     3.2. [OID Identifiers](#oid-identifiers3)
 
@@ -452,6 +454,21 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 
 > A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.
 
+<a name="identity-binding-levels"></a>
+##### 3.1.9.3. Identity Binding Levels
+
+Section 3.3.2 of \[[EidAttributes](#eidattributes)\] defines three possible values
+for the `personalIdentityNumberBinding` attribute. These are:
+
+| **URI** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.swedenconnect.se/`<br />`id-binding/level/basic` | Basic identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`<br />`id-binding/level/enhanced` | Enhanced identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`<br />`id-binding/level/verified` | Verified identity binding. | \[[ID-Binding](#id-binding)\] |
+
+The [Binding of eIDAS Attributes to Swedish Personal Identity Numbers](#id-binding) 
+(\[[ID-Binding](#id-binding)\]) document defines the above levels in detail. 
+
 <a name="oid-identifiers3"></a>
 ### 3.2. OID Identifiers
 
@@ -591,6 +608,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
+<a name="id-binding"></a>
+**\[ID-Binding\]**
+> [Binding of eIDAS Attributes to Swedish Personal Identity Numbers](https://docs.swedenconnect.se/technical-framework/Identity_Binding.html)
+
 <a name="svt-pdf"></a>
 **\[SVT-PDF\]**
 > [PDF Signature Validation Token](https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/).
@@ -609,6 +630,11 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.7 and version 1.b:**
+
+- Section 3.1.9.3, "Identity Binding Levels", was introduced where binding levels for
+matching eIDAS identities to Swedish identity numbers are listed.
 
 **Changes between version 1.6 and version 1.7:**
 
