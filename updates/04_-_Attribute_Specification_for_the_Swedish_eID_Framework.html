@@ -6,7 +6,7 @@
     <title>Attribute Specification for the Swedish eID Framework</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
@@ -19,11 +19,11 @@
 </p>
 
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-1.8---2022-12-20---*draft-version*">Version 1.8 - 2022-12-20 - <em>Draft version</em></h3>
+<h3 id="version-18---2023-04-24---draft-version">Version 1.8 - 2023-04-24 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-310</strong></p>
 <hr>
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2023. All Rights Reserved.
 </p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -67,50 +67,48 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </ol>
 <hr>
 <p><a name="introduction"></a></p>
-<h2 id="1.-introduction">1. Introduction</h2>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>This document specifies an attribute profile for the Swedish eID
 Framework. The attribute profile defines attributes for use within the
 Swedish eID Framework, and a number of defined attribute sets that may
 be referenced by other documents as means to specify specific attribute
 release requirements.</p>
 <p><a name="terminology"></a></p>
-<h3 id="1.1.-terminology">1.1. Terminology</h3>
+<h3 id="11-terminology">1.1. Terminology</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Term</th>
-<th style="text-align:left">Defined meaning</th>
+<th align="left">Term</th>
+<th align="left">Defined meaning</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Attribute</strong></td>
-<td style="text-align:left">A property, quality or characteristic of a person, thing or object. This term is used in general in this specification to denote an attribute of a person/entity that is represented by a set of attributes in a SAML attribute statement (see SAML Attribute). This term is also used in this specification when describing XML syntax to denote an attribute (property) of an XML element.</td>
+<tbody><tr>
+<td align="left"><strong>Attribute</strong></td>
+<td align="left">A property, quality or characteristic of a person, thing or object. This term is used in general in this specification to denote an attribute of a person/entity that is represented by a set of attributes in a SAML attribute statement (see SAML Attribute). This term is also used in this specification when describing XML syntax to denote an attribute (property) of an XML element.</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>SAML attribute</strong></td>
-<td style="text-align:left">An attribute of an entity represented by a set of attributes in a SAML attribute statement (<code>&lt;saml:AttributeStatement&gt;</code> element).</td>
+<td align="left"><strong>SAML attribute</strong></td>
+<td align="left">An attribute of an entity represented by a set of attributes in a SAML attribute statement (<code>&lt;saml:AttributeStatement&gt;</code> element).</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>IDP</strong></td>
-<td style="text-align:left">Identity Provider</td>
+<td align="left"><strong>IDP</strong></td>
+<td align="left">Identity Provider</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>SP</strong></td>
-<td style="text-align:left">Service Provider</td>
+<td align="left"><strong>SP</strong></td>
+<td align="left">Service Provider</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>Natural person</strong></td>
-<td style="text-align:left">Natural person is legal term for a real human being, as opposed to a legal person, which may be a private (i.e., business entity) or public (i.e., government) organization.</td>
+<td align="left"><strong>Natural person</strong></td>
+<td align="left">Natural person is legal term for a real human being, as opposed to a legal person, which may be a private (i.e., business entity) or public (i.e., government) organization.</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>Civic registration number</strong></td>
-<td style="text-align:left">A unique identifier assigned to each natural person in a national population register. Within the context of this specification this is a Swedish ”personnummer” or ”samordningsnummer” according to [SKV704] and [SKV707].</td>
+<td align="left"><strong>Civic registration number</strong></td>
+<td align="left">A unique identifier assigned to each natural person in a national population register. Within the context of this specification this is a Swedish ”personnummer” or ”samordningsnummer” according to [SKV704] and [SKV707].</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><a name="requirement-key-words"></a></p>
-<h3 id="1.2.-requirement-key-words">1.2. Requirement key words</h3>
+<h3 id="12-requirement-key-words">1.2. Requirement key words</h3>
 <p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
 “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be
 interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
@@ -119,36 +117,34 @@ requirements over protocol features and behavior that affect the
 interoperability and security of implementations. When these words are
 not capitalized, they are meant in their natural-language sense.</p>
 <p><a name="name-space-references"></a></p>
-<h3 id="1.3.-name-space-references">1.3. Name space references</h3>
+<h3 id="13-name-space-references">1.3. Name space references</h3>
 <p>Conventional XML namespace prefixes are used throughout the listings in
 this specification to stand for their respective namespaces as follows,
 whether or not a namespace declaration is present in the example:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Prefix</th>
-<th style="text-align:left">XML Namespace</th>
-<th style="text-align:left">Comments</th>
+<th align="left">Prefix</th>
+<th align="left">XML Namespace</th>
+<th align="left">Comments</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>saml</code></td>
-<td style="text-align:left"><code>urn:oasis:names:tc:SAML:2.0:assertion</code></td>
-<td style="text-align:left">The SAML V2.0 assertion namespace, defined in the schema [<a href="#saml-xsd">SAML-XSD</a>].</td>
+<tbody><tr>
+<td align="left"><code>saml</code></td>
+<td align="left"><code>urn:oasis:names:tc:SAML:2.0:assertion</code></td>
+<td align="left">The SAML V2.0 assertion namespace, defined in the schema [<a href="#saml-xsd">SAML-XSD</a>].</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>xs</code></td>
-<td style="text-align:left"><code>http://www.w3.org/2001/XMLSchema</code></td>
-<td style="text-align:left">The XML Schema namespace, representing definitions of data types in [<a href="#xml-schema">XML-Schema</a>].</td>
+<td align="left"><code>xs</code></td>
+<td align="left"><code>http://www.w3.org/2001/XMLSchema</code></td>
+<td align="left">The XML Schema namespace, representing definitions of data types in [<a href="#xml-schema">XML-Schema</a>].</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><a name="structure"></a></p>
-<h3 id="1.4.-structure">1.4. Structure</h3>
+<h3 id="14-structure">1.4. Structure</h3>
 <p>This specification uses the following typographical conventions in text: <code>&lt;ns:Element&gt;</code>, <code>Attribute</code>, <strong>Datatype</strong>, <code>OtherCode</code>.</p>
 <p><a name="attribute-sets"></a></p>
-<h2 id="2.-attribute-sets">2. Attribute Sets</h2>
+<h2 id="2-attribute-sets">2. Attribute Sets</h2>
 <p>This section defines attribute sets based on attribute definitions in
 <a href="#attribute-definitions">section 3</a>. Common to all attribute sets is that each attribute MUST NOT
 be present more than once. An attribute that has more than one value
@@ -171,108 +167,104 @@ requirements apply:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute requirement</th>
-<th style="text-align:left">Definition</th>
+<th align="left">Attribute requirement</th>
+<th align="left">Definition</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>REQUIRED</strong></td>
-<td style="text-align:left">Attributes that MUST be present.</td>
+<tbody><tr>
+<td align="left"><strong>REQUIRED</strong></td>
+<td align="left">Attributes that MUST be present.</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left">Attributes that SHOULD be present, if available.</td>
+<td align="left"><strong>RECOMMENDED</strong></td>
+<td align="left">Attributes that SHOULD be present, if available.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>A defined attribute set does not define any rules for attributes other
 than those listed as required or recommended.</p>
 <blockquote>
 <p>[*]: An Attribute Provider is an entity that releases attributes to a requesting entity. In all practical cases within the Swedish eID Framework this entity is an Identity Provider or an Attribute Authority. Within the eIDAS Framework, the Swedish eIDAS node acts as the Attribute Provider for the Service Providers.</p>
 </blockquote>
 <p><a name="pseudonym-identity"></a></p>
-<h3 id="2.1.-pseudonym-identity">2.1. Pseudonym Identity</h3>
+<h3 id="21-pseudonym-identity">2.1. Pseudonym Identity</h3>
 <p>Attribute set identifier: <strong>ELN-AP-Pseudonym-01</strong></p>
 <p>URI: <code>http://id.elegnamnden.se/ap/1.0/pseudonym-01</code></p>
 <p>This attribute set specifies the condition where there are no mandatory or recommended attributes.</p>
 <p><strong>Typical use</strong>: In a pseudonym attribute release policy that just provides a persistent <code>NameID</code> identifier in the assertion but no attributes.</p>
 <p><a name="natural-personal-identity-without-civic-registration-number"></a></p>
-<h3 id="2.2.-natural-personal-identity-without-civic-registration-number">2.2. Natural Personal Identity without Civic Registration Number</h3>
+<h3 id="22-natural-personal-identity-without-civic-registration-number">2.2. Natural Personal Identity without Civic Registration Number</h3>
 <p>Attribute set identifier: <strong>ELN-AP-NaturalPerson-01</strong></p>
 <p>URI: <code>http://id.elegnamnden.se/ap/1.0/natural-person-01</code></p>
 <p>The “Personal Identity without Civic Registration Number” attribute set provides basic natural person information without revealing the civic registration number of the subject.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute requirement</th>
-<th style="text-align:left">Attributes</th>
+<th align="left">Attribute requirement</th>
+<th align="left">Attributes</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>REQUIRED</strong></td>
-<td style="text-align:left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name)</td>
+<tbody><tr>
+<td align="left"><strong>REQUIRED</strong></td>
+<td align="left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic user name information together with a persistent <code>NameID</code> identifier in the assertion.</p>
 <p><a name="natural-personal-identity-with-civic-registration-number"></a></p>
-<h3 id="2.3.-natural-personal-identity-with-civic-registration-number">2.3. Natural Personal Identity with Civic Registration Number</h3>
+<h3 id="23-natural-personal-identity-with-civic-registration-number">2.3. Natural Personal Identity with Civic Registration Number</h3>
 <p>Attribute set identifier: <strong>ELN-AP-Pnr-01</strong></p>
 <p>URI: <code>http://id.elegnamnden.se/ap/1.0/pnr-01</code></p>
 <p>The “Personal Identity with Civic Registration Number” attribute set provides basic personal identity information including a Swedish civic registration number of the subject.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute requirement</th>
-<th style="text-align:left">Attributes</th>
+<th align="left">Attribute requirement</th>
+<th align="left">Attributes</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>REQUIRED</strong></td>
-<td style="text-align:left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name) <br /> <code>personalIdentityNumber</code> (National civic registration number)</td>
+<tbody><tr>
+<td align="left"><strong>REQUIRED</strong></td>
+<td align="left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name) <br /> <code>personalIdentityNumber</code> (National civic registration number)</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left"><code>dateOfBirth</code> (Date of birth)</td>
+<td align="left"><strong>RECOMMENDED</strong></td>
+<td align="left"><code>dateOfBirth</code> (Date of birth)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic user name information together with the person’s Swedish civic registration number.</p>
 <p><a name="organizational-identity-for-natural-persons"></a></p>
-<h3 id="2.4.-organizational-identity-for-natural-persons">2.4. Organizational Identity for Natural Persons</h3>
+<h3 id="24-organizational-identity-for-natural-persons">2.4. Organizational Identity for Natural Persons</h3>
 <p>Attribute set identifier: <strong>ELN-AP-OrgPerson-01</strong></p>
 <p>URI: <code>http://id.elegnamnden.se/ap/1.0/org-person-01</code></p>
 <p>The “Organizational Identity for Natural Persons” attribute set provides basic organizational identity information about a person. The organizational identity does not necessarily imply that the subject has any particular relationship with or standing within the organization, but rather that this identity has been issued/provided by that organization for any particular reason (employee, customer, consultant, etc.).</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute requirement</th>
-<th style="text-align:left">Attributes</th>
+<th align="left">Attribute requirement</th>
+<th align="left">Attributes</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>REQUIRED</strong></td>
-<td style="text-align:left"><code>displayName</code> (Display name)<sup>*</sup> <br /> <code>orgAffiliation</code> (Personal identifier and organizational identifier code)<sup>**</sup> <br /> <code>o</code> (Organization name)</td>
+<tbody><tr>
+<td align="left"><strong>REQUIRED</strong></td>
+<td align="left"><code>displayName</code> (Display name)<sup>*</sup> <br /> <code>orgAffiliation</code> (Personal identifier and organizational identifier code)<sup>**</sup> <br /> <code>o</code> (Organization name)</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left"><code>organizationIdentifier</code> (Organizational identifier code)<sup>***</sup></td>
+<td align="left"><strong>RECOMMENDED</strong></td>
+<td align="left"><code>organizationIdentifier</code> (Organizational identifier code)<sup>***</sup></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic organizational identity information about a natural person.</p>
 <p>The &quot;Organizational Identity for Natural Persons&quot; attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish eID Framework” ([<a href="#eiddeployprof">EidDeployProf</a>]).</p>
 <blockquote>
 <p>[*]: The <code>displayName</code> attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, &quot;Administrator 123&quot;. This is decided by the issuing organization.</p>
+</blockquote>
+<blockquote>
 <p>[**]: See section <a href="#the-orgaffiliation-attribute">3.2.5</a>.</p>
+</blockquote>
+<blockquote>
 <p>[***]: The organizational identifier can always be derived from the mandatory <code>orgAffiliation</code> attribute, but an attribute provider supporting the &quot;Organizational Identity for Natural Persons&quot; attribute set SHOULD also release the <code>organizationIdentifier</code> attribute individually. </p>
 </blockquote>
 <p><a name="eidas-natural-person-attribute-set"></a></p>
-<h3 id="2.5.-eidas-natural-person-attribute-set">2.5. eIDAS Natural Person Attribute Set</h3>
+<h3 id="25-eidas-natural-person-attribute-set">2.5. eIDAS Natural Person Attribute Set</h3>
 <p>Attribute set identifier: <strong>ELN-AP-eIDAS-NatPer-01</strong></p>
 <p>URI: <code>http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01</code></p>
 <p>The “eIDAS Natural Person Attribute Set” provides personal identity
@@ -281,25 +273,23 @@ Framework.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute requirement</th>
-<th style="text-align:left">Attributes</th>
+<th align="left">Attribute requirement</th>
+<th align="left">Attributes</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>REQUIRED</strong><sup>*</sup></td>
-<td style="text-align:left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>c</code> (Country code for the eIDAS country that authenticated the subject) <br /><code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>**</sup></td>
+<tbody><tr>
+<td align="left"><strong>REQUIRED</strong><sup>*</sup></td>
+<td align="left"><code>prid</code> (Provisional ID) <br /> <code>pridPersistence</code> (Provisional ID persistence indicator) <br /> <code>eidasPersonIdentifier</code> (Mapping of the eIDAS PersonIdentifier attribute) <br /> <code>dateOfBirth</code> (Date of birth) <br /> <code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>c</code> (Country code for the eIDAS country that authenticated the subject) <br /><code>transactionIdentifier</code> (ID of assertion issued by the member state node)<sup>**</sup></td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>REQUIRED</strong><br />(if available)<sup>***</sup></td>
-<td style="text-align:left"><code>birthName</code> (Birth name) <br /> <code>placeOfBirth</code> (Place of birth) <br /> <code>eidasNaturalPersonAddress</code> (Address for natural person) <br /> <code>gender</code> (Gender)</td>
+<td align="left"><strong>REQUIRED</strong><br />(if available)<sup>***</sup></td>
+<td align="left"><code>birthName</code> (Birth name) <br /> <code>placeOfBirth</code> (Place of birth) <br /> <code>eidasNaturalPersonAddress</code> (Address for natural person) <br /> <code>gender</code> (Gender)</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left"><code>mappedPersonalIdentityNumber</code> (Mapped national civic registration number) <br /> <code>personalIdentityNumberBinding</code> (National civic registration number Binding URI)</td>
+<td align="left"><strong>RECOMMENDED</strong></td>
+<td align="left"><code>mappedPersonalIdentityNumber</code> (Mapped national civic registration number) <br /> <code>personalIdentityNumberBinding</code> (National civic registration number Binding URI)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Typical use</strong>: In an attribute release policy implemented by an eIDAS
 connector that provides a complete set of attributes to a requesting
 Service Provider.</p>
@@ -329,403 +319,403 @@ corresponding string value-typed attributes. The
 examples of “converted attributes”.</p>
 <blockquote>
 <p>[*]: Attributes “added” by the Swedish eID node and converted attributes for the mandatory attributes of the eIDAS minimum data set for natural persons.</p>
+</blockquote>
+<blockquote>
 <p>[**]: The transaction identifier attribute will contain the unique ID of the assertion that was issued by the member state node. This information together with the entityID of the member state node (found in the <code>&lt;saml2:AuthenticatingAuthority&gt;</code> element of an assertion) give a reference to the original assertion and authentication process.</p>
+</blockquote>
+<blockquote>
 <p>[***]: Converted attributes for the optional attributes of the eIDAS minimum data set for natural persons.</p>
 </blockquote>
 <p><a name="natural-person-identity-with-hsa-id"></a></p>
-<h3 id="2.6.-natural-person-identity-with-hsa-id">2.6. Natural Person Identity with HSA-ID</h3>
+<h3 id="26-natural-person-identity-with-hsa-id">2.6. Natural Person Identity with HSA-ID</h3>
 <p>Attribute set identifier: <strong>DIGG-AP-HSAid-01</strong></p>
 <p>URI: <code>http://id.swedenconnect.se/ap/1.0/hsaid-01</code></p>
 <p>The “Natural Person Identity with HSA-ID” attribute set provides basic personal identity information including a HSA-ID of the subject (see [<a href="#sambiattr">SambiAttr</a>]).</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute requirement</th>
-<th style="text-align:left">Attributes</th>
+<th align="left">Attribute requirement</th>
+<th align="left">Attributes</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>REQUIRED</strong></td>
-<td style="text-align:left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name) <br /> <code>employeeHsaId</code> (HSA-ID)</td>
+<tbody><tr>
+<td align="left"><strong>REQUIRED</strong></td>
+<td align="left"><code>sn</code> (Surname) <br /> <code>givenName</code> (Given name) <br /> <code>displayName</code> (Display name) <br /> <code>employeeHsaId</code> (HSA-ID)</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>RECOMMENDED</strong></td>
-<td style="text-align:left"><code>dateOfBirth</code> (Date of birth)</td>
+<td align="left"><strong>RECOMMENDED</strong></td>
+<td align="left"><code>dateOfBirth</code> (Date of birth)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Typical use</strong>: In an attribute release policy that provides basic user name information together with the person’s HSA-ID.</p>
 <p><a name="attribute-definitions"></a></p>
-<h2 id="3.-attribute-definitions">3. Attribute Definitions</h2>
+<h2 id="3-attribute-definitions">3. Attribute Definitions</h2>
 <p><a name="attributes"></a></p>
-<h3 id="3.1.-attributes">3.1. Attributes</h3>
+<h3 id="31-attributes">3.1. Attributes</h3>
 <p>The following attributes are defined for use within the attribute profile for the Swedish eID Framework:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Attribute abbreviation</th>
-<th style="text-align:left">SAML attribute name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Use within this specification</th>
-<th style="text-align:center">Multi-valued</th>
-<th style="text-align:left">Scoped</th>
-<th style="text-align:left">Example</th>
+<th align="left">Attribute abbreviation</th>
+<th align="left">SAML attribute name</th>
+<th align="left">Description</th>
+<th align="left">Use within this specification</th>
+<th align="center">Multi-valued</th>
+<th align="left">Scoped</th>
+<th align="left">Example</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">sn</td>
-<td style="text-align:left">urn:oid:2.5.4.4</td>
-<td style="text-align:left">Surname</td>
-<td style="text-align:left">Registered surname.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Lindeman</td>
+<tbody><tr>
+<td align="left">sn</td>
+<td align="left">urn:oid:2.5.4.4</td>
+<td align="left">Surname</td>
+<td align="left">Registered surname.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Lindeman</td>
 </tr>
 <tr>
-<td style="text-align:left">givenName</td>
-<td style="text-align:left">urn:oid:2.5.4.42</td>
-<td style="text-align:left">Given Name</td>
-<td style="text-align:left">Registered given name.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Valfrid</td>
+<td align="left">givenName</td>
+<td align="left">urn:oid:2.5.4.42</td>
+<td align="left">Given Name</td>
+<td align="left">Registered given name.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Valfrid</td>
 </tr>
 <tr>
-<td style="text-align:left">displayName</td>
-<td style="text-align:left">urn:oid:2.16.840.1.<br/>113730.3.1.241</td>
-<td style="text-align:left">Display Name</td>
-<td style="text-align:left">A name in any preferred presentation format.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Valfrid Lindeman</td>
+<td align="left">displayName</td>
+<td align="left">urn:oid:2.16.840.1.<br/>113730.3.1.241</td>
+<td align="left">Display Name</td>
+<td align="left">A name in any preferred presentation format.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Valfrid Lindeman</td>
 </tr>
 <tr>
-<td style="text-align:left">gender</td>
-<td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.3</td>
-<td style="text-align:left">Gender</td>
-<td style="text-align:left">A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">M</td>
+<td align="left">gender</td>
+<td align="left">urn:oid:1.3.6.1.5.5.7.9.3</td>
+<td align="left">Gender</td>
+<td align="left">A one letter representation (“M”/”F”/”U” or “m”/“f”/”u”) representing the subject’s gender, where “M” represents male, “F” represents female and “U” is used for unspecified, or unknown, gender.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">M</td>
 </tr>
 <tr>
-<td style="text-align:left">personalIdentity-<br/>Number</td>
-<td style="text-align:left">urn:oid:1.2.752.29.4.13</td>
-<td style="text-align:left">National civic registration number/code</td>
-<td style="text-align:left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="#skv704">SKV 704</a> and <a href="#skv707">SKV 707</a>. 12 digits without hyphen.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">195006262546</td>
+<td align="left">personalIdentity-<br/>Number</td>
+<td align="left">urn:oid:1.2.752.29.4.13</td>
+<td align="left">National civic registration number/code</td>
+<td align="left">Swedish ”personnummer” or ”samordningsnummer” according to <a href="#skv704">SKV 704</a> and <a href="#skv707">SKV 707</a>. 12 digits without hyphen.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">195006262546</td>
 </tr>
 <tr>
-<td style="text-align:left">previousPersonal-<br/>IdentityNumber</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.15</td>
-<td style="text-align:left">A user&#39;s previous national civic registration number, see <a href="#the-previouspersonalidentitynumber-attribute">section 3.2.6</a> below.</td>
-<td style="text-align:left">See <code>personalIdentityNumber</code> above.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">197010632391</td>
+<td align="left">previousPersonal-<br/>IdentityNumber</td>
+<td align="left">urn:oid:1.2.752.201.3.15</td>
+<td align="left">A user&#39;s previous national civic registration number, see <a href="#the-previouspersonalidentitynumber-attribute">section 3.2.6</a> below.</td>
+<td align="left">See <code>personalIdentityNumber</code> above.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">197010632391</td>
 </tr>
 <tr>
-<td style="text-align:left">dateOfBirth</td>
-<td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.1</td>
-<td style="text-align:left">Date of birth</td>
-<td style="text-align:left">Date of birth expressed using the format YYYY-MM-DD.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">1950-06-26</td>
+<td align="left">dateOfBirth</td>
+<td align="left">urn:oid:1.3.6.1.5.5.7.9.1</td>
+<td align="left">Date of birth</td>
+<td align="left">Date of birth expressed using the format YYYY-MM-DD.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">1950-06-26</td>
 </tr>
 <tr>
-<td style="text-align:left">birthName</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.8</td>
-<td style="text-align:left">Name at the time of birth</td>
-<td style="text-align:left">Full name of a person at birth.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Valfrid Danielsson</td>
+<td align="left">birthName</td>
+<td align="left">urn:oid:1.2.752.201.3.8</td>
+<td align="left">Name at the time of birth</td>
+<td align="left">Full name of a person at birth.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Valfrid Danielsson</td>
 </tr>
 <tr>
-<td style="text-align:left">street</td>
-<td style="text-align:left">urn:oid:2.5.4.9</td>
-<td style="text-align:left">Street address</td>
-<td style="text-align:left">Street address.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Mosebacke torg 3</td>
+<td align="left">street</td>
+<td align="left">urn:oid:2.5.4.9</td>
+<td align="left">Street address</td>
+<td align="left">Street address.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Mosebacke torg 3</td>
 </tr>
 <tr>
-<td style="text-align:left">postOfficeBox</td>
-<td style="text-align:left">urn:oid:2.5.4.18</td>
-<td style="text-align:left">Post box</td>
-<td style="text-align:left">Post box.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Box 1122</td>
+<td align="left">postOfficeBox</td>
+<td align="left">urn:oid:2.5.4.18</td>
+<td align="left">Post box</td>
+<td align="left">Post box.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Box 1122</td>
 </tr>
 <tr>
-<td style="text-align:left">postalCode</td>
-<td style="text-align:left">urn:oid:2.5.4.17</td>
-<td style="text-align:left">Postal code</td>
-<td style="text-align:left">Postal code.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">11826</td>
+<td align="left">postalCode</td>
+<td align="left">urn:oid:2.5.4.17</td>
+<td align="left">Postal code</td>
+<td align="left">Postal code.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">11826</td>
 </tr>
 <tr>
-<td style="text-align:left">l</td>
-<td style="text-align:left">urn:oid:2.5.4.7</td>
-<td style="text-align:left">Locality</td>
-<td style="text-align:left">Locality.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Stockholm</td>
+<td align="left">l</td>
+<td align="left">urn:oid:2.5.4.7</td>
+<td align="left">Locality</td>
+<td align="left">Locality.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Stockholm</td>
 </tr>
 <tr>
-<td style="text-align:left">c</td>
-<td style="text-align:left">urn:oid:2.5.4.6</td>
-<td style="text-align:left">Country</td>
-<td style="text-align:left">ISO 3166-1 alpha-2 [ISO3166] two letter country code.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">SE</td>
+<td align="left">c</td>
+<td align="left">urn:oid:2.5.4.6</td>
+<td align="left">Country</td>
+<td align="left">ISO 3166-1 alpha-2 [ISO3166] two letter country code.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">SE</td>
 </tr>
 <tr>
-<td style="text-align:left">placeOfBirth</td>
-<td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.2</td>
-<td style="text-align:left">Place of birth</td>
-<td style="text-align:left">A string representing the place of birth</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Stockholm</td>
+<td align="left">placeOfBirth</td>
+<td align="left">urn:oid:1.3.6.1.5.5.7.9.2</td>
+<td align="left">Place of birth</td>
+<td align="left">A string representing the place of birth</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Stockholm</td>
 </tr>
 <tr>
-<td style="text-align:left">countryOfCitizenship</td>
-<td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.4</td>
-<td style="text-align:left">Country of citizenship</td>
-<td style="text-align:left">ISO 3166-1 alpha-2 [ISO3166] two letter country code representing a country of citizenship.</td>
-<td style="text-align:center">Yes</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">SE</td>
+<td align="left">countryOfCitizenship</td>
+<td align="left">urn:oid:1.3.6.1.5.5.7.9.4</td>
+<td align="left">Country of citizenship</td>
+<td align="left">ISO 3166-1 alpha-2 [ISO3166] two letter country code representing a country of citizenship.</td>
+<td align="center">Yes</td>
+<td align="left">No</td>
+<td align="left">SE</td>
 </tr>
 <tr>
-<td style="text-align:left">countryOfResidence</td>
-<td style="text-align:left">urn:oid:1.3.6.1.5.5.7.9.5</td>
-<td style="text-align:left">Country of Residence</td>
-<td style="text-align:left">ISO 3166-1 alpha-2 [ISO3166] two letter country code representing the country of residence.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">SE</td>
+<td align="left">countryOfResidence</td>
+<td align="left">urn:oid:1.3.6.1.5.5.7.9.5</td>
+<td align="left">Country of Residence</td>
+<td align="left">ISO 3166-1 alpha-2 [ISO3166] two letter country code representing the country of residence.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">SE</td>
 </tr>
 <tr>
-<td style="text-align:left">telephoneNumber</td>
-<td style="text-align:left">urn:oid:2.5.4.20</td>
-<td style="text-align:left">Telephone number</td>
-<td style="text-align:left">Telephone number.</td>
-<td style="text-align:center">Yes</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">+46890510</td>
+<td align="left">telephoneNumber</td>
+<td align="left">urn:oid:2.5.4.20</td>
+<td align="left">Telephone number</td>
+<td align="left">Telephone number.</td>
+<td align="center">Yes</td>
+<td align="left">No</td>
+<td align="left">+46890510</td>
 </tr>
 <tr>
-<td style="text-align:left">mobile</td>
-<td style="text-align:left">urn:oid:0.9.2342.<br/>19200300.100.1.41</td>
-<td style="text-align:left">Mobile number</td>
-<td style="text-align:left">Mobile number.</td>
-<td style="text-align:center">Yes</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">+46703419886</td>
+<td align="left">mobile</td>
+<td align="left">urn:oid:0.9.2342.<br/>19200300.100.1.41</td>
+<td align="left">Mobile number</td>
+<td align="left">Mobile number.</td>
+<td align="center">Yes</td>
+<td align="left">No</td>
+<td align="left">+46703419886</td>
 </tr>
 <tr>
-<td style="text-align:left">mail</td>
-<td style="text-align:left">urn:oid:0.9.2342.<br/>19200300.100.1.3</td>
-<td style="text-align:left">E-mail address</td>
-<td style="text-align:left">E-mail address.</td>
-<td style="text-align:center">Yes</td>
-<td style="text-align:left">Yes/No<sup>*</sup></td>
-<td style="text-align:left">vfl@mosebackemonarki.se</td>
+<td align="left">mail</td>
+<td align="left">urn:oid:0.9.2342.<br/>19200300.100.1.3</td>
+<td align="left">E-mail address</td>
+<td align="left">E-mail address.</td>
+<td align="center">Yes</td>
+<td align="left">Yes/No<sup>*</sup></td>
+<td align="left"><a href="mailto:&#118;&#102;&#x6c;&#64;&#x6d;&#x6f;&#x73;&#101;&#98;&#97;&#x63;&#x6b;&#x65;&#x6d;&#111;&#110;&#97;&#114;&#107;&#105;&#46;&#x73;&#x65;">&#118;&#102;&#x6c;&#64;&#x6d;&#x6f;&#x73;&#101;&#98;&#97;&#x63;&#x6b;&#x65;&#x6d;&#111;&#110;&#97;&#114;&#107;&#105;&#46;&#x73;&#x65;</a></td>
 </tr>
 <tr>
-<td style="text-align:left">o</td>
-<td style="text-align:left">urn:oid:2.5.4.10</td>
-<td style="text-align:left">Organization name</td>
-<td style="text-align:left">Registered organization name.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">Skatteverket</td>
+<td align="left">o</td>
+<td align="left">urn:oid:2.5.4.10</td>
+<td align="left">Organization name</td>
+<td align="left">Registered organization name.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">Skatteverket</td>
 </tr>
 <tr>
-<td style="text-align:left">ou</td>
-<td style="text-align:left">urn:oid:2.5.4.11</td>
-<td style="text-align:left">Organizational unit name</td>
-<td style="text-align:left">Organizational unit name.</td>
-<td style="text-align:center">Yes</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">IT-Avdelningen</td>
+<td align="left">ou</td>
+<td align="left">urn:oid:2.5.4.11</td>
+<td align="left">Organizational unit name</td>
+<td align="left">Organizational unit name.</td>
+<td align="center">Yes</td>
+<td align="left">No</td>
+<td align="left">IT-Avdelningen</td>
 </tr>
 <tr>
-<td style="text-align:left">organizationIdentifier</td>
-<td style="text-align:left">urn:oid:2.5.4.97</td>
-<td style="text-align:left">Organizational identifier code</td>
-<td style="text-align:left">Swedish “organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">5562265719</td>
+<td align="left">organizationIdentifier</td>
+<td align="left">urn:oid:2.5.4.97</td>
+<td align="left">Organizational identifier code</td>
+<td align="left">Swedish “organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">5562265719</td>
 </tr>
 <tr>
-<td style="text-align:left">orgAffiliation</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.1</td>
-<td style="text-align:left">&lt;uid&gt;@&lt;orgnr&gt;</td>
-<td style="text-align:left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
-<td style="text-align:center">Yes</td>
-<td style="text-align:left">Yes</td>
-<td style="text-align:left">vlindman@5562265719<br />See <a href="#the-orgaffiliation-attribute">section 3.2.5</a> below.</td>
+<td align="left">orgAffiliation</td>
+<td align="left">urn:oid:1.2.752.201.3.1</td>
+<td align="left">&lt;uid&gt;@&lt;orgnr&gt;</td>
+<td align="left"><em>Personal ID</em> @ Swedish ”organisationsnummer” according to <a href="#skv709">SKV 709</a>. 10 digits without hyphen.</td>
+<td align="center">Yes</td>
+<td align="left">Yes</td>
+<td align="left">vlindman@5562265719<br />See <a href="#the-orgaffiliation-attribute">section 3.2.5</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">transactionIdentifier</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.2</td>
-<td style="text-align:left">Transaction identifier</td>
-<td style="text-align:left">Transaction identifier for an event, e.g. an authentication process.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left"><em>9878HJ6687 (arbitrary string)</em></td>
+<td align="left">transactionIdentifier</td>
+<td align="left">urn:oid:1.2.752.201.3.2</td>
+<td align="left">Transaction identifier</td>
+<td align="left">Transaction identifier for an event, e.g. an authentication process.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left"><em>9878HJ6687 (arbitrary string)</em></td>
 </tr>
 <tr>
-<td style="text-align:left">authContextParams</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.3</td>
-<td style="text-align:left">Authentication Context Parameters.</td>
-<td style="text-align:left">Key-value pairs from an authentication process. Defined by issuing entity.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#the-authcontextparams-attribute">section 3.2.1</a> below.</td>
+<td align="left">authContextParams</td>
+<td align="left">urn:oid:1.2.752.201.3.3</td>
+<td align="left">Authentication Context Parameters.</td>
+<td align="left">Key-value pairs from an authentication process. Defined by issuing entity.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#the-authcontextparams-attribute">section 3.2.1</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">userCertificate</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.10</td>
-<td style="text-align:left">User certificate</td>
-<td style="text-align:left">Base64-encoding of a user certificate.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
+<td align="left">userCertificate</td>
+<td align="left">urn:oid:1.2.752.201.3.10</td>
+<td align="left">User certificate</td>
+<td align="left">Base64-encoding of a user certificate.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">userSignature</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.11</td>
-<td style="text-align:left">User signature</td>
-<td style="text-align:left">Base64-encoding of a signature object applied by the user.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
+<td align="left">userSignature</td>
+<td align="left">urn:oid:1.2.752.201.3.11</td>
+<td align="left">User signature</td>
+<td align="left">Base64-encoding of a signature object applied by the user.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">authServerSignature</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.13</td>
-<td style="text-align:left">Authentication server signature</td>
-<td style="text-align:left">Base64-encoding of a authentication server signature.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
+<td align="left">authServerSignature</td>
+<td align="left">urn:oid:1.2.752.201.3.13</td>
+<td align="left">Authentication server signature</td>
+<td align="left">Base64-encoding of a authentication server signature.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#the-usercertificate-and-usersignature-attributes">section 3.2.2</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">sad</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.12</td>
-<td style="text-align:left">Signature activation data</td>
-<td style="text-align:left">Signature activation data required by signature services.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#the-sad-attribute">section 3.2.3</a> below.</td>
+<td align="left">sad</td>
+<td align="left">urn:oid:1.2.752.201.3.12</td>
+<td align="left">Signature activation data</td>
+<td align="left">Signature activation data required by signature services.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#the-sad-attribute">section 3.2.3</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">signMessageDigest</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.14</td>
-<td style="text-align:left">Sign message digest</td>
-<td style="text-align:left">Included in assertions as a proof that a user sign message was displayed.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#the-signmessagedigest-attribute">section 3.2.4</a> below.</td>
+<td align="left">signMessageDigest</td>
+<td align="left">urn:oid:1.2.752.201.3.14</td>
+<td align="left">Sign message digest</td>
+<td align="left">Included in assertions as a proof that a user sign message was displayed.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#the-signmessagedigest-attribute">section 3.2.4</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">prid</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.4</td>
-<td style="text-align:left">Provisional identifier</td>
-<td style="text-align:left">Unique identifier for an authentication performed against the eIDAS Framework. See <a href="#the-prid-and-pridpersistence-attributes">section 3.3.1</a> below.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">NO:5068907693</td>
+<td align="left">prid</td>
+<td align="left">urn:oid:1.2.752.201.3.4</td>
+<td align="left">Provisional identifier</td>
+<td align="left">Unique identifier for an authentication performed against the eIDAS Framework. See <a href="#the-prid-and-pridpersistence-attributes">section 3.3.1</a> below.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">NO:5068907693</td>
 </tr>
 <tr>
-<td style="text-align:left">pridPersistence</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.5</td>
-<td style="text-align:left">Provisional identifier persistence indicator</td>
-<td style="text-align:left">Indicator for the expected persistence of the prid attribute. See <a href="#the-prid-and-pridpersistence-attributes">section 3.3.1</a> below.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">A</td>
+<td align="left">pridPersistence</td>
+<td align="left">urn:oid:1.2.752.201.3.5</td>
+<td align="left">Provisional identifier persistence indicator</td>
+<td align="left">Indicator for the expected persistence of the prid attribute. See <a href="#the-prid-and-pridpersistence-attributes">section 3.3.1</a> below.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">A</td>
 </tr>
 <tr>
-<td style="text-align:left">personalIdentity-<br/>NumberBinding</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.6</td>
-<td style="text-align:left">National civic registration number/code binding URI</td>
-<td style="text-align:left">The type of binding performed of mappedPersonalIdentityNumber attribute added by eIDAS connector. See <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section 3.3.2</a> below.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left"><a href="http://eid.example.se/presentedInPerson">http://eid.example.se/presentedInPerson</a></td>
+<td align="left">personalIdentity-<br/>NumberBinding</td>
+<td align="left">urn:oid:1.2.752.201.3.6</td>
+<td align="left">National civic registration number/code binding URI</td>
+<td align="left">URI identifying the binding performed of the <code>mappedPersonalIdentityNumber</code> attribute added by eIDAS connector. See <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section 3.3.2</a> below.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left"><code>http://id.swedenconnect.se/</code><br /><code>id-binding/level/enhanced</code></td>
 </tr>
 <tr>
-<td style="text-align:left">mappedPersonal-<br />IdentityNumber</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.16</td>
-<td style="text-align:left">Mapped national civic registration number</td>
-<td style="text-align:left">A &quot;mapped&quot; personalIdentityNumber, see <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section 3.3.2</a>.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">195006262546</td>
+<td align="left">mappedPersonal-<br />IdentityNumber</td>
+<td align="left">urn:oid:1.2.752.201.3.16</td>
+<td align="left">Mapped national civic registration number</td>
+<td align="left">A &quot;mapped&quot; personalIdentityNumber, see <a href="#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute">section 3.3.2</a>.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">195006262546</td>
 </tr>
 <tr>
-<td style="text-align:left">eidasPersonIdentifier</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.7</td>
-<td style="text-align:left">eIDAS uniqueness identifier for natural persons</td>
-<td style="text-align:left">Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">ES/AT/02635542Y (Spanish eID number for an Austrian SP)</td>
+<td align="left">eidasPersonIdentifier</td>
+<td align="left">urn:oid:1.2.752.201.3.7</td>
+<td align="left">eIDAS uniqueness identifier for natural persons</td>
+<td align="left">Maps the eIDAS PersonIdentifier attribute to a string attribute within the scope of the Swedish eID Framework attribute set.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">ES/AT/02635542Y (Spanish eID number for an Austrian SP)</td>
 </tr>
 <tr>
-<td style="text-align:left">eidasNatural-<br/>PersonAddress</td>
-<td style="text-align:left">urn:oid:1.2.752.201.3.9</td>
-<td style="text-align:left">eIDAS Natural Person Address</td>
-<td style="text-align:left">Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See <a href="#conversion-of-eidas-currentaddress">section 3.3.3.1</a> below.</td>
+<td align="left">eidasNatural-<br/>PersonAddress</td>
+<td align="left">urn:oid:1.2.752.201.3.9</td>
+<td align="left">eIDAS Natural Person Address</td>
+<td align="left">Attribute for converting the eIDAS CurrentAddress attribute into an attribute having a string type value.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See <a href="#conversion-of-eidas-currentaddress">section 3.3.3.1</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">employeeHsaId</td>
-<td style="text-align:left">urn:oid:1.2.752.29.6.2.1</td>
-<td style="text-align:left">HSA-ID</td>
-<td style="text-align:left">Person identifier used by Swedish health care organizations.</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">No</td>
-<td style="text-align:left">See [<a href="#sambiattr">SambiAttr</a>].</td>
+<td align="left">employeeHsaId</td>
+<td align="left">urn:oid:1.2.752.29.6.2.1</td>
+<td align="left">HSA-ID</td>
+<td align="left">Person identifier used by Swedish health care organizations.</td>
+<td align="center">No</td>
+<td align="left">No</td>
+<td align="left">See [<a href="#sambiattr">SambiAttr</a>].</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <blockquote>
 <p>[*]: The <code>mail</code> attribute should be regarded as a scoped attribute (see <a href="#scoped-attributes">3.1.3</a> below) if the attribute release policy in use has stated it as scoped. Such a policy can for example be that the attribute is part of an attribute set (see <a href="#attribute-sets">section 2</a>) that documents the attribute as scoped. In all other cases the attribute is regarded as non-scoped.</p>
 </blockquote>
 <p><a name="attribute-string-values"></a></p>
-<h4 id="3.1.1.-attribute-string-values">3.1.1. Attribute String Values</h4>
+<h4 id="311-attribute-string-values">3.1.1. Attribute String Values</h4>
 <p>All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the <code>xs:string</code> data type. Certain attributes such as <code>mail</code>, <code>personalIdentityNumber</code>, <code>organizationIdentifier</code>, <code>telephoneNumber</code> and <code>mobile</code> use a restricted character set according to its defined usage within this specification.</p>
 <p>All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 [<a href="#x520">X.520</a>]. That is, case-insensitive comparison where insignificant spaces are ignored.</p>
 <p><a name="multi-valued-attributes"></a></p>
-<h4 id="3.1.2.-multi-valued-attributes">3.1.2. Multi-valued Attributes</h4>
+<h4 id="312-multi-valued-attributes">3.1.2. Multi-valued Attributes</h4>
 <p>Attributes with a “No” value in the column &quot;Multi-valued&quot; MUST NOT have more than one <code>&lt;AttributeValue&gt;</code> sub-element. Attributes with a “Yes” value in the column &quot;Multi-valued&quot; MAY have one or more <code>&lt;AttributeValue&gt;</code> sub-elements.</p>
 <p><a name="scoped-attributes"></a></p>
-<h4 id="3.1.3.-scoped-attributes">3.1.3. Scoped Attributes</h4>
+<h4 id="313-scoped-attributes">3.1.3. Scoped Attributes</h4>
 <p>Attributes with a &quot;Yes&quot; value in the column &quot;Scoped&quot; are scoped attributes. A scoped attribute expresses values in a string-valued attribute of the form <code>value@scope</code>, where <code>scope</code> takes the form of a domain name or something similar such as an organizational identifier.</p>
 <p>An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider&#39;s metadata entry. See section 2.1.3.1 of [<a href="#eiddeployprof">EidDeployProf</a>] for details.    </p>
 <p>A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider&#39;s metadata entry as described in section 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>]. </p>
 <p><a name="saml-attribute-format"></a></p>
-<h3 id="3.2.-saml-attribute-format">3.2. SAML Attribute Format</h3>
+<h3 id="32-saml-attribute-format">3.2. SAML Attribute Format</h3>
 <p>The <code>&lt;saml:Attribute&gt;</code> element representing an attribute in <a href="#attributes">3.1</a> SHALL comply with the following requirements:</p>
 <ul class="list">
 <li><p>The <code>NameFormat</code> attribute SHALL have the value <code>urn:oasis:names:tc:SAML:2.0:attrname-format:uri</code>.</p>
@@ -738,25 +728,25 @@ examples of “converted attributes”.</p>
 </li>
 </ul>
 <p>The following is an example of the surname attribute. Its name is “urn:oid:2.5.4.4”, its friendly name is “sn” and the value is represented using a string type.</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>
-                           <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">"sn"</span>
-                           <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:2.5.4.4"</span>
-                           <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">"xs:string"</span>&gt;</span>Eriksson<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+                           <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">&quot;sn&quot;</span>
+                           <span class="hljs-attr">Name</span>=<span class="hljs-string">&quot;urn:oid:2.5.4.4&quot;</span>
+                           <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>Eriksson<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span></code></pre><p><a name="the-authcontextparams-attribute"></a></p>
-<h4 id="3.2.1.-the-authcontextparams-attribute">3.2.1. The authContextParams Attribute</h4>
+<h4 id="321-the-authcontextparams-attribute">3.2.1. The authContextParams Attribute</h4>
 <p>The attribute <code>authContextParams</code> holds key-value pairs. Its purpose is to store key-value pairs representing data from an authentication process. The data stored in this attribute is generally not defined by the Swedish eID Framework, but instead by the issuing party (i.e., the Identity Provider).</p>
 <p>The <code>authContextParams</code> attribute is a non-empty single-value attribute where the attribute value contains the key-value pairs separated by semicolons. The key and value of each pair is separated by a ‘=’ character and both the key and value MUST be URL-encoded.</p>
 <p>Below follows an example of how the authContextParams attribute is populated with two key-value pairs, &quot;foo&quot; that stores the value &quot;ÅÄÖ&quot;, and &quot;bar&quot; that stores the value &quot;123&quot;.</p>
 <pre class="hljs"><code>...
-&lt;saml<span class="hljs-number">2</span>:Attribute xmlns:xsi=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>    
-                           FriendlyName=<span class="hljs-string">"authContextParams"</span>
-                           Name=<span class="hljs-string">"urn:oid:1.2.752.201.3.3"</span>
-                           NameFormat=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;
-  &lt;saml<span class="hljs-number">2</span>:AttributeValue xsi:<span class="hljs-keyword">type</span>=<span class="hljs-string">"xs:string"</span>&gt;foo=<span class="hljs-symbol">%C3</span><span class="hljs-symbol">%85</span><span class="hljs-symbol">%C3</span><span class="hljs-symbol">%84</span><span class="hljs-symbol">%C3</span><span class="hljs-symbol">%96</span><span class="hljs-comment">;bar=123&lt;/saml2:AttributeValue&gt;
-</span>&lt;/saml<span class="hljs-number">2</span>:Attribute&gt;
+&lt;saml<span class="hljs-number">2</span>:Attribute xmlns:xsi<span class="hljs-operator">=</span><span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>    
+                           FriendlyName<span class="hljs-operator">=</span><span class="hljs-string">&quot;authContextParams&quot;</span>
+                           Name<span class="hljs-operator">=</span><span class="hljs-string">&quot;urn:oid:1.2.752.201.3.3&quot;</span>
+                           NameFormat<span class="hljs-operator">=</span><span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;
+  &lt;saml<span class="hljs-number">2</span>:AttributeValue xsi:<span class="hljs-keyword">type</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;xs:string&quot;</span>&gt;foo<span class="hljs-operator">=</span><span class="hljs-variable">%C3</span><span class="hljs-variable">%85</span><span class="hljs-variable">%C3</span><span class="hljs-variable">%84</span><span class="hljs-variable">%C3</span><span class="hljs-variable">%96</span><span class="hljs-comment">;bar=123&lt;/saml2:AttributeValue&gt;</span>
+&lt;/saml<span class="hljs-number">2</span>:Attribute&gt;
 ...</code></pre><p><a name="the-usercertificate-and-usersignature-attributes"></a></p>
-<h4 id="3.2.2.-the-usercertificate,-usersignature-and-authserversignature-attributes">3.2.2. The userCertificate, userSignature and authServerSignature Attributes</h4>
+<h4 id="322-the-usercertificate-usersignature-and-authserversignature-attributes">3.2.2. The userCertificate, userSignature and authServerSignature Attributes</h4>
 <p>Identity Providers that implement a PKI-based authentication method may
 make use of the <code>userCertificate</code> and <code>userSignature</code> attributes.</p>
 <p>The <code>userCertificate</code> attribute holds, as its value, a base64-encoding of
@@ -769,14 +759,14 @@ process.</p>
 <p>[*]: Note that an authentication process, may be “authentication for signature” as specified in section 7 of [<a href="#eiddeployprof">EidDeployProf</a>].</p>
 </blockquote>
 <p><a name="the-sad-attribute"></a></p>
-<h4 id="3.2.3.-the-sad-attribute">3.2.3. The sad Attribute</h4>
+<h4 id="323-the-sad-attribute">3.2.3. The sad Attribute</h4>
 <p>The <code>sad</code> attribute holds Signature Activation Data that is required by a
 signature service in order to service a signature request in accordance
 with CEN EN 419 241-2. The <code>sad</code> attribute holds a single string
 attribute value. The format of the string value is defined in the &quot;Signature Activation Protocol 
 for Federated Signing&quot; specification [<a href="#sigsap">SigSAP</a>].</p>
 <p><a name="the-signmessagedigest-attribute"></a></p>
-<h4 id="3.2.4.-the-signmessagedigest-attribute">3.2.4. The signMessageDigest Attribute</h4>
+<h4 id="324-the-signmessagedigest-attribute">3.2.4. The signMessageDigest Attribute</h4>
 <p>The <code>signMessageDigest</code> attribute is included in an assertion as a proof that an Identity Provider displayed
 a sign message for the user and that the user actively confirmed acceptance of this sign message. This sign 
 message is the <code>SignMessage</code> extension that may be included in an authentication request by Signature Service 
@@ -795,19 +785,19 @@ represented as:</p>
 <span class="hljs-section">&lt;/csig:Message&gt;</span></code></pre><p>The input to the digesting operation is the value bytes of the <code>csig:Message</code> element which is UTF-8 encoded bytes
 of the actual sign message<sup>*</sup>.</p>
 <p>The <code>signMessageDigest</code> attribute for the above example will then be:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">"signMessageDigest"</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.201.3.14"</span>
-  <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">"xsd:string"</span>&gt;</span>
-    http://www.w3.org/2001/04/xmlenc#sha256;0yKaSVsYeh+PX2Q6diqO2w89+a3Dm303tp3AVjgxwj0=
-  <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span></code></pre><p><a name="the-orgaffiliation-attribute"></a></p>
-<h4 id="3.2.5.-the-orgaffiliation-attribute">3.2.5. The orgAffiliation Attribute</h4>
+<pre class="hljs"><code><span class="hljs-section">&lt;saml2:Attribute FriendlyName=<span class="hljs-string">&quot;signMessageDigest&quot;</span> Name=<span class="hljs-string">&quot;urn:oid:1.2.752.201.3.14&quot;</span>
+  NameFormat=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;</span>
+  <span class="hljs-section">&lt;saml2:AttributeValue xsi:type=<span class="hljs-string">&quot;xsd:string&quot;</span>&gt;</span>
+    <span class="hljs-attribute">http</span>://www.w<span class="hljs-number">3</span>.org/<span class="hljs-number">2001</span>/<span class="hljs-number">04</span>/xmlenc#sha<span class="hljs-number">256</span>;<span class="hljs-number">0</span>yKaSVsYeh+PX<span class="hljs-number">2</span>Q<span class="hljs-number">6</span>diqO<span class="hljs-number">2</span>w<span class="hljs-number">89</span>+a<span class="hljs-number">3</span>Dm<span class="hljs-number">303</span>tp<span class="hljs-number">3</span>AVjgxwj<span class="hljs-number">0</span>=
+  <span class="hljs-section">&lt;/saml2:AttributeValue&gt;</span>
+<span class="hljs-section">&lt;/saml2:Attribute&gt;</span></code></pre><p><a name="the-orgaffiliation-attribute"></a></p>
+<h4 id="325-the-orgaffiliation-attribute">3.2.5. The orgAffiliation Attribute</h4>
 <p>The <code>orgAffiliation</code> attribute is intended to be used as a primary identity attribute for personal organizational identities. It consists of a personal identifier <strong>and</strong> an organizational identifier code (<code>organizationIdentifier</code>). </p>
 <p>This specification does not impose any specific requirements concerning the personal identifier part of the attribute other than that it MUST be unique for the given organization.</p>
 <p><strong>Note</strong>: In the general case, an attribute consumer MUST NOT assume a particular format or meaning of the personal identifier part since different organizations may use different formats. An attribute consumer should also be aware that a personal identifier separated from its organizational identifier code can not be regarded as unique. </p>
 <p><strong>Note</strong>: The <code>orgAffiliation</code> is a <a href="#scoped-attributes">scoped attribute</a> meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>].</p>
 <p><a name="the-previouspersonalidentitynumber-attribute"></a></p>
-<h4 id="3.2.6.-the-previouspersonalidentitynumber-attribute">3.2.6. The previousPersonalIdentityNumber Attribute</h4>
+<h4 id="326-the-previouspersonalidentitynumber-attribute">3.2.6. The previousPersonalIdentityNumber Attribute</h4>
 <p>The <code>personalIdentityNumber</code> attribute can contain a Swedish personal identity number (personnummer), [<a href="#skv704">SKV704</a>], or a Swedish coordination number (samordningsnummer), [<a href="#skv707">SKV707</a>]. All individuals born in Sweden or moving to Sweden with the intention 
 of staying one year or longer is assigned a personal identity number and registered in the
 population register. A coordination number may be assigned to a person that is not registered, 
@@ -827,9 +817,9 @@ previously held identity number to a newly assigned identity number. The <code>p
 wishing to receive the attribute should declare the these requirement in their metadata entries
 (using a <code>&lt;md:RequestedAttribute&gt;</code> element).</p>
 <p><a name="attributes-for-the-eidas-framework"></a></p>
-<h3 id="3.3.-attributes-for-the-eidas-framework">3.3. Attributes for the eIDAS Framework</h3>
+<h3 id="33-attributes-for-the-eidas-framework">3.3. Attributes for the eIDAS Framework</h3>
 <p><a name="the-prid-and-pridpersistence-attributes"></a></p>
-<h4 id="3.3.1.-the-prid-and-pridpersistence-attributes">3.3.1. The prid and pridPersistence Attributes</h4>
+<h4 id="331-the-prid-and-pridpersistence-attributes">3.3.1. The prid and pridPersistence Attributes</h4>
 <p>Assertions (with attribute statements) issued from a member state eIDAS
 node contain a set of attributes identifying the authenticated subject.
 Attributes obtained from other conformant eIDAS nodes will provide an
@@ -865,29 +855,26 @@ Swedish eID Framework”, [<a href="#constructedattr">ConstructedAttr</a>], decl
 how the <code>prid</code> and <code>pridPersistence</code> attributes are generated and how they
 should be processed.</p>
 <p><a name="the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute"></a></p>
-<h4 id="3.3.2.-the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attributes">3.3.2. The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes</h4>
+<h4 id="332-the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attributes">3.3.2. The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes</h4>
 <p>When an authentication for a natural person is performed against the
-eIDAS Framework the Swedish eIDAS connector may attempt to perform a
-mapping of the received eIDAS identity to a Swedish civic registration
-number. If such a mapping is performed and is successful, the
+eIDAS Framework, the Swedish eIDAS connector will query an identity binding service
+for a binding between the attributes found in the assertion received from the foreign
+eIDAS-node and a Swedish personal identity number.  If such a mapping exists, the
 assertion is extended with a <code>mappedPersonalIdentityNumber</code> attribute holding the
 &quot;mapped&quot; Swedish civic registration number (&quot;personnummer&quot; or &quot;samordningsnummer&quot;).</p>
 <p>This mapping, or binding, can be performed using a number of different processes,
-where some are considered to be strong and where others only may be a
-“good guess” or even supplied by the user. Therefore, an eIDAS connector that 
-extends an assertion with a <code>mappedPersonalIdentityNumber</code> attribute MUST also include the
-<code>personalIdentityNumberBinding</code> attribute. This attribute contains a value
-that is an URI that identifies the process that was used to link a set
-of eIDAS attributes to a <code>mappedPersonalIdentityNumber</code> attribute. </p>
+where some are considered to be strong and where others are less trustworthy.
+Therefore, an eIDAS connector that extends an assertion with a 
+<code>mappedPersonalIdentityNumber</code> attribute MUST also include the
+<code>personalIdentityNumberBinding</code> attribute. This attribute contains an URI that
+identifies the strength of the binding process. See [<a href="#id-binding">ID-Binding</a>]
+for the possible values.</p>
 <p>If this binding is acceptable for a Service Provider processing an assertion
 (containing the <code>mappedPersonalIdentityNumber</code> attribute), the Service Provider 
 MAY treat the contents of the <code>mappedPersonalIdentityNumber</code>
 attribute as it would have received the <code>personalIdentityNumber</code> attribute, otherwise
 the Service Provider SHOULD NOT use the identity found in the <code>mappedPersonalIdentityNumber</code>
 attribute to login the user.</p>
-<p>This specification does not specify any defined URI identifiers that may
-be included in this attribute. Such URI identifiers will be specified in
-documents specifying appropriate binding mechanisms.</p>
 <blockquote>
 <p><strong>Note</strong>: The reason that an ordinary <code>personalIdentityNumber</code> attribute is not
 used to represent a mapped civic registration number is that it is essential that
@@ -896,7 +883,7 @@ mapping was performed is acceptable, before proceeding with the authentication
 process.</p>
 </blockquote>
 <p><a name="conversion-of-eidas-attributes"></a></p>
-<h4 id="3.3.3.-conversion-of-eidas-attributes">3.3.3. Conversion of eIDAS Attributes</h4>
+<h4 id="333-conversion-of-eidas-attributes">3.3.3. Conversion of eIDAS Attributes</h4>
 <p>The attributes specified within eIDAS ([<a href="#eidas-attr">eIDAS_Attr</a>]) does not use
 simple string type values. Instead each attribute is represented using
 its own dedicated XML data type. This affects interoperability in a
@@ -910,84 +897,82 @@ Swedish eID Framework.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">eIDAS attribute</th>
-<th style="text-align:left">Swedish eID attribute</th>
+<th align="left">eIDAS attribute</th>
+<th align="left">Swedish eID attribute</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">PersonIdentifier <br /> <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code></td>
-<td style="text-align:left">eidasPersonIdentifier <br /> urn:oid:1.2.752.201.3.7</td>
+<tbody><tr>
+<td align="left">PersonIdentifier <br /> <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code></td>
+<td align="left">eidasPersonIdentifier <br /> urn:oid:1.2.752.201.3.7</td>
 </tr>
 <tr>
-<td style="text-align:left">FamilyName <br /> <code>http://eidas.europa.eu/attributes/naturalperson/CurrentFamilyName</code></td>
-<td style="text-align:left">sn <br /> urn:oid:2.5.4.4</td>
+<td align="left">FamilyName <br /> <code>http://eidas.europa.eu/attributes/naturalperson/CurrentFamilyName</code></td>
+<td align="left">sn <br /> urn:oid:2.5.4.4</td>
 </tr>
 <tr>
-<td style="text-align:left">FirstName <br /> <code>http://eidas.europa.eu/attributes/naturalperson/CurrentGivenName</code></td>
-<td style="text-align:left">givenName <br /> urn:oid:2.5.4.42</td>
+<td align="left">FirstName <br /> <code>http://eidas.europa.eu/attributes/naturalperson/CurrentGivenName</code></td>
+<td align="left">givenName <br /> urn:oid:2.5.4.42</td>
 </tr>
 <tr>
-<td style="text-align:left">DateOfBirth <br /> <code>http://eidas.europa.eu/attributes/naturalperson/DateOfBirth</code></td>
-<td style="text-align:left">dateOfBirth <br /> urn:oid:1.3.6.1.5.5.7.9.1</td>
+<td align="left">DateOfBirth <br /> <code>http://eidas.europa.eu/attributes/naturalperson/DateOfBirth</code></td>
+<td align="left">dateOfBirth <br /> urn:oid:1.3.6.1.5.5.7.9.1</td>
 </tr>
 <tr>
-<td style="text-align:left">BirthName <br /> <code>http://eidas.europa.eu/attributes/naturalperson/BirthName</code></td>
-<td style="text-align:left">birthName <br /> urn:oid:1.2.752.201.3.8</td>
+<td align="left">BirthName <br /> <code>http://eidas.europa.eu/attributes/naturalperson/BirthName</code></td>
+<td align="left">birthName <br /> urn:oid:1.2.752.201.3.8</td>
 </tr>
 <tr>
-<td style="text-align:left">PlaceOfBirth <br /> <code>http://eidas.europa.eu/attributes/naturalperson/PlaceOfBirth</code></td>
-<td style="text-align:left">placeOfBirth <br /> urn:oid:1.3.6.1.5.5.7.9.2</td>
+<td align="left">PlaceOfBirth <br /> <code>http://eidas.europa.eu/attributes/naturalperson/PlaceOfBirth</code></td>
+<td align="left">placeOfBirth <br /> urn:oid:1.3.6.1.5.5.7.9.2</td>
 </tr>
 <tr>
-<td style="text-align:left">CurrentAddress <br /> <code>http://eidas.europa.eu/attributes/naturalperson/CurrentAddress</code></td>
-<td style="text-align:left">eidasNaturalPersonAddress <br /> urn:oid:1.2.752.201.3.9 <br /> See <a href="#conversion-of-eidas-currentaddress">section 3.3.3.1</a> below.</td>
+<td align="left">CurrentAddress <br /> <code>http://eidas.europa.eu/attributes/naturalperson/CurrentAddress</code></td>
+<td align="left">eidasNaturalPersonAddress <br /> urn:oid:1.2.752.201.3.9 <br /> See <a href="#conversion-of-eidas-currentaddress">section 3.3.3.1</a> below.</td>
 </tr>
 <tr>
-<td style="text-align:left">Gender <br /> <code>http://eidas.europa.eu/attributes/naturalperson/Gender</code></td>
-<td style="text-align:left">gender <br /> urn:oid:1.3.6.1.5.5.7.9.3</td>
+<td align="left">Gender <br /> <code>http://eidas.europa.eu/attributes/naturalperson/Gender</code></td>
+<td align="left">gender <br /> urn:oid:1.3.6.1.5.5.7.9.3</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>Note</strong>: When converting an eIDAS attribute that makes use of
 “transliteration” (as described in section 2.4 of [<a href="#eidas-attr">eIDAS_Attr</a>])
 attribute values having the <code>LatinScript</code> attribute set to <code>false</code> will not
 be part of the resulting attribute.</p>
 <p><a name="conversion-of-eidas-currentaddress"></a></p>
-<h5 id="3.3.3.1.-conversion-of-eidas-currentaddress">3.3.3.1. Conversion of eIDAS CurrentAddress</h5>
+<h5 id="3331-conversion-of-eidas-currentaddress">3.3.3.1. Conversion of eIDAS CurrentAddress</h5>
 <p>The eIDAS attribute <code>CurrentAddress</code> is defined in section 2.2.9 of
 [<a href="#eidas-attr">eIDAS_Attr</a>]. Its value is a Base64-encoding of an XML-structure of
 the type CurrentAddressStructuredType.</p>
-<pre class="hljs"><code>&lt;xsd:complexType name=<span class="hljs-string">"CurrentAddressStructuredType"</span>&gt;
+<pre class="hljs"><code>&lt;xsd:complexType <span class="hljs-type">name</span>=&quot;CurrentAddressStructuredType&quot;&gt;
   &lt;xsd:annotation&gt;
     &lt;xsd:documentation&gt;
-      Current address <span class="hljs-keyword">of</span> the natural person.
+      <span class="hljs-keyword">Current</span> address <span class="hljs-keyword">of</span> the <span class="hljs-keyword">natural</span> person.
     &lt;/xsd:documentation&gt;
   &lt;/xsd:annotation&gt;
-  &lt;xsd:sequence&gt;
-    &lt;xsd:element name=<span class="hljs-string">"PoBox"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"LocatorDesignator"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"LocatorName"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"CvaddressArea"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"Thoroughfare"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"PostName"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"AdminunitFirstline"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"AdminunitSecondline"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-    &lt;xsd:element name=<span class="hljs-string">"PostCode"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"xsd:string"</span> minOccurs=<span class="hljs-string">"0"</span> maxOccurs=<span class="hljs-string">"1"</span>/&gt;
-  &lt;/xsd:sequence&gt;
+  &lt;xsd:<span class="hljs-keyword">sequence</span>&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;PoBox&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;LocatorDesignator&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;LocatorName&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;CvaddressArea&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;Thoroughfare&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;PostName&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;AdminunitFirstline&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;AdminunitSecondline&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+    &lt;xsd:element <span class="hljs-type">name</span>=&quot;PostCode&quot; <span class="hljs-keyword">type</span>=&quot;xsd:string&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;/&gt;
+  &lt;/xsd:<span class="hljs-keyword">sequence</span>&gt;
 &lt;/xsd:complexType&gt;</code></pre><p>An example of an instance of a CurrentAddress attribute would look as
 follows:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>
-                           <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">"CurrentAddress"</span>
-                           <span class="hljs-attr">Name</span>=<span class="hljs-string">"http://eidas.europa.eu/attributes/naturalperson/CurrentAddress"</span>
-                           <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">"eidas:CurrentAddressType"</span>&gt;</span>
-    PGVpZGFzOkxvY2F0b3JEZXNpZ25hdG9yPjIyPC9laWRhczpMb2NhdG9yRGVzaWduYX
-    Rvcj48ZWlkYXM6VGhvcm91Z2hmYXJlPkFyY2FjaWEgQXZlbnVlPC9laWRhczpUaG9y
-    b3VnaGZhcmU+DQo8ZWlkYXM6UG9zdE5hbWU+TG9uZG9uPC9laWRhczpQb3N0TmFtZT
-    4NCjxlaWRhczpQb3N0Q29kZT5TVzFBIDFBQTwvZWlkYXM6UG9zdENvZGU+
-  <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span></code></pre><p>The value is the Base64-encoding of the following XML-snippet:</p>
+<pre class="hljs"><code><span class="hljs-section">&lt;saml2:Attribute xmlns:xsi=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+                           FriendlyName=<span class="hljs-string">&quot;CurrentAddress&quot;</span>
+                           Name=<span class="hljs-string">&quot;http://eidas.europa.eu/attributes/naturalperson/CurrentAddress&quot;</span>
+                           NameFormat=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;</span>
+  <span class="hljs-section">&lt;saml2:AttributeValue xsi:type=<span class="hljs-string">&quot;eidas:CurrentAddressType&quot;</span>&gt;</span>
+    <span class="hljs-attribute">PGVpZGFzOkxvY2F0b3JEZXNpZ25hdG9yPjIyPC9laWRhczpMb2NhdG9yRGVzaWduYX</span>
+    <span class="hljs-attribute">Rvcj48ZWlkYXM6VGhvcm91Z2hmYXJlPkFyY2FjaWEgQXZlbnVlPC9laWRhczpUaG9y</span>
+    <span class="hljs-attribute">b3VnaGZhcmU</span>+DQo<span class="hljs-number">8</span>ZWlkYXM<span class="hljs-number">6</span>UG<span class="hljs-number">9</span>zdE<span class="hljs-number">5</span>hbWU+TG<span class="hljs-number">9</span>uZG<span class="hljs-number">9</span>uPC<span class="hljs-number">9</span>laWRhczpQb<span class="hljs-number">3</span>N<span class="hljs-number">0</span>TmFtZT
+    <span class="hljs-attribute">4NCjxlaWRhczpQb3N0Q29kZT5TVzFBIDFBQTwvZWlkYXM6UG9zdENvZGU</span>+
+  <span class="hljs-section">&lt;/saml2:AttributeValue&gt;</span>
+<span class="hljs-section">&lt;/saml2:Attribute&gt;</span></code></pre><p>The value is the Base64-encoding of the following XML-snippet:</p>
 <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">eidas:LocatorDesignator</span>&gt;</span>22<span class="hljs-tag">&lt;/<span class="hljs-name">eidas:LocatorDesignator</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">eidas:Thoroughfare</span>&gt;</span>Arcacia Avenue<span class="hljs-tag">&lt;/<span class="hljs-name">eidas:Thoroughfare</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">eidas:PostName</span>&gt;</span>London<span class="hljs-tag">&lt;/<span class="hljs-name">eidas:PostName</span>&gt;</span>
@@ -1004,15 +989,15 @@ corresponding values. The key and value of each pair is separated by a
 ‘=’ character and both the key and value MUST be URL-encoded.</p>
 <p>The eIDAS-attribute <code>CurrentAddress</code> above will thus be converted to the
 following attribute:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>
-                           <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">"eidasNaturalPersonAddress"</span>
-                           <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.201.3.9"</span>
-                           <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">"xs:string"</span>&gt;</span>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saml2:Attribute</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+                           <span class="hljs-attr">FriendlyName</span>=<span class="hljs-string">&quot;eidasNaturalPersonAddress&quot;</span>
+                           <span class="hljs-attr">Name</span>=<span class="hljs-string">&quot;urn:oid:1.2.752.201.3.9&quot;</span>
+                           <span class="hljs-attr">NameFormat</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">saml2:AttributeValue</span> <span class="hljs-attr">xsi:type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
     LocatorDesignator=22;Thoroughfare=Arcacia%20Avenue;PostName=London;PostCode=SW1A%201AA
   <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:AttributeValue</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">saml2:Attribute</span>&gt;</span></code></pre><p><a name="references"></a></p>
-<h2 id="4.-references">4. References</h2>
+<h2 id="4-references">4. References</h2>
 <p><a name="rfc2119"></a>
 <strong>[RFC2119]</strong></p>
 <blockquote>
@@ -1047,6 +1032,11 @@ Samordningsnummer</a>.</p>
 <strong>[SKV709]</strong></p>
 <blockquote>
 <p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv709-8.pdf">Skatteverket, SKV 709, Utgåva 8, Organisationsnummer</a>.</p>
+</blockquote>
+<p><a name="id-binding"></a>
+<strong>[ID-Binding]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/Identity_Binding.html">Binding of eIDAS Attributes to Swedish Personal Identity Numbers</a></p>
 </blockquote>
 <p><a name="x520"></a>
 <strong>[X.520]</strong></p>
@@ -1108,10 +1098,13 @@ subdivisions Part 1: Country codes, ISO standard, ISO 3166-1.</p>
 <p><a href="https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
-<h2 id="5.-changes-between-versions">5. Changes between versions</h2>
+<h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.7 and version 1.8:</strong></p>
 <ul class="list">
-<li>Updated link to Sambi attribute specification.</li>
+<li><p>Updated link to Sambi attribute specification.</p>
+</li>
+<li><p>Section 3.3.2, &quot;The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes&quot;, was updated.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.6 and version 1.7:</strong></p>
 <ul class="list">
@@ -1150,66 +1143,66 @@ identity number.</p>
 <p><strong>Changes between version 1.3 and version 1.4:</strong></p>
 <ul class="list">
 <li><p>Attributes for mapping eIDAS-attributes have been defined (section
-3.1 and 3.3).</p>
+  3.1 and 3.3).</p>
 </li>
 <li><p>The eIDAS Natural Person Attribute Set has been defined (section
-2.5).</p>
+  2.5).</p>
 </li>
 <li><p>The definition of the <code>gender</code>-attribute was extended to also include
-“U” (for unspecified or unknown).</p>
+  “U” (for unspecified or unknown).</p>
 </li>
 <li><p>For interoperability and implementations reasons, the definition of
-the <code>dateOfBirth</code>-attribute has been changed so that it is represented
-as an <code>xs:string</code> type on the format YYYY-MM-DD, instead of the
-<code>xs:date</code> type.</p>
+  the <code>dateOfBirth</code>-attribute has been changed so that it is represented
+  as an <code>xs:string</code> type on the format YYYY-MM-DD, instead of the
+  <code>xs:date</code> type.</p>
 </li>
-<li><p>Attributes <code>userCertificate</code>, <code>userSignature</code>, <code>authServerSignature</code> and <code>sad</code> were added.</p>
+<li><p>  Attributes <code>userCertificate</code>, <code>userSignature</code>, <code>authServerSignature</code> and <code>sad</code> were added.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.2 and version 1.3:</strong></p>
 <ul class="list">
 <li><p>This specification no longer uses the term “attribute profile” for
-named collections of attributes for different scenarios. Instead the
-term “attribute set” is used.</p>
+  named collections of attributes for different scenarios. Instead the
+  term “attribute set” is used.</p>
 </li>
 <li><p>Definitions of attribute sets (profiles) have been changed to be
-more flexible and to focus only on which attributes that should be
-included in an attribute release. Attribute set requirements now
-include “required” and “recommended” attributes instead of
-“required”, “allowed”, “if requested” and “prohibited”. See
-section 2.</p>
+  more flexible and to focus only on which attributes that should be
+  included in an attribute release. Attribute set requirements now
+  include “required” and “recommended” attributes instead of
+  “required”, “allowed”, “if requested” and “prohibited”. See
+  section 2.</p>
 </li>
 <li><p>The contents of the previous chapter 2, “NameID”, were moved to the
-“Deployment Profile for the Swedish eID Framework” document.</p>
+  “Deployment Profile for the Swedish eID Framework” document.</p>
 </li>
 <li><p>The attribute <code>displayName</code> is now specified as “required” for the
-“Natural Personal Identity with Civic Registration Number
-(Personnummer)” (ELN-AP-NaturalPerson-01) attribute set (profile).
-See section 2.3.</p>
+  “Natural Personal Identity with Civic Registration Number
+  (Personnummer)” (ELN-AP-NaturalPerson-01) attribute set (profile).
+  See section 2.3.</p>
 </li>
 <li><p>The attributes <code>o</code> (Organization) and <code>displayName</code> are now specified as
-“required” for the “Organizational Identity for Natural Persons”
-(ELN-AP-OrgPerson-01) attribute set (profile). See section 2.4.</p>
+  “required” for the “Organizational Identity for Natural Persons”
+  (ELN-AP-OrgPerson-01) attribute set (profile). See section 2.4.</p>
 </li>
 <li><p>The attributes <code>givenName</code> and <code>sn</code> (surname) are now specified as
-“required” for the “Natural Personal Identity without Civic
-Registration Number” (ELN-AP-NaturalPerson-01) attribute set
-(profile). See section 2.2.</p>
+  “required” for the “Natural Personal Identity without Civic
+  Registration Number” (ELN-AP-NaturalPerson-01) attribute set
+  (profile). See section 2.2.</p>
 </li>
 <li><p>The attributes <code>transactionIdentifier</code> and <code>authContextParams</code> were
-introduced (see sections 3.1 and 3.2.1).</p>
+  introduced (see sections 3.1 and 3.2.1).</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.1 and version 1.2:</strong></p>
 <ul class="list">
 <li>Attribute Profiles are now also represented with valid URIs as well
-as their textual identifiers.</li>
+  as their textual identifiers.</li>
 </ul>
 <p><strong>Changes between version 1.0 and version 1.1:</strong></p>
 <ul class="list">
 <li>In chapter 3.4, “Organizational Identity for Natural Persons”, some
-attributes were listed as both prohibited and allowed. This has been
-fixed.</li>
+  attributes were listed as both prohibited and allowed. This has been
+  fixed.</li>
 </ul>
     </article>
   </body>

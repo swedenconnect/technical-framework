@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Binding of eIDAS Attributes to Swedish Personal Identity Numbers</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="binding-of-eidas-attributes-to-swedish-personal-identity-numbers">Binding of eIDAS Attributes to Swedish Personal Identity Numbers</h1>
+<h3 id="2023-04-24-draft">2023-04-24 (draft)</h3>
+<p>This document contains information about the identity binding process where 
+an identity received from an eIDAS assertion is bound to a Swedish personal
+identity number.</p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2023. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+</li>
+<li><p><a href="#the-identity-binding-service"><strong>The Identity Binding Service</strong></a></p>
+<p> 2.1. <a href="#making-a-binding">Making a Binding</a></p>
+<p> 2.2. <a href="#eidas-node-queries">eIDAS-node Queries</a></p>
+</li>
+<li><p><a href="#identity-binding-levels"><strong>Identity Binding Levels</strong></a></p>
+<p> 3.1. <a href="#basic-binding">Basic Binding</a></p>
+<p> 3.2. <a href="#enhanced-binding">Enhanced Binding</a></p>
+<p> 3.3. <a href="#verified-binding">Verified Binding</a></p>
+</li>
+<li><p><a href="#identity-binding-processes"><strong>Identity Binding Processes</strong></a></p>
+<p> 4.1. <a href="#matching-against-the-population-register">Matching Against the Population Register</a></p>
+<p> 4.2. <a href="#use-of-swedish-eid">Use of Swedish eID</a></p>
+<p> 4.3. <a href="#attestation-from-relative">Attestation from Relative</a></p>
+<p> 4.4. <a href="#foreign-identity-present-in-the-population-register">Foreign Identity Present in the Population Register</a></p>
+<p> 4.5. <a href="#passport-or-id-card-scanning">Passport or ID-card Scanning</a></p>
+</li>
+<li><p><a href="#versions"><strong>Versions</strong></a></p>
+</li>
+</ol>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This document contains information about the identity binding process where 
+an identity received from an eIDAS assertion is bound to a Swedish personal
+identity number.</p>
+<blockquote>
+<p>TODO: more ...</p>
+</blockquote>
+<p><a name="the-identity-binding-service"></a></p>
+<h2 id="2-the-identity-binding-service">2. The Identity Binding Service</h2>
+<p>The process, or processes, of binding a foreign identity to a Swedish personal identity
+number is the responsibility of the Identity Binding service.  </p>
+<blockquote>
+<p>TODO: Include links to <a href="https://elegitimation.se">https://elegitimation.se</a> and other resources where we describe
+the ID-matching service.</p>
+</blockquote>
+<p><a name="making-a-binding"></a></p>
+<h3 id="21-making-a-binding">2.1. Making a Binding</h3>
+<blockquote>
+<p>TODO: A short description of the web-service that the user logs in to and makes the
+binding. No details, we just need to mention that such a service exists.</p>
+</blockquote>
+<p><a name="eidas-node-queries"></a></p>
+<h3 id="22-eidas-node-queries">2.2. eIDAS-node Queries</h3>
+<p>The identity bindings of the Identity Binding service will be accessible for the
+Swedish eIDAS-node via a query-API. During an eIDAS authentication the Swedish eIDAS-node
+will query this API for a binding between the attributes presented in the assertion 
+received from the foreign node and a Swedish personal identity number. If such a
+binding exists two attributes will be added to the resulting assertion delivered to
+the Swedish relying party (service provider). These attributes are:</p>
+<ul class="list">
+<li><p><code>urn:oid:1.2.752.201.3.16</code> (mappedPersonalIdentityNumber) - Contains the Swedish
+personal identity number that was bound to the eIDAS identity.</p>
+</li>
+<li><p><code>urn:oid:1.2.752.201.3.6</code> (personalIdentityNumberBinding) - Contains an URI that
+represents the &quot;binding level&quot;, see <a href="#identity-binding-levels">section 3, &quot;Identity Binding Levels&quot;</a> below.</p>
+</li>
+</ul>
+<p>See sections 2.5, &quot;eIDAS Natural Person Attribute Set&quot;, and 3.3.2, &quot;The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes&quot;, of <a href="https://docs.swedenconnect.se/technical-framework/updates/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a> for more information
+about attribute release during an eIDAS authentication.</p>
+<p><a name="identity-binding-levels"></a></p>
+<h2 id="3-identity-binding-levels">3. Identity Binding Levels</h2>
+<p>An identity binding that connects a foreign identity with a Swedish personal identity number (&quot;personnummer&quot; or &quot;samordningsnummer&quot;) can be made using different processes. These processes
+are of different strength, and the trustworthiness of a binding is therefore determined by
+an &quot;Identity Binding Level&quot;.</p>
+<p>This section defines the three levels that are used to represent this trustworthiness and
+a relying party should decide the required level based on the security requirements of the service. </p>
+<p><a name="basic-binding"></a></p>
+<h3 id="31-basic-binding">3.1. Basic Binding</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/level/basic</code></p>
+<p><strong>Description:</strong> A basic binding where the identity attributes received from the foreign
+eIDAS-node matches an individual&#39;s record in the population register.</p>
+<p>The process <code>http://id.swedenconnect.se/id-binding/process/populationregister</code> 
+(<a href="#matching-against-the-population-register">4.1</a>) must have been applied.</p>
+<p><a name="enhanced-binding"></a></p>
+<h3 id="32-enhanced-binding">3.2. Enhanced Binding</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/level/enhanced</code></p>
+<p><strong>Description:</strong> Enhanced binding. Apart from meeting all requirements for the basic level, the binding has been strengthened with additional steps. </p>
+<p>The process <code>http://id.swedenconnect.se/id-binding/process/populationregister</code> 
+(<a href="#matching-against-the-population-register">4.1</a>) must have been applied as well
+as at least one of the following processes:</p>
+<ul class="list">
+<li><code>http://id.swedenconnect.se/id-binding/process/relative</code> (<a href="#attestation-from-relative">4.3</a>)</li>
+</ul>
+<p><a name="verified-binding"></a></p>
+<h3 id="33-verified-binding">3.3. Verified Binding</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/level/verified</code></p>
+<p><strong>Description:</strong> Verified binding. The binding has been verified with strong and trustworthy processes as listed below:</p>
+<p>The process <code>http://id.swedenconnect.se/id-binding/process/populationregister</code> must have
+been applied as well as at least one of the following processes:</p>
+<ul class="list">
+<li><p><code>http://id.swedenconnect.se/id-binding/process/swedish-eid</code> (<a href="#use-of-swedish-eid">4.2</a>)</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/id-binding/process/presentbinding</code> (<a href="#foreign-identity-present-in-the-population-register">4.4</a>)</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/id-binding/process/iddoc-scanning</code> (<a href="#passport-or-id-card-scanning">4.5</a>)</p>
+</li>
+</ul>
+<p><a name="identity-binding-processes"></a></p>
+<h2 id="4-identity-binding-processes">4. Identity Binding Processes</h2>
+<p>This section contains a detailed description of the processes of binding identities that
+are possible to perform. Each process is identified with a URI.</p>
+<blockquote>
+<p>Note: The process URI:s are not part of a resulting SAML assertion. However, they will
+be stored in matching records and log entries.</p>
+</blockquote>
+<p><a name="matching-against-the-population-register"></a></p>
+<h3 id="41-matching-against-the-population-register">4.1. Matching Against the Population Register</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/process/populationregister</code></p>
+<p><strong>Description:</strong> ...</p>
+<blockquote>
+<p>TODO: Based on the matching in Navet, there can be different strengths on this
+matching. Should we have several URI:s? I suggest that we don&#39;t since it will be
+too much to handle.</p>
+</blockquote>
+<p><a name="use-of-swedish-eid"></a></p>
+<h3 id="42-use-of-swedish-eid">4.2. Use of Swedish eID</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/process/swedish-eid</code></p>
+<p><strong>Description:</strong> The individual making a binding holds an approved<sup>1</sup> Swedish 
+eID that is used to sign an attestation of the correctness of the binding.</p>
+<p>TODO: more</p>
+<blockquote>
+<p><strong>[1]:</strong> The Swedish eID must .... (Svensk e-legitimation, godkänd av DIGG) ...</p>
+</blockquote>
+<p><a name="attestation-from-relative"></a></p>
+<h3 id="43-attestation-from-relative">4.3. Attestation from Relative</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/process/relative</code></p>
+<p><strong>Description:</strong> A relative to the person making the binding uses an approved
+Swedish eID (see <a href="#use-of-swedish-eid">4.2</a> above) to attest the correctness
+of the binding.</p>
+<blockquote>
+<p>Note: Only relationships registered in the Swedish population register will
+be allowed.</p>
+</blockquote>
+<p><a name="foreign-identity-present-in-the-population-register"></a></p>
+<h3 id="44-foreign-identity-present-in-the-population-register">4.4. Foreign Identity Present in the Population Register</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/process/presentbinding</code></p>
+<p><strong>Description:</strong> For some countries a foreign personal identity number may be
+present in the Swedish population register. More ...</p>
+<p><a name="passport-or-id-card-scanning"></a></p>
+<h3 id="45-passport-or-id-card-scanning">4.5. Passport or ID-card Scanning</h3>
+<p><strong>URI:</strong> <code>http://id.swedenconnect.se/id-binding/process/iddoc-scanning</code></p>
+<p><strong>Description:</strong> A passport ...</p>
+<p><a name="versions"></a></p>
+<h2 id="5-versions">5. Versions</h2>
+<ul class="list">
+<li>2023-04-24: First draft version</li>
+</ul>
+    </article>
+  </body>
+</html>
