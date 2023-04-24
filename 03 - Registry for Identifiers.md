@@ -462,9 +462,9 @@ for the `personalIdentityNumberBinding` attribute. These are:
 
 | **URI** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.swedenconnect.se/`</br />`id-binding/level/basic` | Basic identity binding. | \[[ID-Binding](#id-binding)\] |
-| `http://id.swedenconnect.se/`</br />`id-binding/level/enhanced` | Enhanced identity binding. | \[[ID-Binding](#id-binding)\] |
-| `http://id.swedenconnect.se/`</br />`id-binding/level/verified` | Verified identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`<br />`id-binding/level/basic` | Basic identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`<br />`id-binding/level/enhanced` | Enhanced identity binding. | \[[ID-Binding](#id-binding)\] |
+| `http://id.swedenconnect.se/`<br />`id-binding/level/verified` | Verified identity binding. | \[[ID-Binding](#id-binding)\] |
 
 The [Binding of eIDAS Attributes to Swedish Personal Identity Numbers](#id-binding) 
 (\[[ID-Binding](#id-binding)\]) document defines the above levels in detail. 
