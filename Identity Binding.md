@@ -47,7 +47,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     4.4. [Use of Swedish eID](#use-of-swedish-eid)
     
-    4.5. [A relative has confirmed the binding](#confirmed-by-relative)
+    4.5. [A relative to end-user has confirmed the binding](#confirmed-by-relative)
  
     4.6. [Passport or ID-card scanning](#passport-or-id-card-scanning)
     
@@ -194,12 +194,15 @@ prove binding to the Swedish identification number by signing a confirmation wit
 her/his Swedish eID.
 
 **Additional requirements:** Assurance for the Swedish eID must be minimum at 
-level 3 in accordance of the Swedish Trust Framework (a.k.a. Tillitsramverk för 
-Svensk e-legitimation). Using eID for this purpose must also be approved by the 
+level 3 in accordance of the 
+[Swedish Trust Framework](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation) 
+(a.k.a. [Tillitsramverk för 
+Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation)). 
+Using eID for this purpose must also be approved by the 
 eID provider.
     
 <a name="confirmed-by-relative"></a>
-### 4.5. A relative has confirmed the binding
+### 4.5. A relative to end-user has confirmed the binding
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/relative`
 
