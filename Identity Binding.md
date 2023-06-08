@@ -6,12 +6,12 @@
 <img align="center" src="img/transparent.png"></img>
 </p>
 
-# Binding of eIDAS identity to records in the Swedish population register
+# Binding of eIDAS Identity to Record in the Swedish Population Register
 
-### 2023-06-07 (draft)
+### 2023-06-08 (draft)
 
-This document contains information about the binding process when an eIDAS 
-identity is linked to a record in the Swedish population register.
+This document contains information about the binding processes that  
+associate a Swedish identity number to an eIDAS notified edID.
 
 ---
 
@@ -37,19 +37,19 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     
     3.3. [Verified Binding](#verified-binding)
     
-4. [**Record Matching Processes**](#record-matching-processes)
+4. [**Identity Binding Processes**](#identity-binding-processes)
 
-    4.1. [Essential matching of record in the population register](#essential-matching-population-register)
+    4.1. [Essential Matching of Record in the Population Register](#essential-matching-population-register)
 
-    4.2. [Elevated matching of record in the poulation register](#elevated-matching-population-register)
+    4.2. [Elevated Matching of Record in the Poulation Register](#elevated-matching-population-register)
     
-    4.3. [Nordic identification number found in the population register](#nordic-id-in-population-register)
+    4.3. [Nordic Identification Number Found in the Population Register](#nordic-id-in-population-register)
 
     4.4. [Use of Swedish eID](#use-of-swedish-eid)
     
-    4.5. [A relative to end-user has confirmed the binding](#confirmed-by-relative)
+    4.5. [A Relative to End-user has Confirmed the Binding](#confirmed-by-relative)
  
-    4.6. [Passport or ID-card scanning](#passport-or-id-card-scanning)
+    4.6. [Passport or ID-card Scanning](#passport-or-id-card-scanning)
     
 5. [**Versions**](#versions)
     
@@ -57,29 +57,40 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 ## 1. Introduction
 
 Public relying parties in Sweden commonly use the Swedish personal 
-identification number (a.k.a. personnummer) or the Swedish coordination 
-number (a.k.a. samordningsnummer) as identifier to carry out the 
-authorisation of the authenticated user. These records cannot be found
-in eIDAS attributes. 
+identity number (a.k.a. personnummer) or the Swedish coordination 
+number (a.k.a. samordningsnummer) as the primary identifier to carry 
+out the authorisation of the authenticated user. These attributes are 
+not part of an eIDAS assertion. 
 
-The Identity Binding Service is an extension to Swedish eIDAS-node and 
-a part of Sweden's digital infrastructure aimed at linking records in 
-the Swedish population register to notified eIDs from member states 
-outside of Sweden.
+By providing an Identity Binding Service, end-users can associate 
+their eIDAS notified eID with their record in the Swedish population 
+register. And, in such manner, end-users gain access to many more 
+digital services.
 
 <a name="the-identity-binding-service"></a>
 ## 2. The Identity Binding Service
-The Identity Binding Service can be used by end-users, who are 
+The Identity Binding Service is a part of Sweden's digital 
+infrastructure. For users that have an eIDAS notified eID, it 
+provides support in binding processes, which give end-users ability 
+to associate their eID to a record in the Swedish pouplation register. 
+As records are matched, then the identity binding can be utilized 
+by the Swedish eIDAS-node when the end-user logs in to a digital 
+service in Sweden. The assertion that is provided to relying party 
+includes attributes from eIDAS as well as attributes from the 
+Identity Binding Service.
+
+
+The Identity Binding Service can be used by the end-users, who are 
 authenticated through eIDAS, in those cases when:
-- end-user have a registered record in terms of Swedish personal identification number (a.k.a. personnummer) or the Swedish coordination number (a.k.a. samordningsnummer) in the Swedish population register, and
-- end-user have chosen to bound this record to her/his eIDAS notified eID.
+- the end-user has a registered record in terms of Swedish personal identity number (a.k.a. personnummer) or the Swedish coordination number (a.k.a. samordningsnummer) in the Swedish population register, and
+- the end-user has chosen to associate this record to her/his eIDAS notified eID.
 
 When end-user's Swedish records are linked to her/his eID, the Swedish eIDAS-node can 
 provide this information in the assertion to relying party.
 
 <a name="making-a-binding"></a>
 ### 2.1. Making a Binding
-Identity binding can be made through a number of different [Record Matching Processes](#record-matching-processes). 
+Identity binding can be made through a number of different [Identity Binding Processes](#identity-binding-processes). 
 These processes are run separately or in combinations and can result in linked 
 identifications based on three different levels of confidence. See also 
 [section 3, "Identity Binding Levels"](#identity-binding-levels)
@@ -108,7 +119,7 @@ about attribute release during an eIDAS authentication.
 
 <a name="identity-binding-levels"></a>
 ## 3. Identity Binding Levels
-Linked identifications through the Identity Binding Service can be provided in three different levels of confidence. 
+Identity Bindings are provided in three different levels of confidence. 
 These levels can be used in the authorisation process by the relying party. 
 
 <a name="basic-binding"></a>
@@ -118,7 +129,7 @@ These levels can be used in the authorisation process by the relying party.
 
 **Description:** Level of confidence in binding as a result from an automated decision process when the eIDAS attributes from the foreign eID are matched to an individual's record in the Swedish population register.
 
-Following processes must have been applied:
+The following processes must have been applied:
 - `http://id.swedenconnect.se/id-binding/process/registered` ([4.1](#essential-matching-population-register))
 - `http://id.swedenconnect.se/id-binding/process/populationregister` ([4.2](#elevated-matching-population-register))
     
@@ -148,17 +159,17 @@ highest level of confidence in record matching. It requires the process `http://
 - `http://id.swedenconnect.se/id-binding/process/relative` ([4.5](#confirmed-by-relative))
 - `http://id.swedenconnect.se/id-binding/process/iddoc-scanning` ([4.6](#passport-or-id-card-scanning))
     
-<a name="record-matching-processes"></a>
-## 4. Record Matching Processes
+<a name="identity-binding-processes"></a>
+## 4. Identity Binding Processes
 
-This section contains a detailed description of the record matching processes that
+This section contains a detailed description of the matching processes that
 are used by the Identity Binding Service. Each process is identified with an URI.
 
 > Note: The process URI:s are not part of a resulting SAML assertion. However, they will
 be stored in matching records and log entries.
 
 <a name="essential-matching-population-register"></a>
-### 4.1. Essential matching of record in the population register
+### 4.1. Essential Matching of Record in the Population Register
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/registered`
 
@@ -167,7 +178,7 @@ is found in the Swedish pouplation register. It belongs to a living natural pers
 the value for birthday in record is matched to the birthday attribute from eIDAS. 
 
 <a name="elevated-matching-population-register"></a>
-### 4.2. Elevated  matching of record in the population register
+### 4.2. Elevated Matching of Record in the Population Register
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/populationregister`
 
@@ -177,7 +188,7 @@ search in population register show that there are no other records found with th
 same birthday and name, thus decision for record matching can be made unambiguously.
 
 <a name="nordic-id-in-population-register"></a>
-### 4.3. Nordic identification number found in the population register
+### 4.3. Nordic Identification Number Found in the Population Register
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/nordicid`
 
@@ -190,7 +201,7 @@ other Nordic country and this number can be found in the assetion from eIDAS.
 **URI:** `http://id.swedenconnect.se/id-binding/process/swedish-eid`
 
 **Description:** The end-user, who has been authenticated with a foreign eID, can 
-prove binding to the Swedish identification number by signing a confirmation with 
+prove binding to the Swedish identity number by signing a confirmation with 
 her/his Swedish eID.
 
 **Additional requirements:** Assurance for the Swedish eID must be minimum at 
@@ -202,7 +213,7 @@ Using eID for this purpose must also be approved by the
 eID provider.
     
 <a name="confirmed-by-relative"></a>
-### 4.5. A relative to end-user has confirmed the binding
+### 4.5. A Relative to End-user has Confirmed the Binding
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/relative`
 
@@ -215,17 +226,17 @@ wife, parent and child.
 Swedish eID that meet same requirements as in section [4.2](#use-of-swedish-eid) above.
 
 <a name="passport-or-id-card-scanning"></a>
-### 4.5. Passport or ID-card scanning
+### 4.5. Passport or ID-card Scanning
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/iddoc-scanning`
 
 **Description:** The end-user, who has been authenticated with a foreign eID, can 
-prove binding to the Swedish identification number by reading chip from a Swedish 
+prove binding to the Swedish identity number by reading chip from a Swedish 
 identity document, such as passport or ID-card.
 
 <a name="versions"></a>
 ## 5. Versions
 
 - 2023-04-24: First draft version
-- 2023-06-07: Revision of draft
+- 2023-06-08: Revision of draft
 
