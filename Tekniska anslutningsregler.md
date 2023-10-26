@@ -986,7 +986,7 @@ Deltagande i Sweden Connect-federationen styrs av avtal, både gällande förlit
 För att en legitimeringstjänst ska acceptera en legitimeringsbegäran från en förlitande part måste den kunna ta reda
 på om den förlitande parten har rätt att nyttja tjänsten. Detta åstadkoms genom att förlitande parter deklarerar 
 "Service Contract Category"-värden som indikerar vilka avtal som gäller för aktören. Se kapitel 5 av 
-[Entity Categories for the Swedish eID Framework](#https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#service-contract-categories).
+[Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#service-contract-categories).
 
 Nedan följer identifierare som mappas mot de avtal som listades i kapitel [1.1](#avtal).
 
