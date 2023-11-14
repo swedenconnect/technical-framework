@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2022-12-20
+### 2023-11-14
 
 Specifikation gällande aktörer som ansluter till
 DIGG:s identitetsfederation Sweden Connect.
@@ -16,7 +16,7 @@ DIGG:s identitetsfederation Sweden Connect.
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2021-2022.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2021-2023.
 </p>
 
 ## Innehållsförteckning
@@ -166,7 +166,7 @@ Detta avtal ger en förlitande part rätt att nyttja den svenska eIDAS-noden fö
 [Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx) ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstelegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 2, 3 eller 4
 och att de levererar enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx).
 
-> Endast offentliga förlitande parter kan teckna [Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx).
+> Både offentliga och privata förlitande parter kan teckna [Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx).
 
 Se vidare:
 
@@ -1163,6 +1163,10 @@ legitimering enligt tillitsnivå 4<sup>\*\*</sup> måste också deklarera ett `A
 
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
+
+- 2023-11-14:
+	- Ändringar i kapitel 1.1.3, "eID för medarbetare", där både offentliga och privata
+	  förlitande parter nu kan teckna avtalet.
 
 - 2022-12-20:
 	- Korrigering efter att DIGG:s webbteam ändrat länkar till diverse avtal.
