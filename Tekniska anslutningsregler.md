@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2023-11-14
+### 2024-02-13
 
 Specifikation gällande aktörer som ansluter till
 DIGG:s identitetsfederation Sweden Connect.
@@ -16,7 +16,7 @@ DIGG:s identitetsfederation Sweden Connect.
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2021-2023.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2021-2024.
 </p>
 
 ## Innehållsförteckning
@@ -236,8 +236,7 @@ denna identifierare.
 
 - `http://id.elegnamnden.se/loa/1.0/loa4` - tillitsnivå 4 - Endast legitimeringstjänster
 som är godkända enligt [tillitsramverkets](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket) nivå 4 får utfärda identitetsintyg innehållande
-denna identifierare. [Sweden Connect - Tekniskt ramverk](https://docs.swedenconnect.se/technical-framework/) ställer också ytterligare krav rörande tillitsnivå där SAML-profilen "Holder-of-key"
-krävs.
+denna identifierare. Det är också rekommenderat att SAML-profilen "Holder-of-key" används.
 
 - `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` - eIDAS "low" utfärdat av eID som anmälts till EU enligt eIDAS-förordningen -
 Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-nivån `http://eidas.europa.eu/LoA/low`.
@@ -533,8 +532,16 @@ inte inkluderar de önskade attributen.*
 <a name="specifika-krav-rorande-tillitsniva-4"></a>
 ### 2.4. Specifika krav rörande Tillitsnivå 4
 
-För Legitimeringsbegäran och leverans av identitetsintyg enligt enligt tillitsnivå 4 är kravet
-att SAML-profilen [SAML V2.0 Holder-of-key Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf) används. Användandet av "Holder-of-key" enligt Sweden Connect Tekniskt Ramverk specificeras i [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+En legitimeringstjänst som är godkänd för legitimering och intygsleverans enligt tillitsnivå 4
+**bör** stödja SAML-profilen [SAML V2.0 Holder-of-key Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf). Användandet av "Holder-of-key" enligt Sweden Connect Tekniskt Ramverk specificeras i [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+
+En legitimeringstjänst som är godkänd för legitimering och intygsleverans enligt tillitsnivå 4 som stödjer
+"Holder-of-key"-profilen skall också godkänna legitimeringsbegäran enligt ordinarie WebSSO-profil (d.v.s,
+ett anrop enligt [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html) som inte nyttjar 
+"Holder-of-key").
+
+En förlitande part **kan** välja att kräva legitimering enligt "Holder-of-key"-profilen för
+legitimeringstjänster som har annonserat stöd för detta.
 
 För att den höjda säkerheten med användandet av "Holder-of-key" ska bibehållas är det viktigt att både
 legitimeringstjänsten (vid begäran) och den förlitande parten (vid intygsleverans) kräver att ett 
@@ -775,8 +782,6 @@ deklarera entitetskategorin `loa4-pnr`.
 attributleverans med endast namn och inget personnummer/samordningsnummer). Se kapitel 2.4.3 i [
 Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-name).
 
-- Se också regler och rutiner i kapitel [3.9](#metadataregler-gallande-tillitsniva-4) nedan.
-
 <a name="loa3-orgid"></a>
 #### 3.4.3. loa3-orgid
 
@@ -838,8 +843,6 @@ eller `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`.
 - En legitimeringstjänst som deklarerar `loa4-orgid` skall även deklarera kategorin `loa4-name` (d.v.s., 
 attributleverans av för- och efternamn). Se kapitel 2.4.3 i [
 Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-name).
-
-- Se också regler och rutiner i kapitel [3.9](#metadataregler-gallande-tillitsniva-4) nedan.
 
 <a name="loa3-name"></a>
 #### 3.4.5. loa3-name
@@ -909,8 +912,6 @@ eller  `http://id.swedenconnect.se/loa/1.0/loa3-nonresident` får deklarera enti
 
 - En legitimeringstjänst som deklarerar `loa4-pnr` (se [3.4.2](#loa4-pnr) ovan) eller 
 `loa4-orgid` (se [3.4.4](#loa4-orgid) ovan) måste också deklarera `loa4-name`.
-
-- Se också regler och rutiner i kapitel [3.9](#metadataregler-gallande-tillitsniva-4) nedan.
 
 <a name="eidas-naturalperson"></a>
 #### 3.4.7. eidas-naturalperson
@@ -1126,43 +1127,30 @@ användaren om att ett personnummer krävs för att autentisera sig och inte st�
 <a name="metadataregler-gallande-tillitsniva-4"></a>
 ### 3.9. Metadataregler gällande tillitsnivå 4 (LoA 4)
 
-För legitimering och leverans av identitetsintyg enligt tillitsnivå 4 kräver Sweden Connect-federationen att
-SAML-profilen [SAML V2.0 Holder-of-key Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf) används. Användandet av "Holder-of-key" enligt Sweden Connect Tekniskt Ramverk specificeras i [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+För legitimering och leverans av identitetsintyg enligt tillitsnivå 4 rekommenderar 
+Sweden Connect-federationen att SAML-profilen [SAML V2.0 Holder-of-key Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf) används. Användandet av "Holder-of-key" enligt Sweden Connect Tekniskt Ramverk specificeras i [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
-Följande metadataregler gäller rörande tillitsnivå 4 och Holder-of-key:
+> Notera att även legitimeringstjänster som inte levererar enligt tillitsnivå 4 kan välja att erbjuda
+stöd för "Holder-of-key". 
 
-En legitimeringstjänst som deklarerar att den levererar legitimering och intyg enligt
-tillitsnivå 4<sup>*</sup> skall deklarera dedikerade `SingleSignOnService`-element för 
-"Holder-of-key" i sin metadatapost enligt kapitel 2.1.3.2 av 
-[Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#idp-holder-of-key-support). De adresser som pekas ut i dessa element måste vara konfigurerade för mutual-TLS, 
-d.v.s., TLS där ett klientcertifikat krävs.
+Följande metadataregler gäller rörande Holder-of-key:
 
-En förlitande part som deklarerar en entitetskategori som indikerar att aktören kräver
-legitimering enligt tillitsnivå 4<sup>\*\*</sup> måste också deklarera ett `AssertionConsumerService`-element för "Holder-of-key" enligt kapitel 2.1.2.1 av [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#sp-holder-of-key-support). Adressen som pekas ut i detta element måste vara konfigurerat för mutual-TLS, d.v.s., TLS där ett klientcertifikat krävs.
+En legitimeringstjänst som erbjuder "Holder-of-key"-stöd skall deklarera dedikerade 
+`SingleSignOnService`-element för "Holder-of-key" i sin metadatapost enligt kapitel 2.1.3.2 av
+ [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#idp-holder-of-key-support). De adresser som pekas
+ ut i dessa element måste vara konfigurerade för mutual-TLS, d.v.s., TLS där ett klientcertifikat krävs.
+
+En förlitande part som vill nyttja "Holder-of-key" vid autentisering ska deklarera ett `AssertionConsumerService`-element för "Holder-of-key" enligt kapitel 2.1.2.1 av [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#sp-holder-of-key-support). Adressen som pekas ut i detta element måste vara konfigurerat för mutual-TLS, d.v.s., TLS där ett klientcertifikat krävs.
 
 \[*\]: `http://id.elegnamnden.se/loa/1.0/loa4` och/eller `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`.
-
-\[\*\*\]: `http://id.elegnamnden.se/ec/1.0/loa4-pnr`, `http://id.swedenconnect.se/ec/1.0/loa4-orgid` eller `http://id.swedenconnect.se/ec/1.0/loa4-name`.
-
-**Regler och rutiner vid registrering av metadata**:
-
-- För en legitimeringstjänst som deklarerar stöd för tillitsnivå 4 verifieras att följande finns deklarerat i metadata:
-
-  - Ett `SingleSignOnService`-element som har attributet `Binding` satt till 
-  `urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser` samt attributet
-  `hoksso:ProtocolBinding` satt till `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`.
   
-  - Ett `SingleSignOnService`-element som har attributet `Binding` satt till 
-  `urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser` samt attributet
-  `hoksso:ProtocolBinding` satt till `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
-  
-- För en förlitande part som deklarerar en LoA4-entitetskategori verifieras att ett 
-  `AssertionConsumerService`-element med `Binding`-attributet satt till 
-  `urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser` och 
-  `hoksso:ProtocolBinding`-attributet satt till `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
-
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
+
+- 2024-02-12:
+	- "Holder-of-key" är inte längre tvingande för tillitsnivå 4. Detta beroende på ändringar
+	   i Diggs tillitsramverk. Se kapitel 2.4, "Specifika krav rörande Tillitsnivå 4", och
+       kapitel 3.9, "Metadataregler gällande tillitsnivå 4 (LoA 4)".
 
 - 2023-11-14:
 	- Ändringar i kapitel 1.1.3, "eID för medarbetare", där både offentliga och privata
