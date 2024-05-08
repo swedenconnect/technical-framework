@@ -32,7 +32,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     
 3. [**Identity Binding Processes**](#identity-binding-processes)
 
-    3.1. [End-user Holds an Account in the Identity Binding Service](#identity-binding-user)
+    3.1. [End-user Holds an Account in the Identity Binding Service](#identity-binding-service-user)
 
     3.2. [End-user Holds a Copy of Record from the Swedish Population Register](#population-register)
     
@@ -97,7 +97,7 @@ This section contains a detailed description of the matching processes that are 
 > Note: The process URI:s are not always included in the resulting SAML assertion. However, they will be stored in the log entries.
 
 
-<a name="#identity-binding-user"></a>
+<a name="#identity-binding-service-user"></a>
 ### 3.1. End-user Holds an Account in the Identity Binding Service
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/registered-user`
