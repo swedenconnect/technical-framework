@@ -34,7 +34,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     3.1. [End-user Holds an Account in the Identity Binding Service](#identity-binding-user)
 
-    3.2. [End-user Holds a Copy of Record From the Swedish Population Register](#population-register)
+    3.2. [End-user Holds a Copy of Record from the Swedish Population Register](#population-register)
     
     3.3. [Nordic Identification Number Correspond to Record in the Swedish Population Register](#nordic-id)
 
@@ -106,7 +106,7 @@ This section contains a detailed description of the matching processes that are 
 
 
 <a name="population-register"></a>
-### 3.2. End-user Holds a Copy of Record From the Swedish Population Register
+### 3.2. End-user Holds a Copy of Record from the Swedish Population Register
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/populationregister`
 
