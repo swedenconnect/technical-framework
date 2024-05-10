@@ -32,15 +32,13 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     
 3. [**Identity Binding Processes**](#identity-binding-processes)
 
-    3.1. [End-user Holds an Account in the Identity Binding Service](#identity-binding-service-user)
-
-    3.2. [End-user Holds a Copy of Record from the Swedish Population Register](#population-register)
+    3.1. [Unique Record in the Population Register](#population-register)
     
-    3.3. [Nordic Identification Number Correspond to Record in the Swedish Population Register](#nordic-id)
+    3.2. [Nordic Identification Number Corresponding to Population Register Record](#nordic-id)
 
-    3.4. [End-user Electronically Signed the Copy of Record by Using his/her Swedish eID](#user-with-swedish-eid)
+    3.3. [Use of Swedish eID](#user-with-swedish-eid)
     
-    3.5. [A Relative to End-user Confirmed the Binding](#confirmed-by-relative)
+    3.4. [Relative Confirms Binding](#confirmed-by-relative)
  
 4. [**Versions**](#versions)
     
@@ -63,7 +61,7 @@ from the Identity Binding Service.
 The Identity Binding Service can be used by end-users, who are authenticated through eIDAS under specific conditions:
 
 - The end-user must have a registered record in terms of Swedish personal identity number (a.k.a. personnummer) or Swedish coordination number (a.k.a. samordningsnummer) in the Swedish population register.
-- The end-user must opt to associate this record to his or her eIDAS notified eID.
+- The end-user must opt to associate this record to his or hers eIDAS notified eID.
 
 Once an end-user's Swedish record is linked to hir or her foreing eID, the Swedish eIDAS node can include this information in the assertion provided to the relying party.
 
@@ -71,7 +69,7 @@ Once an end-user's Swedish record is linked to hir or her foreing eID, the Swedi
 <a name="making-a-binding"></a>
 ### 2.1. Making a Binding
 
-A user can make an identity binding through a various [Identity Binding Processes](#identity-binding-processes). These processes are run independently or in combination, aimed at achieving a clear and unambiguous identity binding.
+A user can make an identity binding through various [Identity Binding Processes](#identity-binding-processes). These processes are run independently or in combination, aimed at achieving a clear and unambiguous identity binding.
     
 <a name="eidas-node-queries"></a>
 ### 2.2. eIDAS-node Queries
@@ -94,40 +92,39 @@ See also sections 2.5, "eIDAS Natural Person Attribute Set", and 3.3.2, "The map
 
 This section contains a detailed description of the matching processes that are used by the Identity Binding Service. Each process is identified with an URI.
 
-> Note: The process URI:s are not always included in the resulting SAML assertion. However, they will be stored in the log entries.
+The prerequisites for all bindings described below are the following: The end-user has been authenticated using a foreign eID. Attributes provided via eIDAS, along with the end-user's statement of her/his Swedish identity number, meet the prerequisites for user registration. This verification includes:
 
+- confirming the record in the Swedish population register,
+- ensuring it belongs to a living natural person,
+- validating that attribute values from eIDAS assertion correspond to the date of birth and names registered in the record. 
 
-<a name="#identity-binding-service-user"></a>
-### 3.1. End-user Holds an Account in the Identity Binding Service
+Moreover, the end-user has accepted the terms of use and created a private storage in the Identity Binding Service.
 
-**URI:** `http://id.swedenconnect.se/id-binding/process/registered-user`
-
-**Description:** The end-user has been authenticated using a foreign eID. Attributes provided via eIDAS, along with the end-user's statement of her/his Swedish identity number, meet the prerequisites for user registration. This verification includes confirming the record in the Swedish population register, ensuring it belongs to a living natural person, and validating that attribute values from eIDAS correspond to the date of birth and names registered in the record. Moreover, the end-user has accepted the terms of use and created a private storage in the Identity Binding Service.
-
+**Note:** If the above steps uniquely corresponds to exactly one record in the Swedish population register, the binding `http://id.swedenconnect.se/id-binding/process/populationregister` ([3.1](#population-register)) will be created, but, if the birth date and name information from the eIDAS assertion matches more than one record from the population register, other processes (as described below) need to be applied for a binding to be completed.
 
 <a name="population-register"></a>
-### 3.2. End-user Holds a Copy of Record from the Swedish Population Register
+### 3.1. Unique Record in the Population Register
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/populationregister`
 
-**Description:** The provided date of birth and names from eIDAS accurately correspond to the record in the population register. A detailed search in the population register confirms that there is a low risk of confusion, with no other records found that could potentially lead to ambiguity. The end-user holds a 
-machine-readable copy of the record retrieved from the Swedish population register. It's stored in the user's private storage and can be securely bound to end-user's eID in an unambiguous manner.
+**Description:** The provided date of birth and name information from the eIDAS assertion uniquely matches only one record in the population register. 
 
+A detailed search in the population register confirms that there is a low risk of confusion, with no other records found that could potentially lead to ambiguity. The end-user holds a 
+machine-readable copy of the record retrieved from the Swedish population register. It is stored in the user's private storage and can be securely bound to end-user's eID in an unambiguous manner.
 
 <a name="nordic-id"></a>
-### 3.3. Nordic Identification Number Correspond to Record in the Swedish Population Register
+### 3.2. Nordic Identification Number Corresponding to Population Register Record
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/nordicid`
 
 **Description:** The end-user holds a machine-readable copy of the record retrieved from the Swedish population register. This record includes an identification number from a Nordic country, which corresponds to the number found in the eIDAS assertion.
 
-
 <a name="user-with-swedish-eid"></a>
-### 3.4. End-user Electronically Signed the Copy of Record by Using his/her Swedish eID
+### 3.3. Use of Swedish eID
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/swedish-eid`
 
-**Description:** The end-user has electronically signed the record retrieved from the Swedish population register using a Swedish eID, which provides the end-user's Swedish identification number.
+**Description:** The end-user has digitally signed an attestation connecting an eIDAS identity number to a record retrieved from the Swedish population register using a Swedish eID. Using this process the user proves the he or she holds both the eIDAS identity (received from the eIDAS authentication) and the Swedish identity number (received from the digital signature).
 
 **Additional requirements:** Assurance level for the eID must be minimum at level 3 in accordance of the 
 [Swedish Trust Framework](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation) 
@@ -135,14 +132,15 @@ machine-readable copy of the record retrieved from the Swedish population regist
 Using the eID for this purpose must also be approved by the eID provider.
     
 <a name="confirmed-by-relative"></a>
-### 5.5. A Relative to End-user Confirmed the Binding
+### 3.4. Relative Confirms Binding
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/relative`
 
-**Description:** A relative of the end-user signs in to the Identity Binding Service and vouches for the end-user to retrieve a machine-readable copy of the record from the Swedish population register. The relationship must be officially registered in the Swedish population register, and valid examples 
-of such relationships include spouses, parents, and children.
+**Description:** A relative of the end-user logs in to the Identity Binding Service and vouches for the end-user to retrieve a machine-readable copy of the record from the Swedish population register. The relative digitally signs this attestation.
 
-**Additional requirements:** The relative must be at least 18 years old and use an eID that meets the same requirements as in section [4.2](#user-with-swedish-eid) above.
+The relationship must be officially registered in the Swedish population register, and valid examples of such relationships include spouses, parents, and children.
+
+**Additional requirements:** The relative must be at least 18 years old and use an eID that meets the same requirements as in section [3.3](#user-with-swedish-eid) above.
 
 
 <a name="versions"></a>
