@@ -146,5 +146,7 @@ The relationship must be officially registered in the Swedish population registe
 <a name="versions"></a>
 ## 4. Versions
 
+- 2024-05-08: Updated according to the latest legal agreements. The binding level is no longer used. Instead a set of identity binding process URL:s represent the binding.
+
 - 2023-06-09: First version.
-- 2024-05-08: Updated for release of the Identity Binding Service to the Sweden Connect QA environment.
+
