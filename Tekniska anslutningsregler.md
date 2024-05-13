@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2024-02-14
+### 2024-05-13
 
 Specifikation gällande aktörer som ansluter till
 Diggs identitetsfederation Sweden Connect.
@@ -261,13 +261,13 @@ ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimat
 anskaffas av arbetsgivare enligt [E-legitimering för medarbetare](https://www.digg.se/digitala-tjanster/e-legitimering/skaffa-losningar-for-inloggning-med-e-legitimationer/erbjud-inloggning-med-e-tjanstelegitimationer), och intygsleverans
 sker av legitimeringstjänst som leverarer enligt [Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx) kan det förekomma att individer som inte innehar ett svenskt personnummer
 eller samordningsnummer tilldelas ett eID. Då dessa eID:n används för legitimering inom
-Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 3 eller 4 användas. En
-legitimeringstjänst som är godkänd för nivå 3 eller 4, och som utfärdar intyg för dessa
+Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 2 eller 3 användas. En
+legitimeringstjänst som är godkänd för nivå 2 eller 3, och som utfärdar intyg för dessa
 typer av eID:n skall då använda följande identifierare:
 
-- `http://id.swedenconnect.se/loa/1.0/loa3-nonresident` - Legitimering enligt tillitsnivå 3 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).
+- `http://id.swedenconnect.se/loa/1.0/loa2-nonresident` - Legitimering enligt tillitsnivå 2 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).
 
-- `http://id.swedenconnect.se/loa/1.0/loa4-nonresident` - Legitimering enligt tillitsnivå 4 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).
+- `http://id.swedenconnect.se/loa/1.0/loa3-nonresident` - Legitimering enligt tillitsnivå 3 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).
 
 I båda ovanstående fall krävs att utfärdandet av e-legitimationen följer tillitsramverket med
 undantag av kravet på personnummer/samordningsnummer och med tilläggskraven för "non-resident".
@@ -672,11 +672,11 @@ tillitsnivå 3 och 4.*
 
 - Endast legitimeringstjänster som levererar enligt [Anslutningsavtal för utfärdare av 
 e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx) 
-och som är granskade och godkända enligt tillitsnivå 3 eller 4 får deklarera `http://id.swedenconnect.se/loa/1.0/loa3-nonresident`.
+och som är granskade och godkända enligt tillitsnivå 3 eller högre får deklarera `http://id.swedenconnect.se/loa/1.0/loa3-nonresident`.
 
 - Endast legitimeringstjänster som levererar enligt [Anslutningsavtal för utfärdare av 
 e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx)
-och som är granskade och godkända enligt tillitsnivå 4 får deklarera `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`. 
+och som är granskade och godkända enligt tillitsnivå 2 får deklarera `http://id.swedenconnect.se/loa/1.0/loa2-nonresident`. 
 
 - Endast den svenska eIDAS-noden får deklarera någon av följande identifierare:
   - `http://id.elegnamnden.se/loa/1.0/eidas-low`, `http://id.elegnamnden.se/loa/1.0/eidas-nf-low`,
@@ -826,7 +826,7 @@ En deklaration av entitetskategorin `http://id.swedenconnect.se/ec/1.0/loa4-orgi
 
 **För en legitimeringstjänst**:
 
-> Legitimeringstjänsten deklarerar att den kan legitimera användare enligt tillitsnivå 4<sup>\*</sup> och
+> Legitimeringstjänsten deklarerar att den kan legitimera användare enligt tillitsnivå 4 och
 leverera intyg med attribut från attributuppsättningen [Organizational Identity for Natural Persons](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons).
 
 **För en förlitande part**:
@@ -834,15 +834,11 @@ leverera intyg med attribut från attributuppsättningen [Organizational Identit
 > Den förlitande parten deklarerar att den kommer att begära legitimering enligt tillitsnivå 4<sup>\*</sup> och
 att den begär leverans av attribut enligt uppsättningen [Organizational Identity for Natural Persons](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons).
 
-\[*\]: Denna entitetskategori gäller för legitimering enligt `http://id.elegnamnden.se/loa/1.0/loa4`
-eller `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`.
-
-
 **Regler och rutiner vid registrering av metadata**:
 
 - Endast legitimeringstjänster som i `assurance-certification`-attributet (se kapitel 
-[3.3](#registrering-av-tillitsnivaer) ovan) deklarerar `http://id.elegnamnden.se/loa/1.0/loa4` eller 
-`http://id.swedenconnect.se/loa/1.0/loa4-nonresident` får deklarera entitetskategorin `loa4-orgid`.
+[3.3](#registrering-av-tillitsnivaer) ovan) deklarerar `http://id.elegnamnden.se/loa/1.0/loa4`
+får deklarera entitetskategorin `loa4-orgid`.
 
 - En legitimeringstjänst som deklarerar `loa4-orgid` skall även deklarera kategorin `loa4-name` (d.v.s., 
 attributleverans av för- och efternamn). Se kapitel 2.4.3 i [
@@ -1146,17 +1142,19 @@ En legitimeringstjänst som erbjuder "Holder-of-key"-stöd skall deklarera dedik
 
 En förlitande part som vill nyttja "Holder-of-key" vid autentisering ska deklarera ett `AssertionConsumerService`-element för "Holder-of-key" enligt kapitel 2.1.2.1 av [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#sp-holder-of-key-support). Adressen som pekas ut i detta element måste vara konfigurerat för ömsesidig TLS, d.v.s., TLS där ett klientcertifikat krävs.
 
-\[*\]: `http://id.elegnamnden.se/loa/1.0/loa4` och/eller `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`.
   
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
+
+- 2024-05-13:
+	- Korrigeringar rörande `http://id.swedenconnect.se/loa/1.0/loa2-nonresident` och `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`. 
 
 - 2024-02-14:
 	- "Holder-of-key" är inte längre tvingande för tillitsnivå 4. Detta beroende på ändringar
 	   i tillitsramverket för Svensk e-legitimation. Se kapitel 2.4, "Specifika krav rörande Tillitsnivå 4",
 	   och kapitel 3.9, "Metadataregler gällande tillitsnivå 4 (LoA 4)".
 	   
-    - Also corrected broken links to Digg-resources.
+    - Korrigering av felaktiga länkar.
 
 - 2023-11-14:
 	- Ändringar i kapitel 1.1.3, "eID för medarbetare", där både offentliga och privata
