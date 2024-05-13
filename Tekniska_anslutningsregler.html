@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="tekniska-anslutningsregler-för-sweden-connect-federationen">Tekniska anslutningsregler för Sweden Connect-federationen</h1>
-<h3 id="2024-02-14">2024-02-14</h3>
+<h3 id="2024-05-13">2024-05-13</h3>
 <p>Specifikation gällande aktörer som ansluter till
 Diggs identitetsfederation Sweden Connect.</p>
 <hr>
@@ -200,13 +200,13 @@ ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimat
 anskaffas av arbetsgivare enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/skaffa-losningar-for-inloggning-med-e-legitimationer/erbjud-inloggning-med-e-tjanstelegitimationer">E-legitimering för medarbetare</a>, och intygsleverans
 sker av legitimeringstjänst som leverarer enligt <a href="https://www.digg.se/download/18.5b30ce7218475cd9ed3289b/1670934932324/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> kan det förekomma att individer som inte innehar ett svenskt personnummer
 eller samordningsnummer tilldelas ett eID. Då dessa eID:n används för legitimering inom
-Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 3 eller 4 användas. En
-legitimeringstjänst som är godkänd för nivå 3 eller 4, och som utfärdar intyg för dessa
+Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 2 eller 3 användas. En
+legitimeringstjänst som är godkänd för nivå 2 eller 3, och som utfärdar intyg för dessa
 typer av eID:n skall då använda följande identifierare:</p>
 <ul class="list">
-<li><p><code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> - Legitimering enligt tillitsnivå 3 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code> - Legitimering enligt tillitsnivå 2 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
 </li>
-<li><p><code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code> - Legitimering enligt tillitsnivå 4 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> - Legitimering enligt tillitsnivå 3 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
 </li>
 </ul>
 <p>I båda ovanstående fall krävs att utfärdandet av e-legitimationen följer tillitsramverket med
@@ -555,11 +555,11 @@ tillitsnivå 3 och 4.</em></p>
 </li>
 <li><p>Endast legitimeringstjänster som levererar enligt <a href="https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx">Anslutningsavtal för utfärdare av 
 e-tjänstelegitimationer - Förbetald e-legitimering</a> 
-och som är granskade och godkända enligt tillitsnivå 3 eller 4 får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code>.</p>
+och som är granskade och godkända enligt tillitsnivå 3 eller högre får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code>.</p>
 </li>
 <li><p>Endast legitimeringstjänster som levererar enligt <a href="https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx">Anslutningsavtal för utfärdare av 
 e-tjänstelegitimationer - Förbetald e-legitimering</a>
-och som är granskade och godkända enligt tillitsnivå 4 får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>. </p>
+och som är granskade och godkända enligt tillitsnivå 2 får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code>. </p>
 </li>
 <li><p>Endast den svenska eIDAS-noden får deklarera någon av följande identifierare:</p>
 <ul class="list">
@@ -694,7 +694,7 @@ Entity Categories for the Swedish eID Framework</a>. </p>
 <p>En deklaration av entitetskategorin <code>http://id.swedenconnect.se/ec/1.0/loa4-orgid</code> innebär följande:</p>
 <p><strong>För en legitimeringstjänst</strong>:</p>
 <blockquote>
-<p>Legitimeringstjänsten deklarerar att den kan legitimera användare enligt tillitsnivå 4<sup>*</sup> och
+<p>Legitimeringstjänsten deklarerar att den kan legitimera användare enligt tillitsnivå 4 och
 leverera intyg med attribut från attributuppsättningen <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
 </blockquote>
 <p><strong>För en förlitande part</strong>:</p>
@@ -702,13 +702,11 @@ leverera intyg med attribut från attributuppsättningen <a href="https://docs.s
 <p>Den förlitande parten deklarerar att den kommer att begära legitimering enligt tillitsnivå 4<sup>*</sup> och
 att den begär leverans av attribut enligt uppsättningen <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
 </blockquote>
-<p>[*]: Denna entitetskategori gäller för legitimering enligt <code>http://id.elegnamnden.se/loa/1.0/loa4</code>
-eller <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>.</p>
 <p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
 <ul class="list">
 <li><p>Endast legitimeringstjänster som i <code>assurance-certification</code>-attributet (se kapitel 
-<a href="#registrering-av-tillitsnivaer">3.3</a> ovan) deklarerar <code>http://id.elegnamnden.se/loa/1.0/loa4</code> eller 
-<code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code> får deklarera entitetskategorin <code>loa4-orgid</code>.</p>
+<a href="#registrering-av-tillitsnivaer">3.3</a> ovan) deklarerar <code>http://id.elegnamnden.se/loa/1.0/loa4</code>
+får deklarera entitetskategorin <code>loa4-orgid</code>.</p>
 </li>
 <li><p>En legitimeringstjänst som deklarerar <code>loa4-orgid</code> skall även deklarera kategorin <code>loa4-name</code> (d.v.s., 
 attributleverans av för- och efternamn). Se kapitel 2.4.3 i <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-name">
@@ -950,16 +948,20 @@ stöd för &quot;Holder-of-key&quot;. </p>
  <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#idp-holder-of-key-support">Deployment Profile for the Swedish eID Framework</a>. De adresser som pekas
  ut i dessa element måste vara konfigurerade för ömsesidig TLS, d.v.s., TLS där ett klientcertifikat krävs.</p>
 <p>En förlitande part som vill nyttja &quot;Holder-of-key&quot; vid autentisering ska deklarera ett <code>AssertionConsumerService</code>-element för &quot;Holder-of-key&quot; enligt kapitel 2.1.2.1 av <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#sp-holder-of-key-support">Deployment Profile for the Swedish eID Framework</a>. Adressen som pekas ut i detta element måste vara konfigurerat för ömsesidig TLS, d.v.s., TLS där ett klientcertifikat krävs.</p>
-<p>[*]: <code>http://id.elegnamnden.se/loa/1.0/loa4</code> och/eller <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>.</p>
 <p><a name="versioner-av-detta-dokument"></a></p>
 <h2 id="4-versioner-av-detta-dokument">4. Versioner av detta dokument</h2>
 <ul class="list">
+<li><p>2024-05-13:</p>
+<ul class="list">
+<li>Korrigeringar rörande <code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code> och <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>. </li>
+</ul>
+</li>
 <li><p>2024-02-14:</p>
 <ul class="list">
 <li>&quot;Holder-of-key&quot; är inte längre tvingande för tillitsnivå 4. Detta beroende på ändringar
  i tillitsramverket för Svensk e-legitimation. Se kapitel 2.4, &quot;Specifika krav rörande Tillitsnivå 4&quot;,
  och kapitel 3.9, &quot;Metadataregler gällande tillitsnivå 4 (LoA 4)&quot;.</li>
-<li>Also corrected broken links to Digg-resources.</li>
+<li>Korrigering av felaktiga länkar.</li>
 </ul>
 </li>
 <li><p>2023-11-14:</p>
