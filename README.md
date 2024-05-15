@@ -88,9 +88,15 @@ SAML implementation profile for Identity Providers implementing BankID support.
 
 #### SAML: Principal Selection in SAML Authentication Requests
 
-This specification defines an element that may be included in the Extensions element of a SAML AuthnRequest where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
+This specification defines an element that may be included in the Extensions element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
 
 > [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
+
+#### SAML: User Message Extension in SAML Authentication Requests
+
+This specification defines an element that may be included in the Extensions element of a SAML `AuthnRequest` where the requesting Service Provider can specify a "user message" that is to be displayed for the user by the Identity Provider during the authentication phase.
+
+> [18 - User Message Extension in SAML Authentication Requests](18%20-%20User%20Message%20Extension%20in%20SAML%20Authentication%20Requests.md)
 
 ### Signature Specifications
 

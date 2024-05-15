@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.9 - 2023-04-20 - *Draft version*
+### Version 1.9 - 2024-05-15 - *Draft version*
 
 
 Registration number: **2019-311**
@@ -86,6 +86,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     6.1. [secure-authenticator-binding](#secure-authenticator-binding)
 
     6.2. [accepts-coordination-number](#accepts-coordination-number)
+    
+    6.3. [supports-user-message](#supports-user-message)
 
 7. [**References**](#references)
 
@@ -595,6 +597,13 @@ in its metadata.
 Thus, a coordination number may be included in this attribute even if the Service Provider
 has not declared the entity category. 
 
+<a name="supports-user-message"></a>
+### 6.3. supports-user-message
+
+**URL**: `http://id.swedenconnect.se/general-ec/1.0/supports-user-message`
+
+**Description**: Service Providers may include the `<umsg:UserMessage>` extension in authentication requests for the purpose of displaying a custom "user message" for the authentication users, see \[[UserMessageExt](#user-message-ext)\]. An Identity Provider announces support for this extension by declaring the `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category.
+
 
 <a name="references"></a>
 ## 7. References
@@ -656,6 +665,10 @@ has not declared the entity category.
 **\[SigSAP\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
+<a name="user-message-ext"></a>
+**\[UserMessageExt\]**
+> [User Message Request Extension](https://docs.swedenconnect.se/technical-framework/updates/18_-_ User_Message_Extension_in_SAML_Authentication_Requests.html).
+
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions
 
@@ -665,6 +678,8 @@ has not declared the entity category.
 
 - Section 6.2, "accepts-coordination-number", was updated with changed logic for
 the `mappedPersonalIdentityNumber` attribute.
+
+- Added section 6.3, "supports-user-message", with a definition for the `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category.
 
 **Changes between version 1.7 and version 1.8:**
 

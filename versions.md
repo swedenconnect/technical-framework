@@ -19,3 +19,4 @@
 | ~~15 - Signature Validation Token~~<br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt/ | ~~1.0<br/>(draft)~~ |
 | ~~16 - PDF Profile for Signature Validation Tokens~~<br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/ | ~~1.0<br/>(draft)~~ |
 | ~~17 - XML Profile for Signature Validation Tokens~~ <br /><br />Replaced by IETF draft: https://datatracker.ietf.org/doc/draft-santesson-svt-xml/ | ~~1.0<br/>(draft)~~ |
+| [18 - User Message Extension in SAML Authentication Requests](18%20-%20User%20Message%20Extension%20in%20SAML%20Authentication%20Requests.md) | 1.0<br />(draft) |
