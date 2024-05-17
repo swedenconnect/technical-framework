@@ -89,7 +89,7 @@ This specification defines the element `<UserMessage>` to be included in the `<E
 This element MAY included by a Service Provider asking the Identity Provider to display a given message for the user during the authentication phase. The element has the following elements and attributes:
 
 `<Message>` \[One or more\]
-> Element that holds the user message for a given language. See below.
+> Element that holds the user message for a specific language. See below.
 
 `mimeType`
 > The MIME type for the text contained in all `Message` elements. This specification defines two possible values that are `text/plain` (where ;charset=UTF-8 is an implicit condition) and `text/markdown`<sup>1</sup>. If no value is given for this field, `text/plain` MUST be assumed. Other profiles MAY add support for additional MIME types.
@@ -108,7 +108,7 @@ The following schema fragment defines the `<UserMessage>` element:
       <xs:documentation>The format of the user message(s)</xs:documentation>
     </xs:annotation>
   </xs:attribute>
-  <xs:anyAttribute namespace="##any"/>
+  <xs:anyAttribute namespace="##any" processContents="lax"/>
 </xs:complexType>
 ```
 
@@ -119,7 +119,7 @@ The `<Message>` element is defined by the following schema definition:
   <xs:simpleContent>
     <xs:extension base="xs:base64Binary">
       <xs:attribute ref="xml:lang" use="required"/>
-      <xs:anyAttribute namespace="##any"/>
+      <xs:anyAttribute namespace="##any" processContents="lax"/>
     </xs:extension>
   </xs:simpleContent>
 </xs:complexType>
@@ -213,7 +213,7 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/user-
         <xs:documentation>The MIME type of the user message(s)</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:anyAttribute namespace="##any"/>
+    <xs:anyAttribute namespace="##any" processContents="lax"/>
   </xs:complexType>
 
   <xs:complexType name="MessageType">
@@ -225,7 +225,7 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/user-
     <xs:simpleContent>
       <xs:extension base="xs:base64Binary">
         <xs:attribute ref="xml:lang" use="required"/>
-        <xs:anyAttribute namespace="##any"/>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
