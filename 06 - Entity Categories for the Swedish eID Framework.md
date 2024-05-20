@@ -16,7 +16,7 @@ Registration number: **2019-311**
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -667,7 +667,7 @@ has not declared the entity category.
 
 <a name="user-message-ext"></a>
 **\[UserMessageExt\]**
-> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_ User_Message_Extension_in_SAML_Authentication_Requests.html).
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions

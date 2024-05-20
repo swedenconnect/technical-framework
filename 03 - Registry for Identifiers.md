@@ -612,7 +612,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="user-message-ext"></a>
 **\[UserMessageExt\]**
-> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_ User_Message_Extension_in_SAML_Authentication_Requests.html).
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
 
 <a name="id-binding"></a>
 **\[ID-Binding\]**
