@@ -642,6 +642,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 - Section 3.1.9.3, "Identity Binding Levels", was introduced where binding levels for
 matching eIDAS identities to Swedish identity numbers are listed.
 
+- The `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category was added to section, 3.1.3.5, "General Entity Categories".
+
 **Changes between version 1.6 and version 1.7:**
 
 - Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` and `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
