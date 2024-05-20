@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.9 - 2024-05-15 - *Draft version*
+### Version 1.9 - 2024-05-20 - *Draft version*
 
 
 Registration number: **2019-311**
@@ -667,7 +667,7 @@ has not declared the entity category.
 
 <a name="user-message-ext"></a>
 **\[UserMessageExt\]**
-> [User Message Request Extension](https://docs.swedenconnect.se/technical-framework/updates/18_-_ User_Message_Extension_in_SAML_Authentication_Requests.html).
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_ User_Message_Extension_in_SAML_Authentication_Requests.html).
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions

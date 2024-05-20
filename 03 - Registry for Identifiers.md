@@ -8,14 +8,14 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.8 - 2023-04-24 - *Draft version*
+### Version 1.8 - 2024-05-20 - *Draft version*
 
 Registration number: **2019-309**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2023. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -363,6 +363,8 @@ General category identifiers are prefixed with `http://id.swedenconnect.se/gener
 | :--- | :--- | :--- |
 | `http://id.swedenconnect.se/general-ec/`<br />`1.0/secure-authenticator-binding` | Indicator that a secure authenticator binding is required, or supported.  | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.swedenconnect.se/general-ec/`<br />`1.0/accepts-coordination-number` | Category for opt-in for the acceptance of Swedish coordination numbers in the personalIdentityNumber attribute.  | \[[EidEntityCat](#eidentitycat)\] |
+| `http://id.swedenconnect.se/general-ec/`<br />`1.0/supports-user-message` | Indicator that an Identity Provider supports the `UserMessage` authentication request extension, see \[[UserMessageExt](#user-message-ext)\]. | \[[EidEntityCat](#eidentitycat)\] |
+
 
 <a name="saml-protocol-status-codes"></a>
 #### 3.1.4. SAML Protocol Status Codes
@@ -607,6 +609,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 <a name="eidattributes"></a>
 **\[EidAttributes\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
+
+<a name="user-message-ext"></a>
+**\[UserMessageExt\]**
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_ User_Message_Extension_in_SAML_Authentication_Requests.html).
 
 <a name="id-binding"></a>
 **\[ID-Binding\]**
