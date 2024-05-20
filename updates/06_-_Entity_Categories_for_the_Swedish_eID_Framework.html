@@ -6,7 +6,7 @@
     <title>Entity Categories for the Swedish eID Framework</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/eln-landscape.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
     <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
   </head>
   <body>
@@ -19,11 +19,11 @@
 </p>
 
 <h1 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</h1>
-<h3 id="version-19---2023-04-20---draft-version">Version 1.9 - 2023-04-20 - <em>Draft version</em></h3>
+<h3 id="version-19---2024-05-20---draft-version">Version 1.9 - 2024-05-20 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-311</strong></p>
 <hr>
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -66,6 +66,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <li><p><a href="#general-entity-categories"><strong>General Entity Categories</strong></a></p>
 <p> 6.1. <a href="#secure-authenticator-binding">secure-authenticator-binding</a></p>
 <p> 6.2. <a href="#accepts-coordination-number">accepts-coordination-number</a></p>
+<p> 6.3. <a href="#supports-user-message">supports-user-message</a></p>
 </li>
 <li><p><a href="#references"><strong>References</strong></a></p>
 </li>
@@ -493,6 +494,10 @@ in its metadata.</p>
 <code>mappedPersonalIdentityNumber</code>, see section 3.3.2 of [<a href="#eidattributes">EidAttributes</a>].
 Thus, a coordination number may be included in this attribute even if the Service Provider
 has not declared the entity category. </p>
+<p><a name="supports-user-message"></a></p>
+<h3 id="63-supports-user-message">6.3. supports-user-message</h3>
+<p><strong>URL</strong>: <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code></p>
+<p><strong>Description</strong>: Service Providers may include the <code>&lt;umsg:UserMessage&gt;</code> extension in authentication requests for the purpose of displaying a custom &quot;user message&quot; for the authentication users, see [<a href="#user-message-ext">UserMessageExt</a>]. An Identity Provider announces support for this extension by declaring the <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code> entity category.</p>
 <p><a name="references"></a></p>
 <h2 id="7-references">7. References</h2>
 <p><a name="rfc2119"></a>
@@ -564,6 +569,11 @@ Samordningsnummer</a>.</p>
 <blockquote>
 <p><a href="https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
 </blockquote>
+<p><a name="user-message-ext"></a>
+<strong>[UserMessageExt]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html">User Message Extension in SAML Authentication Requests</a>.</p>
+</blockquote>
 <p><a name="changes-between-versions"></a></p>
 <h2 id="8-changes-between-versions">8. Changes between versions</h2>
 <p><strong>Changes between version 1.8 and version 1.9:</strong></p>
@@ -572,6 +582,8 @@ Samordningsnummer</a>.</p>
 </li>
 <li><p>Section 6.2, &quot;accepts-coordination-number&quot;, was updated with changed logic for
 the <code>mappedPersonalIdentityNumber</code> attribute.</p>
+</li>
+<li><p>Added section 6.3, &quot;supports-user-message&quot;, with a definition for the <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code> entity category.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.7 and version 1.8:</strong></p>
