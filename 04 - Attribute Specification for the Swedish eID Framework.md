@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.8 - 2024-05-10 - *Draft version*
+### Version 1.8 - 2024-10-07 - *Draft version*
 
 Registration number: **2019-310**
 
@@ -330,7 +330,7 @@ The following attributes are defined for use within the attribute profile for th
 | postalCode | urn:oid:2.5.4.17 | Postal code | Postal code. | No | No | 11826 |
 | l | urn:oid:2.5.4.7 | Locality | Locality. | No | No | Stockholm |
 | c | urn:oid:2.5.4.6 | Country | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code. | No | No | SE |
-| placeOfBirth | urn:oid:1.3.6.1.5.5.7.9.2 | Place of birth | A string representing the place of birth | No | No | Stockholm |
+| placeOfBirth | urn:oid:1.3.6.1.5.5.7.9.2 | Place of birth | A string representing the place of birth. | No | No | Stockholm |
 | countryOfCitizenship | urn:oid:1.3.6.1.5.5.7.9.4 | Country of citizenship | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing a country of citizenship. | Yes | No | SE |
 | countryOfResidence | urn:oid:1.3.6.1.5.5.7.9.5 | Country of Residence | ISO 3166-1 alpha-2 \[ISO3166\] two letter country code representing the country of residence. | No | No | SE |
 | telephoneNumber | urn:oid:2.5.4.20 | Telephone number | Telephone number. | Yes | No | +46890510 |
@@ -608,6 +608,12 @@ Swedish eID Framework.
 | PlaceOfBirth <br /> `http://eidas.europa.eu/attributes/naturalperson/PlaceOfBirth` | placeOfBirth <br /> urn:oid:1.3.6.1.5.5.7.9.2 |
 | CurrentAddress <br /> `http://eidas.europa.eu/attributes/naturalperson/CurrentAddress` | eidasNaturalPersonAddress <br /> urn:oid:1.2.752.201.3.9 <br /> See [section 3.3.3.1](#conversion-of-eidas-currentaddress) below. |
 | Gender <br /> `http://eidas.europa.eu/attributes/naturalperson/Gender` | gender <br /> urn:oid:1.3.6.1.5.5.7.9.3 |
+| Nationality<br />`http://eidas.europa.eu/attributes/naturalperson/Nationality` | countryOfCitizenship<br />urn:oid:1.3.6.1.5.5.7.9.4 |
+| CountryOfBirth<br />`http://eidas.europa.eu/attributes/naturalperson/CountryOfBirth` | Will be added as the last element of placeOfBirth (see above) |
+| TownOfBirth<br />`http://eidas.europa.eu/attributes/naturalperson/TownOfBirth` | Ignored if the eIDAS attribute PlaceOfBirth is assigned. Otherwise placed as first element of placeOfBirth. |
+| CountryOfResidence<br />`http://eidas.europa.eu/attributes/naturalperson/CountryOfResidence` | countryOfResidence<br />urn:oid:1.3.6.1.5.5.7.9.5 |
+| PhoneNumber<br />`http://eidas.europa.eu/attributes/naturalperson/PhoneNumber` | telephoneNumber<br />urn:oid:2.5.4.20 |
+| EmailAddress<br />`http://eidas.europa.eu/attributes/naturalperson/EmailAddress` | mail<br />urn:oid:0.9.2342.19200300.100.1.3 |
 
 **Note**: When converting an eIDAS attribute that makes use of
 “transliteration” (as described in section 2.4 of \[[eIDAS\_Attr](#eidas-attr)\])
@@ -779,6 +785,8 @@ following attribute:
 - Updated link to Sambi attribute specification.
 
 - Section 3.3.2, "The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes", was updated.
+
+- Section 3.3.3, "Conversion of eIDAS Attributes", was extended to contain mappings for the optional eIDAS attributes: Nationality, CountryOfBirth, TownOfBirth, CountryOfResidence, PhoneNumber and EmailAddress.
 
 **Changes between version 1.6 and version 1.7:**
 
