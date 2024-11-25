@@ -8,14 +8,14 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.5 - 2022-12-20 - *Draft version*
+### Version 1.5 - 2024-11-25 - *Draft version*
 
 Registration number: **2019-314**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -180,7 +180,7 @@ This schema is associated with the following XML namespace:
 `http://id.elegnamnden.se/csig/1.1/dss-ext/ns`
 
 Compliance with this specification requires support of the latest version of 
-the \[[Csig-XSD](#csig-xsd)\] schema which is 1.1.2.
+the \[[Csig-XSD](#csig-xsd)\] schema which is 1.1.3.
 
 If a future, non backwards compatible, version of this specification is needed, it will use a
 different namespace.
@@ -358,15 +358,9 @@ attributes and elements:
 
 `<saml:Conditions>` \[Required\]
 
-> Conditions that MUST be evaluated when assessing the validity of
-> and/or when using the Sign Request. See Section 2.5 of
-> \[[SAML2.0](#saml)\]for additional information on how to evaluate
-> conditions.
->
-> This element MUST include the attributes `NotBefore` and `NotOnOrAfter`
-> and MUST include the element `<saml:AudienceRestriction>` which in
-> turn MUST contain one `<saml:Audience>` element, specifying the
-> return URL for any resulting Sign Response message.
+> This element MUST include the element `<saml:AudienceRestriction>` which in
+> turn MUST contain one `<saml:Audience>` element, specifying the return URL for
+> any resulting Sign Response message.
 
 `<Signer>` \[Optional\]
 
@@ -1250,7 +1244,7 @@ signature and MUST check that the signature covers all data in the
 
 <a name="csig-xsd"></a>
 **\[Csig-XSD\]**
-> This specification's DSS Extensions schema Version 1.1.2, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2.xsd, June 2020.
+> This specification's DSS Extensions schema Version 1.1.3, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.3.xsd, November, 2024.
 
 <a name="dss"></a>
 **\[OASIS-DSS\]**
@@ -1306,6 +1300,10 @@ Recommendation 26 November 2008](https://www.w3.org/TR/REC-xml/).
 
 **Changes between version 1.4 and 1.5:**
 
+- The \[[Csig-XSD](#csig-xsd)\] schema was updated to version 1.1.3.
+
+- In section 3.1, "Element SignRequestExtension", the requirements for `NotBefore` and `NotOnOrAfter` to be present under the `<saml:Conditions>` element was removed. The reason for this is that it will always be the SignService itself that determines whether a message has expired or not.
+
 - Links in the appendix pointed to a draft version of the schema. This was fixed.
 
 **Changes between version 1.3 and 1.4:**
@@ -1343,7 +1341,7 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    version="1.1.2"
+    version="1.1.3"
     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
     targetNamespace="http://id.elegnamnden.se/csig/1.1/dss-ext/ns"
     xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
@@ -1353,8 +1351,8 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
 
   <xs:annotation>
     <xs:documentation>
-      Version: 1.1.2
-      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.2.xsd
+      Version: 1.1.3
+      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.3.xsd
     </xs:documentation>
   </xs:annotation>
 
@@ -1582,14 +1580,9 @@ The schema can also be downloaded from https://docs.swedenconnect.se/schemas/csi
       <xs:element ref="saml:Conditions">
         <xs:annotation>
           <xs:documentation>
-            Conditions that MUST be evaluated when assessing the validity of and/or 
-            when using the Sign Request. See Section 2.5 of SAML2.0 for additional 
-            information on how to evaluate conditions.
-
-            This element MUST include the attributes NotBefore and NotOnOrAfter and 
-            MUST include the element saml:AudienceRestriction which in turn MUST 
-            contain one saml:Audience element, specifying the return URL for any 
-            resulting Sign Response message.
+            This element MUST include the element saml:AudienceRestriction which in
+            turn MUST contain one saml:Audience element, specifying the return URL for
+            any resulting Sign Response message.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
