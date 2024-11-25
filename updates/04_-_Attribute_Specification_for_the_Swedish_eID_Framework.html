@@ -19,11 +19,11 @@
 </p>
 
 <h1 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</h1>
-<h3 id="version-18---2024-10-07---draft-version">Version 1.8 - 2024-10-07 - <em>Draft version</em></h3>
+<h3 id="version-18---2024-11-25---draft-version">Version 1.8 - 2024-11-25 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-310</strong></p>
 <hr>
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -534,7 +534,7 @@ examples of “converted attributes”.</p>
 <td align="left">E-mail address.</td>
 <td align="center">Yes</td>
 <td align="left">Yes/No<sup>*</sup></td>
-<td align="left"><a href="mailto:&#118;&#102;&#x6c;&#64;&#109;&#111;&#115;&#101;&#x62;&#x61;&#x63;&#107;&#101;&#109;&#x6f;&#x6e;&#x61;&#114;&#107;&#105;&#46;&#x73;&#101;">&#118;&#102;&#x6c;&#64;&#109;&#111;&#115;&#101;&#x62;&#x61;&#x63;&#107;&#101;&#109;&#x6f;&#x6e;&#x61;&#114;&#107;&#105;&#46;&#x73;&#101;</a></td>
+<td align="left"><a href="mailto:&#x76;&#x66;&#108;&#x40;&#109;&#111;&#x73;&#x65;&#98;&#x61;&#99;&#107;&#x65;&#109;&#111;&#x6e;&#x61;&#114;&#x6b;&#x69;&#x2e;&#x73;&#101;">&#x76;&#x66;&#108;&#x40;&#109;&#111;&#x73;&#x65;&#98;&#x61;&#99;&#107;&#x65;&#109;&#111;&#x6e;&#x61;&#114;&#x6b;&#x69;&#x2e;&#x73;&#101;</a></td>
 </tr>
 <tr>
 <td align="left">o</td>
@@ -713,7 +713,8 @@ examples of “converted attributes”.</p>
 <h4 id="313-scoped-attributes">3.1.3. Scoped Attributes</h4>
 <p>Attributes with a &quot;Yes&quot; value in the column &quot;Scoped&quot; are scoped attributes. A scoped attribute expresses values in a string-valued attribute of the form <code>value@scope</code>, where <code>scope</code> takes the form of a domain name or something similar such as an organizational identifier.</p>
 <p>An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider&#39;s metadata entry. See section 2.1.3.1 of [<a href="#eiddeployprof">EidDeployProf</a>] for details.    </p>
-<p>A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider&#39;s metadata entry as described in section 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>]. </p>
+<p>A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider&#39;s metadata entry as described in section 6.2.1 of [<a href="#eiddeployprof">EidDeployProf</a>].</p>
+<p><strong>Note:</strong> The <code>value</code> part of a scoped attribute MAY contain a <code>@</code>-character, for example when the value part is an email address, or a User Principal Name (UPN). Therefore, consumers of scoped attributes MUST use the last <code>@</code>-character as a delimiting character when splitting a scoped attribute into its <code>value</code> and <code>scope</code> parts.</p>
 <p><a name="saml-attribute-format"></a></p>
 <h3 id="32-saml-attribute-format">3.2. SAML Attribute Format</h3>
 <p>The <code>&lt;saml:Attribute&gt;</code> element representing an attribute in <a href="#attributes">3.1</a> SHALL comply with the following requirements:</p>
@@ -1114,6 +1115,8 @@ subdivisions Part 1: Country codes, ISO standard, ISO 3166-1.</p>
 <h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.7 and version 1.8:</strong></p>
 <ul class="list">
+<li><p>In section 3.1.3, &quot;Scoped Attributes&quot;, a note about <code>@</code>-characters in scoped values was added.</p>
+</li>
 <li><p>Updated link to Sambi attribute specification.</p>
 </li>
 <li><p>Section 3.3.2, &quot;The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes&quot;, was updated.</p>
