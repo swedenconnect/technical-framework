@@ -55,8 +55,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p>This specification defines the <code>&lt;psc:PrincipalSelection&gt;</code> element that may be included in the <code>&lt;saml2p:Extensions&gt;</code> element of a SAML <code>&lt;saml2p:AuthnRequest&gt;</code> where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.</p>
 <p>The specification also defines the <code>&lt;psc:RequestedPrincipalSelection&gt;</code> element that should be used by Identity Providers that may need information about a known user in order to avoid prompting for the user ID<sup>1</sup>. The element should be included as an extension in the Identity Provider metadata under the <code>&lt;md:IDPSSODescriptor&gt;</code> element.</p>
 <p>Even though the main purpose of the <code>&lt;psc:PrincipalSelection&gt;</code> extension is to aid the Identity Provider
-in selecting a particular subject for the authentication, an Identity Provider MAY also compare the match 
-values present in the extension with the resulting attributes from the user authentication, and in case of a 
+in selecting a particular subject for the authentication, an Identity Provider MAY also compare the match
+values present in the extension with the resulting attributes from the user authentication, and in case of a
 mismatch, respond with an error. In these cases the second-level SAML status code MUST be set to
 <code>urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal</code> [<a href="#saml2core">SAML2Core</a>].</p>
 <blockquote>
@@ -133,7 +133,7 @@ mismatch, respond with an error. In these cases the second-level SAML status cod
   &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexContent</span>&gt;
 &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="examples"></a></p>
 <h2 id="3.-examples">3. Examples</h2>
-<p>Attributes in the examples below are specified in [<a href="eidattributes">EidAttributes</a>].</p>
+<p>Attributes in the examples below are specified in [<a href="#eidattributes">EidAttributes</a>].</p>
 <p><a name="authentication-requests"></a></p>
 <h3 id="3.1.-authentication-requests">3.1. Authentication Requests</h3>
 <pre class="hljs"><code>...
@@ -160,7 +160,7 @@ mismatch, respond with an error. In these cases the second-level SAML status cod
     <span class="hljs-tag">&lt;<span class="hljs-name">mdui:UIInfo</span> <span class="hljs-attr">xmlns:mdui</span>=<span class="hljs-string">"urn:oasis:names:tc:SAML:metadata:ui"</span>&gt;</span>
       ...
     <span class="hljs-tag">&lt;/<span class="hljs-name">mdui:UIInfo</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">psc:RequestedPrincipalSelection</span> 
+    <span class="hljs-tag">&lt;<span class="hljs-name">psc:RequestedPrincipalSelection</span>
          <span class="hljs-attr">xmlns:psc</span>=<span class="hljs-string">"http://id.swedenconnect.se/authn/1.0/principal-selection/ns"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">psc:MatchValue</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">"urn:oid:1.2.752.29.4.13"</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">psc:RequestedPrincipalSelection</span>&gt;</span>
@@ -198,7 +198,7 @@ mismatch, respond with an error. In these cases the second-level SAML status cod
   &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">"MatchValueType"</span>&gt;
     &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
       &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">"xs:string"</span>&gt;
-        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"NameFormat"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:anyURI"</span> 
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"NameFormat"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:anyURI"</span>
             default=<span class="hljs-string">"urn:oasis:names:tc:SAML:2.0:attrname-format:uri"</span> /&gt;
         &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">"Name"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"xs:string"</span> use=<span class="hljs-string">"required"</span> /&gt;
         &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">"##any"</span> /&gt;
