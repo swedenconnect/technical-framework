@@ -8,7 +8,7 @@
 
 # Swedish eID Framework - Registry for identifiers
 
-### Version 1.8 - 2024-05-20 - *Draft version*
+### Version 1.8 - 2024-11-25 - *Draft version*
 
 Registration number: **2019-309**
 
@@ -313,8 +313,8 @@ Identifiers for entity categories representing alternative sets of requirements.
 | `http://id.elegnamnden.se/`<br />`ec/1.0/loa4-pnr` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/pnr-01`. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/`<br />`ec/1.0/eidas-naturalperson` | Service consuming/providing assertions based on any eIDAS assurance level, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.elegnamnden.se/`<br />`ec/1.0/eidas-pnr-delivery` | Service providing assertions to eIDAS services via Swedish eIDAS-node | \[[EidEntityCat](#eidentitycat)\] |
-| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set ´http://id.swedenconnect.se/ap/1.0/hsaid-01´. |  |
-| `http://id.swedenconnect.se/`<br />`ec/sc/uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set ´http://id.swedenconnect.se/ap/1.0/hsaid-01´. | |
+| `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-hsaid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.swedenconnect.se/ap/1.0/hsaid-01`. |  |
+| `http://id.swedenconnect.se/`<br />`ec/sc/uncertified-loa3-hsaid` | Service consuming/providing assertions based on uncertified-loa3, as defined above, implementing the attribute set `http://id.swedenconnect.se/ap/1.0/hsaid-01`. | |
 | `http://id.swedenconnect.se/`<br />`ec/1.0/loa2-orgid` | Service consuming/providing assertions based on assurance level 2, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.swedenconnect.se/`<br />`ec/1.0/loa3-orgid` | Service consuming/providing assertions based on assurance level 3, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |
 | `http://id.swedenconnect.se/`<br />`ec/1.0/loa4-orgid` | Service consuming/providing assertions based on assurance level 4, implementing the attribute set `http://id.elegnamnden.se/ap/1.0/org-person-01`. | \[[EidEntityCat](#eidentitycat)\] |

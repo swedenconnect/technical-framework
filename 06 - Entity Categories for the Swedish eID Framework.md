@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.9 - 2024-05-20 - *Draft version*
+### Version 1.9 - 2024-11-25 - *Draft version*
 
 
 Registration number: **2019-311**
@@ -647,7 +647,7 @@ has not declared the entity category.
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
 
 <a name="eiddeploy"></a>
 **\[EidDeploy\]**

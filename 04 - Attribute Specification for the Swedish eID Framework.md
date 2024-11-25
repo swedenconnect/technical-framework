@@ -753,7 +753,7 @@ following attribute:
 
 <a name="sambiattr"></a>
 **\[SambiAttr\]**
-> [Sambi Attributspecifikation](https://www.sambi.se/attributes/).
+> [Sambi Attributspecifikation](https://wiki.federationer.internetstiftelsen.se/pages/viewpage.action?pageId=46465316).
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
