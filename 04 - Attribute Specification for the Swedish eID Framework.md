@@ -8,14 +8,14 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.8 - 2024-10-07 - *Draft version*
+### Version 1.8 - 2024-11-25 - *Draft version*
 
 Registration number: **2019-310**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -376,7 +376,9 @@ Attributes with a "Yes" value in the column "Scoped" are scoped attributes. A sc
 
 An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider's metadata entry. See section 2.1.3.1 of \[[EidDeployProf](#eiddeployprof)\] for details.	
 
-A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[EidDeployProf](#eiddeployprof)\]. 
+A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[EidDeployProf](#eiddeployprof)\].
+
+**Note:** The `value` part of a scoped attribute MAY contain a `@`-character, for example when the value part is an email address, or a User Principal Name (UPN). Therefore, consumers of scoped attributes MUST use the last `@`-character as a delimiting character when splitting a scoped attribute into its `value` and `scope` parts.
 
 <a name="saml-attribute-format"></a>
 ### 3.2. SAML Attribute Format
@@ -781,6 +783,8 @@ following attribute:
 ## 5. Changes between versions
 
 **Changes between version 1.7 and version 1.8:**
+
+- In section 3.1.3, "Scoped Attributes", a note about `@`-characters in scoped values was added.
 
 - Updated link to Sambi attribute specification.
 
