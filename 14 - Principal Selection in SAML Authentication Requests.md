@@ -167,7 +167,7 @@ The following schema fragment defines the `<RequestedPrincipalSelection>` elemen
 <a name="examples"></a>
 ## 3. Examples
 
-Attributes in the examples below are specified in \[[EidAttributes](eidattributes)\].
+Attributes in the examples below are specified in \[[EidAttributes](#eidattributes)\].
 
 <a name="authentication-requests"></a>
 ### 3.1. Authentication Requests

@@ -248,8 +248,8 @@ compared using an exact binary comparison. In particular,
 implementations MUST NOT depend on case insensitive string comparisons,
 normalization or trimming of whitespace, or conversion of
 locale-specific formats such as numbers or currency. This requirement is
-intended to conform to the W3C working-draft Requirements for String
-Identity, Matching, and String Indexing \[[W3C-CHAR](https://www.w3.org/TR/WD-charreq/)\].
+intended to conform to the W3C working group note "Requirements for String
+Identity, Matching, and String Indexing" \[[W3C-CHAR](https://www.w3.org/TR/charreq/)\].
 
 <a name="uri-values"></a>
 #### 1.3.2. URI Values
