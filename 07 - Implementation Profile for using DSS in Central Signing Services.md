@@ -230,7 +230,7 @@ A `<saml:Conditions>` element MUST be present. This element MUST NOT
 contain any information in addition to what is defined in section 3.1 of
 \[[DSS-Ext](#dss-ext)\].
 
-If the `<saml:Conditions>` element contains the `NotBefore` and/or `NotOnOrAfter` attributes, the Signature Service consuming these values MAY consider them it its processing. However, a Signature Service MUST have a limitation on the maximum age of received messages, and if `NotOnOrAfter` exceeds this limitation, the `NotOnOrAfter` value MUST be ignored.
+If the `<saml:Conditions>` element contains the `NotBefore` and/or `NotOnOrAfter` attributes, the Signature Service consuming these values MAY consider them in its processing. However, a Signature Service MUST have a limitation on the maximum age of received messages, and if `NotOnOrAfter` exceeds this limitation, the `NotOnOrAfter` value MUST be ignored.
 
 This specification does not state how long the message age limitation should be. However, it is RECOMMENDED that it does not exceed 3 minutes. 
 
