@@ -8,14 +8,14 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.5 - 2021-11-11
+### Version 1.6 - 2024-11-25 - *Draft version*
 
 Registration number: **2019-312**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -229,6 +229,10 @@ If absent, the default value "1.1" MUST be assumed.
 A `<saml:Conditions>` element MUST be present. This element MUST NOT
 contain any information in addition to what is defined in section 3.1 of
 \[[DSS-Ext](#dss-ext)\].
+
+If the `<saml:Conditions>` element contains the `NotBefore` and/or `NotOnOrAfter` attributes, the Signature Service consuming these values MAY consider them in its processing. However, a Signature Service MUST have a limitation on the maximum age of received messages, and if `NotOnOrAfter` exceeds this limitation, the `NotOnOrAfter` value MUST be ignored.
+
+This specification does not state how long the message age limitation should be. However, it is RECOMMENDED that it does not exceed 3 minutes. 
 
 <a name="signer"></a>
 ##### 2.1.3.3. Signer
@@ -663,6 +667,10 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.5 and version 1.6:**
+
+- Section 2.1.3.2, "Conditions", was updated with requirements on how to interpret `NotBefore` and/or `NotOnOrAfter` values.
 
 **Changes between version 1.4 and version 1.5:**
 
