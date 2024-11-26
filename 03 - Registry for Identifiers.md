@@ -415,6 +415,8 @@ for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign r
 | `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | \[[EidCSignProf](#eidcsignprof)\] |
 | `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | \[[EidCSignProf](#eidcsignprof)\] |
 | `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.swedenconnect.se/sig-status/1.1/authn-failed` | The authentication during the signature operation failed. |  \[[EidCSignProf](#eidcsignprof)\] |
+| `http://id.swedenconnect.se/sig-status/1.1/security-violation` | The Signature Service, or Identity Provider authenticating the end user, has detected a security violation (such as a possible fraud). |  \[[EidCSignProf](#eidcsignprof)\] |
 
 <a name="name-registration-authorities"></a>
 #### 3.1.8. Name Registration Authorities
@@ -635,6 +637,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 ## 5. Changes between versions
 
 **Changes between version 1.7 and version 1.b:**
+
+- Section 3.1.7, "Sign Response Status Codes", were extended with error codes for `authn-failed` and `security-violation`.
 
 - Section 3.1.9.3, "Identity Binding Processes", was introduced where binding process URI:s for matching eIDAS identities to Swedish identity numbers are listed.
 
