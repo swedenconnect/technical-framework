@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="swedish-eid-framework---registry-for-identifiers">Swedish eID Framework - Registry for identifiers</h1>
-<h3 id="version-18---2024-11-25---draft-version">Version 1.8 - 2024-11-25 - <em>Draft version</em></h3>
+<h3 id="version-18---2024-11-26---draft-version">Version 1.8 - 2024-11-26 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-309</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -54,7 +54,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 3.1.9. <a href="#eidas-identifiers">eIDAS Identifiers</a></p>
 <p> 3.1.9.1. <a href="#eidas-proxy-service-aliases">eIDAS Proxy Service Aliases</a></p>
 <p> 3.1.9.2. <a href="#eidas-connector-aliases">eIDAS Connector Aliases</a></p>
-<p> 3.1.9.3. <a href="#identity-binding-levels">Identity Binding Levels</a></p>
+<p> 3.1.9.3. <a href="#identity-binding-processes">Identity Binding Processes</a></p>
 <p> 3.2. <a href="#oid-identifiers3">OID Identifiers</a></p>
 <p> 3.2.1. <a href="#asn1-declarations">ASN.1 Declarations</a></p>
 </li>
@@ -777,10 +777,9 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <blockquote>
 <p>A consumer of an eIDAS Connector alias URI MUST accept the country code part of the URI in both lower and upper case letters.</p>
 </blockquote>
-<p><a name="identity-binding-levels"></a></p>
-<h5 id="3193-identity-binding-levels">3.1.9.3. Identity Binding Levels</h5>
-<p>Section 3.3.2 of [<a href="#eidattributes">EidAttributes</a>] defines three possible values
-for the <code>personalIdentityNumberBinding</code> attribute. These are:</p>
+<p><a name="identity-binding-processes"></a></p>
+<h5 id="3193-identity-binding-processes">3.1.9.3. Identity Binding Processes</h5>
+<p>Section 3.3.2 of [<a href="#eidattributes">EidAttributes</a>] describes how the <code>personalIdentityNumberBinding</code> attribute is assigned with one or more &quot;Identity Binding Process URI:s&quot; after an identity binding. The possible values are: </p>
 <table>
 <thead>
 <tr>
@@ -790,23 +789,17 @@ for the <code>personalIdentityNumberBinding</code> attribute. These are:</p>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><code>http://id.swedenconnect.se/</code><br /><code>id-binding/level/basic</code></td>
-<td align="left">Basic identity binding.</td>
+<td align="left"><code>http://id.swedenconnect.se/</code><br /><code>id-binding/process/populationregister</code></td>
+<td align="left">Unique match of name and birth date between eIDAS identity and the Swedish Population register.</td>
 <td align="left">[<a href="#id-binding">ID-Binding</a>]</td>
 </tr>
 <tr>
-<td align="left"><code>http://id.swedenconnect.se/</code><br /><code>id-binding/level/enhanced</code></td>
-<td align="left">Enhanced identity binding.</td>
-<td align="left">[<a href="#id-binding">ID-Binding</a>]</td>
-</tr>
-<tr>
-<td align="left"><code>http://id.swedenconnect.se/</code><br /><code>id-binding/level/verified</code></td>
-<td align="left">Verified identity binding.</td>
+<td align="left"><code>http://id.swedenconnect.se/</code><br /><code>id-binding/process/swedish-eid</code></td>
+<td align="left">Digitally signed attestation using a Swedish eID.</td>
 <td align="left">[<a href="#id-binding">ID-Binding</a>]</td>
 </tr>
 </tbody></table>
-<p>The <a href="#id-binding">Binding of eIDAS Attributes to Swedish Personal Identity Numbers</a> 
-([<a href="#id-binding">ID-Binding</a>]) document defines the above levels in detail. </p>
+<p>The <a href="#id-binding">Binding eIDAS Identities to Records in the Swedish Population Register</a> ([<a href="#id-binding">ID-Binding</a>]) document defines the above processes in detail. </p>
 <p><a name="oid-identifiers3"></a></p>
 <h3 id="32-oid-identifiers">3.2. OID Identifiers</h3>
 <p>Defined categories:</p>
@@ -1063,7 +1056,7 @@ Version 1.0.</a></p>
 <p><a name="id-binding"></a>
 <strong>[ID-Binding]</strong></p>
 <blockquote>
-<p><a href="https://docs.swedenconnect.se/technical-framework/Identity_Binding.html">Binding of eIDAS Attributes to Swedish Personal Identity Numbers</a></p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/Identity_Binding.html">Binding eIDAS Identities to Records in the Swedish Population Register</a></p>
 </blockquote>
 <p><a name="svt-pdf"></a>
 <strong>[SVT-PDF]</strong></p>
@@ -1088,8 +1081,7 @@ regulation and associated technical specifications.</p>
 <h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.7 and version 1.b:</strong></p>
 <ul class="list">
-<li><p>Section 3.1.9.3, &quot;Identity Binding Levels&quot;, was introduced where binding levels for
-matching eIDAS identities to Swedish identity numbers are listed.</p>
+<li><p>Section 3.1.9.3, &quot;Identity Binding Processes&quot;, was introduced where binding process URI:s for matching eIDAS identities to Swedish identity numbers are listed.</p>
 </li>
 <li><p>The <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code> entity category was added to section, 3.1.3.5, &quot;General Entity Categories&quot;.</p>
 </li>
