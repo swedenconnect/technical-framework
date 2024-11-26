@@ -19,11 +19,11 @@
 </p>
 
 <h1 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS DSS in Central Signing Services</h1>
-<h3 id="version-1.5---2021-11-11">Version 1.5 - 2021-11-11</h3>
+<h3 id="version-16---2024-11-25---draft-version">Version 1.6 - 2024-11-25 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-312</strong></p>
 <hr>
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2021. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -77,14 +77,14 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </li>
 </ol>
 <p><a name="introduction"></a></p>
-<h2 id="1.-introduction">1. Introduction</h2>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>This document specifies an implementation profile for exchange of sign
 requests and responses using the OASIS DSS protocol [<a href="#dss">DSS</a>], enhanced by
 the DSS Extensions for Federated Central Signing Services [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p>Section 2 defines the sign request and response messages and section 3
 defines the transport of these messages using HTTP POST.</p>
 <p><a name="terminology"></a></p>
-<h3 id="1.1.-terminology">1.1. Terminology</h3>
+<h3 id="11-terminology">1.1. Terminology</h3>
 <table>
 <thead>
 <tr>
@@ -92,8 +92,7 @@ defines the transport of these messages using HTTP POST.</p>
 <th>Defined meaning</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>User</strong></td>
 <td>The entity requested to sign a document.</td>
 </tr>
@@ -105,10 +104,9 @@ defines the transport of these messages using HTTP POST.</p>
 <td><strong>Signing Service</strong></td>
 <td>A centralized service that manages the process to authenticate the user that has been requested to sign a document, and the process to obtain the user’s signature on the requested document.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><a name="requirement-key-words"></a></p>
-<h3 id="1.2.-requirement-key-words">1.2. Requirement key words</h3>
+<h3 id="12-requirement-key-words">1.2. Requirement key words</h3>
 <p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>,
 <strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>,
 <strong>MAY</strong>, and <strong>OPTIONAL</strong> are to be interpreted as described in
@@ -118,7 +116,7 @@ requirements over protocol features and behavior that affect the
 interoperability and security of implementations. When these words are
 not capitalized, they are meant in their natural-language sense.</p>
 <p><a name="namespace-references"></a></p>
-<h3 id="1.3.-namespace-references">1.3. Namespace references</h3>
+<h3 id="13-namespace-references">1.3. Namespace references</h3>
 <p>Conventional XML namespace prefixes are used throughout the listings in
 this specification to stand for their respective namespaces as follows,
 whether or not a namespace declaration is present in the example:</p>
@@ -130,8 +128,7 @@ whether or not a namespace declaration is present in the example:</p>
 <th>Comments</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>csig</td>
 <td><code>http://id.elegnamnden.se/csig/1.1/dss-ext/ns</code></td>
 <td>For the DSS extension namespace [<a href="#dss-ext">DSS-Ext</a>] (default namespace).</td>
@@ -151,22 +148,21 @@ whether or not a namespace declaration is present in the example:</p>
 <td><code>urn:oasis:names:tc:SAML:2.0:assertion</code></td>
 <td>The SAML V2.0 assertion namespace, defined in the schema [<a href="#saml-xsd">SAML-XSD</a>].</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <p><a name="identification"></a></p>
-<h3 id="1.4.-identification">1.4. Identification</h3>
+<h3 id="14-identification">1.4. Identification</h3>
 <p>The following URI identifier identifies this profile:</p>
 <blockquote>
 <p><strong><code>http://id.elegnamnden.se/csig/1.1/dss-ext/profile</code></strong></p>
 </blockquote>
 <p><a name="structure"></a></p>
-<h3 id="1.5.-structure">1.5. Structure</h3>
+<h3 id="15-structure">1.5. Structure</h3>
 <p>This specification uses the following typographical conventions in text:
 <code>&lt;EidElement&gt;</code>, <code>&lt;ns:ForeignElement&gt;</code>, <code>Attribute</code>, <strong>Datatype</strong>,
 <code>OtherCode</code>.</p>
 <p><a name="sign-request-and-response-messages"></a></p>
-<h2 id="2.-sign-request-and-response-messages">2. Sign Request and Response Messages</h2>
+<h2 id="2-sign-request-and-response-messages">2. Sign Request and Response Messages</h2>
 <p>This section defines a profile for sign requests and responses using the
 OASIS DSS standard [<a href="#dss">DSS</a>] in combination with “DSS extensions for
 Federated Central Signing Services” [<a href="#dss-ext">DSS-Ext</a>].</p>
@@ -178,37 +174,39 @@ DSS-Ext is the normative one. In case of differences between this
 implementation profile and DSS-Ext, this implementation profile is the
 normative one.</p>
 <p><a name="sign-requests"></a></p>
-<h3 id="2.1.-sign-requests">2.1. Sign Requests</h3>
+<h3 id="21-sign-requests">2.1. Sign Requests</h3>
 <p>Sign requests are carried in a <code>&lt;dss:SignRequest&gt;</code> element according to requirements and conditions of the following subsections.</p>
 <p>The <code>&lt;dss:SignRequest&gt;</code> element MUST have a <code>Profile</code> attribute with the value <code>http://id.elegnamnden.se/csig/1.1/dss-ext/profile</code>, which specifies conformance to this implementation profile.</p>
 <p>The <code>&lt;dss:SignRequest&gt;</code> element MUST have a <code>RequestID</code> attribute with a value that uniquely identifies this request. The <code>RequestID</code> value MUST be a random generated value with at least 128 bit entropy and a length of at least 20 bytes.</p>
 <p><a name="signature-on-sign-requests"></a></p>
-<h4 id="2.1.1.-signature-on-sign-requests">2.1.1. Signature on Sign Requests</h4>
+<h4 id="211-signature-on-sign-requests">2.1.1. Signature on Sign Requests</h4>
 <p>Sign requests MUST be signed. The signature MUST have a Same-Document URI-Reference (URI=””) to ensure that the signature covers the complete <code>&lt;dss:SignRequest&gt;</code> element.</p>
 <p>The resulting <code>&lt;ds:Signature&gt;</code> element MUST be placed inside the <code>&lt;dss:OptionalInputs&gt;</code> element in accordance with section 5 of [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p>The Signature Service MUST NOT process the sign request unless the signature of the sign request can be authenticated as originating from a legitimate Requesting Service.</p>
 <p><a name="data-to-be-signed"></a></p>
-<h4 id="2.1.2.-data-to-be-signed">2.1.2. Data To Be Signed</h4>
+<h4 id="212-data-to-be-signed">2.1.2. Data To Be Signed</h4>
 <p>A representation of the document to be signed MUST be provided in accordance with section 4.1 of [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p>Data to be signed MUST be provided in a <code>&lt;SignTaskData&gt;</code> element.</p>
 <p>The <code>&lt;SignTasks&gt;</code> element MAY contain one or more <code>&lt;SignTaskData&gt;</code> elements, representing one or more requested signatures.</p>
 <p><a name="dss-extension"></a></p>
-<h4 id="2.1.3.-dss-extension">2.1.3. DSS Extension</h4>
+<h4 id="213-dss-extension">2.1.3. DSS Extension</h4>
 <p>The <code>&lt;dss:OptionalInput&gt;</code> element of the sign request MUST contain a
 <code>&lt;SignRequestExtension&gt;</code> element according to requirements and
 conditions of the following subsections.</p>
 <p><a name="version"></a></p>
-<h5 id="2.1.3.1.-version">2.1.3.1. Version</h5>
+<h5 id="2131-version">2.1.3.1. Version</h5>
 <p>The <code>Version</code> attribute giving the version number of the [<a href="#dss-ext">DSS-Ext</a>] specification
 SHOULD be set to the version number that is supported by the sender.
 If absent, the default value &quot;1.1&quot; MUST be assumed.</p>
 <p><a name="conditions"></a></p>
-<h5 id="2.1.3.2.-conditions">2.1.3.2. Conditions</h5>
+<h5 id="2132-conditions">2.1.3.2. Conditions</h5>
 <p>A <code>&lt;saml:Conditions&gt;</code> element MUST be present. This element MUST NOT
 contain any information in addition to what is defined in section 3.1 of
 [<a href="#dss-ext">DSS-Ext</a>].</p>
+<p>If the <code>&lt;saml:Conditions&gt;</code> element contains the <code>NotBefore</code> and/or <code>NotOnOrAfter</code> attributes, the Signature Service consuming these values MAY consider them in its processing. However, a Signature Service MUST have a limitation on the maximum age of received messages, and if <code>NotOnOrAfter</code> exceeds this limitation, the <code>NotOnOrAfter</code> value MUST be ignored.</p>
+<p>This specification does not state how long the message age limitation should be. However, it is RECOMMENDED that it does not exceed 3 minutes. </p>
 <p><a name="signer"></a></p>
-<h5 id="2.1.3.3.-signer">2.1.3.3. Signer</h5>
+<h5 id="2133-signer">2.1.3.3. Signer</h5>
 <p>The Requesting Service MAY include a <code>&lt;Signer&gt;</code> element containing the SAML attributes that 
 are necessary in order to uniquely identify the signer. The present attributes MUST match the attributes
 that are provided for this signer when authenticating the signer using the Identity Provider specified in the <code>&lt;IdentityProvider&gt;</code> element.</p>
@@ -225,30 +223,30 @@ be found or matched with a corresponding attribute value from an
 obtained assertion from the specified Identity Provider, the Signing
 Service MUST reject the sign request.  </p>
 <p><a name="identityprovider"></a></p>
-<h5 id="2.1.3.4.-identityprovider">2.1.3.4. IdentityProvider</h5>
+<h5 id="2134-identityprovider">2.1.3.4. IdentityProvider</h5>
 <p>This element MUST be present, specifying the SAML entityID of the
 Identity Provider that MUST be used to authenticate the signer. The
 Signing Service MUST NOT generate the requested signature unless the
 signer is successfully authenticated through this Identity Provider.</p>
 <p><a name="signrequester"></a></p>
-<h5 id="2.1.3.5.-signrequester">2.1.3.5. SignRequester</h5>
+<h5 id="2135-signrequester">2.1.3.5. SignRequester</h5>
 <p>This element MUST be present, specifying the identity of the Requesting
 Service in the form of its SAML entityID.</p>
 <p><a name="signservice"></a></p>
-<h5 id="2.1.3.6-signservice">2.1.3.6 SignService</h5>
+<h5 id="2136-signservice">2.1.3.6 SignService</h5>
 <p>This element MUST be present, specifying the SAML entityID of the
 Signing Service that is the target of this sign request.</p>
 <p><a name="requestedsignaturealgorithm"></a></p>
-<h5 id="2.1.3.7.-requestedsignaturealgorithm">2.1.3.7. RequestedSignatureAlgorithm</h5>
+<h5 id="2137-requestedsignaturealgorithm">2.1.3.7. RequestedSignatureAlgorithm</h5>
 <p>This element MAY be present, specifying a URI that identifies a
 signature algorithm that the Requesting Service prefers to be used when
 generating the requested signature.</p>
 <p>When this element is absent, the default signing algorithm is RSA with
 SHA-256, <code>http://www.w3.org/2001/04/xmldsig-more#rsa-sha256</code>.</p>
 <p><a name="signmessage"></a></p>
-<h5 id="2.1.3.8.-signmessage">2.1.3.8. SignMessage</h5>
+<h5 id="2138-signmessage">2.1.3.8. SignMessage</h5>
 <p><a name="signmessage-element"></a></p>
-<h6 id="2.1.3.8.1.-signmessage-element">2.1.3.8.1. SignMessage Element</h6>
+<h6 id="21381-signmessage-element">2.1.3.8.1. SignMessage Element</h6>
 <p>This element MAY be present to provide information that the Identity
 Provider MAY display for the user before obtaining the user’s consent to
 sign. The message MAY be provided in clear text or in encrypted form.
@@ -271,8 +269,7 @@ attributes for each tag other than those listed in the following table:</p>
 <th>Allowed attributes</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>h1, h2, h3, h4</td>
 <td>Headings</td>
 <td>style</td>
@@ -302,14 +299,13 @@ attributes for each tag other than those listed in the following table:</p>
 <td>List</td>
 <td>&nbsp;</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>Allowed HTML entities for character replacement SHALL be restricted to
 <code>amp</code>, <code>gt</code>, <code>lt</code>, <code>quot</code> and <code>nbsp</code> (in the form <code>&amp;entity-name;</code>).</p>
 <p>HTML messages MUST NOT contain any URI references to data outside of the
 message and MUST NOT contain any JavaScript in any form.</p>
 <p><a name="requesting-identity-provider-to-display-signmessage"></a></p>
-<h6 id="2.1.3.8.2.-requesting-identity-provider-to-display-signmessage">2.1.3.8.2. Requesting Identity Provider to Display SignMessage</h6>
+<h6 id="21382-requesting-identity-provider-to-display-signmessage">2.1.3.8.2. Requesting Identity Provider to Display SignMessage</h6>
 <p>The means through which the Service Provider requests the Identity
 Provider to display a sign message is defined in section 7.1.1 of “Deployment Profile
 for the Swedish eID Framework” [<a href="#eid-profile">Eid-Profile</a>].</p>
@@ -319,10 +315,10 @@ Signature Service MUST apply the following process regarding the inclusion of th
 when authenticating the user for signing:</p>
 <ol class="list">
 <li><p>Determine requested LoA (Level of Assurance) by either:</p>
-<ol class="list">
-<li>Get the LoA, or LoA:s, from the <code>AuthnContextClassRef</code> specified in the sign request as <code>CertRequestProperties</code>, or</li>
-<li>if the LoA reference from the sign request is absent then use the default LoA according to the governing policy.</li>
-</ol>
+</li>
+<li><p>Get the LoA, or LoA:s, from the <code>AuthnContextClassRef</code> specified in the sign request as <code>CertRequestProperties</code>, or</p>
+</li>
+<li><p>if the LoA reference from the sign request is absent then use the default LoA according to the governing policy.</p>
 </li>
 <li><p>Include the LoA URI(s) from the step above as <code>RequestedAuthnContext</code> if supported by the Identity Provider.
 If none of the LoA:s are supported by the Identity Provider, fail signing and return an error sign response,
@@ -330,16 +326,16 @@ indicating a request failure (the requested LoA(s) was inconsistent with the spe
 </li>
 </ol>
 <p><a name="certrequestproperties"></a></p>
-<h5 id="2.1.3.9.-certrequestproperties">2.1.3.9. CertRequestProperties</h5>
+<h5 id="2139-certrequestproperties">2.1.3.9. CertRequestProperties</h5>
 <p>This element MAY be present to provide requested properties of generated
 signature certificates according with section 3.1.1 of [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p>When the <code>CertType</code> attribute is present with a value of <code>QC/SSCD</code> the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” [<a href="#eid-profile">Eid-Profile</a>], or reject the request.</p>
 <p><a name="authncontextclassref"></a></p>
-<h6 id="2.1.3.9.1.-authncontextclassref">2.1.3.9.1. AuthnContextClassRef</h6>
+<h6 id="21391-authncontextclassref">2.1.3.9.1. AuthnContextClassRef</h6>
 <p>This element MAY be present to specify the Level of Assurance(s) required
 in order to issue the signing certificate. </p>
 <p><a name="requestedcertattributes"></a></p>
-<h6 id="2.1.3.9.2.-requestedcertattributes">2.1.3.9.2. RequestedCertAttributes</h6>
+<h6 id="21392-requestedcertattributes">2.1.3.9.2. RequestedCertAttributes</h6>
 <p>This element MAY be present to specify any number of attributes that the
 Requesting Service requires or requests to be included as a
 representation of the subject in the signature certificate that is
@@ -364,7 +360,7 @@ the signer. If the requested attribute is provided by the Identity
 Provider or any Attribute Authority used by the Signing Service, then
 these values MUST be used over the <code>DefaultValue</code>.</p>
 <p><a name="sign-responses"></a></p>
-<h3 id="2.2.-sign-responses">2.2. Sign Responses</h3>
+<h3 id="22-sign-responses">2.2. Sign Responses</h3>
 <p>Sign responses are carried in a <code>&lt;dss:SignResponse&gt;</code> element
 according to requirements and conditions of the following subsections.</p>
 <p>The <code>&lt;dss:SignResponse&gt;</code> element MUST have a <code>Profile</code> attribute with
@@ -374,7 +370,7 @@ specifies conformance to this implementation profile.</p>
 with a value that is identical to the sign request that is being
 serviced through this sign response.</p>
 <p><a name="signature-on-sign-responses"></a></p>
-<h4 id="2.2.1.-signature-on-sign-responses">2.2.1. Signature on Sign Responses</h4>
+<h4 id="221-signature-on-sign-responses">2.2.1. Signature on Sign Responses</h4>
 <p>Sign responses MUST be signed. The signature MUST have a Same-Document
 URI-Reference (URI=””) to ensure that the signature covers the complete
 <code>&lt;dss:SignResponse&gt;</code> element.</p>
@@ -382,7 +378,7 @@ URI-Reference (URI=””) to ensure that the signature covers the complete
 <code>&lt;dss:OptionalOutputs&gt;</code> element in accordance with section 5 of
 [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p><a name="sign-response-status-information"></a></p>
-<h4 id="2.2.2.-sign-response-status-information">2.2.2. Sign Response Status Information</h4>
+<h4 id="222-sign-response-status-information">2.2.2. Sign Response Status Information</h4>
 <p>Implementations of this specification MUST return a
 <code>&lt;dss:ResultMajor&gt;</code> value and MAY return a <code>&lt;dss:ResultMinor&gt;</code>
 value. Implementations of this specification are released from the
@@ -396,33 +392,33 @@ signature creation.</p>
 the DSS standard, amended by status identifiers defined in section 3.1.7
 of [<a href="#eid-registry">Eid-Registry</a>], SHOULD be used.</p>
 <p><a name="generated-signature"></a></p>
-<h4 id="2.2.3.-generated-signature">2.2.3. Generated Signature</h4>
+<h4 id="223-generated-signature">2.2.3. Generated Signature</h4>
 <p>The generated signature result data SHALL be provided in
 <code>&lt;SignTaskData&gt;</code> element according to section 4.1.1 of [<a href="#dss-ext">DSS-Ext</a>].</p>
 <p>One <code>&lt;SignTaskData&gt;</code> element shall be provided for each successfully
 generated signature as a result of the corresponding request.</p>
 <p><a name="dss-extension"></a></p>
-<h4 id="2.2.4.-dss-extension">2.2.4. DSS Extension</h4>
+<h4 id="224-dss-extension">2.2.4. DSS Extension</h4>
 <p>The <code>&lt;dss:OptionalInput&gt;</code> element of the sign response MUST contain
 a <code>&lt;SignResponseExtension&gt;</code> element according to requirements and
 conditions of the following subsections.</p>
 <p><a name="version2"></a></p>
-<h5 id="2.2.4.1.-version">2.2.4.1. Version</h5>
+<h5 id="2241-version">2.2.4.1. Version</h5>
 <p>The version of the [<a href="#dss-ext">DSS-Ext</a>] specification under which the 
 request was processed and response was constructed. This version MUST be the same
 version as given in the <code>SignRequestExtension</code> (see section <a href="#version">2.1.3.1</a>, &quot;<a href="#version">Version</a>)&quot;.</p>
 <p>For backwards compatibility reasons that attribute MAY be absent if version &quot;1.1&quot; was requested. 
 Otherwise it MUST be set.</p>
 <p><a name="responsetime"></a></p>
-<h5 id="2.2.4.2.-responsetime">2.2.4.2. ResponseTime</h5>
+<h5 id="2242-responsetime">2.2.4.2. ResponseTime</h5>
 <p>The <code>&lt;ResponseTime&gt;</code> element MUST be present in the response.</p>
 <p><a name="request"></a></p>
-<h5 id="2.2.4.3.-request">2.2.4.3. Request</h5>
+<h5 id="2243-request">2.2.4.3. Request</h5>
 <p>The <code>&lt;Request&gt;</code> element MAY be present in a response. However, it is RECOMMENDED not to include this
 element since it makes the response message unnecessary large. Instead the requester of a sign operation
 is expected to save the request message in its session for later use when processing a response message.</p>
 <p><a name="signerassertioninfo"></a></p>
-<h5 id="2.2.4.4.-signerassertioninfo">2.2.4.4. SignerAssertionInfo</h5>
+<h5 id="2244-signerassertioninfo">2.2.4.4. SignerAssertionInfo</h5>
 <p>The <code>&lt;SignerAssertionInfo&gt;</code> element MUST be present if the signer
 has been successfully authenticated using the specified Identity
 Provider. The present <code>&lt;ContextInfo&gt;</code> child element MUST include an
@@ -430,21 +426,21 @@ Provider. The present <code>&lt;ContextInfo&gt;</code> child element MUST includ
 element MUST contain the value of the <code>ID</code> attribute of the root element
 of the SAML assertion used to authenticate the signer.</p>
 <p><a name="signaturecertificatechain"></a></p>
-<h5 id="2.2.4.5.-signaturecertificatechain">2.2.4.5. SignatureCertificateChain</h5>
+<h5 id="2245-signaturecertificatechain">2.2.4.5. SignatureCertificateChain</h5>
 <p>The <code>&lt;SignatureCertificateChain&gt;</code> element MUST be present if a
 certificate was issued to the signer. This element MUST provide a
 complete chain of certificates up to a self-signed root certificate.</p>
 <p>All signature values according to section <a href="#generated-signature">2.2.3</a> MUST be verifiable using
 the signer certificate provided in this element.</p>
 <p><a name="http-post-binding"></a></p>
-<h2 id="3.-http-post-binding">3. HTTP POST Binding</h2>
+<h2 id="3-http-post-binding">3. HTTP POST Binding</h2>
 <p>This section specifies the protocol binding
 for transport of sign request and sign response messages using HTTP POST. This
 protocol binding implements the message exchange model in section <a href="#message-exchange-model">3.1</a>.</p>
 <p>This process is technically equivalent to the procedures implemented by
 SAML HTTP POST bindings [<a href="#saml2bind">SAML2Bind</a>], section 3.5.</p>
 <p><a name="message-exchange-model"></a></p>
-<h3 id="3.1.-message-exchange-model">3.1. Message Exchange Model</h3>
+<h3 id="31-message-exchange-model">3.1. Message Exchange Model</h3>
 <p>Sign request and response messages are exchanged between the Requesting
 Service and the Signing Service with the user acting as an intermediary
 through a user agent (typically a web browser) according to the
@@ -452,51 +448,51 @@ following message flow:</p>
 <p><img src="img/dssprof-msg-exch-model.png"></img></p>
 <ol class="list">
 <li><p>The user agent initiates the signing process by an HTTP request to
-the Service Provider, for example caused by the user clicking a
-button on a web page.</p>
+ the Service Provider, for example caused by the user clicking a
+ button on a web page.</p>
 </li>
 <li><p>The Service Provider responds to the user agent with an XHTML form,
-containing a Base64 encoded sign request.</p>
+ containing a Base64 encoded sign request.</p>
 </li>
 <li><p>A JavaScript in the XHTML form causes the user agent to send the
-sign request to the Signing Service using HTTP POST.</p>
+ sign request to the Signing Service using HTTP POST.</p>
 </li>
 <li><p>The user interacts with the Signing Service to complete the
-requested signature.</p>
+ requested signature.</p>
 </li>
 <li><p>The Signing Service responds to the user agent with an XHTML form,
-containing a Base64 encoded sign response.</p>
+ containing a Base64 encoded sign response.</p>
 </li>
 <li><p>A JavaScript in the XHTML form causes the user agent to send the
-sign response to the Service Provider using HTTP POST.</p>
+ sign response to the Service Provider using HTTP POST.</p>
 </li>
 <li><p>The Service Provider processes the sign response and a confirmation
-or status message is returned to the user agent.</p>
+ or status message is returned to the user agent.</p>
 </li>
 </ol>
 <p>The steps 1,4 and 7 are part of the service infrastructure and are
 outside the scope of this HTTP POST binding specification.</p>
 <p><a name="sign-request-xhtml-form"></a></p>
-<h4 id="3.1.1.-sign-request-xhtml-form">3.1.1. Sign Request XHTML Form</h4>
+<h4 id="311-sign-request-xhtml-form">3.1.1. Sign Request XHTML Form</h4>
 <p>The sign request XHTML form SHALL have functional properties that are
 equivalent to the following implementation example:</p>
-<pre class="hljs"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">'1.0'</span> encoding=<span class="hljs-string">'UTF-8'</span><span class="hljs-meta">?&gt;</span></span>
-<span class="hljs-meta">&lt;!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">'http://www.w3.org/1999/xhtml'</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">'en'</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">'document.forms[0].submit()'</span>&gt;</span>
+<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27;?&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span> <span class="hljs-meta-keyword">PUBLIC</span> <span class="hljs-meta-string">&#x27;-//W3C//DTD XHTML 1.1//EN&#x27;</span> <span class="hljs-meta-string">&#x27;http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd&#x27;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&#x27;http://www.w3.org/1999/xhtml&#x27;</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">&#x27;en&#x27;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&#x27;document.forms[0].submit()&#x27;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">noscript</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Note:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> Since your browser does not support JavaScript,
     you must press the Continue button once to proceed.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">noscript</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">'https://csig.example.com/signrequest'</span> <span class="hljs-attr">method</span>=<span class="hljs-string">'post'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&#x27;https://csig.example.com/signrequest&#x27;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&#x27;post&#x27;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'Binding'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'POST/XML/1.0'</span>/&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'RelayState'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'56345145a482995d'</span>/&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'EidSignRequest'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'PD94bWw…WVzdD4='</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;hidden&#x27;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;Binding&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;POST/XML/1.0&#x27;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;hidden&#x27;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;RelayState&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;56345145a482995d&#x27;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;hidden&#x27;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;EidSignRequest&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;PD94bWw…WVzdD4=&#x27;</span>/&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">noscript</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'submit'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'Continue'</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;submit&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;Continue&#x27;</span>/&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">noscript</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
@@ -510,8 +506,7 @@ the form MUST have a method attribute with the value “post”.</p>
 <th>Value</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Binding</td>
 <td>“POST/XML/1.0” Identifying implementation of this binding specification</td>
 </tr>
@@ -523,29 +518,28 @@ the form MUST have a method attribute with the value “post”.</p>
 <td>EidSignRequest</td>
 <td>Base64 encoded sign request.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><a name="sign-response-xhtml-form"></a></p>
-<h5 id="3.1.2.-sign-response-xhtml-form">3.1.2. Sign Response XHTML Form</h5>
+<h5 id="312-sign-response-xhtml-form">3.1.2. Sign Response XHTML Form</h5>
 <p>The sign response XHTML form SHALL have functional properties that are
 equivalent to the following implementation example:</p>
-<pre class="hljs"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">'1.0'</span> encoding=<span class="hljs-string">'UTF-8'</span><span class="hljs-meta">?&gt;</span></span>
-<span class="hljs-meta">&lt;!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">'http://www.w3.org/1999/xhtml'</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">'en'</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">'document.forms[0].submit()'</span>&gt;</span>
+<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27;?&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span> <span class="hljs-meta-keyword">PUBLIC</span> <span class="hljs-meta-string">&#x27;-//W3C//DTD XHTML 1.1//EN&#x27;</span> <span class="hljs-meta-string">&#x27;http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd&#x27;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&#x27;http://www.w3.org/1999/xhtml&#x27;</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">&#x27;en&#x27;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&#x27;document.forms[0].submit()&#x27;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">noscript</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Note:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> Since your browser does not support JavaScript,
     you must press the Continue button once to proceed.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">noscript</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">'https://sp.example.com/sigResponseHandler'</span> <span class="hljs-attr">method</span>=<span class="hljs-string">'post'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&#x27;https://sp.example.com/sigResponseHandler&#x27;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&#x27;post&#x27;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'Binding'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'POST/XML/1.0'</span>/&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'RelayState'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'56345145a482995d'</span>/&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'hidden'</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'EidSignResponse'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'PD94bWw…WVzdD4='</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;hidden&#x27;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;Binding&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;POST/XML/1.0&#x27;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;hidden&#x27;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;RelayState&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;56345145a482995d&#x27;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;hidden&#x27;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;EidSignResponse&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;PD94bWw…WVzdD4=&#x27;</span>/&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">noscript</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'submit'</span> <span class="hljs-attr">value</span>=<span class="hljs-string">'Continue'</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;submit&#x27;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&#x27;Continue&#x27;</span>/&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">noscript</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
@@ -562,8 +556,7 @@ the value “post”.</p>
 <th>Value</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Binding</td>
 <td>“POST/XML/1.0” Identifying implementation of this binding specification</td>
 </tr>
@@ -575,12 +568,11 @@ the value “post”.</p>
 <td>EidSignResponse</td>
 <td>Base64 encoded sign response.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><a name="references"></a></p>
-<h2 id="4.-references">4. References</h2>
+<h2 id="4-references">4. References</h2>
 <p><a name="normative-references"></a></p>
-<h3 id="4.1.-normative-references">4.1. Normative References</h3>
+<h3 id="41-normative-references">4.1. Normative References</h3>
 <p><a name="rfc2119"></a>
 <strong>[RFC2119]</strong></p>
 <blockquote>
@@ -622,14 +614,18 @@ the value “post”.</p>
 <p><a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html">Swedish eID Framework - Registry for identifiers</a>.</p>
 </blockquote>
 <p><a name="informative-references"></a></p>
-<h3 id="4.2.-informative-references">4.2. Informative References</h3>
+<h3 id="42-informative-references">4.2. Informative References</h3>
 <p><a name="saml2bind"></a>
 <strong>[SAML2Bind]</strong></p>
 <blockquote>
 <p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-bindings-2.0-os.pdf">OASIS Standard, Bindings for the OASIS Security Assertion Markup Language (SAML) V2.0, March 2005</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
-<h2 id="5.-changes-between-versions">5. Changes between versions</h2>
+<h2 id="5-changes-between-versions">5. Changes between versions</h2>
+<p><strong>Changes between version 1.5 and version 1.6:</strong></p>
+<ul class="list">
+<li>Section 2.1.3.2, &quot;Conditions&quot;, was updated with requirements on how to interpret <code>NotBefore</code> and/or <code>NotOnOrAfter</code> values.</li>
+</ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">
 <li><p>The requirements in section 2.2.4.3, &quot;Request&quot;, were updated. The <code>Request</code> element is no longer mandatory to include in a response message.</p>
@@ -658,14 +654,14 @@ process of determining the Level of Assurance URI to include in requests.</p>
 <p><strong>Changes between version 1.0 and version 1.1:</strong></p>
 <ul class="list">
 <li><p>This profile now refers to version 1.1 of the “DSS Extensions for
-Federated Central Signing Services” specification.</p>
+  Federated Central Signing Services” specification.</p>
 </li>
 <li><p>Changes were made to section 2.1.3.8, “SignMessage”, in order to
-define usage of the <code>&lt;SignMessage&gt;</code> element.</p>
+  define usage of the <code>&lt;SignMessage&gt;</code> element.</p>
 </li>
 <li><p>The URI identifier that identifies this profile has been changed
-from <code>http://id.elegnamnden.se/csig/1.0/eid2-dss/profile</code> to
-<code>http://id.elegnamnden.se/csig/1.1/dss-ext/profile</code>.</p>
+  from <code>http://id.elegnamnden.se/csig/1.0/eid2-dss/profile</code> to
+  <code>http://id.elegnamnden.se/csig/1.1/dss-ext/profile</code>.</p>
 </li>
 </ul>
     </article>
