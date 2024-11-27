@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS DSS in Central Signing Services</h1>
-<h3 id="version-16---2024-11-25---draft-version">Version 1.6 - 2024-11-25 - <em>Draft version</em></h3>
+<h3 id="version-16---2024-11-26---draft-version">Version 1.6 - 2024-11-26 - <em>Draft version</em></h3>
 <p>Registration number: <strong>2019-312</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -388,9 +388,20 @@ the <code>&lt;dss:ResultMajor&gt;</code> value
 <code>urn:oasis:names:tc:dss:1.0:resultmajor:Success</code>, since all the listed
 <code>&lt;dss:ResultMinor&gt;</code> values relates to signature validation and not
 signature creation.</p>
-<p>With the exception above, the response values defined in section 2.6 of
-the DSS standard, amended by status identifiers defined in section 3.1.7
-of [<a href="#eid-registry">Eid-Registry</a>], SHOULD be used.</p>
+<p>With the exception above, the response values defined in section 2.6 of the DSS standard, amended by status identifiers defined below<sup>*</sup> SHOULD be used.</p>
+<p>| <strong>URL</strong> | <strong>Description</strong> |
+| :--- | :--- | :--- |
+| <code>http://id.elegnamnden.se/sig-status/1.0/req-expired</code> | The time window for the signature request has expired. |
+| <code>http://id.elegnamnden.se/sig-status/1.0/user-mismatch</code> | The authenticated user does not match the signer identity attributes in the request.
+| <code>http://id.elegnamnden.se/sig-status/1.0/unsupported-loa</code> | The requested level of assurance for user authentication is not supported. |
+| <code>http://id.elegnamnden.se/sig-status/1.0/sigmessage-error</code> | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. |
+| <code>http://id.elegnamnden.se/sig-status/1.0/user-cancel</code> | The end user cancelled the signature operation. |
+| <code>http://id.swedenconnect.se/sig-status/1.1/authn-failed</code> | The authentication during the signature operation failed. |
+| <code>http://id.swedenconnect.se/sig-status/1.1/security-violation</code> | The Signature Service, or Identity Provider authenticating the end user, has detected a security violation (such as a possible fraud). |</p>
+<p><strong>Note:</strong> The <code>authn-failed</code> and <code>security-violation</code> codes were introduced for version 1.5 (of [<a href="#dss-ext">DSS-Ext</a>]), and a client not supporting this version will fail to understand these error codes. Whether a Signature Service checks the client version support or not before using these codes are out of scope for this profile. </p>
+<blockquote>
+<p>[*]: Also listed in section 3.1.7 of [<a href="#eid-registry">Eid-Registry</a>].</p>
+</blockquote>
 <p><a name="generated-signature"></a></p>
 <h4 id="223-generated-signature">2.2.3. Generated Signature</h4>
 <p>The generated signature result data SHALL be provided in
@@ -624,7 +635,10 @@ the value “post”.</p>
 <h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.5 and version 1.6:</strong></p>
 <ul class="list">
-<li>Section 2.1.3.2, &quot;Conditions&quot;, was updated with requirements on how to interpret <code>NotBefore</code> and/or <code>NotOnOrAfter</code> values.</li>
+<li><p>Section 2.2.2, &quot;Sign Response Status Information&quot;, now defines the DSS status codes previously only appearing in [[Eid-Registry(#eid-registry)]. The status codes <code>http://id.swedenconnect.se/sig-status/1.1/authn-failed</code> and <code>http://id.swedenconnect.se/sig-status/1.1/security-violation</code> were also introduced.</p>
+</li>
+<li><p>Section 2.1.3.2, &quot;Conditions&quot;, was updated with requirements on how to interpret <code>NotBefore</code> and/or <code>NotOnOrAfter</code> values.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.4 and version 1.5:</strong></p>
 <ul class="list">

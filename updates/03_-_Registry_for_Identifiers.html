@@ -736,6 +736,16 @@ for inclusion in a <code>&lt;ResultMinor&gt;</code> element of the <code>&lt;Res
 <td align="left">The end user cancelled the signature operation.</td>
 <td align="left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
 </tr>
+<tr>
+<td align="left"><code>http://id.swedenconnect.se/sig-status/1.1/authn-failed</code></td>
+<td align="left">The authentication during the signature operation failed.</td>
+<td align="left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://id.swedenconnect.se/sig-status/1.1/security-violation</code></td>
+<td align="left">The Signature Service, or Identity Provider authenticating the end user, has detected a security violation (such as a possible fraud).</td>
+<td align="left">[<a href="#eidcsignprof">EidCSignProf</a>]</td>
+</tr>
 </tbody></table>
 <p><a name="name-registration-authorities"></a></p>
 <h4 id="318-name-registration-authorities">3.1.8. Name Registration Authorities</h4>
@@ -1081,6 +1091,8 @@ regulation and associated technical specifications.</p>
 <h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.7 and version 1.b:</strong></p>
 <ul class="list">
+<li><p>Section 3.1.7, &quot;Sign Response Status Codes&quot;, were extended with error codes for <code>authn-failed</code> and <code>security-violation</code>.</p>
+</li>
 <li><p>Section 3.1.9.3, &quot;Identity Binding Processes&quot;, was introduced where binding process URI:s for matching eIDAS identities to Swedish identity numbers are listed.</p>
 </li>
 <li><p>The <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code> entity category was added to section, 3.1.3.5, &quot;General Entity Categories&quot;.</p>
