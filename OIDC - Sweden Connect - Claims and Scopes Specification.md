@@ -8,7 +8,7 @@
 
 # OpenID Connect Claims and Scopes Specification for Sweden Connect
 
-### Version 1.0 - 2024-11-27 - *Draft version*
+### Version 1.0 - 2024-11-28 - *Draft version*
 
 Registration number: **TBD**
 
@@ -22,7 +22,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
 1. [**Introduction**](#introduction)
 
-    1.1. [Requirement key words](#requirement-key-words)
+    1.1. [Requirements Notation and Conventions](#requirements-notation-and-conventions)
 
 2. [**Claims**](#claims)
 
@@ -63,10 +63,10 @@ Appendix A: [**Conversion of eIDAS Attributes**](#conversion-of-eidas-attributes
 
 This specification extends the "Claims and Scopes Specification for the Swedish OpenID Connect Profile", \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], with OpenID Connect claims and scopes for usage within the Sweden Connect federation and Swedish eID Framework.
 
-<a name="requirement-key-words"></a>
-### 1.1. Requirement key words
+<a name="requirements-notation-and-conventions"></a>
+### 1.1. Requirements Notation and Conventions
 
-The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in \[[RFC2119](#rfc2119)\].
+The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in \[[RFC2119](#rfc2119)\].
 
 These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.
 
@@ -162,7 +162,7 @@ Normally a Swedish coordination number is represented using the claim `https://i
 
 **Claim:** `https://id.swedenconnect.se/claim/eidasCountry`
 
-**Description:** A claims that holds the representation of a eIDAS member country.
+**Description:** A claim that identifies the eIDAS member state that is providing the claims of the subject.
 
 **Type:** String representing country in \[[ISO3166-1](#iso3166-1)\] Alpha-2 or \[[ISO3166-3](#iso3166-3)\] syntax. 
 
@@ -204,6 +204,7 @@ The above is true also for Relying Parties authenticating users against the Swed
   "userinfo" : {
     "https://id.swedenconnect.se/claim/prid" : { "essential" : true },
     "https://id.swedenconnect.se/claim/pridPersistence" : { "essential" : true },
+    "https://id.swedenconnect.se/claim/eidasPersonIdentifier": { "essential" : true },
   },
   "id_token" : {
     "https://id.swedenconnect.se/claim/prid" : { "essential" : true },
@@ -212,7 +213,8 @@ The above is true also for Relying Parties authenticating users against the Swed
 }
 ```
 
-**Note:** It is RECOMMENDED that Swedish Relying Parties use the `https://id.swedenconnect.se/claim/prid` claim as a primary identity for a user identified using eIDAS. Should a Relying Party should want to use the eIDAS Person Identifier instead, it should include an explicit claim request for the `https://id.swedenconnect.se/claim/eidasPersonIdentifier` claim in its authentication request.
+
+**Note:** It is RECOMMENDED that Swedish Relying Parties use the `https://id.swedenconnect.se/claim/prid` claim as a primary identity for a user identified using eIDAS and therefore this claim will be available in the ID Token. The eIDAS Person Identifier, which is the identifier issued by the member state eIDAS-node, may be logged/saved by the Relying Party for potential future use in contacts with the member state node. 
 
 
 <a name="eidas-natural-person-with-swedish-identity"></a>
@@ -251,13 +253,13 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 
 - To obtain name and date of birth claims, include the `https://id.oidc.se/scope/naturalPersonInfo` scope (section 3.1 of  \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\]).
 
-- For the eIDAS Person Identifier, which is the eIDAS identity delivered from the foreign member state, include an explicit claim request for the `https://id.swedenconnect.se/claim/eidasPersonIdentifier` claim ([2.1.6](#eidas-person-identifier).
-
 - For the transaction identifier holding the ID of the SAML assertion delivered from the foreign member state (as described in section 2.5 of \[[SAML.SC.Attributes](#saml-sc-attributes)\]), include an explicit claim request for the `txn` claim ([[RFC8417](#rfc8417)\]).
 
 - For the country code of the eIDAS country at which the user was authenticated (as described in section 2.5 of \[[SAML.SC.Attributes](#saml-sc-attributes)\]), include an explicit claim request for the `https://id.swedenconnect.se/claim/eidasCountry` claim ([2.1.7](#eidas-country)).
 
 - For all other optional eIDAS attributes (see [Appendix A](#conversion-of-eidas-attributes)), an explicit claim request should be included. These claims SHOULD NOT be marked as "essential" since they are not mandatory according to \[[eIDAS.Attributes](#eidas-attr)\]. 
+
+> Section 2.2.1 of \[[eIDAS.Attributes](#eidas-attr)\] defines the eIDAS Minimum Dataset for Natural Persons. This set comprises of the eIDAS attributes FamilyName, FirstName, DateOfBirth and PersonIdentifier. In order for a Relying Party to obtain the corresponding OpenID Connect claims from an eIDAS authentication it should specify the `https://id.oidc.se/scope/naturalPersonInfo` and `https://id.swedenconnect.se/scope/eidasNaturalPersonIdentity` scopes in an authentication request sent to the Swedish eIDAS Connector.
 
 
 <a name="references"></a>
@@ -307,18 +309,6 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 **\[RFC8417\]**
 > [P. Hunt, M. Jones, W. Denniss, M. Ansari, "Security Event Token (SET)", July 2018](https://tools.ietf.org/html/rfc8417).
 
-<a name="skv704"></a>
-**\[SKV704\]**
-> [Skatteverket, SKV 704 Utgåva 8, Personnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf).
-
-<a name="skv707"></a>
-**\[SKV707\]**
-> [Skatteverket, SKV 707, Utgåva 2, Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
-
-<a name="skv709"></a>
-**\[SKV709\]**
-> [Skatteverket, SKV 709, Utgåva 8, Organisationsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv709-8.pdf).
-
 <a name="iso3166-1"></a>
 **\[ISO3166-1\]**
 > [ISO, "ISO 3166-1:2020. Codes for the representation of names of countries and their subdivisions -- Part 1: Country codes", 2020](https://www.iso.org/standard/72482.html).
@@ -326,14 +316,6 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 <a name="iso3166-3"></a>
 **\[ISO3166-3\]**
 > [ISO, "ISO 3166-3:2020. Codes for the representation of names of countries and their subdivisions -- Part 3: Code for formerly used names of countries", 2020](https://www.iso.org/standard/72482.html).
-
-<a name="sigsap"></a>
-**\[SigSAP\]**
-> [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
-
-<a name="dssext"></a>
-**\[DSSExt\]**
-> [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="conversion-of-eidas-attributes"></a>
 ## Appendix A: Conversion of eIDAS Attributes
