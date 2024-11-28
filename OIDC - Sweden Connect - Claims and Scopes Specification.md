@@ -82,7 +82,7 @@ The claims defined in this specification are named in a collision-resistant mann
 
 This section defines how identity attributes received from, or in conjunction with, an eIDAS authentication is represented as OpenID claims within the Sweden Connect federation. 
 
-[Appendix A: Conversion of eIDAS Attributes](#conversion-of-eidas-attributes) presents a full listing of all eIDAS attributes and how they map to OpenID Connect claims. The sub-sections below defines additional claims that may added by the Swedish eIDAS-node.
+[Appendix A: Conversion of eIDAS Attributes](#conversion-of-eidas-attributes) presents a full listing of all eIDAS attributes and how they map to OpenID Connect claims. The sub-sections below define additional claims that may be added by the Swedish eIDAS-node.
 
 <a name="provisional-identifier"></a>
 #### 2.1.1. Provisional Identifier
@@ -116,7 +116,7 @@ This section defines how identity attributes received from, or in conjunction wi
 Normally a Swedish civic registration number is represented using the claim `https://id.oidc.se/claim/personalIdentityNumber` defined in \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], but in order to avoid consumption of this claim without checking how the binding was made, i.e., how trustworthy the process of binding the Swedish 
 identity to the identity attributes from the eIDAS authentication is, the identity number is represented in a separate claim. See [Identity Binding](#identity-binding) below.
 
-**Type:** String where the format is 12 digits without hyphen.
+**Type:** String where the format is 12 digits without a hyphen.
 
 **Corresponding SAML Attribute:** `urn:oid:1.2.752.201.3.16` (mappedPersonalIdentityNumber) - \[[SAML.SC.Attributes](#saml-sc-attributes)\]
 
@@ -129,7 +129,7 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 
 Normally a Swedish coordination number is represented using the claim `https://id.oidc.se/claim/coordinationNumber` defined in \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], but for the same reasons as described for the `mappedPersonalIdentityNumber` claim above, a mapped coordination number is represented in a separate claim.
 
-**Type:** String where the format is 12 digits without hyphen.
+**Type:** String where the format is 12 digits without a hyphen.
 
 **Corresponding SAML Attribute:** `urn:oid:1.2.752.201.3.16` (mappedPersonalIdentityNumber) - \[[SAML.SC.Attributes](#saml-sc-attributes)\]
 
@@ -149,7 +149,7 @@ Normally a Swedish coordination number is represented using the claim `https://i
 
 **Claim:** `https://id.swedenconnect.se/claim/eidasPersonIdentifier`
 
-**Description:** A claim that holds the value for the eIDAS Person Identifier attribute, `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier`. This value is issued by the foreign eIDAS node and within the eIDAS federation this is the unique user identifier. See \[[eIDAS.Attributes](#eidas-attr)\].
+**Description:** A claim that holds the value for the eIDAS Person Identifier attribute, `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier`. This value is issued by the foreign eIDAS node, and within the eIDAS federation this is the unique user identifier. See \[[eIDAS.Attributes](#eidas-attr)\].
 
 **Type:** String
 
@@ -171,7 +171,7 @@ Normally a Swedish coordination number is represented using the claim `https://i
 <a name="scopes"></a>
 ## 3. Scopes
 
-This section defines a set of scope that extend the claims defined in section 3 of \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\].
+This section defines a set of scope that extends the claims defined in section 3 of \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\].
 
 The scopes defined in this specification are named in a collision-resistant manner, as described in JSON Web Token (JWT), \[[RFC7515](#rfc7515)\], specification. All scopes defined within this specification are prefixed with the namespace `https://id.swedenconnect.se/scope/`.
 
@@ -180,7 +180,7 @@ The scopes defined in this specification are named in a collision-resistant mann
 
 Section 3 of \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\] states the following:
 
-> Many Relying Parties that use OpenID Connect to authenticate users can not solely depend on the user's session at the OpenID Provider and the `sub` claim to log in the user to the RP application. In the context of Swedish eID there are some obvious claims that are regarded to be "primary" identity claims by Relying Parties, for example a Swedish personal identity number. Such claims are needed by the Relying Party in order to log in a user to its application. Therefore, this specification's scope definitions will define that some claims are to be delivered in the ID Token so that a Relying Party can fully log in a user without having to make a, potentially, unnecessary call to the UserInfo endpoint.
+> Many Relying Parties that use OpenID Connect to authenticate users cannot solely depend on the user's session at the OpenID Provider and the `sub` claim to log in the user to the RP application. In the context of Swedish eID there are some obvious claims that are regarded to be "primary" identity claims by Relying Parties, for example, a Swedish personal identity number. Such claims are needed by the Relying Party in order to log in a user to its application. Therefore, this specification's scope definitions will define that some claims are to be delivered in the ID Token so that a Relying Party can fully log in a user without having to make a, potentially, unnecessary call to the UserInfo endpoint.
 
 The above is true also for Relying Parties authenticating users against the Swedish eIDAS Connector.
 
@@ -240,7 +240,7 @@ The above is true also for Relying Parties authenticating users against the Swed
 }
 ```
 
-**Note:** None of the claims are marked as "essential" since the eIDAS Connector will only deliver the claims if an identity binding exists. Also, the scope definition states that the claims should be delivered via the UserInfo endpoint and not directly in the ID Token. The reason for this is that a mapped identity can never be seen as a primary eIDAS identity (since the claims are only delivered of a binding exists).
+**Note:** None of the claims are marked as "essential" since the eIDAS Connector will only deliver the claims if an identity binding exists. Also, the scope definition states that the claims should be delivered via the UserInfo endpoint and not directly in the ID Token. The reason for this is that a mapped identity can never be seen as a primary eIDAS identity (since the claims are only delivered if a binding exists).
 
 **Note (ii):** The `mappedPersonalIdentityNumber` and `mappedCoordinationNumber` claims are mutually exclusive. A user has bound his or hers eIDAS identity to a Swedish civic registration number ("personnummer") **or** a Swedish coordination number ("samordningsnummer"), never both.
 
