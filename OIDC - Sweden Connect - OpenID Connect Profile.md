@@ -8,7 +8,7 @@
 
 # OpenID Connect Profile for Sweden Connect
 
-### Version 1.0 - 2024-11-28 - *Draft version*
+### Version 1.0 - 2024-12-02 - *Draft version*
 
 Registration number: **TBD**
 
@@ -193,7 +193,7 @@ The Relying Party/Client metadata MUST contain the following additional paramete
 
 - The `client_uri` parameter containing a URL that is the home page for the Relying Party. This link may be used by the OpenID Provider when interacting with the user. The URL MUST use the HTTPS-scheme and point to a valid web page. The parameter MAY be given for different languages.
 
-> TODO: Organization?
+Also, it is RECOMMENDED, that a Relying Party includes the `organization_name` claim and provides its human-readable organization name in Swedish and English. See section 5.2.2 of \[[OpenID.Federation](#openid-federation)\]. 
 
 **Example:**
 
@@ -207,7 +207,9 @@ The Relying Party/Client metadata MUST contain the following additional paramete
   "client_name#sv": "Exempeltjänsten",
   "logo_uri": "https://www.example.com/logo.svg",
   "client_uri#en": "https://www.example.com",
-  "client_uri#sv": "https://www.example.com/sv", 
+  "client_uri#sv": "https://www.example.com/sv",
+  "organization_name#en" : "Example Organization",
+  "organization_name#sv" : "Exempelorganisationen"
   ...
 }
 ```
@@ -235,6 +237,10 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 <a name="openid-registration"></a>
 **\[OpenID.Registration\]**
 > [Sakimura, N., Bradley, J., and M. Jones, “OpenID Connect Dynamic Client Registration 1.0,” November 2014](https://openid.net/specs/openid-connect-registration-1_0.html).
+
+<a name="openid-federation"></a>
+**\[OpenID.Federation\]**
+> [Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G. and V. Dzhuvinov, "OpenID Federation 1.0"](https://openid.net/specs/openid-federation-1_0.html).
 
 <a name="rfc7515"></a>
 **\[RFC7515\]**
