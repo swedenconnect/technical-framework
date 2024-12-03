@@ -79,8 +79,6 @@ This profile defines requirements for OpenID Connect Relying Parties (clients) a
 
 Components compliant with this profile MUST adhere to the requirements of [The Swedish OpenID Connect Profile](#oidc-sweden-profile), \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] along with the extensions and requirements stated in the rest of this profile.
 
-When a component compliant with this profile is interacting with other components compliant with this profile, all components MUST fully conform to the features and requirements of this specification. Any interaction with components that are not compliant with this profile is out of scope for this specification.
-
 <a name="openid-provider-requirements"></a>
 ## 2. OpenID Provider Requirements
 
@@ -89,7 +87,7 @@ An OpenID Provider compliant with this profile MUST adhere to the requirements s
 <a name="openid-provider-discovery-and-metadata-requirements"></a>
 ### 2.1. OpenID Provider Discovery and Metadata Requirements
 
-OpenID Providers MUST follow the requirements stated in section 5.2 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] with the following additions:
+The following requirements concerning OpenID Provider Metadata documents apply in addition to section 5.2 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\]:
 
 - The OP Metadata document SHOULD contain a `service_documentation` parameter having as its value a URL pointing to a resource containing human-readable information about the OP (for example, information about client registration). See section 3 of \[[OpenID.Discovery](#openid-discovery)\].
 
@@ -145,7 +143,7 @@ This section extends section 3 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\
 <a name="client-authentication-requirements"></a>
 #### 2.3.1. Client Authentication Requirements
 
-OpenID Providers compliant with this profile MUST adhere with section 3.1.1 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] with the following addition:
+The following requirements apply in addition to the requirements stated in section 3.1.1 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\].
 
 In the context of the Sweden Connect federation, the OpenID Provider MUST NOT accept any other client authentication methods than `private_key_jwt`, or, if a bilateral agreement exists with a Relying Party, mutual TLS authentication.
 
