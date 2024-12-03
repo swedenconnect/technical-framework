@@ -8,7 +8,7 @@
 
 # Introduction to the Sweden Connect Technical Framework
 
-### 2024-12-02
+### 2024-12-04
 
 Registration number: **2019-267**
 

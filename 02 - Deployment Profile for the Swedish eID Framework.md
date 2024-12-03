@@ -8,7 +8,7 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.8 - 2024-12-04 - *Draft version*
+### Version 1.8 - 2024-12-04
 
 Registration number: **2019-308**
 
@@ -141,7 +141,7 @@ by this profile.
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in
 \[[RFC2119](http://www.ietf.org/rfc/rfc2119.txt)\].
@@ -279,9 +279,9 @@ messages using both the old and new key.
 <a name="declaring-algorithm-support"></a>
 ##### 2.1.1.3. Declaring Algorithm Support
 
-Services MAY declare encryption and signature capabilities as defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Swedish eID Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
+Services MAY declare encryption and signature capabilities as defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Sweden Connect Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
 
-All services conformant with this specification MUST support the mandatory algorithms defined by the Swedish eID Framework, meaning that a service has no possibility to opt-out from a certain mandatory algorithm by excluding it from the declared capabilities. The main purpose of declaring an algorithm using any of the elements `<md:EncryptionMethod>`, `<alg:SigningMethod>` or `<alg:DigestMethod>` is to declare which algorithm the service prefers.
+All services conformant with this specification MUST support the mandatory algorithms defined by the Sweden Connect Framework, meaning that a service has no possibility to opt-out from a certain mandatory algorithm by excluding it from the declared capabilities. The main purpose of declaring an algorithm using any of the elements `<md:EncryptionMethod>`, `<alg:SigningMethod>` or `<alg:DigestMethod>` is to declare which algorithm the service prefers.
 
 <a name="service-providers"></a>
 #### 2.1.2. Service Providers
@@ -290,7 +290,7 @@ The `<mdattr:EntityAttributes>` element of a Service Provider’s
 entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[[EidEntCat](#eidentcat)\], identifying the Service Provider requirements in relation to
+\[[SC.EntCat](#sc-entcat)\], identifying the Service Provider requirements in relation to
 identity services concerning attribute release and level of assurance.
 
 The example below illustrates how an entity declares the service entity
@@ -324,7 +324,7 @@ combination with `<md:RequestedAttribute>` elements under the
 Provider metadata. The `<md:RequestedAttribute>` elements in the
 Service Provider metadata, when present, hold a list of requested and/or
 required attributes. This list of attributes MUST be interpreted in the
-context of present service entity categories defined in \[[EidEntCat](#eidentcat)\].
+context of present service entity categories defined in \[[SC.EntCat](#sc-entcat)\].
 
 > Note: Only the requirements for attributes that are not implicitly requested through a declared
 service entity category need to be expressed as `<md:RequestedAttribute>` elements.
@@ -394,7 +394,7 @@ The `<mdattr:EntityAttributes>` element of an Identity Provider’s
 entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[[EidEntCat](#eidentcat)\], defining the Identity Provider ability to deliver
+\[[SC.EntCat](#sc-entcat)\], defining the Identity Provider ability to deliver
 assertions (defining the level of assurance and attribute release).
 
 If an Identity Provider has the ability to release attributes, other than those
@@ -408,8 +408,8 @@ metadata SHALL contain an attribute according to
 `urn:oasis:names:tc:SAML:attribute:assurance-certification`
 and holding at least one attribute value identifying a Level of Assurance
 (LoA) for which the Identity Provider has been approved. 
-The Swedish eID Framework defines such identifier values in section 3.1.1 of
-\[[SC.Registry](#sc-registry)\] and their meanings are defined in \[[EidTillit](#eidtillit)\].
+The Sweden Connect Framework defines such identifier values in section 3.1.1 of
+\[[SC.Registry](#sc-registry)\] and their meanings are defined in \[[SE.Trust](#se-trust)\].
 
 ```
 <md:Extensions>
@@ -434,7 +434,7 @@ element to a value of `true`. See further section E7, “Metadata for
 Agreeing to Sign Authentication Requests”, of \[[SAML v2.0 Errata
 05](#saml2errata05)\].
 
-Identity Providers SHALL advertise support for the SAP protocol according to \[[SigSAP](#sigsap)\], by including the service property entity category URI
+Identity Providers SHALL advertise support for the SAP protocol according to \[[SC.SAP](#sc-sap)\], by including the service property entity category URI
 `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that does not advertise support for SAP MAY ignore requests for SAD.
 
 ```
@@ -451,12 +451,12 @@ Identity Providers SHALL advertise support for the SAP protocol according to \[[
 ```
 *Example of how an Identity Provider advertises its support for SCAL2 authentication.*
 
-An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension in authentication requests SHOULD include the `<psc:RequestedPrincipalSelection>` extension extending the `<md:IDPSSODescriptor>` element. In this extension the Identity Provider declares which attribute value(s) it wants to receive in authentication requests from requestors using the `<psc:PrincipalSelection>` authentication request extension. See [section 5.3.3](#principal-selection) and \[[PrincipalSel](#principalsel)\].
+An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension in authentication requests SHOULD include the `<psc:RequestedPrincipalSelection>` extension extending the `<md:IDPSSODescriptor>` element. In this extension the Identity Provider declares which attribute value(s) it wants to receive in authentication requests from requestors using the `<psc:PrincipalSelection>` authentication request extension. See [section 5.3.3](#principal-selection) and \[[SC.Principal](#sc-principal)\].
 
 <a name="declaring-authorized-scopes"></a>
 ##### 2.1.3.1. Declaring Authorized Scopes
 
-An Identity Provider that releases "scoped attributes", see section 3.1.3 of \[[EidAttributes](#eidattributes)\],
+An Identity Provider that releases "scoped attributes", see section 3.1.3 of \[[SC.Attributes](#sc-attributes)\],
 MUST be authorized to do so by the federation operator. Each authorized scope MUST be declared in the Identity Provider metadata entry using a `<shibmd:Scope>` element, see section 3.5.2, "Scope Filtering", in \[[SAML2SubjIdAttr](#saml2subjidattr)\]. The `<shibmd:Scope>` elements MUST appear within the `<md:Extensions>` element of the `<md:IDPSSODescriptor>`.
 
 ```
@@ -510,13 +510,13 @@ If the Identity Provider also supports authentication according the ordinary Web
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
 
-A Signature Service within the Swedish eID Framework is a Service
+A Signature Service within the Sweden Connect Framework is a Service
 Provider with specific requirements concerning its representation in
 metadata. 
 
 The `<mdattr:EntityAttributes>` element of a Signature Service SP
 entity descriptor SHALL include the service type entity category
-identifier **`http://id.elegnamnden.se/st/1.0/sigservice`** (\[[EidEntCat](#eidentcat)\])
+identifier **`http://id.elegnamnden.se/st/1.0/sigservice`** (\[[SC.EntCat](#sc-entcat)\])
 as a value to the entity category attribute \[[EntCat](#entcat)\].
 
 ```
@@ -558,8 +558,8 @@ message).
 <a name="attributes"></a>
 ## 4. Attributes
 
-Attribute specifications for the Swedish eID Framework are defined in
-\[[EidAttributes](#eidattributes)\].
+Attribute specifications for the Sweden Connect Framework are defined in
+\[[SC.Attributes](#sc-attributes)\].
 
 The content of `<saml2:AttributeValue>` elements exchanged via any
 SAML 2.0 messages or assertions SHOULD be limited to a single child text
@@ -632,7 +632,7 @@ For the HTTP-POST binding the `<saml2p:AuthnRequest>` element MUST
 be signed using a `<ds:Signature>` element within the
 `<saml2:AuthnRequest>`.
 
-Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider's metadata (`<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Swedish eID Framework during the signature operation.
+Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider's metadata (`<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Sweden Connect Framework during the signature operation.
 
 > \[\*\]: A Service Provider should be aware of web browser, or web server, size limitations
 of URL:s, and it is RECOMMENDED that a Service Provider use the HTTP-POST binding in cases where 
@@ -692,7 +692,7 @@ one out of a selection of acceptable authentication context URIs, then
 all of these URIs MUST be included in the request.
 
 The requested authentication context SHOULD be consistent with at least
-one of the service entity categories \[[EidEntCat](#eidentcat)\] declared in the
+one of the service entity categories \[[SC.EntCat](#sc-entcat)\] declared in the
 Service Provider’s metadata entry. See further [section 5.4.4](#authentication-context-and-level-of-assurance-handling) below.
 
 ```
@@ -715,7 +715,7 @@ message.*
 *Example of how several Authentication Context URIs are included in an
 authentication request message. In this case, the Service Provider
 states that it requests the authentication to be performed according to
-either the LoA3 URI defined within the Swedish eID Framework or the
+either the LoA3 URI defined within the Sweden Connect Framework or the
 substantial level for notified eIDs defined within the eIDAS Framework.*
 
 <a name="scoping"></a>
@@ -754,7 +754,7 @@ extension of the `AuthnRequest` message, see section [5.3.3](#principal-selectio
 <a name="principal-selection"></a>
 #### 5.3.3. Principal Selection
 
-The specification "Principal Selection in SAML Authentication Requests", \[[PrincipalSel](#principalsel)\], defines the `<psc:PrincipalSelection>` extension that enables a requestor to inform the Identity Provider about known attributes for the principal that is about to be authenticated. 
+The specification "Principal Selection in SAML Authentication Requests", \[[SC.Principal](#sc-principal)\], defines the `<psc:PrincipalSelection>` extension that enables a requestor to inform the Identity Provider about known attributes for the principal that is about to be authenticated. 
 
 This may be relevant for Identity Provider services who prompt users for an identifier in order initiate an authentication process with the user's eID. In such cases, this extension can be used to avoid unnecessary prompting when the user's identity is known in advance to the service requesting authentication, such as when a previously authenticated user is requested to sign a document.
 
@@ -855,7 +855,7 @@ the Identity Provider MAY return the result of a default authentication
 process that is consistent with the Identity Providers metadata.
 
 **Note**: The Identity Provider does not have to consider the service
-entity categories (\[[EidEntCat](#eidentcat)\]) declared in the Service Provider’s
+entity categories (\[[SC.EntCat](#sc-entcat)\]) declared in the Service Provider’s
 metadata entry when determining the requested authentication context
 under which the authentication should be performed. The purpose of the
 service entity categories is primarily to support service matching in
@@ -939,7 +939,7 @@ message. The elements `<saml2:EncryptedID>` and
 `<saml2:EncryptedAttribute>` MUST NOT be used; instead the entire
 assertion MUST be encrypted.
 
-Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use algorithms listed as mandatory by the Swedish eID Framework. For encryption, the chosen algorithm MUST also be compatible with the Service Provider's encryption key 
+Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use algorithms listed as mandatory by the Sweden Connect Framework. For encryption, the chosen algorithm MUST also be compatible with the Service Provider's encryption key 
 declared in metadata.
 
 Service Providers SHOULD NOT accept unsolicited `<saml2p:Response>`
@@ -968,7 +968,7 @@ especially important in cases of re-use of already established security
 contexts at the Identity Provider side (Single Sign On).
 
 Each identity assertion MUST have a `<saml:Subject>` element that
-specifies the principal that is the subject of all of the statements in
+specifies the principal that is the subject of all the statements in
 the assertion.
 
 The value of the `<saml:NameID>` element under the
@@ -1055,19 +1055,19 @@ An Identity Provider determines which attributes to include in the
 `<saml2:AttributeStatement>` element of an assertion based on the
 Service Provider requirements and its agreements with the user being
 authenticated. Service Provider attribute preferences and requirements
-are specified by the service entity categories \[[EidEntCat](#eidentcat)\] and
+are specified by the service entity categories \[[SC.EntCat](#sc-entcat)\] and
 requested attributes in the `<md:AttributeConsumingService>` element
 declared in the Service Provider metadata. A service entity category
-specifies the attribute set (as defined in \[[EidAttributes](#eidattributes)\]) that is
+specifies the attribute set (as defined in \[[SC.Attributes](#sc-attributes)\]) that is
 requested for the attribute release process.
 
 An Identity Provider declares service entity categories in order to
 publish its ability to deliver attributes according to certain attribute
 sets. For all declared service entity categories, the Identity Provider
 MUST possess the ability to deliver the mandatory attributes of the
-underlying attribute set. See \[[EidEntCat](#eidentcat)\] and \[[EidAttributes](#eidattributes)\] for details.
+underlying attribute set. See \[[SC.EntCat](#sc-entcat)\] and \[[SC.Attributes](#sc-attributes)\] for details.
 
-An Identity Provider releasing scoped attributes, see section 3.1.3 of \[[EidAttributes](#eidattributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
+An Identity Provider releasing scoped attributes, see section 3.1.3 of \[[SC.Attributes](#sc-attributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
 
 Consequently, a Service Provider consuming a scoped attribute SHOULD verify that the issuing Identity Provider has been authorized to release attributes for the given scope by asserting its presence in the Identity Provider's metadata, see section [2.1.3.1](#declaring-authorized-scopes) and section 3.5.2 of \[[SAML2SubjIdAttr](#saml2subjidattr)\]. A scoped attribute that fails this check MUST NOT be accepted by the Service Provider.
 
@@ -1279,9 +1279,9 @@ If an Identity Provider detects suspicious fraudulent behaviour or if any of its
 <a name="authentication-for-signature"></a>
 ## 7. Authentication for Signature
 
-“DSS Extension for Federated Central Signing Services”, \[[EidDSS](#eiddss)\],
+“DSS Extension for Federated Central Signing Services”, \[[SC.DSS.Ext](#sc-dss-ext)\],
 defines an extension to the OASIS DSS protocol for providing centralized
-Signature Services within the Swedish eID Framework. This specification
+Signature Services within the Sweden Connect Framework. This specification
 defines the communication between a *Signature Requestor*<sup>*</sup> and a
 Signature Service, but does not cover SAML specific requirements
 regarding the user authentication phase that is part of the signature
@@ -1308,7 +1308,7 @@ following requirements:
     also be indicated in the Signature Service metadata record using the
     `AuthnRequestsSigned` attribute (see [section 2.1.4](#signature-service)).
 
-If the receiving Identity Provider has declared that it wishes to receive principal selection information about the signer (see [section 5.3.3](#principal-selection)), and the Signature Service has received any of the requested attribute values in the `Signer` element of the `SignRequest` (\[[EidDSS](#eiddss)\]), the Signature Service SHOULD include those attribute values in a `<psc:PrincipalSelection>` extension of the authentication request. 
+If the receiving Identity Provider has declared that it wishes to receive principal selection information about the signer (see [section 5.3.3](#principal-selection)), and the Signature Service has received any of the requested attribute values in the `Signer` element of the `SignRequest` (\[[SC.DSS.Ext](#sc-dss-ext)\]), the Signature Service SHOULD include those attribute values in a `<psc:PrincipalSelection>` extension of the authentication request. 
 
 It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:RequesterID>` element holding the entityID of the Service Requestor is included in `<saml2p:AuthnRequest>` messages generated by a Signature Service.
 
@@ -1330,8 +1330,8 @@ end user is performing a signature.
 <a name="requesting-display-of-signature-message"></a>
 #### 7.1.1. Requesting Display of Signature Message
 
-\[[EidDSS\_Profile](#eiddssprofile)\] specifies that a Signature Requestor may include a
-`SignMessage` element (as defined by \[[EidDSS](#eiddss)\]) in a signature request.
+\[[SC.DSS.Profile](#sc-dss-profile)\] specifies that a Signature Requestor may include a
+`SignMessage` element (as defined by \[[SC.DSS.Ext](#sc-dss-ext)\]) in a signature request.
 This element holds a message that the Identity Provider, which is
 responsible for “authentication for signature”, should present to the
 user that is performing the signature.
@@ -1345,7 +1345,7 @@ element in the `<saml2p:AuthnRequest>` message (see section 3.2.1 of
 All Identity Providers compliant with this profile MUST be able to parse and understand
 the `SignMessage` extension.
 
-If the `Message`-element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Swedish eID Framework during the encryption operation, which is compatible with the Identity Provider's encryption key declared in metadata.
+If the `Message`-element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Sweden Connect Framework during the encryption operation, which is compatible with the Identity Provider's encryption key declared in metadata.
 
 If an Identity Provider that has ways of determining the principal's identity before displaying
 a sign message receives a `<psc:PrincipalSelection>` extension in  the authentication request 
@@ -1372,7 +1372,7 @@ from signature services):
   return an error response.
   
 - If authentication and sign message confirmation by the user was successful, the Identity Provider 
-  MUST include the `signMessageDigest` attribute (see section 3.2.4 of \[[EidAttributes](#eidattributes)\]) 
+  MUST include the `signMessageDigest` attribute (see section 3.2.4 of \[[SC.Attributes](#sc-attributes)\]) 
   in the assertion that is issued.
 
 - The Identity Provider MUST NOT return an assertion without performing an authentication process 
@@ -1383,18 +1383,18 @@ from signature services):
 <a name="requesting-scal2-signature-activation-data"></a>
 #### 7.1.2. Requesting SCAL2 Signature Activation Data
 
-The type of signature requested in a signature request is, according to \[[EidDSS_Profile](#eiddssprofile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SigSAP](#sigsap)\], and MUST include the `SignMessage` extension (as described above).
+The type of signature requested in a signature request is, according to \[[SC.DSS.Profile](#sc-dss-profile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SC.SAP](#sc-sap)\], and MUST include the `SignMessage` extension (as described above).
 
 As pointed out in [section 2.1.3](#identity-providers) an Identity Provider that supports processing of SAD requests and issuance of SAD-attributes SHALL advertise this by declaring the service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that has declared this entity category MUST return a SAD attribute in an issued assertion if the corresponding `<saml2p:AuthnRequest>` message contains the `<sap:SADRequest>` extension.
 
 A SAD returned from the Identity Provider MUST have a signature which can be verified using a certificate from the Identity Provider's metadata entry. The signature algorithm used to sign the SAD MUST be equivalent to the algorithm used to sign the responses and assertions from the Identity Provider.
 
-Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of \[[SigSAP](#sigsap)\].
+Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of \[[SC.SAP](#sc-sap)\].
 
 <a name="authentication-responses2"></a>
 ### 7.2. Authentication Responses
 
-By including the `signMessageDigest` attribute (see section 3.2.4 of \[[EidAttributes](#eidattributes)\]) 
+By including the `signMessageDigest` attribute (see section 3.2.4 of \[[SC.Attributes](#sc-attributes)\]) 
 in the SAML assertion, the Identity Provider asserts that it has successfully displayed the sign message
 received in the request for the user and that the user has accepted to sign under the context of this sign message. This attribute MUST be included in the issued assertion if a sign message was displayed for, and accepted by, the user.
 
@@ -1505,7 +1505,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 ```
 *Example of how a service announces that it wishes that the peer uses SHA-256 as the key transport digest when encrypting using RSA-OAEP-MGF1P.*
 
-> \[*\]: Note that the use if SHA-1 in this context (both as digest algoritm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 is is known to be relevant to its use in this context.
+> \[*\]: Note that the use if SHA-1 in this context (both as digest algoritm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 are known to be relevant to its use in this context.
 
 <a name="normative-references"></a>
 ## 9. Normative References
@@ -1604,37 +1604,37 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **\[SAML2HokAP\]**
 > [OASIS Committee Specification, SAML V2.0 Holder-of-Key Assertion Profile Version 1.0, January 2010](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml2-holder-of-key.pdf).
 
-<a name="eidtillit"></a>
-**\[EidTillit\]**
+<a name="se-trust"></a>
+**\[SE.Trust\]**
 > [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
 
 <a name="sc-registry"></a>
 **\[SC.Registry\]**
 > [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
-<a name="eidattributes"></a>
-**\[EidAttributes\]**
+<a name="sc-attributes"></a>
+**\[SC.Attributes\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
-<a name="eidentcat"></a>
-**\[EidEntCat\]**
+<a name="sc-entcat"></a>
+**\[SC.EntCat\]**
 > [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
-<a name="eiddss"></a>
-**\[EidDSS\]**
+<a name="sc-principal"></a>
+**\[SC.Principal\]**
+> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html).
+
+<a name="sc-dss-ext"></a>
+**\[SC.DSS.Ext\]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
-<a name="seiddssprofile"></a>
-**\[EidDSS\_Profile\]**
+<a name="sc-dss-profile"></a>
+**\[SC.DSS.Profile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
-<a name="sigsap"></a>
-**\[SigSAP\]**
+<a name="sc-sap"></a>
+**\[SC.SAP\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
-
-<a name="principalsel"></a>
-**\[PrincipalSel\]**
-> [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html).
 
 <a name="rfc4051"></a>
 **\[RFC4051\]**
@@ -1650,7 +1650,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 **Changes between version 1.7 and 1.8:**
 
-- Section 7.1.2 was updated to state that the requirement to include both a SAD and a SignMessage extension only applies when the requested CertType is "QC/SSCD". Voluntary use of SAD for other types of signatures (e.g. non qualified signatures) does not automatically trigger a requirement to include SignMessage.
+- Section 7.1.2 was updated to state that the requirement to include both a SAD and a SignMessage extension only applies when the requested CertType is "QC/SSCD". Voluntary use of SAD for other types of signatures (e.g., nonqualified signatures) does not automatically trigger a requirement to include SignMessage.
 
 **Changes between version 1.6 and 1.7:**
 
@@ -1667,7 +1667,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **Changes between version 1.5 and 1.6:**
 
 - In order to facilitate algorithm interoperability between peers additions concerning "Metadata Profile for Algorithm Support" \[[SAML2MetaAlgSupport](#saml2metaalg)\] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.
-- Section 5.3, "Message Content", was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.
+- Section 5.3, "Message Content", was re-structured with subchapters for requested authentication contexts, scoping and principal selection.
 - The `PrincipalSelection` and `RequestedPrincipalSelection` extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.
 - The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 - This profile is no longer normatively dependent upon SAML2Int. Therefore, the profile has been updated with requirements that previously was implicit (due to the normative dependency to SAML2Int).
@@ -1713,7 +1713,7 @@ and the use of the `signMessageDigest` attribute was introduced.
 -   In section 7.1, a set of authentication context URIs for the eIDAS
     Framework was added.
 
--   In section 6.4, the requirement to use the sub-level status code
+-   In section 6.4, the requirement to use the sublevel status code
     `http://id.elegnamnden.se/status/1.0/cancel` was added. This status
     should be used to indicate a cancelled operation.
 
@@ -1760,7 +1760,7 @@ and the use of the `signMessageDigest` attribute was introduced.
     difficult to make use of the `<saml2:AuthnContextDecl>` element
     to store authentication context parameters, and that no commercial,
     or open source, Identity Provider software had support for this
-    feature. \[EidAttributes\] now describe how the `authContextParams`
+    feature. \[SC.Attributes\] now describe how the `authContextParams`
     attribute may be used for the same purpose, and the examples where
     this information was stored under the `<saml2:AuthnContextDecl>`
     element was removed from chapter 6.2, “Message Content”.

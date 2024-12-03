@@ -8,21 +8,21 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.2 - 2022-12-20 - *Draft version*
+### Version 1.2 - 2024-12-04
 
 Registration number: **2019-317**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
 
 1. [**Introduction**](#introduction)
 
-    1.1. [Requirement key words](#requirement-key-words)
+    1.1. [Requirement keywords](#requirement-keywords)
 
     1.2. [XML namespace references](#xml-namespace-references)
 
@@ -72,10 +72,10 @@ The Signature Activation Protocol (SAP) defined in this document is used to exch
 
 The SAP specified in this document is specifically designed to be used with a signing service operating in accordance with the federated signing specification \[[DSS-Ext](#dss-ext)\].
 
-<a name="requirement-key-words"></a>
-### 1.1. Requirement key words
+<a name="requirement-keywords"></a>
+### 1.1. Requirement keywords
 
-The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
+The keywords **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**,
 **MAY**, and **OPTIONAL** are to be interpreted as described in
 \[[RFC2119](#rfc2119)\].
@@ -127,7 +127,7 @@ This document specifies exchange of two data elements:
 - `SADRequest`
 - `SAD`
 
-The `SADRequest` SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the `SADRequest` element as an request extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
+The `SADRequest` SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the `SADRequest` element as a request extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
 
 When an Identity Provider returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[EidAttributes](#eidattributes)].
 
@@ -174,7 +174,7 @@ The SAD Request is provided in a `<sap:SADRequest>` element. The element has the
 
 `ID` \[Required\]
 
-> Attribute holding an unique identifier for the `SADRequest`.
+> Attribute holding a unique identifier for the `SADRequest`.
 
 The following schema fragment defines the `<sap:SADRequest>` element:
 
@@ -426,7 +426,7 @@ Protection profile for QSCD for Server Signing
 
 **Changes between version 1.1 and 1.2:**
 
-- The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
+- The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
 
 - Updated examples where the use of "signmessage" LoA URI:s was removed.
 

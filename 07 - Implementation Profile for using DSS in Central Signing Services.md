@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.6 - 2024-12-04 - *Draft version*
+### Version 1.6 - 2024-12-04
 
 Registration number: **2019-312**
 
@@ -24,7 +24,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     1.1. [Terminology](#terminology)
 
-    1.2. [Requirement key words](#requirement-key-words)
+    1.2. [Requirements Notation](#requirements-notation)
 
     1.3. [Namespace references](#namespace-references)
 
@@ -123,10 +123,10 @@ Term | Defined meaning
 **Requesting Service** | The service requesting the signature on a particular document by a particular user.
 **Signing Service** | A centralized service that manages the process to authenticate the user that has been requested to sign a document, and the process to obtain the user’s signature on the requested document.
 
-<a name="requirement-key-words"></a>
-### 1.2. Requirement key words
+<a name="requirements-notation"></a>
+### 1.2. Requirements Notation
 
-The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
+The keywords **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**,
 **MAY**, and **OPTIONAL** are to be interpreted as described in
 \[[RFC2119](#rfc2119)\].
@@ -321,7 +321,7 @@ attributes for each tag other than those listed in the following table:
 Allowed HTML entities for character replacement SHALL be restricted to
 `amp`, `gt`, `lt`, `quot` and `nbsp` (in the form `&entity-name;`).
 
-HTML messages MUST NOT contain any URI references to data outside of the
+HTML messages MUST NOT contain any URI references to data outside the
 message and MUST NOT contain any JavaScript in any form.
 
 <a name="requesting-identity-provider-to-display-signmessage"></a>
@@ -329,9 +329,9 @@ message and MUST NOT contain any JavaScript in any form.
 
 The means through which the Service Provider requests the Identity
 Provider to display a sign message is defined in section 7.1.1 of “Deployment Profile
-for the Swedish eID Framework” \[[Eid-Profile](#eid-profile)\].
+for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\].
 
-In addition to the requirements in section 7.1.1 of \[[Eid-Profile](#eid-profile)\] the 
+In addition to the requirements in section 7.1.1 of \[[SC.SAML.Profile](#sc-saml-profile)\] the 
 Signature Service MUST apply the following process regarding the inclusion of the
 `AuthnContextClassRef` URI to include in the `AuthnRequest` sent to the Identity Provider 
 when authenticating the user for signing:
@@ -349,9 +349,9 @@ when authenticating the user for signing:
 ##### 2.1.3.9. CertRequestProperties
 
 This element MAY be present to provide requested properties of generated
-signature certificates according with section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
+signature certificates according to section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
 
-When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[Eid-Profile](#eid-profile)\], or reject the request.
+When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\], or reject the request.
 
 <a name="authncontextclassref"></a>
 ###### 2.1.3.9.1. AuthnContextClassRef
@@ -467,7 +467,7 @@ request was processed and response was constructed. This version MUST be the sam
 version as given in the `SignRequestExtension` (see section [2.1.3.1](#version), "[Version](#version))".
 
 For backwards compatibility reasons that attribute MAY be absent if version "1.1" was requested. 
-Otherwise it MUST be set.
+Otherwise, it MUST be set.
 
 <a name="responsetime"></a>
 ##### 2.2.4.2. ResponseTime
@@ -478,7 +478,7 @@ The `<ResponseTime>` element MUST be present in the response.
 ##### 2.2.4.3. Request
 
 The `<Request>` element MAY be present in a response. However, it is RECOMMENDED not to include this
-element since it makes the response message unnecessary large. Instead the requester of a sign operation
+element since it makes the response message unnecessary large, instead the requester of a sign operation
 is expected to save the request message in its session for later use when processing a response message.
 
 <a name="signerassertioninfo"></a>
@@ -658,13 +658,13 @@ EidSignResponse | Base64 encoded sign response.
 **[XMLSig-XSD]**
 > XML Signature Schema. World Wide Web Consortium. See <https://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd>.
 
-<a name="eid-profile"></a>
-**[Eid-Profile]**
-> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
-
 <a name="dss-ext"></a>
 **[DSS-Ext]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
+
+<a name="sc-saml-profile"></a>
+**[SC.SAML.Profile]**
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="sc-registry"></a>
 **[SC.Registry]**
@@ -703,7 +703,7 @@ EidSignResponse | Base64 encoded sign response.
 
 **Changes between version 1.2 and version 1.3:**
 
-- In section 2.1.3.9, "CertRequestProperties", an requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature was added.
+- In section 2.1.3.9, "CertRequestProperties", a requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature was added.
 
 **Changes between version 1.1 and version 1.2:**
 

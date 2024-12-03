@@ -2,7 +2,7 @@
 #
 # release.sh
 #
-# Author: Martin Lindström, Litsec AB
+# Author: Martin LindstrÃ¶m
 #
 
 INSTALL_DIR=$(dirname $0)
@@ -38,7 +38,10 @@ declare -a SPECIFICATIONS=("00 - Tekniskt ramverk - Introduktion"
     "11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework"
     "12 - BankID Profile for the Swedish eID Framework"
     "13 - Signature Activation Protocol"
-    "14 - Principal Selection in SAML Authentication Requests")
+    "14 - Principal Selection in SAML Authentication Requests"
+    "18 - User Message Extension in SAML Authentication Requests"
+    "OpenID Connect Claims and Scopes Specification"
+    "OpenID Connect Profile for Sweden Connect")
 
 #
 # Produce HTML
@@ -60,8 +63,3 @@ done
 ${INSTALL_DIR}/tohtml.sh ${INSTALL_DIR}/templates/index.md ${OUTPUT_DIR} -o p
 
 exit 0
-
-
-
-
-
