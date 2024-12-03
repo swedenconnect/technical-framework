@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Message Extension in SAML Authentication Requests</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="user-message-extension-in-saml-authentication-requests">User Message Extension in SAML Authentication Requests</h1>
+<h3 id="version-10---2024-04-15---draft-version">Version 1.0 - 2024-04-15 - <em>Draft version</em></h3>
+<p>Registration number: TBD</p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2024. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation">Requirements Notation</a></p>
+<p> 1.2. <a href="#xml-namespace-references">XML Namespace References</a></p>
+<p> 1.3. <a href="#structure">Structure</a></p>
+</li>
+<li><p><a href="#data-elements"><strong>Data elements</strong></a></p>
+</li>
+<li><p><a href="#usage-requirements"><strong>Usage Requirements</strong></a></p>
+<p> 3.1. <a href="#identity-provider-requirements">Identity Provider Requirements</a></p>
+<p> 3.2. <a href="#service-provider-requirements">Service Provider Requirements</a></p>
+</li>
+<li><p><a href="#examples"><strong>Examples</strong></a></p>
+</li>
+<li><p><a href="#schemas"><strong>Schemas</strong></a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>When a Service Provider requests authentication of a user, the Service Provider may want to pass a message along for the user to see during the authentication phase at the Identity Provider. Normally, an Identity Provider displays information about the requesting Service Provider for the user based on the registered presentation data from the SP&#39;s SAML metadata entry. This information is static and its purpose is to show for the user that he or she is still in the context of the Service Provider.</p>
+<p>By using dynamic user messages to be displayed at the Identity Provider side (possibly in an authentication device such as a mobile phone), the Service Provider may further strengthen the coupling to its current context. Examples of messages can be information about the purpose of the authentication or warnings and prompts for the user to not authenticate based on another person&#39;s request. </p>
+<p>This specification defines the <code>&lt;umsg:UserMessage&gt;</code> element that may be included in the <code>&lt;saml2p:Extensions&gt;</code> element of a SAML <code>&lt;saml2p:AuthnRequest&gt;</code> where the requesting Service Provider can specify a message text that is to be displayed by the Identity Provider during the user authentication process.</p>
+<p><a name="requirements-notation"></a></p>
+<h3 id="11-requirements-notation">1.1. Requirements Notation</h3>
+<p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>,
+<strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>,
+<strong>MAY</strong>, and <strong>OPTIONAL</strong> are to be interpreted as described in
+[<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="xml-namespace-references"></a></p>
+<h3 id="12-xml-namespace-references">1.2. XML Namespace References</h3>
+<p>The prefix <strong>umsg:</strong> stands for the User Message Extension XML schema namespace <code>http://id.swedenconnect.se/authn/1.0/user-message/ns</code>. </p>
+<p>The prefix <strong>saml2:</strong> stands for the OASIS SAML 2 Assertion schema namespace <code>urn:oasis:names:tc:SAML:2.0:assertion</code>.</p>
+<p>The prefix <strong>saml2p:</strong> stands for the OASIS SAML 2 Protocol schema namespace <code>urn:oasis:names:tc:SAML:2.0:protocol</code>.</p>
+<p>The prefix <strong>md:</strong> stands for the OASIS SAML 2 Metadata schema namespace <code>urn:oasis:names:tc:SAML:2.0:metadata</code>.</p>
+<p><a name="structure"></a></p>
+<h3 id="13-structure">1.3. Structure</h3>
+<p>This specification uses the following typographical conventions in text:
+<code>&lt;LocalElement&gt;</code>, <code>&lt;ns:ForeignElement&gt;</code>, <code>Attribute</code>, <strong>Datatype</strong>,
+<code>OtherCode</code>.</p>
+<p><a name="data-elements"></a></p>
+<h2 id="2-data-elements">2. Data elements</h2>
+<p>This specification defines the element <code>&lt;UserMessage&gt;</code> to be included in the <code>&lt;Extensions&gt;</code> element of an <code>AuthnRequest</code>. </p>
+<p>This element MAY included by a Service Provider asking the Identity Provider to display a given message for the user during the authentication phase. The element has the following elements and attributes:</p>
+<p><code>&lt;Message&gt;</code> [One or more]</p>
+<blockquote>
+<p>Element that holds the user message for a specific language. See below.</p>
+</blockquote>
+<p><code>mimeType</code></p>
+<blockquote>
+<p>The MIME type for the text contained in all <code>Message</code> elements. This specification defines two possible values that are <code>text/plain</code> (where ;charset=UTF-8 is an implicit condition) and <code>text/markdown</code><sup>1</sup>. If no value is given for this field, <code>text/plain</code> MUST be assumed. Other profiles MAY add support for additional MIME types.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;UserMessage&gt;</code> element:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;UserMessage&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;umsg:UserMessageType&quot;</span>/&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;UserMessageType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;Message&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;umsg:MessageType&quot;</span> minOccurs=<span class="hljs-string">&quot;1&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;mimeType&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> default=<span class="hljs-string">&quot;text/plain&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;The format of the user message(s)&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">&quot;##any&quot;</span> processContents=<span class="hljs-string">&quot;lax&quot;</span>/&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p>The <code>&lt;Message&gt;</code> element is defined by the following schema definition:</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;MessageType&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:extension</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;xml:lang&quot;</span> <span class="hljs-attr">use</span>=<span class="hljs-string">&quot;required&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:anyAttribute</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;##any&quot;</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:extension</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span></code></pre><p>The <code>&lt;Message&gt;</code> element contains the Base64-encoding of the UTF-8 string holding the message to display to the user for a specific language.</p>
+<p>The required <code>xml:lang</code> attribute contains the language tag for the message&#39;s language according to [<a href="#bcp47">BCP47</a>].</p>
+<blockquote>
+<p><strong>[1]</strong>: The Markdown dialect, and potential restrictions for tags, is not regulated in this specification. However, the Markdown SHOULD NOT contain HTML-tags for security reasons.</p>
+</blockquote>
+<p><a name="usage-requirements"></a></p>
+<h2 id="3-usage-requirements">3. Usage Requirements</h2>
+<p><a name="identity-provider-requirements"></a></p>
+<h3 id="31-identity-provider-requirements">3.1. Identity Provider Requirements</h3>
+<p>An Identity Provider that supports the <code>&lt;umsg:UserMessage&gt;</code> extension MUST declare this support in its metadata entry by declaring the <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code> entity category (see section 6.3 of [<a href="#eidentcat">EidEntCat</a>]).</p>
+<p>Identity Providers compliant with this specification MUST support the <code>text/plain</code> and <code>text/markdown</code> MIME types.</p>
+<p>An OpenID Provider MUST NOT display a user message unless the user is being authenticated. Thus, if the <code>IsPassive</code>-flag of the authentication request is set to <code>true</code>, the Identity Provider MUST NOT display the user message.</p>
+<p>An Identity Provider that receives a <code>&lt;umsg:UserMessage&gt;</code> extension containing user messages in several languages SHOULD display the message that best matches the user&#39;s current locale at the Identity Provider. If no message matches the user&#39;s current locale, the Identity Provider SHOULD select the first message from the list.</p>
+<p>An Identity Provider MUST refuse to display a message if it does not support a given MIME type. It MAY respond with an error if a non-supported MIME type is received.</p>
+<p>Should a message contain illegal characters, or any other constructs not accepted by the Identity Provider, the Identity Provider MAY choose not to display the message, or filter the message before displaying it.</p>
+<p>The Identity Provider MUST be able to handle messages containing line breaks.</p>
+<p><a name="service-provider-requirements"></a></p>
+<h3 id="32-service-provider-requirements">3.2. Service Provider Requirements</h3>
+<p>A Service Provider SHOULD check whether an Identity Provider supports the <code>&lt;umsg:UserMessage&gt;</code> extension before including it in a <code>&lt;saml2p:AuthnRequest&gt;</code> element. This is done by checking the Identity Provider metadata entry for the presence of the <code>http://id.swedenconnect.se/general-ec/1.0/supports-user-message</code> entity category (see <a href="#identity-provider-requirements">3.1</a> above).</p>
+<p>A Service Provider MUST NOT supply user messages that contains integrity sensitive information. The message will be displayed for the user <strong>before</strong> he or she is authenticated.</p>
+<p><a name="examples"></a></p>
+<h2 id="4-examples">4. Examples</h2>
+<p>Example of supplying a user message in Swedish (&quot;Jag vill logga in till example.com&quot;) and in
+English (&quot;I wish to login to example.com&quot;):</p>
+<pre class="hljs"><code>...
+&lt;saml2p:Extensions&gt;
+  &lt;ums<span class="hljs-variable">g:UserMessage</span> xmln<span class="hljs-variable">s:umsg</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/authn/1.0/user-message/ns&quot;</span>
+                    mimeType=<span class="hljs-string">&quot;text/plain&quot;</span>&gt;
+    &lt;ums<span class="hljs-variable">g:Message</span> <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;
+      SmFnIHZpbGwgbG9nZ2EgaW4gdGlsbCBleGFtcGxlLmNvbQ==
+    &lt;/ums<span class="hljs-variable">g:Message</span>&gt;
+    &lt;ums<span class="hljs-variable">g:Message</span> <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;
+      SSB3aXNoIHRvIGxvZ2luIHRvIGV4YW1wbGUuY29t
+    &lt;/ums<span class="hljs-variable">g:Message</span>&gt;
+  &lt;/ums<span class="hljs-variable">g:UserMessage</span>&gt;
+&lt;/saml2p:Extensions&gt;
+...</code></pre><p><a name="schemas"></a></p>
+<h2 id="5-schemas">5. Schemas</h2>
+<p>The following XML schema defines the <code>http://id.swedenconnect.se/authn/1.0/user-message/ns</code> namespace:</p>
+<pre class="hljs"><code>&lt;?xml <span class="hljs-keyword">version</span>=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span> xmln<span class="hljs-variable">s:xs</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> elementFormDefault=<span class="hljs-string">&quot;qualified&quot;</span>
+           targetNamespace=<span class="hljs-string">&quot;http://id.swedenconnect.se/authn/1.0/user-message/ns&quot;</span>
+           xmln<span class="hljs-variable">s:umsg</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/authn/1.0/user-message/ns&quot;</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:import</span> namespace=<span class="hljs-string">&quot;http://www.w3.org/XML/1998/namespace&quot;</span> schemaLocation=<span class="hljs-string">&quot;http://www.w3.org/2001/xml.xsd&quot;</span>/&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+      Schema location URL: http<span class="hljs-variable">s:</span>//docs.swedenconnect.<span class="hljs-keyword">se</span>/schemas/authn/<span class="hljs-number">1.0</span>/UserMessage-<span class="hljs-number">1.0</span>.xsd
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;UserMessage&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;umsg:UserMessageType&quot;</span>/&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;UserMessageType&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;List of user <span class="hljs-keyword">messages</span> (in different languages)&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;Message&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;umsg:MessageType&quot;</span> minOccurs=<span class="hljs-string">&quot;1&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;mimeType&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> default=<span class="hljs-string">&quot;text/plain&quot;</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;The MIME <span class="hljs-built_in">type</span> of the user message(s)&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">&quot;##any&quot;</span> processContents=<span class="hljs-string">&quot;lax&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;MessageType&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+        The Base64-encoding of UTF-<span class="hljs-number">8</span> <span class="hljs-built_in">string</span> holding the user message.
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:documentation</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:annotation</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> ref=<span class="hljs-string">&quot;xml:lang&quot;</span> use=<span class="hljs-string">&quot;required&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">&quot;##any&quot;</span> processContents=<span class="hljs-string">&quot;lax&quot;</span>/&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:schema</span>&gt;</code></pre><p><a name="normative-references"></a></p>
+<h2 id="6-normative-references">6. Normative References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
+Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="bcp47"></a>
+<strong>[BCP47]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc5646.txt">Tags for Identifying Languages, September 2009</a>.</p>
+</blockquote>
+<p><a name="saml2core"></a>
+<strong>[SAML2Core]</strong></p>
+<blockquote>
+<p><a href="http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf">OASIS Standard, Assertions and Protocols for the OASIS Security
+Assertion Markup Language (SAML) V2.0, March
+2005</a>.</p>
+</blockquote>
+<p><a name="eidentcat"></a>
+<strong>[EidEntCat]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="7-changes-between-versions">7. Changes between versions</h2>
+<p>This is the first version of this specification.</p>
+    </article>
+  </body>
+</html>

@@ -6,7 +6,7 @@
 <img align="center" src="img/transparent.png"></img>
 </p>
 
-# Swedish eID Framework - Registry for identifiers
+# Sweden Connect - Registry for identifiers
 
 ### Version 1.8 - 2024-11-26 - *Draft version*
 
@@ -85,8 +85,7 @@ The implementation of a Swedish infrastructure for electronic
 identification and electronic signature requires various types of
 identifiers to represent objects in protocols and data structures.
 
-This document defines the structure for identifiers assigned by the Swedish eID Framework
-and provides a registry for assigned identifiers.
+This document defines the structure for identifiers assigned by the Sweden Connect Framework and provides a registry for assigned identifiers.
 
 The following types of identifiers are assigned in this document:
 
@@ -104,7 +103,7 @@ documents where the exact meaning of each identifier is defined.
 <a name="structure"></a>
 ## 2. Structure
 
-The basic structure of identifiers assigned by the Swedish eID Framework is based on the following components:
+The basic structure of identifiers assigned by the Sweden Connect Framework is based on the following components:
 
 | **Parameter** | **Description** |
 | ---| ---|
@@ -164,8 +163,8 @@ necessary, within the identifier portion of the OID, typically by
 assigning a new identifier.
 
 **Note**: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but
-this organisation has been overtaken by the Swedish Agency for Digital Government (DIGG) who 
-now uses this OID arc for the Sweden Connect Technical Framework.
+this organisation has been overtaken by the Swedish Agency for Digital Government (Digg) who 
+now uses this OID arc for the Sweden Connect Framework.
 
 <a name="assigned-identifiers"></a>
 ## 3. Assigned Identifiers
@@ -241,7 +240,7 @@ a Swedish personal identity number (personnummer) or a Swedish coordination numb
 In some cases, a certified eID-issuer may also issue eIDs to persons that do not hold
 a Swedish identity number (non-residents). If this is the case, and the original 
 identification of the person has a strength that corresponds to the requirements 
-put in \[[TillitRamv](#tillitramv)\], a certified Identity Provider MAY use the URIs
+put in \[[TillitRamv](#tillitramv)\], a certified Identity Provider or OpenID Provider MAY use the URIs
 defined below:
 
 | **URL** | **Object** | **Reference** |
@@ -250,29 +249,20 @@ defined below:
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`loa3-nonresident` | A URI that is indented to be used by a level 3-certified providers that authenticate a non-resident eID holder according to assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`loa4-nonresident` | A URI that is indented to be used by a level 4-certified providers that authenticate a non-resident eID holder according to assurance level 4 - `http://id.elegnamnden.se/loa/1.0/loa4`. | This document |
 
-**Note:** An Identity Provider that includes any of the above URIs in an issued assertion
-MUST NOT provide the `personalIdentityNumber` attribute in the assertion. This is per
-definition since these URIs are intended to be used for non-residents (i.e., they do not hold
-a Swedish identity number).
+**Note:** An Identity Provider, or OpenID Provider, that includes any of the above URIs in an issued assertion/ID Token, MUST NOT provide the Swedish personal identity number as an identity attribute/claim. 
+This is per definition since these URIs are intended to be used for non-residents (i.e., they do not hold a Swedish identity number).
 
 <a name="authentication-context-uris-for-uncertified-providers"></a>
 ##### 3.1.1.2. Authentication Context URIs for Uncertified Providers
 
-The assurance levels defined in section [3.1.1](#authentication-context-uris) may only be 
-used by Identity Providers that have been reviewed and approved by the Swedish Agency for 
-Digital Government (DIGG) according to \[[TillitRamv](#tillitramv)\]. For Identity Providers 
-that have not undergone a review process but make a self declaration to be compliant 
-with \[[TillitRamv](#tillitramv)\] this specification defines the following authentication
-context URIs:
+The assurance levels defined in section [3.1.1](#authentication-context-uris) may only be used by Identity Providers, or OpenID Providers, that have been reviewed and approved by the Swedish Agency for Digital Government (Digg) according to \[[TillitRamv](#tillitramv)\]. For providers that have not undergone a review process but make a self declaration to be compliant with \[[TillitRamv](#tillitramv)\] this specification defines the following authentication context URIs:
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
 
-Proxy Identity Providers that have eIDAS authentication as an option MUST NOT use the eIDAS
-authentication context URIs defined in section [3.1.1](#authentication-context-uris). 
-Instead they should use:
+Proxy providers that have eIDAS authentication as an option MUST NOT use the eIDAS authentication context URIs defined in section [3.1.1](#authentication-context-uris). Instead they should use:
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
@@ -283,8 +273,7 @@ Instead they should use:
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
 
-Identifiers for attribute sets defined in the Attribute Profile
-Specification for the Swedish eID Framework.
+Identifiers for attribute sets defined in the Sweden Connect SAML Attribute Specification.
 
 | **Identifier** | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- | :--- |
@@ -298,7 +287,7 @@ Specification for the Swedish eID Framework.
 <a name="entity-category-identifiers"></a>
 #### 3.1.3. Entity Category Identifiers
 
-Identifiers for categories of service entities, specified as an “Entity Attribute” in the federation metadata.
+Identifiers for categories of service entities, specified as an “Entity Attribute” in the SAML federation metadata.
 
 <a name="service-entity-categories"></a>
 ##### 3.1.3.1. Service Entity Categories
@@ -350,7 +339,7 @@ Service Contract Entity Category identifiers are indented for performing service
 
 All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract/<org>`, where `org` is the identifier for the defining organization.
 
-The Swedish eID Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
+The Sweden Connect Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
 
 <a name="general-entity-categories"></a>
 ##### 3.1.3.5. General Entity Categories
@@ -405,8 +394,7 @@ Identifiers associated with the Authentication Context X.509 extension
 <a name="sign-response-status-codes"></a>
 #### 3.1.7. Sign Response Status Codes
 
-Status code identifiers for the DSS Extension for SAML based Central Signing service. The following identifiers provide defined status codes
-for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign response message according to the OASIS standard “Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0” \[[OASIS-DSS](#oasis-dss)\].
+Status code identifiers for the DSS Extension for Central Signing services. The following identifiers provide defined status codes for inclusion in a `<ResultMinor>` element of the `<Result>` element of a sign response message according to the OASIS standard “Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0” \[[OASIS-DSS](#oasis-dss)\].
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
@@ -427,12 +415,12 @@ Some protocols require a URI identifier to uniquely identify the entity responsi
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[CertProf](#certprof)\] |
 
-> \[*\]: This also covers the Swedish Agency for Digital Government (DIGG) which has overtaken the Swedish E-identification Board's assignments.
+> \[*\]: This also covers the Swedish Agency for Digital Government (Digg) which has overtaken the Swedish E-identification Board's assignments.
 
 <a name="eidas-identifiers"></a>
 #### 3.1.9. eIDAS Identifiers
 
-This section defines identifiers used within the Swedish eID Framework to integrate with the eIDAS Framework.
+This section defines identifiers used within the Sweden Connect Framework to integrate with the eIDAS Framework.
 
 <a name="eidas-proxy-service-aliases"></a>
 ##### 3.1.9.1. eIDAS Proxy Service Aliases
@@ -558,7 +546,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
     id-ce-authContext  OBJECT IDENTIFIER ::= { id-ce 1 }    -- Auth context extension used in RFC 7773
     id-ce-svt          OBJECT IDENTIFIER ::= { id-ce 2 }    -- Signature Validation Token extension
 
-> \[*\]: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but this organisation has been overtaken by the Swedish Agency for Digital Government (DIGG) who now uses this OID arc for the Sweden Connect Technical Framework.
+> \[*\]: The OID 1.2.752.201 was assigned to the Swedish E-identification Board, but this organisation has been overtaken by the Swedish Agency for Digital Government (Digg) who now uses this OID arc for the Sweden Connect Framework.
 
 <a name="references"></a>
 ## 4. References
@@ -575,7 +563,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="tillitramv"></a>
 **\[TillitRamv\]**
-> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
 
 <a name="rfc7773"></a>
 **\[RFC7773\]**
@@ -636,7 +624,9 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
 
-**Changes between version 1.7 and version 1.b:**
+**Changes between version 1.7 and version 1.8:**
+
+- The document name was changed to "Sweden Connect - Registry for identifiers" from "Swedish eID Framework - Registry for identifiers".
 
 - Section 3.1.7, "Sign Response Status Codes", were extended with error codes for `authn-failed` and `security-violation`.
 

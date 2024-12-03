@@ -8,14 +8,14 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2022-10-05
+### 2024-12-02
 
 Diarienummer: **2019-267**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (DIGG)</a>, 2015-2022.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (Digg)</a>, 2015-2024.
 </p>
 
 ## Innehållsförteckning
@@ -46,7 +46,7 @@ Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvalt
 
 2. [**Tekniska specifikationer**](#tekniska-specifikationer)
 
-    2.1. [SAML-profiler](#saml-profiler)
+    2.1. [Profiler och specifikationer för SAML](#profiler-och-specifikationer-for-saml)
     
     2.1.1. [Deployment Profile for the Swedish eID Framework](#deployment-profile-for-the-swedish-eid-framework)
 
@@ -61,17 +61,25 @@ Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvalt
     2.1.6. [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](#bankid-profile)
     
     2.1.7. [Principal Selection in SAML Authentication Requests](#principal-selection-in-saml-authentication-requests)
+    
+    2.1.8. [User Message Extension in SAML Authentication Requests](#user-message-extension-in-saml-authentication-requests)
+    
+    2.2. [Profiler och specifikationer för OpenID Connect](#profiler-och-specifikationer-for-openid-connect)
+    
+    2.2.1. [OpenID Connect Profile for Sweden Connect](#openid-connect-profile-for-sweden-connect)
+    
+    2.2.2. [OpenID Connect Claims and Scopes Specification for Sweden Connect](#openid-connect-claims-and-scopes-specification-for-sweden-connect)
 
-    2.2. [Specifikationer för Underskrift](#specifikationer-foer-underskrift)
+    2.3. [Specifikationer för Underskrift](#specifikationer-foer-underskrift)
     
-    2.2.1. [Implementation Profile for using OASIS DSS in Central Signing Services](#implementation-profile-oasis-dss)
+    2.3.1. [Implementation Profile for using OASIS DSS in Central Signing Services](#implementation-profile-oasis-dss)
     
-    2.2.2. [DSS Extension for Federated Central Signing Services](#dss-extensions)
+    2.3.2. [DSS Extension for Federated Central Signing Services](#dss-extensions)
     
-    2.2.3. [Certificate Profile for Certificates Issued by Central Signing Services
+    2.3.3. [Certificate Profile for Certificates Issued by Central Signing Services
 ](#certificate-profile-css)
     
-    2.2.4. [Signature Activation Protocol for Federated Signing](#signature-activation)
+    2.3.4. [Signature Activation Protocol for Federated Signing](#signature-activation)
 
 3. [**Referenslista**](#referenslista)
 
@@ -87,6 +95,10 @@ Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvalt
 
 Sweden Connect Tekniskt Ramverk är anpassat för
 identitetsfederationer som baseras på SAML 2.0.
+
+> I den senaste versionen av Tekniskt ramverk har även specifikationer för OpenID Connect introducerats. För närvarande finns inget federationsstöd för OpenID Connect. Detta kommer att introduceras under 2025. 
+
+> Resterande delar av detta dokument beskriver endast SAML-federationen. Då OpenID Connect introduceras fullt ut kommer även detta dokument att beskriva denna teknik. 
 
 Förlitande parter erhåller identitetsintyg i ett standardiserat format
 från en legitimeringstjänst<sup>1</sup>.
@@ -124,7 +136,7 @@ e-legitimationen inte innehåller några specifika personuppgifter
 Figur 1: *Illustration av kommunikationen mellan de olika tjänsterna inom
 en identitetsfederation.*
 
-> \[1\]: Legitimeringstjänst benämns i annan dokumentation från DIGG också som identitetstjänst och intygstjänst. I detta dokument används dock uteslutande benämningen legitimeringstjänst.
+> \[1\]: Legitimeringstjänst benämns i annan dokumentation från Digg också som identitetstjänst och intygstjänst. I detta dokument används dock uteslutande benämningen legitimeringstjänst.
 
 <a name="tillitsramverk-och-saekerhetsnivaaer"></a>
 ### 1.2. Tillitsramverk och säkerhetsnivåer
@@ -133,7 +145,7 @@ Grunden för vilken säkerhetsnivå som tillämpas när en användare
 legitimerar sig är den tillitsnivå avseende e-legitimationen som
 e-tjänsten kräver. För att dessa säkerhetsnivåer ska kunna vara
 jämförbara inom ramen för federationen definieras fyra tillitsnivåer (1
-– 4) i Tillitsramverket för Svensk e-legitimation \[[EidTillit](#eidtillit)\] och tre
+– 4) i Tillitsramverket för Svensk e-legitimation \[[Digg.Tillit](#digg-tillit)\] och tre
 tillitsnivåer (låg, väsentlig, hög) i EU-förordningen eIDAS. Alla som
 utfärdar identitetsintyg måste visa att hela den process som ligger till
 grund för utfärdandet av identitetsintyg uppfyller kraven i den
@@ -422,16 +434,16 @@ dessa dokument normativa för leverans av tjänster inom
 identitetsfederationer som implementerar 
 tekniskt ramverk.
 
-<a name="saml-profiler"></a>
-### 2.1. SAML-profiler
+<a name="profiler-och-specifikationer-for-saml"></a>
+### 2.1. Profiler och specifikationer för SAML
 
 Identitetsfederationer som följer Sweden Connect tekniska ramverk är uppbyggda
-kring ”Deployment Profile for the Swedish eID Framework”, \[[EidProfile](#eidprofile)\]. Denna profil är influerad av, men inte normativt beroende på, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. \[[EidProfile](#eidprofile)\] innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
+kring ”Deployment Profile for the Swedish eID Framework”, \[[SAML.Profile](#saml-profile)\]. Denna profil är influerad av, men inte normativt beroende på, ”SAML V2.0 Deployment Profile for Federation Interoperability” \[[SAML2Int](#saml2int)\]. \[[SAML.Profile](#saml-profile)\] innehåller också regler och riktlinjer specifika för Sweden Connect tekniskt ramverk. 
 
 <a name="deployment-profile-for-the-swedish-eid-framework"></a>
 #### 2.1.1. Deployment Profile for the Swedish eID Framework
 
-”Deployment Profile for the Swedish eID Framework”, \[[EidProfile](#eidprofile)\], är huvuddokumentet för tekniskt ramverk och specificerar bland annat:
+”Deployment Profile for the Swedish eID Framework”, \[[SAML.Profile](#saml-profile)\], är huvuddokumentet för tekniskt ramverk och specificerar bland annat:
 
 - Hur SAML metadata ska byggas upp och tolkas.
 
@@ -448,7 +460,7 @@ kring ”Deployment Profile for the Swedish eID Framework”, \[[EidProfile](#ei
 
 Implementering av en infrastruktur för Svensk e-legitimation kräver
 olika former av identifierare för att representera objekt i
-datastrukturer. Dokumentet ”Swedish eID Framework - Registry for identifiers”, \[[EidRegistry](#eidregistry)\], definierar strukturen
+datastrukturer. Dokumentet ”Sweden Connect - Registry for identifiers”, \[[SC.Registry](#sc-registry)\], definierar strukturen
 för identifierare som tilldelats inom ramen för tekniskt ramverk, samt ett
 register över definierade identifierare.
 
@@ -456,7 +468,7 @@ register över definierade identifierare.
 #### 2.1.3. Attribute Specification for the Swedish eID Framework
 
 Specifikationen ”Attribute Specification for the Swedish eID Framework”,
-\[[EidAttributes](#eidattributes)\], deklarerar de SAML attributprofiler som används inom
+\[[SAML.Attributes](#saml-attributes)\], deklarerar de SAML attributprofiler som används inom
 identitetsfederationer som följer tekniskt ramverk inklusive de som
 ansluter till eIDAS via den svenska eIDAS-noden.
 
@@ -484,62 +496,82 @@ syften:
     för någon av de ovanstående typerna.
 
 Specifikationen ”Entity Categories for the Swedish eID Framework”
-\[[EidEntCat](#eidentcat)\] specificerar de entitetskategorier som definieras av tekniskt ramverk och beskriver dess betydelse.
+\[[SAML.EntCat](#saml-entcat)\] specificerar de entitetskategorier som definieras av tekniskt ramverk och beskriver dess betydelse.
 
 <a name="eidas-constructed-attributes-specification-for-the-swedish-eid-framework"></a>
 #### 2.1.5. eIDAS Constructed Attributes Specification for the Swedish eID Framework
 
 Specifikationen ”eIDAS Constructed Attributes Specification for the Swedish
-eID Framework”, \[[EidConstrAttributes](#eidconstrattributes)\], specificerar processer och regler
+eID Framework”, \[[SC.eIDAS.Attrs](#sc-eidas-attrs)\], specificerar processer och regler
 för hur ID-attribut konstrueras baserat på attribut som tas emot vid
 legitimering mot eIDAS.
 
 <a name="bankid-profile"></a>
 #### 2.1.6. Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
-Specifikationen "Implementation Profile for BankID Identity Providers within the Swedish eID Framework", \[[EidBankID](#eidbankid)\], definierar regler för hur en legitimeringstjänst som implementerar stöd för BankID skall utformas.
+Specifikationen "Implementation Profile for BankID Identity Providers within the Swedish eID Framework", \[[SAML.BankID](#saml-bankid)\], definierar regler för hur en legitimeringstjänst som implementerar stöd för BankID skall utformas.
 
 > **Notera:** Denna specifikation är inte normativ för uppfyllande av tekniskt ramverk. Den är endast relevant för legitimeringstjänster som implementerar stöd för BankID samt e-tjänster som använder dessa. Dock så skall legitimeringstjänster som implementerar stöd för BankID och vill ansluta till Sweden Connect-federationen uppfylla denna specifikation.
 
 <a name="principal-selection-in-saml-authentication-requests"></a>
 #### 2.1.7. Principal Selection in SAML Authentication Requests
 
-Specifikationen "Principal Selection in SAML Authentication Requests", \[[EidPrincipalSel](#eidprincipalsel)\], definierar en utökning till SAML som möjliggör för en förlitande part att informera en legitimeringstjänst vilken identitet den önskar ska legitimeras.
+Specifikationen "Principal Selection in SAML Authentication Requests", \[[SAML.Principal](#saml-principal)\], definierar en utökning till SAML som möjliggör för en förlitande part att informera en legitimeringstjänst vilken identitet den önskar ska legitimeras.
+
+<a name="user-message-extension-in-saml-authentication-requests"></a>
+#### 2.1.8. User Message Extension in SAML Authentication Requests
+
+Specifikationen "User Message Extension in SAML Authentication Requests", \[[SAML.UMessage](#saml-umessage)\], definierar en utökning till SAML som möjliggör för en förlitande part att inkludera ett visningsmeddelande i den legitimeringsbegäran som skickas till legitimeringstjänsten. Legitimeringstjänsten kan då visa upp detta meddelande för använderen under legitimeringssteget.
+
+<a name="profiler-och-specifikationer-for-openid-connect"></a>
+### 2.2. Profiler och specifikationer för OpenID Connect
+
+<a name="openid-connect-profile-for-sweden-connect"></a>
+#### 2.2.1. OpenID Connect Profile for Sweden Connect
+
+Profilen "OpenID Connect Profile for Sweden Connect", \[[OIDC.Profile](#oidc-profile)\], bygger vidare på [The Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html) som är en OpenID Connect-profil framtagen av [OIDC Sweden](https://www.oidc.se) för att främja interoperabilitet och säkerhet inom svenska OIDC-lösningar.
+
+\[[OIDC.Profile](#oidc-profile)\] tillför ytterligare krav gällande Sweden Connect-federationen.
+    
+<a name="openid-connect-claims-and-scopes-specification-for-sweden-connect"></a>
+#### 2.2.2. OpenID Connect Claims and Scopes Specification for Sweden Connect
+
+Specifikationen "OpenID Connect Claims and Scopes Specification for Sweden Connect", \[[OIDC.Claims](#oidc-claims)\], bygger vidare på specifikationen [Claims and Scopes Specification for the Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html) från [OIDC Sweden](https://www.oidc.se).
 
 <a name="specifikationer-foer-underskrift"></a>
-### 2.2. Specifikationer för Underskrift
+### 2.3. Specifikationer för Underskrift
 
 Detta stycke innehåller referenser till de dokument vilka definierar
 underskriftstjänster inom federationer som följer Sweden Connect tekniskt
 ramverk.
 
 <a name="implementation-profile-oasis-dss"></a>
-#### 2.2.1. Implementation Profile for using OASIS DSS in Central Signing Services
+#### 2.3.1. Implementation Profile for using OASIS DSS in Central Signing Services
 
 Implementationsprofilen ”Implementation Profile for Using OASIS DSS in
-Central Signing Services”, \[[EidDSSProfile](#eiddssprofile)\], specificerar en profil för
+Central Signing Services”, \[[Sign.DSS.Profile](#sign-dss-profile)\], specificerar en profil för
 underskriftsbegäran och respons enligt OASIS standarden "Digital
 Signature Service Core Protocols, Elements, and Bindings",
 \[[DSS](#dss)\].
 
 <a name="dss-extensions"></a>
-#### 2.2.2. DSS Extension for Federated Central Signing Services
+#### 2.3.2. DSS Extension for Federated Central Signing Services
 
-”DSS Extension for Federated Central Signing Services”, \[[EidDSSExt](#eiddssext)\], är en påbyggnad av 
+”DSS Extension for Federated Central Signing Services”, \[[Sign.DSS.Ext](#sign-dss-ext)\], är en påbyggnad av 
 OASIS standarden ”Digital Signature Service Core Protocols, Elements, and Bindings”, \[[DSS](#dss)\], där definitioner som behövs för underskrift enligt tekniskt ramverk specificeras.
 
 <a name="certificate-profile-css"></a>
-#### 2.2.3. Certificate Profile for Certificates Issued by Central Signing Services
+#### 2.3.3. Certificate Profile for Certificates Issued by Central Signing Services
 
-Certifikatprofilen ”Certificate profile for certificates issued by Central Signing services”, \[[EidCertProf](#eidcertprof)\], specificerar innehåll i signeringscertifikat. Denna profil tillämpar en
+Certifikatprofilen ”Certificate profile for certificates issued by Central Signing services”, \[[Sign.Cert.Profile](#sign-cert-profile)\], specificerar innehåll i signeringscertifikat. Denna profil tillämpar en
 ny certifikatextension till stöd för underskriftstjänster.
 
 Denna profil refererar till "Authentication Context Certificate Extension", \[[AuthContext](#authcontext)\], vilken beskriver hur ”Authentication Context” representeras i X.509 certifikat.
 
 <a name="signature-activation"></a>
-#### 2.2.4. Signature Activation Protocol for Federated Signing
+#### 2.3.4. Signature Activation Protocol for Federated Signing
 
-Specifikationen "Signature Activation Protocol for Federated Signing", \[[EidSigAct](#eidsigact)\], definierar ett "Signature Activation Protocol" (SAP) för implementation av "Sole Control Assurance Level 2" (SCAL2) enligt standarden "prEN 419241 - Trustworthy Systems Supporting Server Signing".
+Specifikationen "Signature Activation Protocol for Federated Signing", \[[Sign.Activation](#sign-activation)\], definierar ett "Signature Activation Protocol" (SAP) för implementation av "Sole Control Assurance Level 2" (SCAL2) enligt standarden "prEN 419241 - Trustworthy Systems Supporting Server Signing".
 
 <a name="referenslista"></a>
 ## 3. Referenslista
@@ -547,54 +579,66 @@ Specifikationen "Signature Activation Protocol for Federated Signing", \[[EidSig
 <a name="digg"></a>
 ### 3.1. DIGG
 
-<a name="eidtillit"></a>
-**\[EidTillit\]**
-> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
+<a name="digg-tillit"></a>
+**\[Digg.Tillit\]**
+> [Tillitsramverk för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
 
-<a name="eidprofile"></a>
-**\[EidProfile\]**
+<a name="sc-registry"></a>
+**\[SC.Registry\]**
+> [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+
+<a name="saml-profile"></a>
+**\[SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
-<a name="eidregistry"></a>
-**\[EidRegistry\]**
-> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
-
-<a name="eidattributes"></a>
-**\[EidAttributes\]**
+<a name="saml-attributes"></a>
+**\[SAML.Attributes\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
-<a name="eidentcat"></a>
-**\[EidEntCat\]**
+<a name="saml-entcat"></a>
+**\[SAML.EntCat\]**
 > [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
-<a name="eidconstrattributes"></a>
-**\[EidConstrAttributes\]**
+<a name="sc-eidas-attrs"></a>
+**\[SC.eIDAS.Attrs\]**
 > [eIDAS Constructed Attributes Specification for the Swedish eID
 > Framework](https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
-<a name="eidbankid"></a>
-**\[EidBankID\]**
+<a name="saml-bankid"></a>
+**\[SAML.BankID\]**
 > [Implementation Profile for BankID Identity Providers within the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html).
 
-<a name="eidprincipalsel"></a>
-**\[EidPrincipalSel\]**
+<a name="saml-principal"></a>
+**\[SAML.Principal\]**
 > [Principal Selection in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html).
 
-<a name="eiddssprofile"></a>
-**\[EidDSSProfile\]**
+<a name="saml-umessage"></a>
+**\[SAML.UMessage\]**
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
+
+<a name="oidc-profile"></a>
+**\[OIDC.Profile\]**
+> [OpenID Connect Profile for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OIDC_-_Sweden_Connect_-_OpenID_Connect_Profile.html).
+
+<a name="oidc-claims"></a>
+**\[OIDC.Claims\]**
+> [OpenID Connect Claims and Scopes Specification for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OIDC_-_Sweden_Connect_-_Claims_and_Scopes_Specification.html).
+
+<a name="sign-dss-profile"></a>
+**\[Sign.DSS.Profile\]**
 > [Implementation Profile for Using OASIS DSS in Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html).
 
-<a name="eiddssext"></a>
-**\[EidDSSExt\]**
+<a name="sign-dss-ext"></a>
+**\[Sign.DSS.Ext\]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
-<a name="eidcertprof"></a>
-**\[EidCertProf\]**
+<a name="sign-cert-profile"></a>
+**\[Sign.Cert.Profile\]**
 > [Certificate profile for certificates issued by Central Signing
 > services](https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html).
 
-<a name="eidsigact"></a>
-**\[EidSigAct\]**
+<a name="sign-activation"></a>
+**\[Sign.Activation\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
 <a name="oevriga-referenser"></a>

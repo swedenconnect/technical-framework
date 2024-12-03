@@ -6,45 +6,37 @@
 <img align="center" src="img/transparent.png"></img>
 </p>
 
-# Technical Specifications for the Swedish eID Framework
+# Sweden Connect Technical Specifications
 
-This repository comprises the specifications of the Swedish eID Framework.
+This repository comprises the specifications for the Sweden Connect Framework.
 
 ### About
 
-The specifications in this branch are the latest development of the Swedish eID Framework. The latest official release
-can be found in the [november-2021 branch](https://github.com/swedenconnect/technical-framework/tree/november-2021).
+The specifications in this branch are the latest development of the Sweden Connect Framework. The latest official release can be found in the [december-2024 branch](https://github.com/swedenconnect/technical-framework/tree/december-2024).
 
 ### Feedback and Questions
 
-If you have feedback or questions regarding the Technical Framework join the 
-[Sweden Connect Slack Workspace](https://swedenconnect.slack.com).
-
-Click <a href="mailto:martin@idsec.se?subject= I would like to join the SwedenConnect Slack Workspace">here</a> to ask for an invitation.
-
-### The Working Group
-
-The [Working Group for the Swedish eID Framework](working-group/wg.md) is responsible of development of future versions of the framework. 
+If you have feedback or questions regarding the Technical Framework open an [Issue](https://github.com/swedenconnect/technical-framework/issues).
 
 ### Releases
 
-For official and draft releases of the Swedish eID Framework, see the [releases section](https://github.com/swedenconnect/technical-framework/releases).
+For official and draft releases of the Sweden Connect Framework, see the [releases section](https://github.com/swedenconnect/technical-framework/releases).
 
 The releases can also be found under <https://docs.swedenconnect.se/technical-framework/>.
 
 ## Contents
 
-#### Introduction to the Swedish eID Framework
+#### Introduction to the Sweden Connect Technical Framework
 
-An overview document that describes the different parts of the Swedish eID Framework.
+An overview document that describes the different parts of the Sweden Connect Framework.
 
 > [Introduction to the Swedish eID Framework](00%20-%20Swedish%20eID%20Framework%20-%20Introduction.md) (in English)
 
 > [Tekniskt ramverk - Introduktion](00%20-%20Tekniskt%20ramverk%20-%20Introduktion.md) (in Swedish)
 
-#### Swedish eID Framework - Registry for identifiers
+#### Sweden Connect - Registry for identifiers
 
-This document defines the structure for identifiers assigned by the Swedish Agency for Digital Government (DIGG) and provides a registry for assigned identifiers.
+This document defines the structure for identifiers assigned by the Swedish Agency for Digital Government (Digg) and provides a registry for assigned identifiers.
 
 > [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md)
 
@@ -52,19 +44,32 @@ This document defines the structure for identifiers assigned by the Swedish Agen
 
 Below follows a listing of all specifications concerning user authentication.
 
-> OpenID Connect will be introduced as an alternative to SAML. Therefore we point out the protocol for the specifications below.
 
 #### SAML: Deployment Profile for the Swedish eID Framework
 
-This is the main specification for the Swedish eID Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services.
+This is the main SAML specification for the Sweden Connect Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services.
 
 > [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
 
+#### OIDC: OpenID Connect Profile for Sweden Connect
+
+This profile is an extension of [The Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html) for the Sweden Connect identity federation.
+
+The profile aims to get a baseline security and to facilitate interoperability between relying parties and OpenID providers within the Sweden Connect identity federation.
+
+> [OpenID Connect Profile for Sweden Connect](OpenID%20Connect%20Profile%20for%20Sweden%20Connect.md)
+
 #### SAML: Attribute Specification for the Swedish eID Framework
 
-This document specifies an attribute profile for the Swedish eID Framework. The attribute profile defines attributes for use within the Swedish eID Framework, and a number of defined attribute sets that may be referenced by other documents as means to specify specific attribute release requirements.
+This document specifies a SAML attribute profile for the Sweden Connect Framework. The attribute profile defines attributes for use within the Sweden Connect federation, and a number of defined attribute sets that may be referenced by other documents as means to specify specific attribute release requirements.
 
 > [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
+
+#### OIDC: OpenID Connect Claims and Scopes Specification for Sweden Connect
+
+This specification extends the [Claims and Scopes Specification for the Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html) with OpenID Connect claims and scopes for usage within the Sweden Connect federation.
+
+> [OpenID Connect Claims and Scopes Specification for Sweden Connect](OpenID%20Connect%20Claims%20and%20Scopes%20Specification%20for%20Sweden%20Connect.md)
 
 #### SAML: Entity Categories for the Swedish eID Framework
 
@@ -72,9 +77,9 @@ This specification contains the Entity Category definitions that are defined for
 
 > [06 - Entity Categories for the Swedish eID Framework](06%20-%20Entity%20Categories%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### eIDAS Constructed Attribute Specification for the Swedish eID Framework
+#### eIDAS Constructed Attribute Specification
 
-This document extends “Attribute Specification for the Swedish eID Framework”, providing specifications for constructed attributes.
+This document provides specifications for constructed attributes.
 
 The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes) delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
 
@@ -94,7 +99,7 @@ This specification defines an element that may be included in the Extensions ele
 
 #### SAML: User Message Extension in SAML Authentication Requests
 
-This specification defines an element that may be included in the Extensions element of a SAML `AuthnRequest` where the requesting Service Provider can specify a "user message" that is to be displayed for the user by the Identity Provider during the authentication phase.
+This specification defines an element that may be included in the Extensions element of a SAML authentication request where the requesting Service Provider can specify a "user message" that is to be displayed for the user by the Identity Provider during the authentication phase.
 
 > [18 - User Message Extension in SAML Authentication Requests](18%20-%20User%20Message%20Extension%20in%20SAML%20Authentication%20Requests.md)
 
@@ -148,6 +153,7 @@ Older version of the specifications are stored in the following branches:
 + [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) - For the March 2017 release
 + [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) - For the June 2018 release
 + [january-2020](https://github.com/swedenconnect/technical-framework/tree/january-2020) - For the January 2020 release
++ [november-2021](https://github.com/swedenconnect/technical-framework/tree/november-2021) - For the November 2021 release
 
 ---
 

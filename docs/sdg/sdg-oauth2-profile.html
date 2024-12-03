@@ -1,0 +1,665 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OAuth 2.0 Profile for the Swedish SDG Framework</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p class="img-container"><img src="assets/digg.png" alt="Logo"></p>
+<h1 id="oauth-20-profile-for-the-swedish-sdg-framework">OAuth 2.0 Profile for the Swedish SDG Framework</h1>
+<h3 id="version-10---draft-01---2023-05-16">Version: 1.0 - draft 01 - 2023-05-16</h3>
+<h2 id="abstract">Abstract</h2>
+<p>This specification defines an OAuth2 profile to use within the Single Digital Gateway (SDG)
+project. It profiles the OAuth2 protocol to get a baseline security and to facilitate interoperability
+between Relying Parties (clients), Resource Servers and Authorization Servers.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation-and-conventions">Requirements Notation and Conventions</a></p>
+<p> 1.2. <a href="#terminology">Terminology</a></p>
+<p> 1.3. <a href="#conformance">Conformance</a>    </p>
+</li>
+<li><p><a href="#client-types"><strong>Client Types</strong></a></p>
+<p> 2.1. <a href="#full-client-with-user-delegation">Full Client with User Delegation</a></p>
+<p> 2.2. <a href="#direct-access-client">Direct Access Client</a></p>
+</li>
+<li><p><a href="#authorization-requests"><strong>Authorization Requests</strong></a></p>
+<p> 3.1. <a href="#request-parameters">Request Parameters</a></p>
+<p> 3.1.1. <a href="#the-pkce-parameter">The PKCE Parameter</a></p>
+<p> 3.2. <a href="#requesting-user-authentication">Requesting User Authentication</a></p>
+</li>
+<li><p><a href="#token-endpoint-requests-and-token-issuance"><strong>Token Endpoint Requests and Token Issuance</strong></a></p>
+<p> 4.1. <a href="#requests-to-the-token-endpoint">Requests to the Token Endpoint</a></p>
+<p> 4.1.1. <a href="#client-authentication">Client Authentication</a></p>
+<p> 4.2. <a href="#token-responses-and-validation">Token Responses and Validation</a></p>
+</li>
+<li><p><a href="#resource-servers"><strong>Resource Servers</strong></a></p>
+<p> 5.1. <a href="#registration-of-resource-servers">Registration of Resource Servers</a></p>
+<p> 5.2. <a href="#validation-of-jwt-access-tokens">Validation of JWT Access Tokens</a></p>
+</li>
+<li><p><a href="#discovery"><strong>Discovery</strong></a></p>
+<p> 6.1. <a href="#authorization-server-metadata">Authorization Server Metadata</a></p>
+<p> 6.2. <a href="#obtaining-and-validating-metadata">Obtaining and Validating Metadata</a></p>
+</li>
+<li><p><a href="#client-registration"><strong>Client Registration</strong></a></p>
+<p> 7.1. <a href="#redirect-uri">Redirect URI</a></p>
+</li>
+<li><p><a href="#security-requirements"><strong>Security Requirements</strong></a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+</ol>
+<hr>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This specification defines an OAuth2 profile to use within the Single Digital Gateway (SDG)
+project. It profiles the OAuth2 protocol to get a baseline security and to facilitate interoperability
+between Relying Parties (clients), Resource Servers and Authorization Servers.</p>
+<p>The profile is loosely based on the International Government Assurance Profile for OAuth2.0 draft, 
+[<a href="#oauth2-igov">OAuth2.iGov</a>].</p>
+<blockquote>
+<p>The <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect Technical Framework</a> will
+introduce specifications for OAuth2 in the future. When this happens, these specifications will be
+normative within the Swedish SDG framework.</p>
+</blockquote>
+<p><a name="requirements-notation-and-conventions"></a></p>
+<h3 id="11-requirements-notation-and-conventions">1.1. Requirements Notation and Conventions</h3>
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="terminology"></a></p>
+<h3 id="12-terminology">1.2. Terminology</h3>
+<p>This specification uses the terms &quot;Access Token&quot;, &quot;Authorization Code&quot;, &quot;Authorization Endpoint&quot;,
+&quot;Authorization Grant&quot;, &quot;Authorization Server&quot;, &quot;Client&quot;, &quot;Client Authentication&quot;, &quot;Client Identifier&quot;,
+&quot;Client Secret&quot;, &quot;Grant Type&quot;, &quot;Protected Resource&quot;, &quot;Redirection URI&quot;, &quot;Refresh Token&quot;, 
+&quot;Resource Owner&quot;, &quot;Resource Server&quot;, &quot;Response Type&quot;, and &quot;Token Endpoint&quot; defined by 
+[<a href="#rfc6749">RFC6749</a>] and the terms &quot;Claim Name&quot;, &quot;Claim Value&quot;, and 
+&quot;JSON Web Token (JWT)&quot; defined by [<a href="#rfc7519">RFC7519</a>].</p>
+<p><a name="conformance"></a></p>
+<h3 id="13-conformance">1.3. Conformance</h3>
+<p>This specification defines requirements for the following entities:</p>
+<ul class="list">
+<li>OAuth 2.0 Clients (relying parties).</li>
+<li>OAuth 2.0 Authorization Servers.</li>
+<li>OAuth 2.0 Resource Servers (protected resources).</li>
+</ul>
+<p>When an entity compliant with this profile is interacting with other entities also compliant with this
+profile, in any valid combination, all entities MUST fully conform to the features and requirements of
+this specification. All interaction with other entities is outside the scope of this specification.</p>
+<p><a name="client-types"></a></p>
+<h2 id="2-client-types">2. Client Types</h2>
+<p>The following descriptions give patterns of deployment for use in different types of
+client applications based on the OAuth grant type. Additional grant types, such as assertions,
+chained tokens, or other mechanisms, are out of scope of this profile and must be covered
+separately by appropriate profile documents.</p>
+<p><a name="full-client-with-user-delegation"></a></p>
+<h3 id="21-full-client-with-user-delegation">2.1. Full Client with User Delegation</h3>
+<p>This client type applies to clients that act on behalf of a particular resource owner (user) and
+require delegation of that user’s authority to access the protected resource. Furthermore, these
+clients are capable of interacting with a separate web browser application to facilitate the 
+resource owner&#39;s interaction with the authentication endpoint of the Authorization Server.</p>
+<p>These clients MUST use the authorization code flow of OAuth2 by sending the resource owner (user)
+to the authorization endpoint to obtain authorization. The user MUST authenticate to the 
+authorization endpoint. The user’s web browser is then redirected back to a URI hosted by the 
+client service, from which the client can obtain an authorization code passed as a query parameter.
+The client then presents that authorization code along with its own credentials (<code>private_key_jwt</code>) 
+to the Authorization Server&#39;s token endpoint to obtain an access token.</p>
+<p>This client type MAY request and be issued a refresh token if the security parameters of the access
+request allow for it.</p>
+<p><a name="direct-access-client"></a></p>
+<h3 id="22-direct-access-client">2.2. Direct Access Client</h3>
+<p>This profile applies to clients that connect directly to Resource Servers and do not act on 
+behalf of a particular resource owner (user), such as those clients that facilitate bulk transfers.</p>
+<p>These clients use the client credentials flow of OAuth2 by sending a request to the token endpoint
+with the client&#39;s credentials and obtaining an access token in the response. Since this profile does
+not involve an authenticated user, this flow is appropriate only for trusted applications, such as
+those that would traditionally use a developer key. For example, a partner system that performs bulk
+data transfers between two systems would be considered a direct access client.</p>
+<p>This client type MUST NOT request or be issued a refresh token.</p>
+<p><a name="authorization-requests"></a></p>
+<h2 id="3-authorization-requests">3. Authorization Requests</h2>
+<p>Full clients clients making a request to the authorization endpoint MUST include the <code>state</code> parameter
+and use an unpredictable value with at least 128 bits of entropy. Clients MUST validate the value of the
+<code>state</code> parameter upon return to the redirect URI and MUST ensure that the <code>state</code> value is securely
+tied to the user’s current session (e.g., by relating the state value to a session identifier issued
+by the client software to the browser).</p>
+<p>Clients MUST include the <code>redirect_uri</code> parameter in the authorization request and the value MUST be
+the full redirect URI. To prevent open redirection and other injection attacks, the Authorization Server
+MUST match the entire redirect URI using a direct string comparison against registered values and MUST
+reject requests with an invalid or missing redirect URI.</p>
+<p>The following is a sample response from a (web-based) Client to the user’s browser for the purpose of
+redirecting the end user to the Authorization Server&#39;s authorization endpoint (wrapping for display
+purposes):</p>
+<pre class="hljs"><code>HTTP/<span class="hljs-number">1.2</span> <span class="hljs-number">302</span> Found
+Cache-Control: no-cache
+<span class="hljs-symbol">Connection:</span> close
+Content-Type: text/plain; charset=UTF<span class="hljs-number">-8</span>
+<span class="hljs-symbol">Date:</span> Wed, <span class="hljs-number">04</span> May <span class="hljs-number">2013</span> <span class="hljs-number">11</span>:<span class="hljs-number">26</span>:<span class="hljs-number">54</span> GMT
+<span class="hljs-symbol">Location:</span> https:<span class="hljs-comment">//as.example.se/authorize?client_id=example_client \ </span>
+  <span class="hljs-variable">&amp;state</span>=cd567e...ca557c30d \
+  <span class="hljs-variable">&amp;response_type</span>=code \
+  <span class="hljs-variable">&amp;scope</span>=read_private_resource \
+  <span class="hljs-variable">&amp;redirect_uri</span>=https%<span class="hljs-number">3</span>A%<span class="hljs-number">2F</span>%<span class="hljs-number">2F</span>client.example.se%<span class="hljs-number">2F</span>callback
+<span class="hljs-symbol">Status:</span> <span class="hljs-number">302</span> Found</code></pre><p>This causes the browser to send the following (non-normative) request to the authorization endpoint
+(inline wraps for display purposes only):</p>
+<pre class="hljs"><code><span class="hljs-builtin-name">GET</span> /authorize?<span class="hljs-attribute">client_id</span>=example_client \
+  &amp;<span class="hljs-attribute">state</span>=cd567e...ca557c30d \
+  &amp;<span class="hljs-attribute">response_type</span>=code \
+  &amp;<span class="hljs-attribute">scope</span>=read_private_resource \
+  &amp;<span class="hljs-attribute">redirect_uri</span>=https%3A%2F%2Fclient.example.se%2Fcallback
+  HTTP/1.1
+Host: as.example.se</code></pre><p><a name="request-parameters"></a></p>
+<h3 id="31-request-parameters">3.1. Request Parameters</h3>
+<p><a name="the-pkce-parameter"></a></p>
+<h4 id="311-the-pkce-parameter">3.1.1. The PKCE Parameter</h4>
+<p>A client MAY choose to use the Proof Key for Code Exchange (PKCE) extension, [<a href="#rfc7636">RFC7636</a>] 
+and include the <code>code_challenge</code> and <code>code_challenge_method</code> parameters.</p>
+<p>If PKCE is used, the code challenge method <code>S256</code> SHOULD be used.</p>
+<p>An Authorization Server compliant with this specification MUST support the PKCE extension 
+including support for the <code>S256</code> code challenge method.</p>
+<p>An Authorization Server MUST NOT allow a client to use the <code>plain</code> code challenge method.</p>
+<p><a name="requesting-user-authentication"></a></p>
+<h3 id="32-requesting-user-authentication">3.2. Requesting User Authentication</h3>
+<p>An Authorization Server compliant with this specification that supports clients using
+the authorization code grant type (<a href="#full-client-with-user-delegation">2.1</a>) MUST also
+be able to act as an OpenID Provider according to [<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<p>This means that a Full Client (<a href="#full-client-with-user-delegation">2.1</a>) can delegate
+user authentication to the Authorization Server (OpenID Provider) by including the
+<code>openid</code> scope parameter in the request to the authorization endpoint.</p>
+<p>Additional OpenID Connect scopes MAY also be supplied in the request. See 
+[<a href="#oidc-attr-sweden">OIDC.Attr.Sweden</a>] and the &quot;Sweden Connect - OpenID Connect
+Claims and Scopes Specification&quot;<sup>1</sup>.</p>
+<p>Below follows an example of a request to the Authorization Server that will lead to 
+that both an access token and an OpenID Connect ID token can be obtained from the
+token endpoint (see below): </p>
+<pre class="hljs"><code><span class="hljs-builtin-name">GET</span> /authorize?<span class="hljs-attribute">client_id</span>=example_client \
+  &amp;<span class="hljs-attribute">state</span>=cd567e...ca557c30d \
+  &amp;<span class="hljs-attribute">response_type</span>=code \
+  &amp;<span class="hljs-attribute">scope</span>=openid https%3A%2F%2Fid.oidc.se%2Fscope%2FnaturalPersonNumber read_private_resource \
+  &amp;<span class="hljs-attribute">prompt</span>=login \
+  &amp;<span class="hljs-attribute">redirect_uri</span>=https%3A%2F%2Fclient.example.se%2Fcallback \
+  &amp;<span class="hljs-attribute">resource</span>=https%3A%2F%2Fresource1.example.se
+  HTTP/1.1
+Host: as.example.se</code></pre><p>Compared with the earlier example there are two differences:</p>
+<ul class="list">
+<li><p>The scopes <code>openid</code> and <code>https://id.oidc.se/scope/naturalPersonNumber</code> are included.
+This tells the Authorization Server that the user should be authenticated and that the
+client wishes to receive the identity claims that are part of the naturalPersonNumber
+scope, see section 3.2 of [<a href="#oidc-attr-sweden">OIDC.Attr.Sweden</a>].</p>
+</li>
+<li><p>The <code>prompt</code> parameter is included which is an OpenID Connect-specific request
+parameter. The value <code>login</code> tells the Authorization Server that the user must be
+prompted to authenticate, i.e., SSO is disabled.</p>
+</li>
+</ul>
+<p><strong>Note:</strong> A &quot;pure&quot; Authorization Server, i.e., an AS that does not support OpenID Connect,
+will also authenticate the end-user, but in these cases the client has no way of affect the
+authentication and thus can not request specific identity attributes to be delivered.</p>
+<p>Also, if the client wishes to receive specific identity claims in the resulting
+access token JWT, see section <a href="#jwt-access-tokens">4.2.1</a> this needs to be prepared for 
+already during the authorization request by including the appropriate OpenID Connect
+scopes. If an authorization request does not include these scopes the Authorization Server 
+will only include the <code>sub</code> claim in the JWT.</p>
+<blockquote>
+<p><strong>[1]:</strong> At the time of writing this specification the Sweden Connect Claims and Scopes
+specification is not ready for publication. It will define claims and scopes for 
+eIDAS authentication.</p>
+</blockquote>
+<p><a name="token-endpoint-requests-and-token-issuance"></a></p>
+<h2 id="4-token-endpoint-requests-and-token-issuance">4. Token Endpoint Requests and Token Issuance</h2>
+<p><a name="requests-to-the-token-endpoint"></a></p>
+<h3 id="41-requests-to-the-token-endpoint">4.1. Requests to the Token Endpoint</h3>
+<p>Requests to the Authorization Server token endpoint can be made to:</p>
+<ul class="list">
+<li><p>request an ID token,</p>
+</li>
+<li><p>request a JWT access token, or</p>
+</li>
+<li><p>request both an ID token <strong>and</strong> a JWT access token.</p>
+</li>
+</ul>
+<p>Requests to the Authorization Server token endpoint MUST be sent and processed according to
+section 3.2 of [<a href="#rfc6749">RFC6749</a>]. For For Full Clients 
+(<a href="#full-client-with-user-delegation">2.1</a>) section 4.1.3 MUST be followed and
+for Direct Access Clients (<a href="#direct-access-client">2.2</a>) section 4.4.2 MUST be followed.</p>
+<p>If the grant type is <code>authorization_code</code> and the corresponding authorization request
+contained the <code>openid</code> scope, the Authorization Server MUST deliver an ID token in the 
+token response message, see section 3 of [<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<p>If a JWT access token that is to be passed to a resource server is requested, the client 
+MUST include the <code>resource</code> parameter in the token request according to section 2.2 of
+[<a href="#rfc8707">RFC8707</a>]. The value of this parameter MUST be set to the registered 
+identity<sup>1</sup> of the resource server where the client intends to use the requested
+access token. </p>
+<p>In cases where the client needs to communicate with multiple resource servers it is
+RECOMMENDED that separate token requests are sent<sup>2</sup>, i.e., one access token per
+intended resource server will be issued. In these cases the client passes the refresh
+token i subsequent requests.</p>
+<p>An Authorization Server compliant with this profile MUST support the <code>resource</code> parameter
+and, if the supplied resource server ID is accepted by the Authorization Server, its
+exact value MUST be assigned to the resulting token audience, see section <a href="#jwt-access-tokens">4.2.1</a>
+below.</p>
+<p>If the client requires that identity claims from the user authentication should be included
+in the resulting JWT access token, the client MUST include the OpenID Connect scopes
+identifying these claims. A client MUST NOT include an OpenID Connect scope that was not
+included in the corresponding authorization request (see section <a href="#requesting-user-authentication">3.2</a>
+above).</p>
+<p>In the special case where the client only requires an ID token and not a JWT access token
+to be passed to a resource server, the client MUST omit the <code>resource</code> parameter. The Authorization
+Server MUST then issue an opaque string as the value of the access token. This token
+can only be understood by the Authorization Server and MAY be used in further communications
+with the Authorization Server.</p>
+<blockquote>
+<p><strong>[1]:</strong> How the registered identities for resource servers are made known to OAuth2 
+clients are out of scope for this specification.</p>
+</blockquote>
+<blockquote>
+<p><strong>[2]:</strong> [<a href="#rfc8707">RFC8707</a>] allows for passing multiple <code>resource</code> parameters, and
+thus getting an access token having multiple audiences. The problem with this usage may be
+that the requested scopes then need to apply for all resource servers, and this is not always
+the case. Another problem is that multiple audiences in the JWT will reveal unwanted 
+information to the resource servers.</p>
+</blockquote>
+<p><a name="client-authentication"></a></p>
+<h4 id="411-client-authentication">4.1.1. Client Authentication</h4>
+<p>Full clients (<a href="#full-client-with-user-delegation">2.1</a>) and direct access clients 
+(<a href="#direct-access-client">2.2</a>) MUST authenticate to Authorization Server&#39;s token endpoint
+using a JWT assertion as defined by [<a href="#rfc7523">RFC7523</a>] using only the 
+<code>private_key_jwt</code> method defined in [<a href="#openid-core">OpenID.Core</a>].</p>
+<p>The following claims MUST be included in the token request:</p>
+<ul class="list">
+<li><p><code>client_assertion_type</code> - Set to <code>urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</p>
+</li>
+<li><p><code>client_assertion</code> - The value of the signed client authentication JWT generated. The Client
+MUST generate a new assertion JWT for each call to the token endpoint. See below.</p>
+</li>
+</ul>
+<p>The JWT assertion MUST use the claims as follows: </p>
+<ul class="list">
+<li><code>iss</code> - The client ID of the client creating the token.</li>
+<li><code>sub</code> - The client ID of the client creating the token.</li>
+<li><code>aud</code> - The URL of the Authorization Server&#39;s token endpoint.</li>
+<li><code>iat</code> - The time that the token was created by the client</li>
+<li><code>exp</code> - The expiration time, after which the token MUST be considered invalid.</li>
+<li><code>jti</code> - A unique identifier generated by the client for this authentication. This identifier MUST
+contain at least 128 bits of entropy and MUST NOT be re-used by any subsequent authentication token.</li>
+</ul>
+<p>The following sample claim set illustrates the use of the required claims for a client authentication
+JWT as defined in this profile. Additional claims MAY be included in the claim set.</p>
+<pre class="hljs"><code>{
+  <span class="hljs-attr">&quot;iss&quot;</span>: <span class="hljs-string">&quot;example_client&quot;</span>,
+  <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;example_client&quot;</span>,
+  <span class="hljs-attr">&quot;aud&quot;</span>: <span class="hljs-string">&quot;https://as.example.se/token&quot;</span>,
+  <span class="hljs-attr">&quot;iat&quot;</span>: <span class="hljs-number">1683200128</span>,
+  <span class="hljs-attr">&quot;exp&quot;</span>: <span class="hljs-number">1683200188</span>, 
+  <span class="hljs-attr">&quot;jti&quot;</span>: <span class="hljs-string">&quot;AB786tg9kLTMNB90&quot;</span>
+}</code></pre><p>The JWT assertion MUST be signed by the client using the client&#39;s private key. Section 7.1 of 
+[<a href="#oidc-sweden">OIDC.Sweden</a>], lists the requirements for allowed and required signature algorithms.</p>
+<p>The Authorization Server MUST enforce client authentication as described above for the authorization
+code and client credentials grant types. </p>
+<p><a name="token-responses-and-validation"></a></p>
+<h3 id="42-token-responses-and-validation">4.2. Token Responses and Validation</h3>
+<p>An Authorization Server compliant with this specification MUST issue refresh tokens to Full
+Clients (<a href="#full-client-with-user-delegation">2.1</a>). Direct Access Clients (<a href="#direct-access-client">2.2</a>)
+MUST NOT be issued refresh tokens.</p>
+<p>If the corresponding authorization request contained the <code>openid</code> scope, the Authorization Server
+MUST include an ID token in the token response according to section 3.2 of 
+[<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<p><a name="jwt-access-tokens"></a></p>
+<h4 id="421-jwt-access-tokens">4.2.1. JWT Access Tokens</h4>
+<p>Authorization Servers compliant with this specification MUST issue access tokens that are 
+cryptographically signed tokens in the JSON Web Token (JWT) format, [<a href="#rfc7519">RFC7519</a>]. The
+only exception is when a token request did not contain a <code>resource</code> parameter and the corresponding
+authorization request contained the <code>openid</code> scope. In these cases the Authorization Server
+MUST issue an access token that is an opaque string. This token only has meaning for the 
+Authorization Server itself.</p>
+<p>The information carried in the JWT is intended to allow a resource server to validate the integrity
+of the token without any additional invocations, and to allow the resource server to determine which
+Authorization Server issued the token. Entities compliant with this specification SHOULD NOT use token 
+introspection, meaning that all access tokens issued MUST contain all the needed information both
+regarding token validation and the data needed by the resource server to take an authorization 
+decision.</p>
+<p>An Authorization Server compliant with this specification MUST issue JWT access tokens that follow 
+<a href="#rfc9068">JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens</a>, [<a href="#rfc9068">RFC9068</a>], 
+with the following clarifications and overrides:</p>
+<ul class="list">
+<li><p>The <code>aud</code> claim is REQUIRED and MUST match the <code>resource</code> parameter from the corresponding
+token request, see section <a href="#requests-to-the-token-endpoint">4.1</a> above. If more than
+one <code>resource</code> parameter was sent, the <code>aud</code> claim MAY hold several values (in an array).</p>
+</li>
+<li><p>The <code>sub</code> claim is REQUIRED and for clients using the authorization code grant type
+(<a href="#full-client-with-user-delegation">2.1</a>) the value SHOULD contain the Swedish personal 
+identity number (or coordination number), and for clients using the client credentials grant 
+type (<a href="#direct-access-client">2.2</a>) the value MUST be the same as the <code>client_id</code>.</p>
+</li>
+<li><p>The <code>scope</code> claim, as defined in section 4.2 of [<a href="#rfc8693">RFC8693</a>], is REQUIRED if 
+the corresponding token request included the <code>scope</code> parameter. All the individual scope 
+strings in the <code>scope</code> claim MUST have meaning for the resources indicated in the <code>aud</code> claim.</p>
+</li>
+</ul>
+<p>If the token request contained an OpenID scope value, the Authorization Server MUST attempt<sup>1</sup> 
+to include the claims identified by the scope. In these cases the following claims MUST
+be included in the JWT:</p>
+<ul class="list">
+<li><p><code>auth_time</code> - The authentication time as defined in section 2 of [<a href="#openid-core">OpenID.Core</a>].</p>
+</li>
+<li><p><code>acr</code> - The authentication context class for the authentication as defined in section 2 of 
+[<a href="#openid-core">OpenID.Core</a>].</p>
+</li>
+<li><p><code>https://id.oidc.se/claim/authnProvider</code> - The identity of the authentication/identity provider
+that authenticated the user on behalf of the Authorization Server. See section 2.3.5 of
+[<a href="#oidc-attr-sweden">OIDC.Attr.Sweden</a>]. <br/>If the Authorization Server did not delegate user
+authentication this claim will contain the identity of the Authorization Server.</p>
+</li>
+</ul>
+<p>Furthermore, the JWT MUST be signed with an asymmetric algorithm. See section 2.1 of 
+[<a href="#rfc9068">RFC9068</a>] and section 7.1 of [<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<blockquote>
+<p>[1]: Since not all claims for a given OpenID Connect scope may be available from a particular
+user authentication process, we write &quot;MUST attempt&quot; and not &quot;MUST&quot;. Claims issuance from an OpenID
+Provider is &quot;best effort&quot;-based and a consumer of the resulting token should always check whether
+the necessary claims are included in the token.</p>
+</blockquote>
+<p><a name="token-lifetime"></a></p>
+<h4 id="422-token-lifetime">4.2.2. Token Lifetime</h4>
+<p>This specification provides the following requirements regarding token lifetimes:</p>
+<ul class="list">
+<li><p>For clients using the authorization code grant type (<a href="#full-client-with-user-delegation">2.1</a>), access
+tokens SHOULD have a valid lifetime no greater than 60 minutes, and refresh tokens SHOULD have a valid
+lifetime no greater than 24 hours.</p>
+</li>
+<li><p>For clients using the client credentials grant type (<a href="#direct-access-client">2.2</a>), access tokens
+SHOULD have a valid lifetime no greater than 60 minutes.</p>
+</li>
+</ul>
+<p>Any active token MAY be revoked at any time.</p>
+<p><a name="resource-servers"></a></p>
+<h2 id="5-resource-servers">5. Resource Servers</h2>
+<p>An Resource Server, or protected resource, within the SDG framework is basically an API for a
+particular service. Each API must be identified with an identified that is unique within the
+SDG federation. An organization, or service provider, MAY have several API:s, each with a
+unique identifier.</p>
+<p>A client making an API-call to a protected resource MUST, after it have obtained an access
+token from the Authorization Server, include the access token in the HTTP request as a value
+to the &quot;Authorization header&quot; field. This value is prefixed by the text &quot;Bearer &quot;. See section
+2.1 of [<a href="#rfc6750">RFC6750</a>].</p>
+<p><a name="registration-of-resource-servers"></a></p>
+<h3 id="51-registration-of-resource-servers">5.1. Registration of Resource Servers</h3>
+<p>When a resource server registers at the Authorization Server it is assigned a unique identifier
+in the form of an URI. It will also receive the Authorization Server Metadata document, see
+section <a href="#authorization-server-metadata">6.1</a> below, from where it can extract the trusted
+key to use when verifying JWT signatures and the Authorization Server identity
+(see <a href="#validation-of-jwt-access-tokens">Validation of JWT Access Tokens</a> below).</p>
+<p>The resource server supplies the Authorization Server with the following information:</p>
+<ul class="list">
+<li><p>Required scope(s).<br />Initially, very few scopes will be used within SDG, and it is
+likely that API:s all &quot;require&quot; the same scope, e.g., <code>read-api</code>. </p>
+</li>
+<li><p>the organization name and description of the API service, and</p>
+</li>
+<li><p>optionally, whether the API has any specific requirements concerning which clients that
+may use the service.</p>
+</li>
+</ul>
+<p>Also. If the API handles data tied to a user (natural person) and requires that the access
+tokens contain information about that the user has authenticated at the Authorization
+Server, and explicitly or implicitly given his or hers consent for the calling client to 
+perform an action, this information must be part of the registration. If the Resource Server 
+requires more information than the <code>sub</code> claim (that normally contains the Swedish personal
+identity number or coordination number) the required identity claims should be made known in the
+registration phase.</p>
+<blockquote>
+<p>Note: The above is not the normative description of API-registration in SDG. This information
+is provided via other channels.</p>
+</blockquote>
+<p><a name="validation-of-jwt-access-tokens"></a></p>
+<h3 id="52-validation-of-jwt-access-tokens">5.2. Validation of JWT Access Tokens</h3>
+<p>An JWT access token serves several purposes for a resource server when receiving it in an 
+API call. </p>
+<ul class="list">
+<li><p>The party that is making the call can be identified via the <code>client_id</code> claim.</p>
+</li>
+<li><p>The scopes, or rights, assigned to the calling party by the trusted Authorization Server
+can be found via the <code>scope</code> claim.</p>
+</li>
+<li><p>The resource owner&#39;s (the user&#39;s) identity is found in the <code>sub</code> claim, and additional identity
+claims may also be included (see section <a href="#jwt-access-tokens">4.2.1</a> above). </p>
+</li>
+</ul>
+<p>So, in other words, the Authorization Server, whom is trusted by the API, has authenticated both
+the client and the user and verified that the client is authorized to make the call to the API
+(in the name of the user).</p>
+<p>Before a resource server grants access to an API call it MUST validate the received JWT access
+token according to <a href="https://www.rfc-editor.org/rfc/rfc9068.html#name-validating-jwt-access-token">section 4</a> of [<a href="#rfc9068">RFC9068</a>].</p>
+<p>Also, if the API call concerns getting, or manipulating, data tied to a user (resource owner) and
+the resource server requires proof that the user has authenticated at the Authorization
+Server, and explicitly or implicitly given his or hers consent for the calling client to 
+perform this action, the resource server MUST ensure that the identity claims<sup>1</sup> of the JWT
+matches the user related parameters of the API call. </p>
+<p>A resource server MUST NOT allow access if a JWT lacks identity claims required by the API
+endpoint policy.</p>
+<blockquote>
+<p><strong>[1]:</strong> Such identity claims are the <code>sub</code> claim and additional identity claims that are
+dependent on the scopes passed to the token endpoint (see section <a href="#requests-to-the-token-endpoint">4.1</a>
+above).</p>
+</blockquote>
+<p><a name="discovery"></a></p>
+<h2 id="6-discovery">6. Discovery</h2>
+<p>An Authorization Server compliant with this specification MUST provide an OAuth2 discovery endpoint
+as described in section 3 of [<a href="#rfc8414">RFC8414</a>].</p>
+<p>If the Authorization Server is also an OpenID Connect Provider, it MUST follow the requirements
+from section 5.2 of [<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<p><a name="authorization-server-metadata"></a></p>
+<h3 id="61-authorization-server-metadata">6.1. Authorization Server Metadata</h3>
+<p>An Authorization Server compliant with this specification MUST provide a Metadata Document according
+to section 2 of [<a href="#rfc8414">RFC8414</a>] with the following extensions:</p>
+<ul class="list">
+<li><p>The <code>jwks_uri</code> field is REQUIRED.</p>
+</li>
+<li><p>The <code>scopes_supported</code> field is REQUIRED.</p>
+</li>
+<li><p>The <code>grant_types</code> field is REQUIRED and MUST be set to <code>[ &quot;authorization_code&quot; ]</code>.</p>
+</li>
+<li><p>The <code>token_endpoint_auth_methods_supported</code> field is REQUIRED and MUST be set to <code>[ &quot;private_key_jwt&quot; ]</code>.</p>
+</li>
+<li><p>The <code>token_endpoint_auth_signing_alg_values_supported</code> field is REQUIRED and MUST contain <code>RS256</code>
+and <code>ES256</code>.</p>
+</li>
+<li><p>The <code>code_challenge_methods_supported</code> field is REQUIRED. JSON array containing a list of PKCE
+code challenge methods supported by this Authorization Server. The array MUST include the 
+<code>S256</code> method and MUST NOT include the <code>plain</code> method.</p>
+</li>
+<li><p>The <code>signed_metadata</code> is REQUIRED. See section 2.1 of [<a href="#rfc8414">RFC8414</a>].</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The issuer name (<code>iss</code>) and signing key/certificate for the <code>signed_metadata</code> is 
+distributed to SDG clients out-of-band.</p>
+</blockquote>
+<p><a name="obtaining-and-validating-metadata"></a></p>
+<h3 id="62-obtaining-and-validating-metadata">6.2. Obtaining and Validating Metadata</h3>
+<p>An entity wishing to download an Authorization Server&#39;s Metadata document SHOULD follow
+the methods described in sections 3.1 and 3.2 of [<a href="#rfc8414">RFC8414</a>] and
+validate the downloaded metadata according to section 3.3.</p>
+<p>An entity (Client or Resource Server) compliant with this specification SHOULD support
+the <code>signed_metadata</code> field of the Metadata document. Before accepting the
+metadata values contained in this field the signature MUST be successfully verified
+against an out-of-band distributed key/certificate.</p>
+<p><a name="client-registration"></a></p>
+<h2 id="7-client-registration">7. Client Registration</h2>
+<p>All Clients MUST register with the Authorization Server. </p>
+<p>Client registration MAY be completed by either static configuration (out-of-band, through an
+administrator, etc.) or dynamically (see [<a href="#rfc7591">RFC7591</a>]).</p>
+<p>A Client MUST NOT be registered both as a Full Client (<a href="#full-client-with-user-delegation">2.1</a>)
+and a Direct Access Client (<a href="#direct-access-client">2.2</a>), i.e., the client MUST NOT register a
+Client Metadata document where the <code>grant_types</code> field includes both the <code>authorization_code</code>
+and the <code>client_credentials</code> grants (see listing below).</p>
+<p>An OAuth2 Client compliant with this specification that also acts as an OpenID Connect Client
+MUST also follow the requirements put in section 6 of [<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<p>Section 2 of [<a href="#rfc7591">RFC7591</a>] states requirements for the Client Metadata
+document. This specification puts the following additional requirements:</p>
+<ul class="list">
+<li><p>Each registered client receives a unique Client ID during the registration process. This ID is
+later used by the client to identify itself in authorization and token requests. </p>
+</li>
+<li><p><code>redirect_uris</code> - REQUIRED for Full Clients (<a href="#full-client-with-user-delegation">2.1</a>). See section
+<a href="#redirect-uri">7.1</a> below.</p>
+</li>
+<li><p><code>token_endpoint_auth_method</code> - REQUIRED for all clients compliant with this specification. MUST be
+set to <code>private_key_jwt</code>, see [<a href="#openid-core">OpenID.Core</a>].</p>
+</li>
+<li><p><code>grant_types</code> - REQUIRED. The array MUST include <code>authorization_code</code> for Full Clients (<a href="#full-client-with-user-delegation">2.1</a>) and <code>client_credentials</code> for Direct Access Clients (<a href="#direct-access-client">2.2</a>).</p>
+</li>
+<li><p><code>response_types</code> - REQUIRED for Full Clients (<a href="#full-client-with-user-delegation">2.1</a>). The array MUST include the <code>code</code> value and MUST NOT include the <code>token</code> value (implicit response type).</p>
+</li>
+<li><p><code>scope</code> - REQUIRED. String containing a space-separated list of scope values.</p>
+</li>
+<li><p><code>jwks</code> - RECOMMENDED. The client&#39;s JSON Web Key Set [JWK] document, passed by value. See [<a href="#rfc7517">RFC7517</a>]. If not provided, the <code>jwks_uri</code> MUST be present and be reachable by the Authorization 
+Server and point to the client&#39;s public key set. See note about <code>jkws_uri</code> below.</p>
+</li>
+<li><p><code>client_name</code> - REQUIRED for Full Clients (<a href="#full-client-with-user-delegation">2.1</a>). 
+Human-readable string name of the client to be presented to the  end-user during authorization.
+The value of this field SHOULD be internationalized with values for Swedish and English supplied.
+See section 2.2 of [<a href="#rfc7591">RFC7591</a>]</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> This specification, unlike [<a href="#rfc7591">RFC7591</a>], prefers that JWK:s are
+registered by value (<code>jwks</code>) instead of by reference (<code>jwks_uri</code>). The reason for this is that it is
+unlikely that all clients within the SDG Framework manage to publish public URL:s containing a JWK. </p>
+</blockquote>
+<p><a name="redirect-uri"></a></p>
+<h3 id="71-redirect-uri">7.1. Redirect URI</h3>
+<p>Clients using the authorization code grant type MUST register their full redirect URIs. 
+The Authorization Server MUST validate the redirect URI given by the client at the authorization
+endpoint using strict string comparison.</p>
+<p>A Client MUST protect the values passed back to its redirect URI by ensuring that the redirect URI
+is one of the following:</p>
+<ul class="list">
+<li>Hosted on a website with TLS protection (HTTPS)</li>
+<li>Hosted on the local domain of the client (e.g., <code>https://localhost:8443</code>) - <em>For testing only</em>.</li>
+</ul>
+<p>Clients SHOULD NOT have multiple redirect URIs on different domains.</p>
+<p>Clients MUST NOT forward values passed back to their redirect URI:s to other arbitrary or 
+user-provided URI:s.</p>
+<p><a name="security-requirements"></a></p>
+<h2 id="8-security-requirements">8. Security Requirements</h2>
+<p>See <a href="https://www.oidc.se/specifications/swedish-oidc-profile.html#security-requirements">Section 7</a>, <a href="https://www.oidc.se/specifications/swedish-oidc-profile.html#security-requirements">Security Requirements</a>, of [<a href="#oidc-sweden">OIDC.Sweden</a>].</p>
+<p><a name="normative-references"></a></p>
+<h2 id="9-normative-references">9. Normative References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc2119.txt">Bradner, S., &quot;Key words for use in RFCs to Indicate Requirement Levels&quot;, RFC 2119, March 1997</a>.</p>
+</blockquote>
+<p><a name="rfc6749"></a>
+<strong>[RFC6749]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc6749">Hardt, D., &quot;The OAuth 2.0 Authorization Framework&quot;, RFC 6749, October 2012</a>.</p>
+</blockquote>
+<p><a name="rfc6750"></a>
+<strong>[RFC6750]</strong></p>
+<blockquote>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc6750">Jones, M. and D. Hardt, &quot;The OAuth 2.0 Authorization Framework: Bearer Token Usage&quot;, RFC 6750, October 2012</a>.</p>
+</blockquote>
+<p><a name="rfc7523"></a>
+<strong>[RFC7523]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7523">Jones, M., Campbell, B. and C. Mortimore, &quot;JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants&quot;, RFC 7523, May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc7591"></a>
+<strong>[RFC7591]</strong></p>
+<blockquote>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc7591">Richer, J., Jones, M., Bradley, J., Machulak, M. and P. Hunt, &quot;OAuth 2.0 Dynamic Client Registration Protocol&quot;, RFC 7591, July 2015</a>.</p>
+</blockquote>
+<p><a name="rfc8414"></a>
+<strong>[RFC8414]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc8414.html">Jones, M., Bradley, J., and N. Sakimura, &quot;OAuth 2.0 Authorization Server Metadata&quot;, RFC 8414, June 2018</a>.</p>
+</blockquote>
+<p><a name="rfc8707"></a>
+<strong>[RFC8707]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/info/rfc8707">Campbell, B., Bradley, J., and H. Tschofenig, &quot;Resource Indicators for OAuth 2.0&quot;, RFC 8707, February 2020</a>.</p>
+</blockquote>
+<p><a name="rfc9068"></a>
+<strong>[RFC9068]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc9068.html">Bertocci, V., &quot;JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens&quot;, RFC 9068, October 2021</a>.</p>
+</blockquote>
+<p><a name="rfc8693"></a>
+<strong>[RFC8693]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc8693.html">Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J., and C. Mortimore, &quot;OAuth 2.0 Token Exchange&quot;, RFC 8693, January 2020</a></p>
+</blockquote>
+<p><a name="rfc6819"></a>
+<strong>[RFC6819]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc6819">Lodderstedt, T., McGloin, M. and P. Hunt, &quot;OAuth 2.0 Threat Model and Security Considerations&quot;, RFC 6819, January 2013</a>.</p>
+</blockquote>
+<p><a name="rfc7636"></a>
+<strong>[RFC7636]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7636">Sakimura, N., Bradley, J. and N. Agarwal, &quot;Proof Key for Code Exchange by OAuth Public Clients&quot;, RFC 7636, September 2015</a>.</p>
+</blockquote>
+<p><a name="openid-core"></a>
+<strong>[OpenID.Core]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-core-1_0.html">Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015</a>.</p>
+</blockquote>
+<p><a name="openid-discovery"></a>
+<strong>[OpenID.Discovery]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-discovery-1_0.html">Sakimura, N., Bradley, J., Jones, M. and E. Jay, &quot;OpenID Connect Discovery 1.0&quot;, August 2015</a>.</p>
+</blockquote>
+<p><a name="rfc7515"></a>
+<strong>[RFC7515]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7515">Jones, M., Bradley, J., and N. Sakimura, &quot;JSON Web Signature (JWS)&quot;, RFC 7515, May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc7517"></a>
+<strong>[RFC7517]</strong></p>
+<blockquote>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc7517">Jones, M., &quot;JSON Web Key (JWK)&quot;, RFC 7517, May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc7518"></a>
+<strong>[RFC7518]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc7518.txt">Jones, M., &quot;JSON Web Algorithms (JWA)&quot;, RFC 7518, May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc7519"></a>
+<strong>[RFC7519]</strong></p>
+<blockquote>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc7519">Jones, M., Bradley, J. and N. Sakimura, &quot;JSON Web Token (JWT)&quot;, RFC 7519,  May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc5480"></a>
+<strong>[RFC5480]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc5480.txt">IETF RFC 5480, Elliptic Curve Cryptography Subject Public Key Information, RFC 5480, March 2009</a>.</p>
+</blockquote>
+<p><a name="nist800-52"></a>
+<strong>[NIST.800-52.Rev2]</strong></p>
+<blockquote>
+<p><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-52r2.pdf">NIST Special Publication 800-52, Revision 2, &quot;Guidelines for the Selection, Configuration, and Use of Transport Layer Security (TLS) Implementations&quot;</a>. </p>
+</blockquote>
+<p><a name="oidc-sweden"></a>
+<strong>[OIDC.Sweden]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-profile.html">The Swedish OpenID Connect Profile</a>.</p>
+</blockquote>
+<p><a name="oidc-attr-sweden"></a>
+<strong>[OIDC.Attr.Sweden]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-attribute-specification.html">Attribute Specification for the Swedish OpenID Connect Profile</a>.</p>
+</blockquote>
+<p><a name="oauth2-igov"></a>
+<strong>[OAuth2.iGov]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-igov-oauth2-1_0-03.html">J. Richer, P. Grassi, M. Varley, &quot;International Government Assurance Profile (iGov) for OAuth 2.0 - Draft 03&quot;, October 2018</a>.</p>
+</blockquote>
+    </article>
+  </body>
+</html>

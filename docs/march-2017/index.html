@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specifications for the Swedish eID Framework</title>
+<link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+<link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+<link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print">
+<link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print">
+</head>
+<body>
+  <article class="markdown-body">
+    <p>
+      <img src="img/eln-logo.png"></img>
+    </p>
+    <h1 id="specifications-for-the-swedish-eid-framework">
+      Specifications for the Swedish eID Framework</h1>
+    <h3>March 2017</h3>
+    <hr>
+    <p>
+      This is the March 2017 version of the Swedish eID Framework. As of March 28th, 2017 it replaces the previous 
+      October 2015 release as the official version for the Swedish eID Framework.
+    </p>
+    <blockquote>
+      <p>
+        If you have comments on, or questions about the specifications,
+        please use the forum &quot;E-legitimationsnämndens Tekniska
+        Forum&quot; - <a href="https://forum.eidasweb.se">https://forum.eidasweb.se</a>.
+      </p>
+    </blockquote>
+    <h3 id="changes-since-last-version">Changes since last version</h3>
+    <p>
+      Below follows a listing of all significant changes since the October 2015 release of the Swedish eID Framework.
+    </p>
+    <ul class="list">
+      <li>
+        Changes were made to the specifications to integrate the eIDAS framework into the Swedish eID framework.
+        For Swedish Service Providers wishing to connect to the eIDAS framework changes are limited to attribute
+        processing and metadata representation.
+      </li>
+      <li>
+        Definitions for new attributes have been added, both for use with BankID services and eIDAS.
+      </li>
+      <li>
+        A new specification, <a href="ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS Constructed Attributes Specification for the Swedish eID Framework</a>,
+        was added to define how eIDAS identities are calculated. This specification is primarly of
+        interest for implementors of an eIDAS connector service.
+      </li>
+      <li>
+        Changes concerning entity categories have been made to support changed conditions, especially that the
+        former definition of "one eID provider" - "one Identity Provider" no longer is valid. This means that
+        within the federation there may be several Identity Providers supporting the same eID provider, and for
+        a generic discovery service to be able to work the use of entity categories needed to be updated.
+      </li>
+      <li>
+        Due to changed conditions, the Swedish eID Framework no longer includes the "Discovery within the Swedish eID Framework" 
+        specification. However, an updated version of the specification may be re-introduced at a later stage.
+      </li>
+      <li>
+        Updates to support interoperability between Service Providers and Identity Providers have to added. Also, an
+        specification focusing on interoperability (and security) was added for 
+        <a href="ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html">BankID support using SAML</a>.         
+      </li>      
+    </ul>
+    <p>
+      Each document also contains a "Changes between versions" section where you can see what has been updated for 
+      that particular specification.
+    </p>
+    <p>
+      For a really detailed list of changes you can view all changes in GitHub using this link: 
+      <a href="https://github.com/elegnamnden/technical-framework/compare/october-2015...march-2017">https://github.com/elegnamnden/technical-framework/compare</a>.
+    </p>
+   <h3 id="specifications">Specifications</h3>
+    <ul class="list">
+      <li>
+        <a href="ELN-0600_-_Tekniskt_ramverk_-_Svensk_e-legitimation.html">
+          <strong>ELN-0600 - Tekniskt ramverk - Svensk e-legitimation</strong>
+        </a> - version 1.5 | 
+        <a href="pdf/ELN-0600_-_Tekniskt_ramverk_-_Svensk_e-legitimation.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">
+          <strong>ELN-0602 - Deployment Profile for the Swedish eID Framework</strong>
+        </a> - version 1.4 | 
+        <a href="pdf/ELN-0602_-_Deployment_Profile_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0603_-_Registry_for_Identifiers.html">
+          <strong>ELN-0603 - Registry for Identifiers</strong>
+        </a> - version 1.4 | 
+        <a href="pdf/ELN-0603_-_Registry_for_Identifiers.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">
+          <strong>ELN-0604 - Attribute Specification for the Swedish eID Framework</strong>
+        </a> - version 1.4 | 
+        <a href="pdf/ELN-0604_-_Attribute_Specification_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.html">
+          <strong>ELN-0606 - Entity Categories for the Swedish eID Framework</strong>
+        </a> - version 1.5 | 
+        <a href="pdf/ELN-0606_-_Entity_Categories_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">
+          <strong>ELN-0607 - Implementation Profile for using DSS in Central Signing Services</strong>
+        </a> - version 1.2 | 
+        <a href="pdf/ELN-0607_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.html">
+          <strong>ELN-0608 - Certificate Profile for Central Signing Services</strong>
+        </a> - version 1.0 | 
+        <a href="pdf/ELN-0608_-_Certificate_Profile_for_Central_Signing_Services.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.html">
+          <strong>ELN-0609 - DSS Extension for Federated Signing Services</strong>
+        </a> - version 1.1 | 
+        <a href="pdf/ELN-0609_-_DSS_Extension_for_Federated_Signing_Services.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">
+          <strong>ELN-0611 - eIDAS Constructed Attributes Specification for the Swedish eID Framework</strong>
+        </a> - version 1.0 | 
+        <a href="pdf/ELN-0611_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+      </li>
+      <li>
+        <a href="ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.html">
+          <strong>ELN-0612 - BankID Profile for the Swedish eID Framework</strong>
+        </a> - version 1.0 | 
+        <a href="pdf/ELN-0612_-_BankID_Profile_for_the_Swedish_eID_Framework.pdf">pdf download</a>
+      </li>
+    </ul>
+    <p>
+      <a href="pdf/swe-eid-specifications.zip">
+        <img src="img/pdf.png" />
+      </a> 
+      <a href="pdf/swe-eid-specifications.zip">Download a ZIP-file of all specifications in PDF-format</a>.
+    </p>
+    <blockquote>
+      <p>
+        All specifications are also available in Markdown format on GitHub - 
+        <a href="https://github.com/elegnamnden/technical-framework">https://github.com/elegnamnden/technical-framework</a>.
+        Here you can follow the further development of the Swedish eID Framework.
+      </p>
+    </blockquote>
+  </article>
+</body>
+</html>

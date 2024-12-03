@@ -61,7 +61,7 @@ Appendix A: [**Conversion of eIDAS Attributes**](#conversion-of-eidas-attributes
 <a name="introduction"></a>
 ## 1. Introduction
 
-This specification extends the "Claims and Scopes Specification for the Swedish OpenID Connect Profile", \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], with OpenID Connect claims and scopes for usage within the Sweden Connect federation and Swedish eID Framework.
+This specification extends the "Claims and Scopes Specification for the Swedish OpenID Connect Profile", \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], with OpenID Connect claims and scopes for usage within the Sweden Connect federation.
 
 <a name="requirements-notation-and-conventions"></a>
 ### 1.1. Requirements Notation and Conventions
@@ -340,6 +340,3 @@ This section provides a listing of how the eIDAS attributes for natural persons 
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/CountryOfResidence` - CountryOfResidence | `address.country` | \[[OpenID.Core](#openid-core)\] |
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/PhoneNumber` - PhoneNumber | `phone_number` | \[[OpenID.Core](#openid-core)\] |
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/EmailAddress` - EmailAddress | `email` | \[[OpenID.Core](#openid-core)\] |
-
-
-

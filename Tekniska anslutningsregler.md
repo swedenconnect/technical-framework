@@ -227,7 +227,7 @@ Svenska förlitande parter som legitimerar individer genom eIDAS-legitimering, v
 
 Inom Sweden Connect representeras en legitimeringoperation genom s.k. 
 "Authentication Context URI:er". Dessa beskrivs i kapitel 3.1.1 av 
-[Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris).
+[Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris).
 
 Detta kapitel går igenom dessa och redogör för vilka regler som gäller för dess
 användning.
@@ -277,7 +277,7 @@ användas inom Sweden Connect-federationen. Eftersom dessa legitimeringstjänste
 är godkända enligt [tillitsramverket](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation) får de inte inkludera någon av de ovanstående
 identifierarna i identitetsintyg. Det står en tredjeparts-legitimeringstjänst fritt att
 definiera egna identifierare, men för att upprätthålla möjligheter för god interoperabilitet
-definieras ett antal identifierare i kapitel 3.1.1.2 av [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris-for-uncertified-providers).
+definieras ett antal identifierare i kapitel 3.1.1.2 av [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris-for-uncertified-providers).
 Dessa är:
 
 - `http://id.swedenconnect.se/loa/1.0/uncertified-loa3` - Skall användas av en legitimeringstjänst som inte granskats, och godkänts, enligt tillitsramverkets nivå 3 men
@@ -924,7 +924,7 @@ En deklaration av entitetskategorin `http://id.elegnamnden.se/ec/1.0/eidas-natur
 
 > Legitimeringstjänsten deklarerar att den är en eIDAS-nod som agerar "Identity Provider" mot 
 Sweden Connect-federationen och "Service Provider" mot eIDAS-federationen<sup>*</sup>. Legitimering av användare
-sker enligt någon av de definierade tillitsnivåerna för eIDAS (se kapitel 3.1.1 i [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris)) och attribut som ingår i utställda identitetsintyg är enligt uppsättningen [eIDAS Natural Person Attribute Set](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#eidas-natural-person-attribute-set).
+sker enligt någon av de definierade tillitsnivåerna för eIDAS (se kapitel 3.1.1 i [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris)) och attribut som ingår i utställda identitetsintyg är enligt uppsättningen [eIDAS Natural Person Attribute Set](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#eidas-natural-person-attribute-set).
 
 **För en förlitande part**:
 

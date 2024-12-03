@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.6 - 2024-11-26 - *Draft version*
+### Version 1.6 - 2024-12-04 - *Draft version*
 
 Registration number: **2019-312**
 
@@ -441,7 +441,7 @@ With the exception above, the response values defined in section 2.6 of the DSS 
 
 **Note:** The `authn-failed` and `security-violation` codes were introduced for version 1.5 (of \[[DSS-Ext](#dss-ext)\]), and a client not supporting this version will fail to understand these error codes. Whether a Signature Service checks the client version support or not before using these codes are out of scope for this profile. 
 
-> \[*\]: Also listed in section 3.1.7 of \[[Eid-Registry](#eid-registry)\].
+> \[*\]: Also listed in section 3.1.7 of \[[SC.Registry](#sc-registry)\].
 
 <a name="generated-signature"></a>
 #### 2.2.3. Generated Signature
@@ -666,9 +666,9 @@ EidSignResponse | Base64 encoded sign response.
 **[DSS-Ext]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
-<a name="eid-registry"></a>
-**[Eid-Registry]**
-> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+<a name="sc-registry"></a>
+**[SC.Registry]**
+> [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="informative-references"></a>
 ### 4.2. Informative References
@@ -682,7 +682,7 @@ EidSignResponse | Base64 encoded sign response.
 
 **Changes between version 1.5 and version 1.6:**
 
-- Section 2.2.2, "Sign Response Status Information", now defines the DSS status codes previously only appearing in \[[Eid-Registry(#eid-registry)\]. The status codes `http://id.swedenconnect.se/sig-status/1.1/authn-failed` and `http://id.swedenconnect.se/sig-status/1.1/security-violation` were also introduced.
+- Section 2.2.2, "Sign Response Status Information", now defines the DSS status codes previously only appearing in \[[SC.Registry](#sc-registry)\]. The status codes `http://id.swedenconnect.se/sig-status/1.1/authn-failed` and `http://id.swedenconnect.se/sig-status/1.1/security-violation` were also introduced.
 
 - Section 2.1.3.2, "Conditions", was updated with requirements on how to interpret `NotBefore` and/or `NotOnOrAfter` values.
 
@@ -707,7 +707,7 @@ EidSignResponse | Base64 encoded sign response.
 
 **Changes between version 1.1 and version 1.2:**
 
-- In section 2.2.2, a reference to section 3.1.5 in \[Eid-Registry\] was changed to section 3.1.7.
+- In section 2.2.2, a reference to section 3.1.5 in \[SC.Registry\] was changed to section 3.1.7.
 
 **Changes between version 1.0 and version 1.1:**
 
