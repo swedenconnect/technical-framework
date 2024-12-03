@@ -416,7 +416,7 @@ The following XML schema defines the `http://id.elegnamnden.se/csig/1.1/sap/ns` 
 General System Security Requirements
 
 <a name="rsig-pp-2"></a>
-**[RSIG-PP-2]*s
+**[RSIG-PP-2]**
 > European Standard prEN 419241-2 - Trustworthy Systems Supporting Server Signing - Part 2:
 Protection profile for QSCD for Server Signing
 

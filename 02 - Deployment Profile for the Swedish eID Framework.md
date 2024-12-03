@@ -8,14 +8,14 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.8 - 2022-10-19 - *Draft version*
+### Version 1.8 - 2024-12-04 - *Draft version*
 
 Registration number: **2019-308**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -409,7 +409,7 @@ metadata SHALL contain an attribute according to
 and holding at least one attribute value identifying a Level of Assurance
 (LoA) for which the Identity Provider has been approved. 
 The Swedish eID Framework defines such identifier values in section 3.1.1 of
-\[[EidRegistry](#eidregistry)\] and their meanings are defined in \[[EidTillit](#eidtillit)\].
+\[[SC.Registry](#sc-registry)\] and their meanings are defined in \[[EidTillit](#eidtillit)\].
 
 ```
 <md:Extensions>
@@ -678,7 +678,7 @@ If the Service Provider has included more than one `<md:AttributeConsumingServic
 A Service Provider SHOULD explicitly specify a requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
 containing `<saml2:AuthnContextClassRef>` elements each holding
-a Level of Assurance authentication context URI (see section 3.1.1 of \[[EidRegistry](#eidregistry)\]) 
+a Level of Assurance authentication context URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]) 
 that the Service Provider considers acceptable for the authentication process.
 
 A present `<saml2p:RequestedAuthnContext>` element MUST specify
@@ -733,7 +733,7 @@ IdP MAY include the `<saml2p:Scoping>` element. See section 3.4.1.5 of \[[SAML2C
 ```
 *Example of how an `AuthnRequest` contains a `Scoping`-element where the requester (Service Provider) signals to the Proxy IdP which Identity Provider that should perform the authentication of the user.*
 
-The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[[EidRegistry](#eidregistry)\].
+The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[[SC.Registry](#sc-registry)\].
 
 ```
 <saml2p:Scoping>
@@ -1249,7 +1249,7 @@ assertions in the `<saml2p:Response>` message.
 An Identity Provider conformant with this profile SHOULD NOT make use of
 any other `<saml2p:StatusCode>` values than those specified in
 section 3.2.2.2 of
-\[[SAML2Core](#saml2core)\] or in section 3.1.4 of \[[EidRegistry](#eidregistry)\]. 
+\[[SAML2Core](#saml2core)\] or in section 3.1.4 of \[[SC.Registry](#sc-registry)\]. 
 The top-level `<saml2p:StatusCode>` value may only be one of the following error
 identifiers:
 
@@ -1606,11 +1606,11 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="eidtillit"></a>
 **\[EidTillit\]**
-> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digital-identitet/e-legitimering/tillitsnivaer/tillitsramverket).
+> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
 
-<a name="eidregistry"></a>
-**\[EidRegistry\]**
-> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+<a name="sc-registry"></a>
+**\[SC.Registry\]**
+> [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="eidattributes"></a>
 **\[EidAttributes\]**

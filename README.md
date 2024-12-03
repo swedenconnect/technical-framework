@@ -42,9 +42,9 @@ An overview document that describes the different parts of the Swedish eID Frame
 
 > [Tekniskt ramverk - Introduktion](00%20-%20Tekniskt%20ramverk%20-%20Introduktion.md) (in Swedish)
 
-#### Swedish eID Framework - Registry for identifiers
+#### Sweden Connect - Registry for identifiers
 
-This document defines the structure for identifiers assigned by the Swedish Agency for Digital Government (DIGG) and provides a registry for assigned identifiers.
+This document defines the structure for identifiers assigned by the Swedish Agency for Digital Government (Digg) and provides a registry for assigned identifiers.
 
 > [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md)
 

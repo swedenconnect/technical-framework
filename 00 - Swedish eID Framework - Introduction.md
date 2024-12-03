@@ -436,7 +436,7 @@ is the main specification of the eID Framework and comprises of:
 
 The implementation of an infrastructure for Swedish eID:s demand different forms
 of identifiers to represent objects in data structures. The document
-”Swedish eID Framework - Registry for identifiers”, \[[SC.Registry](#sc-registry)\],
+”Sweden Connect - Registry for identifiers”, \[[SC.Registry](#sc-registry)\],
 defines the structure for identifiers that are assigned within the scope of
 the Swedish eID Framework, and contains a registry of defined identifiers.
 
@@ -569,7 +569,7 @@ defines a "Signature Activation Protocol" (SAP) for implementation of "Sole Cont
 
 <a name="sc-registry"></a>
 **\[SC.Registry\]**
-> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+> [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="saml-profile"></a>
 **\[SAML.Profile\]**

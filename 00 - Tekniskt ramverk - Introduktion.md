@@ -460,7 +460,7 @@ kring ”Deployment Profile for the Swedish eID Framework”, \[[SAML.Profile](#
 
 Implementering av en infrastruktur för Svensk e-legitimation kräver
 olika former av identifierare för att representera objekt i
-datastrukturer. Dokumentet ”Swedish eID Framework - Registry for identifiers”, \[[SC.Registry](#sc-registry)\], definierar strukturen
+datastrukturer. Dokumentet ”Sweden Connect - Registry for identifiers”, \[[SC.Registry](#sc-registry)\], definierar strukturen
 för identifierare som tilldelats inom ramen för tekniskt ramverk, samt ett
 register över definierade identifierare.
 
@@ -585,7 +585,7 @@ Specifikationen "Signature Activation Protocol for Federated Signing", \[[Sign.A
 
 <a name="sc-registry"></a>
 **\[SC.Registry\]**
-> [Swedish eID Framework - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+> [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="saml-profile"></a>
 **\[SAML.Profile\]**
