@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PDF Profile for Signature Validation Tokens</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="pdf-profile-for-signature-validation-tokens">PDF Profile for Signature Validation Tokens</h1>
+<h3 id="version-1.0---2020-12-16---*draft-version*">Version 1.0 - 2020-12-16 - <em>Draft version</em></h3>
+<p>Registration number: <strong>2020-61</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2020. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation">Requirements Notation</a></p>
+<p> 1.2. <a href="#definitions">Definitions</a></p>
+</li>
+<li><p><a href="#svt-in-pdf-documents"><strong>SVT in PDF Documents</strong></a></p>
+<p> 2.1. <a href="#svt-extension-to-timestamp-tokens">SVT Extension to Timestamp Tokens</a></p>
+</li>
+<li><p><a href="#svt-claims"><strong>SVT Claims</strong></a></p>
+<p> 3.1. <a href="#signature-reference-data">Signature Reference Data</a></p>
+<p> 3.2. <a href="#signed-data-reference-data">Signed Data Reference Data</a></p>
+<p> 3.3. <a href="#signer-certificate-references">Signer Certificate References</a></p>
+</li>
+<li><p><a href="#jose-header"><strong>JOSE Header</strong></a></p>
+<p> 4.1. <a href="#svt-signing-key-reference">SVT Signing Key Reference</a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+</ol>
+<hr>
+<p><a name="introduction"></a></p>
+<h2 id="1.-introduction">1. Introduction</h2>
+<p>The &quot;Signature Validation Token&quot; specification [<a href="#svt">SVT</a>] defines a basic token to support signature validation in a way that can significantly extend the lifetime of a signature.</p>
+<p>This specification defines a profile for implementing SVT with a signed PDF document, and defines the following aspects of SVT usage:</p>
+<ul class="list">
+<li>How to include reference data related to PDF signatures and PDF documents in an SVT.</li>
+<li>How to add an SVT token to a PDF document.</li>
+</ul>
+<p>PDF document signatures are added as incremental updates to the signed PDF document and signs all data of the PDF document up until the current signature. When more than one signature is added to a PDF document the previous signature is signed by the next signature and can not be updated with additional data after this event.</p>
+<p>To minimize the impact on PDF documents with multiple signatures and to stay backwards compatible with PDF software that do not understand SVT, PDF documents add one SVT token for all signatures of the PDF as an extension to a document timestamp added to the signed PDF as an incremental update. This SVT covers all signatures of the signed SVT.</p>
+<p><a name="requirements-notation"></a></p>
+<h3 id="1.1.-requirements-notation">1.1. Requirements Notation</h3>
+<p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>, <strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>, <strong>MAY</strong>, and <strong>OPTIONAL</strong> in this document are to be interpreted as described in BCP 14 [<a href="#rfc2119">RFC2119</a>] [<a href="#rfc8174">RFC8174</a>] when, and only when, they appear in all capitals, as shown here.</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="definitions"></a></p>
+<h3 id="1.2.-definitions">1.2. Definitions</h3>
+<p>The definitions in [<a href="#svt">SVT</a>] apply also to this document.</p>
+<p><a name="svt-in-pdf-documents"></a></p>
+<h2 id="2.-svt-in-pdf-documents">2. SVT in PDF Documents</h2>
+<p>An SVT added to a signed PDF document SHALL be added to a document timestamp accordance with ISO 32000-2:2017 [<a href="pdf">PDF</a>].</p>
+<p>The document timestamp contains an RFC 3161 timestamp token (TSTInfo) in EncapsulatedContentInfo of the CMS signature. The SVT SHALL be added to the timestamp token (TSTInfo) as an Extension object as defined in <a href="#svt-extension-to-timestamp-tokens">section 2.1</a>.</p>
+<p><a name="svt-extension-to-timestamp-tokens"></a></p>
+<h3 id="2.1.-svt-extension-to-timestamp-tokens">2.1. SVT Extension to Timestamp Tokens</h3>
+<p>The SVT extension is an Extension suitable to be included in TSTInfo as defined by [<a href="rfc3161">RFC3161</a>]<sup>*</sup>.</p>
+<p>The SVT extension is identified by the Object Identifier (OID) <code>1.2.752.201.5.2</code> as defined in [<a href="eidregistry">EidRegistry</a>].</p>
+<p>This extension data (OCTET STRING) holds the bytes of SVT JWT, represented as a UTF-8 encoded string.</p>
+<p>This extension SHALL NOT be marked critical.</p>
+<blockquote>
+<p>[*]: Extensions in timestamp tokens according to [<a href="rfc3161">RFC3161</a>] are imported from the definition of the X.509 certificate extensions defined in [<a href="rfc5280">RFC5280</a>].</p>
+</blockquote>
+<p><a name="svt-claims"></a></p>
+<h2 id="3.-svt-claims">3. SVT Claims</h2>
+<p><a name="signature-reference-data"></a></p>
+<h3 id="3.1.-signature-reference-data">3.1. Signature Reference Data</h3>
+<p>The SVT SHALL contain a <strong>SigReference</strong> claims object that SHALL contain the following data:</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Absent or a <strong>Null</strong> value.</td>
+</tr>
+<tr>
+<td><code>sig_hash</code></td>
+<td>The hash over the signature value bytes.</td>
+</tr>
+<tr>
+<td><code>sb_hash</code></td>
+<td>The hash over the DER encoded <code>SignedAttributes</code> in <code>SignerInfo</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="signed-data-reference-data"></a></p>
+<h3 id="3.2.-signed-data-reference-data">3.2. Signed Data Reference Data</h3>
+<p>An SVT according to this profile SHALL contain exactly one instance of the <strong>SignedData</strong> claims object. The <strong>SignedData</strong> claims object shall contain the following data:</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ref</code></td>
+<td>The string representation of the <strong>ByteRange</strong> value of the PDF signature dictionary of the target signature. This is a sequence of integers separated by space where each integer pair specifies the start index and length of a byte range.</td>
+</tr>
+<tr>
+<td><code>hash</code></td>
+<td>The hash of all bytes identified by the <strong>ByteRange</strong> value. This is the concatenation of all byte ranges identified by the <strong>ByteRange</strong> value.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="signer-certificate-references"></a></p>
+<h3 id="3.3.-signer-certificate-references">3.3. Signer Certificate References</h3>
+<p>The SVT SHALL contain a <strong>CertReference</strong> claims object. The <code>type</code> claim of the <strong>CertReference</strong> claims object SHALL be either <code>cert</code>, <code>chain</code>, <code>cert_hash</code> or <code>cert_and_chain_hash</code>.</p>
+<ul class="list">
+<li>The <code>chain</code> type SHALL be used when signature validation was performed using one or more certificates where some or all of the certificates in the chain are not present in the target signature.</li>
+<li>The <code>chain_hash</code> type SHALL be used when signature validation was performed using one or more certificates where all of the certificates are present in the target signature.</li>
+</ul>
+<p><strong>Note:</strong> The <code>cert</code> type MUST NOT be used with a PAdES signatures (SubFiler in the signature dictionary is set to &quot;ETSI.CAdES.detached&quot;) where the signing certificate in the target signature is bound to the signature through ESSCertID or ESSCertIDv2 [<a href="rfc55035">RFC5035</a>].</p>
+<p><a name="jose-header"></a></p>
+<h2 id="4.-jose-header">4. JOSE Header</h2>
+<p><a name="svt-signing-key-reference"></a></p>
+<h3 id="4.1.-svt-signing-key-reference">4.1. SVT Signing Key Reference</h3>
+<p>The SVT JOSE header must contain one of the following header parameters in accordance with [<a href="#rfc7515">RFC7515</a>], for storing a reference to the public key used to verify the signature on the SVT:</p>
+<table>
+<thead>
+<tr>
+<th>Header Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x5c</code></td>
+<td>Holds an X.509 certificate [<a href="#rfc5280">RFC5280</a>] or a chain of certificates. The certificate holding the public key that verifies the signature on the SVT MUST be the first certificate in the chain.</td>
+</tr>
+<tr>
+<td><code>kid</code></td>
+<td>A key identifier holding the Base64 encoded hash value of the certificate that can verify the signature on the SVT. The hash algorithm MUST be the same hash algorithm used when signing the SVT as specified by the <code>alg</code> header parameter. The referenced certificate SHOULD be the same certificate that was used to sign the document timestamp that contains the SVT.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="normative-references"></a></p>
+<h2 id="5.-normative-references">5. Normative References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement
+Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="rfc3161"></a>
+<strong>[RFC3161]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc3161.txt">Adams, C., Cain, P., Pinkas, D., Zuccherato, R., Internet X.509 Public Key
+Infrastructure Time-Stamp Protocol (TSP), August 2001</a>.</p>
+</blockquote>
+<p><a name="rfc5280"></a>
+<strong>[RFC5280]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc5280.txt">D. Cooper, S. Santesson, S. Farrell, S. Boeyen, R. Housley, W. Polk, Internet
+X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL)
+Profile, May 2008</a>.</p>
+</blockquote>
+<p><a name="rfc5035"></a>
+<strong>[RFC5035]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc5035.txt">Shaad, J., Enhanced Security Services (ESS) Update: Adding CertID Algorithm
+Agility, August 2007</a>.</p>
+</blockquote>
+<p><a name="rfc7515"></a>
+<strong>[RFC7515]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc7515.txt">Jones, M., Bradley, J., Sakimura, N., JSON Web Signature (JWS), May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc8174"></a>
+<strong>[RFC8174]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc8174.txt">Leiba, B., Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words,
+May 2017</a>.</p>
+</blockquote>
+<p><a name="pdf"></a>
+<strong>[PDF]</strong></p>
+<blockquote>
+<p><a href="https://www.iso.org/obp/ui/#iso:std:iso:32000:-2:ed-1:v1:en">ISO 32000-2:2017, Document management - Portable Document Format - Part 2:
+PDF 2.0, July 2017</a>.</p>
+</blockquote>
+<p><a name="eidregistry"></a>
+<strong>[EidRegistry]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html">Swedish eID Framework - Registry for identifiers</a>.</p>
+</blockquote>
+<p><a name="svt"></a>
+<strong>[SVT]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/updates/15_-_Signature_Validation%_Token.html">Signature Validation Token</a>.</p>
+</blockquote>
+    </article>
+  </body>
+</html>

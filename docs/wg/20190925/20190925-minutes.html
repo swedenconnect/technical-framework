@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Working Group for the Swedish eID Framework</title>
+    <link type="text/css" rel="stylesheet" href="../../assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="../../assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="../..assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="../../assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p><img src="../../img/sweden-connect.png"></img></p>
+<h1 id="working-group-for-the-swedish-eid-framework">Working Group for the Swedish eID Framework</h1>
+<h2 id="meeting-minutes---2019-09-25">Meeting minutes - 2019-09-25</h2>
+<h3 id="attendees">Attendees</h3>
+<ul class="list">
+<li>Martin Lindström, DIGG/IDsec Solutions</li>
+<li>Stefan Santesson, DIGG/IDsec Solutions</li>
+<li>Roger Fagerud, DIGG</li>
+<li>Dragoljub Nešić, Verisec</li>
+<li>Nina Tatomir, Verisec</li>
+<li>Gunnar Klintberg, CGI</li>
+<li>Andreas Wanberg, CGI</li>
+<li>Emil Sunesson, Inera/CGI</li>
+<li>Fredrik Engström, Inera/CGI</li>
+<li>Roberth Lundin, Cybercom</li>
+<li>Patrik Wallström, Nexus</li>
+<li>Stefan Halén, Internetstiftelsen</li>
+<li>Rasmus Larsson, Internetstiftelsen</li>
+</ul>
+<h3 id="agenda/presentation">Agenda/presentation</h3>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/wg/20190925/20190925-presentation.pdf">Agenda and presentation (in Swedish)</a></li>
+</ul>
+<blockquote>
+<p>Below we include the contents for each slide in English (prefixed with &quot;From the presentation&quot;).</p>
+</blockquote>
+<h3 id="minutes">Minutes</h3>
+<h5 id="suggested-changes">Suggested changes</h5>
+<h5 id="principalselection-extension">PrincipalSelection extension</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>SAML does not have a standardized way of passing a known identity along in an AuthnRequest.</li>
+<li>Has been a problem for signing services.<ul class="list">
+<li>Has led to different, less good, solutions.</li>
+<li>A signature service does not want to prompt for the person identity number when the user signs (since he or she has most likely given this info at the time of logging in).</li>
+</ul>
+</li>
+<li>At this point: Most relevant for IdP:s that prompt for personal identity number.</li>
+<li><p>SHOULD-requirement for IdP:s and not a MUST to be backwards compatible.</p>
+<ul class="list">
+<li>For future versions we should use MUST.</li>
+</ul>
+</li>
+<li><p>See <a href="https://docs.swedenconnect.se/technical-framework/wg/20190925/20190925-presentation.pdf">presentation</a> for SAML example.</p>
+</li>
+</ul>
+</blockquote>
+<p>Everyone agreed that there is a need to standardize this.</p>
+<p>There is a draft published at <a href="https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html">https://docs.swedenconnect.se/technical-framework/updates/ELN-0614_-_Principal_Selection_in_SAML_Authentication_Requests.html</a>.</p>
+<p>Gunnar had a request that if an identity is passed using the <code>PrincipalSelection</code> extension the eIDAS node from a signature service, the eIDAS node should assert that the user-id (eIDAS ID) corresponds to the passed in identity before displaying the signature message. This is a good idea, but can be implemented in the eIDAS node without any changes being made to the technical framework.</p>
+<h5 id="upgrade-to-the-latest-version-of-saml2int">Upgrade to the latest version of SAML2Int</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>The new SAML2Int is available at: <a href="https://kantarainitiative.github.io/SAMLprofiles/saml2int.html">https://kantarainitiative.github.io/SAMLprofiles/saml2int.html</a>.</li>
+<li>Unfortunately it is a little bit too much &quot;bleeding edge&quot; ...<ul class="list">
+<li>Subject Identifier Attributes (has little or no support in most implementations).</li>
+<li>Removal of Subject NameID.</li>
+<li>Usage of <code>Scope</code> elements.</li>
+</ul>
+</li>
+<li>Discussion: Should we build the next version of the technical framework upon this version and make explicit exceptions from what we don&#39;t want to use/request <strong>or</strong> should our specification be made &quot;self-contained&quot;, meaning that explicitly mention all the requirements that we have?</li>
+</ul>
+</blockquote>
+<p>It was decided that we refer only to new SAML2Int as being an &quot;inspiration&quot;, but make our technical framework normatively detached from SAML2Int, meaning that every requirement should be expressed within our specification (with the exceptions of references to core specifications and profiles).</p>
+<h5 id="distinct-requirements-concerning-algorithm-support">Distinct requirements concerning algorithm support</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>We should look at section 2.3 of the new <a href="https://kantarainitiative.github.io/SAMLprofiles/saml2int.html#_cryptographic_algorithms">SAML2Int</a>.</li>
+<li>AES-GCM algorithms are not implemented by all deployments yet - AES-CBC should be the default for a while longer.</li>
+<li>RSA 1.5 for key transport will be black-listed.</li>
+<li>SHA-1 as digest in signatures will be black-listed.</li>
+<li>IdP:s should support consuming <code>&lt;md:EncryptionMethod&gt;</code> from SP metadata. In these cases, the SP:s that want to receive, for example, messages encrypted using AES-GCM can announce it in metadata.</li>
+</ul>
+</blockquote>
+<p>During the last year it has been clear that we need to document what should (and must) be supported concerning algorithms. </p>
+<p>Everyone agrees that there is a need to clearly document what should be supported.</p>
+<p><strong>Editors note</strong>: We will probably add a MUST requirements for Identity Providers to support AES-GCM.</p>
+<h5 id="uncertified-loa-3">Uncertified LoA 3</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>BankID is not audited and approved according to LoA 3. Nor are the IdP:s implementing BankID-authentication.</li>
+<li>IdP:s within Sweden Connect implementing BankID support should use the dedicated uncertified-loa3 URI instead.</li>
+<li>There are installations (outside of Sweden Connect) where loa3 URI:s are used by BankID and Telia IdP:s...</li>
+<li>Support needed in SP and signature services needed ...</li>
+</ul>
+</blockquote>
+<p>This is really an informational issue, where Martin asked everybody to not misuse loa3.</p>
+<h5 id="entity-categories-for-contracts">Entity categories for contracts</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>All IdP:s within the Sweden Connect-federation are not available to every SP. For BankID (and Telia) IdP:s the use is controlled by business agreements and contracts.</li>
+<li>The system of choice 2017 (Valfrihetssystem 2017) defines the contract entity category: <code>http://id.swedenconnect.se/contract/sc/eid-choice-2017</code>.</li>
+<li>IdP:s within Sweden Connect, but not part of the System of choice 2017 (Valfrihetssystem 2017) should define their own (customer specific) URI:s. For example, Cybercom defines <code>http://id.swedenconnect.se/contract/Cybercom/Pensionsmyndigheten/Leveransavtal-SYS-2015-71</code> that tells that Pensionsmyndigheten may use their IdP.</li>
+<li>For a future central Discovery Service the use of there categories is essential to facilitate matching.</li>
+</ul>
+</blockquote>
+<p>Informational item with no further discussion.</p>
+<h5 id="updated-bankid-profile">Updated BankID profile</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>Rules for QR-code usage. Desired behaviour is declared by a SP using entity category in metadata - <code>http://id.swedenconnect.se/general-ec/1.0/bankid/qr-code</code>.</li>
+<li>Rules for using <code>PrincipalSelection</code>.</li>
+<li>Recommendations for auto-start logic.</li>
+<li>Recommendations for cancel.</li>
+</ul>
+</blockquote>
+<p>Questions were raised why we declared a specific QR-code entity category for BankID. Why not use a generic identifier that affects other IdP:s also? </p>
+<p>Martin replied that for Freja, it is more or less their choice how they would like to offer authentication services, where for BankID we have a little bit of different scenario where there are several IdP:s, but most important, the number of users that have been accustomed of a specific way of logging on using BankID.</p>
+<p>Anyway. We (Martin) could not really argue in favour of just specifying this for BankID. Therefore, we will make changes in the drafts so that we remove the specific entity category for BankID and introduce a corresponding URI that is generic.</p>
+<p>See <a href="https://github.com/swedenconnect/technical-framework/issues/96">Issue 96</a> for more details.</p>
+<p>When discussing BankID there were questions about why we publish a specific profile for BankID, but say nothing about how Telia eID should be implemented within the federation. The reason for this is that Telia isn&#39;t used much anymore, and we haven&#39;t had any requirements to specify anything for those IdP:s. However, if the need arises we will look into it.</p>
+<h5 id="declared-algorithm-support">Declared algorithm support</h5>
+<p>For the presentation:</p>
+<blockquote>
+<ul class="list">
+<li><a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-metadata-algsupport-v1.0-cs01.html">SAML v2.0 Metadata Profile for Algorithm Support Version 1.0</a> should be followed.</li>
+<li><code>&lt;md:EncryptionMethod&gt;</code>, <code>&lt;alg:DigestMethod&gt;</code>, <code>&lt;alg:SigningMethod&gt;</code>.</li>
+<li>Enables better interoperability concerning choice of algorithms. </li>
+<li>If AES-GCM is supported, this should be declared using <code>&lt;md:EncryptionMethod&gt;</code> in metadata.</li>
+</ul>
+</blockquote>
+<p>Informational item with no further discussion.</p>
+<h5 id="samordningsnummer/coordination-number">Samordningsnummer/Coordination number</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>Not the be equated with a Swedish personal identity number (personnummer).</li>
+<li>Has only meaning for the issuer of the number.</li>
+<li>Does not fit into a national federation.</li>
+</ul>
+</blockquote>
+<p>Informational item with no further discussion.</p>
+<h5 id="certificate-profile-for-signrequest">Certificate profile for SignRequest</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>A signing certificate can be generated according to different certificate profiles.</li>
+<li>We will define a number of profile identifiers.</li>
+<li>Which profiles are of interest?</li>
+<li>MUST or SHOULD?</li>
+</ul>
+</blockquote>
+<p>We will prepare the protocol so that it is possible to request a specific certificate profile, but will not define any profile identifier at this point.</p>
+<h5 id="transaction-evidence-in-signing-certificates">Transaction evidence in signing certificates</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li><a href="https://github.com/swedenconnect/technical-framework/issues/69">https://github.com/swedenconnect/technical-framework/issues/69</a></li>
+<li>Store transaction ID in AuthContext in the certificate</li>
+<li>Store SAD-payload in AuthContext in the certificate</li>
+</ul>
+</blockquote>
+<p>Informational item with no further discussion.</p>
+<h5 id="other-changes">Other changes</h5>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>Updates of underlying references.</li>
+<li>Name change. E-legitimationsnämnden to Sweden Connect.</li>
+<li>Introduction document is now translated into English.</li>
+</ul>
+</blockquote>
+<p>Informational item with no further discussion.</p>
+<hr>
+<h4 id="other-specifications-and-standards">Other specifications and standards</h4>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>Normative specifications for signature services<ul class="list">
+<li>Be a part of the technical framework?</li>
+</ul>
+</li>
+<li>Federation specific rules and requirements<ul class="list">
+<li>Currently a bit hard to find at swedenconnect.se</li>
+<li>Tie the trust framework (Tillitsramverket) more tightly together with the Swedish eID Framework (Tekniskt ramverk).</li>
+</ul>
+</li>
+<li>Is a CPS, alternatively a certificate policy, for the CA issuing signature certificates needed?</li>
+</ul>
+</blockquote>
+<p><strong>About the signature service specifications</strong>:</p>
+<p>We all agreed that there is a need to take control of the normative specifications for signature services. As it is today, it is very hard to find the specifications, and they are in Swedish.</p>
+<p>The working group suggests that all signature service specifications are written in English, and that it is developed and published from a GitHub repository. Should DIGG want to publish it from their own domain, this can also be accomplished. </p>
+<p>The working group also suggests that there is a special working group that discusses, and leads, future development of the normative specifications.</p>
+<p><strong>About federation specific rules</strong>:</p>
+<p>The working group agrees that there need to be a <strong><em>Sweden Connect Federation Policy</em></strong> in place. This policy would cover things that are not explicitly mentioned in the technical framework.</p>
+<p>Currently we have some federation rules that can be found on swedenconnect.se, but we need to be more explicit on the matter.</p>
+<p><strong>Us a CPS/certificate policy needed for signature service CA:s?</strong></p>
+<p>Currently, a CA should follow the ETSI certificate policy. Stefan claimed that this is sufficient. </p>
+<hr>
+<h4 id="other-federations">Other federations</h4>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>How does Sweden Connect relate to other Swedish federations?</li>
+<li>Collaboration aiming to homogenize and to facilitate for integrators and product providers.</li>
+</ul>
+</blockquote>
+<p>The working group discussed the matter and saw that the Swedish federations all are built upon the SAML WebSSO profile and &quot;follows&quot; SAML2Int. The differences are mainly:</p>
+<ul class="list">
+<li>Different attribute representations,</li>
+<li>different trust frameworks and thus different authentication context URI:s,</li>
+<li>the Swedish eID Framework has special purpose URI:s used during &quot;authentication for signature&quot;.</li>
+</ul>
+<p>We decided to try to involve each other in our respective work in order to understand, and hopefully make sure that our federations do not grow apart more that necessary. The aim should be that vendors should be able to have solutions that work for several federations.</p>
+<blockquote>
+<p>Also, after the meeting Martin and Stefan discussed how we could solve the problems with the so called sigmessage URI:s used to indicate that a sign message has been displayed. See <a href="https://github.com/swedenconnect/technical-framework/issues/95">issue 95</a> for our suggestion.</p>
+</blockquote>
+<p>When discussing the challenge that integrators and vendors face we came up the the proposal that there should be some sort of &quot;Quality mark&quot; that stands for &quot;Compliant with Sweden Connect&quot;. We will bring this to DIGG.</p>
+<hr>
+<h4 id="the-technical-framework---now-and-in-the-future">The Technical Framework - Now and in the future</h4>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>Interoperability in practise - How do we improve?</li>
+<li>Support when developing against the Technical Framework<ul class="list">
+<li>Reference implementations</li>
+<li>Cooperation</li>
+<li>Workshops</li>
+</ul>
+</li>
+<li>Future ways of working<ul class="list">
+<li>Mailing list?</li>
+<li>More committers</li>
+<li>Implementations in a common test environment (sandbox)</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>Gunnar raised one thing regarding taking part in the work of developing the specifications for the Technical Framework and the signature service. It is hard for integrators (that are often working as consultants) to convince their management that they should be allowed to spend time for this kind of work. He suggested that DIGG creates a &quot;group&quot; to which all participants pay a fee. Only members are this group are allowed to respond to tenders concerning signature services and eID-solutions. By taking part in the work for the Technical Framework the fee could be reduced.</p>
+<hr>
+<h4 id="the-technical-framework---roadmap">The Technical Framework - Roadmap</h4>
+<p>From the presentation:</p>
+<blockquote>
+<ul class="list">
+<li>Support for LoA 4 in the federation<ul class="list">
+<li>Requires &quot;holder of key&quot; or something corresponding.</li>
+</ul>
+</li>
+<li>LoA 1 &amp; 2<ul class="list">
+<li>Do we need to do anything in the Technical Framework?</li>
+</ul>
+</li>
+<li>Other attribute profiles</li>
+<li>Get rid of sigmessage URI:s</li>
+<li>Specifications for validation assertions and services</li>
+<li>Common API:s for signature service support services (Stödtjänster)</li>
+<li>OpenID Connect</li>
+</ul>
+</blockquote>
+<p>Regarding &quot;Getting rid of sigmessage URI:s&quot;, se <a href="https://github.com/swedenconnect/technical-framework/issues/95">issue 95</a>. We will most likely include this is the coming version of the Technical Framework.</p>
+<p>The work has started on &quot;specifications for validation assertions and services&quot;. It will be done openly, and the specs and implementations will be published to GitHub.</p>
+<p>The group discussed OpenID Connect, and there are use cases for OpenID Connect and signature services. </p>
+    </article>
+  </body>
+</html>
