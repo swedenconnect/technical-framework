@@ -602,11 +602,11 @@ defines a "Signature Activation Protocol" (SAP) for implementation of "Sole Cont
 
 <a name="oidc-profile"></a>
 **\[OIDC.Profile\]**
-> [OpenID Connect Profile for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OIDC_-_Sweden_Connect_-_OpenID_Connect_Profile.html).
+> [OpenID Connect Profile for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Profile_for_Sweden_Connect.html).
 
 <a name="oidc-claims"></a>
 **\[OIDC.Claims\]**
-> [OpenID Connect Claims and Scopes Specification for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OIDC_-_Sweden_Connect_-_Claims_and_Scopes_Specification.html).
+> [OpenID Connect Claims and Scopes Specification for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Claims_and_Scopes_Specification.html).
 
 <a name="sign-dss-profile"></a>
 **\[Sign.DSS.Profile\]**
