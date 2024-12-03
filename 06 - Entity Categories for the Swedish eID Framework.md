@@ -8,7 +8,7 @@
 
 # Entity Categories for the Swedish eID Framework
 
-### Version 1.9 - 2024-12-04 - *Draft version*
+### Version 1.9 - 2024-12-04
 
 
 Registration number: **2019-311**
@@ -284,7 +284,7 @@ This specification does not impose any other limitations on what requirements or
 This section define Service Entity Categories that has attribute requirements 
 according to the "Natural Personal Identity with Civic Registration Number" 
 (`http://id.elegnamnden.se/ap/1.0/pnr-01`) attribute set as defined in section 2.3 
-of \[[EidAttributes](#eidattributes)\].
+of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 
 **Note**: The `http://id.elegnamnden.se/ap/1.0/pnr-01` attribute set includes the `personalIdentityNumber` attribute. See section [6.2](#accepts-coordination-number), "[accepts-coordination-number](#accepts-coordination-number)", for specific requirements concerning delivering a coordination number in this attribute. 
 
@@ -293,7 +293,7 @@ of \[[EidAttributes](#eidattributes)\].
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa2-pnr`
 
-**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
+**Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
 > Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -305,7 +305,7 @@ of \[[EidAttributes](#eidattributes)\].
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa3-pnr`
 
-**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
+**Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
 > Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -317,7 +317,7 @@ of \[[EidAttributes](#eidattributes)\].
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/loa4-pnr`
 
-**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
+**Description**: User authentication according to assurance level 4 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
 
@@ -335,7 +335,7 @@ Attribute release is based on the "Natural Personal Identity with Civic Registra
 It is the responsibility of the Swedish eIDAS Proxy Service to transform these attributes into eIDAS attributes.
 
 **LoA-identifier**: Not applicable
-> An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[[SC.Registry](#sc-registry)\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[[EidDeploy](#eiddeploy)\].
+> An Identity Provider delivering assertions to the eIDAS framework is obliged to announce which levels that it supports by including the corresponding eIDAS authentication context URIs defined in section 3.1.1 of \[[SC.Registry](#sc-registry)\] as assurance certification attributes in its metadata as described in section 2.1.3 of \[[SC.SAML.Profile](#sc-saml-profile)\].
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01` where the `dateOfBirth` attribute (`urn:oid:1.3.6.1.5.5.7.9.1`) is mandatory.
 
@@ -347,7 +347,7 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 
 **URL**: `http://id.elegnamnden.se/ec/1.0/eidas-naturalperson`
 
-**Description**: User authentication according to any of the eIDAS assurance levels and attribute release according to “eIDAS Natural Person Attribute Set” (see section 2.5 of \[[EidAttributes](#eidattributes)\]).
+**Description**: User authentication according to any of the eIDAS assurance levels and attribute release according to “eIDAS Natural Person Attribute Set” (see section 2.5 of \[[SC.SAML.Attrs](#sc-saml-attrs)\]).
 
 **LoA-identifier**:   Not applicable
 > It does not make sense to specify the level of assurance for a Service
@@ -364,14 +364,14 @@ It is the responsibility of the Swedish eIDAS Proxy Service to transform these a
 This section define Service Entity Categories that has attribute requirements 
 according to the "Organizational Identity for Natural Persons" 
 (`http://id.elegnamnden.se/ap/1.0/org-person-01`) attribute set as defined in section 2.4 
-of \[[EidAttributes](#eidattributes)\].
+of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 
 <a name="loa2-orgid"></a>
 #### 2.3.1. loa2-orgid
 
 **URL**: `http://id.swedenconnect.se/ec/1.0/loa2-orgid`
 
-**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
+**Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
 > Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -383,7 +383,7 @@ of \[[EidAttributes](#eidattributes)\].
 
 **URL**: `http://id.swedenconnect.se/ec/1.0/loa3-orgid`
 
-**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
+**Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
 > Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -395,7 +395,7 @@ of \[[EidAttributes](#eidattributes)\].
 
 **URL**: `http://id.swedenconnect.se/ec/1.0/loa4-orgid`
 
-**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
+**Description**: User authentication according to assurance level 4 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
 > Or a corresponding LoA 4 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -408,12 +408,12 @@ of \[[EidAttributes](#eidattributes)\].
 This section define Service Entity Categories that has attribute requirements 
 according to the "Natural Personal Identity without Civic Registration Number" 
 (`http://id.elegnamnden.se/ap/1.0/natural-person-01`) attribute set as defined in section 2.2 
-of \[[EidAttributes](#eidattributes)\].
+of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 
 <a name="loa2-name"></a>
 ### 2.4.1. loa2-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa2-name`**Description**: User authentication according to assurance level 2 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa2-name`**Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
 > Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -423,7 +423,7 @@ of \[[EidAttributes](#eidattributes)\].
 <a name="loa3-name"></a>
 ### 2.4.2. loa3-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
 > Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -433,7 +433,7 @@ of \[[EidAttributes](#eidattributes)\].
 <a name="loa4-name"></a>
 ### 2.4.3. loa4-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa4-name`**Description**: User authentication according to assurance level 4 \[[EidTillit](#eidtillit)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa4-name`**Description**: User authentication according to assurance level 4 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
 > Or a corresponding LoA 4 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
@@ -480,7 +480,7 @@ authentication using mobile devices.
 
 **URL**: `http://id.elegnamnden.se/sprop/1.0/scal2`
 
-**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with \[[SigSAP](#sigsap)\]. 
+**Description**: A service property declaring that the service is adapted to support Sole Control Assurance Level 2 (SCAL2) in accordance with \[[SC.SAP](#sc-sap)\]. 
 
 For a providing service, i.e. an Identity Provider, inclusion of the
 scal2 service property states that the Identity Provider will return a "SAD" in response to a `SADRequest` in an authentication requests from a signing service.
@@ -583,7 +583,7 @@ from Service Providers that have declared this entity category in their metadata
 **Description**: A special purpose entity category that is declared by Service Providers
 to announce that they accept a Swedish coordination number (samordningsnummer), \[[SKV707](#skv707)\], being delivered in the `personalIdentityNumber` (`urn:oid:1.2.752.29.4.13`) attribute.
 
-The `personalIdentityNumber` is defined in section 3.1 of \[[EidAttributes](#eidattributes)\] to contain either a Swedish personal identity number, \[[SKV704](#skv704)\], or a Swedish coordination number, \[[SKV707](#skv707)\]. However, how to utilize coordination numbers in
+The `personalIdentityNumber` is defined in section 3.1 of \[[SC.SAML.Attrs](#sc-saml-attrs)\] to contain either a Swedish personal identity number, \[[SKV704](#skv704)\], or a Swedish coordination number, \[[SKV707](#skv707)\]. However, how to utilize coordination numbers in
 electronic services is, or has been, unclear. Not all Service Providers want, or are able to, use these types of identifiers. Therefore, this specification defines the "accepts coordination
 number" category as an opt-in feature for those Service Providers that can accept a `personalIdentityNumber` attribute to contain a coordination number as well as a personal identity number.
 
@@ -593,7 +593,7 @@ the `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` enti
 in its metadata.
 
 **Note**: This entity category does **not** apply to the eIDAS specific attribute
-`mappedPersonalIdentityNumber`, see section 3.3.2 of \[[EidAttributes](#eidattributes)\].
+`mappedPersonalIdentityNumber`, see section 3.3.2 of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 Thus, a coordination number may be included in this attribute even if the Service Provider
 has not declared the entity category. 
 
@@ -602,7 +602,7 @@ has not declared the entity category.
 
 **URL**: `http://id.swedenconnect.se/general-ec/1.0/supports-user-message`
 
-**Description**: Service Providers may include the `<umsg:UserMessage>` extension in authentication requests for the purpose of displaying a custom "user message" for the authentication users, see \[[UserMessageExt](#user-message-ext)\]. An Identity Provider announces support for this extension by declaring the `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category.
+**Description**: Service Providers may include the `<umsg:UserMessage>` extension in authentication requests for the purpose of displaying a custom "user message" for the authentication users, see \[[SC.SAML.UMsg](#sc-saml-umsg)\]. An Identity Provider announces support for this extension by declaring the `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category.
 
 
 <a name="references"></a>
@@ -645,29 +645,29 @@ has not declared the entity category.
 > [Skatteverket, SKV 707, Utgåva 2,
 > Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
 
-<a name="eidtillit"></a>
-**\[EidTillit\]**
+<a name="se-trust"></a>
+**\[SE.Trust\]**
 > [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
 
-<a name="eiddeploy"></a>
-**\[EidDeploy\]**
+<a name="sc-saml-profile"></a>
+**\[SC.SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="sc-registry"></a>
 **\[SC.Registry\]**
 > [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
-<a name="eidattributes"></a>
-**\[EidAttributes\]**
+<a name="sc-saml-attrs"></a>
+**\[SC.SAML.Attrs\]**
 > [Attribute Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html).
 
-<a name="sigsap"></a>
-**\[SigSAP\]**
+<a name="sc-sap"></a>
+**\[SC.SAP\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
-<a name="user-message-ext"></a>
-**\[UserMessageExt\]**
-> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
+<a name="sc-saml-umsg"></a>
+**\[SC.SAML.UMsg\]**
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
 
 <a name="changes-between-versions"></a>
 ## 8. Changes between versions

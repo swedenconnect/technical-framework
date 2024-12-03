@@ -8,9 +8,9 @@
 
 # OpenID Connect Profile for Sweden Connect
 
-### Version 1.0 - 2024-12-02 - *Draft version*
+### Version 1.0 - 2024-12-04
 
-Registration number: **TBD**
+Registration number: **2024-7674**
 
 ---
 
@@ -53,6 +53,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.2. [Client Registration and Metadata Requirements](#client-registration-and-metadata-requirements)
 
 4. [**References**](#references)
+
+5. [**Changes between versions**](#changes-between-versions)
 
 ---
 
@@ -271,3 +273,8 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 <a name="sc-saml-profile"></a>
 **\[SC.SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+
+<a name="changes-between-versions"></a>
+## 5. Changes between versions
+
+This is the first version of this specification.

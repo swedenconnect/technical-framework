@@ -8,14 +8,14 @@
 
 # User Message Extension in SAML Authentication Requests
 
-### Version 1.0 - 2024-04-15 - *Draft version*
+### Version 1.0 - 2024-12-04
 
-Registration number: TBD
+Registration number: **2024-7673**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -56,7 +56,7 @@ This specification defines the `<umsg:UserMessage>` element that may be included
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
-The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
+The keywords **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**,
 **MAY**, and **OPTIONAL** are to be interpreted as described in
 \[[RFC2119](#rfc2119)\].
@@ -137,7 +137,7 @@ The required `xml:lang` attribute contains the language tag for the message's la
 <a name="identity-provider-requirements"></a>
 ### 3.1. Identity Provider Requirements
 
-An Identity Provider that supports the `<umsg:UserMessage>` extension MUST declare this support in its metadata entry by declaring the `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category (see section 6.3 of \[[EidEntCat](#eidentcat)\]).
+An Identity Provider that supports the `<umsg:UserMessage>` extension MUST declare this support in its metadata entry by declaring the `http://id.swedenconnect.se/general-ec/1.0/supports-user-message` entity category (see section 6.3 of \[[SC.SAML.EntCat](#sc-saml-entcat)\]).
 
 Identity Providers compliant with this specification MUST support the `text/plain` and `text/markdown` MIME types.
 
@@ -251,8 +251,8 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/user-
 > Assertion Markup Language (SAML) V2.0, March
 > 2005](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf).
 
-<a name="eidentcat"></a>
-**\[EidEntCat\]**
+<a name="sc-saml-entcat"></a>
+**\[SC.SAML.EntCat\]**
 > [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="changes-between-versions"></a>

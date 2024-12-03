@@ -11,6 +11,8 @@
 
 ### 2024-11-22
 
+Registration number: **2024-7672**
+
 This document outlines the process for binding an eIDAS-notified electronic identity (eID) to an individual's personal identification number in the Swedish Population Register.
 
 ---

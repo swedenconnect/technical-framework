@@ -8,9 +8,9 @@
 
 # OpenID Connect Claims and Scopes Specification for Sweden Connect
 
-### Version 1.0 - 2024-11-28 - *Draft version*
+### Version 1.0 - 2024-12-04
 
-Registration number: **TBD**
+Registration number: **2024-7704**
 
 ---
 
@@ -53,6 +53,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1.3. [Additional eIDAS Claims](#additional-eidas-claims)
 
 4. [**References**](#references)
+
+5. [**Changes between versions**](#changes-between-versions)
 
 Appendix A: [**Conversion of eIDAS Attributes**](#conversion-of-eidas-attributes)
 
@@ -316,6 +318,11 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 <a name="iso3166-3"></a>
 **\[ISO3166-3\]**
 > [ISO, "ISO 3166-3:2020. Codes for the representation of names of countries and their subdivisions -- Part 3: Code for formerly used names of countries", 2020](https://www.iso.org/standard/72482.html).
+
+<a name="changes-between-versions"></a>
+## 5. Changes between versions
+
+This is the first version of this specification.
 
 <a name="conversion-of-eidas-attributes"></a>
 ## Appendix A: Conversion of eIDAS Attributes

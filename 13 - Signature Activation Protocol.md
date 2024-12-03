@@ -8,21 +8,21 @@
 
 # Signature Activation Protocol for Federated Signing
 
-### Version 1.2 - 2022-12-20 - *Draft version*
+### Version 1.2 - 2024-12-04
 
 Registration number: **2019-317**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (DIGG)</a>, 2015-2022. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
 </p>
 
 ## Table of Contents
 
 1. [**Introduction**](#introduction)
 
-    1.1. [Requirement key words](#requirement-key-words)
+    1.1. [Requirement keywords](#requirement-keywords)
 
     1.2. [XML namespace references](#xml-namespace-references)
 
@@ -72,10 +72,10 @@ The Signature Activation Protocol (SAP) defined in this document is used to exch
 
 The SAP specified in this document is specifically designed to be used with a signing service operating in accordance with the federated signing specification \[[DSS-Ext](#dss-ext)\].
 
-<a name="requirement-key-words"></a>
-### 1.1. Requirement key words
+<a name="requirement-keywords"></a>
+### 1.1. Requirement keywords
 
-The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
+The keywords **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**,
 **MAY**, and **OPTIONAL** are to be interpreted as described in
 \[[RFC2119](#rfc2119)\].

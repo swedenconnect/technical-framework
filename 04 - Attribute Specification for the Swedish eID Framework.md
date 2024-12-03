@@ -8,7 +8,7 @@
 
 # Attribute Specification for the Swedish eID Framework
 
-### Version 1.8 - 2024-12-04 - *Draft version*
+### Version 1.8 - 2024-12-04
 
 Registration number: **2019-310**
 
@@ -156,7 +156,7 @@ the provider.
 **Note**: An Attribute Provider may also release other attributes, not
 specified by the defined attribute sets it supports. See further section
 6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish
-eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
+eID Framework” (\[[SC.SAML.Profile](#sc-saml-profile)\]).
 
 In order to comply with a defined attribute set, the following attribute
 requirements apply:
@@ -228,7 +228,7 @@ The “Organizational Identity for Natural Persons” attribute set provides bas
 
 **Typical use**: In an attribute release policy that provides basic organizational identity information about a natural person.
 
-The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish eID Framework” (\[[EidDeployProf](#eiddeployprof)\]).
+The "Organizational Identity for Natural Persons" attribute set defines a minimum set of attributes needed to provide organizational identity information about a person. Should an attribute consumer require additional attributes, such as surname and given name, the personal identity number or an organizational unit name, this can be achieved by either requesting other attribute sets or by explicitly requesting individual attributes. See further section 6.2.1, “Attribute Release and Consuming Rules”, of “Deployment Profile for the Swedish eID Framework” (\[[SC.SAML.Profile](#sc-saml-profile)\]).
 
 > \[*\]: The `displayName` attribute MAY contain personal information such as the given name or surname, but it MAY also be used as an anonymized display name, for example, "Administrator 123". This is decided by the issuing organization.
 
@@ -374,9 +374,9 @@ Attributes with a “No” value in the column "Multi-valued" MUST NOT have more
 
 Attributes with a "Yes" value in the column "Scoped" are scoped attributes. A scoped attribute expresses values in a string-valued attribute of the form `value@scope`, where `scope` takes the form of a domain name or something similar such as an organizational identifier.
 
-An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider's metadata entry. See section 2.1.3.1 of \[[EidDeployProf](#eiddeployprof)\] for details.	
+An Identity Provider wishing to release scoped attributes must register the scopes with the federation operator. After the federation operator has authorized the Identity Provider for the given scopes, they are declared in the Identity Provider's metadata entry. See section 2.1.3.1 of \[[SC.SAML.Profile](#sc-saml-profile)\] for details.	
 
-A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[EidDeployProf](#eiddeployprof)\].
+A Service Provider consuming a scoped attribute SHOULD assert that the issuing Identity Provider is authorized to issue attributes with the given scope by checking the Identity Provider's metadata entry as described in section 6.2.1 of \[[SC.SAML.Profile](#sc-saml-profile)\].
 
 **Note:** The `value` part of a scoped attribute MAY contain a `@`-character, for example when the value part is an email address, or a User Principal Name (UPN). Therefore, consumers of scoped attributes MUST use the last `@`-character as a delimiting character when splitting a scoped attribute into its `value` and `scope` parts.
 
@@ -435,7 +435,7 @@ process.
 
 The `authServerSignature` may be included in assertions in cases where there are requirements to include a digitally signed proof from the authentication server at which the end user authenticated. This is mainly useful in cases where the SAML Identity Provider delegates end user authentication to a subordinate authentication server.
 
-> \[*\]: Note that an authentication process, may be “authentication for signature” as specified in section 7 of \[[EidDeployProf](#eiddeployprof)\].
+> \[*\]: Note that an authentication process, may be “authentication for signature” as specified in section 7 of \[[SC.SAML.Profile](#sc-saml-profile)\].
 
 <a name="the-sad-attribute"></a>
 #### 3.2.3. The sad Attribute
@@ -444,7 +444,7 @@ The `sad` attribute holds Signature Activation Data that is required by a
 signature service in order to service a signature request in accordance
 with CEN EN 419 241-2. The `sad` attribute holds a single string
 attribute value. The format of the string value is defined in the "Signature Activation Protocol 
-for Federated Signing" specification \[[SigSAP](#sigsap)\].
+for Federated Signing" specification \[[SC.SAP](#sc-sap)\].
 
 <a name="the-signmessagedigest-attribute"></a>
 #### 3.2.4. The signMessageDigest Attribute
@@ -452,15 +452,15 @@ for Federated Signing" specification \[[SigSAP](#sigsap)\].
 The `signMessageDigest` attribute is included in an assertion as a proof that an Identity Provider displayed
 a sign message for the user and that the user actively confirmed acceptance of this sign message. This sign 
 message is the `SignMessage` extension that may be included in an authentication request by Signature Service 
-Service Providers. See section 7 of \[[EidDeployProf](#eiddeployprof)\] for details.
+Service Providers. See section 7 of \[[SC.SAML.Profile](#sc-saml-profile)\] for details.
 
 The attribute value format for the `signMessageDigest` attribute is `digest-algorithm-identifier;sign-message-digest`, where
 `digest-algorithm-identifier` is the XML Security algorithm URI identifier of the selected digest algorithm and
-`sign-message-digest` is `base64(digest(msg))`. The `msg` is the UTF-8 encoded bytes of the sign message that was displayed. It equals the `csig:Message` element value of the `csig:SignMessage` (\[[DSSExt](#dssext)\]). Thus, if the `csig:Message` element is encrypted into a `csig:EncryptedMessage`, the element value after decryption should be used.
+`sign-message-digest` is `base64(digest(msg))`. The `msg` is the UTF-8 encoded bytes of the sign message that was displayed. It equals the `csig:Message` element value of the `csig:SignMessage` (\[[SC.DSS.Ext](#dssext)\]). Thus, if the `csig:Message` element is encrypted into a `csig:EncryptedMessage`, the element value after decryption should be used.
 
 Entities compliant with this specification MUST use `http://www.w3.org/2001/04/xmlenc#sha256` as the digest algorithm, 
 unless the recipient of the `signMessageDigest` attribute has declared another digest algorithm as preferred in its
-metadata entry (see section 2.1.1.3 of [[EidDeployProf](#eiddeployprof)\]). In those cases this algorithm MAY be used.
+metadata entry (see section 2.1.1.3 of [[SC.SAML.Profile](#sc-saml-profile)\]). In those cases this algorithm MAY be used.
 
 **Example:**
 
@@ -496,7 +496,7 @@ This specification does not impose any specific requirements concerning the pers
 
 **Note**: In the general case, an attribute consumer MUST NOT assume a particular format or meaning of the personal identifier part since different organizations may use different formats. An attribute consumer should also be aware that a personal identifier separated from its organizational identifier code can not be regarded as unique. 
 
-**Note**: The `orgAffiliation` is a [scoped attribute](#scoped-attributes) meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of \[[EidDeployProf](#eiddeployprof)\].
+**Note**: The `orgAffiliation` is a [scoped attribute](#scoped-attributes) meaning that producing and consuming such an attribute MUST follow the rules given in sections 2.1.3.1 and 6.2.1 of \[[SC.SAML.Profile](#sc-saml-profile)\].
 
 <a name="the-previouspersonalidentitynumber-attribute"></a>
 #### 3.2.6. The previousPersonalIdentityNumber Attribute
@@ -547,7 +547,7 @@ the user in a common format regardless of the composition of the
 original attributes received from the authenticating source. The `prid`
 attribute value is not stored in any registry, but derived from the
 received attributes at each authentication instant according to defined
-algorithms specified in \[[ConstructedAttr](#constructedattr)\]. The algorithm ensures that
+algorithms specified in \[[SC.Constructed](#sc-constructed)\]. The algorithm ensures that
 each `prid` is unique for each authenticated entity, but does not ensure
 persistence. If the attributes received for an entity changes over time,
 the `prid` attribute may also change dependent on the defined `prid`
@@ -565,7 +565,7 @@ This may assist users with low persistence expectancy to regain control
 of their user account, should their `prid` change in the future.
 
 The specification “eIDAS Constructed Attributes Specification for the
-Swedish eID Framework”, \[[ConstructedAttr](#constructedattr)\], declares the details for
+Swedish eID Framework”, \[[SC.Constructed](#sc-constructed)\], declares the details for
 how the `prid` and `pridPersistence` attributes are generated and how they
 should be processed.
 
@@ -588,7 +588,7 @@ process.
 <a name="conversion-of-eidas-attributes"></a>
 #### 3.3.3. Conversion of eIDAS Attributes
 
-The attributes specified within eIDAS (\[[eIDAS\_Attr](#eidas-attr)\]) does not use
+The attributes specified within eIDAS (\[[eIDAS.Attributes](#eidas-attr)\]) does not use
 simple string type values. Instead each attribute is represented using
 its own dedicated XML data type. This affects interoperability in a
 negative way since most standard SAML software need to be modified to
@@ -618,7 +618,7 @@ Swedish eID Framework.
 | EmailAddress<br />`http://eidas.europa.eu/attributes/naturalperson/EmailAddress` | mail<br />urn:oid:0.9.2342.19200300.100.1.3 |
 
 **Note**: When converting an eIDAS attribute that makes use of
-“transliteration” (as described in section 2.4 of \[[eIDAS\_Attr](#eidas-attr)\])
+“transliteration” (as described in section 2.4 of \[[eIDAS.Attributes](#eidas-attr)\])
 attribute values having the `LatinScript` attribute set to `false` will not
 be part of the resulting attribute.
 
@@ -626,7 +626,7 @@ be part of the resulting attribute.
 ##### 3.3.3.1. Conversion of eIDAS CurrentAddress
 
 The eIDAS attribute `CurrentAddress` is defined in section 2.2.9 of
-\[[eIDAS\_Attr](#eidas-attr)\]. Its value is a Base64-encoding of an XML-structure of
+\[[eIDAS.Attributes](#eidas-attr)\]. Its value is a Base64-encoding of an XML-structure of
 the type CurrentAddressStructuredType.
 
     <xsd:complexType name="CurrentAddressStructuredType">
@@ -729,7 +729,7 @@ following attribute:
 
 <a name="id-binding"></a>
 **\[ID-Binding\]**
-> [Binding of eIDAS Attributes to Swedish Personal Identity Numbers](https://docs.swedenconnect.se/technical-framework/Identity_Binding.html)
+> [Binding eIDAS Identities to Records in the Swedish Population Register](https://docs.swedenconnect.se/technical-framework/Identity_Binding.html)
 
 <a name="x520"></a>
 **\[X.520\]**
@@ -755,28 +755,24 @@ following attribute:
 **\[SambiAttr\]**
 > [Sambi Attributspecifikation](https://wiki.federationer.internetstiftelsen.se/pages/viewpage.action?pageId=46465316).
 
-<a name="tillitramv"></a>
-**\[TillitRamv\]**
-> [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation).
-
-<a name="eiddeployprof"></a>
-**\[EidDeployProf\]**
+<a name="sc-saml-profile"></a>
+**\[SC.SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
-<a name="constructedattr"></a>
-**\[ConstructedAttr\]**
+<a name="sc-constructed"></a>
+**\[SC.Constructed\]**
 > [eIDAS Constructed Attributes Specification for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html).
 
 <a name="eidas-attr"></a>
-**\[eIDAS\_Attr\]**
-> [eIDAS SAML Attribute Profile, version 1.2, 21 May 2019](https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.2-FINAL.pdf).
+**\[eIDAS.Attributes\]**
+> [eIDAS SAML Attribute Profile, version 1.4, 31 October 2023](https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.4_final.pdf).
 
-<a name="sigsap"></a>
-**\[SigSAP\]**
+<a name="sc-sap"></a>
+**\[SC.SAP\]**
 > [Signature Activation Protocol for Federated Signing](https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html).
 
 <a name="dssext"></a>
-**\[DSSExt\]**
+**\[SC.DSS.Ext\]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
 
 <a name="changes-between-versions"></a>

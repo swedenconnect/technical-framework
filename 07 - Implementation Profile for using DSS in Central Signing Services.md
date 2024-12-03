@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.6 - 2024-12-04 - *Draft version*
+### Version 1.6 - 2024-12-04
 
 Registration number: **2019-312**
 
@@ -24,7 +24,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     1.1. [Terminology](#terminology)
 
-    1.2. [Requirement key words](#requirement-key-words)
+    1.2. [Requirements Notation](#requirements-notation)
 
     1.3. [Namespace references](#namespace-references)
 
@@ -123,10 +123,10 @@ Term | Defined meaning
 **Requesting Service** | The service requesting the signature on a particular document by a particular user.
 **Signing Service** | A centralized service that manages the process to authenticate the user that has been requested to sign a document, and the process to obtain the user’s signature on the requested document.
 
-<a name="requirement-key-words"></a>
-### 1.2. Requirement key words
+<a name="requirements-notation"></a>
+### 1.2. Requirements Notation
 
-The key words **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
+The keywords **MUST**, **MUST** **NOT**, **REQUIRED**, **SHALL**,
 **SHALL** **NOT**, **SHOULD**, **SHOULD** **NOT**, **RECOMMENDED**,
 **MAY**, and **OPTIONAL** are to be interpreted as described in
 \[[RFC2119](#rfc2119)\].
@@ -329,9 +329,9 @@ message and MUST NOT contain any JavaScript in any form.
 
 The means through which the Service Provider requests the Identity
 Provider to display a sign message is defined in section 7.1.1 of “Deployment Profile
-for the Swedish eID Framework” \[[Eid-Profile](#eid-profile)\].
+for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\].
 
-In addition to the requirements in section 7.1.1 of \[[Eid-Profile](#eid-profile)\] the 
+In addition to the requirements in section 7.1.1 of \[[SC.SAML.Profile](#sc-saml-profile)\] the 
 Signature Service MUST apply the following process regarding the inclusion of the
 `AuthnContextClassRef` URI to include in the `AuthnRequest` sent to the Identity Provider 
 when authenticating the user for signing:
@@ -351,7 +351,7 @@ when authenticating the user for signing:
 This element MAY be present to provide requested properties of generated
 signature certificates according with section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
 
-When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[Eid-Profile](#eid-profile)\], or reject the request.
+When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\], or reject the request.
 
 <a name="authncontextclassref"></a>
 ###### 2.1.3.9.1. AuthnContextClassRef
@@ -658,13 +658,13 @@ EidSignResponse | Base64 encoded sign response.
 **[XMLSig-XSD]**
 > XML Signature Schema. World Wide Web Consortium. See <https://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd>.
 
-<a name="eid-profile"></a>
-**[Eid-Profile]**
-> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
-
 <a name="dss-ext"></a>
 **[DSS-Ext]**
 > [DSS Extension for Federated Central Signing Services](https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html).
+
+<a name="sc-saml-profile"></a>
+**[SC.SAML.Profile]**
+> [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="sc-registry"></a>
 **[SC.Registry]**

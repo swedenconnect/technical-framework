@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.5 - 2024-11-25 - *Draft version*
+### Version 1.5 - 2024-12-04
 
 Registration number: **2019-314**
 
@@ -24,7 +24,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     1.1. [Terminology](#terminology)
 
-    1.1.1. [Key words](#key-words)
+    1.1.1. [Keywords](#keywords)
 
     1.1.2. [Structure](#structure)
 
@@ -126,10 +126,10 @@ request.
 <a name="terminology"></a>
 ### 1.1. Terminology
 
-<a name="key-words"></a>
-#### 1.1.1.  Key words
+<a name="keywords"></a>
+#### 1.1.1.  Keywords
 
-The key words *MUST*, *MUST NOT*, *REQUIRED*, *SHALL*, *SHALL NOT*,
+The keywords *MUST*, *MUST NOT*, *REQUIRED*, *SHALL*, *SHALL NOT*,
 *SHOULD*, *SHOULD NOT*, *RECOMMENDED*, *MAY*, and *OPTIONAL* are to be
 interpreted as described in \[[RFC 2119](#rfc2119)\].
 
@@ -150,7 +150,7 @@ This specification uses the following typographical conventions in text:
 Listings of DSS schemas appear like this.
 
 <a name="definitions"></a>
-#### 1.1.3.  Definitions
+#### 1.1.3. Definitions
 
 **Identity Provider**
 

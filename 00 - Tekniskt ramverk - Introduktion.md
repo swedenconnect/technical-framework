@@ -8,7 +8,7 @@
 
 # En introduktion till Sweden Connect Tekniskt ramverk
 
-### 2024-12-02
+### 2024-12-04
 
 Diarienummer: **2019-267**
 
