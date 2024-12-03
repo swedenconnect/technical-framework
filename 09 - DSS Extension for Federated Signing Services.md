@@ -85,7 +85,7 @@ Appendix A. [**XML Schema**](#appendix-a.xml-schema)
 <a name="introduction"></a>
 ## 1. Introduction
 
-This specifications defines elements that extend the
+This specification defines elements that extend the
 `<dss:SignRequest>` and `<dss:SignResponse>` elements of
 \[[OASIS-DSS](#dss)\].
 
@@ -187,7 +187,7 @@ different namespace.
 
 Conventional XML namespace prefixes are used in the schema:
 
--   The prefix `csig`: stands for the this specification's XML schema
+-   The prefix `csig`: stands for this specification's XML schema
     namespace \[[Csig-XSD](#csig-xsd)\].
 
 -   The prefix `dss`: stands for the DSS core namespace
@@ -245,7 +245,7 @@ Recommendation \[[XML](#xml)\] Section 2.3).
 Unless otherwise noted in this specification, all elements that have the
 XML Schema **xs:string** type, or a type derived from that, MUST be
 compared using an exact binary comparison. In particular,
-implementations MUST NOT depend on case insensitive string comparisons,
+implementations MUST NOT depend on case-insensitive string comparisons,
 normalization or trimming of whitespace, or conversion of
 locale-specific formats such as numbers or currency. This requirement is
 intended to conform to the W3C working group note "Requirements for String
@@ -716,7 +716,7 @@ attributes and elements:
 > The MIME type defining the message format. This is an enumeration of
 > the valid attribute values `text` (plain text), `text/html` (html) or
 > `text/markdown` (markdown). This specification does not specify any
-> particular restrictions on the provided message but it is RECOMMENDED
+> particular restrictions on the provided message, but it is RECOMMENDED
 > that sign message content is restricted to a limited set of valid tags
 > and attributes, and that the display entity performs filtering to
 > enforce these restrictions before displaying the message. The means
@@ -966,7 +966,7 @@ This complex type can be used to hold a sequence of X.509 certificates.
 Certificates MUST be provided in sequence with the end-entity
 certificate first in the sequence followed by any CA certificates that
 can be used to verify the previous certificate in the sequence, ending
-with a self signed root certificate.
+with a self-signed root certificate.
 
 The **CertificateChainType** complex type has the following elements:
 
@@ -1224,7 +1224,7 @@ be signed to the signer. Implementers of this specification MUST sign
 requests and responses for signature creation to protect against
 spoofing and substitution attacks. If a hash of the document to be
 signed is replaced in a sign request, the signer may end up signing
-something completely different than what the requesting service
+something completely different from what the requesting service
 presented to the signer.
 
 When a `<dss:SignRequest>` is signed, the signature of that request
@@ -1244,7 +1244,7 @@ signature and MUST check that the signature covers all data in the
 
 <a name="csig-xsd"></a>
 **\[Csig-XSD\]**
-> This specification's DSS Extensions schema Version 1.1.3, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.3.xsd, November, 2024.
+> This specification's DSS Extensions schema Version 1.1.3, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.3.xsd, November 2024.
 
 <a name="dss"></a>
 **\[OASIS-DSS\]**

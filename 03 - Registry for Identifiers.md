@@ -262,7 +262,7 @@ The assurance levels defined in section [3.1.1](#authentication-context-uris) ma
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
 | `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
 
-Proxy providers that have eIDAS authentication as an option MUST NOT use the eIDAS authentication context URIs defined in section [3.1.1](#authentication-context-uris). Instead they should use:
+Proxy providers that have eIDAS authentication as an option MUST NOT use the eIDAS authentication context URIs defined in section [3.1.1](#authentication-context-uris), instead they should use:
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
@@ -339,7 +339,7 @@ Service Contract Entity Category identifiers are indented for performing service
 
 All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract/<org>`, where `org` is the identifier for the defining organization.
 
-The Sweden Connect Framework specifications do not define any Service Contract identifiers. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
+The Sweden Connect Framework specifications do not define any Service Contract identifiers, instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
 
 <a name="general-entity-categories"></a>
 ##### 3.1.3.5. General Entity Categories
@@ -425,7 +425,7 @@ This section defines identifiers used within the Sweden Connect Framework to int
 <a name="eidas-proxy-service-aliases"></a>
 ##### 3.1.9.1. eIDAS Proxy Service Aliases
 
-Each country within the eIDAS federation provides an eIDAS Proxy Service that is a Proxy Identity Provider for the authentication services within that specific country. The entityID identifier for an eIDAS Proxy Service in another country is not known to a Swedish Service Provider, but there are cases in which the Swedish Service Provider needs to refer to a specific eIDAS Proxy Service. Therefore, this specification defines an URI identifier format for eIDAS Proxy Service aliases. The format is as follows:
+Each country within the eIDAS federation provides an eIDAS Proxy Service that is a Proxy Identity Provider for the authentication services within that specific country. The entityID identifier for an eIDAS Proxy Service in another country is not known to a Swedish Service Provider, but there are cases in which the Swedish Service Provider needs to refer to a specific eIDAS Proxy Service. Therefore, this specification defines a URI identifier format for eIDAS Proxy Service aliases. The format is as follows:
 
 **`http://id.swedenconnect.se/eidas/1.0/proxy-service/{country-code}`**
 
@@ -583,7 +583,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="sc-saml-umsg"></a>
 **\[SC.SAML.UMsg\]**
-> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/updates/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
+> [User Message Extension in SAML Authentication Requests](https://docs.swedenconnect.se/technical-framework/latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html).
 
 <a name="sc-dss-ext"></a>
 **\[SC.DSS.Ext\]**
@@ -638,7 +638,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 - Section, 3.1.3.5, "General Entity Categories", was introduced and `http://id.swedenconnect.se/general-ec/1.0/secure-authenticator-binding` and `http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number` was added.
 
-- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added and one OID for a SVT timestamp policy.
+- In section 3.2, an object identifier (OID) for Signature Validation Token extension was added and one OID for an SVT timestamp policy.
 
 - Added service entity categories `http://id.swedenconnect.se/ec/1.0/loa3-orgid` and `http://id.swedenconnect.se/ec/1.0/loa3-name` to section 3.1.3.1.
 

@@ -86,7 +86,7 @@ This specification uses the following typographical conventions in text:
 
 This specification defines the element `<UserMessage>` to be included in the `<Extensions>` element of an `AuthnRequest`. 
 
-This element MAY included by a Service Provider asking the Identity Provider to display a given message for the user during the authentication phase. The element has the following elements and attributes:
+This element MAY be included by a Service Provider asking the Identity Provider to display a given message for the user during the authentication phase. The element has the following elements and attributes:
 
 `<Message>` \[One or more\]
 > Element that holds the user message for a specific language. See below.
@@ -162,7 +162,7 @@ A Service Provider MUST NOT supply user messages that contains integrity sensiti
 ## 4. Examples
 
 Example of supplying a user message in Swedish ("Jag vill logga in till example.com") and in
-English ("I wish to login to example.com"):
+English ("I wish to log in to example.com"):
 
 ```
 ...
@@ -253,7 +253,7 @@ The following XML schema defines the `http://id.swedenconnect.se/authn/1.0/user-
 
 <a name="sc-saml-entcat"></a>
 **\[SC.SAML.EntCat\]**
-> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/updates/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
+> [Entity Categories for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html).
 
 <a name="changes-between-versions"></a>
 ## 7. Changes between versions

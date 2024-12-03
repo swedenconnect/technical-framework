@@ -24,7 +24,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     1.1. [Terminology](#terminology)
 
-    1.2. [Requirement key words](#requirement-key-words)
+    1.2. [Requirement keywords](#requirement-keywords)
 
     1.3. [Name space references](#name-space-references)
 
@@ -105,10 +105,10 @@ release requirements.
 | **Natural person** | Natural person is legal term for a real human being, as opposed to a legal person, which may be a private (i.e., business entity) or public (i.e., government) organization. |
 | **Civic registration number** | A unique identifier assigned to each natural person in a national population register. Within the context of this specification this is a Swedish ”personnummer” or ”samordningsnummer” according to \[SKV704\] and \[SKV707\]. |
 
-<a name="requirement-key-words"></a>
-### 1.2. Requirement key words
+<a name="requirement-keywords"></a>
+### 1.2. Requirement keywords
 
-The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
+The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,
 “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be
 interpreted as described in \[[RFC2119](#rfc2119)\].
 
@@ -122,7 +122,7 @@ not capitalized, they are meant in their natural-language sense.
 
 Conventional XML namespace prefixes are used throughout the listings in
 this specification to stand for their respective namespaces as follows,
-whether or not a namespace declaration is present in the example:
+whether a namespace declaration is present in the example:
 
 | Prefix | XML Namespace | Comments |
 | :---- | :---- | :---- |
@@ -143,7 +143,7 @@ be present more than once. An attribute that has more than one value
 MUST be provided as one attribute with multiple `<AttributeValue>`
 sub-elements in accordance with [section 3.1](#attributes).
 
-An identifier, named “Attribute Set Identifier”, and an URI, are defined
+An identifier, named “Attribute Set Identifier”, and a URI, are defined
 for each attribute set as means for other documents to reference
 specific attribute sets.
 
@@ -195,7 +195,7 @@ The “Personal Identity without Civic Registration Number” attribute set prov
 | :--- | :--- |
 | **REQUIRED** | `sn` (Surname) <br /> `givenName` (Given name) <br /> `displayName` (Display name) |
 
-**Typical use**: In an attribute release policy that provides basic user name information together with a persistent `NameID` identifier in the assertion.
+**Typical use**: In an attribute release policy that provides basic username information together with a persistent `NameID` identifier in the assertion.
 
 <a name="natural-personal-identity-with-civic-registration-number"></a>
 ### 2.3. Natural Personal Identity with Civic Registration Number
@@ -210,7 +210,7 @@ The “Personal Identity with Civic Registration Number” attribute set provide
 | **REQUIRED** | `sn` (Surname) <br /> `givenName` (Given name) <br /> `displayName` (Display name) <br /> `personalIdentityNumber` (National civic registration number) |
 | **RECOMMENDED** | `dateOfBirth` (Date of birth) |
 
-**Typical use**: In an attribute release policy that provides basic user name information together with the person’s Swedish civic registration number.
+**Typical use**: In an attribute release policy that provides basic username information together with the person’s Swedish civic registration number.
 
 <a name="organizational-identity-for-natural-persons"></a>
 ### 2.4. Organizational Identity for Natural Persons
@@ -263,7 +263,7 @@ provider has access to enough information to provide a binding
 between eIDAS attributes and a Swedish identity number (see [section
 3.3.2](#the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute)).
 
-The eIDAS attribute set comprises of “added” and “converted” attributes.
+The eIDAS attribute set consists of “added” and “converted” attributes.
 
 **Added attributes**: Attributes that are not provided by the member
 state node, but added by the
@@ -298,14 +298,15 @@ Attribute set identifier: **DIGG-AP-HSAid-01**
 
 URI: `http://id.swedenconnect.se/ap/1.0/hsaid-01`
 
-The “Natural Person Identity with HSA-ID” attribute set provides basic personal identity information including a HSA-ID of the subject (see \[[SambiAttr](#sambiattr)\]).
+The “Natural Person Identity with HSA-ID” attribute set provides basic personal identity information including an HSA-ID of the subject (see \[[SambiAttr](#sambiattr)\]).
 
 | Attribute requirement | Attributes |
 | :--- | :--- |
 | **REQUIRED** | `sn` (Surname) <br /> `givenName` (Given name) <br /> `displayName` (Display name) <br /> `employeeHsaId` (HSA-ID) |
 | **RECOMMENDED** | `dateOfBirth` (Date of birth) |
 
-**Typical use**: In an attribute release policy that provides basic user name information together with the person’s HSA-ID.
+**Typical use**: In an attribute release policy that provides basic username information together with the person’s HSA-ID.
+
 
 <a name="attribute-definitions"></a>
 ## 3. Attribute Definitions
@@ -360,7 +361,7 @@ The following attributes are defined for use within the attribute profile for th
 <a name="attribute-string-values"></a>
 #### 3.1.1. Attribute String Values
 
-All attributes, unless stated otherwise in this table, holds string values using the UTF-8 character set using the `xs:string` data type. Certain attributes such as `mail`, `personalIdentityNumber`, `organizationIdentifier`, `telephoneNumber` and `mobile` use a restricted character set according to its defined usage within this specification.
+All attributes, unless stated otherwise in this table, hold string values using the UTF-8 character set using the `xs:string` data type. Certain attributes such as `mail`, `personalIdentityNumber`, `organizationIdentifier`, `telephoneNumber` and `mobile` use a restricted character set according to its defined usage within this specification.
 
 All attributes use the “caseIgnoreMatch” matching rule as defined by X.520 \[[X.520](#x520)\]. That is, case-insensitive comparison where insignificant spaces are ignored.
 
@@ -452,7 +453,7 @@ for Federated Signing" specification \[[SC.SAP](#sc-sap)\].
 The `signMessageDigest` attribute is included in an assertion as a proof that an Identity Provider displayed
 a sign message for the user and that the user actively confirmed acceptance of this sign message. This sign 
 message is the `SignMessage` extension that may be included in an authentication request by Signature Service 
-Service Providers. See section 7 of \[[SC.SAML.Profile](#sc-saml-profile)\] for details.
+SP:s. See section 7 of \[[SC.SAML.Profile](#sc-saml-profile)\] for details.
 
 The attribute value format for the `signMessageDigest` attribute is `digest-algorithm-identifier;sign-message-digest`, where
 `digest-algorithm-identifier` is the XML Security algorithm URI identifier of the selected digest algorithm and
@@ -533,7 +534,7 @@ wishing to receive the attribute should declare the these requirement in their m
 Assertions (with attribute statements) issued from a member state eIDAS
 node contain a set of attributes identifying the authenticated subject.
 Attributes obtained from other conformant eIDAS nodes will provide an
-eIDAS unique identifier but it can not be ruled out that the Swedish
+eIDAS unique identifier, but it can not be ruled out that the Swedish
 eIDAS node may be adopted to accept authentication from non eIDAS
 compliant nodes, such as when accepting authentication from countries
 outside of EU such as the USA.
@@ -572,12 +573,16 @@ should be processed.
 <a name="the-mappedpersonalidentitynumber-and-personalidentitynumberbinding-attribute"></a>
 #### 3.3.2. The mappedPersonalIdentityNumber and personalIdentityNumberBinding Attributes
 
-When an authentication for a natural person is performed against theeIDAS Framework, the Swedish eIDAS connector will query the Identity Binding Service
+When an authentication for a natural person is performed against the
+eIDAS Framework, the Swedish eIDAS connector will query the Identity Binding Service
 for a binding between the attributes found in the assertion received from the foreign
-eIDAS-node and a Swedish personal identity number.  If such a mapping exists, and the user consents to it being used, the assertion will be extended with a `mappedPersonalIdentityNumber` attribute holding the "mapped" Swedish civic registration number ("personnummer" or "samordningsnummer").This mapping, or binding, can be performed using a number of different processes,each identified by a URI. Therefore, if the eIDAS connector extends an assertion with a 
+eIDAS-node and a Swedish personal identity number.  If such a mapping exists, and the user consents to it being used, the assertion will be extended with a `mappedPersonalIdentityNumber` attribute holding the "mapped" Swedish civic registration number ("personnummer" or "samordningsnummer").
+
+This mapping, or binding, can be performed using a number of different processes,
+each identified by a URI. Therefore, if the eIDAS connector extends an assertion with a 
 `mappedPersonalIdentityNumber` attribute, it MUST also include the `personalIdentityNumberBinding` attribute. This attribute contains a semicolon separated list of URI:s that identify the binding process applied to obtain the binding. See \[[ID-Binding](#id-binding)\] for the possible values.
 
-If these bindings are acceptable for a Service Provider processing an assertion (containing the `mappedPersonalIdentityNumber` attribute), the Service Provider MAY treat the contents of the `mappedPersonalIdentityNumber` attribute as it would have received the `personalIdentityNumber` attribute, otherwise the Service Provider SHOULD NOT use the identity found in the `mappedPersonalIdentityNumber` attribute to login the user.
+If these bindings are acceptable for a Service Provider processing an assertion (containing the `mappedPersonalIdentityNumber` attribute), the Service Provider MAY treat the contents of the `mappedPersonalIdentityNumber` attribute as it would have received the `personalIdentityNumber` attribute, otherwise the Service Provider SHOULD NOT use the identity found in the `mappedPersonalIdentityNumber` attribute to log in the user.
 
 > **Note**: The reason that an ordinary `personalIdentityNumber` attribute is not
 used to represent a mapped civic registration number is that it is essential that
@@ -589,7 +594,7 @@ process.
 #### 3.3.3. Conversion of eIDAS Attributes
 
 The attributes specified within eIDAS (\[[eIDAS.Attributes](#eidas-attr)\]) does not use
-simple string type values. Instead each attribute is represented using
+simple string type values, instead each attribute is represented using
 its own dedicated XML data type. This affects interoperability in a
 negative way since most standard SAML software need to be modified to
 support these attributes. Therefore, the Swedish eID Framework defines
@@ -841,7 +846,7 @@ following attribute:
 **Changes between version 1.2 and version 1.3:**
 
 -   This specification no longer uses the term “attribute profile” for
-    named collections of attributes for different scenarios. Instead the
+    named collections of attributes for different scenarios, instead the
     term “attribute set” is used.
 
 -   Definitions of attribute sets (profiles) have been changed to be
@@ -881,4 +886,3 @@ following attribute:
 -   In chapter 3.4, “Organizational Identity for Natural Persons”, some
     attributes were listed as both prohibited and allowed. This has been
     fixed.
-

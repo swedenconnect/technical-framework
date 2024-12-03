@@ -84,7 +84,7 @@ The claims defined in this specification are named in a collision-resistant mann
 
 This section defines how identity attributes received from, or in conjunction with, an eIDAS authentication is represented as OpenID claims within the Sweden Connect federation. 
 
-[Appendix A: Conversion of eIDAS Attributes](#conversion-of-eidas-attributes) presents a full listing of all eIDAS attributes and how they map to OpenID Connect claims. The sub-sections below define additional claims that may be added by the Swedish eIDAS-node.
+[Appendix A: Conversion of eIDAS Attributes](#conversion-of-eidas-attributes) presents a full listing of all eIDAS attributes and how they map to OpenID Connect claims. The subsections below define additional claims that may be added by the Swedish eIDAS-node.
 
 <a name="provisional-identifier"></a>
 #### 2.1.1. Provisional Identifier
@@ -182,7 +182,7 @@ The scopes defined in this specification are named in a collision-resistant mann
 
 Section 3 of \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\] states the following:
 
-> Many Relying Parties that use OpenID Connect to authenticate users cannot solely depend on the user's session at the OpenID Provider and the `sub` claim to log in the user to the RP application. In the context of Swedish eID there are some obvious claims that are regarded to be "primary" identity claims by Relying Parties, for example, a Swedish personal identity number. Such claims are needed by the Relying Party in order to log in a user to its application. Therefore, this specification's scope definitions will define that some claims are to be delivered in the ID Token so that a Relying Party can fully log in a user without having to make a, potentially, unnecessary call to the UserInfo endpoint.
+> Many Relying Parties that use OpenID Connect to authenticate users cannot solely depend on the user's session at the OpenID Provider and the `sub` claim to log in the user to the RP application. In the context of Swedish eID there are some obvious claims that are regarded to be "primary" identity claims by Relying Parties, for example, a Swedish personal identity number. Such claims are needed by the Relying Party in order to log in a user to its application. Therefore, this specification's scope definitions will define that some claims are to be delivered in the ID Token so that a Relying Party can fully log in a user without having to make a potentially unnecessary call to the UserInfo endpoint.
 
 The above is true also for Relying Parties authenticating users against the Swedish eIDAS Connector.
 
@@ -261,7 +261,7 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 
 - For all other optional eIDAS attributes (see [Appendix A](#conversion-of-eidas-attributes)), an explicit claim request should be included. These claims SHOULD NOT be marked as "essential" since they are not mandatory according to \[[eIDAS.Attributes](#eidas-attr)\]. 
 
-> Section 2.2.1 of \[[eIDAS.Attributes](#eidas-attr)\] defines the eIDAS Minimum Dataset for Natural Persons. This set comprises of the eIDAS attributes FamilyName, FirstName, DateOfBirth and PersonIdentifier. In order for a Relying Party to obtain the corresponding OpenID Connect claims from an eIDAS authentication it should specify the `https://id.oidc.se/scope/naturalPersonInfo` and `https://id.swedenconnect.se/scope/eidasNaturalPersonIdentity` scopes in an authentication request sent to the Swedish eIDAS Connector.
+> Section 2.2.1 of \[[eIDAS.Attributes](#eidas-attr)\] defines the eIDAS Minimum Dataset for Natural Persons. This set consists of the eIDAS attributes FamilyName, FirstName, DateOfBirth and PersonIdentifier. In order for a Relying Party to obtain the corresponding OpenID Connect claims from an eIDAS authentication it should specify the `https://id.oidc.se/scope/naturalPersonInfo` and `https://id.swedenconnect.se/scope/eidasNaturalPersonIdentity` scopes in an authentication request sent to the Swedish eIDAS Connector.
 
 
 <a name="references"></a>

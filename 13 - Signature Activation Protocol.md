@@ -127,7 +127,7 @@ This document specifies exchange of two data elements:
 - `SADRequest`
 - `SAD`
 
-The `SADRequest` SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the `SADRequest` element as an request extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
+The `SADRequest` SHALL have the format defined in section [3.1](#sadrequest). When a Remote Signing Service request a SAD from the Identity Provider, it MUST include the `SADRequest` element as a request extension by including it as a child element to a `<saml2p:Extensions>` element in the `<saml2p:AuthnRequest>`.
 
 When an Identity Provider returns a SAD, as defined in section [3.2](#signature-activation-data), in a SAML Assertion, it MUST be included as a single string value of a `sad` attribute identified by the attribute name `urn:oid:1.2.752.201.3.12` as defined in the attribute specification [[EidAttributes](#eidattributes)].
 
@@ -174,7 +174,7 @@ The SAD Request is provided in a `<sap:SADRequest>` element. The element has the
 
 `ID` \[Required\]
 
-> Attribute holding an unique identifier for the `SADRequest`.
+> Attribute holding a unique identifier for the `SADRequest`.
 
 The following schema fragment defines the `<sap:SADRequest>` element:
 
@@ -426,7 +426,7 @@ Protection profile for QSCD for Server Signing
 
 **Changes between version 1.1 and 1.2:**
 
-- The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
+- The protocol logic was clarified by removing references to sign message (which was never present in the actual protocol) and replacing this with a clarification of the semantics of including the Sign Request ID in SAD to assert the acceptance to sign the documents referenced in that Sign Request.
 
 - Updated examples where the use of "signmessage" LoA URI:s was removed.
 

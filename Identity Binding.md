@@ -83,7 +83,7 @@ See also sections 2.5, "eIDAS Natural Person Attribute Set", and 3.3.2, "The map
 <a name="identity-binding-processes"></a>
 ## 3. Identity Binding Processes
 
-This section contains a detailed description of the binding processes that are used by the Identity Binding Service. Each process is identified with an URI.
+This section contains a detailed description of the binding processes that are used by the Identity Binding Service. Each process is identified with a URI.
 
 To perform the identity binding process, a user must meet the following requirements:
 
@@ -97,7 +97,7 @@ To perform the identity binding process, a user must meet the following requirem
 
 - The user must accept the terms of use and consent to creation of a private storage area that belongs to the user.
 
-**Note:** If the above steps uniquely corresponds to exactly one record in the Swedish population register, the binding `http://id.swedenconnect.se/id-binding/process/populationregister` ([3.1](#population-register)) will be created, but, if the birth date and name information from the eIDAS assertion matches more than one record from the population register, other processes (as described below) need to be applied for a binding to be completed.
+**Note:** If the above steps uniquely corresponds to exactly one record in the Swedish population register, the binding `http://id.swedenconnect.se/id-binding/process/populationregister` ([3.1](#population-register)) will be created, but, if the birthdate and name information from the eIDAS assertion matches more than one record from the population register, other processes (as described below) need to be applied for a binding to be completed.
 
 <a name="population-register"></a>
 ### 3.1. Unique Record in the Population Register
@@ -113,7 +113,7 @@ A detailed search in the population register confirms that there is a low risk o
 
 **URI:** `http://id.swedenconnect.se/id-binding/process/swedish-eid`
 
-**Description:** The user has digitally signed an attestation connecting an eIDAS identity number to a record retrieved from the Swedish population register using a Swedish eID. Using this process the user proves the he or she holds both the eIDAS identity (received from the eIDAS-notified eID) and the Swedish identity number (received from the digital signature).
+**Description:** The user has digitally signed an attestation connecting an eIDAS identity number to a record retrieved from the Swedish population register using a Swedish eID. Using this process the user proves that he or she holds both the eIDAS identity (received from the eIDAS-notified eID) and the Swedish identity number (received from the digital signature).
 
 **Additional requirements:** Assurance level for the Swedish eID must be minimum at level 3 in accordance of the [Swedish Trust Framework](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation) (a.k.a. [Tillitsramverk för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation)). Using the eID for this purpose must also be approved by the eID provider.
 
@@ -122,7 +122,6 @@ A detailed search in the population register confirms that there is a low risk o
 
 - 2024-11-22: Updated version where the bindings for Nordic eID:s and relative confirmation were removed due to legal reasons.
 
-- 2024-05-08: Updated according to the latest legal agreements. The binding level is no longer used. Instead a set of identity binding process URL:s represent the binding.
+- 2024-05-08: Updated according to the latest legal agreements. The binding level is no longer used, instead a set of identity binding process URL:s represent the binding.
 
 - 2023-06-09: First version.
-

@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenID Connect Profile for Sweden Connect</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="openid-connect-profile-for-sweden-connect">OpenID Connect Profile for Sweden Connect</h1>
+<h3 id="version-10---2024-12-04">Version 1.0 - 2024-12-04</h3>
+<p>Registration number: <strong>2024-7674</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation-and-conventions">Requirements Notation and Conventions</a></p>
+<p> 1.2. <a href="#conformance">Conformance</a></p>
+</li>
+<li><p><a href="#openid-provider-requirements"><strong>OpenID Provider Requirements</strong></a></p>
+<p> 2.1. <a href="#openid-provider-discovery-and-metadata-requirements">OpenID Provider Discovery and Metadata Requirements</a></p>
+<p> 2.2. <a href="#op-authentication-request-requirements">Authentication Request Requirements</a></p>
+<p> 2.2.1. <a href="#single-sign-on-processing">Single Sign-on Processing</a></p>
+<p> 2.2.2. <a href="#user-message-request-parameter">User Message Request Parameter</a></p>
+<p> 2.2.3. <a href="#requested-authentication-provider-parameter">Requested Authentication Provider Parameter</a></p>
+<p> 2.3. <a href="#op-token-endpoint-requirements">Token Endpoint Requirements</a></p>
+<p> 2.3.1. <a href="#client-authentication-requirements">Client Authentication Requirements</a></p>
+<p> 2.3.2. <a href="#token-response-requirements">Token Response Requirements</a></p>
+<p> 2.4. <a href="#eidas-requirements">eIDAS Requirements</a></p>
+</li>
+<li><p><a href="#relying-party-requirements"><strong>Relying Party Requirements</strong></a></p>
+<p> 3.1. <a href="#client-authentication-request-requirements">Authentication Request Requirements</a></p>
+<p> 3.2. <a href="#client-registration-and-metadata-requirements">Client Registration and Metadata Requirements</a></p>
+</li>
+<li><p><a href="#references"><strong>References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<hr>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This profile is an extension of <a href="#oidc-sweden-profile">The Swedish OpenID Connect Profile</a>, [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>], for the <a href="https://www.swedenconnect.se">Sweden Connect</a> identity federation.</p>
+<p>The profile aims to get a baseline security and to facilitate interoperability between relying parties and OpenID providers within the Sweden Connect identity federation.</p>
+<blockquote>
+<p><strong>Note:</strong> This version of the profile does not address features concerning &quot;Signature Services&quot; and requirements for &quot;authentication for Signature&quot; that are specified in the corresponding Sweden Connect SAML deployment profile, [<a href="#sc-saml-profile">SC.SAML.Profile</a>]. Nor does the profile specify how OpenID Provider metadata and Relying Party/Client metadata is distributed and made available to the members of the federation. This will be added in future versions of the profile.</p>
+</blockquote>
+<p><a name="requirements-notation-and-conventions"></a></p>
+<h3 id="11-requirements-notation-and-conventions">1.1. Requirements Notation and Conventions</h3>
+<p>The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="conformance"></a></p>
+<h3 id="12-conformance">1.2. Conformance</h3>
+<p>This profile defines requirements for OpenID Connect Relying Parties (clients) and OpenID Providers (identity providers), and the interaction between them. </p>
+<p>Components compliant with this profile MUST adhere to the requirements of <a href="#oidc-sweden-profile">The Swedish OpenID Connect Profile</a>, [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] along with the extensions and requirements stated in the rest of this profile.</p>
+<p><a name="openid-provider-requirements"></a></p>
+<h2 id="2-openid-provider-requirements">2. OpenID Provider Requirements</h2>
+<p>An OpenID Provider compliant with this profile MUST adhere to the requirements stated in [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] along with the additions declared below.</p>
+<p><a name="openid-provider-discovery-and-metadata-requirements"></a></p>
+<h3 id="21-openid-provider-discovery-and-metadata-requirements">2.1. OpenID Provider Discovery and Metadata Requirements</h3>
+<p>The following requirements concerning OpenID Provider Metadata documents apply in addition to section 5.2 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>]:</p>
+<ul class="list">
+<li><p>The OP Metadata document SHOULD contain a <code>service_documentation</code> parameter having as its value a URL pointing to a resource containing human-readable information about the OP (for example, information about client registration). See section 3 of [<a href="#openid-discovery">OpenID.Discovery</a>].</p>
+</li>
+<li><p>The OP Metadata document MUST contain the <code>ui_locales_supported</code> parameter, and its value MUST contain English (<code>en</code>) and Swedish (<code>sv</code>), and MAY contain support for other languages. See section 3 of [<a href="#openid-discovery">OpenID.Discovery</a>].</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> This version of the profile does not specify how OpenID Provider Metadata documents are made available to the Relying Parties/Clients of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing metadata.</p>
+</blockquote>
+<p><a name="op-authentication-request-requirements"></a></p>
+<h3 id="22-authentication-request-requirements">2.2. Authentication Request Requirements</h3>
+<p><a name="single-sign-on-processing"></a></p>
+<h4 id="221-single-sign-on-processing">2.2.1. Single Sign-on Processing</h4>
+<p>Sweden Connect is a national identity federation and the Relying Parties of the federation generally have no organizational affinity, other than they use the same OpenID Providers for authentication of their users. Therefore, the feature of Single Sign-on by relying on a user&#39;s security context/session at an OpenID Provider that is used by several, non-connected, Relying Parties, should be used with great care. </p>
+<p>This profile states the following requirements regarding the re-use of user sessions:</p>
+<ul class="list">
+<li><p>An OpenID Provider within the Sweden Connect federation MUST NOT allow user sessions to exceed 60 minutes. </p>
+</li>
+<li><p>If the <code>prompt</code> parameter is not present in an authentication request, the OpenID Provider MUST treat this request as if it would contain the <code>prompt</code> parameter with a value of <code>login</code>, meaning that a user (re-)authentication is required, no matter the state of the current user session at the provider.</p>
+</li>
+<li><p>If the <code>prompt</code> parameter is present and its value is set to <code>none</code> (meaning that the Relying Party wishes to make use of an existing user security context/session, i.e., SSO), the following requirements apply:</p>
+<ul class="list">
+<li>If the security context/user session has expired, the OP MUST respond with an error holding the error code <code>login_required</code>.</li>
+<li>If the original authentication process, which led to the establishment of the security context, was created based on the request from another Relying Party than the sender of the current request, the OP MUST respond with an error holding the error code <code>login_required</code>. <br /><br />The exception to this requirement is that an OP is allowed to maintain a configuration of &quot;groups of Relying Parties&quot;, where SSO is allowed. How this configuration is maintained is out of scope for this profile.  </li>
+<li>If the original authentication process, which led to the establishment of the security context, was performed using another authentication method or <code>acr</code> (Authentication Context Class Reference) than what is requested in the current authentication request, the OP MUST respond with an error holding the error code <code>login_required</code>.</li>
+<li>If the original authentication process, which led to the establishment of the security context, involved user consent for a set of claims, and the current authentication request contains a request for a different set of identity claims, the OP MUST respond with an error holding the error code <code>interaction_required</code>.</li>
+</ul>
+</li>
+</ul>
+<p>See section 3.1.2.1 of [<a href="#openid-core">OpenID.Core</a>] and section 2.1.4 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] regarding further requirements for the <code>prompt</code> request parameter.</p>
+<p><a name="user-message-request-parameter"></a></p>
+<h4 id="222-user-message-request-parameter">2.2.2. User Message Request Parameter</h4>
+<p>It is RECOMMENDED that OpenID Providers compliant with this profile supports the <code>https://id.oidc.se/param/userMessage</code> request parameter according to section 2.1 of [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>]. This parameter gives the Relying Party the possibility to request that a message (set by the RP) is displayed to the user during the authentication process.</p>
+<p>OpenID Providers that support the <code>https://id.oidc.se/param/userMessage</code> request parameter MUST include the <code>https://id.oidc.se/disco/userMessageSupported</code> parameter in its Metadata document (see section 3.3.1 of [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>]). If MIME types other than <code>text/plain</code> is supported, the OP MUST include the <code>https://id.oidc.se/disco/userMessageSupportedMimeTypes</code> parameter and as its value state all supported MIME types.</p>
+<p><a name="requested-authentication-provider-parameter"></a></p>
+<h4 id="223-requested-authentication-provider-parameter">2.2.3. Requested Authentication Provider Parameter</h4>
+<p>An OpenID Provider that acts as a proxy for underlying authentication mechanisms SHOULD support the <code>https://id.oidc.se/param/authnProvider</code> request parameter extension (see section 2.2 of [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>]).</p>
+<p>OpenID Providers that support the <code>https://id.oidc.se/param/authnProvider</code> request parameter, MUST declare this support in its Metadata document using the <code>https://id.oidc.se/disco/authnProviderSupported</code> parameter, see section 3.2 of [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>].</p>
+<p><a name="op-token-endpoint-requirements"></a></p>
+<h3 id="23-token-endpoint-requirements">2.3. Token Endpoint Requirements</h3>
+<p>This section extends section 3 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] with additional requirements for Token endpoint requests and responses.</p>
+<p><a name="client-authentication-requirements"></a></p>
+<h4 id="231-client-authentication-requirements">2.3.1. Client Authentication Requirements</h4>
+<p>The following requirements apply in addition to the requirements stated in section 3.1.1 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>].</p>
+<p>In the context of the Sweden Connect federation, the OpenID Provider MUST NOT accept any other client authentication methods than <code>private_key_jwt</code>, or, if a bilateral agreement exists with a Relying Party, mutual TLS authentication.</p>
+<p>Mutual TLS authentication may be <code>tls_client_auth</code> or <code>self_signed_tls_client_auth</code>, and the requirements stated in section 2 of [<a href="#rfc8705">RFC8705</a>] MUST be followed. </p>
+<p><a name="token-response-requirements"></a></p>
+<h4 id="232-token-response-requirements">2.3.2. Token Response Requirements</h4>
+<p>The contents of the Access Token issued in a Token response MUST NOT reveal any information about the user&#39;s identity or the authentication process.</p>
+<p>Section 4.2 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] states:</p>
+<blockquote>
+<p>An OpenID Provider compliant with this profile MUST NOT release any identity claims in the ID Token, or via the UserInfo endpoint, if they have not been explicitly requested via scope and/or claims request parameters, or indirectly by a policy known, and accepted, by the involved parties. </p>
+</blockquote>
+<p>If the Access Token is a cleartext JWT holding user identity data, information that the Relying Party may not be authorized to access may be leaked. Therefore, it is RECOMMENDED that opaque strings are used as Access Tokens.</p>
+<p>Note: An OpenID Provider that also acts as an OAuth2 Authorization Server may of course issue JWT Access Tokens. The above requirement only applies to the Access Tokens that are issued during authentication (i.e., for granting access to the UserInfo endpoint).</p>
+<p><a name="relying-party-requirements"></a></p>
+<h2 id="3-relying-party-requirements">3. Relying Party Requirements</h2>
+<p>An OpenID Connect Relying Party (Client) compliant with this profile MUST adhere to the requirements stated in [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] along with the additions declared below.</p>
+<p><a name="client-authentication-request-requirements"></a></p>
+<h3 id="31-authentication-request-requirements">3.1. Authentication Request Requirements</h3>
+<p>For all authentication requests where the Relying Party expects the user to authenticate itself, the RP SHOULD include the <code>prompt</code> request parameter and assign the <code>login</code> value. This is to prevent un-wanted SSO. See section 2.1.4 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>].</p>
+<p>It is RECOMMENDED that Relying Parties send authentication requests containing Request Objects, i.e., the request parameters are included in a JWT, and its encoding is assigned to the <code>request</code> parameter according to section 6.1 of [<a href="#openid-core">OpenID.Core</a>]. It is also RECOMMENDED that the Request Object JWT is signed.</p>
+<blockquote>
+<p>The above recommendation gives a higher level of security, and may be changed to an imperative requirement in future versions of this profile.</p>
+</blockquote>
+<p><a name="client-registration-and-metadata-requirements"></a></p>
+<h3 id="32-client-registration-and-metadata-requirements">3.2. Client Registration and Metadata Requirements</h3>
+<p>Relying Parties compliant with this profile MUST follow the requirements stated in section 6 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] with the additions stated below.</p>
+<p>The Relying Party/Client metadata MUST contain the following additional parameters:</p>
+<ul class="list">
+<li><p>The <code>contacts</code> parameter holding at least one email address of people/groups responsible for the Relying Party.</p>
+</li>
+<li><p>The <code>client_name</code> parameter holding the client presentation name. This name may be presented to the end-user by the OpenID Provider during authentication. The name MUST be given in Swedish (<code>sv</code>) and English (<code>en</code>).</p>
+</li>
+<li><p>The <code>logo_uri</code> parameter containing a URL referencing a logotype for the Relying Party. This logotype may be displayed by the OpenID Provider for the end-user during authentication. The URL MUST use the HTTPS-scheme and point to a valid image file. It is RECOMMENDED that the image file is in SVG-format. The parameter MAY be given for different languages.</p>
+</li>
+<li><p>The <code>client_uri</code> parameter containing a URL that is the home page for the Relying Party. This link may be used by the OpenID Provider when interacting with the user. The URL MUST use the HTTPS-scheme and point to a valid web page. The parameter MAY be given for different languages.</p>
+</li>
+</ul>
+<p>Also, it is RECOMMENDED, that a Relying Party includes the <code>organization_name</code> claim and provides its human-readable organization name in Swedish and English. See section 5.2.2 of [<a href="#openid-federation">OpenID.Federation</a>]. </p>
+<p><strong>Example:</strong></p>
+<pre class="hljs"><code>{
+  ...
+  <span class="hljs-attr">&quot;contacts&quot;</span>: [
+    <span class="hljs-string">&quot;operations@example.com&quot;</span>
+  ],
+  <span class="hljs-attr">&quot;client_name#en&quot;</span>: <span class="hljs-string">&quot;The Example Service&quot;</span>,
+  <span class="hljs-attr">&quot;client_name#sv&quot;</span>: <span class="hljs-string">&quot;Exempeltjänsten&quot;</span>,
+  <span class="hljs-attr">&quot;logo_uri&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/logo.svg&quot;</span>,
+  <span class="hljs-attr">&quot;client_uri#en&quot;</span>: <span class="hljs-string">&quot;https://www.example.com&quot;</span>,
+  <span class="hljs-attr">&quot;client_uri#sv&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/sv&quot;</span>,
+  <span class="hljs-attr">&quot;organization_name#en&quot;</span> : <span class="hljs-string">&quot;Example Organization&quot;</span>,
+  <span class="hljs-attr">&quot;organization_name#sv&quot;</span> : <span class="hljs-string">&quot;Exempelorganisationen&quot;</span>
+  ...
+}</code></pre><p>See further requirements concerning client metadata in section 2 of [<a href="#openid-registration">OpenID.Registration</a>].</p>
+<blockquote>
+<p><strong>Note:</strong> This version of the profile does not specify how client metadata is registered at/distributed to the OpenID Providers of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing client metadata.</p>
+</blockquote>
+<p><a name="references"></a></p>
+<h2 id="4-references">4. References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="openid-core"></a>
+<strong>[OpenID.Core]</strong></p>
+<blockquote>
+<p>[Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015] (<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>).</p>
+</blockquote>
+<p><a name="openid-discovery"></a>
+<strong>[OpenID.Discovery]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-discovery-1_0.html">Sakimura, N., Bradley, J., Jones, M. and E. Jay, &quot;OpenID Connect Discovery 1.0&quot;, August 2015</a>.</p>
+</blockquote>
+<p><a name="openid-registration"></a>
+<strong>[OpenID.Registration]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-registration-1_0.html">Sakimura, N., Bradley, J., and M. Jones, “OpenID Connect Dynamic Client Registration 1.0,” November 2014</a>.</p>
+</blockquote>
+<p><a name="openid-federation"></a>
+<strong>[OpenID.Federation]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-federation-1_0.html">Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G. and V. Dzhuvinov, &quot;OpenID Federation 1.0&quot;</a>.</p>
+</blockquote>
+<p><a name="rfc7515"></a>
+<strong>[RFC7515]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7515">Jones, M., Bradley, J., and N. Sakimura, “JSON Web Token (JWT)”, May 2015</a>.</p>
+</blockquote>
+<p><a name="rfc8705"></a>
+<strong>[RFC8705]</strong></p>
+<blockquote>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc8705">B. Campbell, J. Bradley, N. Sakimura, T. Lodderstedt, &quot;OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens&quot;, February 2020</a>.</p>
+</blockquote>
+<p><a name="iana-reg"></a>
+<strong>[IANA-Reg]</strong></p>
+<blockquote>
+<p><a href="https://www.iana.org/assignments/jwt/jwt.xhtml#claims">IANA JSON Web Token Claims Registry</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-profile"></a>
+<strong>[OIDC.Sweden.Profile]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html">The Swedish OpenID Connect Profile - version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-claims"></a>
+<strong>[OIDC.Sweden.Claims]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html">Claims and Scopes Specification for the Swedish OpenID Connect Profile - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-rpar"></a>
+<strong>[OIDC.Sweden.RPar]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/request-parameter-extensions-1_1.html">Authentication Request Parameter Extensions for the Swedish OpenID Connect Profile - Version 1.1</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-sign"></a>
+<strong>[OIDC.Sweden.Sign]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/oidc-signature-extension-1_1.html">Signature Extension for OpenID Connect - Version 1.1</a>.</p>
+</blockquote>
+<p><a name="sc-saml-profile"></a>
+<strong>[SC.SAML.Profile]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="5-changes-between-versions">5. Changes between versions</h2>
+<p>This is the first version of this specification.</p>
+    </article>
+  </body>
+</html>

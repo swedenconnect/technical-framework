@@ -144,7 +144,7 @@ Five types of Entity Categories are used within the federation:
 <a name="requirements-notation"></a>
 ### 1.1. Requirements Notation
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in \[[RFC2119](#rfc2119)\].
 
@@ -225,7 +225,7 @@ a plausible choice, if and only if, the following conditions apply;
 -   if the Identity Provider declares at least one Service Contract identifier,
     the Service Provider must declare at least one of declared identifiers, and,
 
--   all of the Service Property identifiers declared by the Service
+-   all the Service Property identifiers declared by the Service
     Provider must be declared by the Identity Provider.
 
 <a name="representation-of-entity-categories-in-metadata"></a>
@@ -270,7 +270,7 @@ may define additional categories.
 All service entity category identifiers are prefixed with
 `http://id.elegnamnden.se/ec` or `http://id.swedenconnect.se/ec` (defined after Aug. 2018).
 
-A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes. For contract- or business agreement requirements [Service Contract Categories](#service-contract-categories) should be used.
+A service entity category identifies an arbitrary set of requirements and conditions that is required by the consuming service and provided by the providing service. Each service entity category specifies its own set of requirements and conditions. Typically, such requirements and conditions include requirements on level of assurance (LoA) and requirements on mandatory attributes. For contract or business agreement requirements [Service Contract Categories](#service-contract-categories) should be used.
 
 A providing service declaring a service entity category that consists of both a level of assurance requirement and an attribute set MUST guarantee that the release of the given attributes are consistent with the level of assurance requirement.
 
@@ -296,7 +296,7 @@ of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 **Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
-> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01`
 
@@ -308,7 +308,7 @@ of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 **Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity with Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
-> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/pnr-01`
 
@@ -374,7 +374,7 @@ of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 **Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
-> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/org-person-01`
 
@@ -386,7 +386,7 @@ of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 **Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
-> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/org-person-01`
 
@@ -398,7 +398,7 @@ of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 **Description**: User authentication according to assurance level 4 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Organizational Identity for Natural Persons”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
-> Or a corresponding LoA 4 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 4 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/org-person-01`
 
@@ -413,30 +413,36 @@ of \[[SC.SAML.Attrs](#sc-saml-attrs)\].
 <a name="loa2-name"></a>
 ### 2.4.1. loa2-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa2-name`**Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa2-name`
+
+**Description**: User authentication according to assurance level 2 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa2`
-> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 2 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/natural-person-01`
 
 <a name="loa3-name"></a>
 ### 2.4.2. loa3-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`**Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa3-name`
+
+**Description**: User authentication according to assurance level 3 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa3`
-> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 3 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/natural-person-01`
 
 <a name="loa4-name"></a>
 ### 2.4.3. loa4-name
 
-**URL**: `http://id.swedenconnect.se/ec/1.0/loa4-name`**Description**: User authentication according to assurance level 4 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
+**URL**: `http://id.swedenconnect.se/ec/1.0/loa4-name`
+
+**Description**: User authentication according to assurance level 4 \[[SE.Trust](#se-trust)\] and attribute release according to the attribute set “Natural Personal Identity without Civic Registration Number”.
 
 **LoA-identifier**: `http://id.elegnamnden.se/loa/1.0/loa4`
-> Or a corresponding LoA 4 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\].
+> Or a corresponding LoA 4 URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]).
 
 **Attribute requirements**: `http://id.elegnamnden.se/ap/1.0/natural-person-01`
 
@@ -527,7 +533,7 @@ Service Contract Entity Category identifiers are indented for performing service
 
 All Service Contract identifiers are prefixed with `http://id.swedenconnect.se/contract/<org>`, where `org` is identifier for the defining organization.
 
-The meaning of different contracts and business agreements are out of scope for this specification. Instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
+The meaning of different contracts and business agreements are out of scope for this specification, instead the federation operator, or other parties, may define identifiers suitable for representing how consuming and providing services should be matched based on their respective agreements.
 
 
 <a name="general-entity-categories"></a>
@@ -557,7 +563,7 @@ person who opens, and performs the authentication in the app.
 
 In order to prevent attacks of this type many authentication schemes offer alternative ways
 of initiating authentication (or signature) sessions, where some sort of binding between the
-user agent and the authentication device is performed. An good example of this is when 
+user agent and the authentication device is performed. A good example of this is when 
 Identity Providers prompt the user to scan a QR-code displayed in the web browser using the 
 authentication app instead of prompting for the user identity. This effectively binds the
 user agent to the same physical location as the authentication device, and in practice

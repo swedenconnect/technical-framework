@@ -166,7 +166,7 @@ For Identity Providers implementing BankID support in **one** Identity Provider 
 <a name="relying-party-configuration"></a>
 ### 1.4. Relying Party Configuration
 
-When a Relying Party uses the BankID Relying Party API directly in order to implement BankID services, it has a set of configuration settings to choose from (see `requirements` object under the [Auth](https://developers.bankid.com/api-references/auth--sign/auth) and [Sign API](https://developers.bankid.com/api-references/auth--sign/sign). Examples are:
+When a Relying Party uses the BankID Relying Party API directly in order to implement BankID services, it has a set of configuration settings to choose from (see `requirements` object under the [Auth](https://developers.bankid.com/api-references/auth--sign/auth) and [Sign API](https://developers.bankid.com/api-references/auth--sign/sign)). Examples are:
 
 - Should fingerprints be allowed instead of the user entering his or hers security code?
 
@@ -174,9 +174,9 @@ When a Relying Party uses the BankID Relying Party API directly in order to impl
 
 - Smart card reader preferences.
 
-However, the services of a BankID Identity Provider are used by several parties within the federation and it is thus harder to maintain a per Service Provider configuration. Therefore, a BankID Identity Provider compliant with this profile SHOULD use the same configuration defaults as stated in [Auth](https://developers.bankid.com/api-references/auth--sign/auth) and [Sign API](https://developers.bankid.com/api-references/auth--sign/sign).
+However, the services of a BankID Identity Provider are used by several parties within the federation, and it is thus harder to maintain a per-Service Provider configuration. Therefore, a BankID Identity Provider compliant with this profile SHOULD use the same configuration defaults as stated in [Auth](https://developers.bankid.com/api-references/auth--sign/auth) and [Sign API](https://developers.bankid.com/api-references/auth--sign/sign).
 
-> **Note:** It is of course allowed for a BankID Identity Provider to maintain specific Service Provider configurations, but this is outside of the scope for this profile, and there will be no specification support to accomplish this.
+> **Note:** It is of course allowed for a BankID Identity Provider to maintain specific Service Provider configurations, but this is outside the scope for this profile, and there will be no specification support to accomplish this.
 
 <a name="attributes"></a>
 ## 2. Attributes
@@ -222,7 +222,7 @@ The attribute is used by attribute providers to release data from an authenticat
 <a name="identity-provider-user-interface"></a>
 ## 3. Identity Provider User Interface
 
-This profile does not state any requirements on how the user interface for an Identity Provider implementing BankID services should be implemented other than the statements listed in the sub sections below.
+This profile does not state any requirements on how the user interface for an Identity Provider implementing BankID services should be implemented other than the statements listed in the subsections below.
 
 <a name="general-requirements"></a>
 ### 3.1. General Requirements
@@ -266,14 +266,16 @@ An Identity Provider conformant with this profile MUST require `<saml2p:AuthnReq
 <a name="handling-of-principal-selection"></a>
 ### 4.2. Handling of Principal Selection
 
-An Identity Provider that has declared support for the `<psc:PrincipalSelection>` extension (see see section [6](#metadata)) MUST assign the `requirement.personalNumber` field of [/auth](https://developers.bankid.com/api-references/auth--sign/auth) or [/sign](https://developers.bankid.com/api-references/auth--sign/sign) if a Swedish personal identity number is received in the `<psc:PrincipalSelection>` extension.
+An Identity Provider that has declared support for the `<psc:PrincipalSelection>` extension (see section [6](#metadata)) MUST assign the `requirement.personalNumber` field of [/auth](https://developers.bankid.com/api-references/auth--sign/auth) or [/sign](https://developers.bankid.com/api-references/auth--sign/sign) if a Swedish personal identity number is received in the `<psc:PrincipalSelection>` extension.
 
 See \[[SC.SAML.Principal](#sc-saml-principal)\] for further requirements concerning the principal selection extension.
 
 <a name="authentication-for-signature"></a>
 ### 4.3. Authentication for Signature
 
-An Identity Provider conforming to the Sweden Connect Framework is obliged to handle requests received from Signature Services as described in section 7, “Authentication for Signature”, of \[[SC.SAML.Profile](#sc-saml-profile)\]. This section further specifies how a BankID Identity Provider should support “authentication for signature”.A BankID Identity Provider that receives an `<saml2p:AuthnRequest>` message from a Signature Service MUST initiate a BankID **signature** operation. It MUST NOT initiate a BankID authentication operation for several reasons: 
+An Identity Provider conforming to the Sweden Connect Framework is obliged to handle requests received from Signature Services as described in section 7, “Authentication for Signature”, of \[[SC.SAML.Profile](#sc-saml-profile)\]. This section further specifies how a BankID Identity Provider should support “authentication for signature”.
+
+A BankID Identity Provider that receives an `<saml2p:AuthnRequest>` message from a Signature Service MUST initiate a BankID **signature** operation. It MUST NOT initiate a BankID authentication operation for several reasons: 
 
 * the user interface in the BankID client (app or Desktop program) during authentication indicates that the user is logging on (and not signing which is the case when a request from a Signature Service is being processed), 
 * the user expects to be displayed a text describing what he or she is signing,
@@ -286,17 +288,20 @@ The BankID client (app or desktop program) comprises a text box in which the sig
 
 An Identity Provider that processes an `<saml2p:AuthnRequest>` from a Signature Service is not given the actual data that is being signed by the user via the Signature Service. However, in order to invoke the BankID signature function, the Identity Provider must supply the BankID-server with data to be signed. This section specifies the input to the BankID signature operation.
 
-The "To-be-signed" data that is passed as input the the BankID Sign-method (`/sign`) is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (<https://developers.bankid.com/api-references/auth--sign/sign>).
+The "To-be-signed" data that is passed as input the BankID Sign-method (`/sign`) is a combination of the data from the `userVisibleData` and `userNonVisibleData` parameters (<https://developers.bankid.com/api-references/auth--sign/sign>).
 
 <a name="uservisibledata"></a>
 ##### 4.3.1.1. userVisibleData - Signature Message
 
-The Sign-method parameter `userVisibleData` holds data that will be signed by the user but it is also displayed in the BankID application text box.
+The Sign-method parameter `userVisibleData` holds data that will be signed by the user, but it is also displayed in the BankID application text box.
 
 If the `<saml2p:AuthnRequest>` message contains a `SignMessage` extension, the contents of this message MUST be assigned to the `userVisibleData` parameter (after necessary encoding).
 
-A BankID Identity Provider MUST support `SignMessage` elements having their `MimeType` attribute set to `text`, and SHOULD support Markdown (`text/markdown`) according to [BankID - Guidelines for Formatted Text](#bankid-md), \[[BankID.MD](#bankid-md)\]. For other values (`text/html`), the Identity Provider MUST respond with an error.If the `<saml2p:AuthnRequest>` message does not contain a `SignMessage` extension, the Identity Provider MUST assign a sensible default signature message to the `userVisibleData` parameter. How this message is constructed is the responsibility of the Identity Provider, but it must be obvious for the user who is the requesting party, i.e., the Service Provider that has ordered the signature operation<sup>2</sup>.
-> \[1\]: If the `MimeType` attribute is not set, `text` is the default value.
+A BankID Identity Provider MUST support `SignMessage` elements having their `MimeType` attribute set to `text`, and SHOULD support Markdown (`text/markdown`) according to [BankID - Guidelines for Formatted Text](#bankid-md), \[[BankID.MD](#bankid-md)\]. For other values (`text/html`), the Identity Provider MUST respond with an error.
+
+If the `<saml2p:AuthnRequest>` message does not contain a `SignMessage` extension, the Identity Provider MUST assign a sensible default signature message to the `userVisibleData` parameter. How this message is constructed is the responsibility of the Identity Provider, but it must be obvious for the user who is the requesting party, i.e., the Service Provider that has ordered the signature operation<sup>2</sup>.
+
+> \[1\]: If the `MimeType` attribute is not set, `text` is the default value.
 > 
 > \[2\]: For this purpose, the `<mdui:DisplayName>` element of the Signature Service’s metadata entry, is a good and generic choice.
 
@@ -343,7 +348,7 @@ If the user cancels a BankID operation, either by clicking the Cancel-button in 
 
 In cases where the Identity Provider receives the BankID error code `ALREADY_IN_PROGRESS` in response to an Auth- or Sign-call the Identity Provider MAY display a warning to the user that someone may have initiated a BankID operation using their personal identity number<sup>1</sup>. If this warning is displayed, it is RECOMMENDED that the second level status code `http://id.elegnamnden.se/status/1.0/possibleFraud` is included in the error response message posted back to the Service Provider.
 
-> \[1\]: There have been reports where fraudsters remotely try to convince people of using their Mobile BankID to log in to a service. In these cases, the fraudster initiates a BankID authentication prior to the person he tries to trick into logging in to the service, and is waiting for the user to enter his or hers personal code, thus authenticating the fraudsters session. 
+> \[1\]: There have been reports where fraudsters remotely try to convince people of using their Mobile BankID to log in to a service. In these cases, the fraudster initiates a BankID authentication prior to the person he tries to trick into logging in to the service, and is waiting for the user to enter his or hers personal code, thus authenticating the fraudster's session. 
 
 <a name="metadata"></a>
 ## 6. Metadata

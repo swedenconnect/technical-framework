@@ -968,7 +968,7 @@ especially important in cases of re-use of already established security
 contexts at the Identity Provider side (Single Sign On).
 
 Each identity assertion MUST have a `<saml:Subject>` element that
-specifies the principal that is the subject of all of the statements in
+specifies the principal that is the subject of all the statements in
 the assertion.
 
 The value of the `<saml:NameID>` element under the
@@ -1505,7 +1505,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 ```
 *Example of how a service announces that it wishes that the peer uses SHA-256 as the key transport digest when encrypting using RSA-OAEP-MGF1P.*
 
-> \[*\]: Note that the use if SHA-1 in this context (both as digest algoritm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 is is known to be relevant to its use in this context.
+> \[*\]: Note that the use if SHA-1 in this context (both as digest algoritm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 are known to be relevant to its use in this context.
 
 <a name="normative-references"></a>
 ## 9. Normative References
@@ -1650,7 +1650,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 **Changes between version 1.7 and 1.8:**
 
-- Section 7.1.2 was updated to state that the requirement to include both a SAD and a SignMessage extension only applies when the requested CertType is "QC/SSCD". Voluntary use of SAD for other types of signatures (e.g. non qualified signatures) does not automatically trigger a requirement to include SignMessage.
+- Section 7.1.2 was updated to state that the requirement to include both a SAD and a SignMessage extension only applies when the requested CertType is "QC/SSCD". Voluntary use of SAD for other types of signatures (e.g., nonqualified signatures) does not automatically trigger a requirement to include SignMessage.
 
 **Changes between version 1.6 and 1.7:**
 
@@ -1667,7 +1667,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 **Changes between version 1.5 and 1.6:**
 
 - In order to facilitate algorithm interoperability between peers additions concerning "Metadata Profile for Algorithm Support" \[[SAML2MetaAlgSupport](#saml2metaalg)\] was added. Section 2.1.1 was updated with a section defining how preferred algorithms are declared in metadata, and sections 5.2, 6.1 and 7.2.1 was updated with requirements for algorithm selection during signing and encryption.
-- Section 5.3, "Message Content", was re-structured with sub-chapters for requested authentication contexts, scoping and principal selection.
+- Section 5.3, "Message Content", was re-structured with subchapters for requested authentication contexts, scoping and principal selection.
 - The `PrincipalSelection` and `RequestedPrincipalSelection` extensions were introduced to sections 2.1.3, 5.3.3 and 7.2.
 - The link for the "Tillitsramverk för Svensk e-legitimation" specification was updated.
 - This profile is no longer normatively dependent upon SAML2Int. Therefore, the profile has been updated with requirements that previously was implicit (due to the normative dependency to SAML2Int).
@@ -1713,7 +1713,7 @@ and the use of the `signMessageDigest` attribute was introduced.
 -   In section 7.1, a set of authentication context URIs for the eIDAS
     Framework was added.
 
--   In section 6.4, the requirement to use the sub-level status code
+-   In section 6.4, the requirement to use the sublevel status code
     `http://id.elegnamnden.se/status/1.0/cancel` was added. This status
     should be used to indicate a cancelled operation.
 

@@ -321,7 +321,7 @@ attributes for each tag other than those listed in the following table:
 Allowed HTML entities for character replacement SHALL be restricted to
 `amp`, `gt`, `lt`, `quot` and `nbsp` (in the form `&entity-name;`).
 
-HTML messages MUST NOT contain any URI references to data outside of the
+HTML messages MUST NOT contain any URI references to data outside the
 message and MUST NOT contain any JavaScript in any form.
 
 <a name="requesting-identity-provider-to-display-signmessage"></a>
@@ -349,7 +349,7 @@ when authenticating the user for signing:
 ##### 2.1.3.9. CertRequestProperties
 
 This element MAY be present to provide requested properties of generated
-signature certificates according with section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
+signature certificates according to section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
 
 When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\], or reject the request.
 
@@ -467,7 +467,7 @@ request was processed and response was constructed. This version MUST be the sam
 version as given in the `SignRequestExtension` (see section [2.1.3.1](#version), "[Version](#version))".
 
 For backwards compatibility reasons that attribute MAY be absent if version "1.1" was requested. 
-Otherwise it MUST be set.
+Otherwise, it MUST be set.
 
 <a name="responsetime"></a>
 ##### 2.2.4.2. ResponseTime
@@ -478,7 +478,7 @@ The `<ResponseTime>` element MUST be present in the response.
 ##### 2.2.4.3. Request
 
 The `<Request>` element MAY be present in a response. However, it is RECOMMENDED not to include this
-element since it makes the response message unnecessary large. Instead the requester of a sign operation
+element since it makes the response message unnecessary large, instead the requester of a sign operation
 is expected to save the request message in its session for later use when processing a response message.
 
 <a name="signerassertioninfo"></a>
@@ -703,7 +703,7 @@ EidSignResponse | Base64 encoded sign response.
 
 **Changes between version 1.2 and version 1.3:**
 
-- In section 2.1.3.9, "CertRequestProperties", an requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature was added.
+- In section 2.1.3.9, "CertRequestProperties", a requirement to adapt authentication request procedures when the requested signature is a qualified electronic signature was added.
 
 **Changes between version 1.1 and version 1.2:**
 
