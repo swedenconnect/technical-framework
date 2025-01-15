@@ -671,11 +671,11 @@ tillitsnivå 3 och 4.*
 `http://id.elegnamnden.se/loa/1.0/loa4`.
 
 - Endast legitimeringstjänster som levererar enligt [Anslutningsavtal för utfärdare av 
-e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx) 
+e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.129a4fef1939e2e1c1f106f1/1675421071580/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx) 
 och som är granskade och godkända enligt tillitsnivå 3 eller högre får deklarera `http://id.swedenconnect.se/loa/1.0/loa3-nonresident`.
 
 - Endast legitimeringstjänster som levererar enligt [Anslutningsavtal för utfärdare av 
-e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx)
+e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.129a4fef1939e2e1c1f106f1/1675421071580/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx)
 och som är granskade och godkända enligt tillitsnivå 2 får deklarera `http://id.swedenconnect.se/loa/1.0/loa2-nonresident`. 
 
 - Endast den svenska eIDAS-noden får deklarera någon av följande identifierare:
@@ -1037,7 +1037,7 @@ levererar enligt [Anslutningsavtal för leverantör avseende Valfrihetssystem 20
 
 Skall deklareras av förlitande parter som tecknat avtalet [Förlitandeavtal - Förbetald e-legitimering](https://www.digg.se/4b00bf/globalassets/dokument/digital-identitet/eid-for-medarbetare/forlitandeavtal-forbetald-e-legitimering.docs)
 och av legitimeringstjänster som levererar enligt [Anslutningsavtal för utfärdare av 
-e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx).
+e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.129a4fef1939e2e1c1f106f1/1675421071580/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx).
 
 **Regler och rutiner vid registrering av metadata**:
 
@@ -1047,7 +1047,7 @@ e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd
 ### 3.7. Metadataregler gällande organisationsidentiteter
 
 Legitimeringstjänster som levererar enligt [Anslutningsavtal för utfärdare av 
-e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/4b00bd/globalassets/dokument/digital-identitet/eid-for-medarbetare/anslutningsavtal-leverantor-forbetald-e-legitimering.docx) och stödjer leverans av intyg enligt attributsuppsättningen [Organizational Identity for Natural Persons](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons) måste anmäla
+e-tjänstelegitimationer - Förbetald e-legitimering](https://www.digg.se/download/18.129a4fef1939e2e1c1f106f1/1675421071580/Anslutningsavtal-leverantor-forbetald-e-legitimering.docx) och stödjer leverans av intyg enligt attributsuppsättningen [Organizational Identity for Natural Persons](https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons) måste anmäla
 till federationsoperatören (Digg) vilka organisationer som hanteras av den givna legitimeringstjänsten.
 
 Denna information kommer att publiceras i legitimeringstjänstens SAML-metadata enligt beskrivningen i kapitel 2.1.3.1
