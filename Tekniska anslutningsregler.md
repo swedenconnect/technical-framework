@@ -157,7 +157,7 @@ Legitimeringstjänster som levererar enligt Valfrihetssystem 2017 har tecknat "A
 <a name="auktorisationssystem-for-elektronisk-identifiering"></a>
 #### 1.1.2. Auktorisationssystem för elektronisk identifiering
 
-Auktorisationssystem för elektronisk identifiering är ett avtal som ger förlitande parter tillgång till godkända och granskade e-legitimationer samt tillhörande legitimeringstjänster. 
+[Auktorisationssystem för elektronisk identifiering](https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-elektronisk-identifiering-inom-auktorisationssystemet) är ett avtal som ger förlitande parter tillgång till godkända och granskade e-legitimationer samt tillhörande legitimeringstjänster. 
 
 E-legitimationerna utfärdas till personer med person- och samordningsnummer och uppfyller tillitsnivå 2, 3 eller 4 enligt [Tillitsramverket för Svensk e-legitimation](https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation). 
 
@@ -1123,7 +1123,7 @@ En förlitande part som vill nyttja "Holder-of-key" vid autentisering ska deklar
 
 - 2025-04-03:
 
-    - Introducerade värde för entitetskategori som indikerar tecknande av, eller leverans enligt, [Auktorisationssystem för elektronisk identifiering](https://www.digg.se/digitala-tjanster/auktorisationssystem/auktorisationssystem-for-elektronisk-identifiering). Se kapitel [3.6.5](#auktorisationssystem), [Auktorisationssystem](#auktorisationssystem).
+    - Introducerade värde för entitetskategori som indikerar tecknande av, eller leverans enligt, [Auktorisationssystem för elektronisk identifiering](https://www.digg.se/digitala-tjanster/auktorisationssystem/auktorisationssystem-for-elektronisk-identifiering). Se kapitel [3.6.5, Auktorisationssystem för elektronisk identifiering](#eid-authorization-system).
 
 - 2024-05-13:
 	- Korrigeringar rörande `http://id.swedenconnect.se/loa/1.0/loa2-nonresident` och `http://id.swedenconnect.se/loa/1.0/loa4-nonresident`. 
