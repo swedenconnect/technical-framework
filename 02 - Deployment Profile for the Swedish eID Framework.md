@@ -8,14 +8,14 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.8 - 2024-12-04
+### Version 1.9 - 2025-10-16 - Draft
 
 Registration number: **2019-308**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2025. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -1236,9 +1236,9 @@ If the Service Provider included the attribute `ForceAuthn` with a value
 of `true` in the authentication request, the Service Provider SHOULD
 ensure that the `AuthnInstant` attribute of the
 `<saml2:AuthnStatement>` element is greater than the time when the
-request was sent (allowing for a reasonable clock skew).
+request was sent (allowing for a clock skew).
 
-A reasonable clock skew according to this profile is between 3 and 5 minutes in either direction.
+The clock skew, according to this profile, SHOULD NOT exceed 1 minute in either direction.
 
 <a name="error-responses"></a>
 ### 6.4. Error Responses
@@ -1647,6 +1647,10 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="changes-between-versions"></a>
 ## 10. Changes between versions
+
+**Changed between version 1.8 and 1.9:**
+
+- Section 6.3.5 was updated where the requirement "A reasonable clock skew according to this profile is between 3 and 5 minutes in either direction" was changed to "The clock skew, according to this profile, SHOULD NOT exceed 1 minute in either direction".
 
 **Changes between version 1.7 and 1.8:**
 

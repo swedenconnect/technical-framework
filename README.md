@@ -157,4 +157,4 @@ Older version of the specifications are stored in the following branches:
 
 ---
 
-Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2024. All Rights Reserved.
+Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2025. All Rights Reserved.
