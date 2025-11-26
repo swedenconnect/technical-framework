@@ -1,1 +1,417 @@
-../december-2024/OpenID_Connect_Claims_and_Scopes_Specification.html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenID Connect Claims and Scopes Specification for Sweden Connect</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="openid-connect-claims-and-scopes-specification-for-sweden-connect">OpenID Connect Claims and Scopes Specification for Sweden Connect</h1>
+<h3 id="version-11---2025-11-26---draft">Version 1.1 - 2025-11-26 - Draft</h3>
+<p>Registration number: <strong>2024-7704</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2025. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirements-notation-and-conventions">Requirements Notation and Conventions</a></p>
+</li>
+<li><p><a href="#claims"><strong>Claims</strong></a></p>
+<p> 2.1. <a href="#eidas-claims">eIDAS Claims</a></p>
+<p> 2.1.1. <a href="#provisional-identifier">Provisional Identifier</a></p>
+<p> 2.1.2. <a href="#provisional-identifier-persistence-indicator">Provisional Identifier Persistence Indicator</a></p>
+<p> 2.1.3. <a href="#mapped-swedish-personal-identity-number">Mapped Swedish Personal Identity Number</a></p>
+<p> 2.1.4. <a href="#mapped-swedish-coordination-number">Mapped Swedish Coordination Number</a></p>
+<p> 2.1.5. <a href="#identity-binding">Identity Binding</a></p>
+<p> 2.1.6. <a href="#eidas-person-identifier">eIDAS Person Identifier</a></p>
+<p> 2.1.7. <a href="#eidas-country">eIDAS Country</a></p>
+</li>
+<li><p><a href="#scopes"><strong>Scopes</strong></a></p>
+<p> 3.1. <a href="#eidas-scopes">eIDAS Scopes</a></p>
+<p> 3.1.1. <a href="#eidas-natural-person-identity">eIDAS Natural Person Identity</a></p>
+<p> 3.1.2. <a href="#eidas-natural-person-with-swedish-identity">eIDAS Natural Person with Swedish Identity</a></p>
+<p> 3.1.3. <a href="#additional-eidas-claims">Additional eIDAS Claims</a></p>
+</li>
+<li><p><a href="#metadata-parameters"><strong>Metadata Parameters</strong></a></p>
+<p> 4.1. <a href="#organization-number">Organization Number</a></p>
+</li>
+<li><p><a href="#references"><strong>References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<p>Appendix A: <a href="#conversion-of-eidas-attributes"><strong>Conversion of eIDAS Attributes</strong></a></p>
+<hr>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This specification extends the &quot;Claims and Scopes Specification for the Swedish OpenID Connect Profile&quot;, [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>], with OpenID Connect claims and scopes for usage within the Sweden Connect federation.</p>
+<p><a name="requirements-notation-and-conventions"></a></p>
+<h3 id="11-requirements-notation-and-conventions">1.1. Requirements Notation and Conventions</h3>
+<p>The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” are to be interpreted as described in [<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behaviour that affect the interoperability and security of implementations. When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="claims"></a></p>
+<h2 id="2-claims">2. Claims</h2>
+<p>This section defines a set of claims that extend the claims defined in [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>], and the set of standard claims defined in [<a href="#rfc7515">RFC7515</a>] and section 5.1 of [<a href="#openid-core">OpenID.Core</a>]. A full listing of standard claims can be found in the <a href="https://www.iana.org/assignments/jwt/jwt.xhtml#claims">IANA JSON Web Token Claims Registry</a>, [<a href="#iana-reg">IANA-Reg</a>].</p>
+<p>The claims defined in this specification are named in a collision-resistant manner, as described in JSON Web Token (JWT), [<a href="#rfc7515">RFC7515</a>], specification. All claims defined within this specification are prefixed with the namespace <code>https://id.swedenconnect.se/claim/</code>.</p>
+<p><a name="eidas-claims"></a></p>
+<h3 id="21-eidas-claims">2.1. eIDAS Claims</h3>
+<p>This section defines how identity attributes received from, or in conjunction with, an eIDAS authentication is represented as OpenID claims within the Sweden Connect federation. </p>
+<p><a href="#conversion-of-eidas-attributes">Appendix A: Conversion of eIDAS Attributes</a> presents a full listing of all eIDAS attributes and how they map to OpenID Connect claims. The subsections below define additional claims that may be added by the Swedish eIDAS-node.</p>
+<p><a name="provisional-identifier"></a></p>
+<h4 id="211-provisional-identifier">2.1.1. Provisional Identifier</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/prid</code></p>
+<p><strong>Description:</strong> Provisional Identifier used to represent a subject that has been authenticated by the Swedish eIDAS Connector. See section 3.3.1 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>] for details.</p>
+<p><strong>Type:</strong> String</p>
+<p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.4</code> (prid) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
+<p><a name="provisional-identifier-persistence-indicator"></a></p>
+<h4 id="212-provisional-identifier-persistence-indicator">2.1.2. Provisional Identifier Persistence Indicator</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/pridPersistence</code></p>
+<p><strong>Description:</strong> Indicator for the expected persistence of the <code>prid</code> claim. See section 3.3.1 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>] for details.</p>
+<p><strong>Type:</strong> String, where the possible values are <code>A</code>, <code>B</code> or <code>C</code>. See [<a href="#sc-constructed-attr">SC.Constructed</a>] for details.</p>
+<p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.5</code> (pridPersistence) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
+<p><a name="mapped-swedish-personal-identity-number"></a></p>
+<h4 id="213-mapped-swedish-personal-identity-number">2.1.3. Mapped Swedish Personal Identity Number</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/mappedPersonalIdentityNumber</code></p>
+<p><strong>Description:</strong> A Swedish civic registration number (&quot;personnummer&quot;). This claim is used to represent a Swedish civic registration number that was the result of a query from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node. See section 3.3.2 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>] for details.</p>
+<p>Normally a Swedish civic registration number is represented using the claim <code>https://id.oidc.se/claim/personalIdentityNumber</code> defined in [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>], but in order to avoid consumption of this claim without checking how the binding was made, i.e., how trustworthy the process of binding the Swedish 
+identity to the identity attributes from the eIDAS authentication is, the identity number is represented in a separate claim. See <a href="#identity-binding">Identity Binding</a> below.</p>
+<p><strong>Type:</strong> String where the format is 12 digits without a hyphen.</p>
+<p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.16</code> (mappedPersonalIdentityNumber) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
+<p><a name="mapped-swedish-coordination-number"></a></p>
+<h4 id="214-mapped-swedish-coordination-number">2.1.4. Mapped Swedish Coordination Number</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/mappedCoordinationNumber</code></p>
+<p><strong>Description:</strong> A Swedish coordination number (&quot;samordningsnummer&quot;). This claim is used to represent a Swedish coordination number that was the result of a query from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node. See section 3.3.2 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>] for details.</p>
+<p>Normally a Swedish coordination number is represented using the claim <code>https://id.oidc.se/claim/coordinationNumber</code> defined in [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>], but for the same reasons as described for the <code>mappedPersonalIdentityNumber</code> claim above, a mapped coordination number is represented in a separate claim.</p>
+<p><strong>Type:</strong> String where the format is 12 digits without a hyphen.</p>
+<p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.16</code> (mappedPersonalIdentityNumber) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
+<p><a name="identity-binding"></a></p>
+<h4 id="215-identity-binding">2.1.5. Identity Binding</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/identityBinding</code></p>
+<p><strong>Description:</strong> A semicolon separated list of URI:s identifying the &quot;binding process(es)&quot; for a <code>mappedPersonalIdentityNumber</code> or <code>mappedCoordinationNumber</code> claim. See section 3.3.2 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>] and [<a href="#sc-id-bidning">SC.ID-Binding</a>] for details.</p>
+<p><strong>Type:</strong> Semicolon separated list of URI:s. Possible values are defined in section 3 of [<a href="#sc-id-bidning">SC.ID-Binding</a>].</p>
+<p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.6</code> (personalIdentityNumberBinding) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
+<p><a name="eidas-person-identifier"></a></p>
+<h4 id="216-eidas-person-identifier">2.1.6. eIDAS Person Identifier</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/eidasPersonIdentifier</code></p>
+<p><strong>Description:</strong> A claim that holds the value for the eIDAS Person Identifier attribute, <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code>. This value is issued by the foreign eIDAS node, and within the eIDAS federation this is the unique user identifier. See [<a href="#eidas-attr">eIDAS.Attributes</a>].</p>
+<p><strong>Type:</strong> String</p>
+<p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.7</code> (eidasPersonIdentifier) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
+<blockquote>
+<p>Within eIDAS, the corresponding SAML attribute is: <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code> [<a href="#eidas-attr">eIDAS.Attributes</a>].</p>
+</blockquote>
+<p><a name="eidas-country"></a></p>
+<h4 id="217-eidas-country">2.1.7. eIDAS Country</h4>
+<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/eidasCountry</code></p>
+<p><strong>Description:</strong> A claim that identifies the eIDAS member state that is providing the claims of the subject.</p>
+<p><strong>Type:</strong> String representing country in [<a href="#iso3166-1">ISO3166-1</a>] Alpha-2 or [<a href="#iso3166-3">ISO3166-3</a>] syntax. </p>
+<p><strong>Corresponding SAML Attribute:</strong> No specific SAML attribute exists for &quot;eIDAS country&quot;. However, the generic <code>urn:oid:2.5.4.6</code> (c) attribute is included in assertions issued by the Swedish eIDAS node.</p>
+<p><a name="scopes"></a></p>
+<h2 id="3-scopes">3. Scopes</h2>
+<p>This section defines a set of scope that extends the claims defined in section 3 of [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>].</p>
+<p>The scopes defined in this specification are named in a collision-resistant manner, as described in JSON Web Token (JWT), [<a href="#rfc7515">RFC7515</a>], specification. All scopes defined within this specification are prefixed with the namespace <code>https://id.swedenconnect.se/scope/</code>.</p>
+<p><a name="eidas-scopes"></a></p>
+<h3 id="31-eidas-scopes">3.1. eIDAS Scopes</h3>
+<p>Section 3 of [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>] states the following:</p>
+<blockquote>
+<p>Many Relying Parties that use OpenID Connect to authenticate users cannot solely depend on the user&#39;s session at the OpenID Provider and the <code>sub</code> claim to log in the user to the RP application. In the context of Swedish eID there are some obvious claims that are regarded to be &quot;primary&quot; identity claims by Relying Parties, for example, a Swedish personal identity number. Such claims are needed by the Relying Party in order to log in a user to its application. Therefore, this specification&#39;s scope definitions will define that some claims are to be delivered in the ID Token so that a Relying Party can fully log in a user without having to make a potentially unnecessary call to the UserInfo endpoint.</p>
+</blockquote>
+<p>The above is true also for Relying Parties authenticating users against the Swedish eIDAS Connector.</p>
+<p><a name="eidas-natural-person-identity"></a></p>
+<h4 id="311-eidas-natural-person-identity">3.1.1. eIDAS Natural Person Identity</h4>
+<p><strong>Scope:</strong> <code>https://id.swedenconnect.se/scope/eidasNaturalPersonIdentity</code></p>
+<p><strong>Description:</strong> A scope that defines a claim set that provides identity information for a natural person authenticated via the Swedish eIDAS-node (via a eIDAS member state). </p>
+<table>
+<thead>
+<tr>
+<th align="left">Requested Claims</th>
+<th align="left">Description/comment</th>
+<th align="left">Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>https://id.swedenconnect.se/claim/prid</code></td>
+<td align="left">Provisional identifier</td>
+<td align="left">This specification - [<a href="#provisional-identifier">2.1.1</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/claim/pridPersistence</code></td>
+<td align="left">Persistence indicator for the above <code>prid</code> claim</td>
+<td align="left">This specification - [<a href="#provisional-identifier-persistence-indicator">2.1.2</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/claim/eidasPersonIdentifier</code></td>
+<td align="left">eIDAS Person Identifier</td>
+<td align="left">This specification - [<a href="#eidas-person-identifier">2.1.6</a>]</td>
+</tr>
+</tbody></table>
+<p><strong>Claims Parameter Equivalent:</strong></p>
+<pre class="hljs"><code>{
+  <span class="hljs-attr">&quot;userinfo&quot;</span> : {
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/prid&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/pridPersistence&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/eidasPersonIdentifier&quot;</span>: { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
+  },
+  <span class="hljs-attr">&quot;id_token&quot;</span> : {
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/prid&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/pridPersistence&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> }
+  }
+}</code></pre><p><strong>Note:</strong> It is RECOMMENDED that Swedish Relying Parties use the <code>https://id.swedenconnect.se/claim/prid</code> claim as a primary identity for a user identified using eIDAS and therefore this claim will be available in the ID Token. The eIDAS Person Identifier, which is the identifier issued by the member state eIDAS-node, may be logged/saved by the Relying Party for potential future use in contacts with the member state node. </p>
+<p><a name="eidas-natural-person-with-swedish-identity"></a></p>
+<h4 id="312-eidas-natural-person-with-swedish-identity">3.1.2. eIDAS Natural Person with Swedish Identity</h4>
+<p><strong>Scope:</strong> <code>https://id.swedenconnect.se/scope/eidasSwedishIdentity</code></p>
+<p><strong>Description:</strong> The Swedish eIDAS Connector has an integration against an &quot;Identity Binding Service&quot; holding bindings between eIDAS eID identities and Swedish identities (see [<a href="#sc-id-bidning">SC.ID-Binding</a>] for details). If this scope is requested by a Relying Party, the eIDAS Connector will check if there exists a binding between the user&#39;s eIDAS identity and a Swedish identity, and if so, make those claims available for the Relying Party.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requested Claims</th>
+<th align="left">Description/comment</th>
+<th align="left">Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>mappedPersonalIdentityNumber</code></td>
+<td align="left">A Swedish civic registration number (&quot;personnummer&quot;) that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node.</td>
+<td align="left">This specification - [<a href="#mapped-swedish-personal-identity-number">2.1.3</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>mappedCoordinationNumber</code></td>
+<td align="left">A Swedish coordination number (&quot;samordningsnummer&quot;) that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node.</td>
+<td align="left">This specification - [<a href="#mapped-swedish-coordination-number">2.1.4</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>identityBinding</code></td>
+<td align="left">Identification of the binding process(es) that were applied to obtain the binding between the eIDAS identity and the <code>mappedPersonalIdentityNumber</code> or <code>mappedCoordinationNumber</code>. See [<a href="#sc-id-bidning">SC.ID-Binding</a>].</td>
+<td align="left">This specification - [<a href="#identity-binding">2.1.5</a>]</td>
+</tr>
+</tbody></table>
+<p><strong>Claims Parameter Equivalent:</strong></p>
+<pre class="hljs"><code>{
+  <span class="hljs-attr">&quot;userinfo&quot;</span> : {
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/mappedPersonalIdentityNumber&quot;</span> : <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/mappedCoordinationNumber&quot;</span> : <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/identityBinding&quot;</span> : <span class="hljs-literal">null</span>
+  }
+}</code></pre><p><strong>Note:</strong> None of the claims are marked as &quot;essential&quot; since the eIDAS Connector will only deliver the claims if an identity binding exists. Also, the scope definition states that the claims should be delivered via the UserInfo endpoint and not directly in the ID Token. The reason for this is that a mapped identity can never be seen as a primary eIDAS identity (since the claims are only delivered if a binding exists).</p>
+<p><strong>Note (ii):</strong> The <code>mappedPersonalIdentityNumber</code> and <code>mappedCoordinationNumber</code> claims are mutually exclusive. A user has bound his or hers eIDAS identity to a Swedish civic registration number (&quot;personnummer&quot;) <strong>or</strong> a Swedish coordination number (&quot;samordningsnummer&quot;), never both.</p>
+<p><a name="additional-eidas-claims"></a></p>
+<h4 id="313-additional-eidas-claims">3.1.3. Additional eIDAS Claims</h4>
+<p>Not all eIDAS attributes/claims listed in <a href="#conversion-of-eidas-attributes">Appendix A</a> are covered by the above scope definitions. This section is an informational text informing Relying Parties how to obtain additional claims for an eIDAS authentication.</p>
+<ul class="list">
+<li><p>To obtain name and date of birth claims, include the <code>https://id.oidc.se/scope/naturalPersonInfo</code> scope (section 3.1 of  [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>]).</p>
+</li>
+<li><p>For the transaction identifier holding the ID of the SAML assertion delivered from the foreign member state (as described in section 2.5 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]), include an explicit claim request for the <code>txn</code> claim ([<a href="#rfc8417">RFC8417</a>]).</p>
+</li>
+<li><p>For the country code of the eIDAS country at which the user was authenticated (as described in section 2.5 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]), include an explicit claim request for the <code>https://id.swedenconnect.se/claim/eidasCountry</code> claim (<a href="#eidas-country">2.1.7</a>).</p>
+</li>
+<li><p>For all other optional eIDAS attributes (see <a href="#conversion-of-eidas-attributes">Appendix A</a>), an explicit claim request should be included. These claims SHOULD NOT be marked as &quot;essential&quot; since they are not mandatory according to [<a href="#eidas-attr">eIDAS.Attributes</a>]. </p>
+</li>
+</ul>
+<blockquote>
+<p>Section 2.2.1 of [<a href="#eidas-attr">eIDAS.Attributes</a>] defines the eIDAS Minimum Dataset for Natural Persons. This set consists of the eIDAS attributes FamilyName, FirstName, DateOfBirth and PersonIdentifier. In order for a Relying Party to obtain the corresponding OpenID Connect claims from an eIDAS authentication it should specify the <code>https://id.oidc.se/scope/naturalPersonInfo</code> and <code>https://id.swedenconnect.se/scope/eidasNaturalPersonIdentity</code> scopes in an authentication request sent to the Swedish eIDAS Connector.</p>
+</blockquote>
+<p><a name="metadata-parameters"></a></p>
+<h2 id="4-metadata-parameters">4. Metadata Parameters</h2>
+<p>This section defines metadata parameters to be used in OpenID Provider and Relying Party metadata. </p>
+<p><a name="organization-number"></a></p>
+<h3 id="41-organization-number">4.1. Organization Number</h3>
+<p><strong>Parameter:</strong> <code>https://id.swedenconnect.se/md/organizationNumber</code></p>
+<p><strong>Description:</strong> In some cases, the organization to which an entity belongs needs to be uniquely identified. [<a href="#openid-federation">OpenID.Federation</a>] defines the <code>organization_name</code> parameter, but this parameter is mainly intended for display purposes, therefore this specification defines the <code>https://id.swedenconnect.se/md/organizationNumber</code> parameter for holding an organization number.</p>
+<p><strong>Type:</strong> String.</p>
+<p>When used in a Swedish context where all organizations have a Swedish organization number according to [<a href="#skv709">SKV709</a>], the format MUST be 10 digits without a hyphen.</p>
+<p>When used in an international context where organizations come from different countries, it is RECOMMENDED to use the ICD (International Code Designator) format as defined in [<a href="#iso6523-1">ISO/IEC.6523-1</a>] and [<a href="#iso6523-2">ISO/IEC.6523-2</a>].</p>
+<p><a name="references"></a></p>
+<h2 id="5-references">5. References</h2>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="http://www.ietf.org/rfc/rfc2119.txt">Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997</a>.</p>
+</blockquote>
+<p><a name="openid-core"></a>
+<strong>[OpenID.Core]</strong></p>
+<blockquote>
+<p>[Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015] (<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>).</p>
+</blockquote>
+<p><a name="rfc7515"></a>
+<strong>[RFC7515]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7515">Jones, M., Bradley, J., and N. Sakimura, “JSON Web Token (JWT)”, May 2015</a>.</p>
+</blockquote>
+<p><a name="iana-reg"></a>
+<strong>[IANA-Reg]</strong></p>
+<blockquote>
+<p><a href="https://www.iana.org/assignments/jwt/jwt.xhtml#claims">IANA JSON Web Token Claims Registry</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-claims"></a>
+<strong>[OIDC.Sweden.Claims]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html">Claims and Scopes Specification for the Swedish OpenID Connect Profile - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="saml-sc-attributes"></a>
+<strong>[SAML.SC.Attributes]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="sc-constructed-attr"></a>
+<strong>[SC.Constructed]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS Constructed Attributes Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="sc-id-bidning"></a>
+<strong>[SC.ID-Binding]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/Identity_Binding.html">Binding eIDAS Identities to Records in the Swedish Population Register</a>.</p>
+</blockquote>
+<p><a name="eidas-attr"></a>
+<strong>[eIDAS.Attributes]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.4_final.pdf">eIDAS SAML Attribute Profile, version 1.4, 31 October 2023</a>.</p>
+</blockquote>
+<p><a name="oidc-iac"></a>
+<strong>[OIDC.IAC]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-4-ida-claims-1_0-final.html">T. Lodderstedt, D. Fett, M. Haine, A. Pulido, K. Lehmann, K. Koiwai, &quot;OpenID Connect for Identity Assurance Claims Registration 1.0&quot;, October 2024</a>.</p>
+</blockquote>
+<p><a name="openid-federation"></a>
+<strong>[OpenID.Federation]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-federation-1_0.html">Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G., and V. Dzhuvinov, &quot;OpenID Federation 1.0&quot;, 20 November 2025</a>.</p>
+</blockquote>
+<p><a name="rfc8417"></a>
+<strong>[RFC8417]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc8417">P. Hunt, M. Jones, W. Denniss, M. Ansari, &quot;Security Event Token (SET)&quot;, July 2018</a>.</p>
+</blockquote>
+<p><a name="iso3166-1"></a>
+<strong>[ISO3166-1]</strong></p>
+<blockquote>
+<p><a href="https://www.iso.org/standard/72482.html">ISO, &quot;ISO 3166-1:2020. Codes for the representation of names of countries and their subdivisions -- Part 1: Country codes&quot;, 2020</a>.</p>
+</blockquote>
+<p><a name="iso3166-3"></a>
+<strong>[ISO3166-3]</strong></p>
+<blockquote>
+<p><a href="https://www.iso.org/standard/72482.html">ISO, &quot;ISO 3166-3:2020. Codes for the representation of names of countries and their subdivisions -- Part 3: Code for formerly used names of countries&quot;, 2020</a>.</p>
+</blockquote>
+<p><a name="iso6523-1"></a>
+<strong>[ISO/IEC.6523-1]</strong></p>
+<blockquote>
+<p><a href="https://www.iso.org/standard/82246.html">ISO/IEC 6523-1:2023, Information technology — Structure for the identification of organizations and organization parts — Part 1: Identification of organization identification schemes</a></p>
+</blockquote>
+<p><a name="iso6523-2"></a>
+<strong>[ISO/IEC.6523-2]</strong></p>
+<blockquote>
+<p><a href="https://www.iso.org/standard/89595.html">ISO/IEC 6523-2:2025, Information technology — Structure for the identification of organizations and organization parts — Part 2: Registration of organization identification schemes</a></p>
+</blockquote>
+<p><a name="skv709"></a>
+<strong>[SKV709]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv709-8.pdf">Skatteverket, SKV 709, Utgåva 8, Organisationsnummer</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="6-changes-between-versions">6. Changes between versions</h2>
+<p>Changes between version 1.0 and version 1.1:</p>
+<ul class="list">
+<li>Section 4, Metadata Parameters, was introduced, where a parameter for representing organization numbers was added.</li>
+</ul>
+<p><a name="conversion-of-eidas-attributes"></a></p>
+<h2 id="appendix-a-conversion-of-eidas-attributes">Appendix A: Conversion of eIDAS Attributes</h2>
+<p>This section provides a listing of how the eIDAS attributes for natural persons defined in section 2.2 of [<a href="#eidas-attr">eIDAS.Attributes</a>] are mapped to their corresponding OpenID Connect claims.</p>
+<blockquote>
+<p>Also see section 3.3.3 of [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>] where a corresponding mapping between eIDAS attributes and Sweden Connect SAML attributes is presented.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">eIDAS attribute</th>
+<th align="left">Claim</th>
+<th align="left">Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/PersonIdentifier</code> - PersonIdentifier</td>
+<td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>eidasPersonIdentifier</code></td>
+<td align="left">This specification</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/CurrentFamilyName</code> - FamilyName</td>
+<td align="left"><code>family_name</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/CurrentGivenName</code> - FirstName</td>
+<td align="left"><code>given_name</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/DateOfBirth</code> - DateOfBirth</td>
+<td align="left"><code>birthdate</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/BirthName</code> - BirthName</td>
+<td align="left"><code>birth_family_name</code><br /><code>birth_given_name</code><br /><code>birth_middle_name</code></td>
+<td align="left">[<a href="#oidc-iac">OIDC.IAC</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/PlaceOfBirth</code> - PlaceOfBirth</td>
+<td align="left"><code>place_of_birth</code></td>
+<td align="left">[<a href="#oidc-iac">OIDC.IAC</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/CurrentAddress</code> - CurrentAddress</td>
+<td align="left"><code>address</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/Gender</code> - Gender</td>
+<td align="left"><code>gender</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/Nationality</code> - Nationality</td>
+<td align="left"><code>nationalities</code></td>
+<td align="left">[<a href="#oidc-iac">OIDC.IAC</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/CountryOfBirth</code> - CountryOfBirth</td>
+<td align="left"><code>place_of_birth.country</code></td>
+<td align="left">[<a href="#oidc-iac">OIDC.IAC</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br ><code>naturalperson/TownOfBirth</code> - TownOfBirth</td>
+<td align="left"><code>place_of_birth.locality</code></td>
+<td align="left">[<a href="#oidc-iac">OIDC.IAC</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/CountryOfResidence</code> - CountryOfResidence</td>
+<td align="left"><code>address.country</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/PhoneNumber</code> - PhoneNumber</td>
+<td align="left"><code>phone_number</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/EmailAddress</code> - EmailAddress</td>
+<td align="left"><code>email</code></td>
+<td align="left">[<a href="#openid-core">OpenID.Core</a>]</td>
+</tr>
+</tbody></table>
+    </article>
+  </body>
+</html>
