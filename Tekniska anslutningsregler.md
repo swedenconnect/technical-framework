@@ -8,7 +8,7 @@
 
 # Tekniska anslutningsregler för Sweden Connect-federationen
 
-### 2025-09-25
+### 2025-11-27
 
 Specifikation gällande aktörer som ansluter till Diggs identitetsfederation Sweden Connect.
 
@@ -539,23 +539,33 @@ Relevanta specifikationer:
 <a name="registrering-av-organisationsinformation"></a>
 ### 3.1. Registrering av organisationsinformation
 
-Alla aktörer, d.v.s., både legitimeringstjänster och förlitande parter, skall inkludera organisationsinformation
-i varje metadatapost som registreras.
+Alla aktörer, d.v.s., både legitimeringstjänster och förlitande parter, skall inkludera organisationsinformation i varje metadatapost som registreras.
 
 En sådant element ser ut enligt följande:
 
 ```
 <md:Organization>
+  <md:Extensions>
+    <mdorgext:OrganizationNumber xmlns:mdorgext="http://id.swedenconnect.se/authn/1.0/md-org-ext/ns">
+      2021006883
+    </mdorgext:OrganizationNumber>
+  </md:Extensions>
   <md:OrganizationName xml:lang="sv">Myndigheten för digital förvaltning</md:OrganizationName>
   <md:OrganizationName xml:lang="en">Agency for digital government</md:OrganizationName>
   <md:OrganizationDisplayName xml:lang="sv">Myndigheten för digital förvaltning - Digg</md:OrganizationDisplayName>
   <md:OrganizationDisplayName xml:lang="en">Agency for digital government - Digg</md:OrganizationDisplayName>
   <md:OrganizationURL xml:lang="sv">https://www.digg.se/</md:OrganizationURL>
-  <md:OrganizationURL xml:lang="en">https://www.digg.se/en</md:OrganizationURL>  
+  <md:OrganizationURL xml:lang="en">https://www.digg.se/en</md:OrganizationURL>
 </md:Organization>
 ```
 
 *Exempel på hur organisationen Digg har registrerat organisationsinformation i metadata.*
+
+**Notera:** Tillägget för att representera organisationsnummer skapas av Sweden Connect:s anslutningsprocesser (om det inte är satt vid inlämning av metadata). Detta element innehåller organisationsnumret för den givna organisationen enligt formatet 10 siffror utan bindestreck.
+
+För ytterligare information om XML-formatet för detta element, se [OrganizationNumber-1.0.xsd](https://docs.swedenconnect.se/schemas/authn/1.0/UserMessage-1.0.xsd).
+
+I sammanställt metadata för federationen inkluderas elementet `OrganizationNumber` för alla parter.
 
 **Regler och rutiner vid registrering av metadata**:
 
@@ -563,11 +573,13 @@ En sådant element ser ut enligt följande:
 som angavs när organisationen tecknade avtal med Digg angående deltagande i federationen (undantaget
 nedanstående punkt).
 
-- I de fall en offentlig aktör som har tecknat något form av Sweden Connect-avtal har begärt att 
+    - I de fall en offentlig aktör som har tecknat något form av Sweden Connect-avtal har begärt att 
 en tredjeparts-legitimeringstjänst registreras i metadata under aktörens avtal behöver `OrganizationName`
 inte ange den offentliga aktörens registrerade namn. Orsaken till detta är att det
 i många fall är flera offentliga aktörer som använder samma tredjeparts-legitimeringstjänst. Dock
 skall aktören meddela kopplingen mellan aktören och legitimeringstjänsten.
+
+- Om elementet `OrganizationNumber` anges i registrerat metadata görs en kontroll att detta nummer stämmer överens med den organisation som tecknat avtal med Digg. Om elementet saknas i inlämnat metadata skapas ett element innehållande anslutande aktörs organisationsnummer.<br /><br />Samma undantag som för organisationsnamn angående tredjeparts-legitimeringstjänster gäller även för organisationsnummer.
 
 <a name="registrering-av-visningsnamn-och-logotyp"></a>
 ### 3.2. Registrering av visningsnamn och logotyp
@@ -1114,6 +1126,10 @@ En förlitande part som vill nyttja "Holder-of-key" vid autentisering ska deklar
   
 <a name="versioner-av-detta-dokument"></a>
 ## 4. Versioner av detta dokument
+
+- 2025-11-27:
+
+    - Kapitel 3.1, "Registrering av organisationsinformation", uppdaterades med information om inkludering av organisationsnummer.
 
 - 2025-09-25:
 
