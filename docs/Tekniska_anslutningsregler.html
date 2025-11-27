@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="tekniska-anslutningsregler-för-sweden-connect-federationen">Tekniska anslutningsregler för Sweden Connect-federationen</h1>
-<h3 id="2025-09-25">2025-09-25</h3>
+<h3 id="2025-11-27">2025-11-27</h3>
 <p>Specifikation gällande aktörer som ansluter till Diggs identitetsfederation Sweden Connect.</p>
 <hr>
 <p class="copyright-statement">
@@ -438,28 +438,38 @@ tolkas.</p>
 </ul>
 <p><a name="registrering-av-organisationsinformation"></a></p>
 <h3 id="31-registrering-av-organisationsinformation">3.1. Registrering av organisationsinformation</h3>
-<p>Alla aktörer, d.v.s., både legitimeringstjänster och förlitande parter, skall inkludera organisationsinformation
-i varje metadatapost som registreras.</p>
+<p>Alla aktörer, d.v.s., både legitimeringstjänster och förlitande parter, skall inkludera organisationsinformation i varje metadatapost som registreras.</p>
 <p>En sådant element ser ut enligt följande:</p>
 <pre class="hljs"><code>&lt;md:Organization&gt;
+  &lt;md:Extensions&gt;
+    &lt;mdorgex<span class="hljs-variable">t:OrganizationNumber</span> xmln<span class="hljs-variable">s:mdorgext</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/authn/1.0/md-org-ext/ns&quot;</span>&gt;
+      <span class="hljs-number">2021006883</span>
+    &lt;/mdorgex<span class="hljs-variable">t:OrganizationNumber</span>&gt;
+  &lt;/md:Extensions&gt;
   &lt;md:OrganizationName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;Myndigheten <span class="hljs-keyword">f</span>ör digital <span class="hljs-keyword">f</span>örvaltning&lt;/md:OrganizationName&gt;
   &lt;md:OrganizationName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;Agency <span class="hljs-keyword">for</span> digital government&lt;/md:OrganizationName&gt;
   &lt;md:OrganizationDisplayName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;Myndigheten <span class="hljs-keyword">f</span>ör digital <span class="hljs-keyword">f</span>örvaltning - Digg&lt;/md:OrganizationDisplayName&gt;
   &lt;md:OrganizationDisplayName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;Agency <span class="hljs-keyword">for</span> digital government - Digg&lt;/md:OrganizationDisplayName&gt;
   &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/&lt;/md:OrganizationURL&gt;
-  &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/<span class="hljs-keyword">en</span>&lt;/md:OrganizationURL&gt;  
+  &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/<span class="hljs-keyword">en</span>&lt;/md:OrganizationURL&gt;
 &lt;/md:Organization&gt;</code></pre><p><em>Exempel på hur organisationen Digg har registrerat organisationsinformation i metadata.</em></p>
+<p><strong>Notera:</strong> Tillägget för att representera organisationsnummer skapas av Sweden Connect:s anslutningsprocesser (om det inte är satt vid inlämning av metadata). Detta element innehåller organisationsnumret för den givna organisationen enligt formatet 10 siffror utan bindestreck.</p>
+<p>För ytterligare information om XML-formatet för detta element, se <a href="https://docs.swedenconnect.se/schemas/authn/1.0/UserMessage-1.0.xsd">OrganizationNumber-1.0.xsd</a>.</p>
+<p>I sammanställt metadata för federationen inkluderas elementet <code>OrganizationNumber</code> för alla parter.</p>
 <p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
 <ul class="list">
 <li><p>Det namn som anges på svenska under elementet <code>OrganizationName</code> skall stämma överens med namnet
 som angavs när organisationen tecknade avtal med Digg angående deltagande i federationen (undantaget
 nedanstående punkt).</p>
-</li>
-<li><p>I de fall en offentlig aktör som har tecknat något form av Sweden Connect-avtal har begärt att 
+<ul class="list">
+<li>I de fall en offentlig aktör som har tecknat något form av Sweden Connect-avtal har begärt att 
 en tredjeparts-legitimeringstjänst registreras i metadata under aktörens avtal behöver <code>OrganizationName</code>
 inte ange den offentliga aktörens registrerade namn. Orsaken till detta är att det
 i många fall är flera offentliga aktörer som använder samma tredjeparts-legitimeringstjänst. Dock
-skall aktören meddela kopplingen mellan aktören och legitimeringstjänsten.</p>
+skall aktören meddela kopplingen mellan aktören och legitimeringstjänsten.</li>
+</ul>
+</li>
+<li><p>Om elementet <code>OrganizationNumber</code> anges i registrerat metadata görs en kontroll att detta nummer stämmer överens med den organisation som tecknat avtal med Digg. Om elementet saknas i inlämnat metadata skapas ett element innehållande anslutande aktörs organisationsnummer.<br /><br />Samma undantag som för organisationsnamn angående tredjeparts-legitimeringstjänster gäller även för organisationsnummer.</p>
 </li>
 </ul>
 <p><a name="registrering-av-visningsnamn-och-logotyp"></a></p>
@@ -909,6 +919,11 @@ stöd för &quot;Holder-of-key&quot;. </p>
 <p><a name="versioner-av-detta-dokument"></a></p>
 <h2 id="4-versioner-av-detta-dokument">4. Versioner av detta dokument</h2>
 <ul class="list">
+<li><p>2025-11-27:</p>
+<ul class="list">
+<li>Kapitel 3.1, &quot;Registrering av organisationsinformation&quot;, uppdaterades med information om inkludering av organisationsnummer.</li>
+</ul>
+</li>
 <li><p>2025-09-25:</p>
 <ul class="list">
 <li>Uppdateringar rörande införandet av &quot;Auktorisationssystem för elektronisk identifiering&quot;.</li>
