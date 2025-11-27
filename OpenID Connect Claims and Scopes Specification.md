@@ -8,14 +8,14 @@
 
 # OpenID Connect Claims and Scopes Specification for Sweden Connect
 
-### Version 1.0 - 2024-12-04
+### Version 1.1 - 2025-11-26 - Draft
 
 Registration number: **2024-7704**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2025. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -51,10 +51,14 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1.2. [eIDAS Natural Person with Swedish Identity](#eidas-natural-person-with-swedish-identity)
     
     3.1.3. [Additional eIDAS Claims](#additional-eidas-claims)
+    
+4. [**Metadata Parameters**](#metadata-parameters)
 
-4. [**References**](#references)
+    4.1. [Organization Number](#organization-number)
 
-5. [**Changes between versions**](#changes-between-versions)
+5. [**References**](#references)
+
+6. [**Changes between versions**](#changes-between-versions)
 
 Appendix A: [**Conversion of eIDAS Attributes**](#conversion-of-eidas-attributes)
 
@@ -263,9 +267,26 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 
 > Section 2.2.1 of \[[eIDAS.Attributes](#eidas-attr)\] defines the eIDAS Minimum Dataset for Natural Persons. This set consists of the eIDAS attributes FamilyName, FirstName, DateOfBirth and PersonIdentifier. In order for a Relying Party to obtain the corresponding OpenID Connect claims from an eIDAS authentication it should specify the `https://id.oidc.se/scope/naturalPersonInfo` and `https://id.swedenconnect.se/scope/eidasNaturalPersonIdentity` scopes in an authentication request sent to the Swedish eIDAS Connector.
 
+<a name="metadata-parameters"></a>
+## 4. Metadata Parameters
+
+This section defines metadata parameters to be used in OpenID Provider and Relying Party metadata. 
+
+<a name="organization-number"></a>
+### 4.1. Organization Number
+
+**Parameter:** `https://id.swedenconnect.se/md/organizationNumber`
+
+**Description:** In some cases, the organization to which an entity belongs needs to be uniquely identified. \[[OpenID.Federation](#openid-federation)\] defines the `organization_name` parameter, but this parameter is mainly intended for display purposes, therefore this specification defines the `https://id.swedenconnect.se/md/organizationNumber` parameter for holding an organization number.
+
+**Type:** String.
+
+When used in a Swedish context where all organizations have a Swedish organization number according to \[[SKV709](#skv709)\], the format is 10 digits without a hyphen.
+
+When used in an international context where organizations come from different countries, it is RECOMMENDED to use the ICD (International Code Designator) format as defined in \[[ISO/IEC.6523-1](#iso6523-1)\] and \[[ISO/IEC.6523-2](#iso6523-2)\].
 
 <a name="references"></a>
-## 4. References
+## 5. References
 
 <a name="rfc2119"></a>
 **\[RFC2119\]**
@@ -307,6 +328,10 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 **\[OIDC.IAC\]**
 > [T. Lodderstedt, D. Fett, M. Haine, A. Pulido, K. Lehmann, K. Koiwai, "OpenID Connect for Identity Assurance Claims Registration 1.0", October 2024](https://openid.net/specs/openid-connect-4-ida-claims-1_0-final.html).
 
+<a name="openid-federation"></a>
+**\[OpenID.Federation\]**
+> [Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G., and V. Dzhuvinov, "OpenID Federation 1.0", 20 November 2025](https://openid.net/specs/openid-federation-1_0.html).
+
 <a name="rfc8417"></a>
 **\[RFC8417\]**
 > [P. Hunt, M. Jones, W. Denniss, M. Ansari, "Security Event Token (SET)", July 2018](https://tools.ietf.org/html/rfc8417).
@@ -319,10 +344,24 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 **\[ISO3166-3\]**
 > [ISO, "ISO 3166-3:2020. Codes for the representation of names of countries and their subdivisions -- Part 3: Code for formerly used names of countries", 2020](https://www.iso.org/standard/72482.html).
 
-<a name="changes-between-versions"></a>
-## 5. Changes between versions
+<a name="iso6523-1"></a>
+**\[ISO/IEC.6523-1\]**
+> [ISO/IEC 6523-1:2023, Information technology — Structure for the identification of organizations and organization parts — Part 1: Identification of organization identification schemes](https://www.iso.org/standard/82246.html)
 
-This is the first version of this specification.
+<a name="iso6523-2"></a>
+**\[ISO/IEC.6523-2\]**
+> [ISO/IEC 6523-2:2025, Information technology — Structure for the identification of organizations and organization parts — Part 2: Registration of organization identification schemes](https://www.iso.org/standard/89595.html)
+
+<a name="skv709"></a>
+**\[SKV709\]**
+> [Skatteverket, SKV 709, Utgåva 8, Organisationsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv709-8.pdf).
+
+<a name="changes-between-versions"></a>
+## 6. Changes between versions
+
+Changes between version 1.0 and version 1.1:
+
+- Section 4, Metadata Parameters, was introduced, where a parameter for representing organization numbers was added.
 
 <a name="conversion-of-eidas-attributes"></a>
 ## Appendix A: Conversion of eIDAS Attributes
