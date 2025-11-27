@@ -281,7 +281,7 @@ This section defines metadata parameters to be used in OpenID Provider and Relyi
 
 **Type:** String.
 
-When used in a Swedish context where all organizations have a Swedish organization number according to \[[SKV709](#skv709)\], the format MUST be 10 digits without a hyphen.
+When used in a Swedish context where all organizations have a Swedish organization number according to \[[SKV709](#skv709)\], the format is 10 digits without a hyphen.
 
 When used in an international context where organizations come from different countries, it is RECOMMENDED to use the ICD (International Code Designator) format as defined in \[[ISO/IEC.6523-1](#iso6523-1)\] and \[[ISO/IEC.6523-2](#iso6523-2)\].
 
