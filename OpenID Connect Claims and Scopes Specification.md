@@ -8,14 +8,14 @@
 
 # OpenID Connect Claims and Scopes Specification for Sweden Connect
 
-### Version 1.1 - 2025-11-26 - Draft
+### Version 1.1 - 2026-05-26 - Draft
 
 Registration number: **2024-7704**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2025. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -54,7 +54,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     
 4. [**Metadata Parameters**](#metadata-parameters)
 
-    4.1. [Organization Number](#organization-number)
+    4.1. [Organization Identifier](#organization-identifier)
 
 5. [**References**](#references)
 
@@ -272,18 +272,14 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 
 This section defines metadata parameters to be used in OpenID Provider and Relying Party metadata. 
 
-<a name="organization-number"></a>
-### 4.1. Organization Number
+<a name="organization-identifier"></a>
+### 4.1. Organization Identifier
 
-**Parameter:** `https://id.swedenconnect.se/md/organizationNumber`
-
-**Description:** In some cases, the organization to which an entity belongs needs to be uniquely identified. \[[OpenID.Federation](#openid-federation)\] defines the `organization_name` parameter, but this parameter is mainly intended for display purposes, therefore this specification defines the `https://id.swedenconnect.se/md/organizationNumber` parameter for holding an organization number.
-
-**Type:** String.
+In cases where the organization to which an entity belongs needs to be uniquely identified, this specification mandates the use of `organization_identifier` as defined in \[[OpenID.OrgID](#openid-orgid)\].
 
 When used in a Swedish context where all organizations have a Swedish organization number according to \[[SKV709](#skv709)\], the format is 10 digits without a hyphen.
 
-When used in an international context where organizations come from different countries, it is RECOMMENDED to use the ICD (International Code Designator) format as defined in \[[ISO/IEC.6523-1](#iso6523-1)\] and \[[ISO/IEC.6523-2](#iso6523-2)\].
+When used in an international context where organizations come from different countries, it is RECOMMENDED to use \[[ISO.6523](#iso6523)\] and GLUE URIs, as specified in \[[OpenID.OrgID](#openid-orgid)\].
 
 <a name="references"></a>
 ## 5. References
@@ -330,7 +326,11 @@ When used in an international context where organizations come from different co
 
 <a name="openid-federation"></a>
 **\[OpenID.Federation\]**
-> [Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G., and V. Dzhuvinov, "OpenID Federation 1.0", 20 November 2025](https://openid.net/specs/openid-federation-1_0.html).
+> [Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G., and V. Dzhuvinov, "OpenID Federation 1.0", 17 February 2026](https://openid.net/specs/openid-federation-1_0.html).
+
+<a name="openid-orgid"></a>
+**\[OpenID.OrgID\]**
+> [Lindström, M, and S. Santesson, "OpenID Federation Organization Identifier Metadata Parameter 1.0", 23 February 2026](https://www.oidc.se/specifications/openid-federation-organization-identifier-1_0.html).
 
 <a name="rfc8417"></a>
 **\[RFC8417\]**
@@ -344,13 +344,9 @@ When used in an international context where organizations come from different co
 **\[ISO3166-3\]**
 > [ISO, "ISO 3166-3:2020. Codes for the representation of names of countries and their subdivisions -- Part 3: Code for formerly used names of countries", 2020](https://www.iso.org/standard/72482.html).
 
-<a name="iso6523-1"></a>
-**\[ISO/IEC.6523-1\]**
+<a name="iso6523"></a>
+**\[ISO.6523\]**
 > [ISO/IEC 6523-1:2023, Information technology — Structure for the identification of organizations and organization parts — Part 1: Identification of organization identification schemes](https://www.iso.org/standard/82246.html)
-
-<a name="iso6523-2"></a>
-**\[ISO/IEC.6523-2\]**
-> [ISO/IEC 6523-2:2025, Information technology — Structure for the identification of organizations and organization parts — Part 2: Registration of organization identification schemes](https://www.iso.org/standard/89595.html)
 
 <a name="skv709"></a>
 **\[SKV709\]**
