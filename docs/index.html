@@ -1,444 +1,630 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Technical Specifications for the Swedish eID Framework</title>
-  <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
-  <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-  <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print">
-  <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Start page only. The specification documents under latest/, updates/ and the
+       dated directories keep github-markdown.css and pilcrow.css. -->
+  <link rel="stylesheet" type="text/css" href="assets/css/sctf-start.css">
+
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>Sweden Connect Technical Specifications</title>
 </head>
+
 <body>
-<article class="markdown-body">
-  <p>
-    <img align="left" src="img/sweden-connect.png"></img>
-    <img align="right" src="img/digg_centered.png"></img>
-  </p>
-  <p>
-    <img align="center" src="img/transparent.png"></img>
-  </p>
-  <h1 id="technical-specifications-for-the-swedish-eid-framework">Technical Specifications for the Sweden Connect
-    Framework</h1>
 
-  <p>
-    This is the overview page for the Sweden Connect specifications. Listed below are the specifications from the
-    latest official version (<a href="december-2024/index.html">December 2024</a>), along with the latest updates
-    (drafts).
-  </p>
-  <p>
-    The section <a href="#federation">The Sweden Connect Federation</a> presents documents needed for joining the
-    federation.
-  </p>
+<div class="page-container">
 
-  <h4 id="tekniskt-ramverk-för-svensk-e-legitimation">An introduction to the Sweden Connect Framework</h4>
-  <p>
-    Overview documents that describe the different parts of the Sweden Connect Framework.
-    <i>Currently only covers SAML.</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="latest/00_-_Tekniskt_ramverk_-_Introduktion.html">En introduktion till Sweden Connect Tekniskt
-        ramverk</a>
-    </p>
-    <p>
-      <a href="latest/00_-_Swedish_eID_Framework_-_Introduction.html">Introduction to the Sweden Connect Technical
-        Framework</a>
-    </p>
-  </blockquote>
+  <!-- BEGIN: site-header -->
+  <header class="site-header">
+    <a class="navbar-brand" href="https://www.swedenconnect.se">
+      <img class="logo" src="img/sweden-connect.png" alt="Sweden Connect">
+    </a>
+  </header>
+  <!-- END: site-header -->
 
-  <h4 id="registry-for-identifiers-assigned-by-the-swedish-e-identification-board">Sweden Connect - Registry for
-    identifiers</h4>
-  <p>
-    This document defines the structure for identifiers assigned by the Swedish Agency for Digital Government (Digg) and
-    provides a registry for assigned identifiers.
-  </p>
-  <p><strong>Version 1.8</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/03_-_Registry_for_Identifiers.html">Sweden Connect - Registry for Identifiers</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.9:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/03_-_Registry_for_Identifiers.html">Sweden Connect - Registry for Identifiers - Draft</a>
-    </p>
-  </blockquote>
-  -->
+  <main class="page-main">
+    <div class="container">
+      <div class="page-grid">
 
-  <h2>Authentication Specifications</h2>
-  <p>
-    The specifications for user authentication are listed below.
-  </p>
+        <article>
 
-  <h4 id="deployment-profile-for-the-swedish-eid-framework">SAML: Deployment Profile for the Swedish eID Framework</h4>
-  <p>
-    This is the main SAML specification for the Sweden Connect Framework. It defines a SAML profile including metadata,
-    request and response processing, as well as extensions for signature services.
-  </p>
-  <p><strong>Version 1.8</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the
-        Swedish eID Framework</a>
-    </p>
-  </blockquote>
+          <h1 class="article-header" id="sweden-connect-technical-specifications">Sweden Connect Technical Specifications</h1>
 
-  <p>
-    <i>Draft version 1.9:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the
-        Swedish eID Framework - Draft</a>
-    </p>
-  </blockquote>
+          <p class="excerpt">
+            This is the overview page for the Sweden Connect specifications. Listed below are the specifications from
+            the latest official version (<a href="december-2024/index.html">December 2024</a>), along with the latest
+            updates (drafts).
+          </p>
+          <p class="excerpt">
+            The section <a href="#federation">The Sweden Connect Federation</a> presents documents needed for joining
+            the federation.
+          </p>
 
-  <h4>OIDC: OpenID Connect Profile for Sweden Connect</h4>
-  <p>
-    This profile is an extension of <a href="https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html">The
-    Swedish OpenID Connect Profile</a> for the Sweden Connect identity federation.
-  </p>
-  <p>
-    The profile aims to establish a baseline level of security and to facilitate interoperability between Relying
-    Parties and OpenID Providers within the Sweden Connect identity federation.
-  </p>
-  <p><strong>Version 1.0</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/OpenID_Connect_Profile_for_Sweden_Connect.html">OpenID Connect Profile for Sweden Connect</a>
-    </p>
-  </blockquote>
+          <!-- ============================================================ -->
+          <section id="overview">
+            <h2>Overview and Registry</h2>
 
-  <h4 id="attribute-specification-for-the-swedish-eid-framework">SAML: Attribute Specification for the Swedish eID
-    Framework</h4>
-  <p>
-    This document specifies a SAML attribute profile for the Sweden Connect Framework. The attribute profile defines
-    attributes for use within the Sweden Connect federation, and a number of defined attribute sets that may be
-    referenced by other documents as a means of specifying attribute release requirements.
-  </p>
-  <p><strong>Version 1.8</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for
-        the Swedish eID Framework</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.9:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for
-        the Swedish eID Framework - Draft</a>
-    </p>
-  </blockquote>
-  -->
+            <div class="spec-list">
 
-  <h4>OIDC: OpenID Connect Claims and Scopes Specification for Sweden Connect</h4>
-  <p>
-    This specification extends the <a
-      href="https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html">Claims and Scopes
-    Specification for the Swedish OpenID Connect Profile</a>
-    with OpenID Connect claims and scopes for usage within the Sweden Connect federation.
-  </p>
-  <p><strong>Version 1.0</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/OpenID_Connect_Claims_and_Scopes_Specification.html">OpenID Connect Claims and Scopes
-        Specification for Sweden Connect</a>
-    </p>
-  </blockquote>
-  <p>
-    <i>Draft version 1.1:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/OpenID_Connect_Claims_and_Scopes_Specification.html">OpenID Connect Claims and Scopes
-        Specification for Sweden Connect - Draft</a>
-    </p>
-  </blockquote>
+              <div class="spec">
+                <h3 id="tekniskt-ramverk-för-svensk-e-legitimation">An introduction to the Sweden Connect Framework</h3>
+                <p class="spec__description">
+                  Overview documents that describe the different parts of the Sweden Connect Framework.
+                  <i>Currently only covers SAML.</i>
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/00_-_Tekniskt_ramverk_-_Introduktion.html">
+                      <span>En introduktion till Sweden Connect Tekniskt ramverk</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="doc-link" href="latest/00_-_Swedish_eID_Framework_-_Introduction.html">
+                      <span>Introduction to the Sweden Connect Technical Framework</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <h4 id="entity-categories-for-the-swedish-eid-framework">SAML: Entity Categories for the Swedish eID Framework</h4>
-  <p>
-    This specification contains the Entity Category definitions that are defined for the Sweden Connect Framework and
-    that should be supported by Service Providers and Identity Providers that are part of the federation.
-  </p>
-  <p><strong>Version 1.9</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID
-        Framework</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.10:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework - Draft</a>
-    </p>
-  </blockquote>
-  -->
+              <div class="spec">
+                <h3 id="registry-for-identifiers-assigned-by-the-swedish-e-identification-board">Sweden Connect -
+                  Registry for identifiers</h3>
+                <p class="spec__description">
+                  This document defines the structure for identifiers assigned by the Swedish Agency for Digital
+                  Government (Digg) and provides a registry for assigned identifiers.
+                </p>
+                <span class="version">Version 1.8</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/03_-_Registry_for_Identifiers.html">
+                      <span>Sweden Connect - Registry for Identifiers</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft" href="updates/03_-_Registry_for_Identifiers.html">
+                      <span>Sweden Connect - Registry for Identifiers
+                        <span class="doc-link__label">Draft version 1.9</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
 
-  <h4 id="eidas-constructed-attribute-specification-for-the-swedish-eid-framework">eIDAS Constructed Attribute
-    Specification for the Swedish eID Framework</h4>
-  <p>
-    This document provides specifications for constructed attributes.
-  </p>
-  <p>
-    The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy nodes)
-    delivering identity assertions to Swedish Service Providers based on user authentication with a foreign eID.
-  </p>
-  <p><strong>Version 1.2</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS
-        Constructed Attributes Specification for the Swedish eID Framework</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.3:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS Constructed Attributes Specification for the Swedish eID Framework</a>
-    </p>
-  </blockquote>
-  -->
+            </div>
+          </section>
 
-  <h4>SAML: Principal Selection in SAML Authentication Requests</h4>
-  <p>
-    This specification defines an element that may be included in the Extensions element of a SAML AuthnRequest where
-    the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select
-    the particular user that should be authenticated.
-  </p>
-  <p><strong>Version 1.0</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html">Principal Selection in SAML
-        Authentication Requests</a>
-    </p>
-  </blockquote>
+          <!-- ============================================================ -->
+          <section id="authentication-specifications">
+            <h2>Authentication Specifications</h2>
+            <p class="section-intro">
+              The specifications for user authentication are listed below.
+            </p>
 
-  <h4>SAML: User Message Extension in SAML Authentication Requests</h4>
-  <p>
-    This specification defines an element that may be included in the Extensions element of a SAML authentication
-    request where the requesting Service Provider can specify a "user message" that is to be displayed for the user by
-    the Identity Provider during the authentication phase.
-  </p>
-  <p><strong>Version 1.0</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html">User Message Extension in SAML
-        Authentication Requests</a>
-    </p>
-  </blockquote>
+            <h3 class="spec-group" id="authentication-saml">SAML</h3>
 
-  <h4 id="implementation-profile-for-bankid-identity-providers-within-the-swedish-eid-framework">SAML: Implementation
-    Profile for BankID Identity Providers within the Swedish eID Framework</h4>
-  <p>
-    SAML implementation profile for Identity Providers implementing BankID support.
-  </p>
-  <p><strong>Version 1.4</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html">BankID Profile for the Swedish eID
-        Framework</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.4:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html">BankID Profile for the Swedish eID Framework - Draft</a>
-    </p>
-  </blockquote>
-  -->
+            <div class="spec-list">
 
-  <h4>eIDAS Identity Binding</h4>
-  <p>
-    This informational document outlines the process for binding an eIDAS-notified electronic identity (eID) to
-    an individual's personal identification number in the Swedish Population Register.
-  </p>
-  <blockquote>
-    <p>
-      <a href="Identity_Binding.html">Binding eIDAS Identities to Records in the Swedish Population Register</a>
-    </p>
-  </blockquote>
+              <div class="spec">
+                <h4 id="deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID
+                  Framework</h4>
+                <p class="spec__description">
+                  This is the main SAML specification for the Sweden Connect Framework. It defines a SAML profile
+                  including metadata, request and response processing, as well as extensions for signature services.
+                </p>
+                <span class="version">Version 1.8</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">
+                      <span>Deployment Profile for the Swedish eID Framework</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">
+                      <span>Deployment Profile for the Swedish eID Framework
+                        <span class="doc-link__label">Draft version 1.9</span></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <a name="sigval"></a>
+              <div class="spec">
+                <h4 id="attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the
+                  Swedish eID Framework</h4>
+                <p class="spec__description">
+                  This document specifies a SAML attribute profile for the Sweden Connect Framework. The attribute
+                  profile defines attributes for use within the Sweden Connect federation, and a number of defined
+                  attribute sets that may be referenced by other documents as a means of specifying attribute release
+                  requirements.
+                </p>
+                <span class="version">Version 1.8</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">
+                      <span>Attribute Specification for the Swedish eID Framework</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">
+                      <span>Attribute Specification for the Swedish eID Framework
+                        <span class="doc-link__label">Draft version 1.9</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
 
-  <h2>Signature Specifications</h2>
-  <p>
-    The specifications for Federated Central Signing Services are listed below.
-  </p>
+              <div class="spec">
+                <h4 id="entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID
+                  Framework</h4>
+                <p class="spec__description">
+                  This specification contains the Entity Category definitions that are defined for the Sweden Connect
+                  Framework and that should be supported by Service Providers and Identity Providers that are part of
+                  the federation.
+                </p>
+                <span class="version">Version 1.9</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">
+                      <span>Entity Categories for the Swedish eID Framework</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">
+                      <span>Entity Categories for the Swedish eID Framework
+                        <span class="doc-link__label">Draft version 1.10</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
 
-  <h4 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS
-    DSS in Central Signing Services</h4>
-  <p>
-    This document specifies an implementation profile for exchange of sign requests and responses using the OASIS DSS
-    protocol, enhanced by the DSS Extensions for Federated Central Signing Services.
-  </p>
-  <p><strong>Version 1.6</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation
-        Profile for using DSS in Central Signing Services</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.7:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation
-        Profile for using DSS in Central Signing Services - Draft</a>
-    </p>
-  </blockquote>
-  -->
+              <div class="spec">
+                <h4 id="eidas-constructed-attribute-specification-for-the-swedish-eid-framework">eIDAS Constructed
+                  Attribute Specification for the Swedish eID Framework</h4>
+                <p class="spec__description">
+                  This document provides specifications for constructed attributes.
+                </p>
+                <p class="spec__description">
+                  The concept of constructed attributes is introduced in Swedish national authentication nodes (proxy
+                  nodes) delivering identity assertions to Swedish Service Providers based on user authentication with
+                  a foreign eID.
+                </p>
+                <span class="version">Version 1.2</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link"
+                       href="latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">
+                      <span>eIDAS Constructed Attributes Specification for the Swedish eID Framework</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">
+                      <span>eIDAS Constructed Attributes Specification for the Swedish eID Framework
+                        <span class="doc-link__label">Draft version 1.3</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
 
-  <h4 id="certificate-profile-for-certificates-issued-by-central-signing-services">Certificate Profile for Certificates
-    Issued by Central Signing Services</h4>
-  <p>
-    This document specifies a certificate profile for certificates issued by a signature service.
-  </p>
-  <p><strong>Version 1.2</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/08_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate Profile for Central
-        Signing Services</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.3:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/08_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate Profile for Central Signing Services - Draft</a>
-    </p>
-  </blockquote>
-  -->
+              <div class="spec">
+                <h4 id="principal-selection-in-saml-authentication-requests">Principal Selection in SAML
+                  Authentication Requests</h4>
+                <p class="spec__description">
+                  This specification defines an element that may be included in the Extensions element of a SAML
+                  AuthnRequest where the requesting Service Provider can specify matching criteria that may be used by
+                  the Identity Provider to select the particular user that should be authenticated.
+                </p>
+                <span class="version">Version 1.0</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html">
+                      <span>Principal Selection in SAML Authentication Requests</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <h4 id="dss-extension-for-federated-central-signing-services">DSS Extension for Federated Central Signing
-    Services</h4>
-  <p>
-    This specification defines elements that extends the <code>&lt;dss:SignRequest&gt;</code> and <code>&lt;dss:SignResponse&gt;</code>
-    elements of the OASIS DSS protocol.
-  </p>
-  <p><strong>Version 1.5</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/09_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Signing
-        Services</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.6:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/09_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Signing Services</a>
-    </p>
-  </blockquote>
-  -->
+              <div class="spec">
+                <h4 id="user-message-extension-in-saml-authentication-requests">User Message Extension in SAML
+                  Authentication Requests</h4>
+                <p class="spec__description">
+                  This specification defines an element that may be included in the Extensions element of a SAML
+                  authentication request where the requesting Service Provider can specify a "user message" that is to
+                  be displayed for the user by the Identity Provider during the authentication phase.
+                </p>
+                <span class="version">Version 1.0</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html">
+                      <span>User Message Extension in SAML Authentication Requests</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <h4 id="signature-activation-protocol-for-federated-signing">Signature Activation Protocol for Federated Signing</h4>
-  <p>
-    This document specifies a Signature Activation Protocol (SAP) and its data elements for implementation of Sole
-    Control Assurance Level 2 (SCAL2) according to the European standard prEN 419241, Trustworthy Systems Supporting
-    Server Signing.
-  </p>
-  <p><strong>Version 1.2</strong></p>
-  <blockquote>
-    <p>
-      <a href="latest/13_-_Signature_Activation_Protocol.html">Signature Activation Protocol</a>
-    </p>
-  </blockquote>
-  <!--
-  <p>
-    <i>Draft version 1.3:</i>
-  </p>
-  <blockquote>
-    <p>
-      <a href="updates/13_-_Signature_Activation_Protocol.html">Signature Activation Protocol - Draft</a>
-    </p>
-  </blockquote>
-  -->
+              <div class="spec">
+                <h4 id="implementation-profile-for-bankid-identity-providers-within-the-swedish-eid-framework">Implementation
+                  Profile for BankID Identity Providers within the Swedish eID Framework</h4>
+                <p class="spec__description">
+                  SAML implementation profile for Identity Providers implementing BankID support.
+                </p>
+                <span class="version">Version 1.4</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html">
+                      <span>BankID Profile for the Swedish eID Framework</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html">
+                      <span>BankID Profile for the Swedish eID Framework
+                        <span class="doc-link__label">Draft version 1.4</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
 
-  <h4>Signature Validation Tokens</h4>
-  <p>
-    The "Signature Validation Token" draft specifications have been replaced by IETF drafts. See <a
-      href="https://github.com/swedenconnect/IETF-SVT">https://github.com/swedenconnect/IETF-SVT</a>.
-  </p>
+              <div class="spec">
+                <h4 id="eidas-identity-binding">eIDAS Identity Binding</h4>
+                <p class="spec__description">
+                  This informational document outlines the process for binding an eIDAS-notified electronic identity
+                  (eID) to an individual's personal identification number in the Swedish Population Register.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="Identity_Binding.html">
+                      <span>Binding eIDAS Identities to Records in the Swedish Population Register</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <hr>
+            </div>
 
-  <a id="federation" name="federation"></a>
-  <h3>The Sweden Connect Federation</h3>
+            <h3 class="spec-group" id="authentication-openid-connect">OpenID Connect</h3>
 
-  <p>Common federation rules:</p>
-  <ul class="list">
-    <li><a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect – Security Requirements 1.0</a></li>
-  </ul>
-  <p>
-    For participants of the Sweden Connect SAML federation, the normative specification
-    <a href="Tekniska_anslutningsregler.html">Tekniska anslutningsregler för Sweden Connect-federationen</a> should also
-    be read. <i>Currently only in Swedish.</i>
-  </p>
-  <p>
-    The following documents apply when joining the Sweden Connect Federation for OpenID Connect (OpenID Federation):
-  </p>
-  <ul class="list">
-    <li>
-      <a href="https://docs.swedenconnect.se/federation/oidf-structure.html">Sweden Connect – OpenID Federation Structure</a>
-    </li>
-    <li>
-      <a href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">Sweden Connect – OpenID Connect Metadata Requirements 1.0</a>
-    </li>
-  </ul>
+            <div class="spec-list">
 
-  <h3>GitHub</h3>
-  <p>
-    The specifications for the Sweden Connect Framework are stored on GitHub at <a
-      href="https://github.com/swedenconnect/technical-framework">https://github.com/swedenconnect/technical-framework</a>.
-    The master branch is where new development is performed, and each official release has its own branch.
-  </p>
+              <div class="spec">
+                <h4 id="openid-connect-profile-for-sweden-connect">OpenID Connect Profile for Sweden Connect</h4>
+                <p class="spec__description">
+                  This profile is an extension of
+                  <a href="https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html">The Swedish OpenID Connect
+                    Profile</a> for the Sweden Connect identity federation.
+                </p>
+                <p class="spec__description">
+                  The profile aims to establish a baseline level of security and to facilitate interoperability between
+                  Relying Parties and OpenID Providers within the Sweden Connect identity federation.
+                </p>
+                <span class="version">Version 1.0</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/OpenID_Connect_Profile_for_Sweden_Connect.html">
+                      <span>OpenID Connect Profile for Sweden Connect</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <h3 id="older-versions">Older versions</h3>
-  <ul class="list">
-    <li><a href="https://github.com/swedenconnect/technical-framework/tree/june-2014">June 2014</a></li>
-    <li><a href="https://github.com/swedenconnect/technical-framework/tree/april-2015">April 2015</a></li>
-    <li><a href="october-2015/index.html">October 2015</a></li>
-    <li><a href="march-2017/index.html">March 2017</a></li>
-    <li><a href="june-2018/index.html">June 2018</a></li>
-    <li><a href="january-2020/index.html">January 2020</a></li>
-    <li><a href="november-2021/index.html">November 2021</a></li>
-  </ul>
+              <div class="spec">
+                <h4 id="openid-connect-claims-and-scopes-specification">OpenID Connect Claims and Scopes
+                  Specification for Sweden Connect</h4>
+                <p class="spec__description">
+                  This specification extends the
+                  <a href="https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html">Claims and
+                    Scopes Specification for the Swedish OpenID Connect Profile</a>
+                  with OpenID Connect claims and scopes for usage within the Sweden Connect federation.
+                </p>
+                <span class="version">Version 1.0</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/OpenID_Connect_Claims_and_Scopes_Specification.html">
+                      <span>OpenID Connect Claims and Scopes Specification for Sweden Connect</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/OpenID_Connect_Claims_and_Scopes_Specification.html">
+                      <span>OpenID Connect Claims and Scopes Specification for Sweden Connect
+                        <span class="doc-link__label">Draft version 1.1</span></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <h3 id="feedback-and-questions">Feedback and Questions</h3>
-  <p>
-    If you have feedback or questions regarding the Technical
-    Framework, open an <a href="https://github.com/swedenconnect/technical-framework/issues">Issue</a>.
-  </p>
+              <div class="spec">
+                <h4 id="openid-connect-metadata-requirements">OpenID Connect Metadata Requirements</h4>
+                <p class="spec__description">
+                  This specification defines the metadata requirements for Relying Parties and OpenID Providers
+                  participating in the Sweden Connect OpenID Connect federation. The metadata is published in Entity
+                  Configurations according to OpenID Federation 1.0.
+                </p>
+                <p class="spec__description">
+                  The requirements apply to the resolved metadata, meaning the metadata that results once the Trust
+                  Chain of an Entity has been applied to the declarations the Entity makes about itself.
+                </p>
+                <span class="version">Version 1.0</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">
+                      <span>Sweden Connect - OpenID Connect Metadata Requirements</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-  <hr>
+            </div>
+          </section>
 
-  <p>Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All
-    Rights Reserved.</p>
+          <!-- ============================================================ -->
+          <section id="sigval">
+            <h2 id="signature-specifications">Signature Specifications</h2>
+            <p class="section-intro">
+              The specifications for Federated Central Signing Services are listed below.
+            </p>
 
-</article>
+            <div class="spec-list">
+
+              <div class="spec">
+                <h3 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile
+                  for using OASIS DSS in Central Signing Services</h3>
+                <p class="spec__description">
+                  This document specifies an implementation profile for exchange of sign requests and responses using
+                  the OASIS DSS protocol, enhanced by the DSS Extensions for Federated Central Signing Services.
+                </p>
+                <span class="version">Version 1.6</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link"
+                       href="latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">
+                      <span>Implementation Profile for using DSS in Central Signing Services</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">
+                      <span>Implementation Profile for using DSS in Central Signing Services
+                        <span class="doc-link__label">Draft version 1.7</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h3 id="certificate-profile-for-certificates-issued-by-central-signing-services">Certificate Profile
+                  for Certificates Issued by Central Signing Services</h3>
+                <p class="spec__description">
+                  This document specifies a certificate profile for certificates issued by a signature service.
+                </p>
+                <span class="version">Version 1.2</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/08_-_Certificate_Profile_for_Central_Signing_Services.html">
+                      <span>Certificate Profile for Central Signing Services</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/08_-_Certificate_Profile_for_Central_Signing_Services.html">
+                      <span>Certificate Profile for Central Signing Services
+                        <span class="doc-link__label">Draft version 1.3</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h3 id="dss-extension-for-federated-central-signing-services">DSS Extension for Federated Central
+                  Signing Services</h3>
+                <p class="spec__description">
+                  This specification defines elements that extends the <code>&lt;dss:SignRequest&gt;</code> and
+                  <code>&lt;dss:SignResponse&gt;</code> elements of the OASIS DSS protocol.
+                </p>
+                <span class="version">Version 1.5</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/09_-_DSS_Extension_for_Federated_Signing_Services.html">
+                      <span>DSS Extension for Federated Signing Services</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="updates/09_-_DSS_Extension_for_Federated_Signing_Services.html">
+                      <span>DSS Extension for Federated Signing Services
+                        <span class="doc-link__label">Draft version 1.6</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h3 id="signature-activation-protocol-for-federated-signing">Signature Activation Protocol for
+                  Federated Signing</h3>
+                <p class="spec__description">
+                  This document specifies a Signature Activation Protocol (SAP) and its data elements for
+                  implementation of Sole Control Assurance Level 2 (SCAL2) according to the European standard prEN
+                  419241, Trustworthy Systems Supporting Server Signing.
+                </p>
+                <span class="version">Version 1.2</span>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="latest/13_-_Signature_Activation_Protocol.html">
+                      <span>Signature Activation Protocol</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li>
+                    <a class="doc-link doc-link--draft" href="updates/13_-_Signature_Activation_Protocol.html">
+                      <span>Signature Activation Protocol
+                        <span class="doc-link__label">Draft version 1.3</span></span>
+                    </a>
+                  </li>
+                  -->
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h3 id="signature-validation-tokens">Signature Validation Tokens</h3>
+                <p class="spec__description">
+                  The "Signature Validation Token" draft specifications have been replaced by IETF drafts. See
+                  <a href="https://github.com/swedenconnect/IETF-SVT">https://github.com/swedenconnect/IETF-SVT</a>.
+                </p>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ============================================================ -->
+          <section id="federation">
+            <h2>The Sweden Connect Federation</h2>
+
+            <p class="section-intro">Common federation rules:</p>
+            <ul class="link-list">
+              <li>
+                <a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect –
+                  Security Requirements 1.0</a>
+              </li>
+            </ul>
+
+            <p>
+              For participants of the Sweden Connect SAML federation, the normative specification
+              <a href="Tekniska_anslutningsregler.html">Tekniska anslutningsregler för Sweden
+                Connect-federationen</a> should also be read. <i>Currently only in Swedish.</i>
+            </p>
+
+            <p>
+              The following documents apply when joining the Sweden Connect Federation for OpenID Connect (OpenID
+              Federation):
+            </p>
+            <ul class="link-list">
+              <li>
+                <a href="https://docs.swedenconnect.se/federation/oidf-structure.html">Sweden Connect – OpenID
+                  Federation Structure</a>
+              </li>
+              <li>
+                <a href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">Sweden Connect –
+                  OpenID Connect Metadata Requirements 1.0</a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ============================================================ -->
+          <section id="github">
+            <h2>GitHub</h2>
+            <p class="section-intro">
+              The specifications for the Sweden Connect Framework are stored on GitHub at
+              <a href="https://github.com/swedenconnect/technical-framework">https://github.com/swedenconnect/technical-framework</a>.
+              The master branch is where new development is performed, and each official release has its own branch.
+            </p>
+          </section>
+
+          <!-- ============================================================ -->
+          <section id="older-versions">
+            <h2>Older versions</h2>
+            <ul class="link-list">
+              <li><a href="november-2021/index.html">November 2021</a></li>
+              <li><a href="january-2020/index.html">January 2020</a></li>
+              <li><a href="june-2018/index.html">June 2018</a></li>
+              <li><a href="march-2017/index.html">March 2017</a></li>
+              <li><a href="october-2015/index.html">October 2015</a></li>
+              <li><a href="https://github.com/swedenconnect/technical-framework/tree/april-2015">April 2015</a></li>
+              <li><a href="https://github.com/swedenconnect/technical-framework/tree/june-2014">June 2014</a></li>
+            </ul>
+          </section>
+
+          <!-- ============================================================ -->
+          <section id="feedback-and-questions">
+            <h2>Feedback and Questions</h2>
+            <p class="section-intro">
+              If you have feedback or questions regarding the Technical Framework, open an
+              <a href="https://github.com/swedenconnect/technical-framework/issues">Issue</a>.
+            </p>
+            <div class="note">
+              <p>
+                Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>,
+                2015-2026. All Rights Reserved.
+              </p>
+            </div>
+          </section>
+
+        </article>
+
+        <!-- BEGIN: on-this-page -->
+        <nav class="page-toc" aria-labelledby="on-this-page">
+          <h2 id="on-this-page">On this page</h2>
+          <ul>
+            <li><a href="#overview">Overview and Registry</a></li>
+            <li>
+              <a href="#authentication-specifications">Authentication Specifications</a>
+              <ul>
+                <li><a href="#authentication-saml">SAML</a></li>
+                <li><a href="#authentication-openid-connect">OpenID Connect</a></li>
+              </ul>
+            </li>
+            <li><a href="#signature-specifications">Signature Specifications</a></li>
+            <li><a href="#federation">The Sweden Connect Federation</a></li>
+            <li><a href="#github">GitHub</a></li>
+            <li><a href="#older-versions">Older versions</a></li>
+            <li><a href="#feedback-and-questions">Feedback and Questions</a></li>
+          </ul>
+        </nav>
+        <!-- END: on-this-page -->
+
+      </div>
+    </div>
+  </main>
+
+  <!-- BEGIN: site-footer -->
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div>
+        <h2>Contact support</h2>
+        <p><a href="mailto:operations@swedenconnect.se">operations@swedenconnect.se</a></p>
+      </div>
+      <div>
+        <h2>Quick links</h2>
+        <ul>
+          <li><a href="https://www.swedenconnect.se">Sweden Connect start page</a></li>
+          <li><a href="https://github.com/swedenconnect/technical-framework">Sweden Connect Technical Framework on
+            GitHub</a></li>
+          <li><a href="https://github.com/swedenconnect/schemas">Sweden Connect XML schemas on GitHub</a></li>
+          <li><a href="https://www.oidc.se/specifications/">OIDC Sweden – OpenID Connect Specifications</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-logo-row">
+      <div class="footer-logo-text">
+        <p>This website is managed by DIGG &ndash; the Agency for Digital Government</p>
+      </div>
+      <img class="footer-logo" src="img/digg_centered.png" alt="" height="56">
+    </div>
+  </footer>
+  <!-- END: site-footer -->
+
+</div>
+
 </body>
 </html>
