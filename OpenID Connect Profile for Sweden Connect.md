@@ -8,14 +8,14 @@
 
 # OpenID Connect Profile for Sweden Connect
 
-### Version 1.0 - 2024-12-04
+### Version 1.1 – 2026-09-03 – Draft
 
 Registration number: **2024-7674**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -44,7 +44,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     
     2.3.2. [Token Response Requirements](#token-response-requirements)
 
-    2.4. [eIDAS Requirements](#eidas-requirements)
+    2.4. [Signature Extension Support](#signature-extension-support)
 
 3. [**Relying Party Requirements**](#relying-party-requirements)
 
@@ -64,8 +64,6 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 This profile is an extension of [The Swedish OpenID Connect Profile](#oidc-sweden-profile), \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\], for the [Sweden Connect](https://www.swedenconnect.se) identity federation.
 
 The profile aims to get a baseline security and to facilitate interoperability between relying parties and OpenID providers within the Sweden Connect identity federation.
-
-> **Note:** This version of the profile does not address features concerning "Signature Services" and requirements for "authentication for Signature" that are specified in the corresponding Sweden Connect SAML deployment profile, \[[SC.SAML.Profile](#sc-saml-profile)\]. Nor does the profile specify how OpenID Provider metadata and Relying Party/Client metadata is distributed and made available to the members of the federation. This will be added in future versions of the profile.
 
 <a name="requirements-notation-and-conventions"></a>
 ### 1.1. Requirements Notation and Conventions
@@ -162,6 +160,22 @@ Section 4.2 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] states:
 If the Access Token is a cleartext JWT holding user identity data, information that the Relying Party may not be authorized to access may be leaked. Therefore, it is RECOMMENDED that opaque strings are used as Access Tokens.
 
 Note: An OpenID Provider that also acts as an OAuth2 Authorization Server may of course issue JWT Access Tokens. The above requirement only applies to the Access Tokens that are issued during authentication (i.e., for granting access to the UserInfo endpoint).
+
+<a name="signature-extension-support"></a>
+### 2.4. Signature Extension Support
+
+Section 7 of \[[SC.SAML.Profile](#sc-saml-profile)\] specifies that a SAML Identity Provider
+compliant with Sweden Connect needs to support the "authentication for signature" feature. By doing so, a Signature Service that acts as a Relying Party against the Identity Provider can request the user's approval for a signature, meaning that a sign message is displayed by the Identity Provider during user authentication.
+
+Consequently, a Sweden Connect OpenID Provider, i.e., an OpenID Provider compliant with this profile, MUST support the "Signature Extension for OpenID Connect" specification \[[OIDC.Sweden.Sign](#oidc-sweden-sign)\] with the following additions and clarifications:
+
+- The OpenID Provider MUST support the Signature Approval use case as defined in Section 2.2 of \[[OIDC.Sweden.Sign](#oidc-sweden-sign)\], and MAY support the Signing use case as defined in Section 2.1 of \[[OIDC.Sweden.Sign](#oidc-sweden-sign)\].
+
+- The OpenID Provider MUST display a user interface for the user (directly or via an authentication device) that makes it clear that the user is performing a signature operation.
+
+- The OpenID Provider MUST NOT save the user's authentication in its session at the OP for later re-use in SSO scenarios. This requirement exists to prevent the authentication from a signature approval operation from being re-used when an ID Token is issued for a later authentication request.
+
+See also Section 5.3 of \[[SC.OIDC.Metadata](#sc-oidc-metadata)\] for a clarification of metadata requirements regarding OpenID Provider signature extension support.
 
 <a name="relying-party-requirements"></a>
 ## 3. Relying Party Requirements
@@ -270,6 +284,10 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 **\[OIDC.Sweden.Sign\]**
 > [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).
 
+<a name="sc-oidc-metadata"></a>
+**\[SC.OIDC.Metadata\]**
+> [Sweden Connect – OpenID Connect Metadata Requirements 1.0](https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html).
+
 <a name="sc-saml-profile"></a>
 **\[SC.SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
@@ -277,4 +295,6 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
 
-This is the first version of this specification.
+Changes between version 1.0 and version 1.1:
+
+- Section 2.4, Signature Extension Support, was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).

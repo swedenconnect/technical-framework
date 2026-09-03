@@ -40,38 +40,23 @@ This document defines the structure for identifiers assigned by the Swedish Agen
 
 > [03 - Registry for Identifiers](03%20-%20Registry%20for%20Identifiers.md)
 
-### Authentication Specifications
+### Authentication Specifications – SAML
 
-Below follows a listing of all specifications concerning user authentication.
+Below follows a listing of all specifications for user authentication using SAML.
 
-
-#### SAML: Deployment Profile for the Swedish eID Framework
+#### Deployment Profile for the Swedish eID Framework
 
 This is the main SAML specification for the Sweden Connect Framework. It defines a SAML profile including metadata, request- and response processing as well as extensions for signature services.
 
 > [02 - Deployment Profile for the Swedish eID Framework](02%20-%20Deployment%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### OIDC: OpenID Connect Profile for Sweden Connect
-
-This profile is an extension of [The Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html) for the Sweden Connect identity federation.
-
-The profile aims to get a baseline security and to facilitate interoperability between relying parties and OpenID providers within the Sweden Connect identity federation.
-
-> [OpenID Connect Profile for Sweden Connect](OpenID%20Connect%20Profile%20for%20Sweden%20Connect.md)
-
-#### SAML: Attribute Specification for the Swedish eID Framework
+#### Attribute Specification for the Swedish eID Framework
 
 This document specifies a SAML attribute profile for the Sweden Connect Framework. The attribute profile defines attributes for use within the Sweden Connect federation, and a number of defined attribute sets that may be referenced by other documents as means to specify specific attribute release requirements.
 
 > [04 - Attribute Specification for the Swedish eID Framework](04%20-%20Attribute%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### OIDC: OpenID Connect Claims and Scopes Specification for Sweden Connect
-
-This specification extends the [Claims and Scopes Specification for the Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html) with OpenID Connect claims and scopes for usage within the Sweden Connect federation.
-
-> [OpenID Connect Claims and Scopes Specification for Sweden Connect](OpenID%20Connect%20Claims%20and%20Scopes%20Specification%20for%20Sweden%20Connect.md)
-
-#### SAML: Entity Categories for the Swedish eID Framework
+#### Entity Categories for the Swedish eID Framework
 
 This specification contains the Entity Category definitions that are defined for the Swedish eID Framework and that should be supported by Service Providers and Identity Providers that are part of the federation.
 
@@ -85,23 +70,41 @@ The concept of constructed attributes is introduced in Swedish national authenti
 
 > [11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### SAML: Implementation Profile for BankID Identity Providers within the Swedish eID Framework
+#### Implementation Profile for BankID Identity Providers within the Swedish eID Framework
 
 SAML implementation profile for Identity Providers implementing BankID support.
 
 > [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### SAML: Principal Selection in SAML Authentication Requests
+#### Principal Selection in SAML Authentication Requests
 
 This specification defines an element that may be included in the Extensions element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
 
 > [14 - Principal Selection in SAML Authentication Requests](14%20-%20Principal%20Selection%20in%20SAML%20Authentication%20Requests.md)
 
-#### SAML: User Message Extension in SAML Authentication Requests
+#### User Message Extension in SAML Authentication Requests
 
 This specification defines an element that may be included in the Extensions element of a SAML authentication request where the requesting Service Provider can specify a "user message" that is to be displayed for the user by the Identity Provider during the authentication phase.
 
 > [18 - User Message Extension in SAML Authentication Requests](18%20-%20User%20Message%20Extension%20in%20SAML%20Authentication%20Requests.md)
+
+### Authentication Specifications – OpenID Connect
+
+Below follows a listing of all specifications for user authentication using OpenID Connect.
+
+#### OpenID Connect Profile for Sweden Connect
+
+This profile is an extension of [The Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html) for the Sweden Connect identity federation.
+
+The profile aims to get a baseline security and to facilitate interoperability between relying parties and OpenID providers within the Sweden Connect identity federation.
+
+> [OpenID Connect Profile for Sweden Connect](OpenID%20Connect%20Profile%20for%20Sweden%20Connect.md)
+
+#### OpenID Connect Claims and Scopes Specification for Sweden Connect
+
+This specification extends the [Claims and Scopes Specification for the Swedish OpenID Connect Profile](https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html) with OpenID Connect claims and scopes for usage within the Sweden Connect federation.
+
+> [OpenID Connect Claims and Scopes Specification for Sweden Connect](OpenID%20Connect%20Claims%20and%20Scopes%20Specification%20for%20Sweden%20Connect.md)
 
 ### Signature Specifications
 
@@ -159,14 +162,13 @@ Sweden Connect apply:
 
 Older version of the specifications are stored in the following branches:
 
-+ [june-2014](https://github.com/swedenconnect/technical-framework/tree/june-2014) - For the June 2014 release
-+ [april-2015](https://github.com/swedenconnect/technical-framework/tree/april-2015) - For the April 2015 release
-+ [october-2015](https://github.com/swedenconnect/technical-framework/tree/october-2015) - For the October 2015 release
-+ [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) - For the March 2017 release
-+ [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) - For the June 2018 release
-+ [january-2020](https://github.com/swedenconnect/technical-framework/tree/january-2020) - For the January 2020 release
 + [november-2021](https://github.com/swedenconnect/technical-framework/tree/november-2021) - For the November 2021 release
-
++ [january-2020](https://github.com/swedenconnect/technical-framework/tree/january-2020) - For the January 2020 release
++ [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) - For the June 2018 release
++ [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) - For the March 2017 release
++ [october-2015](https://github.com/swedenconnect/technical-framework/tree/october-2015) - For the October 2015 release
++ [april-2015](https://github.com/swedenconnect/technical-framework/tree/april-2015) - For the April 2015 release
++ [june-2014](https://github.com/swedenconnect/technical-framework/tree/june-2014) - For the June 2014 release
 
 ---
 
