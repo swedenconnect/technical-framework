@@ -52,9 +52,11 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     3.2. [Client Registration and Metadata Requirements](#client-registration-and-metadata-requirements)
 
-4. [**References**](#references)
+4. [**Security Requirements**](#security-requirements)
 
-5. [**Changes between versions**](#changes-between-versions)
+5. [**References**](#references)
+
+6. [**Changes between versions**](#changes-between-versions)
 
 ---
 
@@ -233,8 +235,13 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 
 > **Note:** This version of the profile does not specify how client metadata is registered at/distributed to the OpenID Providers of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing client metadata.
 
+<a name="security-requirements"></a>
+## 4. Security Requirements
+
+Entities compliant with this profile MUST adhere to \[[SC.Security](#sc-security)\] as well as Section 7 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\], where the requirements from \[[SC.Security](#sc-security)\] take precedence in case of conflicting requirements.
+
 <a name="references"></a>
-## 4. References
+## 5. References
 
 <a name="rfc2119"></a>
 **\[RFC2119\]**
@@ -284,6 +291,10 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 **\[OIDC.Sweden.Sign\]**
 > [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).
 
+<a name="sc-security"></a>
+**\[SC.Security\]**
+> [Sweden Connect – Security Requirements 1.0](https://docs.swedenconnect.se/federation/security-requirements.html).
+
 <a name="sc-oidc-metadata"></a>
 **\[SC.OIDC.Metadata\]**
 > [Sweden Connect – OpenID Connect Metadata Requirements 1.0](https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html).
@@ -293,8 +304,11 @@ See further requirements concerning client metadata in section 2 of \[[OpenID.Re
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
 <a name="changes-between-versions"></a>
-## 5. Changes between versions
+## 6. Changes between versions
 
 Changes between version 1.0 and version 1.1:
 
 - Section 2.4, Signature Extension Support, was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).
+
+- Section 4, Security Requirements, was added.
+
