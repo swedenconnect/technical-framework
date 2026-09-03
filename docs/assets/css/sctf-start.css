@@ -1,0 +1,724 @@
+/*
+ * Sweden Connect Framework - start page stylesheet
+ *
+ * Used by docs/index.html only. Follows the Sweden Connect design used by the
+ * Sandbox pages (github.com/swedenconnect/sandbox-pages, css/style.css).
+ *
+ * This file is standalone. It does not depend on Bootstrap, and it must not be
+ * loaded together with github-markdown.css or pilcrow.css, which style the
+ * generated specification documents.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Fonts
+ *
+ * Self-hosted, so the published page makes no third-party requests. The six
+ * .woff2 files are the same ones used by the Sandbox pages. If they are absent
+ * the browser falls back to the next family in --sc-font-family without error.
+ * ------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ubuntu-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ubuntu-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ubuntu-400-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ubuntu-400-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/ubuntu-700-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/ubuntu-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ------------------------------------------------------------------ *
+ * Design tokens
+ *
+ * Copied from the Sandbox stylesheet so the two sites stay in step. Change
+ * them there first.
+ * ------------------------------------------------------------------ */
+
+:root {
+  /* Text and outlines */
+  --sc-text: #292a2b;
+  --sc-text-muted: #707070;
+  --sc-outline: #2b2a29;
+
+  /* Accents */
+  --sc-accent: #5a6751;
+  --sc-accent-light: #657c54;
+  --sc-link-hover: #5a5856;
+
+  /* Surfaces */
+  --sc-bg: #ffffff;
+  --sc-bg-frame: #f3f3f3;
+  --sc-bg-offwhite: #eff0ee;
+  --sc-panel-sage: #d6d9d3;
+  --sc-panel-sage-hover: #e5e8e2;
+  --sc-border: #e8e8e8;
+
+  /* Secondary accents */
+  --sc-terracotta: #cd7a6e;
+  --sc-terracotta-tint: #f7e4e1;
+  --sc-sand: #d59151;
+
+  /* Typography */
+  --sc-font-family: "Ubuntu", "Helvetica Neue", Arial, sans-serif;
+  --sc-font-size-body: 1.125rem;
+  --sc-line-height-body: 1.5;
+
+  /* Layout */
+  --sc-page-max-width: 1440px;
+  --sc-page-inset: 2rem;
+  --sc-logo-max-width: 343px;
+  --sc-logo-max-width-narrow: 221px;
+  --sc-border-width: 2px;
+
+  /* Height of the sticky header at desktop widths: 1rem padding above and
+     below a logo that is intrinsically 343x59 and rendered unscaled. Anchor
+     targets clear it by this much plus a little air. */
+  --sc-header-height: 91px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--sc-font-family);
+  font-size: var(--sc-font-size-body);
+  line-height: var(--sc-line-height-body);
+  color: var(--sc-text);
+  background-color: var(--sc-bg-frame);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--sc-text);
+}
+
+h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h3,
+h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+/* Groups a set of specifications inside a section, for example SAML and
+   OpenID Connect under Authentication Specifications. */
+.spec-group {
+  margin: 3rem 0 0;
+  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  border-bottom: var(--sc-border-width) solid var(--sc-accent);
+}
+
+.spec-group + .spec-list {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.spec-group + .spec-list > .spec:first-child {
+  border-top: 0;
+}
+
+p {
+  margin: 0 0 1.5rem;
+  line-height: var(--sc-line-height-body);
+}
+
+a {
+  color: var(--sc-text);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--sc-link-hover);
+  text-decoration: none;
+}
+
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background-color: var(--sc-bg-offwhite);
+  border-radius: 2px;
+}
+
+hr {
+  height: 0;
+  margin: 3rem 0;
+  border: 0;
+  border-top: var(--sc-border-width) solid var(--sc-border);
+}
+
+/* ------------------------------------------------------------------ *
+ * Focus indicator
+ *
+ * The most recognisable detail of the Sweden Connect design, and an
+ * accessibility feature. Taken from the official theme unchanged.
+ * ------------------------------------------------------------------ */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px dotted var(--sc-outline);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+@supports not selector(:focus-visible) {
+  a:focus,
+  button:focus {
+    outline: 3px dotted var(--sc-outline);
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Page frame
+ *
+ * A white page floated on the grey body background, centred and capped at
+ * 1440px. Above that width it shows as grey gutters down both sides.
+ * ------------------------------------------------------------------ */
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: var(--sc-page-max-width);
+  margin: 0 auto;
+  background-color: var(--sc-bg);
+}
+
+/* Pushes the footer to the bottom of short pages. */
+.page-main {
+  flex: 1 1 auto;
+}
+
+.container {
+  padding-left: var(--sc-page-inset);
+  padding-right: var(--sc-page-inset);
+}
+
+@media (max-width: 575.98px) {
+  :root {
+    --sc-page-inset: 1.25rem;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Header
+ *
+ * Sticky, not fixed. A fixed header is positioned against the viewport, so it
+ * would ignore the container's centring and span the grey gutters above
+ * 1440px. Sticky stays inside the container and occupies flow space.
+ * ------------------------------------------------------------------ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  padding: 1rem var(--sc-page-inset);
+  background-color: var(--sc-bg);
+}
+
+.site-header .navbar-brand {
+  display: inline-block;
+  padding: 0;
+  max-width: var(--sc-logo-max-width-narrow);
+}
+
+/* The logo is a bitmap, so it is never scaled above its intrinsic width: that
+   would only blur it. max-width still shrinks it on narrow screens. */
+.site-header .logo {
+  display: block;
+  width: auto;
+  max-width: min(var(--sc-logo-max-width-narrow), 100%);
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .site-header .navbar-brand {
+    max-width: var(--sc-logo-max-width);
+  }
+
+  .site-header .logo {
+    max-width: min(var(--sc-logo-max-width), 100%);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Two-column layout: article and the on-this-page navigation
+ * ------------------------------------------------------------------ */
+
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+
+@media (min-width: 992px) {
+  .page-grid {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: 0;
+    align-items: start;
+  }
+}
+
+/* Below the two-column breakpoint the section list is more use above the
+   article than below it. */
+.page-toc {
+  order: -1;
+}
+
+@media (min-width: 992px) {
+  .page-toc {
+    order: 0;
+    position: sticky;
+    top: calc(var(--sc-header-height) + 1.5rem);
+    max-height: calc(100vh - var(--sc-header-height) - 3rem);
+    overflow-y: auto;
+    margin-left: 50px;
+    padding-left: 60px;
+    border-left: var(--sc-border-width) solid var(--sc-border);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Article
+ * ------------------------------------------------------------------ */
+
+h1.article-header {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.excerpt {
+  font-size: 1.25rem;
+  line-height: var(--sc-line-height-body);
+}
+
+article > section {
+  margin-top: 3.5rem;
+}
+
+article > section:first-of-type {
+  margin-top: 2.5rem;
+}
+
+/* The sticky header would otherwise cover the heading an anchor jumps to. */
+[id] {
+  scroll-margin-top: calc(var(--sc-header-height) + 1.5rem);
+}
+
+.section-intro {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+article ul {
+  margin: 0 0 1.5rem;
+  padding-left: 1.5rem;
+}
+
+article ul li {
+  margin-top: 10px;
+}
+
+article ul li:first-child {
+  margin-top: 0;
+}
+
+/* ------------------------------------------------------------------ *
+ * Specification entries
+ *
+ * Rule-separated rows, following the article-list treatment of the official
+ * theme and the service listing on the Sandbox pages.
+ * ------------------------------------------------------------------ */
+
+.spec-list {
+  margin: 2rem 0 0;
+  border-bottom: var(--sc-border-width) solid var(--sc-border);
+}
+
+.spec {
+  padding: 1.75rem 0;
+  border-top: var(--sc-border-width) solid var(--sc-border);
+}
+
+.spec__description {
+  margin: 0;
+  font-size: 1rem;
+  line-height: var(--sc-line-height-body);
+  color: var(--sc-text);
+}
+
+.spec__description + .spec__description {
+  margin-top: 0.75rem;
+}
+
+.version {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 2px 10px;
+  background-color: var(--sc-panel-sage);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* Links to the published documents. The left rule carries the meaning: sage
+   for the current version, sand for a draft. */
+.doc-links {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doc-links li + li {
+  margin-top: 8px;
+}
+
+.doc-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--sc-bg-offwhite);
+  border-left: 4px solid var(--sc-accent);
+  color: var(--sc-text);
+  font-size: 1rem;
+  line-height: var(--sc-line-height-body);
+  text-decoration: none;
+}
+
+/* The label text is one flex child and the chevron is the ::after pseudo
+   element, so the text needs to be allowed to shrink and wrap. */
+.doc-link > span {
+  min-width: 0;
+}
+
+.doc-link:hover {
+  background-color: var(--sc-panel-sage-hover);
+  color: var(--sc-text);
+  text-decoration: underline;
+}
+
+/* Chevron, drawn in CSS because the official arrow is an SVG asset this
+   repository does not hold. */
+.doc-link::after {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  border-top: var(--sc-border-width) solid currentColor;
+  border-right: var(--sc-border-width) solid currentColor;
+  transform: rotate(45deg);
+}
+
+.doc-link--draft {
+  border-left-color: var(--sc-sand);
+}
+
+.doc-link__label {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--sc-text-muted);
+}
+
+/* ------------------------------------------------------------------ *
+ * Plain link lists, used by the federation, older versions and feedback
+ * sections
+ * ------------------------------------------------------------------ */
+
+.link-list {
+  margin: 1.25rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.link-list li {
+  margin-top: 8px;
+  padding-left: 1.25rem;
+  position: relative;
+  font-size: 1rem;
+}
+
+.link-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  background-color: var(--sc-accent);
+}
+
+.note {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.25rem;
+  background-color: var(--sc-bg-offwhite);
+  border-left: var(--sc-border-width) solid var(--sc-accent);
+  font-size: 1rem;
+}
+
+.note :last-child {
+  margin-bottom: 0;
+}
+
+.note p {
+  margin-bottom: 0.75rem;
+  line-height: var(--sc-line-height-body);
+}
+
+/* ------------------------------------------------------------------ *
+ * On this page
+ *
+ * Replaces the "Important resources" panel of the Sandbox start page. One
+ * entry per heading in the article.
+ * ------------------------------------------------------------------ */
+
+/* Below the two-column breakpoint the list sits above the article, so the rule
+   that separates it from the article belongs underneath it, not on top. */
+.page-toc {
+  margin-top: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: var(--sc-border-width) solid var(--sc-border);
+}
+
+@media (min-width: 992px) {
+  .page-toc {
+    margin-top: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.page-toc h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+.page-toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-toc > ul > li {
+  margin-top: 0.5rem;
+}
+
+.page-toc > ul > li > a {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 2px 0;
+}
+
+.page-toc > ul > li > a:hover {
+  color: var(--sc-link-hover);
+  text-decoration: underline;
+}
+
+/* Sub-entries, used for the SAML and OpenID Connect groups. */
+.page-toc ul ul {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 0;
+  border-left: var(--sc-border-width) solid var(--sc-border);
+}
+
+.page-toc ul ul li a {
+  display: block;
+  padding: 3px 0 3px 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--sc-text-muted);
+  text-decoration: none;
+}
+
+.page-toc ul ul li a:hover {
+  color: var(--sc-text);
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------ *
+ * Footer
+ * ------------------------------------------------------------------ */
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 2rem var(--sc-page-inset);
+  border-top: var(--sc-border-width) solid var(--sc-border);
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .footer-columns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 1.5rem;
+  }
+}
+
+.site-footer h2 {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: normal;
+  color: var(--sc-text);
+  margin: 1rem 0;
+}
+
+/* Footer text sits one step below body size, as on the Sandbox pages.
+   Headings stay at 1rem so they still read as headings. */
+.site-footer p,
+.site-footer a {
+  font-size: 0.875rem;
+}
+
+.site-footer p {
+  margin-bottom: 0;
+}
+
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer ul li a {
+  display: inline-block;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.site-footer a {
+  color: var(--sc-text);
+  text-decoration: underline;
+}
+
+.site-footer a:hover {
+  color: var(--sc-link-hover);
+  text-decoration: none;
+}
+
+/* Attribution text on its own line above the logo, both right-aligned. */
+.footer-logo-row {
+  margin-top: 1.1em;
+  text-align: right;
+}
+
+.footer-logo-text {
+  margin-bottom: 0.75rem;
+}
+
+.site-footer .footer-logo-text p {
+  font-size: 0.75rem;
+  color: var(--sc-text-muted);
+}
+
+/* Sized for img/digg_centered.png, which is a taller, more compact mark than
+   the wide DIGG wordmark used on the Sandbox pages. */
+.footer-logo {
+  display: inline-block;
+  height: 56px;
+  width: auto;
+  max-width: 100%;
+}
