@@ -26,10 +26,16 @@
     latest official version (<a href="december-2024/index.html">December 2024</a>), along with the latest updates
     (drafts).
   </p>
+  <p>
+    The section <a href="#federation">The Sweden Connect Federation</a> presents documents needed for joining the
+    federation.
+  </p>
 
   <h4 id="tekniskt-ramverk-för-svensk-e-legitimation">An introduction to the Sweden Connect Framework</h4>
   <p>
-    Overview documents that describes the different parts of the Sweden Connect Framework.</p>
+    Overview documents that describe the different parts of the Sweden Connect Framework.
+    <i>Currently only covers SAML.</i>
+  </p>
   <blockquote>
     <p>
       <a href="latest/00_-_Tekniskt_ramverk_-_Introduktion.html">En introduktion till Sweden Connect Tekniskt
@@ -66,13 +72,13 @@
 
   <h2>Authentication Specifications</h2>
   <p>
-    Below follows a listing of all specifications for user authentication.
+    The specifications for user authentication are listed below.
   </p>
 
   <h4 id="deployment-profile-for-the-swedish-eid-framework">SAML: Deployment Profile for the Swedish eID Framework</h4>
   <p>
     This is the main SAML specification for the Sweden Connect Framework. It defines a SAML profile including metadata,
-    request- and response processing as well as extensions for signature services.
+    request and response processing, as well as extensions for signature services.
   </p>
   <p><strong>Version 1.8</strong></p>
   <blockquote>
@@ -98,8 +104,8 @@
     Swedish OpenID Connect Profile</a> for the Sweden Connect identity federation.
   </p>
   <p>
-    The profile aims to get a baseline security and to facilitate interoperability between relying parties and OpenID
-    providers within the Sweden Connect identity federation.
+    The profile aims to establish a baseline level of security and to facilitate interoperability between Relying
+    Parties and OpenID Providers within the Sweden Connect identity federation.
   </p>
   <p><strong>Version 1.0</strong></p>
   <blockquote>
@@ -113,7 +119,7 @@
   <p>
     This document specifies a SAML attribute profile for the Sweden Connect Framework. The attribute profile defines
     attributes for use within the Sweden Connect federation, and a number of defined attribute sets that may be
-    referenced by other documents as means to specify specific attribute release requirements.
+    referenced by other documents as a means of specifying attribute release requirements.
   </p>
   <p><strong>Version 1.8</strong></p>
   <blockquote>
@@ -261,7 +267,7 @@
 
   <h4>eIDAS Identity Binding</h4>
   <p>
-    Informational document that outlines the process for binding an eIDAS-notified electronic identity (eID) to
+    This informational document outlines the process for binding an eIDAS-notified electronic identity (eID) to
     an individual's personal identification number in the Swedish Population Register.
   </p>
   <blockquote>
@@ -274,7 +280,7 @@
 
   <h2>Signature Specifications</h2>
   <p>
-    Below follows a listing of the specifications we define for Federated Central Signing Services.
+    The specifications for Federated Central Signing Services are listed below.
   </p>
 
   <h4 id="implementation-profile-for-using-oasis-dss-in-central-signing-services">Implementation Profile for using OASIS
@@ -352,7 +358,7 @@
   <h4 id="signature-activation-protocol-for-federated-signing">Signature Activation Protocol for Federated Signing</h4>
   <p>
     This document specifies a Signature Activation Protocol (SAP) and its data elements for implementation of Sole
-    Control Assurance Level 2 (SCAL2) according the European standards prEN 419241 - Trustworthy Systems Supporting
+    Control Assurance Level 2 (SCAL2) according to the European standard prEN 419241, Trustworthy Systems Supporting
     Server Signing.
   </p>
   <p><strong>Version 1.2</strong></p>
@@ -374,21 +380,35 @@
 
   <h4>Signature Validation Tokens</h4>
   <p>
-    The "Signature Validation Token" draft specifications have been replaced with IETF drafts. See <a
+    The "Signature Validation Token" draft specifications have been replaced by IETF drafts. See <a
       href="https://github.com/swedenconnect/IETF-SVT">https://github.com/swedenconnect/IETF-SVT</a>.
   </p>
 
   <hr>
 
+  <a id="federation" name="federation"></a>
   <h3>The Sweden Connect Federation</h3>
+
+  <p>Common federation rules:</p>
+  <ul class="list">
+    <li><a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect – Security Requirements 1.0</a></li>
+  </ul>
   <p>
-    For participants of the Sweden Connect federation, the normative specification
+    For participants of the Sweden Connect SAML federation, the normative specification
     <a href="Tekniska_anslutningsregler.html">Tekniska anslutningsregler för Sweden Connect-federationen</a> should also
-    be read.
+    be read. <i>Currently only in Swedish.</i>
   </p>
   <p>
-    Currently only in Swedish.
+    The following documents apply when joining the Sweden Connect Federation for OpenID Connect (OpenID Federation):
   </p>
+  <ul class="list">
+    <li>
+      <a href="https://docs.swedenconnect.se/federation/oidf-structure.html">Sweden Connect – OpenID Federation Structure</a>
+    </li>
+    <li>
+      <a href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">Sweden Connect – OpenID Connect Metadata Requirements 1.0</a>
+    </li>
+  </ul>
 
   <h3>GitHub</h3>
   <p>
@@ -411,12 +431,12 @@
   <h3 id="feedback-and-questions">Feedback and Questions</h3>
   <p>
     If you have feedback or questions regarding the Technical
-    Framework open an <a href="https://github.com/swedenconnect/technical-framework/issues">Issue</a>.
+    Framework, open an <a href="https://github.com/swedenconnect/technical-framework/issues">Issue</a>.
   </p>
 
   <hr>
 
-  <p>Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All
+  <p>Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All
     Rights Reserved.</p>
 
 </article>

@@ -143,6 +143,18 @@ See https://github.com/swedenconnect/IETF-SVT for the repository that is hosting
 
 ---
 
+## Sweden Connect Federation
+
+In addition to the technical specifications in this repository, the following normative specifications for
+Sweden Connect apply:
+
+- [Sweden Connect – Security Requirements 1.0](https://docs.swedenconnect.se/federation/security-requirements.html)
+- [Sweden Connect – OpenID Federation Structure](https://docs.swedenconnect.se/federation/oidf-structure.html)
+- [Sweden Connect – OpenID Connect Metadata Requirements 1.0](https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html)
+- [Tekniska anslutningsregler för Sweden Connect-federationen](https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html) – SAML only.
+
+---
+
 ## Older versions
 
 Older version of the specifications are stored in the following branches:
@@ -153,8 +165,9 @@ Older version of the specifications are stored in the following branches:
 + [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) - For the March 2017 release
 + [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) - For the June 2018 release
 + [january-2020](https://github.com/swedenconnect/technical-framework/tree/january-2020) - For the January 2020 release
-+ [november-2021](https://github.com/swedenconnect/technical-framework/tree/november-2021) - For the November 2021 release
++ [november-2021](https://github.com/swedenconnect/technical-framework/tree/november-2021) - For the November 2021 release
+
 
 ---
 
-Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2025. All Rights Reserved.
+Copyright &copy; [The Swedish Agency for Digital Government (DIGG)](https://www.digg.se), 2015-2026. All Rights Reserved.
