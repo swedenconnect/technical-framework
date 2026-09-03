@@ -47,6 +47,8 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 3.1. <a href="#client-authentication-request-requirements">Authentication Request Requirements</a></p>
 <p> 3.2. <a href="#client-registration-and-metadata-requirements">Client Registration and Metadata Requirements</a></p>
 </li>
+<li><p><a href="#security-requirements"><strong>Security Requirements</strong></a></p>
+</li>
 <li><p><a href="#references"><strong>References</strong></a></p>
 </li>
 <li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
@@ -183,8 +185,11 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <blockquote>
 <p><strong>Note:</strong> This version of the profile does not specify how client metadata is registered at/distributed to the OpenID Providers of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing client metadata.</p>
 </blockquote>
+<p><a name="security-requirements"></a></p>
+<h2 id="4-security-requirements">4. Security Requirements</h2>
+<p>Entities compliant with this profile MUST adhere to [<a href="#sc-security">SC.Security</a>] as well as Section 7 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>], where the requirements from [<a href="#sc-security">SC.Security</a>] take precedence in case of conflicting requirements.</p>
 <p><a name="references"></a></p>
-<h2 id="4-references">4. References</h2>
+<h2 id="5-references">5. References</h2>
 <p><a name="rfc2119"></a>
 <strong>[RFC2119]</strong></p>
 <blockquote>
@@ -245,6 +250,11 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <blockquote>
 <p><a href="https://www.oidc.se/specifications/oidc-signature-extension-1_1.html">Signature Extension for OpenID Connect - Version 1.1</a>.</p>
 </blockquote>
+<p><a name="sc-security"></a>
+<strong>[SC.Security]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect – Security Requirements 1.0</a>.</p>
+</blockquote>
 <p><a name="sc-oidc-metadata"></a>
 <strong>[SC.OIDC.Metadata]</strong></p>
 <blockquote>
@@ -256,10 +266,13 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <p><a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
 </blockquote>
 <p><a name="changes-between-versions"></a></p>
-<h2 id="5-changes-between-versions">5. Changes between versions</h2>
+<h2 id="6-changes-between-versions">6. Changes between versions</h2>
 <p>Changes between version 1.0 and version 1.1:</p>
 <ul class="list">
-<li>Section 2.4, Signature Extension Support, was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in <a href="https://www.oidc.se/specifications/oidc-signature-extension-1_1.html">Signature Extension for OpenID Connect - Version 1.1</a>.</li>
+<li><p>Section 2.4, Signature Extension Support, was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in <a href="https://www.oidc.se/specifications/oidc-signature-extension-1_1.html">Signature Extension for OpenID Connect - Version 1.1</a>.</p>
+</li>
+<li><p>Section 4, Security Requirements, was added.</p>
+</li>
 </ul>
     </article>
   </body>
