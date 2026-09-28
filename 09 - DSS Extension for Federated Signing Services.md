@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.6 - 2026-08-17 - Draft
+### Version 1.6 - 2026-09-28 - Draft
 
 Registration number: **2019-314**
 
@@ -345,7 +345,7 @@ The following schema fragment defines the `<SignRequestExtension>` element and i
     <xs:element ref="csig:SignService"/>
     <xs:element ref="csig:RequestedSignatureAlgorithm" minOccurs="0"/>
     <xs:element ref="csig:CertRequestProperties" minOccurs="0"/>
-    <xs:element ref="csig:SignMessage" minOccurs="0" maxOccurs="1"/>
+    <xs:element ref="csig:SignMessage" minOccurs="0"/>
     <xs:element ref="csig:OtherRequestInfo" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="Version" type="xs:string" use="optional" default="1.1"/>

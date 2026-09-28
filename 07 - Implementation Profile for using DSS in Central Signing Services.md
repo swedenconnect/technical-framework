@@ -8,14 +8,14 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.6 - 2024-12-04
+### Version 1.7 - 2026-09-28 - Draft
 
 Registration number: **2019-312**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -46,7 +46,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.1.3.2. [Conditions](#conditions)
 
-    2.1.3.3. [Signer](#signer)
+    2.1.3.3. [Signer Identity Attributes](#signer)
 
     2.1.3.4. [IdentityProvider](#identityprovider)
 
@@ -56,17 +56,23 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 
     2.1.3.7. [RequestedSignatureAlgorithm](#requestedsignaturealgorithm)
 
-    2.1.3.8. [SignMessage](#signmessage)
-
-    2.1.3.8.1. [SignMessage Element](#signmessage-element)
-
-    2.1.3.8.2. [Requesting Identity Provider to Display SignMessage](#requesting-identity-provider-to-display-signmessage)
-
+    2.1.3.8. [Sign Message](#signmessage)
+    
     2.1.3.9. [CertRequestProperties](#certrequestproperties)
 
     2.1.3.9.1. [AuthnContextClassRef](#authncontextclassref)
 
     2.1.3.9.2. [RequestedCertAttributes](#requestedcertattributes)
+    
+    2.1.4. [Requesting Authentication at the Identity Provider](#requesting-authentication-at-the-identity-provider)
+
+    2.1.4.1. [Force User Authentication](#force-user-authentication)
+
+    2.1.4.2. [Delivery of Attributes](#delivery-of-attributes)
+
+    2.1.4.3. [Authentication Context Class Reference](#authentication-context-class-reference)
+
+    2.1.4.4. [Requesting Display of Sign Message](#requesting-display-of-sign-message)
 
     2.2. [Sign Responses](#sign-responses)
 
@@ -107,7 +113,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <a name="introduction"></a>
 ## 1. Introduction
 
-This document specifies an implementation profile for exchange of sign
+This document specifies an implementation profile for exchanging sign
 requests and responses using the OASIS DSS protocol \[[DSS](#dss)\], enhanced by
 the DSS Extensions for Federated Central Signing Services \[[DSS-Ext](#dss-ext)\].
 
@@ -117,11 +123,11 @@ defines the transport of these messages using HTTP POST.
 <a name="terminology"></a>
 ### 1.1. Terminology
 
-Term | Defined meaning
---- | ---
-**User** | The entity requested to sign a document.
-**Requesting Service** | The service requesting the signature on a particular document by a particular user.
-**Signing Service** | A centralized service that manages the process to authenticate the user that has been requested to sign a document, and the process to obtain the user’s signature on the requested document.
+| Term | Defined meaning |
+| :--- | :--- |
+| **User**/**Signer** | The entity requested to sign a document. |
+| **Requesting Service** | The service requesting the signature on a particular document by a particular user. |
+| **Signature Service** | A centralized service that manages the process of authenticating the user who has been requested to sign a document, and the process of obtaining the user's signature on the requested document. |
 
 <a name="requirements-notation"></a>
 ### 1.2. Requirements Notation
@@ -188,7 +194,7 @@ Sign requests are carried in a `<dss:SignRequest>` element according to requirem
 
 The `<dss:SignRequest>` element MUST have a `Profile` attribute with the value `http://id.elegnamnden.se/csig/1.1/dss-ext/profile`, which specifies conformance to this implementation profile.
 
-The `<dss:SignRequest>` element MUST have a `RequestID` attribute with a value that uniquely identifies this request. The `RequestID` value MUST be a random generated value with at least 128 bit entropy and a length of at least 20 bytes.
+The `<dss:SignRequest>` element MUST have a `RequestID` attribute with a value that uniquely identifies this request. The `RequestID` value MUST be a randomly generated value with at least 128-bit entropy and a length of at least 20 bytes.
 
 
 <a name="signature-on-sign-requests"></a>
@@ -212,7 +218,7 @@ The `<SignTasks>` element MAY contain one or more `<SignTaskData>` elements, rep
 <a name="dss-extension"></a>
 #### 2.1.3. DSS Extension
 
-The `<dss:OptionalInput>` element of the sign request MUST contain a
+The `<dss:OptionalInputs>` element of the sign request MUST contain a
 `<SignRequestExtension>` element according to requirements and
 conditions of the following subsections.
 
@@ -223,6 +229,10 @@ The `Version` attribute giving the version number of the \[[DSS-Ext](#dss-ext)\]
 SHOULD be set to the version number that is supported by the sender.
 If absent, the default value "1.1" MUST be assumed.
 
+A sender MUST NOT use a version that is higher than what is supported by the receiving Signature Service.
+
+> How the sender knows which versions of the \[[DSS-Ext](#dss-ext)\] specification are supported by a Signature Service is out of scope for this specification. 
+
 <a name="conditions"></a>
 ##### 2.1.3.2. Conditions
 
@@ -230,93 +240,101 @@ A `<saml:Conditions>` element MUST be present. This element MUST NOT
 contain any information in addition to what is defined in section 3.1 of
 \[[DSS-Ext](#dss-ext)\].
 
-If the `<saml:Conditions>` element contains the `NotBefore` and/or `NotOnOrAfter` attributes, the Signature Service consuming these values MAY consider them in its processing. However, a Signature Service MUST have a limitation on the maximum age of received messages, and if `NotOnOrAfter` exceeds this limitation, the `NotOnOrAfter` value MUST be ignored.
+If the `<saml:Conditions>` element contains the `NotBefore` and/or `NotOnOrAfter` attributes, a consuming Signature Service MAY consider them in its processing. However, a Signature Service MUST have a limitation on the maximum age of received messages, and if `NotOnOrAfter` exceeds this limitation, the `NotOnOrAfter` value MUST be ignored.
 
-This specification does not state how long the message age limitation should be. However, it is RECOMMENDED that it does not exceed 3 minutes. 
+This specification does not state how long the message age limitation should be. However, it is RECOMMENDED that it not exceed 3 minutes.
 
 <a name="signer"></a>
-##### 2.1.3.3. Signer
+##### 2.1.3.3. Signer Identity Attributes
 
-The Requesting Service MAY include a `<Signer>` element containing the SAML attributes that 
-are necessary in order to uniquely identify the signer. The present attributes MUST match the attributes
-that are provided for this signer when authenticating the signer using the Identity Provider specified in the `<IdentityProvider>` element.
+The Requesting Service MAY include an element containing the identity attributes that 
+are necessary in order to uniquely identify the Signer (User).
 
-It is RECOMMENDED that a Signature Requester that has authenticated the user before sending a 
-signature request includes relevant SAML attributes in the `<Signer>` element. If this is not done, 
-the identity of the signer needs to be verified after the signature process has completed in order to ensure
-that the authenticated user was the signer.
+The element can be one of the following:
 
-The Signing Service MUST match all attribute values provided in the
-`<Signer>` element with SAML attributes provided for this signer
-subject in a valid assertion obtained from the specified Identity
-Provider.
+- `<SamlAuthenticationAttributes>` - For representing SAML attributes.
 
-If any of the attributes specified in the `<Signer>` element cannot
-be found or matched with a corresponding attribute value from an
-obtained assertion from the specified Identity Provider, the Signing
-Service MUST reject the sign request.  
+- `<OidcAuthenticationAttributes>` - For representing OpenID Connect claims.
+
+- `<OtherAuthenticationAttributes>` - Generic identity attributes. This element is used when an authentication scheme other than SAML or OpenID Connect is employed.
+
+For backwards compatibility a SAML identity may be expressed using the `<Signer>` element as used in versions prior to version 1.6 of the \[[DSS-Ext](#dss-ext)\] specification. If both the Requesting Service and the Signature Service support version 1.6 or later, the `<Signer>` element SHOULD NOT be used.
+
+It is RECOMMENDED that a Requesting Service that has authenticated the User before sending a 
+sign request includes the User's identity attributes in the relevant authentication attributes
+element. If this is not done, the identity of the Signer needs to be verified after the signature process has completed, in order to ensure that the authenticated User is the same individual as the Signer.
+
+The Signature Service MUST match all attribute values provided in the relevant authentication attributes element against the attributes obtained in a valid assertion or token from the specified Identity Provider when authenticating the Signer.
+
+If any of the attributes specified in the relevant authentication attributes element cannot
+be found or matched with a corresponding value from a valid assertion/token obtained from the specified Identity Provider, the Signature Service MUST reject the sign request.
 
 <a name="identityprovider"></a>
 ##### 2.1.3.4. IdentityProvider
 
-This element MUST be present, specifying the SAML entityID of the
-Identity Provider that MUST be used to authenticate the signer. The
-Signing Service MUST NOT generate the requested signature unless the
-signer is successfully authenticated through this Identity Provider.
+The `<IdentityProvider>` element MUST be present, specifying the identifier of the
+Identity Provider that MUST be used to authenticate the Signer. The
+Signature Service MUST NOT generate the requested signature unless the
+Signer is successfully authenticated through this Identity Provider.
+
+Depending on the authentication scheme used, this element contains a SAML entityID,
+an OpenID Connect Issuer identifier, or for other schemes an identifier of the service
+responsible for authenticating users.
 
 <a name="signrequester"></a>
 ##### 2.1.3.5. SignRequester
 
-This element MUST be present, specifying the identity of the Requesting
-Service in the form of its SAML entityID.
+This element MUST be present, specifying the identity of the Requesting Service.
 
 <a name="signservice"></a>
 ##### 2.1.3.6 SignService
 
-This element MUST be present, specifying the SAML entityID of the
-Signing Service that is the target of this sign request.
+This element MUST be present, specifying the identifier of the Signature Service 
+that is the target of this sign request.
 
 <a name="requestedsignaturealgorithm"></a>
 ##### 2.1.3.7. RequestedSignatureAlgorithm
 
 This element MAY be present, specifying a URI that identifies a
-signature algorithm that the Requesting Service prefers to be used when
-generating the requested signature.
+signature algorithm that the Requesting Service prefers for generating
+the requested signature.
 
 When this element is absent, the default signing algorithm is RSA with
-SHA-256, `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+SHA-256 (`http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`).
 
 <a name="signmessage"></a>
-##### 2.1.3.8. SignMessage
+##### 2.1.3.8. Sign Message
 
-<a name="signmessage-element"></a>
-###### 2.1.3.8.1. SignMessage Element
+The `<SignMessage>` element MAY be present to provide information that the Identity
+Provider will display for the User before obtaining the User’s consent to
+sign. 
 
-This element MAY be present to provide information that the Identity
-Provider MAY display for the user before obtaining the user’s consent to
-sign. The message MAY be provided in clear text or in encrypted form.
-The attribute `MustShow` MUST be set to `true` if the Identity Provider is
-required to show this message to the user. When the message is provided
-in encrypted form, the `DisplayEntity` attribute MUST include the entityID
-of the Identity Provider holding the private decryption key. The
+The message MAY be provided in clear text or in encrypted form. However, encrypted
+messages are only supported if the Identity Provider is a SAML IdP. For OpenID Connect, 
+only clear text messages are supported.
+
+When the message is provided in encrypted form, the `DisplayEntity` attribute MUST include the identifier of the Identity Provider holding the private decryption key. The
 encryption key included in the metadata of the identified Identity
 Provider SHOULD be used to encrypt the message.
 
-The message MUST be encoded using UTF-8 and MUST be using one of the
-formats plain text, HTML or markdown. The appropriate MIME type must be
+The attribute `MustShow` MUST be set to `true` if the Identity Provider is
+required to show this message to the User. 
+
+The message MUST be encoded using UTF-8 and MUST use one of the following
+formats: plain text, HTML or Markdown. The appropriate MIME type MUST be
 declared in the `MimeType` attribute.
 
-For messages in HTML format, the message MUST NOT contain tags and
-attributes for each tag other than those listed in the following table:
+For messages in HTML format, the message MUST NOT contain any tags, or
+attributes on those tags, other than those listed in the following table:
 
 | HTML Tags | Type | Allowed attributes |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | h1, h2, h3, h4 | Headings | style |
 | div, span, p | Section | style |
 | table, tr, td | Table | style |
 | b, strong | Highlight | style |
 | i, u, br | Format | &nbsp; |
-| ol, ul, li | List | &nbsp; | 
+| ol, ul, li | List | &nbsp; |
 
 Allowed HTML entities for character replacement SHALL be restricted to
 `amp`, `gt`, `lt`, `quot` and `nbsp` (in the form `&entity-name;`).
@@ -324,26 +342,7 @@ Allowed HTML entities for character replacement SHALL be restricted to
 HTML messages MUST NOT contain any URI references to data outside the
 message and MUST NOT contain any JavaScript in any form.
 
-<a name="requesting-identity-provider-to-display-signmessage"></a>
-###### 2.1.3.8.2. Requesting Identity Provider to Display SignMessage
-
-The means through which the Service Provider requests the Identity
-Provider to display a sign message is defined in section 7.1.1 of “Deployment Profile
-for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\].
-
-In addition to the requirements in section 7.1.1 of \[[SC.SAML.Profile](#sc-saml-profile)\] the 
-Signature Service MUST apply the following process regarding the inclusion of the
-`AuthnContextClassRef` URI to include in the `AuthnRequest` sent to the Identity Provider 
-when authenticating the user for signing:
-
-1. Determine requested LoA (Level of Assurance) by either:
-
-  1. Get the LoA, or LoA:s, from the `AuthnContextClassRef` specified in the sign request as `CertRequestProperties`, or
-  2. if the LoA reference from the sign request is absent then use the default LoA according to the governing policy.
-  
-2. Include the LoA URI(s) from the step above as `RequestedAuthnContext` if supported by the Identity Provider.
-   If none of the LoA:s are supported by the Identity Provider, fail signing and return an error sign response,
-   indicating a request failure (the requested LoA(s) was inconsistent with the specified Identity Provider).
+See also [Section 2.1.4.4](#requesting-display-of-sign-message), [Requesting Display of Sign Message](#requesting-display-of-sign-message).
 
 <a name="certrequestproperties"></a>
 ##### 2.1.3.9. CertRequestProperties
@@ -351,7 +350,9 @@ when authenticating the user for signing:
 This element MAY be present to provide requested properties of generated
 signature certificates according to section 3.1.1 of \[[DSS-Ext](#dss-ext)\].
 
-When the `CertType` attribute is present with a value of `QC/SSCD` the signature service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\], or reject the request.
+When the `CertType` attribute is present with a value of `QC/SSCD` the Signature Service MUST request authentication in accordance with section 7.1.2 of “Deployment Profile for the Swedish eID Framework” \[[SC.SAML.Profile](#sc-saml-profile)\], or reject the request.
+
+> Note: Currently, this applies for SAML only. Using `QC/SSCD` against an OpenID Provider is not supported.
 
 <a name="authncontextclassref"></a>
 ###### 2.1.3.9.1. AuthnContextClassRef
@@ -369,16 +370,15 @@ generated with the requested signature.
 
 The Signature Service MUST NOT generate the requested signature unless
 it can obtain attribute values from an authoritative source for all
-requested attributes that is marked as "required". The Signature service
+requested attributes that is marked as "required". The Signature Service
 SHOULD attempt to provide all "requested" attributes.
 
-The Signing Service MAY use an Attribute Authority as complementary
+The Signature Service MAY use an Attribute Authority as complementary
 source to obtain requested attribute values, as long as the identity
-assertion provided by the specified Identity Provider is sufficient to
+assertion/token provided by the specified Identity Provider is sufficient to
 uniquely identify the signer. The Sign Requester MAY provide one or more
-SAML entityID identifiers of Attribute Authorities in
-`<AttributeAuthority>` elements, which could be used to obtain an
-attribute value for the requested attribute.
+identifiers of Attribute Authorities in `<AttributeAuthority>` elements,
+which could be used to obtain an attribute value for the requested attribute.
 
 It is left to local policy of the Signature Service whether it accepts
 any `DefaultValue` attribute value for any requested attributes as being
@@ -386,8 +386,78 @@ provided by an authoritative source. If a `DefaultValue` is accepted as
 authoritative, it MUST NOT conflict with any attributes received by the
 specified Identity Provider or Attribute Authority when authenticating
 the signer. If the requested attribute is provided by the Identity
-Provider or any Attribute Authority used by the Signing Service, then
+Provider or any Attribute Authority used by the Signature Service, then
 these values MUST be used over the `DefaultValue`.
+
+<a name="requesting-authentication-at-the-identity-provider"></a>
+#### 2.1.4. Requesting Authentication at the Identity Provider
+
+This section declares requirements for how the Signature Service requests
+authentication of the Signer at an external Identity Provider. This provider
+can be a SAML Identity Provider, an OpenID Provider or a service
+supporting a different authentication mechanism.
+
+<a name="force-user-authentication"></a>
+##### 2.1.4.1. Force User Authentication
+
+The authentication request created by the Signature Service MUST indicate
+that the user authentication MUST take place, i.e., re-use of a previous
+authentication is not allowed. For SAML this means that the `ForceAuthn`
+request attribute is set to `TRUE`, and for OpenID Connect this means that
+`prompt` request parameter includes the `login` value.
+
+<a name="delivery-of-attributes"></a>
+##### 2.1.4.2. Delivery of Attributes
+
+As part of the authentication request, the Signature Service MUST request
+delivery of the attributes received in the Signer Identity Attributes, 
+see [Section 2.1.3.3](#signer).
+
+For SAML, this can done by including `RequestedAttribute` elements in the request,
+but also other mechanisms exist, for example, pre-registering certain profiles (entity
+categories) in the SAML metadata.
+
+For OpenID Connect, this is done by including scopes in the authentication request 
+that maps to the requested attributes, or explicitly requesting the attributes using
+the `claims` request parameter.
+
+<a name="authentication-context-class-reference"></a>
+##### 2.1.4.3. Authentication Context Class Reference
+
+The Signature Service MUST apply the following process regarding inclusion of
+a requested authentication context class reference URI in the authentication
+request:
+
+- Determine requested authentication context class reference(s), or Level of
+Assurance (LoA), by reading the URI, or URIs, from the `<AuthnContextClassRef>`
+element(s) specified in the sign request under the `<CertRequestProperties>` element, 
+or, if no such element is present, use a default URI according to a governing policy.
+  
+- Given the URI(s) from the previous step, extract the URI(s) that are supported
+by the Identity Provider. If no URI is supported, the signing process MUST fail and
+an error sign response, indicating a request failure, MUST be returned.
+
+- The URI(s) supported by the Identity Provider is included in the authentication
+request as "requested authentication context class reference".
+    - For a SAML `AuthnRequest`, this means including each URI as a `AuthnContextClassRef` element under the `RequestedAuthnContext` request element.
+    - For OpenID Connect, this means that the `acr` claim with associated values is included as an essential claim in the `claims` request parameter. See Section 5.5.1.1 of \[[OpenID.Core](#openid-core)\]. Note that the request parameter `acr_values` MUST NOT be used.
+
+<a name="requesting-display-of-sign-message"></a>
+##### 2.1.4.4. Requesting Display of Sign Message
+
+If a `<SignMessage>` element is received in a sign request message, the Signature Service SHOULD pass that message along to the Identity Provider that will authenticate the User.
+
+If the received `<SignMessage>` contains an encrypted message and the Identity Provider is not a SAML IdP, the sign request holding this message MUST be rejected.
+
+If the Identity Provider is a SAML IdP, the means through which the Signature Service
+requests the Identity Provider to display a Sign Message is defined in Section 7.1.1 of
+"Deployment Profile for the Swedish eID Framework" \[[SC.SAML.Profile](#sc-saml-profile)\].
+
+If the Identity Provider is an OpenID Provider, the `https://id.oidc.se/param/signRequest` request parameter as specified in Section 3.1 of "Signature Extension for OpenID Connect" \[[OIDC.Sweden.Sign](#oidc-sweden-sign)\] MUST be used to hold the Sign Message. Since the
+`<SignMessage>` element does not support multi-lingual messages, no language tag can be used in the
+OpenID Connect representation of the signature message.
+
+Furthermore, the Signature Service MUST send an authentication request that adheres to Section 4 of \[[OIDC.Sweden.Sign](#oidc-sweden-sign)\].
 
 <a name="sign-responses"></a>
 ### 2.2. Sign Responses
@@ -429,9 +499,9 @@ signature creation.
 
 With the exception above, the response values defined in section 2.6 of the DSS standard, amended by status identifiers defined below<sup>*</sup> SHOULD be used.
 
-| **URL** | **Description** |
-| :--- | :--- | :--- |
-| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the signature request has expired. |
+| **Identifier** | **Description** |
+| :--- | :--- |
+| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the sign request has expired. |
 | `http://id.elegnamnden.se/sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request.
 | `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. |
 | `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. |
@@ -478,18 +548,23 @@ The `<ResponseTime>` element MUST be present in the response.
 ##### 2.2.4.3. Request
 
 The `<Request>` element MAY be present in a response. However, it is RECOMMENDED not to include this
-element since it makes the response message unnecessary large, instead the requester of a sign operation
-is expected to save the request message in its session for later use when processing a response message.
+element since it makes the response message unnecessary large, instead the requester of a sign
+operation is expected to save the request message in its session for later use when processing
+a response message.
 
 <a name="signerassertioninfo"></a>
 ##### 2.2.4.4. SignerAssertionInfo
 
 The `<SignerAssertionInfo>` element MUST be present if the signer
 has been successfully authenticated using the specified Identity
-Provider. The present `<ContextInfo>` child element MUST include an
-`<AssertionRef>` child element. The `<AssertionRef>` child
-element MUST contain the value of the `ID` attribute of the root element
-of the SAML assertion used to authenticate the signer.
+Provider.
+
+If `<SignerAssertionInfo>` includes neither a SAML assertion (`<AttributeStatement>`) nor
+an OIDC ID Token (`<OidcAuthenticationAttributes>`), its `<ContextInfo>` child element 
+MUST include an `<AssertionRef>` child element. The value of the `<AssertionRef>` element
+MUST uniquely identify the assertion or token used to authenticate the signer. For SAML,
+this MUST be the `ID` attribute of the assertion, and for OpenID Connect, this
+MAY be the `jti` claim of the ID Token.
 
 <a name="signaturecertificatechain"></a>
 ##### 2.2.4.5. SignatureCertificateChain
@@ -670,6 +745,14 @@ EidSignResponse | Base64 encoded sign response.
 **[SC.Registry]**
 > [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
+<a name="openid-core"></a>
+**\[OpenID.Core\]**
+> [Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, "OpenID Connect Core 1.0", August 2015] (https://openid.net/specs/openid-connect-core-1_0.html).
+
+<a name="oidc-sweden-sign"></a>
+**\[OIDC.Sweden.Sign\]**
+> [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).
+
 <a name="informative-references"></a>
 ### 4.2. Informative References
 
@@ -679,6 +762,10 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.6 and version 1.7:**
+
+- Updates for introducing OpenID Connect as a possible authentication mechanism.
 
 **Changes between version 1.5 and version 1.6:**
 
