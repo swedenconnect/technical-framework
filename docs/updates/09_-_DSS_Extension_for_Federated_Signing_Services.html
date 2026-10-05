@@ -1,1 +1,1350 @@
-../december-2024/09_-_DSS_Extension_for_Federated_Signing_Services.html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DSS Extension for Federated Central Signing Services</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="dss-extension-for-federated-central-signing-services">DSS Extension for Federated Central Signing Services</h1>
+<h3 id="version-16---2026-09-28---draft">Version 1.6 - 2026-09-28 - Draft</h3>
+<p>Registration number: <strong>2019-314</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#terminology">Terminology</a></p>
+<p> 1.1.1. <a href="#keywords">Keywords</a></p>
+<p> 1.1.2. <a href="#structure">Structure</a></p>
+<p> 1.1.3. <a href="#definitions">Definitions</a></p>
+<p> 1.2. <a href="#schema-organization-and-namespaces">Schema Organization and Namespaces</a></p>
+<p> 1.3. <a href="#common-data-types">Common Data Types</a></p>
+<p> 1.3.1. <a href="#string-values">String values</a></p>
+<p> 1.3.2. <a href="#uri-values">URI Values</a></p>
+<p> 1.3.3. <a href="#time-values">Time Values</a></p>
+<p> 1.3.4. <a href="#mime-types-for-dsstransformeddata">MIME Types for &lt;dss:TransformedData&gt;</a></p>
+</li>
+<li><p><a href="#common-protocol-structures"><strong>Common Protocol Structures</strong></a></p>
+<p> 2.1. <a href="#type-anytype">Type AnyType</a></p>
+</li>
+<li><p><a href="#federated-signing-dss-extensions"><strong>Federated Signing DSS Extensions</strong></a></p>
+<p> 3.1. <a href="#element-signrequestextension">Element &lt;SignRequestExtension&gt;</a></p>
+<p> 3.1.1. <a href="#type-certrequestpropertiestype">Type CertRequestPropertiesType</a></p>
+<p> 3.1.1.1. <a href="#type-requestedattributestype">Type RequestedAttributesType</a></p>
+<p> 3.1.2. <a href="#element-signmessage">Element &lt;SignMessage&gt;</a></p>
+<p> 3.2. <a href="#element-signresponseextension">Element &lt;SignResponseExtension&gt;</a></p>
+<p> 3.2.1. <a href="#type-signerassertioninfotype">Type SignerAssertionInfoType</a></p>
+<p> 3.2.1.1. <a href="#type-contextinfotype">Type ContextInfoType</a></p>
+<p> 3.2.1.2. <a href="#type-assertionstype">Type AssertionsType</a></p>
+<p> 3.2.2. <a href="#type-certificatechaintype">Type CertificateChainType</a></p>
+</li>
+<li><p><a href="#extensions-to-dssinputdocuments-and-dsssignatureobject"><strong>Extensions to &lt;dss:InputDocuments&gt; and &lt;dss:SignatureObject&gt;</strong></a></p>
+<p> 4.1. <a href="#element-signtasks">Element &lt;SignTasks&gt;</a></p>
+<p> 4.1.1. <a href="#element-signtaskdata">Element &lt;SignTaskData&gt;</a></p>
+<p> 4.1.1.1. <a href="#type-adesobjecttype">Type AdESObjectType</a></p>
+</li>
+<li><p><a href="#signing-sign-requests-and-responses"><strong>Signing Sign Requests and Responses</strong></a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<p>Appendix A. <a href="#appendix-a.xml-schema"><strong>XML Schema</strong></a></p>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This specification defines elements that extend the <code>&lt;dss:SignRequest&gt;</code> and <code>&lt;dss:SignResponse&gt;</code> elements of [<a href="#dss">OASIS-DSS</a>].</p>
+<p>One element <code>&lt;SignRequestExtension&gt;</code> is defined for extending signature requests and one element <code>&lt;SignResponseExtension&gt;</code> is defined for extending signature responses. The <code>&lt;SignTasks&gt;</code> element extends the <code>&lt;dss:InputDocuments&gt;</code> element of signature requests and <code>&lt;dss:SignatureObject&gt;</code> element of signature responses.</p>
+<p>These extensions to the DSS protocols provide essential protocol elements in a scenario where:</p>
+<ul class="list">
+<li><p>The user&#39;s signature is requested by a service with which the user has an active session and where this service has authenticated the user using a SAML assertion or an OpenID Connect ID Token.</p>
+</li>
+<li><p>The Service Provider holds the data to be signed.</p>
+</li>
+<li><p>The Central Signature Service is requested to authenticate the user with the same SAML Identity Provider or OpenID Connect Provider that was used to authenticate the user to the Service Provider.</p>
+</li>
+</ul>
+<p>This particular use case is relevant when a user logs in to a service using a federated identity, where the user at some point is required to sign some data such as a tax declaration or payment transaction. The user is forwarded to the Signature Service together with a Sign Request from the Service Provider, specifying the information to be signed together with the conditions for signing. After completed signing, the user is returned to the Service Provider together with a Sign Response from which the Service Provider can assemble a complete signed document, signed by the user.</p>
+<p>This scenario requires more information in both Sign Requests and Sign Responses than the original DSS core standard provides, and it also requires the capability to let the service provider sign the Sign Request.</p>
+<p><a name="terminology"></a></p>
+<h3 id="11-terminology">1.1. Terminology</h3>
+<p><a name="keywords"></a></p>
+<h4 id="111--keywords">1.1.1.  Keywords</h4>
+<p>The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL are to be interpreted as described in [<a href="#rfc2119">RFC 2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify requirements over protocol features and behavior that affect the interoperability and security of implementations.</p>
+<p>When these words are not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="structure"></a></p>
+<h4 id="112-structure">1.1.2. Structure</h4>
+<p>This specification uses the following typographical conventions in text: <code>&lt;ThisSpecifictionElements&gt;</code>, <code>&lt;ns:ForeignElement&gt;</code>, Attribute, <strong>Datatype</strong>, OtherCode.</p>
+<p>Listings of DSS schemas appear like this.</p>
+<p><a name="definitions"></a></p>
+<h4 id="113-definitions">1.1.3. Definitions</h4>
+<p><strong>Signer</strong></p>
+<blockquote>
+<p>The user that signs data at the Signature Service.</p>
+</blockquote>
+<p><strong>Identity Provider</strong></p>
+<blockquote>
+<p>A service that is assigned to authenticate the Signer, typically a SAML Identity Provider or OpenID Provider.</p>
+</blockquote>
+<p><strong>Signature Service</strong></p>
+<blockquote>
+<p>A service that receives Sign Requests and responds with Sign Responses according to this specification.</p>
+</blockquote>
+<p><strong>Service Provider</strong></p>
+<blockquote>
+<p>A service that has identified the Signer through the user&#39;s Identity Provider and requests that the Signer signs data using the Signature Service.</p>
+</blockquote>
+<p><a name="schema-organization-and-namespaces"></a></p>
+<h3 id="12-schema-organization-and-namespaces">1.2. Schema Organization and Namespaces</h3>
+<p>The structures described in this specification are contained in the XML schema for this protocol [<a href="#csig-xsd">Csig-XSD</a>]. All schema listings in the current document are excerpts from the complete XML schema. </p>
+<p>This schema is associated with the following XML namespace:</p>
+<p><code>http://id.elegnamnden.se/csig/1.1/dss-ext/ns</code></p>
+<p>Compliance with this specification requires support of the latest version of the [<a href="#csig-xsd">Csig-XSD</a>] schema which is 1.1.4.</p>
+<p>If a future, non backwards compatible, version of this specification is needed, it will use a
+different namespace.</p>
+<p>Conventional XML namespace prefixes are used in the schema:</p>
+<ul class="list">
+<li><p>The prefix <code>csig</code>: stands for this specification&#39;s XML schema namespace [<a href="#csig-xsd">Csig-XSD</a>].</p>
+</li>
+<li><p>The prefix <code>dss</code>: stands for the DSS core namespace [<a href="#dss">OASIS-DSS</a>].</p>
+</li>
+<li><p>The prefix <code>ds</code>: stands for the W3C XML Signature namespace [<a href="#xmldsig">XMLDSIG</a>].</p>
+</li>
+<li><p>The prefix <code>xs</code>: stands for the W3C XML Schema namespace [<a href="#schema1">Schema1</a>].</p>
+</li>
+<li><p>The prefix <code>saml</code>: stands for the OASIS SAML Schema namespace [<a href="#saml">SAML2.0</a>].</p>
+</li>
+<li><p>The prefix <code>xades</code>: stands for the ETSI XAdES Schema namespace [<a href="#xades">XAdES</a>].</p>
+</li>
+</ul>
+<p>Applications MAY use different namespace prefixes, and MAY use whatever namespace defaulting/scoping conventions they desire, as long as they are compliant with the Namespaces in XML specification [<a href="#xml-ns">XML-ns</a>].</p>
+<p>The following schema fragment defines the XML namespaces and other header information for this specification&#39;s core XML schema:</p>
+<pre class="hljs"><code>&lt;xs:schema xmlns:<span class="hljs-attribute">xs</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> 
+    <span class="hljs-attribute">elementFormDefault</span>=<span class="hljs-string">&quot;qualified&quot;</span>
+    xmlns:<span class="hljs-attribute">ds</span>=<span class="hljs-string">&quot;http://www.w3.org/2000/09/xmldsig#&quot;</span>
+    <span class="hljs-attribute">targetNamespace</span>=<span class="hljs-string">&quot;http://id.elegnamnden.se/csig/1.1/dss-ext/ns&quot;</span>
+    xmlns:<span class="hljs-attribute">saml</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span>
+    xmlns:<span class="hljs-attribute">xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    xmlns:<span class="hljs-attribute">dss</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:dss:1.0:core:schema&quot;</span>
+    xmlns:<span class="hljs-attribute">csig</span>=<span class="hljs-string">&quot;http://id.elegnamnden.se/csig/1.1/dss-ext/ns&quot;</span>&gt;
+    &lt;xs:import <span class="hljs-attribute">namespace</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span>
+        <span class="hljs-attribute">schemaLocation</span>=<span class="hljs-string">&quot;saml-schema-assertion-2.0.xsd&quot;</span>/&gt;</code></pre><p><a name="common-data-types"></a></p>
+<h3 id="13-common-data-types">1.3. Common Data Types</h3>
+<p>The following sections define how to use and interpret common data types that appear throughout the specification.</p>
+<p><a name="string-values"></a></p>
+<h4 id="131-string-values">1.3.1. String values</h4>
+<p>All string values have the type <strong>xs:string</strong>, which is built in to the W3C XML Schema Datatypes specification [<a href="#schema2">Schema2</a>]. Unless otherwise noted in this specification or particular profiles, all strings in this specification MUST consist of at least one non-whitespace character (whitespace is defined in the XML Recommendation [<a href="#xml">XML</a>] Section 2.3).</p>
+<p>Unless otherwise noted in this specification, all elements that have the XML Schema <strong>xs:string</strong> type, or a type derived from that, MUST be compared using an exact binary comparison. In particular, implementations MUST NOT depend on case-insensitive string comparisons, normalization or trimming of whitespace, or conversion of locale-specific formats such as numbers or currency. This requirement is intended to conform to the W3C working group note &quot;Requirements for String
+Identity, Matching, and String Indexing&quot; [<a href="https://www.w3.org/TR/charreq/">W3C-CHAR</a>].</p>
+<p><a name="uri-values"></a></p>
+<h4 id="132-uri-values">1.3.2. URI Values</h4>
+<p>All SAML URI reference values have the type <strong>xs:anyURI</strong>, which is built in to the W3C XML Schema Datatypes specification [<a href="#schema2">Schema2</a>].</p>
+<p>Unless otherwise indicated in this specification, all URI reference values used within defined elements or attributes MUST consist of at least one non-whitespace character, and are REQUIRED to be absolute [<a href="#rfc3986">RFC 3986</a>].</p>
+<p>Note that this specification makes use of URI references as identifiers, such as status codes, format types, attribute and system entity names, etc. In such cases, it is essential that the values be both unique and consistent, such that the same URI is never used at different times to
+represent different underlying information.</p>
+<p><a name="time-values"></a></p>
+<h4 id="133-time-values">1.3.3. Time Values</h4>
+<p>All time values have the type <strong>xs:dateTime</strong>, which is built in to the W3C XML Schema Datatypes specification [<a href="#schema2">Schema2</a>], and MUST be expressed in UTC form, with no time zone component.</p>
+<p>Implementations SHOULD NOT rely on time resolution finer than milliseconds. Implementations MUST NOT generate time instants that specify leap seconds.</p>
+<p><a name="mime-types-for-dsstransformeddata"></a></p>
+<h4 id="134-mime-types-for-dsstransformeddata">1.3.4. MIME Types for &lt;dss:TransformedData&gt;</h4>
+<p>The following MIME type is defined for transformed data included in a <code>&lt;dss:Base64Data&gt;</code> element within a <code>&lt;dss:TransformedData&gt;</code> element in a <code>&lt;dss:SignRequest&gt;</code>.</p>
+<p><strong>application/cms-signed-attributes</strong></p>
+<blockquote>
+<p>This MIME type identifies that the data contained in the <code>&lt;dss:Base64Data&gt;</code> element, is a DER encoded CMS signed attributes structure [<a href="#rfc5652">RFC 5652</a>]. This data is useful when signing a PDF document in cases where the whole PDF document is not included in the request. The signature on a PDF document is generated by signing the hash of a CMS signed attributes structure representing the PDF document to be signed. These signed attributes include data that a Signature Service may want to check before signing, such as the claimed signing time.</p>
+</blockquote>
+<p><a name="common-protocol-structures"></a></p>
+<h2 id="2-common-protocol-structures">2. Common Protocol Structures</h2>
+<p>The following sections describe XML structures and types that are used in multiple places.</p>
+<p><a name="type-anytype"></a></p>
+<h3 id="21-type-anytype">2.1. Type AnyType</h3>
+<p>The <strong>AnyType</strong> complex type allows arbitrary XML element content within an element of this type (see section 3.2.1 Element Content [<a href="#xml">XML</a>]).</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AnyType&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:any</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span></code></pre><p><a name="federated-signing-dss-extensions"></a></p>
+<h2 id="3-federated-signing-dss-extensions">3. Federated Signing DSS Extensions</h2>
+<p>This section defines elements that extend the <code>&lt;dss:SignRequest&gt;</code> and <code>&lt;dss:SignResponse&gt;</code> elements of the DSS Signing Protocol.</p>
+<p><a name="element-signrequestextension"></a></p>
+<h3 id="31-element-signrequestextension">3.1. Element &lt;SignRequestExtension&gt;</h3>
+<p>The <code>&lt;SignRequestExtension&gt;</code> element allows a requesting service to add essential request information to a DSS Sign Request. When present, this element MUST be included in the <code>&lt;dss:OptionalInputs&gt;</code> element of a DSS Sign Request. This element&#39;s <strong>SignRequestExtensionType</strong> complex type includes the following attributes and elements:</p>
+<p><code>Version</code> [Optional] (Default <code>1.1</code>)</p>
+<blockquote>
+<p>The version of this specification supported by the sender. If absent, the version value defaults to &quot;1.1&quot;. </p>
+<p>This attribute provides means for the receiving service (i.e., the Signature Service) to determine the expected semantics of the request based on the protocol version. </p>
+<p>The receiving service MUST use the same version in the resulting response, see <a href="#element-signresponseextension">section 3.2</a>. If the receiving service does not support the requested version, the service MUST refuse to process the request and respond with an error message where <code>&lt;dss:ResultMajor&gt;</code> is set to <code>urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError</code> and <code>&lt;dss:ResultMinor&gt;</code> is set to <code>urn:oasis:names:tc:dss:1.0:resultminor:NotSupported</code>.</p>
+</blockquote>
+<p><code>&lt;RequestTime&gt;</code> [Required]</p>
+<blockquote>
+<p>The time when this request was created.</p>
+</blockquote>
+<p><code>&lt;saml:Conditions&gt;</code> [Required]</p>
+<blockquote>
+<p>This element MUST include the element <code>&lt;saml:AudienceRestriction&gt;</code> which in turn MUST contain one <code>&lt;saml:Audience&gt;</code> element, specifying the return URL for the resulting Sign Response message.</p>
+</blockquote>
+<p><code>&lt;Signer&gt;</code>, <code>&lt;SamlAuthenticationAttributes&gt;</code>, <code>&lt;OidcAuthenticationAttributes&gt;</code>, or <code>&lt;OtherAuthenticationAttributes&gt;</code> [Optional]</p>
+<blockquote>
+<p>The identity of the Signer expressed as a choice between:</p>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><code>Signer</code>/<code>SamlAuthenticationAttributes</code> - a SAML attribute statement holding a sequence of SAML attributes.</li>
+<li><code>OidcAuthenticationAttributes</code> - a set of OpenID Connect claims.</li>
+<li><code>OtherAuthenticationAttributes</code> - an open type that can hold other attribute representations.</li>
+</ul>
+<p>If this element is present, the Signature Service MUST verify that the authenticated identity of the Signer is consistent with the attributes in this element.</p>
+<p><strong>Note</strong>: <code>Signer</code> is the only valid choice for versions prior to 1.6 of this specification. If any other element is used, the <code>Version</code> attribute of the <code>SignRequestExtension</code> element MUST be set to &quot;1.6&quot; or higher. Implementations prior to version 1.6 do not support these elements.</p>
+<p>For versions 1.6 or higher, <code>SamlAuthenticationAttributes</code> is preferred over <code>Signer</code> for representing SAML-authenticated Signers.</p>
+</blockquote>
+<p><code>&lt;IdentityProvider&gt;</code> [Required]</p>
+<blockquote>
+<p>The identifier for the Identity Provider that MUST be used to authenticate the Signer before signing.</p>
+<p>This identifier may be an entityID of a SAML Identity Provider, an Issuer URI of an OpenID Connect Provider, or possibly another type of service.</p>
+<p>The <code>AuthnProfile</code> element (see below) MAY be used to indicate the type of Identity Provider (should it not be known from the deployment&#39;s context).</p>
+<p>The value is specified using the <strong>saml:NameIDType</strong> complex type. If the element represents a SAML Identity Provider, it MUST include a <code>Format</code> attribute with the value <code>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>. If the element represents any other type of identity provider (such as an OpenID Connect Provider), the <code>Format</code> attribute SHOULD be omitted.</p>
+</blockquote>
+<p><code>&lt;AuthnProfile&gt;</code> [Optional]</p>
+<blockquote>
+<p>An opaque string that can be used to inform the Signature Service about specific requirements regarding the user authentication at the given Identity Provider (see above). This specification does not define any possible values or semantics for the element.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> If this element is set, the <code>Version</code> attribute of the <code>SignRequestExtension</code> element MUST be set to &quot;1.4&quot; or higher. Implementations prior to version 1.4 of this specification do not support the element.</p>
+</blockquote>
+<p><code>&lt;SignRequester&gt;</code> [Required]</p>
+<blockquote>
+<p>The identifier for the service that sends this request to the Signature Service. Typically, this is a SAML entityID or an OpenID Connect identifier.</p>
+<p>The value is specified using the <strong>saml:NameIDType</strong> complex type. If the element represents a SAML entity, it MUST include a <code>Format</code> attribute with the value <code>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>. Otherwise, the <code>Format</code> attribute SHOULD be omitted.</p>
+</blockquote>
+<p><code>&lt;SignService&gt;</code> [Required]</p>
+<blockquote>
+<p>The identifier for the service to which this Sign Request is sent, i.e., the Signature Service. This is typically a SAML entityID or an OpenID Connect client identifier.</p>
+</blockquote>
+<blockquote>
+<p>The value is specified using the <strong>saml:NameIDType</strong> complex type. If the element represents a SAML entity, it MUST include a <code>Format</code> attribute with the value <code>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>. Otherwise, the <code>Format</code> attribute SHOULD be omitted.</p>
+</blockquote>
+<p><code>&lt;RequestedSignatureAlgorithm&gt;</code> [Optional]</p>
+<blockquote>
+<p>An identifier of the signature algorithm the requesting service prefers when generating the requested signature.</p>
+</blockquote>
+<p><code>&lt;SignMessage&gt;</code> [Optional]</p>
+<blockquote>
+<p>Optional sign message with information to the Signer about the requested signature.</p>
+</blockquote>
+<p><code>&lt;CertRequestProperties&gt;</code> [Optional]</p>
+<blockquote>
+<p>An optional set of requested properties of the signature certificate that is generated as part of the signature process.</p>
+</blockquote>
+<p><code>&lt;OtherRequestInfo&gt;</code> [Optional]</p>
+<blockquote>
+<p>Any additional inputs to the request extension.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;SignRequestExtension&gt;</code> element and its <strong>SignRequestExtensionType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;SignRequestExtensionType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:RequestTime&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;saml:Conditions&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;Signer&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;saml:AttributeStatementType&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:SamlAuthenticationAttributes&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OidcAuthenticationAttributes&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OtherAuthenticationAttributes&quot;</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:IdentityProvider&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:AuthnProfile&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:SignRequester&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:SignService&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:RequestedSignatureAlgorithm&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:CertRequestProperties&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:SignMessage&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OtherRequestInfo&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;Version&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> use=<span class="hljs-string">&quot;optional&quot;</span> default=<span class="hljs-string">&quot;1.1&quot;</span>/&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="type-certrequestpropertiestype"></a></p>
+<h4 id="311-type-certrequestpropertiestype">3.1.1. Type CertRequestPropertiesType</h4>
+<p>The <strong>CertRequestPropertiesType</strong> complex type is used to specify requested properties of the signature certificate that is associated with the generated signature.</p>
+<p>The <strong>CertRequestPropertiesType</strong> complex type has the following attributes and elements:</p>
+<p><code>CertType</code> [Default &quot;PKC&quot;]</p>
+<blockquote>
+<p>An enumeration of certificate types where &quot;PKC&quot; is the default. The supported values are &quot;PKC&quot;, &quot;QC&quot;, and &quot;QC/SSCD&quot;. &quot;QC&quot; means that the certificate is requested to be a Qualified Certificate according to legal definitions in national law governing the issuer. &quot;QC/SSCD&quot; means a Qualified Certificate where the private key is declared to be residing within a Secure Signature Creation Device according to national law. &quot;PKC&quot; (Public Key Certificate) means a certificate that is not a Qualified Certificate.</p>
+</blockquote>
+<p><code>&lt;saml:AuthnContextClassRef&gt;</code> [Zero or More]</p>
+<blockquote>
+<p>Identifier(s) (URIs) identifying the requested authentication context class reference (level of assurance) that authentication of the signature certificate subject MUST comply with in order to complete signing and certificate issuance.</p>
+<p>A Signature Service MUST NOT issue signature certificates or generate the requested signature unless the authentication process used to authenticate the requested Signer meets one of the requested values expressed in this element. </p>
+<p>If this element is absent, the locally configured policy of the Signature Service is assumed. This can either mean that the Signature Service includes one or more locally configured identifiers in the authentication request issued to authenticate the user, or that an authentication request with no requirements for requested authentication context class reference is used.</p>
+<p><strong>Note:</strong> If more than one identifier is given, the <code>Version</code> attribute of the <code>SignRequestExtension</code> element MUST be set to &quot;1.4&quot; or higher. Implementations prior to version 1.4 of this specification assume that this element may only contain one identifier.</p>
+</blockquote>
+<p><code>&lt;RequestedCertAttributes&gt;</code> [Optional]</p>
+<blockquote>
+<p>An optional set of requested attributes that the requesting service prefers or requires to be present in the generated signing certificate.</p>
+<p>The element provides mappings between identity attributes from the user identity token and certificate entries.</p>
+</blockquote>
+<p><code>&lt;OtherProperties&gt;</code> [Optional]</p>
+<blockquote>
+<p>Other requested properties of the signature certificate.</p>
+</blockquote>
+<p>The following schema fragment defines the <strong>CertRequestPropertiesType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;CertRequestPropertiesType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;saml:AuthnContextClassRef&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:RequestedCertAttributes&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OtherProperties&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span> /&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> default=<span class="hljs-string">&quot;PKC&quot;</span> name=<span class="hljs-string">&quot;CertType&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;PKC&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;QC&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;QC/SSCD&quot;</span>/&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;RequestedCertAttributes&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:RequestedAttributesType&quot;</span> /&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;OtherProperties&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span> /&gt;</code></pre><p><a name="type-requestedattributestype"></a></p>
+<h5 id="3111-type-requestedattributestype">3.1.1.1. Type RequestedAttributesType</h5>
+<p>The <strong>RequestedAttributesType</strong> complex type is used to represent requests for subject attributes in a signer certificate that is associated with the Signer of the generated signature as a result of the Sign Request. </p>
+<p>This protocol is designed to accommodate the scenario where the Signature Service generates the signer key and the signer certificate at the time of signing and where it collects the user&#39;s attributes from an identity token (SAML assertion or OpenID Connect ID Token). </p>
+<blockquote>
+<p>This element can also be used as a requirement for attributes in existing certificates, where the Signature Service can determine if the existing signing certificate matches the requirements of the requesting service.</p>
+</blockquote>
+<p>The <strong>RequestedAttributesType</strong> has the following element:</p>
+<p><code>&lt;RequestedCertAttribute&gt;</code> [One or More]</p>
+<blockquote>
+<p>Information of type <strong>MappedAttributeType</strong> about a requested
+certificate attribute.</p>
+</blockquote>
+<p>The following schema fragment defines the <strong>RequestedAttributesType</strong>
+complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;RequestedAttributesType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;RequestedCertAttribute&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:MappedAttributeType&quot;</span> 
+      maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span> minOccurs=<span class="hljs-string">&quot;1&quot;</span> /&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p>The <strong>MappedAttributeType</strong> complex type has the following elements and
+attributes:</p>
+<p><code>CertAttributeRef</code> [Required]</p>
+<blockquote>
+<p>A reference to the certificate attribute or name type where the requester wants to store this attribute value. The information in this attribute depends on the selected <code>CertNameType</code> attribute value.</p>
+<p>If the <code>CertNameType</code> is <code>rdn</code> or <code>sda</code>, then this attribute MUST contain a string representation of an object identifier (OID). If the <code>CertNameType</code> is <code>san</code> (Subject Alternative Name) and the target name is a GeneralName, then this attribute MUST hold a string representation of the tag value of the target GeneralName type, e.g. &quot;1&quot; for rfc822Name (e-mail) or &quot;2&quot; for dNSName. If the <code>CertNameType</code> is <code>san</code> and the target name form is an OtherName, then this attribute value MUST include a string representation of the object identifier of the target OtherName form.</p>
+<p>Representation of an OID as a string in this attribute MUST consist of a sequence of integers delimited by a dot. This string MUST NOT contain white space or line breaks. Example: &quot;2.5.4.32&quot;.</p>
+</blockquote>
+<p><code>CertNameType</code> [Optional] (Default &quot;rdn&quot;)</p>
+<blockquote>
+<p>An enumeration of the target name form for storing the associated attribute value in the certificate. The available values are:</p>
+<ul class="list">
+<li><code>rdn</code> – for storing the attribute value as an attribute in a Relative Distinguished Name in the subject field of the certificate,</li>
+<li><code>san</code> – for storing the attribute value in a Subject Alternative Name extension, and</li>
+<li><code>sda</code> – for storing the attribute value in a Subject Directory Attribute extension.</li>
+</ul>
+<p>The default value for this attribute is <code>rdn</code>.</p>
+</blockquote>
+<p><code>FriendlyName</code> [Optional]</p>
+<blockquote>
+<p>An optional friendly name of the subject attribute, e.g. &quot;givenName&quot;.</p>
+<p>Note that this name does not need to map to any particular naming convention and its value MUST NOT be used by the Signature Service for attribute type mapping. This name is present for display purposes only.</p>
+</blockquote>
+<p><code>DefaultValue</code> [Optional]</p>
+<blockquote>
+<p>An optional default value for the requested attribute. This value MAY be used by the Signature Service if no authoritative value for the attribute can be obtained when the Signature Service authenticates the user. The value MUST NOT be used by the Signature Service unless this value is consistent with a defined policy at the Signature Service. </p>
+<p>A typical valid use of this attribute is to hold a default country name attribute value that matches a set of allowed country name values. By accepting the default attribute value provided in this attribute, the Signature Service accepts the requesting service as an authoritative source for this particular requested attribute.</p>
+</blockquote>
+<p><code>Required</code> [Optional] (Default <code>false</code>)</p>
+<blockquote>
+<p>If this attribute is set to true, the Signature Service MUST ensure that either an authoritative value for the attribute can be obtained from the user authentication, or that an acceptable default value exists, or else the Signature Service MUST NOT generate the requested certificate.</p>
+</blockquote>
+<p><code>&lt;AttributeAuthority&gt;</code> [Zero or More]</p>
+<blockquote>
+<p>Element holding an identity of an attribute provider that MAY be used to obtain an attribute value for the requested attribute. </p>
+<p>If this authority is a SAML Attribute Authority, the value MUST be the entityID of the Attribute Authority and MUST include a <code>Format</code> attribute with the value <code>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>. For other types of attribute providers the <code>Format</code> attribute SHOULD NOT be present.</p>
+</blockquote>
+<p><code>&lt;AttributeName&gt;</code> [Zero or More]</p>
+<blockquote>
+<p>Element of type <strong>PreferredAttributeNameType</strong> complex type holding a name of a subject attribute/claim that is allowed to provide the content value for the requested certificate attribute.</p>
+<p>For versions prior to 1.6 of this specification, the <code>SamlAttributeName</code> element (see below) is used. For backwards-compatibility reasons, a Signature Service supporting version 1.6 and later of this specification MUST also accept the <code>SamlAttributeName</code> element. </p>
+<p>If the <code>AttributeName</code> choice is set, the <code>Version</code> attribute of the <code>SignRequestExtension</code> element MUST be set to &quot;1.6&quot; or higher. </p>
+</blockquote>
+<p>The following schema fragment defines the <strong>MappedAttributeType</strong>
+complex type:</p>
+<pre class="hljs"><code>  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;MappedAttributeType&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AttributeAuthority&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span>
+                  minOccurs=<span class="hljs-string">&quot;0&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;SamlAttributeName&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:PreferredSAMLAttributeNameType&quot;</span>
+                    minOccurs=<span class="hljs-string">&quot;0&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AttributeName&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:PreferredAttributeNameType&quot;</span>
+                    minOccurs=<span class="hljs-string">&quot;0&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;CertAttributeRef&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> use=<span class="hljs-string">&quot;required&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;CertNameType&quot;</span> default=<span class="hljs-string">&quot;rdn&quot;</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+          &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;rdn&quot;</span>/&gt;
+          &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;san&quot;</span>/&gt;
+          &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;sda&quot;</span>/&gt;
+        &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span>&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;FriendlyName&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;DefaultValue&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;Required&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:boolean&quot;</span> default=<span class="hljs-string">&quot;false&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p>The <strong>PreferredAttributeNameType</strong> complex type holds a string value of an attribute/claim name. This attribute/claim name SHALL be mapped against attribute/claim names in an authentication token (SAML Assertion or OpenID Connect ID Token) that is used to authenticate the Signer.</p>
+<p>The <strong>PreferredAttributeNameType</strong> complex type has the following attributes:</p>
+<p><code>Order</code> [Optional] (Default 0)</p>
+<blockquote>
+<p>An integer specifying the order of preference regarding this attribute. If more than one attribute is listed, the attribute that is present in the authentication token (e.g., a SAML assertion or an OIDC ID Token) and has the lowest Order value SHALL be used.</p>
+<p>Attributes with an absent Order attribute SHALL be treated as having an Order value of 0. Multiple attributes with identical Order values SHALL be treated as having equal priority.</p>
+</blockquote>
+<p><code>AuthnProtocol</code> [Optional] (Default &quot;saml&quot;)</p>
+<blockquote>
+<p>Tells which type of attribute is represented: &quot;saml&quot;, &quot;oidc&quot;, or a custom value.</p>
+<p>This attribute MAY be used when a Signature Service supports multiple authentication protocols.</p>
+</blockquote>
+<p>The following schema fragment defines the <strong>PreferredAttributeNameType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;PreferredAttributeNameType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;Order&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:int&quot;</span> default=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;AuthnProtocol&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AuthnProtocolType&quot;</span> default=<span class="hljs-string">&quot;saml&quot;</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:extension</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleContent</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span> name=<span class="hljs-string">&quot;AuthnProtocolType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:union</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;saml&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;oidc&quot;</span>/&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:union</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;</code></pre><p><a name="element-signmessage"></a></p>
+<h4 id="312-element-signmessage">3.1.2. Element &lt;SignMessage&gt;</h4>
+<p>The <code>&lt;SignMessage&gt;</code> element holds a message, to be displayed to the Signer, with information about what is being signed.</p>
+<p>The Sign Message is provided either in plain text using the <code>&lt;Message&gt;</code> child element or as an encrypted message using the <code>&lt;EncryptedMessage&gt;</code> child element. This element&#39;s <strong>SignMessageType</strong> complex type includes the following attributes and elements:</p>
+<p><code>MustShow</code> [Optional] (Default <code>false</code>)</p>
+<blockquote>
+<p>When this attribute is set to <code>true</code>, the requested signature MUST NOT be created unless this message has been displayed and accepted by the Signer. The default is <code>false</code>.</p>
+</blockquote>
+<p><code>DisplayEntity</code> [Optional]</p>
+<blockquote>
+<p>The identifier of the entity responsible for displaying the Sign Message to the Signer. When the Sign Message is encrypted, this entity is also the holder of the private decryption key necessary to decrypt the Sign Message.</p>
+</blockquote>
+<p><code>MimeType</code> [Optional] (Default <code>text</code>)</p>
+<blockquote>
+<p>The MIME type defining the message format. This is an enumeration of the valid attribute values <code>text</code> (plain text), <code>text/html</code> (html) or <code>text/markdown</code> (markdown).</p>
+<p>This specification does not specify any particular restrictions on the provided message, but it is RECOMMENDED that Sign Message content is restricted to a limited set of valid tags and attributes, and that the display entity performs filtering to enforce these restrictions before displaying the message. The means through which parties agree on such restrictions are outside the scope of this specification, but one valid option to communicate such restrictions could be through federation metadata.</p>
+</blockquote>
+<p><code>&lt;Message&gt;</code> [Choice]</p>
+<blockquote>
+<p>The Base64-encoded Sign Message in unencrypted form. The message MUST be UTF-8 encoded prior to Base64 encoding.</p>
+</blockquote>
+<p><code>&lt;EncryptedMessage&gt;</code> [Choice]</p>
+<blockquote>
+<p>An encrypted <code>&lt;Message&gt;</code> element. </p>
+</blockquote>
+<blockquote>
+<p>Either a <code>&lt;Message&gt;</code> or an <code>&lt;EncryptedMessage&gt;</code> element MUST be present.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;SignMessage&gt;</code> element and the <strong>SignMessageType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;SignMessageType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:Message&quot;</span> /&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:EncryptedMessage&quot;</span> /&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;MustShow&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:boolean&quot;</span> default=<span class="hljs-string">&quot;false&quot;</span> /&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;DisplayEntity&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:anyURI&quot;</span> /&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;MimeType&quot;</span> default=<span class="hljs-string">&quot;text&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;text/html&quot;</span> /&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;text&quot;</span> /&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;text/markdown&quot;</span> /&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:anyAttribute</span> namespace=<span class="hljs-string">&quot;##other&quot;</span> processContents=<span class="hljs-string">&quot;lax&quot;</span> /&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;Message&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;EncryptedMessage&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;saml:EncryptedElementType&quot;</span>/&gt;</code></pre><p><a name="element-signresponseextension"></a></p>
+<h3 id="32-element-signresponseextension">3.2. Element &lt;SignResponseExtension&gt;</h3>
+<p>The <code>&lt;SignResponseExtension&gt;</code> element is an extension that allows a Signature Service to add essential information to the Sign Response. When present, this element MUST be included in the <code>&lt;dss:OptionalOutputs&gt;</code> element in a <code>&lt;dss:SignResponse&gt;</code> element.</p>
+<p>This element&#39;s <strong>SignResponseExtensionType</strong> complex type includes the following attributes and elements:</p>
+<p><code>Version</code> [Optional] (Default <code>1.1</code>)</p>
+<blockquote>
+<p>The version of this specification under which the response message was produced. This attribute provides means for the receiving service to determine the expected semantics of the response based on the protocol version.</p>
+<p>If absent, the version value defaults to &quot;1.1&quot;. </p>
+<p><strong>Note:</strong> The sender (Signature Service) MUST use the same version number as received in the <code>Version</code> attribute of the <code>SignRequestExtension</code> (see <a href="#element-signrequestextension">section 3.1</a>).</p>
+</blockquote>
+<p><code>&lt;ResponseTime&gt;</code> [Required]</p>
+<blockquote>
+<p>The time when the Sign Response was created.</p>
+</blockquote>
+<p><code>&lt;Request&gt;</code> [Optional]</p>
+<blockquote>
+<p>A Base64-encoded signed <code>&lt;dss:SignRequest&gt;</code> element that contains the request related to this Sign Response. This element MAY be present if signing was successful.</p>
+</blockquote>
+<p><code>&lt;SignerAssertionInfo&gt;</code> [Optional]</p>
+<blockquote>
+<p>An element of type <strong>SignerAssertionInfoType</strong> holding information about how the Signer was authenticated by the Signature Service, as well as the subject attribute values from the token authenticating the Signer that were incorporated into the signer certificate.</p>
+<p>This element MUST be present if signing was successful.</p>
+</blockquote>
+<p><code>&lt;SignatureCertificateChain&gt;</code> [Optional]</p>
+<blockquote>
+<p>An element of type <strong>CertificateChainType</strong> holding the signer certificate as well as other certificates that may be used to validate the signature. This element MUST be present if signing was successful and MUST contain all certificates that are necessary to compile a complete and functional signed document.</p>
+<p>The certificates MUST be provided in sequence, with the signer certificate first, followed by any CA certificates that can be used to verify the previous certificate in the sequence, ending with a root CA certificate.</p>
+</blockquote>
+<p><code>&lt;OtherResponseInfo&gt;</code> [Optional]</p>
+<blockquote>
+<p>Optional Sign Response elements of type <strong>AnyType</strong>.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;SignResponseExtension&gt;</code> element and the <strong>SignResponseExtensionType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;xs:element <span class="hljs-type">name</span>=&quot;SignResponseExtension&quot; <span class="hljs-keyword">type</span>=&quot;csig:SignResponseExtensionType&quot; /&gt;
+
+&lt;xs:complexType <span class="hljs-type">name</span>=&quot;SignResponseExtensionType&quot;&gt;
+  &lt;xs:<span class="hljs-keyword">sequence</span>&gt;
+    &lt;xs:element <span class="hljs-keyword">ref</span>=&quot;csig:ResponseTime&quot;/&gt;
+    &lt;xs:element <span class="hljs-keyword">ref</span>=&quot;csig:Request&quot; minOccurs=&quot;0&quot;/&gt;
+    &lt;xs:element <span class="hljs-keyword">ref</span>=&quot;csig:SignerAssertionInfo&quot; minOccurs=&quot;0&quot;/&gt;
+    &lt;xs:element <span class="hljs-keyword">ref</span>=&quot;csig:SignatureCertificateChain&quot; minOccurs=&quot;0&quot;/&gt;
+    &lt;xs:element <span class="hljs-keyword">ref</span>=&quot;csig:OtherResponseInfo&quot; minOccurs=&quot;0&quot;/&gt;
+  &lt;/xs:<span class="hljs-keyword">sequence</span>&gt;
+  &lt;xs:<span class="hljs-keyword">attribute</span> <span class="hljs-type">name</span>=&quot;Version&quot; <span class="hljs-keyword">type</span>=&quot;xs:string&quot; default=&quot;1.1&quot;/&gt;
+&lt;/xs:complexType&gt;
+
+&lt;xs:element <span class="hljs-type">name</span>=&quot;ResponseTime&quot; <span class="hljs-keyword">type</span>=&quot;xs:dateTime&quot;/&gt;
+&lt;xs:element <span class="hljs-type">name</span>=&quot;Request&quot; <span class="hljs-keyword">type</span>=&quot;xs:base64Binary&quot;/&gt;
+&lt;xs:element <span class="hljs-type">name</span>=&quot;SignerAssertionInfo&quot; <span class="hljs-keyword">type</span>=&quot;csig:SignerAssertionInfoType&quot;/&gt;
+&lt;xs:element <span class="hljs-type">name</span>=&quot;SignatureCertificateChain&quot; <span class="hljs-keyword">type</span>=&quot;csig:CertificateChainType&quot;/&gt;
+&lt;xs:element <span class="hljs-type">name</span>=&quot;OtherResponseInfo&quot; <span class="hljs-keyword">type</span>=&quot;csig:AnyType&quot;/&gt;</code></pre><p><a name="type-signerassertioninfotype"></a></p>
+<h4 id="321-type-signerassertioninfotype">3.2.1. Type SignerAssertionInfoType</h4>
+<p>The <strong>SignerAssertionInfoType</strong> complex type has the following elements and attributes:</p>
+<p><code>AuthnProtocol</code> [Optional] (Default &quot;saml&quot;)</p>
+<blockquote>
+<p>The authentication protocol used to authenticate the Signer. For backwards compatibility, the default is &quot;saml&quot;. If any other authentication protocol was used, this attribute MUST be explicitly set (for versions 1.6 or higher).</p>
+</blockquote>
+<p><code>&lt;ContextInfo&gt;</code> [Required]</p>
+<blockquote>
+<p>This element of type <strong>ContextInfoType</strong> holds information about the authentication context related to Signer authentication through an authentication token (SAML assertion or OpenID Connect ID Token). The contents of this element MUST correspond to the <code>AuthnProtocol</code> attribute.</p>
+</blockquote>
+<p><code>&lt;saml:AttributeStatement&gt;</code>, <code>&lt;csig:OidcAuthenticationAttributes&gt;</code> or <code>&lt;csig:OtherAuthenticationAttributes&gt;</code> [Required]</p>
+<blockquote>
+<p>Contains subject attributes obtained from the authentication of the Signer. Depending on the authentication protocol used to authenticate the Signer (see <code>AuthnProtocol</code> above), <code>&lt;saml:AttributeStatement&gt;</code> is used to represent SAML attributes from a SAML authentication, <code>&lt;csig:OidcAuthenticationAttributes&gt;</code> is used to represent OpenID Connect claims from an OpenID Connect authentication, and if an other authentication protocol was used, <code>&lt;csig:OtherAuthenticationAttributes&gt;</code> is set.</p>
+<p>For integrity reasons, it is RECOMMENDED that this element only provides information about attribute values that maps to subject identity information in the Signer&#39;s certificate.</p>
+</blockquote>
+<p><code>&lt;Assertions&gt;</code> or <code>&lt;SamlAssertions&gt;</code> [Optional]</p>
+<blockquote>
+<p>Any number of relevant assertions that were used for authenticating the Signer and the Signer&#39;s identity attributes at the Signature Service.</p>
+<p>Deployments according to version 1.6 and higher of this specification SHOULD use the Assertions choice that supports any type of assertion (depending on the authentication protocol). The <code>SamlAssertions</code> choice is for backwards compatibility (versions prior to 1.6) and supports only SAML assertions.</p>
+</blockquote>
+<p>The following schema fragment defines the <strong>SignerAssertionInfoType</strong>
+complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;SignerAssertionInfoType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:ContextInfo&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;saml:AttributeStatement&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OidcAuthenticationAttributes&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OtherAuthenticationAttributes&quot;</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;    
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;Assertions&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AssertionsType&quot;</span>/&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:SamlAssertions&quot;</span>/&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;AuthnProtocol&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AuthnProtocolType&quot;</span> default=<span class="hljs-string">&quot;saml&quot;</span>/&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;ContextInfo&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:ContextInfoType&quot;</span>/&gt;</code></pre><p><a name="type-contextinfotype"></a></p>
+<h5 id="3211-type-contextinfotype">3.2.1.1. Type ContextInfoType</h5>
+<p>The <strong>ContextInfoType</strong> complex type has the following elements:</p>
+<p><code>&lt;IdentityProvider&gt;</code>[Required]</p>
+<blockquote>
+<p>The identifier of the Identity Provider that authenticated the Signer to the Signature Service.</p>
+<p>If the element represents a SAML Identity Provider, it MUST include a <code>Format</code> attribute with the value <code>urn:oasis:names:tc:SAML:2.0:nameid-format:entity</code>. If the element represents any other type of identity provider (such as an OpenID Connect Provider), the <code>Format</code> attribute SHOULD be omitted.</p>
+</blockquote>
+<p><code>&lt;AuthenticationInstant&gt;</code> [Required]</p>
+<blockquote>
+<p>The time when the Signature Service authenticated the Signer.</p>
+</blockquote>
+<p><code>&lt;saml:AuthnContextClassRef&gt;</code> [Required]</p>
+<blockquote>
+<p>A URI reference to the authentication context class under which the authentication was made.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> This type is used also for OpenID Connect.</p>
+</blockquote>
+<p><code>&lt;ServiceID&gt;</code> [Optional]</p>
+<blockquote>
+<p>An arbitrary identifier of the instance of the Signature Service that authenticated the Signer.</p>
+</blockquote>
+<p><code>&lt;AuthType&gt;</code> [Optional]</p>
+<blockquote>
+<p>An arbitrary identifier of the service used by the Signature Service to authenticate the Signer.</p>
+<p>The content of the element is not specified by this specification.</p>
+</blockquote>
+<p><code>&lt;AssertionRef&gt;</code> [Optional]</p>
+<blockquote>
+<p>A reference to the assertion/token used to identify the Signer. Depending on the authentication protocol used, this reference MAY be the ID attribute of a SAML assertion or a <code>jti</code> claim of an OpenID Connect ID Token, but it MAY also be any other reference that can be used to locate and identify the authentication assertion/token.</p>
+</blockquote>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;ContextInfoType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;IdentityProvider&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AuthenticationInstant&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:dateTime&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;saml:AuthnContextClassRef&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;ServiceID&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AuthType&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AssertionRef&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="type-assertionstype"></a></p>
+<h5 id="3212-type-assertionstype">3.2.1.2. Type AssertionsType</h5>
+<p>The <strong>AssertionsType</strong> holds a collection of assertions or tokens that were used to authenticate the Signer. Each entry is one of: </p>
+<ul class="list">
+<li>a SAML assertion (SamlAssertion), </li>
+<li>an OpenID Connect ID Token (OidcIdToken),</li>
+<li>an OpenID Connect UserInfo response (OidcUserInfoResponse),</li>
+<li>or any other assertion or token represented by an element from a foreign namespace.</li>
+</ul>
+<p>Assertions/tokens stored in this element MUST retain their original canonical format so that any signature on the assertion can be validated.</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;AssertionsType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;SamlAssertion&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;OidcIdToken&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:EncodedJwtType&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;OidcUserInfoResponse&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:EncodedJwtType&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:any</span> namespace=<span class="hljs-string">&quot;##other&quot;</span> processContents=<span class="hljs-string">&quot;lax&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:choice</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span> name=<span class="hljs-string">&quot;EncodedJwtType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;</code></pre><p><a name="type-certificatechaintype"></a></p>
+<h4 id="322-type-certificatechaintype">3.2.2. Type CertificateChainType</h4>
+<p>This complex type can be used to hold a sequence of X.509 certificates. Certificates MUST be provided in sequence, with the end-entity certificate first, followed by any CA certificates that can be used to verify the previous certificate in the sequence, ending with a self-signed root certificate.</p>
+<p>The <strong>CertificateChainType</strong> complex type has the following elements:</p>
+<p><code>&lt;X509Certificate&gt;</code> [One or More]</p>
+<blockquote>
+<p>An X.509 certificate [<a href="#rfc5280">RFC 5280</a>] that is part of a certificate chain that can be used to verify the generated signature. The certificate SHALL be represented as a base64Binary of the DER-encoded certificate.</p>
+</blockquote>
+<p>The following schema fragment defines the <strong>CertificateChainType</strong>
+complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;CertificateChainType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;X509Certificate&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="extensions-to-dssinputdocuments-and-dsssignatureobject"></a></p>
+<h2 id="4-extensions-to-dssinputdocuments-and-dsssignatureobject">4. Extensions to &lt;dss:InputDocuments&gt; and &lt;dss:SignatureObject&gt;</h2>
+<p>This section defines elements that extend the
+<code>&lt;dss:InputDocuments&gt;</code> element of DSS Sign Requests and the
+<code>&lt;dss:SignatureObject&gt;</code> element of DSS Sign Responses by inclusion
+in their respective <code>&lt;dss:Other&gt;</code> element.</p>
+<p><a name="element-signtasks"></a></p>
+<h3 id="41-element-signtasks">4.1. Element &lt;SignTasks&gt;</h3>
+<p>The <code>&lt;SignTasks&gt;</code> element, when present, MUST appear either in the
+<code>&lt;dss:Other&gt;</code> element of the <code>&lt;dss:InputDocuments&gt;</code> element of a
+Sign Request or in the <code>&lt;dss:Other&gt;</code> element of the
+<code>&lt;dss:SignatureObject&gt;</code> element of a Sign Response.</p>
+<p>This element holds information about sign tasks that are requested in a
+Sign Request and returned in a Sign Response. If information about a
+sign task is provided using this element in a Sign Request, the
+corresponding signature result data MUST also be provided using this
+element in the Sign Response.</p>
+<p>This element&#39;s <strong>SignTasksType</strong> complex type includes the following elements:</p>
+<p><code>&lt;SignTaskData&gt;</code> [One or More]</p>
+<blockquote>
+<p>Input and output data associated with a sign task. A request MAY
+contain several instances of this element. When multiple instances of
+this element are present in the request, this means that the Signature
+Service is requested to generate multiple signatures (one for each
+<code>&lt;SignTaskData&gt;</code> element) using the same signing key and signature
+certificate. This allows batch signing of several different documents
+in the same signing instance or creation of multiple signatures on the
+same document such as signing XML content of a PDF document with an
+XML signature, while signing the rest of the document with a PDF
+signature.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;SignTasks&gt;</code> element and
+its <strong>SignTasksType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;SignTasks&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:SignTasksType&quot;</span>/&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;SignTasksType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:SignTaskData&quot;</span> maxOccurs=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;SignTaskData&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:SignTaskDataType&quot;</span>/&gt;</code></pre><p><a name="element-signtaskdata"></a></p>
+<h4 id="411-element-signtaskdata">4.1.1. Element &lt;SignTaskData&gt;</h4>
+<p>When present in a Sign Request, this element provides input data to a
+signature generation process. When present in a Sign Response, this
+element provides the corresponding signature result data. When a request
+provides input data using this type of element, an element of this
+type MUST also be used to return the corresponding signature result
+data.</p>
+<p>This element&#39;s <strong>SignTaskDataType</strong> complex type includes the following
+attributes and elements:</p>
+<p><code>SignTaskId</code> [Optional]</p>
+<blockquote>
+<p>An identifier of the signature task that is represented by this
+element. If the request contains multiple instances of
+<code>&lt;SignTaskData&gt;</code> representing separate sign tasks, each
+instance of the element MUST have a <code>SignTaskId</code> attribute value that
+is unique among all sign tasks in the Sign Request. When this
+attribute is present, the same attribute value MUST be returned in the
+corresponding <code>&lt;SignTaskData&gt;</code> element in the response that holds
+corresponding signature result data.</p>
+</blockquote>
+<p><code>SigType</code> [Required]</p>
+<blockquote>
+<p>Enumerated identifier of the type of signature format the
+canonicalized signed information octets in the <code>&lt;ToBeSignedBytes&gt;</code>
+element are associated with. This MUST be one of the enumerated values
+&quot;XML&quot;, &quot;PDF&quot;, &quot;CMS&quot; or &quot;ASiC&quot;.</p>
+</blockquote>
+<p><code>AdESType</code> [Optional]</p>
+<blockquote>
+<p>Specifies the type of AdES signature. &quot;BES&quot; means that the signing
+certificate hash must be covered by the signature. &quot;EPES&quot; means that the
+signing certificate hash and a signature policy identifier must be
+covered by the signature.</p>
+</blockquote>
+<p><code>ProcessingRules</code> [Optional]</p>
+<blockquote>
+<p>A URI identifying one or more processing rules that the Signature
+Service MUST apply when processing and using the provided signed
+information octets. The Signature Service MUST NOT process and complete
+the signature request if this attribute contains a URI that is not
+recognized by the Signature Service. When this attribute is present in
+the Sign Response, it represents a statement by the Signature Service
+that the identified processing rule was successfully executed.</p>
+</blockquote>
+<p><code>&lt;ToBeSignedBytes&gt;</code> [Required]</p>
+<blockquote>
+<p>The bytes to be hashed and signed when generating the requested
+signature. For an XML signature this MUST be the canonicalized octets
+of a <code>&lt;dss:SignedInfo&gt;</code> element. For a PDF signature this MUST be
+the octets of the DER-encoded SignedAttrs value (signed attributes).
+In some cases the signature process alters this data, for example by
+changing a signing time attribute in PDF SignedAttrs, or by adding a
+reference to a hash of the signature certificate in an XAdES signature.
+If this data was altered, the altered data MUST be returned in the sign
+response using this element.</p>
+</blockquote>
+<p><code>&lt;AdESObject&gt;</code> [Optional]</p>
+<blockquote>
+<p>An element of the <strong>AdESObjectType</strong> type holding data to
+support generation of a signature according to any of the ETSI
+Advanced Electronic Signature (AdES) standard formats.</p>
+</blockquote>
+<p><code>&lt;Base64Signature&gt;</code> [Optional]</p>
+<blockquote>
+<p>The output signature value of the signature creation process
+associated with this sign task. This element&#39;s optional <code>Type</code>
+attribute, if present, SHALL contain a URI indicating the signature
+algorithm that was used to generate the signature value.</p>
+</blockquote>
+<p><code>&lt;OtherSignTaskData&gt;</code> [Optional]</p>
+<blockquote>
+<p>Provides extensibility for input or output data elements associated with the sign task.</p>
+</blockquote>
+<p>The following schema fragment defines the <code>&lt;SignTaskData&gt;</code> element
+and its <strong>SignTaskDataType</strong> complex type:</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;SignTaskData&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:SignTaskDataType&quot;</span>/&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;SignTaskDataType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:ToBeSignedBytes&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:AdESObject&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:Base64Signature&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> ref=<span class="hljs-string">&quot;csig:OtherSignTaskData&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;SignTaskId&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;SigType&quot;</span> use=<span class="hljs-string">&quot;required&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;XML&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;PDF&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;CMS&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;ASiC&quot;</span>/&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;AdESType&quot;</span> default=<span class="hljs-string">&quot;None&quot;</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+      &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span> base=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;None&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;BES&quot;</span>/&gt;
+        &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:enumeration</span> value=<span class="hljs-string">&quot;EPES&quot;</span>/&gt;
+      &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:restriction</span>&gt;
+    &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:simpleType</span>&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:attribute</span> name=<span class="hljs-string">&quot;ProcessingRules&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:anyURI&quot;</span>/&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;
+
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;ToBeSignedBytes&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AdESObject&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AdESObjectType&quot;</span>/&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;Base64Signature&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:Base64SignatureType&quot;</span>/&gt;
+&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;OtherSignTaskData&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span>/&gt;</code></pre><p><a name="type-adesobjecttype"></a></p>
+<h5 id="4111-type-adesobjecttype">4.1.1.1. Type AdESObjectType</h5>
+<p>The <strong>AdESObjectType</strong> complex type holds a Base64-encoded object that
+is referenced from the signature and whose content has to be modified as
+part of the certificate and signature generation process. Handling of
+this data in the signature generation process MAY be affected by
+rules identified by the <code>ProcessingRules</code>, <code>SigType</code> and <code>AdESType</code> attributes
+of the parent <code>&lt;SignatureInputObjects&gt;</code> element.</p>
+<p>This complex type has the following elements:</p>
+<p><code>&lt;SignatureId&gt;</code> [Optional]</p>
+<blockquote>
+<p>An optional identifier of the signature. When the requested signature
+is an XAdES signature, this is the value of the Id attribute of the
+<code>&lt;ds:Signature&gt;</code> element of the resulting signature, which is used
+to construct the <code>Target</code> attribute of the
+<code>&lt;xades:QualifyingProperties&gt;</code> element.</p>
+</blockquote>
+<p><code>&lt;AdESObjectBytes&gt;</code> [Optional]</p>
+<blockquote>
+<p>A Base64-encoded object that is referenced from the signature and
+whose content has to be modified as part of the certificate and
+signature generation process. The type of data in the Base64-encoded
+bytes and the rules for handling this data in the signature
+generation process are determined through the <code>ProcessingRules</code>, <code>SigType</code>
+and <code>AdESType</code> attributes of the parent <code>&lt;SignatureInputObjects&gt;</code>
+element. When the signature type is XAdES, these are the bytes of
+the <code>&lt;ds:Object&gt;</code> element that holds the
+<code>&lt;xades:QualifyingProperties&gt;</code> element of the signature where the
+hash of the signature certificate will be placed.</p>
+<p>When this element is present in the request, it forms a base for
+construction of this object in the signature process.</p>
+</blockquote>
+<p><code>&lt;OtherAdESData&gt;</code> [Optional]</p>
+<blockquote>
+<p>An extension point for additional input data related to the AdES signature
+generation process.</p>
+</blockquote>
+<p>The following schema fragment defines the <strong>AdESObjectType</strong> complex
+type</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span> name=<span class="hljs-string">&quot;AdESObjectType&quot;</span>&gt;
+  &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;SignatureId&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;AdESObjectBytes&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+    &lt;<span class="hljs-keyword">x</span><span class="hljs-variable">s:element</span> name=<span class="hljs-string">&quot;OtherAdESData&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span> minOccurs=<span class="hljs-string">&quot;0&quot;</span>/&gt;
+  &lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:sequence</span>&gt;
+&lt;/<span class="hljs-keyword">x</span><span class="hljs-variable">s:complexType</span>&gt;</code></pre><p><a name="signing-sign-requests-and-responses"></a></p>
+<h2 id="5-signing-sign-requests-and-responses">5. Signing Sign Requests and Responses</h2>
+<p>This specification supports a scenario where a requesting service
+requests the Signer to sign some data and where the same requesting
+service receives the signature from the Signature Service. In this
+scenario the requesting service acts as the presenter of information to
+be signed to the Signer. Implementers of this specification MUST sign
+requests and responses for signature creation to protect against
+spoofing and substitution attacks. If a hash of the document to be
+signed is replaced in a Sign Request, the Signer may end up signing
+something completely different from what the requesting service
+presented to the Signer.</p>
+<p>When a <code>&lt;dss:SignRequest&gt;</code> is signed, the signature of that request
+MUST be placed as the last child element in the
+<code>&lt;dss:OptionalInputs&gt;</code> element. The service that receives the request,
+i.e. the Signature Service, MUST check this signature and MUST check
+that the signature covers all data in the <code>&lt;dss:SignRequest&gt;</code> element
+(except for the signature itself).</p>
+<p>When a <code>&lt;dss:SignResponse&gt;</code> is signed, the signature of that
+response MUST be placed as the last child element in the
+<code>&lt;dss:OptionalOutputs&gt;</code> element. The service that initiated the
+signature process, i.e. the requesting service, MUST check this
+signature and MUST check that the signature covers all data in the
+<code>&lt;dss:SignResponse&gt;</code> element (except for the signature itself).</p>
+<p><a name="normative-references"></a></p>
+<h2 id="6-normative-references">6. Normative References</h2>
+<p><a name="csig-xsd"></a>
+<strong>[Csig-XSD]</strong></p>
+<blockquote>
+<p>This specification&#39;s DSS Extensions schema Version 1.1.4, <a href="https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd">https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd</a>, August 2026.</p>
+</blockquote>
+<p><a name="dss"></a>
+<strong>[OASIS-DSS]</strong></p>
+<blockquote>
+<p><a href="https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html">Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, OASIS, 11 April 2007</a>.</p>
+</blockquote>
+<p><a name="rfc2119"></a>
+<strong>[RFC 2119]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc2119.txt">RFC 2119: Key words for use in RFCs to Indicate Requirement Levels</a>.</p>
+</blockquote>
+<p><a name="rfc3986"></a>
+<strong>[RFC 3986]</strong> </p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a>.</p>
+</blockquote>
+<p><a name="rfc5652"></a>
+<strong>[RFC 5652]</strong> </p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc5652.txt">RFC 5652: Cryptographic Message Syntax (CMS)</a>.</p>
+</blockquote>
+<p><a name="rfc5280"></a>
+<strong>[RFC 5280]</strong> </p>
+<blockquote>
+<p><a href="https://www.ietf.org/rfc/rfc5280.txt">RFC 5280: Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>.</p>
+</blockquote>
+<p><a name="saml"></a>
+<strong>[SAML2.0]</strong></p>
+<blockquote>
+<p><a href="https://docs.oasis-open.org/security/saml/v2.0/">Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0</a>.</p>
+</blockquote>
+<p><a name="schema1"></a>
+<strong>[Schema1]</strong> </p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/xmlschema-1/">XML Schema Part 1: Structures. W3C Recommendation 28 October 2004</a>.</p>
+</blockquote>
+<p><a name="schema2"></a>
+<strong>[Schema2]</strong> </p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/xmlschema-2/">XML Schema Part 2: Datatypes. W3C Recommendation 28 October 2004</a>.</p>
+</blockquote>
+<p><a name="xades"></a>
+<strong>[XAdES]</strong> </p>
+<blockquote>
+<p><a href="https://www.etsi.org/deliver/etsi_en/319100_319199/31913201/01.01.01_60/en_31913201v010101p.pdf">XAdES digital signatures; Part 1: Building blocks and XAdES baseline signatures</a>.</p>
+</blockquote>
+<p><a name="xml"></a>
+<strong>[XML]</strong></p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/REC-xml/">Extensible Markup Language (XML) 1.0 (Fifth Edition). W3C
+Recommendation 26 November 2008</a>.</p>
+</blockquote>
+<p><a name="xml-ns"></a>
+<strong>[XML-ns]</strong> </p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/1999/REC-xml-names-19990114">Namespaces in XML. W3C Recommendation, January 1999</a>.</p>
+</blockquote>
+<p><a name="xmldsig"></a>
+<strong>[XMLDSIG]</strong></p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/2002/REC-xmldsig-core-20020212/">XML-Signature Syntax and Processing. W3C Recommendation, February 2002</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="7-changes-between-versions">7. Changes between versions</h2>
+<p><strong>Changes between version 1.5 and 1.6:</strong></p>
+<ul class="list">
+<li><p>OpenID Connect was introduced as an alternative to SAML for &quot;authentication for signature&quot;. This affects many parts of the underlying schema. The updated [<a href="#csig-xsd">Csig-XSD</a>] schema 1.1.4 is backwards compatible with the prior version of the schema at the message encoding level.</p>
+</li>
+<li><p>The <code>CertAttributeRef</code> attribute of the <strong>MappedAttributeType</strong> was incorrectly marked as optional. This has been fixed. See Section 3.1.1.1.</p>
+</li>
+</ul>
+<p><strong>Changes between version 1.4 and 1.5:</strong></p>
+<ul class="list">
+<li><p>The [<a href="#csig-xsd">Csig-XSD</a>] schema was updated to version 1.1.3.</p>
+</li>
+<li><p>In section 3.1, &quot;Element SignRequestExtension&quot;, the requirements for <code>NotBefore</code> and <code>NotOnOrAfter</code> to be present under the <code>&lt;saml:Conditions&gt;</code> element was removed. The reason for this is that it will always be the SignService itself that determines whether a message has expired or not.</p>
+</li>
+<li><p>Links in the appendix pointed to a draft version of the schema. This was fixed.</p>
+</li>
+</ul>
+<p><strong>Changes between version 1.3 and 1.4:</strong></p>
+<ul class="list">
+<li><p>In section 3.2, &quot;Element SignResponseExtension&quot;, the requirement for the <code>Request</code> element was changed so that it is optional to include even if the signature was successful.</p>
+</li>
+<li><p>Section 3.1, &quot;Element SignRequestExtension&quot;, was updated with the element <code>AuthnProfile</code>.</p>
+</li>
+<li><p>Section 3.1 and 3.2 was updated to clarify the use of the <code>Version</code> attribute in the <code>SignRequestExtension</code> and <code>SignResponseExtension</code> elements.</p>
+</li>
+<li><p>Section 3.1.1, &quot;Type CertRequestPropertiesType&quot;, was updated so that more than one <code>&lt;saml:AuthnContextClassRef&gt;</code> element can be included. The schema was also updated (to version 1.1.2 but keeping the same namespace identifier). </p>
+</li>
+</ul>
+<p><strong>Changes between version 1.2 and 1.3:</strong></p>
+<ul class="list">
+<li>No functional changes. The document has been re-branded with the Sweden Connect- and DIGG logotypes and the document format has been changed from OASIS-style to the style used by all other specifications within the Swedish eID Framework. Some typos were also fixed.</li>
+</ul>
+<p><strong>Changes between version 1.1 and 1.2:</strong></p>
+<ul class="list">
+<li>Incorrect versions and references were corrected.</li>
+</ul>
+<p><strong>Changes between version 1.0 and 1.1:</strong></p>
+<ul class="list">
+<li>Version 1.1 of the XML Schema for DSS extensions was introduced.</li>
+</ul>
+<p><a name="appendix-a.xml-schema"></a></p>
+<h2 id="appendix-a-xml-schema">Appendix A: XML Schema</h2>
+<p>This appendix provides the full XML Schema declaration for the DSS
+protocol extension defined in this document. If there are differences
+between the XML Schema in this appendix and XML Schema fragments in the
+sections above, the XML Schema in this appendix is the normative one.</p>
+<p>The schema can also be downloaded from <a href="https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd">https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd</a>. The downloaded version includes extensive
+documentation.</p>
+<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">xs:schema</span> <span class="hljs-attr">xmlns:xs</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="hljs-attr">elementFormDefault</span>=<span class="hljs-string">&quot;qualified&quot;</span>
+           <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;1.1.4&quot;</span>
+           <span class="hljs-attr">targetNamespace</span>=<span class="hljs-string">&quot;http://id.elegnamnden.se/csig/1.1/dss-ext/ns&quot;</span>
+           <span class="hljs-attr">xmlns:saml</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span>
+           <span class="hljs-attr">xmlns:dss</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:dss:1.0:core:schema&quot;</span>
+           <span class="hljs-attr">xmlns:csig</span>=<span class="hljs-string">&quot;http://id.elegnamnden.se/csig/1.1/dss-ext/ns&quot;</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:annotation</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:documentation</span>&gt;</span>
+      Version: 1.1.4
+      Schema location URL: https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:documentation</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:annotation</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:import</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;</span>
+             <span class="hljs-attr">schemaLocation</span>=<span class="hljs-string">&quot;https://docs.oasis-open.org/security/saml/v2.0/saml-schema-assertion-2.0.xsd&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignTasks&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SignTasksType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignTasksType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SignTaskData&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignTaskData&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SignTaskDataType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignTaskDataType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:ToBeSignedBytes&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:AdESObject&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:Base64Signature&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OtherSignTaskData&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignTaskId&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SigType&quot;</span> <span class="hljs-attr">use</span>=<span class="hljs-string">&quot;required&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;XML&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PDF&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;CMS&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;ASiC&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:restriction</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:attribute</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AdESType&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;None&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;None&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;BES&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;EPES&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:restriction</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:attribute</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ProcessingRules&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:anyURI&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OtherSignTaskData&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ToBeSignedBytes&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AdESObject&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AdESObjectType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AdESObjectType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignatureId&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AdESObjectBytes&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OtherAdESData&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Base64Signature&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:Base64SignatureType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Base64SignatureType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:extension</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Type&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:anyURI&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:extension</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignRequestExtension&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SignRequestExtensionType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignRequestExtensionType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:RequestTime&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;saml:Conditions&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Signer&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:AttributeStatementType&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SamlAuthenticationAttributes&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OidcAuthenticationAttributes&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OtherAuthenticationAttributes&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:IdentityProvider&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:AuthnProfile&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SignRequester&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SignService&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:RequestedSignatureAlgorithm&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:CertRequestProperties&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SignMessage&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;1&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OtherRequestInfo&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Version&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;1.1&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RequestTime&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:dateTime&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SamlAuthenticationAttributes&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:AttributeStatementType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OidcAuthenticationAttributes&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:OidcClaimsType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OtherAuthenticationAttributes&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:any</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;##any&quot;</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:element</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;IdentityProvider&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AuthnProfile&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignRequester&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignService&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RequestedSignatureAlgorithm&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:anyURI&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;CertRequestProperties&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:CertRequestPropertiesType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;CertRequestPropertiesType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;saml:AuthnContextClassRef&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:RequestedCertAttributes&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OtherProperties&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;CertType&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;PKC&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PKC&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;QC&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;QC/SSCD&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:restriction</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:attribute</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OtherProperties&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RequestedCertAttributes&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:RequestedAttributesType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RequestedAttributesType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RequestedCertAttribute&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:MappedAttributeType&quot;</span>
+                  <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;MappedAttributeType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AttributeAuthority&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SamlAttributeName&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:PreferredSAMLAttributeNameType&quot;</span>
+                    <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AttributeName&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:PreferredAttributeNameType&quot;</span>
+                    <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;CertAttributeRef&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">use</span>=<span class="hljs-string">&quot;required&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;CertNameType&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;rdn&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;rdn&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;san&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;sda&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:restriction</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:attribute</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;FriendlyName&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;DefaultValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Required&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:boolean&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PreferredSAMLAttributeNameType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:extension</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Order&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:int&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:extension</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PreferredAttributeNameType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:extension</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Order&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:int&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AuthnProtocol&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AuthnProtocolType&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;saml&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:extension</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignMessage&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SignMessageType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignMessageType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:Message&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:EncryptedMessage&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;MustShow&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:boolean&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;DisplayEntity&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:anyURI&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;MimeType&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;text&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;text/html&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;text&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;text/markdown&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:restriction</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:attribute</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:anyAttribute</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;##other&quot;</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Message&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;EncryptedMessage&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:EncryptedElementType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OtherRequestInfo&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignResponseExtension&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SignResponseExtensionType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignResponseExtensionType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:ResponseTime&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:Request&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SignerAssertionInfo&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SignatureCertificateChain&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OtherResponseInfo&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Version&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;1.1&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ResponseTime&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:dateTime&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Request&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignerAssertionInfo&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SignerAssertionInfoType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignerAssertionInfoType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:ContextInfo&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;saml:AttributeStatement&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OidcAuthenticationAttributes&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:OtherAuthenticationAttributes&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Assertions&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AssertionsType&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csig:SamlAssertions&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AuthnProtocol&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AuthnProtocolType&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;saml&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ContextInfo&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:ContextInfoType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ContextInfoType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;IdentityProvider&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;saml:NameIDType&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AuthenticationInstant&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:dateTime&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;saml:AuthnContextClassRef&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ServiceID&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AuthType&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AssertionRef&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SignatureCertificateChain&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:CertificateChainType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;CertificateChainType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;X509Certificate&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SamlAssertions&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:SAMLAssertionsType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SAMLAssertionsType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Assertion&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AssertionsType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;SamlAssertion&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OidcIdToken&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:EncodedJwtType&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OidcUserInfoResponse&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:EncodedJwtType&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:any</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;##other&quot;</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OtherResponseInfo&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:AnyType&quot;</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AnyType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:any</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span> <span class="hljs-attr">minOccurs</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;AuthnProtocolType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:union</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;saml&quot;</span>/&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:enumeration</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;oidc&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:restriction</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:union</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;EncodedJwtType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:restriction</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OidcClaimsType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Claim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;csig:OidcClaimType&quot;</span> <span class="hljs-attr">maxOccurs</span>=<span class="hljs-string">&quot;unbounded&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;OidcClaimType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:sequence</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;StringValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;IntValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:integer&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;DecimalValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:decimal&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;BooleanValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:boolean&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;JsonObjectValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;JsonArrayValue&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:base64Binary&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;NullValue&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:element</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:sequence</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Name&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">use</span>=<span class="hljs-string">&quot;required&quot;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">xs:schema</span>&gt;</span></code></pre>    </article>
+  </body>
+</html>
