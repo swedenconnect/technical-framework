@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="openid-connect-profile-for-sweden-connect">OpenID Connect Profile for Sweden Connect</h1>
-<h3 id="version-11--2026-09-03--draft">Version 1.1 – 2026-09-03 – Draft</h3>
+<h3 id="version-11--2026-10-07--draft">Version 1.1 – 2026-10-07 – Draft</h3>
 <p>Registration number: <strong>2024-7674</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -91,7 +91,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <ul class="list">
 <li><p>An OpenID Provider within the Sweden Connect federation MUST NOT allow user sessions to exceed 60 minutes. </p>
 </li>
-<li><p>If the <code>prompt</code> parameter is not present in an authentication request, the OpenID Provider MUST treat this request as if it would contain the <code>prompt</code> parameter with a value of <code>login</code>, meaning that a user (re-)authentication is required, no matter the state of the current user session at the provider.</p>
+<li><p>If the <code>prompt</code> parameter is not present in an authentication request, it is RECOMMENDED that the OpenID Provider treat the request as if it contained the <code>prompt</code> parameter with the value <code>login</code>, meaning that user (re-)authentication is required, regardless of the state of the current user session at the OpenID Provider.</p>
 </li>
 <li><p>If the <code>prompt</code> parameter is present and its value is set to <code>none</code> (meaning that the Relying Party wishes to make use of an existing user security context/session, i.e., SSO), the following requirements apply:</p>
 <ul class="list">
@@ -272,6 +272,8 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <li><p>Section 2.4, Signature Extension Support, was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in <a href="https://www.oidc.se/specifications/oidc-signature-extension-1_1.html">Signature Extension for OpenID Connect - Version 1.1</a>.</p>
 </li>
 <li><p>Section 4, Security Requirements, was added.</p>
+</li>
+<li><p>In Section 2.2.1, a requirement that an OP MUST treat a request without a <code>prompt</code> parameter as a request where <code>login</code> is supplied, to a recommendation. The reason for this is to avoid breaking existing implementations.</p>
 </li>
 </ul>
     </article>

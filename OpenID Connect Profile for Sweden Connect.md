@@ -8,7 +8,7 @@
 
 # OpenID Connect Profile for Sweden Connect
 
-### Version 1.1 – 2026-09-03 – Draft
+### Version 1.1 – 2026-10-07 – Draft
 
 Registration number: **2024-7674**
 
@@ -109,7 +109,7 @@ This profile states the following requirements regarding the re-use of user sess
 
 - An OpenID Provider within the Sweden Connect federation MUST NOT allow user sessions to exceed 60 minutes. 
 
-- If the `prompt` parameter is not present in an authentication request, the OpenID Provider MUST treat this request as if it would contain the `prompt` parameter with a value of `login`, meaning that a user (re-)authentication is required, no matter the state of the current user session at the provider.
+- If the `prompt` parameter is not present in an authentication request, it is RECOMMENDED that the OpenID Provider treat the request as if it contained the `prompt` parameter with the value `login`, meaning that user (re-)authentication is required, regardless of the state of the current user session at the OpenID Provider.
 
 - If the `prompt` parameter is present and its value is set to `none` (meaning that the Relying Party wishes to make use of an existing user security context/session, i.e., SSO), the following requirements apply:
 
@@ -311,4 +311,7 @@ Changes between version 1.0 and version 1.1:
 - Section 2.4, Signature Extension Support, was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).
 
 - Section 4, Security Requirements, was added.
+
+- In Section 2.2.1, a requirement that an OP MUST treat a request without a `prompt` parameter as a request where `login` is supplied, to a recommendation. The reason for this is to avoid breaking existing implementations.
+
 
