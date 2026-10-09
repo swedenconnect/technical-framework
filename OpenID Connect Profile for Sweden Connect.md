@@ -8,7 +8,7 @@
 
 # OpenID Connect Profile for Sweden Connect
 
-### Version 1.1 – 2026-10-07 – Draft
+### Version 1.1 – 2026-10-09 – Draft
 
 Registration number: **2024-7674**
 
@@ -101,7 +101,9 @@ The following requirements concerning OpenID Provider Metadata documents apply i
 
 - The OP Metadata document MUST contain the `ui_locales_supported` parameter, and its value MUST contain English (`en`) and Swedish (`sv`), and MAY contain support for other languages. See section 3 of \[[OpenID.Discovery](#openid-discovery)\].
 
-> **Note:** This version of the profile does not specify how OpenID Provider Metadata documents are made available to the Relying Parties/Clients of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing metadata.
+- The value of the `subject_types_supported` parameter MUST contain both `public` and `pairwise`. See section [2.3.3.2](#the-sub-claim) below.
+
+For a consolidated overview of all OpenID Provider metadata requirements, see sections 3 and 5 of [Sweden Connect – OpenID Connect Metadata Requirements 1.0](#sc-oidc-metadata), \[[SC.OIDC.Metadata](#sc-oidc-metadata)\].
 
 <a name="op-authentication-request-requirements"></a>
 ### 2.2. Authentication Request Requirements
@@ -192,8 +194,19 @@ Note: An OpenID Provider that also acts as an OAuth2 Authorization Server may of
 
 Section 3.2.1 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] provides requirements for the ID Token contents. This section adds additional requirements that OpenID Providers compliant with this profile MUST adhere to.
 
+<a name="the-acr-claim"></a>
+#### 2.3.3.1. The acr Claim
+
 Section 5.5.1.1 of \[[OpenID.Core](#openid-core)\] (and \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\]) states that the `acr` claim is a Voluntary Claim, unless the Relying Party requests it as an Essential Claim using the `claims` request parameter. Since the Authentication Context Class Reference is central within Sweden Connect, it is RECOMMENDED that OpenID Providers compliant with this profile include the `acr` claim in the ID Token even when it has not been requested as essential.
 
+<a name="the-sub-claim"></a>
+#### 2.3.3.2. The sub Claim
+
+Section 3.2.1.1 of \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] states that an OpenID Provider MUST support the `public` Subject Identifier type and SHOULD support the `pairwise` type. However, an OpenID Provider compliant with this profile MUST support both types and MUST calculate pairwise Subject Identifiers according to Section 8.1 of \[[OpenID.Core](#openid-core)\].
+
+> The reason for this extension to the \[[OIDC.Sweden.Profile](#oidc-sweden-profile)\] requirement is that within Sweden Connect, Relying Parties register with the federation, not directly with OpenID Providers. Since a Relying Party registers only once and cannot adapt its metadata to the capabilities of each OpenID Provider, OpenID Providers are required to support both Subject Identifier types.
+
+The Sweden Connect federation operator validates the `sector_identifier_uri` client metadata parameter and the contents of the document it references. Therefore, an OpenID Provider can use the `sector_identifier_uri` value from the client metadata when calculating pairwise Subject Identifiers, without retrieving and validating the referenced document.
 
 <a name="signature-extension-support"></a>
 ### 2.4. Signature Extension Support
@@ -282,10 +295,7 @@ Also, it is RECOMMENDED, that a Relying Party includes the `organization_name` c
 }
 ```
 
-See further requirements concerning client metadata in section 2 of \[[OpenID.Registration](#openid-registration)\].
-
-
-> **Note:** This version of the profile does not specify how client metadata is registered at/distributed to the OpenID Providers of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing client metadata.
+For a consolidated overview of all Relying Party metadata requirements, see sections 3 and 4 of [Sweden Connect – OpenID Connect Metadata Requirements 1.0](#sc-oidc-metadata), \[[SC.OIDC.Metadata](#sc-oidc-metadata)\].
 
 <a name="security-requirements"></a>
 ## 4. Security Requirements
@@ -364,6 +374,12 @@ Changes between version 1.0 and version 1.1:
 
 - Section 4, Security Requirements, was added.
 
-- In Section 2.2.1, a requirement that an OP MUST treat a request without a `prompt` parameter as a request where `login` is supplied, to a recommendation. The reason for this is to avoid breaking existing implementations.
+- In Section 2.2.1, the requirement that an OP MUST treat a request without a `prompt` parameter as a request where `login` is supplied was changed to a recommendation. The reason for this is to avoid breaking existing implementations.
+
+- Section 2.3.3.2, The sub Claim, was added. It requires OpenID Providers to support pairwise Subject Identifiers, and states that an OpenID Provider can use the `sector_identifier_uri` client metadata parameter without validating the referenced document. Also, in Section 2.1, a requirement that the `subject_types_supported` parameter MUST contain both `public` and `pairwise` was added.
+
+- Section 2.2.4, Requested Authentication Context Class Reference (acr), was added. It clarifies how an OpenID Provider processes requested Authentication Context Class Reference values.
+
+
 
 
