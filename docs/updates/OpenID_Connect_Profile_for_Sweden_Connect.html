@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="openid-connect-profile-for-sweden-connect">OpenID Connect Profile for Sweden Connect</h1>
-<h3 id="version-11--2026-10-07--draft">Version 1.1 – 2026-10-07 – Draft</h3>
+<h3 id="version-11--2026-10-09--draft">Version 1.1 – 2026-10-09 – Draft</h3>
 <p>Registration number: <strong>2024-7674</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -38,13 +38,16 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <p> 2.2.1. <a href="#single-sign-on-processing">Single Sign-on Processing</a></p>
 <p> 2.2.2. <a href="#user-message-request-parameter">User Message Request Parameter</a></p>
 <p> 2.2.3. <a href="#requested-authentication-provider-parameter">Requested Authentication Provider Parameter</a></p>
+<p> 2.2.4. <a href="#requested-authentication-context-class-reference">Requested Authentication Context Class Reference (acr)</a></p>
 <p> 2.3. <a href="#op-token-endpoint-requirements">Token Endpoint Requirements</a></p>
 <p> 2.3.1. <a href="#client-authentication-requirements">Client Authentication Requirements</a></p>
 <p> 2.3.2. <a href="#token-response-requirements">Token Response Requirements</a></p>
+<p> 2.3.3. <a href="#id-token-issuance">ID Token Issuance</a></p>
 <p> 2.4. <a href="#signature-extension-support">Signature Extension Support</a></p>
 </li>
 <li><p><a href="#relying-party-requirements"><strong>Relying Party Requirements</strong></a></p>
 <p> 3.1. <a href="#client-authentication-request-requirements">Authentication Request Requirements</a></p>
+<p> 3.1.1. <a href="#requesting-authentication-context-class-reference">Requesting Authentication Context Class Reference</a></p>
 <p> 3.2. <a href="#client-registration-and-metadata-requirements">Client Registration and Metadata Requirements</a></p>
 </li>
 <li><p><a href="#security-requirements"><strong>Security Requirements</strong></a></p>
@@ -78,10 +81,10 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </li>
 <li><p>The OP Metadata document MUST contain the <code>ui_locales_supported</code> parameter, and its value MUST contain English (<code>en</code>) and Swedish (<code>sv</code>), and MAY contain support for other languages. See section 3 of [<a href="#openid-discovery">OpenID.Discovery</a>].</p>
 </li>
+<li><p>The value of the <code>subject_types_supported</code> parameter MUST contain both <code>public</code> and <code>pairwise</code>. See section <a href="#the-sub-claim">2.3.3.2</a> below.</p>
+</li>
 </ul>
-<blockquote>
-<p><strong>Note:</strong> This version of the profile does not specify how OpenID Provider Metadata documents are made available to the Relying Parties/Clients of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing metadata.</p>
-</blockquote>
+<p>For a consolidated overview of all OpenID Provider metadata requirements, see sections 3 and 5 of <a href="#sc-oidc-metadata">Sweden Connect – OpenID Connect Metadata Requirements 1.0</a>, [<a href="#sc-oidc-metadata">SC.OIDC.Metadata</a>].</p>
 <p><a name="op-authentication-request-requirements"></a></p>
 <h3 id="22-authentication-request-requirements">2.2. Authentication Request Requirements</h3>
 <p><a name="single-sign-on-processing"></a></p>
@@ -111,6 +114,21 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <h4 id="223-requested-authentication-provider-parameter">2.2.3. Requested Authentication Provider Parameter</h4>
 <p>An OpenID Provider that acts as a proxy for underlying authentication mechanisms SHOULD support the <code>https://id.oidc.se/param/authnProvider</code> request parameter extension (see section 2.2 of [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>]).</p>
 <p>OpenID Providers that support the <code>https://id.oidc.se/param/authnProvider</code> request parameter, MUST declare this support in its Metadata document using the <code>https://id.oidc.se/disco/authnProviderSupported</code> parameter, see section 3.2 of [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>].</p>
+<p><a name="requested-authentication-context-class-reference"></a></p>
+<h4 id="224-requested-authentication-context-class-reference-acr">2.2.4. Requested Authentication Context Class Reference (acr)</h4>
+<p>This section does not add any requirements. It clarifies how an OpenID Provider processes requested Authentication Context Class Reference values, based on [<a href="#openid-core">OpenID.Core</a>], [<a href="#openid-registration">OpenID.Registration</a>] and [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>]. See Section <a href="#client-authentication-request-requirements">3.1</a> for how a Relying Party should request these values.</p>
+<p>A Relying Party can request Authentication Context Class Reference values in the following ways:</p>
+<ul class="list">
+<li>Using the <code>acr_values</code> request parameter.</li>
+<li>Using the <code>default_acr_values</code> client metadata parameter. These values apply to requests that contain neither the <code>acr_values</code> parameter nor an <code>acr</code> claim in the <code>claims</code> parameter.</li>
+<li>Using the <code>claims</code> request parameter, by including the <code>acr</code> claim with a <code>value</code> or <code>values</code> member.</li>
+</ul>
+<p>When <code>acr_values</code> or <code>default_acr_values</code> is used, the <code>acr</code> claim is requested as a Voluntary Claim (Section 3.1.2.1 of [<a href="#openid-core">OpenID.Core</a>] and Section 2 of [<a href="#openid-registration">OpenID.Registration</a>]). This means that:</p>
+<ul class="list">
+<li>The OpenID Provider does not fail the authentication because it cannot use any of the requested values.</li>
+<li>The OpenID Provider may authenticate the end-user using an Authentication Context Class other than the requested ones. The <code>acr</code> claim in the ID Token then holds the Authentication Context Class Reference that the performed authentication satisfied (Section 2 of [<a href="#openid-core">OpenID.Core</a>]).</li>
+</ul>
+<p>Only when the <code>acr</code> claim is requested as an Essential Claim using the <code>claims</code> parameter is the OpenID Provider bound by the requested values. If none of them can be used to authenticate the end-user, the OpenID Provider must not proceed with the authentication, and should respond with an <code>unmet_authentication_requirements</code> error, see Section 2.2 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>].</p>
 <p><a name="op-token-endpoint-requirements"></a></p>
 <h3 id="23-token-endpoint-requirements">2.3. Token Endpoint Requirements</h3>
 <p>This section extends section 3 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] with additional requirements for Token endpoint requests and responses.</p>
@@ -128,6 +146,19 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 </blockquote>
 <p>If the Access Token is a cleartext JWT holding user identity data, information that the Relying Party may not be authorized to access may be leaked. Therefore, it is RECOMMENDED that opaque strings are used as Access Tokens.</p>
 <p>Note: An OpenID Provider that also acts as an OAuth2 Authorization Server may of course issue JWT Access Tokens. The above requirement only applies to the Access Tokens that are issued during authentication (i.e., for granting access to the UserInfo endpoint).</p>
+<p><a name="id-token-issuance"></a></p>
+<h4 id="233-id-token-issuance">2.3.3. ID Token Issuance</h4>
+<p>Section 3.2.1 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] provides requirements for the ID Token contents. This section adds additional requirements that OpenID Providers compliant with this profile MUST adhere to.</p>
+<p><a name="the-acr-claim"></a></p>
+<h4 id="2331-the-acr-claim">2.3.3.1. The acr Claim</h4>
+<p>Section 5.5.1.1 of [<a href="#openid-core">OpenID.Core</a>] (and [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>]) states that the <code>acr</code> claim is a Voluntary Claim, unless the Relying Party requests it as an Essential Claim using the <code>claims</code> request parameter. Since the Authentication Context Class Reference is central within Sweden Connect, it is RECOMMENDED that OpenID Providers compliant with this profile include the <code>acr</code> claim in the ID Token even when it has not been requested as essential.</p>
+<p><a name="the-sub-claim"></a></p>
+<h4 id="2332-the-sub-claim">2.3.3.2. The sub Claim</h4>
+<p>Section 3.2.1.1 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] states that an OpenID Provider MUST support the <code>public</code> Subject Identifier type and SHOULD support the <code>pairwise</code> type. However, an OpenID Provider compliant with this profile MUST support both types and MUST calculate pairwise Subject Identifiers according to Section 8.1 of [<a href="#openid-core">OpenID.Core</a>].</p>
+<blockquote>
+<p>The reason for this extension to the [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] requirement is that within Sweden Connect, Relying Parties register with the federation, not directly with OpenID Providers. Since a Relying Party registers only once and cannot adapt its metadata to the capabilities of each OpenID Provider, OpenID Providers are required to support both Subject Identifier types.</p>
+</blockquote>
+<p>The Sweden Connect federation operator validates the <code>sector_identifier_uri</code> client metadata parameter and the contents of the document it references. Therefore, an OpenID Provider can use the <code>sector_identifier_uri</code> value from the client metadata when calculating pairwise Subject Identifiers, without retrieving and validating the referenced document.</p>
 <p><a name="signature-extension-support"></a></p>
 <h3 id="24-signature-extension-support">2.4. Signature Extension Support</h3>
 <p>Section 7 of [<a href="#sc-saml-profile">SC.SAML.Profile</a>] specifies that a SAML Identity Provider
@@ -147,12 +178,24 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <p>An OpenID Connect Relying Party (Client) compliant with this profile MUST adhere to the requirements stated in [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] along with the additions declared below.</p>
 <p><a name="client-authentication-request-requirements"></a></p>
 <h3 id="31-authentication-request-requirements">3.1. Authentication Request Requirements</h3>
-<p>For all authentication requests where the Relying Party expects the user to authenticate itself, the RP SHOULD include the <code>prompt</code> request parameter and assign the <code>login</code> value. This is to prevent un-wanted SSO. See section 2.1.4 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>].</p>
+<p>For all authentication requests where the Relying Party expects the user to authenticate itself, the Relying Party SHOULD include the <code>prompt</code> request parameter and assign the <code>login</code> value. This is to prevent un-wanted SSO. See section 2.1.4 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>].</p>
 <p>It is RECOMMENDED that Relying Parties send authentication requests containing Request Objects, i.e., the request parameters are included in a JWT, and its encoding is assigned to the <code>request</code> parameter according to section 6.1 of [<a href="#openid-core">OpenID.Core</a>]. It is also RECOMMENDED that the Request Object JWT is signed.</p>
-<blockquote>
-<p>The above recommendation gives a higher level of security, and may be changed to an imperative requirement in future versions of this profile.</p>
-</blockquote>
-<p><a name="client-registration-and-metadata-requirements"></a></p>
+<p><a name="requesting-authentication-context-class-reference"></a></p>
+<h4 id="311-requesting-authentication-context-class-reference">3.1.1. Requesting Authentication Context Class Reference</h4>
+<p>A Relying Party that requests Authentication Context Class Reference values using the <code>acr_values</code> request parameter or the <code>default_acr_values</code> client metadata parameter needs to take into account that the OpenID Provider may authenticate the end-user using an Authentication Context Class other than the requested ones, see Section <a href="#requested-authentication-context-class-reference">2.2.4</a>. The Relying Party therefore needs to check the <code>acr</code> claim in the received ID Token (Section 3.1.3.7 of [<a href="#openid-core">OpenID.Core</a>]).</p>
+<p>A Relying Party that requires the end-user to be authenticated according to a specific Authentication Context Class, or one of a specific set of classes, SHOULD request the <code>acr</code> claim as an Essential Claim using the <code>claims</code> parameter, and list the accepted Authentication Context Class Reference value or values. In these cases the Relying Party SHOULD NOT include the <code>acr_values</code> parameter in the request, see Section 2.1.6 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>].</p>
+<p>The example below shows a <code>claims</code> parameter where the Relying Party accepts authentication according to either assurance level 3 or assurance level 4. The OpenID Provider has to authenticate the end-user according to one of the listed values, and the <code>acr</code> claim in the ID Token holds the value that was used.</p>
+<pre class="hljs"><code>{
+  <span class="hljs-attr">&quot;id_token&quot;</span> : {
+    <span class="hljs-attr">&quot;acr&quot;</span> : {
+      <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">&quot;values&quot;</span> : [
+        <span class="hljs-string">&quot;http://id.elegnamnden.se/loa/1.0/loa3&quot;</span>,
+        <span class="hljs-string">&quot;http://id.elegnamnden.se/loa/1.0/loa4&quot;</span>
+      ]
+    }
+  }
+}</code></pre><p><a name="client-registration-and-metadata-requirements"></a></p>
 <h3 id="32-client-registration-and-metadata-requirements">3.2. Client Registration and Metadata Requirements</h3>
 <p>Relying Parties compliant with this profile MUST follow the requirements stated in section 6 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>] with the additions stated below.</p>
 <p>The Relying Party/Client metadata MUST contain the following additional parameters:</p>
@@ -181,10 +224,7 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
   <span class="hljs-attr">&quot;organization_name#en&quot;</span> : <span class="hljs-string">&quot;Example Organization&quot;</span>,
   <span class="hljs-attr">&quot;organization_name#sv&quot;</span> : <span class="hljs-string">&quot;Exempelorganisationen&quot;</span>
   ...
-}</code></pre><p>See further requirements concerning client metadata in section 2 of [<a href="#openid-registration">OpenID.Registration</a>].</p>
-<blockquote>
-<p><strong>Note:</strong> This version of the profile does not specify how client metadata is registered at/distributed to the OpenID Providers of the federation. Future versions will include OpenID Federation and alternative mechanisms for distributing client metadata.</p>
-</blockquote>
+}</code></pre><p>For a consolidated overview of all Relying Party metadata requirements, see sections 3 and 4 of <a href="#sc-oidc-metadata">Sweden Connect – OpenID Connect Metadata Requirements 1.0</a>, [<a href="#sc-oidc-metadata">SC.OIDC.Metadata</a>].</p>
 <p><a name="security-requirements"></a></p>
 <h2 id="4-security-requirements">4. Security Requirements</h2>
 <p>Entities compliant with this profile MUST adhere to [<a href="#sc-security">SC.Security</a>] as well as Section 7 of [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>], where the requirements from [<a href="#sc-security">SC.Security</a>] take precedence in case of conflicting requirements.</p>
@@ -198,7 +238,7 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <p><a name="openid-core"></a>
 <strong>[OpenID.Core]</strong></p>
 <blockquote>
-<p>[Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015] (<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>).</p>
+<p><a href="https://openid.net/specs/openid-connect-core-1_0.html">Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015</a>.</p>
 </blockquote>
 <p><a name="openid-discovery"></a>
 <strong>[OpenID.Discovery]</strong></p>
@@ -208,7 +248,7 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <p><a name="openid-registration"></a>
 <strong>[OpenID.Registration]</strong></p>
 <blockquote>
-<p><a href="https://openid.net/specs/openid-connect-registration-1_0.html">Sakimura, N., Bradley, J., and M. Jones, “OpenID Connect Dynamic Client Registration 1.0,” November 2014</a>.</p>
+<p><a href="https://openid.net/specs/openid-connect-registration-1_0.html">Sakimura, N., Bradley, J., and M. Jones, &quot;OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 2&quot;, December 2023</a>.</p>
 </blockquote>
 <p><a name="openid-federation"></a>
 <strong>[OpenID.Federation]</strong></p>
@@ -248,7 +288,7 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 <p><a name="oidc-sweden-sign"></a>
 <strong>[OIDC.Sweden.Sign]</strong></p>
 <blockquote>
-<p><a href="https://www.oidc.se/specifications/oidc-signature-extension-1_1.html">Signature Extension for OpenID Connect - Version 1.1</a>.</p>
+<p><a href="https://www.oidc.se/specifications/oidc-signature-extension-1_2.html">Signature Extension for OpenID Connect - Version 1.2</a>.</p>
 </blockquote>
 <p><a name="sc-security"></a>
 <strong>[SC.Security]</strong></p>
@@ -273,7 +313,11 @@ compliant with Sweden Connect needs to support the &quot;authentication for sign
 </li>
 <li><p>Section 4, Security Requirements, was added.</p>
 </li>
-<li><p>In Section 2.2.1, a requirement that an OP MUST treat a request without a <code>prompt</code> parameter as a request where <code>login</code> is supplied, to a recommendation. The reason for this is to avoid breaking existing implementations.</p>
+<li><p>In Section 2.2.1, the requirement that an OP MUST treat a request without a <code>prompt</code> parameter as a request where <code>login</code> is supplied was changed to a recommendation. The reason for this is to avoid breaking existing implementations.</p>
+</li>
+<li><p>Section 2.3.3.2, The sub Claim, was added. It requires OpenID Providers to support pairwise Subject Identifiers, and states that an OpenID Provider can use the <code>sector_identifier_uri</code> client metadata parameter without validating the referenced document. Also, in Section 2.1, a requirement that the <code>subject_types_supported</code> parameter MUST contain both <code>public</code> and <code>pairwise</code> was added.</p>
+</li>
+<li><p>Section 2.2.4, Requested Authentication Context Class Reference (acr), was added. It clarifies how an OpenID Provider processes requested Authentication Context Class Reference values.</p>
 </li>
 </ul>
     </article>
