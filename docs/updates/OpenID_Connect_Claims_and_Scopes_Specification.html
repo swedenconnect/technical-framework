@@ -19,7 +19,7 @@
 </p>
 
 <h1 id="openid-connect-claims-and-scopes-specification-for-sweden-connect">OpenID Connect Claims and Scopes Specification for Sweden Connect</h1>
-<h3 id="version-11--2026-10-10--draft">Version 1.1 – 2026-10-10 – Draft</h3>
+<h3 id="version-11--2026-10-11--draft">Version 1.1 – 2026-10-11 – Draft</h3>
 <p>Registration number: <strong>2024-7704</strong></p>
 <hr>
 <p class="copyright-statement">
@@ -104,12 +104,14 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 <p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.6</code> (personalIdentityNumberBinding) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
 <p><a name="eidas-person-identifier"></a></p>
 <h4 id="216-eidas-person-identifier">2.1.6. eIDAS Person Identifier</h4>
-<p><strong>Claim:</strong> <code>https://id.swedenconnect.se/claim/eidasPersonIdentifier</code></p>
-<p><strong>Description:</strong> A claim that holds the value for the eIDAS Person Identifier attribute, <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code>. This value is issued by the foreign eIDAS node, and within the eIDAS federation this is the unique user identifier. See [<a href="#eidas-attr">eIDAS.Attributes</a>].</p>
+<p>The <a href="#eidas-attr">eIDAS SAML Attribute Profile</a> [<a href="#eidas-attr">eIDAS.Attributes</a>] defines SAML attributes to be used within the eIDAS authentication framework. <a href="#conversion-of-eidas-attributes">Appendix A</a> contains a mapping between these SAML attributes and their corresponding OpenID Connect claims. However, there is no mapping for the <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code> SAML attribute. This attribute holds the unique user identifier for a natural person being authenticated using eIDAS.</p>
+<p>This specification defines that the URI used as the SAML attribute name is also used as the name of the corresponding OpenID Connect claim representing the eIDAS PersonIdentifier.</p>
+<p><strong>Claim:</strong> <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code></p>
+<p><strong>Description:</strong> A claim that holds the value of the eIDAS PersonIdentifier attribute. This value is issued by the foreign eIDAS node, and it is the unique user identifier within the eIDAS federation.</p>
 <p><strong>Type:</strong> String</p>
 <p><strong>Corresponding SAML Attribute:</strong> <code>urn:oid:1.2.752.201.3.7</code> (eidasPersonIdentifier) - [<a href="#saml-sc-attributes">SAML.SC.Attributes</a>]</p>
 <blockquote>
-<p>Within eIDAS, the corresponding SAML attribute is: <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code> [<a href="#eidas-attr">eIDAS.Attributes</a>].</p>
+<p><strong>Note:</strong> In version 1.0 of this specification, the custom claim <code>https://id.swedenconnect.se/claim/eidasPersonIdentifier</code> was used to represent an eIDAS PersonIdentifier. This claim has been removed to avoid introducing unnecessary claim definitions in the Sweden Connect framework.</p>
 </blockquote>
 <p><a name="eidas-country"></a></p>
 <h4 id="217-eidas-country">2.1.7. eIDAS Country</h4>
@@ -143,17 +145,17 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 <tbody><tr>
 <td align="left"><code>https://id.swedenconnect.se/claim/prid</code></td>
 <td align="left">Provisional identifier</td>
-<td align="left">This specification - [<a href="#provisional-identifier">2.1.1</a>]</td>
+<td align="left">Section <a href="#provisional-identifier">2.1.1</a> of this specification</td>
 </tr>
 <tr>
 <td align="left"><code>https://id.swedenconnect.se/claim/pridPersistence</code></td>
 <td align="left">Persistence indicator for the above <code>prid</code> claim</td>
-<td align="left">This specification - [<a href="#provisional-identifier-persistence-indicator">2.1.2</a>]</td>
+<td align="left">Section <a href="#provisional-identifier-persistence-indicator">2.1.2</a> of this specification</td>
 </tr>
 <tr>
-<td align="left"><code>https://id.swedenconnect.se/claim/eidasPersonIdentifier</code></td>
+<td align="left"><code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code></td>
 <td align="left">eIDAS Person Identifier</td>
-<td align="left">This specification - [<a href="#eidas-person-identifier">2.1.6</a>]</td>
+<td align="left">Section <a href="#eidas-person-identifier">2.1.6</a> of this specification and [<a href="#eidas-attr">eIDAS.Attributes</a>]</td>
 </tr>
 </tbody></table>
 <p><strong>Claims Parameter Equivalent:</strong></p>
@@ -161,7 +163,7 @@ identity to the identity attributes from the eIDAS authentication is, the identi
   <span class="hljs-attr">&quot;userinfo&quot;</span> : {
     <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/prid&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
     <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/pridPersistence&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
-    <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/eidasPersonIdentifier&quot;</span>: { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
+    <span class="hljs-attr">&quot;http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> }
   },
   <span class="hljs-attr">&quot;id_token&quot;</span> : {
     <span class="hljs-attr">&quot;https://id.swedenconnect.se/claim/prid&quot;</span> : { <span class="hljs-attr">&quot;essential&quot;</span> : <span class="hljs-literal">true</span> },
@@ -183,17 +185,17 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 <tbody><tr>
 <td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>mappedPersonalIdentityNumber</code></td>
 <td align="left">A Swedish civic registration number (&quot;personnummer&quot;) that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node.</td>
-<td align="left">This specification - [<a href="#mapped-swedish-personal-identity-number">2.1.3</a>]</td>
+<td align="left">Section <a href="#mapped-swedish-personal-identity-number">2.1.3</a> of this specification</td>
 </tr>
 <tr>
 <td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>mappedCoordinationNumber</code></td>
 <td align="left">A Swedish coordination number (&quot;samordningsnummer&quot;) that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node.</td>
-<td align="left">This specification - [<a href="#mapped-swedish-coordination-number">2.1.4</a>]</td>
+<td align="left">Section <a href="#mapped-swedish-coordination-number">2.1.4</a> of this specification</td>
 </tr>
 <tr>
 <td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>identityBinding</code></td>
 <td align="left">Identification of the binding process(es) that were applied to obtain the binding between the eIDAS identity and the <code>mappedPersonalIdentityNumber</code> or <code>mappedCoordinationNumber</code>. See [<a href="#sc-id-bidning">SC.ID-Binding</a>].</td>
-<td align="left">This specification - [<a href="#identity-binding">2.1.5</a>]</td>
+<td align="left">Section <a href="#identity-binding">2.1.5</a> of this specification</td>
 </tr>
 </tbody></table>
 <p><strong>Claims Parameter Equivalent:</strong></p>
@@ -266,7 +268,7 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 <p><a name="eidas-attr"></a>
 <strong>[eIDAS.Attributes]</strong></p>
 <blockquote>
-<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.4_final.pdf">eIDAS SAML Attribute Profile, version 1.4, 31 October 2023</a>.</p>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.4.1_final.pdf">eIDAS SAML Attribute Profile, version 1.4.1, 09 September 2024</a>.</p>
 </blockquote>
 <p><a name="oidc-iac"></a>
 <strong>[OIDC.IAC]</strong></p>
@@ -292,7 +294,7 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 <h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p>Changes between version 1.0 and version 1.1:</p>
 <ul class="list">
-<li></li>
+<li>The custom claim <code>https://id.swedenconnect.se/claim/eidasPersonIdentifier</code> was replaced with the <code>http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier</code> claim for representing an eIDAS Person Identifier.</li>
 </ul>
 <p><a name="conversion-of-eidas-attributes"></a></p>
 <h2 id="appendix-a-conversion-of-eidas-attributes">Appendix A: Conversion of eIDAS Attributes</h2>
@@ -310,8 +312,8 @@ identity to the identity attributes from the eIDAS authentication is, the identi
 </thead>
 <tbody><tr>
 <td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/PersonIdentifier</code> - PersonIdentifier</td>
-<td align="left"><code>https://id.swedenconnect.se/claim/</code><br /><code>eidasPersonIdentifier</code></td>
-<td align="left">This specification</td>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/PersonIdentifier</code></td>
+<td align="left">Section <a href="#eidas-person-identifier">2.1.6</a> of this specification and [<a href="#eidas-attr">eIDAS.Attributes</a>]</td>
 </tr>
 <tr>
 <td align="left"><code>http://eidas.europa.eu/attributes/</code><br /><code>naturalperson/CurrentFamilyName</code> - FamilyName</td>
