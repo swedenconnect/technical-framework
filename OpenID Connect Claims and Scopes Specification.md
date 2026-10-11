@@ -8,7 +8,7 @@
 
 # OpenID Connect Claims and Scopes Specification for Sweden Connect
 
-### Version 1.1 – 2026-10-10 – Draft
+### Version 1.1 – 2026-10-11 – Draft
 
 Registration number: **2024-7704**
 
@@ -149,15 +149,19 @@ Normally a Swedish coordination number is represented using the claim `https://i
 <a name="eidas-person-identifier"></a>
 #### 2.1.6. eIDAS Person Identifier
 
-**Claim:** `https://id.swedenconnect.se/claim/eidasPersonIdentifier`
+The [eIDAS SAML Attribute Profile](#eidas-attr) \[[eIDAS.Attributes](#eidas-attr)\] defines SAML attributes to be used within the eIDAS authentication framework. [Appendix A](#conversion-of-eidas-attributes) contains a mapping between these SAML attributes and their corresponding OpenID Connect claims. However, there is no mapping for the `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier` SAML attribute. This attribute holds the unique user identifier for a natural person being authenticated using eIDAS.
 
-**Description:** A claim that holds the value for the eIDAS Person Identifier attribute, `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier`. This value is issued by the foreign eIDAS node, and within the eIDAS federation this is the unique user identifier. See \[[eIDAS.Attributes](#eidas-attr)\].
+This specification defines that the URI used as the SAML attribute name is also used as the name of the corresponding OpenID Connect claim representing the eIDAS PersonIdentifier.
+
+**Claim:** `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier`
+
+**Description:** A claim that holds the value of the eIDAS PersonIdentifier attribute. This value is issued by the foreign eIDAS node, and it is the unique user identifier within the eIDAS federation.
 
 **Type:** String
 
 **Corresponding SAML Attribute:** `urn:oid:1.2.752.201.3.7` (eidasPersonIdentifier) - \[[SAML.SC.Attributes](#saml-sc-attributes)\]
 
-> Within eIDAS, the corresponding SAML attribute is: `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier` \[[eIDAS.Attributes](#eidas-attr)\].
+> **Note:** In version 1.0 of this specification, the custom claim `https://id.swedenconnect.se/claim/eidasPersonIdentifier` was used to represent an eIDAS PersonIdentifier. This claim has been removed to avoid introducing unnecessary claim definitions in the Sweden Connect framework.
 
 <a name="eidas-country"></a>
 #### 2.1.7. eIDAS Country
@@ -195,9 +199,9 @@ The above is true also for Relying Parties authenticating users against the Swed
 
 | Requested Claims | Description/comment | Reference |
 | :--- | :--- | :--- |
-| `https://id.swedenconnect.se/claim/prid` | Provisional identifier | This specification - \[[2.1.1](#provisional-identifier)\] |
-| `https://id.swedenconnect.se/claim/pridPersistence` | Persistence indicator for the above `prid` claim | This specification - \[[2.1.2](#provisional-identifier-persistence-indicator)\] |
-| `https://id.swedenconnect.se/claim/eidasPersonIdentifier` | eIDAS Person Identifier | This specification - \[[2.1.6](#eidas-person-identifier)\] |
+| `https://id.swedenconnect.se/claim/prid` | Provisional identifier | Section [2.1.1](#provisional-identifier) of this specification |
+| `https://id.swedenconnect.se/claim/pridPersistence` | Persistence indicator for the above `prid` claim | Section [2.1.2](#provisional-identifier-persistence-indicator) of this specification |
+| `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier` | eIDAS Person Identifier | Section [2.1.6](#eidas-person-identifier) of this specification and \[[eIDAS.Attributes](#eidas-attr)\] |
 
 **Claims Parameter Equivalent:**
 
@@ -206,7 +210,7 @@ The above is true also for Relying Parties authenticating users against the Swed
   "userinfo" : {
     "https://id.swedenconnect.se/claim/prid" : { "essential" : true },
     "https://id.swedenconnect.se/claim/pridPersistence" : { "essential" : true },
-    "https://id.swedenconnect.se/claim/eidasPersonIdentifier": { "essential" : true },
+    "http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier" : { "essential" : true }
   },
   "id_token" : {
     "https://id.swedenconnect.se/claim/prid" : { "essential" : true },
@@ -228,9 +232,9 @@ The above is true also for Relying Parties authenticating users against the Swed
 
 | Requested Claims | Description/comment | Reference |
 | :--- | :--- | :--- |
-| `https://id.swedenconnect.se/claim/`<br />`mappedPersonalIdentityNumber` | A Swedish civic registration number ("personnummer") that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node. | This specification - \[[2.1.3](#mapped-swedish-personal-identity-number)\] |
-| `https://id.swedenconnect.se/claim/`<br />`mappedCoordinationNumber` | A Swedish coordination number ("samordningsnummer") that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node. | This specification - \[[2.1.4](#mapped-swedish-coordination-number)\] |
-| `https://id.swedenconnect.se/claim/`<br />`identityBinding` | Identification of the binding process(es) that were applied to obtain the binding between the eIDAS identity and the `mappedPersonalIdentityNumber` or `mappedCoordinationNumber`. See \[[SC.ID-Binding](#sc-id-bidning)\]. | This specification - \[[2.1.5](#identity-binding)\] |
+| `https://id.swedenconnect.se/claim/`<br />`mappedPersonalIdentityNumber` | A Swedish civic registration number ("personnummer") that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node. | Section [2.1.3](#mapped-swedish-personal-identity-number) of this specification |
+| `https://id.swedenconnect.se/claim/`<br />`mappedCoordinationNumber` | A Swedish coordination number ("samordningsnummer") that was the result of a query  from the Swedish eIDAS Connector to the identity binding service after the subject was authenticated at a foreign eIDAS node. | Section [2.1.4](#mapped-swedish-coordination-number) of this specification |
+| `https://id.swedenconnect.se/claim/`<br />`identityBinding` | Identification of the binding process(es) that were applied to obtain the binding between the eIDAS identity and the `mappedPersonalIdentityNumber` or `mappedCoordinationNumber`. See \[[SC.ID-Binding](#sc-id-bidning)\]. | Section [2.1.5](#identity-binding) of this specification |
 
 **Claims Parameter Equivalent:**
 
@@ -300,7 +304,7 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 
 <a name="eidas-attr"></a>
 **\[eIDAS.Attributes\]**
-> [eIDAS SAML Attribute Profile, version 1.4, 31 October 2023](https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.4_final.pdf).
+> [eIDAS SAML Attribute Profile, version 1.4.1, 09 September 2024](https://docs.swedenconnect.se/technical-framework/mirror/eidas/eIDAS_SAML_Attribute_Profile_v1.4.1_final.pdf).
 
 <a name="oidc-iac"></a>
 **\[OIDC.IAC\]**
@@ -323,7 +327,7 @@ Not all eIDAS attributes/claims listed in [Appendix A](#conversion-of-eidas-attr
 
 Changes between version 1.0 and version 1.1:
 
-- 
+- The custom claim `https://id.swedenconnect.se/claim/eidasPersonIdentifier` was replaced with the `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier` claim for representing an eIDAS Person Identifier.
 
 <a name="conversion-of-eidas-attributes"></a>
 ## Appendix A: Conversion of eIDAS Attributes
@@ -332,9 +336,10 @@ This section provides a listing of how the eIDAS attributes for natural persons 
 
 > Also see section 3.3.3 of \[[SAML.SC.Attributes](#saml-sc-attributes)\] where a corresponding mapping between eIDAS attributes and Sweden Connect SAML attributes is presented.
 
+
 | eIDAS attribute | Claim | Reference |
 | :--- | :--- | :--- |
-| `http://eidas.europa.eu/attributes/`<br />`naturalperson/PersonIdentifier` - PersonIdentifier | `https://id.swedenconnect.se/claim/`<br />`eidasPersonIdentifier` | This specification |
+| `http://eidas.europa.eu/attributes/`<br />`naturalperson/PersonIdentifier` - PersonIdentifier | `http://eidas.europa.eu/attributes/`<br />`naturalperson/PersonIdentifier` | Section [2.1.6](#eidas-person-identifier) of this specification and \[[eIDAS.Attributes](#eidas-attr)\] |
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/CurrentFamilyName` - FamilyName | `family_name` | \[[OpenID.Core](#openid-core)\] |
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/CurrentGivenName` - FirstName | `given_name` | \[[OpenID.Core](#openid-core)\] |
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/DateOfBirth` - DateOfBirth | `birthdate` | \[[OpenID.Core](#openid-core)\] |
