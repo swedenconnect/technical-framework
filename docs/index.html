@@ -72,7 +72,7 @@
               </div>
 
               <div class="spec">
-                <h3 id="registry-for-identifiers-assigned-by-the-swedish-e-identification-board">Sweden Connect -
+                <h3 id="registry-for-identifiers-assigned-by-the-swedish-e-identification-board">Sweden Connect –
                   Registry for identifiers</h3>
                 <p class="spec__description">
                   This document defines the structure for identifiers assigned by the Swedish Agency for Digital
@@ -82,7 +82,7 @@
                 <ul class="doc-links">
                   <li>
                     <a class="doc-link" href="latest/03_-_Registry_for_Identifiers.html">
-                      <span>Sweden Connect - Registry for Identifiers</span>
+                      <span>Sweden Connect – Registry for Identifiers</span>
                     </a>
                   </li>
                   <!--
@@ -299,6 +299,16 @@
             </div>
 
             <h3 class="spec-group" id="authentication-openid-connect">OpenID Connect</h3>
+            <p class="section-intro">
+              The Sweden Connect OpenID Connect specifications build upon the specifications published by OIDC Sweden.
+            </p>
+            <ul class="doc-links">
+              <li>
+                <a class="doc-link" href="https://www.oidc.se/specifications/">
+                  <span>OIDC Sweden – OpenID Connect Specifications</span>
+                </a>
+              </li>
+            </ul>
 
             <div class="spec-list">
 
@@ -368,11 +378,11 @@
                   The requirements apply to the resolved metadata, meaning the metadata that results once the Trust
                   Chain of an Entity has been applied to the declarations the Entity makes about itself.
                 </p>
-                <span class="version">Version 1.0</span>
                 <ul class="doc-links">
                   <li>
-                    <a class="doc-link" href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">
-                      <span>Sweden Connect - OpenID Connect Metadata Requirements</span>
+                    <a class="doc-link doc-link--draft"
+                       href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">
+                      <span>Sweden Connect – OpenID Connect Metadata Requirements</span>
                     </a>
                   </li>
                 </ul>
@@ -505,34 +515,195 @@
           <section id="federation">
             <h2>The Sweden Connect Federation</h2>
 
-            <p class="section-intro">Common federation rules:</p>
-            <ul class="link-list">
-              <li>
-                <a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect –
-                  Security Requirements 1.0</a>
-              </li>
-            </ul>
-
-            <p>
-              For participants of the Sweden Connect SAML federation, the normative specification
-              <a href="Tekniska_anslutningsregler.html">Tekniska anslutningsregler för Sweden
-                Connect-federationen</a> should also be read. <i>Currently only in Swedish.</i>
+            <p class="section-intro">
+              The documents needed for joining the Sweden Connect federation are listed below.
             </p>
 
-            <p>
+            <h3 class="spec-group" id="federation-common">Common Federation Rules</h3>
+
+            <div class="spec-list">
+
+              <div class="spec">
+                <h4 id="sweden-connect-security-requirements">Sweden Connect – Security Requirements 1.0</h4>
+                <p class="spec__description">
+                  This specification defines the security requirements for participants in the Sweden Connect
+                  federation. It covers transport protection, cryptographic algorithms, key lengths and key rollover,
+                  and applies to both the SAML and the OpenID Connect parts of the federation.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="https://docs.swedenconnect.se/federation/security-requirements.html">
+                      <span>Sweden Connect – Security Requirements 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+            <h3 class="spec-group" id="federation-saml">SAML</h3>
+
+            <div class="spec-list">
+
+              <div class="spec">
+                <h4 id="tekniska-anslutningsregler">Tekniska anslutningsregler för Sweden Connect-federationen</h4>
+                <p class="spec__description">
+                  Normative specification for parties joining the Sweden Connect SAML federation. It covers the
+                  agreements that give access to the federation, levels of assurance, requirements on authentication
+                  and attribute release, and the rules for registering metadata. <i>Currently only in Swedish.</i>
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="Tekniska_anslutningsregler.html">
+                      <span>Tekniska anslutningsregler för Sweden Connect-federationen</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+            <h3 class="spec-group" id="federation-openid-connect">OpenID Connect</h3>
+            <p class="section-intro">
               The following documents apply when joining the Sweden Connect Federation for OpenID Connect (OpenID
-              Federation):
+              Federation).
             </p>
-            <ul class="link-list">
-              <li>
-                <a href="https://docs.swedenconnect.se/federation/oidf-structure.html">Sweden Connect – OpenID
-                  Federation Structure</a>
-              </li>
-              <li>
-                <a href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">Sweden Connect –
-                  OpenID Connect Metadata Requirements 1.0</a>
-              </li>
-            </ul>
+
+            <div class="spec-list">
+
+              <div class="spec">
+                <h4 id="sweden-connect-openid-federation-rules-and-policies">Sweden Connect – OpenID Federation Rules
+                  and Policies 1.0</h4>
+                <p class="spec__description">
+                  The Federation Rules of the Sweden Connect OpenID Connect federation, and the entry document for
+                  participants. It states what Relying Parties and OpenID Providers must comply with, including Trust
+                  Marks, Registration Policies and the steps for joining the federation.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link doc-link--draft" href="https://docs.swedenconnect.se/federation/oidf-rules.html">
+                      <span>Sweden Connect – OpenID Federation Rules and Policies 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h4 id="sweden-connect-openid-federation-structure">Sweden Connect – OpenID Federation Structure</h4>
+                <p class="spec__description">
+                  Describes how the Sweden Connect OpenID Connect federation is structured, and gives the Entity
+                  Identifiers, endpoints and Trust Anchor keys for the Production, QA and Sandbox environments.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link" href="https://docs.swedenconnect.se/federation/oidf-structure.html">
+                      <span>Sweden Connect – OpenID Federation Structure</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h4 id="sweden-connect-openid-connect-metadata-requirements">Sweden Connect – OpenID Connect Metadata
+                  Requirements 1.0</h4>
+                <p class="spec__description">
+                  Defines the metadata requirements for Relying Parties and OpenID Providers in the Sweden Connect
+                  OpenID Connect federation, and the metadata policies the federation applies to enforce them.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">
+                      <span>Sweden Connect – OpenID Connect Metadata Requirements 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+            <h4 class="spec-group" id="federation-oidc-sweden">OIDC Sweden – OpenID Federation Profiles and
+              Specifications</h4>
+            <p class="section-intro">
+              The Sweden Connect support for OpenID Federation is built upon the following profile and specifications
+              from OIDC Sweden.
+            </p>
+
+            <div class="spec-list">
+
+              <div class="spec">
+                <h5 id="swedish-openid-federation-profile">Swedish OpenID Federation Deployment and Interoperability
+                  Profile 1.0</h5>
+                <p class="spec__description">
+                  A deployment and interoperability profile for OpenID Federation. It defines a constrained subset of
+                  OpenID Federation, with clarifications and extensions, so that OpenID Providers, Relying Parties and
+                  other protocol entities can join a federation with little effort. It also describes how systems
+                  without full OpenID Federation support can take part.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="https://www.oidc.se/specifications/swedish-openid-federation-profile.html">
+                      <span>Swedish OpenID Federation Deployment and Interoperability Profile 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h5 id="openid-federation-organization-identifier">OpenID Federation Organization Identifier
+                  Metadata Parameter 1.0</h5>
+                <p class="spec__description">
+                  Defines the <code>organization_identifier</code> metadata parameter, which lets an Entity declare a
+                  unique identifier for the organization that owns it.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="https://www.oidc.se/specifications/openid-federation-organization-identifier-1_0.html">
+                      <span>OpenID Federation Organization Identifier Metadata Parameter 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h5 id="openid-federation-registration-policy">OpenID Federation Registration Policy 1.0</h5>
+                <p class="spec__description">
+                  An OpenID Federation extension that defines the <code>registration_policy</code> Claim for
+                  Subordinate Statements, identifying the registration policies applied when an Entity was registered
+                  in the federation, and a matching constraint that Trust Anchors and Intermediate Entities can use to
+                  require them.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="https://www.oidc.se/openid-federation-registration-policy/main.html">
+                      <span>OpenID Federation Registration Policy 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="spec">
+                <h5 id="openid-federation-entity-configuration-hosting">OpenID Federation Entity Configuration
+                  Hosting 1.0</h5>
+                <p class="spec__description">
+                  An OpenID Federation extension that defines the <code>ec_location</code> Claim, telling where a
+                  subject's Entity Configuration can be fetched. This lets an Intermediate Entity host the Entity
+                  Configuration for entities that lack full OpenID Federation support.
+                </p>
+                <ul class="doc-links">
+                  <li>
+                    <a class="doc-link doc-link--draft"
+                       href="https://www.oidc.se/openid-federation-hosting/main.html">
+                      <span>OpenID Federation Entity Configuration Hosting 1.0</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
           </section>
 
           <!-- ============================================================ -->
@@ -589,7 +760,14 @@
               </ul>
             </li>
             <li><a href="#signature-specifications">Signature Specifications</a></li>
-            <li><a href="#federation">The Sweden Connect Federation</a></li>
+            <li>
+              <a href="#federation">The Sweden Connect Federation</a>
+              <ul>
+                <li><a href="#federation-common">Common Federation Rules</a></li>
+                <li><a href="#federation-saml">SAML</a></li>
+                <li><a href="#federation-openid-connect">OpenID Connect</a></li>
+              </ul>
+            </li>
             <li><a href="#github">GitHub</a></li>
             <li><a href="#older-versions">Older versions</a></li>
             <li><a href="#feedback-and-questions">Feedback and Questions</a></li>
