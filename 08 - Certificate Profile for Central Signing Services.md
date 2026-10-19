@@ -8,7 +8,7 @@
 
 # Certificate Profile for Certificates Issued by Central Signing Services
 
-### Version 1.2 - 2020-01-17
+### Version 1.3 – 2026-10-19 – Draft
 
 Registration number: **2019-313** (*previously: ELN-0608*)
 
@@ -324,6 +324,10 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 
 <a name="changes-between-versions"></a>
 ## 4. Changes between versions
+
+**Changes between version 1.3 and version 1.3:**
+
+- ...
 
 **Changes between version 1.1 and version 1.2:**
 
