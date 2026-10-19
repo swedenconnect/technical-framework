@@ -751,7 +751,7 @@ EidSignResponse | Base64 encoded sign response.
 
 <a name="oidc-sweden-sign"></a>
 **\[OIDC.Sweden.Sign\]**
-> [Signature Extension for OpenID Connect - Version 1.1](https://www.oidc.se/specifications/oidc-signature-extension-1_1.html).
+> [Signature Extension for OpenID Connect - Version 1.2](https://www.oidc.se/specifications/oidc-signature-extension-1_2.html).
 
 <a name="informative-references"></a>
 ### 4.2. Informative References
