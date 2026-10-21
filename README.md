@@ -70,12 +70,6 @@ The concept of constructed attributes is introduced in Swedish national authenti
 
 > [11 - eIDAS Constructed Attributes Specification for the Swedish eID Framework](11%20-%20eIDAS%20Constructed%20Attributes%20Specification%20for%20the%20Swedish%20eID%20Framework.md)
 
-#### Implementation Profile for BankID Identity Providers within the Swedish eID Framework
-
-SAML implementation profile for Identity Providers implementing BankID support.
-
-> [12 - BankID Profile for the Swedish eID Framework](12%20-%20BankID%20Profile%20for%20the%20Swedish%20eID%20Framework.md)
-
 #### Principal Selection in SAML Authentication Requests
 
 This specification defines an element that may be included in the Extensions element of a SAML `AuthnRequest` where the requesting Service Provider can specify matching criteria that may be used by the Identity Provider to select the particular user that should be authenticated.
@@ -154,7 +148,7 @@ Sweden Connect apply:
 - [Sweden Connect – Security Requirements 1.0](https://docs.swedenconnect.se/federation/security-requirements.html)
 - [Sweden Connect – OpenID Federation Structure](https://docs.swedenconnect.se/federation/oidf-structure.html)
 - [Sweden Connect – OpenID Connect Metadata Requirements 1.0](https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html)
-- [Tekniska anslutningsregler för Sweden Connect-federationen](https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html) – SAML only.
+- [Tekniska anslutningsregler för Sweden Connects SAML-federation](https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html), [Registration Rules for the Sweden Connect SAML Federation](https://docs.swedenconnect.se/technical-framework/Registration_rules_for_SAML.html)  – SAML only.
 
 ---
 

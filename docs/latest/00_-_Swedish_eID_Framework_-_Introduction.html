@@ -1,1 +1,473 @@
-../december-2024/00_-_Swedish_eID_Framework_-_Introduction.html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introduction to the Sweden Connect Technical Framework</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="introduction-to-the-sweden-connect-technical-framework">Introduction to the Sweden Connect Technical Framework</h1>
+<h3 id="2026-10-19">2026-10-19</h3>
+<p>Registration number: <strong>2019-267</strong></p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#overview">Overview</a></p>
+<p> 1.2. <a href="#the-assurance-framework-and-levels-of-assurance">The Assurance Framework and Levels of Assurance</a></p>
+<p> 1.3. <a href="#service-for-collection-administration-and-publishing-of-metadata">Service for Collection, Administration and Publishing of Metadata</a></p>
+<p> 1.4. <a href="#discovery-service">Discovery Service</a></p>
+<p> 1.5. <a href="#relying-party-integration">Relying Party Integration</a></p>
+<p> 1.6. <a href="#signatures">Signatures</a></p>
+<p> 1.7. <a href="#the-technical-framework-and-eidas">The Technical Framework and eIDAS</a></p>
+<p> 1.7.1. <a href="#foreign-eid-authentication">Foreign eID Authentication</a></p>
+<p> 1.7.2. <a href="#signing-using-a-foreign-eid">Signing using a Foreign eID</a></p>
+<p> 1.7.3. <a href="#handling-of-identities">Handling of Identities</a></p>
+<p> 1.7.4. <a href="#swedish-eids-in-foreign-services">Swedish eIDs in Foreign Services</a></p>
+</li>
+<li><p><a href="#technical-specifications"><strong>Technical Specifications</strong></a></p>
+<p> 2.1. <a href="#common-specifications">Common Specifications</a></p>
+<p> 2.1.1. <a href="#sc-registry-for-identifiers">Sweden Connect – Registry for Identifiers</a></p>
+<p> 2.1.2. <a href="#sc-security-requirements">Sweden Connect – Security Requirements</a></p>
+<p> 2.2. <a href="#profiles-and-specifications-for-saml">Profiles and Specifications for SAML</a></p>
+<p> 2.2.1. <a href="#deployment-profile-for-the-swedish-eid-framework">Deployment Profile for the Swedish eID Framework</a></p>
+<p> 2.2.2. <a href="#attribute-specification-for-the-swedish-eid-framework">Attribute Specification for the Swedish eID Framework</a></p>
+<p> 2.2.3. <a href="#entity-categories-for-the-swedish-eid-framework">Entity Categories for the Swedish eID Framework</a></p>
+<p> 2.2.4. <a href="#eidas-constructed-attributes-specification-for-the-swedish-eid-framework">eIDAS Constructed Attributes Specification for the Swedish eID Framework</a></p>
+<p> 2.2.5. <a href="#principal-selection-in-saml-authentication-requests">Principal Selection in SAML Authentication Requests</a></p>
+<p> 2.2.6. <a href="#user-message-extension-in-saml-authentication-requests">User Message Extension in SAML Authentication Requests</a></p>
+<p> 2.3. <a href="#profiles-and-specifications-for-openid-connect">Profiles and Specifications for OpenID Connect</a></p>
+<p> 2.3.1. <a href="#openid-connect-profile-for-sweden-connect">OpenID Connect Profile for Sweden Connect</a></p>
+<p> 2.3.2. <a href="#openid-connect-claims-and-scopes-specification-for-sweden-connect">OpenID Connect Claims and Scopes Specification for Sweden Connect</a></p>
+<p> 2.4. <a href="#signature-specifications">Signature Specifications</a></p>
+<p> 2.4.1. <a href="#implementation-profile-oasis-dss">Implementation Profile for using OASIS DSS in Central Signing Services</a></p>
+<p> 2.4.2. <a href="#dss-extensions">DSS Extension for Federated Central Signing Services</a></p>
+<p> 2.4.3. <a href="#certificate-profile-css">Certificate Profile for Certificates Issued by Central Signing Services</a></p>
+<p> 2.4.4. <a href="#signature-activation">Signature Activation Protocol for Federated Signing</a></p>
+<p> 2.5. <a href="#the-sweden-connect-federation">The Sweden Connect Federation</a></p>
+<p> 2.5.1. <a href="#tekniska-anslutningsregler">Tekniska anslutningsregler för Sweden Connect-federationen</a></p>
+<p> 2.5.2. <a href="#sc-oidf-rules">Sweden Connect – OpenID Federation Rules and Policies</a></p>
+<p> 2.5.3. <a href="#sc-oidf-structure">Sweden Connect – OpenID Federation Structure</a></p>
+<p> 2.5.4. <a href="#sc-oidc-metadata-requirements">Sweden Connect – OpenID Connect Metadata Requirements</a></p>
+<p> 2.5.5. <a href="#oidc-sweden-federation-specifications">OIDC Sweden – OpenID Federation Profiles and Specifications</a></p>
+</li>
+<li><p><a href="#references"><strong>References</strong></a></p>
+<p> 3.1. <a href="#digg">Digg</a></p>
+<p> 3.2. <a href="#oidc-sweden">OIDC Sweden</a></p>
+<p> 3.3. <a href="#other-references">Other References</a></p>
+</li>
+</ol>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p><a name="overview"></a></p>
+<h3 id="11-overview">1.1. Overview</h3>
+<p>The Sweden Connect Technical Framework, also referred to as the Swedish eID Framework, is adapted for identity federations based on SAML 2.0 and OpenID Connect.</p>
+<p>Relying parties receive identity assertions in a standardized format from an identity provider. In SAML, the identity assertion is a SAML assertion. In OpenID Connect, the identity information is delivered in an ID Token and, optionally, in the response from the UserInfo endpoint.</p>
+<p>In SAML, e-services and other relying parties take the role of Service Providers (SP), and services that authenticate users and issue identity assertions take the role of Identity Providers (IdP). In OpenID Connect, the corresponding roles are Relying Parties (RP) and OpenID Providers (OP). This document uses the terms &quot;relying party&quot; and &quot;identity provider&quot; when the text applies to both protocols.</p>
+<p>Relying parties that require electronic signatures do not need to adapt to different signature techniques for different types of eIDs. Instead, a relying party makes use of a signature service, where users sign digital documents by authenticating at an identity provider.</p>
+<p>As both personal identity information and other attributes linked to users are provided through identity assertions, all types of eIDs that have an identity provider within the federation can be used by a relying party that requires specific identity attributes, even if a particular eID does not hold this information.</p>
+<p><a name="the-assurance-framework-and-levels-of-assurance"></a></p>
+<h3 id="12-the-assurance-framework-and-levels-of-assurance">1.2. The Assurance Framework and Levels of Assurance</h3>
+<p>The basis for the level of security applied when a user authenticates is the <em>level of assurance</em> for the eID required by the relying party. In order for these levels to be comparable within the federation, four assurance levels (1 to 4) are defined in the Swedish eID Assurance Framework [<a href="#trustframework">TrustFramework</a>], and three assurance levels (low, substantial, high) are defined by the EU regulation eIDAS. Any service issuing identity assertions must prove that the process of issuing identity assertions meets the requirements of a given level. This includes:</p>
+<ul class="list">
+<li><p>  Requirements for the creation of an identity assertion.</p>
+</li>
+<li><p>  Requirements for electronic authentication.</p>
+</li>
+<li><p>  Requirements for the issuing process.</p>
+</li>
+<li><p>  Requirements for the actual eID and its use.</p>
+</li>
+<li><p>  Requirements for the issuer of the eID.</p>
+</li>
+<li><p>  Requirements for establishing the identity of the eID applicant.</p>
+</li>
+</ul>
+<p><a name="service-for-collection-administration-and-publishing-of-metadata"></a></p>
+<h3 id="13-service-for-collection-administration-and-publishing-of-metadata">1.3. Service for Collection, Administration and Publishing of Metadata</h3>
+<p>A federation provides information about its participants through metadata. The participants of a federation are services that provide identity and attribute assertions, and relying parties that consume these services.</p>
+<p>Through the federation&#39;s metadata, participants obtain information about other participants&#39; services, including the information required for a secure exchange of information between services. Each party needs to keep its metadata updated, and the metadata must conform to agreed conditions.</p>
+<p>The main purpose of metadata is to provide the keys and certificates required for secure communication and information exchange between services. In addition to keys, metadata also contains other information needed for collaboration between services, for example, addresses of required functions, information about assurance levels, service categories and user interface information.</p>
+<p>In the SAML part of the federation, the metadata is a register in XML format that is signed with the federation operator&#39;s certificate. The file contains information about the federation members, including their certificates. Because the metadata file is signed, it is sufficient to compare a certificate with its equivalent in metadata. An infrastructure based on a central federation register requires that the register is constantly updated and that the federation members always use the latest version of the file.</p>
+<p>In the OpenID Connect part of the federation, metadata is handled according to OpenID Federation [<a href="#openid-federation">OpenID.Federation</a>]. Each entity publishes its metadata in a signed Entity Configuration, and the Trust Anchor, along with any Intermediate Entities, issues signed Subordinate Statements about the entities registered below it. Trust in an entity&#39;s metadata is established by resolving a Trust Chain from the entity up to a Trust Anchor operated by the federation, and the metadata policies of the federation are applied to the metadata during this process. See Section <a href="#the-sweden-connect-federation">2.5</a> for the specifications that apply.</p>
+<p><a name="discovery-service"></a></p>
+<h3 id="14-discovery-service">1.4. Discovery Service</h3>
+<p>Within an identity federation, it is possible to offer and consume a common Discovery Service that lists the identity providers (or eIDs) that a user can choose from to authenticate. The purpose of such a service is to relieve the individual relying parties of the federation from implementing support for how users choose how to authenticate.</p>
+<p>By making the discovery service available within the identity federation, relying parties may direct their users there for the choice of how to authenticate. The discovery service interacts with the user, who makes the choice, and directs the user back to the relying party along with the selected authentication choice. The relying party then knows to which identity provider the user should be directed for authentication.</p>
+<blockquote>
+<p>Currently, there is no common discovery service available within the Sweden Connect federation.</p>
+</blockquote>
+<p><a name="relying-party-integration"></a></p>
+<h3 id="15-relying-party-integration">1.5. Relying Party Integration</h3>
+<p>Relying parties integrate with identity providers using standardized messages and consume identity assertions that also have a standardized format.</p>
+<p>For SAML, the Sweden Connect Technical Framework is influenced by the interoperability profile &quot;SAML V2.0 Deployment Profile for Federation Interoperability&quot; [<a href="#saml2int">SAML2Int</a>]. For OpenID Connect, the framework builds on &quot;The Swedish OpenID Connect Profile&quot; [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>], published by OIDC Sweden, which profiles OpenID Connect Core [<a href="#openid-core">OpenID.Core</a>]. Both protocols are supported by several commercial products as well as open source libraries, which facilitates the integration on the relying party side.</p>
+<p>Most relying parties use stand-alone authentication servers, which means that the adaptation needed to support the Sweden Connect Technical Framework is usually limited to the authentication solution used.</p>
+<p><a name="signatures"></a></p>
+<h3 id="16-signatures">1.6. Signatures</h3>
+<p>The Sweden Connect Technical Framework enables digital signatures using any type of eID, even those not based on certificates, as long as there is an identity provider for the particular eID. This is possible because the identity assertion that is issued during authentication for signature is standardized.</p>
+<p>The purpose of a Signature Service is to offer digital signature services within identity federations that follow the Sweden Connect Technical Framework.</p>
+<p>By procuring<sup>1</sup> and introducing a signature service, a relying party within the federation can offer its users the possibility to sign electronic documents with the support of the signature service. The user&#39;s signature, and the associated signature certificate, is created by the signature service after the user has approved the signature by authenticating for the signature service<sup>2</sup>.</p>
+<p>The signature service acts as a relying party towards the identity providers of the federation. The user can authenticate for signature either at a SAML Identity Provider, using the &quot;authentication for signature&quot; feature of [<a href="#saml-profile">SAML.Profile</a>], or at an OpenID Provider, using the &quot;Signature Extension for OpenID Connect&quot; [<a href="#oidc-sweden-sign">OIDC.Sweden.Sign</a>] as profiled by [<a href="#oidc-profile">OIDC.Profile</a>].</p>
+<blockquote>
+<p>[1]: It is also possible for a relying party to implement a signature service based on the specifications.</p>
+</blockquote>
+<blockquote>
+<p>[2]: It is of the utmost importance that the user understands that he or she is signing a document. Therefore, for the eID types that support it, a signature flow should be used during &quot;authentication for signature&quot;.</p>
+</blockquote>
+<p><a name="the-technical-framework-and-eidas"></a></p>
+<h3 id="17-the-technical-framework-and-eidas">1.7. The Technical Framework and eIDAS</h3>
+<p>The EU regulation (<a href="https://ec.europa.eu/futurium/en/system/files/ged/eidas_regulation.pdf">910/2014</a>) on electronic identification and trust services, eIDAS, requires Swedish public bodies to recognize the eIDs that other eIDAS countries have notified. This means that a Swedish public e-service, under certain conditions, must be able to accept a login performed with an eID issued in another country.</p>
+<p><a name="foreign-eid-authentication"></a></p>
+<h4 id="171-foreign-eid-authentication">1.7.1. Foreign eID Authentication</h4>
+<p>The eIDAS technical specifications are, like the SAML part of the Sweden Connect Technical Framework, built upon SAML standards and profiles. Even though the similarities are many, there are also differences between the specifications. However, a Swedish service provider does not have to relate directly to the eIDAS specifications. The figure below illustrates how the Swedish eIDAS node (<em>eIDAS connector</em>) acts as a proxy between other countries and the Swedish federation when a person is authenticated using a foreign eID at a Swedish service provider.</p>
+<p class="img-container"><img src="img/eidas-flow-en.png" alt=""></p>
+<p>The flow is as follows:</p>
+<ol class="list">
+<li><p>A user with a foreign eID requests access to a Swedish service provider (i.e., wants to log in).</p>
+</li>
+<li><p> The service provider lets the user select the login method using a discovery service. In this case, the user chooses the &quot;Foreign eID&quot; option.</p>
+</li>
+<li><p>The service provider creates an authentication request according to the Sweden Connect Technical Framework and directs the user to the Swedish eIDAS node (<em>connector</em>). The eIDAS node acts as an identity provider within the federation, which means that the interaction with this service is performed in the same way as with other identity providers that comply with the Sweden Connect Technical Framework.</p>
+</li>
+<li><p> The received request is processed, and the eIDAS node displays a page where the user chooses his or her country<sup>1</sup>. The Swedish eIDAS node then transforms the received authentication request into an authentication request according to the eIDAS format, and directs the user to the selected country&#39;s <em>eIDAS Proxy Service</em>.</p>
+</li>
+<li><p> When the authentication request is processed by the eIDAS Proxy Service of the selected country, that country&#39;s technique for authentication is used. Not all eIDAS countries use SAML for authentication, but if that were the case in our example, the user would be directed to a national identity provider, possibly via a discovery service where the eID to use is selected.</p>
+</li>
+<li><p> When the user has authenticated, an identity assertion is created according to the eIDAS specifications. This assertion contains eIDAS-specific attributes that identify the user. The assertion is posted back to the Swedish eIDAS node.</p>
+</li>
+<li><p> The node receives the assertion and checks its validity. The assertion is transformed from the eIDAS format into an assertion according to the Sweden Connect Technical Framework and is posted back to the service provider.</p>
+</li>
+<li><p> The service provider may now complement the data with additional information in order to decide whether the user should be granted access to the service.</p>
+</li>
+</ol>
+<p>Thus, Swedish services only have to implement support for the Sweden Connect Technical Framework, also when authenticating foreign users. However, in order for the service to fully accept the authenticated user, it must also be able to handle the presented identity, which is most likely not a Swedish personal identity number. See Section 1.7.3 below.</p>
+<blockquote>
+<p>[1]: The correct way to describe this would be that the user is asked to which eIDAS Proxy Service the request should be sent. This depends on the nationality of the user&#39;s eID issuer.</p>
+</blockquote>
+<p><a name="signing-using-a-foreign-eid"></a></p>
+<h4 id="172-signing-using-a-foreign-eid">1.7.2. Signing using a Foreign eID</h4>
+<p>As already described, a model for digital signatures named &quot;federated signatures&quot; is used within the context of the Sweden Connect Technical Framework. A server-based signature service is associated with the e-service that requests signatures. When a user signs a document, the e-service directs the user, along with a signature request, to the signature service. The signature service then requests that the user authenticate at an identity provider. In conjunction with the authentication, the user approves the signature. The signature service then sends the user back to the e-service along with the signature data, and the e-service stores the signature as a signed document.</p>
+<p>This procedure makes it possible for Swedish e-services to offer signing for users with foreign eIDs, since a signature service can choose to authenticate a user with a foreign eID according to the process described in Section 1.7.1 above.</p>
+<p>In this case, the Swedish eIDAS node is responsible for informing the user that the purpose of the authentication is to approve the signature of a document, and displays information about the requester of the signature and about what is being signed. When the user has authenticated, an identity assertion is issued and sent back to the signature service, which then generates the signature.</p>
+<p><a name="handling-of-identities"></a></p>
+<h4 id="173-handling-of-identities">1.7.3. Handling of Identities</h4>
+<p>Identity assertions from other countries follow common technical specifications within the framework of the eIDAS regulation. These specifications define a <em>Minimum Data Set</em> (MDS), which is a set of attributes that every country must supply for authenticated natural and legal persons. Each country must provide a unique identifier per eID that represents a natural person. For some countries, these identifiers will be unique and persistent per person in the same way as a Swedish personal identity number, but identifiers may have different compositions and properties. A property that may vary is the persistence of a person identifier, i.e., whether the identifier remains unchanged during a person&#39;s lifetime, or whether it changes because the user moves to another region, changes name, or simply obtains a new eID. For some countries, the identifier will be different depending on which of the country&#39;s eIDs the user is currently using.</p>
+<p>In order to simplify the handling of users and identities in Swedish services, the Swedish eIDAS node generates a standardized identity attribute for users that have been authenticated using a foreign eID, a so-called <em>Provisional ID</em> (PRID). The eIDAS node also creates an attribute that declares the persistence, or lifetime, of the PRID attribute. The PRID attribute is generated based on attribute values received from the foreign authentication, according to specific methods for each country. Every combination of country and method is graded based on expected persistence, i.e., how likely it is that the identity of a person changes over time. This makes it possible for Swedish services to adapt the communication with the user and to proactively provide features for a user whose identity has changed, making it possible for this user to access his or her account.</p>
+<p>In some cases, a person that has been authenticated using a foreign eID may hold a Swedish personal identity number. It can, for example, be a Swedish citizen who has moved abroad and obtained a foreign eID, or a foreign citizen who is, or has been, registered (folkbokförd) in Sweden and has been assigned a Swedish personal identity number.</p>
+<p><a name="swedish-eids-in-foreign-services"></a></p>
+<h4 id="174-swedish-eids-in-foreign-services">1.7.4. Swedish eIDs in Foreign Services</h4>
+<p>Sweden has notified Swedish eIDs at the assurance levels substantial and high.</p>
+<p>A request for authentication from a foreign service provider is sent to the Swedish eIDAS node (<em>eIDAS Proxy Service</em>) via an eIDAS connector in the service provider&#39;s country. At the Swedish eIDAS node, the user chooses which Swedish eID he or she wants to use to authenticate, and an authentication request is sent to the identity provider that offers authentication for the selected eID. This request follows the Sweden Connect Technical Framework, which means that a Swedish identity provider does not have to conform to the eIDAS technical specifications.</p>
+<p>The user is authenticated by the Swedish identity provider, and an identity assertion is issued according to the Sweden Connect Technical Framework. This assertion is received by the Swedish eIDAS node (Proxy Service) and transformed into an assertion according to the eIDAS specifications before being sent to the foreign eIDAS connector, and then to the foreign service provider that initiated the request.</p>
+<p><a name="technical-specifications"></a></p>
+<h2 id="2-technical-specifications">2. Technical Specifications</h2>
+<p>This chapter lists the specifications and profiles for identity federations and related services that conform to the Sweden Connect Technical Framework. These documents are normative for the delivery of services within identity federations that implement the Sweden Connect Technical Framework, unless otherwise stated.</p>
+<p><a name="common-specifications"></a></p>
+<h3 id="21-common-specifications">2.1. Common Specifications</h3>
+<p>The specifications in this section apply to both the SAML and the OpenID Connect parts of the Sweden Connect Technical Framework.</p>
+<p><a name="sc-registry-for-identifiers"></a></p>
+<h4 id="211-sweden-connect--registry-for-identifiers">2.1.1. Sweden Connect – Registry for Identifiers</h4>
+<p>The implementation of an infrastructure for Swedish eIDs requires different forms of identifiers to represent objects in data structures. The document &quot;Sweden Connect – Registry for Identifiers&quot;, [<a href="#sc-registry">SC.Registry</a>], defines the structure for identifiers that are assigned within the scope of the Sweden Connect Technical Framework, and contains a registry of defined identifiers.</p>
+<p><a name="sc-security-requirements"></a></p>
+<h4 id="212-sweden-connect--security-requirements">2.1.2. Sweden Connect – Security Requirements</h4>
+<p>The specification &quot;Sweden Connect – Security Requirements&quot;, [<a href="#sc-security">SC.Security</a>], defines the security requirements for participants in the Sweden Connect federation. It covers transport protection, cryptographic algorithms, key lengths and key rollover.</p>
+<p><a name="profiles-and-specifications-for-saml"></a></p>
+<h3 id="22-profiles-and-specifications-for-saml">2.2. Profiles and Specifications for SAML</h3>
+<p>Identity federations conforming to the SAML part of the Sweden Connect Technical Framework are built around the &quot;Deployment Profile for the Swedish eID Framework&quot;, [<a href="#saml-profile">SAML.Profile</a>]. This profile is influenced by, but not normatively dependent on, &quot;SAML V2.0 Deployment Profile for Federation Interoperability&quot; [<a href="#saml2int">SAML2Int</a>]. [<a href="#saml-profile">SAML.Profile</a>] also contains rules and guidelines specific to the Sweden Connect Technical Framework.</p>
+<p><a name="deployment-profile-for-the-swedish-eid-framework"></a></p>
+<h4 id="221-deployment-profile-for-the-swedish-eid-framework">2.2.1. Deployment Profile for the Swedish eID Framework</h4>
+<p>The &quot;Deployment Profile for the Swedish eID Framework&quot; specification, [<a href="#saml-profile">SAML.Profile</a>], is the main SAML specification of the Sweden Connect Technical Framework and covers:</p>
+<ul class="list">
+<li><p>How SAML metadata is constructed and interpreted.</p>
+</li>
+<li><p>How an authentication request is compiled.</p>
+</li>
+<li><p>How an authentication request is processed, and how an identity assertion is constructed, verified and processed.</p>
+</li>
+<li><p>Security requirements.</p>
+</li>
+<li><p>Specific SAML requirements for signature services and &quot;authentication for signature&quot;.</p>
+</li>
+</ul>
+<p><a name="attribute-specification-for-the-swedish-eid-framework"></a></p>
+<h4 id="222-attribute-specification-for-the-swedish-eid-framework">2.2.2. Attribute Specification for the Swedish eID Framework</h4>
+<p>The specification &quot;Attribute Specification for the Swedish eID Framework&quot;, [<a href="#saml-attributes">SAML.Attributes</a>], declares the SAML attribute profiles that are used within identity federations that follow the Sweden Connect Technical Framework, including services that connect to eIDAS via the Swedish eIDAS node.</p>
+<p><a name="entity-categories-for-the-swedish-eid-framework"></a></p>
+<h4 id="223-entity-categories-for-the-swedish-eid-framework">2.2.3. Entity Categories for the Swedish eID Framework</h4>
+<p>Entity Categories are used within the SAML part of the federation for different purposes:</p>
+<ul class="list">
+<li><p>  Service Entity Categories – Used in metadata to represent service provider requirements regarding assurance levels and attributes, and identity provider declarations of supported assurance levels and attribute release capabilities.</p>
+</li>
+<li><p>  Service Property Categories – Used to represent certain properties of services within the federation.</p>
+</li>
+<li><p>Service Type Entity Categories – Represent different service types within the federation.</p>
+</li>
+<li><p>Service Contract Entity Categories – Used by services to declare legal and business agreements.</p>
+</li>
+<li><p>  General Entity Categories – Entity categories that do not fall within the scope of any of the other types.</p>
+</li>
+</ul>
+<p>The specification &quot;Entity Categories for the Swedish eID Framework&quot;, [<a href="#saml-entcat">SAML.EntCat</a>], specifies the entity categories that are defined in the Sweden Connect Technical Framework and describes their meaning.</p>
+<p><a name="eidas-constructed-attributes-specification-for-the-swedish-eid-framework"></a></p>
+<h4 id="224-eidas-constructed-attributes-specification-for-the-swedish-eid-framework">2.2.4. eIDAS Constructed Attributes Specification for the Swedish eID Framework</h4>
+<p>The specification &quot;eIDAS Constructed Attributes Specification for the Swedish eID Framework&quot;, [<a href="#sc-eidas-attrs">SC.eIDAS.Attrs</a>], defines processes and rules for how identity attributes are constructed based on the attributes received during an eIDAS authentication.</p>
+<p><a name="principal-selection-in-saml-authentication-requests"></a></p>
+<h4 id="225-principal-selection-in-saml-authentication-requests">2.2.5. Principal Selection in SAML Authentication Requests</h4>
+<p>The specification &quot;Principal Selection in SAML Authentication Requests&quot;, [<a href="#saml-principal">SAML.Principal</a>], defines an extension to SAML that makes it possible for a service provider to inform an identity provider about the identity of the user that it wishes to have authenticated.</p>
+<p><a name="user-message-extension-in-saml-authentication-requests"></a></p>
+<h4 id="226-user-message-extension-in-saml-authentication-requests">2.2.6. User Message Extension in SAML Authentication Requests</h4>
+<p>The specification &quot;User Message Extension in SAML Authentication Requests&quot;, [<a href="#saml-umessage">SAML.UMessage</a>], defines an extension to SAML that makes it possible for a service provider to include a message in the authentication request sent to the identity provider. The identity provider can then display this message to the user during authentication.</p>
+<p><a name="profiles-and-specifications-for-openid-connect"></a></p>
+<h3 id="23-profiles-and-specifications-for-openid-connect">2.3. Profiles and Specifications for OpenID Connect</h3>
+<p>The OpenID Connect specifications of the Sweden Connect Technical Framework build on the OpenID Connect specifications published by <a href="https://www.oidc.se">OIDC Sweden</a>, and extend them with requirements, claims and scopes specific to the Sweden Connect federation. The following OIDC Sweden specifications are used:</p>
+<ul class="list">
+<li><p>&quot;The Swedish OpenID Connect Profile&quot;, [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>], is an OpenID Connect profile that establishes a baseline level of security and facilitates interoperability between Relying Parties and OpenID Providers in Swedish deployments.</p>
+</li>
+<li><p>&quot;Claims and Scopes Specification for the Swedish OpenID Connect Profile&quot;, [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>], defines claims and scopes for the Swedish OpenID Connect profile.</p>
+</li>
+<li><p>&quot;Authentication Request Parameter Extensions for the Swedish OpenID Connect Profile&quot;, [<a href="#oidc-sweden-rpar">OIDC.Sweden.RPar</a>], defines additional authentication request parameters, for example, a parameter for displaying a message to the user during authentication.</p>
+</li>
+<li><p>&quot;Signature Extension for OpenID Connect&quot;, [<a href="#oidc-sweden-sign">OIDC.Sweden.Sign</a>], defines an extension where a Relying Party, for example, a signature service, sends a signature request to an OpenID Provider.</p>
+</li>
+</ul>
+<p>The specifications needed for joining the OpenID Connect part of the federation, such as the metadata requirements, are listed in Section <a href="#the-sweden-connect-federation">2.5</a>.</p>
+<p><a name="openid-connect-profile-for-sweden-connect"></a></p>
+<h4 id="231-openid-connect-profile-for-sweden-connect">2.3.1. OpenID Connect Profile for Sweden Connect</h4>
+<p>The specification &quot;OpenID Connect Profile for Sweden Connect&quot;, [<a href="#oidc-profile">OIDC.Profile</a>], extends &quot;The Swedish OpenID Connect Profile&quot;, [<a href="#oidc-sweden-profile">OIDC.Sweden.Profile</a>], with additional requirements for Relying Parties and OpenID Providers in the Sweden Connect federation. This includes, for example, requirements for single sign-on, client authentication, ID Token contents and support for the &quot;Signature Extension for OpenID Connect&quot; [<a href="#oidc-sweden-sign">OIDC.Sweden.Sign</a>].</p>
+<p><a name="openid-connect-claims-and-scopes-specification-for-sweden-connect"></a></p>
+<h4 id="232-openid-connect-claims-and-scopes-specification-for-sweden-connect">2.3.2. OpenID Connect Claims and Scopes Specification for Sweden Connect</h4>
+<p>The specification &quot;OpenID Connect Claims and Scopes Specification for Sweden Connect&quot;, [<a href="#oidc-claims">OIDC.Claims</a>], extends &quot;Claims and Scopes Specification for the Swedish OpenID Connect Profile&quot;, [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>], with claims and scopes for use within the Sweden Connect federation, including definitions for eIDAS.</p>
+<p><a name="signature-specifications"></a></p>
+<h3 id="24-signature-specifications">2.4. Signature Specifications</h3>
+<p>This section contains references to the documents that define signature services within federations conforming to the Sweden Connect Technical Framework.</p>
+<p><a name="implementation-profile-oasis-dss"></a></p>
+<h4 id="241-implementation-profile-for-using-oasis-dss-in-central-signing-services">2.4.1. Implementation Profile for using OASIS DSS in Central Signing Services</h4>
+<p>The &quot;Implementation Profile for using OASIS DSS in Central Signing Services&quot;, [<a href="#sign-dss-profile">Sign.DSS.Profile</a>], specifies a profile for signature requests and responses according to the OASIS standard &quot;Digital Signature Service Core Protocols, Elements, and Bindings&quot;, [<a href="#dss">DSS</a>].</p>
+<p><a name="dss-extensions"></a></p>
+<h4 id="242-dss-extension-for-federated-central-signing-services">2.4.2. DSS Extension for Federated Central Signing Services</h4>
+<p>&quot;DSS Extension for Federated Central Signing Services&quot;, [<a href="#sign-dss-ext">Sign.DSS.Ext</a>], is an extension to the OASIS standard &quot;Digital Signature Service Core Protocols, Elements, and Bindings&quot;, [<a href="#dss">DSS</a>], that specifies the definitions required for signatures according to the Sweden Connect Technical Framework.</p>
+<p><a name="certificate-profile-css"></a></p>
+<h4 id="243-certificate-profile-for-certificates-issued-by-central-signing-services">2.4.3. Certificate Profile for Certificates Issued by Central Signing Services</h4>
+<p>The &quot;Certificate Profile for Certificates Issued by Central Signing Services&quot;, [<a href="#sign-cert-profile">Sign.Cert.Profile</a>], specifies the contents of signature certificates and defines a certificate extension for use by signature services.</p>
+<p>This profile refers to &quot;Authentication Context Certificate Extension&quot;, [<a href="#authcontext">AuthContext</a>], which describes how an authentication context is represented in X.509 certificates.</p>
+<p><a name="signature-activation"></a></p>
+<h4 id="244-signature-activation-protocol-for-federated-signing">2.4.4. Signature Activation Protocol for Federated Signing</h4>
+<p>The specification &quot;Signature Activation Protocol for Federated Signing&quot;, [<a href="#sign-activation">Sign.Activation</a>], defines a Signature Activation Protocol (SAP) for implementing Sole Control Assurance Level 2 (SCAL2) according to the standard &quot;prEN 419241 - Trustworthy Systems Supporting Server Signing&quot;.</p>
+<p><a name="the-sweden-connect-federation"></a></p>
+<h3 id="25-the-sweden-connect-federation">2.5. The Sweden Connect Federation</h3>
+<p>This section lists the documents needed for joining the Sweden Connect federation, in addition to the security requirements in Section <a href="#sc-security-requirements">2.1.2</a>. Section 2.5.1 applies to the SAML part of the federation, and Sections 2.5.2 to 2.5.5 apply to the OpenID Connect part, which is based on OpenID Federation [<a href="#openid-federation">OpenID.Federation</a>].</p>
+<p><a name="tekniska-anslutningsregler"></a></p>
+<h4 id="251-tekniska-anslutningsregler-för-sweden-connect-federationen">2.5.1. Tekniska anslutningsregler för Sweden Connect-federationen</h4>
+<p>The document &quot;Tekniska anslutningsregler för Sweden Connect-federationen&quot; (technical rules for joining the Sweden Connect federation), [<a href="#sc-saml-rules">SC.SAML.Rules</a>], is the normative specification for parties joining the SAML part of the Sweden Connect federation. It covers the agreements that give access to the federation, levels of assurance, requirements for authentication and attribute release, and the rules for registering metadata.</p>
+<blockquote>
+<p><strong>Note:</strong> This document is currently only available in Swedish.</p>
+</blockquote>
+<p><a name="sc-oidf-rules"></a></p>
+<h4 id="252-sweden-connect--openid-federation-rules-and-policies">2.5.2. Sweden Connect – OpenID Federation Rules and Policies</h4>
+<p>The document &quot;Sweden Connect – OpenID Federation Rules and Policies&quot;, [<a href="#sc-oidf-rules-ref">SC.OIDF.Rules</a>], contains the federation rules of the OpenID Connect part of the Sweden Connect federation and is the entry document for participants. It states what Relying Parties and OpenID Providers must comply with, including Trust Marks, registration policies and the steps for joining the federation.</p>
+<p><a name="sc-oidf-structure"></a></p>
+<h4 id="253-sweden-connect--openid-federation-structure">2.5.3. Sweden Connect – OpenID Federation Structure</h4>
+<p>The document &quot;Sweden Connect – OpenID Federation Structure&quot;, [<a href="#sc-oidf-structure-ref">SC.OIDF.Structure</a>], describes how the OpenID Connect part of the Sweden Connect federation is structured, and provides the Entity Identifiers, endpoints and Trust Anchor keys for the Production, QA and Sandbox environments.</p>
+<p><a name="sc-oidc-metadata-requirements"></a></p>
+<h4 id="254-sweden-connect--openid-connect-metadata-requirements">2.5.4. Sweden Connect – OpenID Connect Metadata Requirements</h4>
+<p>The specification &quot;Sweden Connect – OpenID Connect Metadata Requirements&quot;, [<a href="#sc-oidc-metadata">SC.OIDC.Metadata</a>], defines the metadata requirements for Relying Parties and OpenID Providers, and the metadata policies that the federation applies to enforce them. The requirements apply to the resolved metadata, i.e., the metadata that results when the Trust Chain of an entity has been applied to the metadata that the entity declares about itself.</p>
+<p><a name="oidc-sweden-federation-specifications"></a></p>
+<h4 id="255-oidc-sweden--openid-federation-profiles-and-specifications">2.5.5. OIDC Sweden – OpenID Federation Profiles and Specifications</h4>
+<p>The Sweden Connect support for OpenID Federation is built upon the following profile and specifications published by OIDC Sweden:</p>
+<ul class="list">
+<li><p>&quot;Swedish OpenID Federation Deployment and Interoperability Profile&quot;, [<a href="#oidc-sweden-fed">OIDC.Sweden.Fed</a>], defines a constrained subset of OpenID Federation, with clarifications and extensions, so that OpenID Providers, Relying Parties and other entities can join a federation with little effort. It also describes how systems without full OpenID Federation support can take part.</p>
+</li>
+<li><p>&quot;OpenID Federation Organization Identifier Metadata Parameter&quot;, [<a href="#oidc-sweden-orgid">OIDC.Sweden.OrgId</a>], defines the <code>organization_identifier</code> metadata parameter, which an entity uses to declare a unique identifier for the organization that owns it.</p>
+</li>
+<li><p>&quot;OpenID Federation Registration Policy&quot;, [<a href="#oidc-sweden-regpolicy">OIDC.Sweden.RegPolicy</a>], defines the <code>registration_policy</code> claim for Subordinate Statements, which identifies the registration policies applied when an entity was registered in the federation.</p>
+</li>
+<li><p>&quot;OpenID Federation Entity Configuration Hosting&quot;, [<a href="#oidc-sweden-hosting">OIDC.Sweden.Hosting</a>], defines the <code>ec_location</code> claim, which states where an entity&#39;s Entity Configuration can be fetched. This makes it possible for an Intermediate Entity to host Entity Configurations for entities that lack full OpenID Federation support.</p>
+</li>
+</ul>
+<p><a name="references"></a></p>
+<h2 id="3-references">3. References</h2>
+<p><a name="digg"></a></p>
+<h3 id="31-digg">3.1. Digg</h3>
+<p><a name="trustframework"></a>
+<strong>[TrustFramework]</strong></p>
+<blockquote>
+<p><a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Tillitsramverk för Svensk e-legitimation</a>.</p>
+</blockquote>
+<p><a name="sc-registry"></a>
+<strong>[SC.Registry]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html">Sweden Connect – Registry for Identifiers</a>.</p>
+</blockquote>
+<p><a name="saml-profile"></a>
+<strong>[SAML.Profile]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="saml-attributes"></a>
+<strong>[SAML.Attributes]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="saml-entcat"></a>
+<strong>[SAML.EntCat]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="sc-eidas-attrs"></a>
+<strong>[SC.eIDAS.Attrs]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html">eIDAS Constructed Attributes Specification for the Swedish eID Framework</a>.</p>
+</blockquote>
+<p><a name="saml-principal"></a>
+<strong>[SAML.Principal]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html">Principal Selection in SAML Authentication Requests</a>.</p>
+</blockquote>
+<p><a name="saml-umessage"></a>
+<strong>[SAML.UMessage]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html">User Message Extension in SAML Authentication Requests</a>.</p>
+</blockquote>
+<p><a name="oidc-profile"></a>
+<strong>[OIDC.Profile]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Profile_for_Sweden_Connect.html">OpenID Connect Profile for Sweden Connect</a>.</p>
+</blockquote>
+<p><a name="oidc-claims"></a>
+<strong>[OIDC.Claims]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Claims_and_Scopes_Specification.html">OpenID Connect Claims and Scopes Specification for Sweden Connect</a>.</p>
+</blockquote>
+<p><a name="sign-dss-profile"></a>
+<strong>[Sign.DSS.Profile]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for using OASIS DSS in Central Signing Services</a>.</p>
+</blockquote>
+<p><a name="sign-dss-ext"></a>
+<strong>[Sign.DSS.Ext]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+</blockquote>
+<p><a name="sign-cert-profile"></a>
+<strong>[Sign.Cert.Profile]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate Profile for Certificates Issued by Central Signing Services</a>.</p>
+</blockquote>
+<p><a name="sign-activation"></a>
+<strong>[Sign.Activation]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html">Signature Activation Protocol for Federated Signing</a>.</p>
+</blockquote>
+<p><a name="sc-security"></a>
+<strong>[SC.Security]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect – Security Requirements 1.0</a>.</p>
+</blockquote>
+<p><a name="sc-saml-rules"></a>
+<strong>[SC.SAML.Rules]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html">Tekniska anslutningsregler för Sweden Connect-federationen</a>.</p>
+</blockquote>
+<p><a name="sc-oidf-rules-ref"></a>
+<strong>[SC.OIDF.Rules]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/federation/oidf-rules.html">Sweden Connect – OpenID Federation Rules and Policies 1.0</a>.</p>
+</blockquote>
+<p><a name="sc-oidf-structure-ref"></a>
+<strong>[SC.OIDF.Structure]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/federation/oidf-structure.html">Sweden Connect – OpenID Federation Structure</a>.</p>
+</blockquote>
+<p><a name="sc-oidc-metadata"></a>
+<strong>[SC.OIDC.Metadata]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html">Sweden Connect – OpenID Connect Metadata Requirements 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden"></a></p>
+<h3 id="32-oidc-sweden">3.2. OIDC Sweden</h3>
+<p><a name="oidc-sweden-profile"></a>
+<strong>[OIDC.Sweden.Profile]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html">The Swedish OpenID Connect Profile - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-claims"></a>
+<strong>[OIDC.Sweden.Claims]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html">Claims and Scopes Specification for the Swedish OpenID Connect Profile - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-rpar"></a>
+<strong>[OIDC.Sweden.RPar]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/request-parameter-extensions-1_1.html">Authentication Request Parameter Extensions for the Swedish OpenID Connect Profile - Version 1.1</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-sign"></a>
+<strong>[OIDC.Sweden.Sign]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/oidc-signature-extension-1_2.html">Signature Extension for OpenID Connect - Version 1.2</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-fed"></a>
+<strong>[OIDC.Sweden.Fed]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-openid-federation-profile-1_0.html">Swedish OpenID Federation Deployment and Interoperability Profile - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-orgid"></a>
+<strong>[OIDC.Sweden.OrgId]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/openid-federation-organization-identifier-1_0.html">OpenID Federation Organization Identifier Metadata Parameter - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-regpolicy"></a>
+<strong>[OIDC.Sweden.RegPolicy]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/openid-federation-registration-policy-1_0.html">OpenID Federation Registration Policy - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-hosting"></a>
+<strong>[OIDC.Sweden.Hosting]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/openid-federation-hosting-1_0.html">OpenID Federation Entity Configuration Hosting - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="other-references"></a></p>
+<h3 id="33-other-references">3.3. Other References</h3>
+<p><a name="openid-core"></a>
+<strong>[OpenID.Core]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-core-1_0.html">Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015</a>.</p>
+</blockquote>
+<p><a name="openid-federation"></a>
+<strong>[OpenID.Federation]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-federation-1_0.html">Hedberg, R., Jones, M.B., Solberg, A.Å., Bradley, J., De Marco, G. and V. Dzhuvinov, &quot;OpenID Federation 1.0&quot;</a>.</p>
+</blockquote>
+<p><a name="saml2int"></a>
+<strong>[SAML2Int]</strong></p>
+<blockquote>
+<p><a href="https://kantarainitiative.github.io/SAMLprofiles/saml2int.html">SAML V2.0 Deployment Profile for Federation Interoperability</a>.</p>
+</blockquote>
+<p><a name="dss"></a>
+<strong>[DSS]</strong></p>
+<blockquote>
+<p><a href="http://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.doc">OASIS Standard – Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007</a>.</p>
+</blockquote>
+<p><a name="authcontext"></a>
+<strong>[AuthContext]</strong></p>
+<blockquote>
+<p><a href="https://tools.ietf.org/html/rfc7773">RFC-7773: Authentication Context Certificate Extension</a>.</p>
+</blockquote>
+    </article>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tekniska anslutningsregler för Sweden Connect-federationen</title>
+    <title>Tekniska anslutningsregler för Sweden Connects SAML-federation</title>
     <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
     <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
@@ -18,23 +18,22 @@
 <img align="center" src="img/transparent.png"></img>
 </p>
 
-<h1 id="tekniska-anslutningsregler-för-sweden-connect-federationen">Tekniska anslutningsregler för Sweden Connect-federationen</h1>
-<h3 id="2025-11-27">2025-11-27</h3>
-<p>Specifikation gällande aktörer som ansluter till Diggs identitetsfederation Sweden Connect.</p>
+<h1 id="tekniska-anslutningsregler-för-sweden-connects-saml-federation">Tekniska anslutningsregler för Sweden Connects SAML-federation</h1>
+<h3 id="2026-10-19">2026-10-19</h3>
+<p>Specifikation gällande aktörer som ansluter med SAML till Diggs identitetsfederation Sweden Connect.</p>
 <hr>
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (Digg)</a>, 2021-2025.
+Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (Digg)</a>, 2021-2026.
 </p>
 
 <h2 id="innehållsförteckning">Innehållsförteckning</h2>
 <ol class="list">
 <li><p><a href="#introduktion"><strong>Introduktion</strong></a></p>
 <p>1.1. <a href="#avtal">Avtal</a></p>
-<p>1.1.1. <a href="#valfrihetssystem-2017">Valfrihetssystem 2017</a></p>
-<p>1.1.2. <a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a></p>
-<p>1.1.3. <a href="#internationell-legitimering-eidas">Internationell legitimering - eIDAS</a></p>
-<p>1.1.4. <a href="#eid-for-medarbetare">eID för medarbetare</a></p>
-<p>1.1.5. <a href="#bilaterala-avtal-om-legitimering">Bilaterala avtal om legitimering</a></p>
+<p>1.1.1. <a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a></p>
+<p>1.1.2. <a href="#internationell-legitimering-eidas">Internationell legitimering - eIDAS</a></p>
+<p>1.1.3. <a href="#eid-for-medarbetare">eID för medarbetare</a></p>
+<p>1.1.4. <a href="#bilaterala-avtal-om-legitimering">Bilaterala avtal om legitimering</a></p>
 <p>1.2. <a href="#tillitsnivaer">Tillitsnivåer och identifierare för legitimering</a></p>
 <p>1.2.1. <a href="#svenska-tillitsnivaer">Svenska tillitsnivåer</a></p>
 <p>1.2.2. <a href="#tillitsnivaer-enligt-eidas">Tillitsnivåer enligt eIDAS</a></p>
@@ -69,14 +68,13 @@ Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvalt
 <p>3.4.7. <a href="#eidas-naturalperson">eidas-naturalperson</a></p>
 <p>3.4.8. <a href="#eidas-pnr-delivery">eidas-pnr-delivery</a></p>
 <p>3.5. <a href="#registrering-av-typ-av-forlitande-part">Registrering av typ av förlitande part - Service Type Category</a></p>
-<p>3.5.1. <a href="#indikator-for-underskriftstjanst">Indikator för underskriftstjänst</a></p>
+<p>3.5.1. <a href="#sigservice">Indikator för underskriftstjänst</a></p>
 <p>3.5.2. <a href="#indikator-for-offentlig-eller-privat-sektor">Indikator för offentlig eller privat sektor</a></p>
 <p>3.6. <a href="#registrering-av-tecknade-avtal">Registrering av tecknade avtal</a></p>
 <p>3.6.1. <a href="#sweden-connect-avtal">Sweden Connect-avtal</a></p>
 <p>3.6.2. <a href="#other-contracts">Bilaterala avtal</a></p>
-<p>3.6.3. <a href="#eid-choice-2017">Valfrihetssystem 2017</a></p>
-<p>3.6.4. <a href="#eid-for-medarbetare2">eID för medarbetare</a></p>
-<p>3.6.5. <a href="#eid-authorization-system">Auktorisationssystem för elektronisk identifiering</a></p>
+<p>3.6.3. <a href="#eid-for-medarbetare2">eID för medarbetare</a></p>
+<p>3.6.4. <a href="#eid-authorization-system">Auktorisationssystem för elektronisk identifiering</a></p>
 <p>3.7. <a href="#metadataregler-gallande-organisationsidentiteter">Metadataregler gällande organisationsidentiteter</a></p>
 <p>3.8. <a href="#metadataregler-gallande-samordningsnummer">Metadataregler gällande samordningsnummer</a></p>
 <p>3.9. <a href="#metadataregler-gallande-tillitsniva-4">Metadataregler gällande tillitsnivå 4 (LoA 4)</a></p>
@@ -91,7 +89,7 @@ Diggs identitetsfederation Sweden Connect.</p>
 <p>Givet de olika avtalen för leverantörer och deltagare inom federationen definieras specifika 
 krav baserat på avtalens utformning och de tekniska kraven i <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect - Tekniskt ramverk</a>.</p>
 <blockquote>
-<p>Notera: Den nuvarande versionen av detta dokument förutsätter att den tekniska anslutningsmetoden till Sweden Connect är SAML. Inom kort kommer detta dokument att uppdateras med anslutningsregler för OpenID Connect.</p>
+<p>Notera: Detta dokument hanterar endast anslutning med SAML. Motsvarande dokument för anslutning med OpenID Connect finns publicerade på <a href="https://docs.swedenconnect.se/technical-framework/#federation-openid-connect">https://docs.swedenconnect.se/technical-framework/#federation-openid-connect</a>.</p>
 </blockquote>
 <p><a name="avtal"></a></p>
 <h3 id="11-avtal">1.1. Avtal</h3>
@@ -100,39 +98,31 @@ Dessa avtal definierar vilken typ av legitimering som levereras/efterfrågas, sa
 såsom avgifter och ansvarsfrågor. Denna specifikation berör endast de tekniska aspekterna av
 de olika avtalen, d.v.s., hur legitimering går till och vilka krav som ställs på en viss aktör
 rörande registrering etc.</p>
-<p><a name="valfrihetssystem-2017"></a></p>
-<h4 id="111-valfrihetssystem-2017">1.1.1. Valfrihetssystem 2017</h4>
-<p><a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-svenska-e-legitimationer/om-valfrihetssystem-2017-och-2018">Valfrihetssystem 2017</a> är ett avtal som ger förlitande parter tillgång till godkända, och granskade, legitimeringstjänst(er) som levererar identitetsintyg utställda enligt tillitsnivå 3 (eller 4), och innehållande person- eller samordningsnummer. </p>
-<blockquote>
-<p>Endast offentliga förlitande parter kan teckna detta avtal.</p>
-</blockquote>
-<p>Legitimeringstjänster som levererar enligt Valfrihetssystem 2017 har tecknat &quot;Anslutningsavtal för leverantör avseende Valfrihetssystem 2017 e-legitimering&quot;.</p>
-<p><strong>Notera:</strong> Valfrihetssystem 2017 (och 2018) övergår till <a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a> den 1:a januari 2026. Det går inte längre att ansluta sig till valfrihetssystemen.</p>
 <p><a name="auktorisationssystem-for-elektronisk-identifiering"></a></p>
-<h4 id="112-auktorisationssystem-för-elektronisk-identifiering">1.1.2. Auktorisationssystem för elektronisk identifiering</h4>
+<h4 id="111-auktorisationssystem-för-elektronisk-identifiering">1.1.1. Auktorisationssystem för elektronisk identifiering</h4>
 <p><a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-elektronisk-identifiering-inom-auktorisationssystemet">Auktorisationssystem för elektronisk identifiering</a> är ett avtal som ger förlitande parter tillgång till godkända och granskade e-legitimationer samt tillhörande legitimeringstjänster. </p>
 <p>E-legitimationerna utfärdas till personer med person- och samordningsnummer och uppfyller tillitsnivå 2, 3 eller 4 enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Tillitsramverket för Svensk e-legitimation</a>. </p>
 <p>De anslutna leverantörerna tillhandahåller funktioner för legitimering, identifiering, elektronisk underskrift och leverans av identitetsintyg. Leverantören kan även erbjuda möjlighet till id-växling.</p>
 <p>Endast offentliga förlitande parter kan teckna detta avtal. Avtalen börjar gälla, och tjänsterna kan börja användas, i januari 2026.</p>
-<p>Leverantörer som levererar enligt Auktorisationsysstem för elektronisk identifiering har tecknat <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-elektronisk-identifiering-inom-auktorisationssystemet/auktorisationssystem-for-elektronisk-identifiering---administrativa-foreskrifter/anslutningsavtal-for-auktorisationssystem-for-elektronisk-identifiering---leverantor">Anslutningsavtal för Auktorisationssystem för elektronisk identifiering – leverantör</a>.</p>
+<p>Leverantörer som levererar enligt Auktorisationssystem för elektronisk identifiering har tecknat <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-elektronisk-identifiering-inom-auktorisationssystemet/auktorisationssystem-for-elektronisk-identifiering---administrativa-foreskrifter/anslutningsavtal-for-auktorisationssystem-for-elektronisk-identifiering---leverantor">Anslutningsavtal för Auktorisationssystem för elektronisk identifiering – leverantör</a>.</p>
 <p><a name="internationell-legitimering-eidas"></a></p>
-<h4 id="113-internationell-legitimering---eidas">1.1.3. Internationell legitimering - eIDAS</h4>
+<h4 id="112-internationell-legitimering---eidas">1.1.2. Internationell legitimering - eIDAS</h4>
 <p>För att en svensk förlitande part ska få tillgång till eIDAS-legitimering tecknas avtalet
-<a href="https://www.digg.se/digitala-tjanster/e-legitimering/om-diggs-avtal-och-infrastruktur/sweden-connect---diggs-infrastruktur-for-e-legitimering/infor-anslutning-till-sweden-connect/anslutningsavtal-till-sweden-connect---offentlig-aktor">Anslutningsavtal till Sweden Connect – offentlig aktör</a>.</p>
+<a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-utlandska-e-legitimationer/anslut-till-den-svenska-eidas-noden/teckna-avtal-gallande-eidas-noden">Anslutningsavtal till Sweden Connect – offentlig aktör</a>.</p>
 <p>Detta avtal ger en förlitande part rätt att nyttja den svenska eIDAS-noden för legitimering av personer som innehar ett utländskt eID.</p>
 <blockquote>
 <p>Både offentliga och privata aktörer kan teckna detta avtal. Notera dock att eIDAS-legitimering för &quot;private sector&quot; i dagsläget har dåligt, eller inget, stöd bland de anslutna länderna.</p>
 </blockquote>
 <p><a name="eid-for-medarbetare"></a></p>
-<h4 id="114-eid-för-medarbetare">1.1.4. eID för medarbetare</h4>
+<h4 id="113-eid-för-medarbetare">1.1.3. eID för medarbetare</h4>
 <p><a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-e-tjanstelegitimationer">Förlitandeavtal - Förbetald e-legitimering</a> ger en förlitande part rätt att nyttja de legitimeringstjänster inom Sweden Connect som levererar identitetsintyg baserat på legitimering utförd med e-tjänstelegitimation. För dessa legitimeringstjänster krävs även en godkänd tillitsgranskning enligt nivå 2, 3 eller 4
 och att de levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a>.</p>
 <blockquote>
 <p>Både offentliga och privata förlitande parter kan teckna &quot;Förlitandeavtal - Förbetald e-legitimering&quot;.</p>
 </blockquote>
 <p><a name="bilaterala-avtal-om-legitimering"></a></p>
-<h4 id="115-bilaterala-avtal-om-legitimering">1.1.5. Bilaterala avtal om legitimering</h4>
-<p>En förlitande part som har tecknat <a href="https://www.digg.se/digitala-tjanster/e-legitimering/om-diggs-avtal-och-infrastruktur/sweden-connect---diggs-infrastruktur-for-e-legitimering/infor-anslutning-till-sweden-connect/anslutningsavtal-till-sweden-connect---offentlig-aktor">Anslutningsavtal till Sweden Connect – offentlig aktör</a> kan också
+<h4 id="114-bilaterala-avtal-om-legitimering">1.1.4. Bilaterala avtal om legitimering</h4>
+<p>En förlitande part som har tecknat <a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-utlandska-e-legitimationer/anslut-till-den-svenska-eidas-noden/teckna-avtal-gallande-eidas-noden">Anslutningsavtal till Sweden Connect – offentlig aktör</a> kan också
 teckna bilaterala avtal med leverantörer angående legitimeringstjänster som inte
 erbjuds via de befintliga Digg-avtalen. Detta kan till exempel vara en 
 tredjeparts-legitimeringstjänst för BankID (som inte finns som officiell legitimeringstjänst 
@@ -191,16 +181,18 @@ Utfärdas av den svenska eIDAS-noden då legitimeringen utförts enligt eIDAS-ni
 </ul>
 <p>[*]: För närvarande har den svenska eIDAS-noden ingen koppling mot annat än anmälda
 eID (eng. notified) enligt EU:s eIDAS-förordning.</p>
-<p><a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Tillitsramverket för Svensk e-legitimation</a> kräver att en individ som erhåller ett eID innehar ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimationer anskaffas av arbetsgivare enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/skaffa-losningar-for-inloggning-med-e-legitimationer/erbjud-inloggning-med-e-tjanstelegitimationer">E-legitimering för medarbetare</a>, och intygsleverans sker av legitimeringstjänst som levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> kan det förekomma att individer som inte innehar ett svenskt personnummer eller samordningsnummer tilldelas ett eID. Då dessa eID:n används för legitimering inom Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 2 eller 3 användas. En legitimeringstjänst som är godkänd för nivå 2 eller 3, och som utfärdar intyg för dessa typer av eID:n skall då använda följande identifierare:</p>
+<p><a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Tillitsramverket för Svensk e-legitimation</a> kräver att en individ som erhåller ett eID innehar ett svenskt personnummer (eller styrkt samordningsnummer). Då tjänstelegitimationer anskaffas av arbetsgivare enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/skaffa-losningar-for-inloggning-med-e-legitimationer/erbjud-inloggning-med-e-tjanstelegitimationer">E-legitimering för medarbetare</a>, och intygsleverans sker av legitimeringstjänst som levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> kan det förekomma att individer som inte innehar ett svenskt personnummer eller samordningsnummer tilldelas ett eID. Då dessa eID:n används för legitimering inom Sweden Connect får inte de ordinarie tillitsnivåerna för nivå 2, 3 eller 4 användas. En legitimeringstjänst som är godkänd för nivå 2, 3 eller 4, och som utfärdar intyg för dessa typer av eID:n skall då använda följande identifierare:</p>
 <ul class="list">
 <li><p><code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code> - Legitimering enligt tillitsnivå 2 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
 </li>
 <li><p><code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> - Legitimering enligt tillitsnivå 3 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
 </li>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code> - Legitimering enligt tillitsnivå 4 där det presenterade eID:t är utfärdat till en individ som inte innehar ett svenskt personnummer (eller samordningsnummer).</p>
+</li>
 </ul>
-<p>I båda ovanstående fall krävs att utfärdandet av e-legitimationen följer tillitsramverket med
+<p>I samtliga ovanstående fall krävs att utfärdandet av e-legitimationen följer tillitsramverket med
 undantag av kravet på personnummer/samordningsnummer och med tilläggskraven för &quot;non-resident&quot;.</p>
-<p>Kapitel <a href="#bilaterala-avtal-om-legitimering">1.1.5</a> och <a href="#aktorsspecifika-legitimeringstjanster">1.3.3</a> redogör för hur icke-tillitsgranskade legitimeringstjänster kan användas inom Sweden Connect-federationen. Eftersom dessa legitimeringstjänster inte är godkända enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">tillitsramverket</a> får de inte inkludera någon av de ovanstående identifierarna i identitetsintyg. Det står en tredjeparts-legitimeringstjänst fritt att definiera egna identifierare, men för att upprätthålla möjligheter för god interoperabilitet definieras ett antal identifierare i kapitel 3.1.1.2 av <a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris-for-uncertified-providers">Sweden Connect - Registry for identifiers</a>.</p>
+<p>Kapitel <a href="#bilaterala-avtal-om-legitimering">1.1.4</a> och <a href="#aktorsspecifika-legitimeringstjanster">1.3.3</a> redogör för hur icke-tillitsgranskade legitimeringstjänster kan användas inom Sweden Connect-federationen. Eftersom dessa legitimeringstjänster inte är godkända enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">tillitsramverket</a> får de inte inkludera någon av de ovanstående identifierarna i identitetsintyg. Det står en tredjeparts-legitimeringstjänst fritt att definiera egna identifierare, men för att upprätthålla möjligheter för god interoperabilitet definieras ett antal identifierare i kapitel 3.1.1.2 av <a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris-for-uncertified-providers">Sweden Connect - Registry for identifiers</a>.</p>
 <p>Dessa är:</p>
 <ul class="list">
 <li><p><code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> - Skall användas av en legitimeringstjänst som inte granskats, och godkänts, enligt tillitsramverkets nivå 3 men som leverarar tjänster som påstås motsvara nivå 3 (via självdeklaration). Detta gäller även för icke-granskade legitimeringstjänster som levererar legitimering för en utfärdare som är godkänd enligt nivå 3 (t.ex. BankID).</p>
@@ -247,7 +239,7 @@ av sin IdP-instans i Sweden Connect QA (se nedan).</p>
 <li><p>Sweden Connect Sandbox - En testmiljö för initial testning. Alla aktörer, oavsett avtal, har rätt
 att ansluta till denna miljö. Se vidare <a href="https://sandbox.swedenconnect.se">https://sandbox.swedenconnect.se</a>.</p>
 </li>
-<li><p>Sweden Connect QA - Sweden Connect:s officiella testmiljö. Endast aktörer som har avtal med Digg
+<li><p>Sweden Connect QA - Sweden Connects officiella testmiljö. Endast aktörer som har avtal med Digg
 har rätt att publicera metadata till denna miljö. Denna miljö ska vara en spegling av produktionsmiljön
 med det viktiga undantaget att endast testanvändare får förekomma (d.v.s., inga riktiga personnummer eller
 liknande tillåts). </p>
@@ -332,7 +324,7 @@ dessa attribut definieras också ett antal övriga attribut i <a href="https://d
 <p>Kraven på attributleverans baserat på Diggs leveransavtal är enligt följande:</p>
 <p><a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a></p>
 <blockquote>
-<p>En legitimeringstjänst som levererar legitimering för förlitande parter som tecknat <a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-e-tjanstelegitimationer">Förlitandeavtal - Förbetald e-legitimering</a> skall stödja följande attributuppsättningar:</p>
+<p>En legitimeringstjänst som levererar legitimering för förlitande parter som anslutits till <a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a> skall stödja följande attributuppsättningar:</p>
 </blockquote>
 <blockquote>
 <ul class="list">
@@ -347,7 +339,7 @@ dessa attribut definieras också ett antal övriga attribut i <a href="https://d
 <p><a href="#eid-for-medarbetare">eID för medarbetare</a></p>
 <blockquote>
 <p>En legitimeringstjänst som levererar legitimering för förlitande parter som tecknat 
-<a href="https://www.digg.se/download/18.3b27105f17fb89447e84747/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx">Förlitandeavtal - Förbetald e-legitimering</a> skall stödja följande 
+<a href="https://www.digg.se/download/18.129a4fef1939e2e1c1f162ca/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx">Förlitandeavtal - Förbetald e-legitimering</a> skall stödja följande 
 attributuppsättningar:</p>
 </blockquote>
 <blockquote>
@@ -411,14 +403,14 @@ inte inkluderar de önskade attributen.</em></p>
 <p><a name="specifika-krav-rorande-tillitsniva-4"></a></p>
 <h3 id="24-specifika-krav-rörande-tillitsnivå-4">2.4. Specifika krav rörande Tillitsnivå 4</h3>
 <p>En legitimeringstjänst som är godkänd för legitimering och intygsleverans på tillitsnivå 4
-enligt tillitsramverket för Svensk e-legitimation <strong>bör</strong> stödja SAML-profilen
+enligt tillitsramverket för Svensk e-legitimation kan välja att stödja SAML-profilen
 <a href="https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf">SAML V2.0 Holder-of-key Web Browser SSO Profile</a>. Användandet av &quot;Holder-of-key&quot; enligt Sweden Connect Tekniskt Ramverk
 specificeras i <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
 <p>En legitimeringstjänst som är godkänd för legitimering och intygsleverans enligt tillitsnivå 4 som stödjer
 &quot;Holder-of-key&quot;-profilen skall också godkänna legitimeringsbegäran enligt ordinarie WebSSO-profil (d.v.s,
 ett anrop enligt <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a> som inte nyttjar 
 &quot;Holder-of-key&quot;).</p>
-<p>En förlitande part <strong>kan</strong> välja att kräva legitimering enligt &quot;Holder-of-key&quot;-profilen för
+<p>En förlitande part kan välja att kräva legitimering enligt &quot;Holder-of-key&quot;-profilen för
 legitimeringstjänster som har annonserat stöd för detta.</p>
 <p>För att den höjda säkerheten med användandet av &quot;Holder-of-key&quot; ska bibehållas är det viktigt att både
 legitimeringstjänsten (vid begäran) och den förlitande parten (vid intygsleverans) kräver att ett 
@@ -453,8 +445,8 @@ tolkas.</p>
   &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/&lt;/md:OrganizationURL&gt;
   &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/<span class="hljs-keyword">en</span>&lt;/md:OrganizationURL&gt;
 &lt;/md:Organization&gt;</code></pre><p><em>Exempel på hur organisationen Digg har registrerat organisationsinformation i metadata.</em></p>
-<p><strong>Notera:</strong> Tillägget för att representera organisationsnummer skapas av Sweden Connect:s anslutningsprocesser (om det inte är satt vid inlämning av metadata). Detta element innehåller organisationsnumret för den givna organisationen enligt formatet 10 siffror utan bindestreck.</p>
-<p>För ytterligare information om XML-formatet för detta element, se <a href="https://docs.swedenconnect.se/schemas/authn/1.0/UserMessage-1.0.xsd">OrganizationNumber-1.0.xsd</a>.</p>
+<p><strong>Notera:</strong> Tillägget för att representera organisationsnummer skapas av Sweden Connects anslutningsprocesser (om det inte är satt vid inlämning av metadata). Detta element innehåller organisationsnumret för den givna organisationen enligt formatet 10 siffror utan bindestreck.</p>
+<p>För ytterligare information om XML-formatet för detta element, se <a href="https://docs.swedenconnect.se/schemas/authn/1.0/OrganizationNumber-1.0.xsd">OrganizationNumber-1.0.xsd</a>.</p>
 <p>I sammanställt metadata för federationen inkluderas elementet <code>OrganizationNumber</code> för alla parter.</p>
 <p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
 <ul class="list">
@@ -526,7 +518,9 @@ tillitsnivå 3 och 4.</em></p>
 <li><p>Endast legitimeringstjänster som är granskade och godkända enligt tillitsnivå 4 får deklarera 
 <code>http://id.elegnamnden.se/loa/1.0/loa4</code>.</p>
 </li>
-<li><p>Endast legitimeringstjänster som levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> och som är granskade och godkända enligt tillitsnivå 3 eller högre får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code>.</p>
+<li><p>Endast legitimeringstjänster som levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> och som är granskade och godkända enligt tillitsnivå 3 får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code>.</p>
+</li>
+<li><p>Endast legitimeringstjänster som levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> och som är granskade och godkända enligt tillitsnivå 4 får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>.</p>
 </li>
 <li><p>Endast legitimeringstjänster som levererar enligt <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering</a> och som är granskade och godkända enligt tillitsnivå 2 får deklarera <code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code>. </p>
 </li>
@@ -666,7 +660,7 @@ leverera intyg med attribut från attributuppsättningen <a href="https://docs.s
 </blockquote>
 <p><strong>För en förlitande part</strong>:</p>
 <blockquote>
-<p>Den förlitande parten deklarerar att den kommer att begära legitimering enligt tillitsnivå 4<sup>*</sup> och
+<p>Den förlitande parten deklarerar att den kommer att begära legitimering enligt tillitsnivå 4 och
 att den begär leverans av attribut enligt uppsättningen <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
 </blockquote>
 <p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
@@ -735,7 +729,7 @@ att den begär leverans av attribut enligt uppsättningen <a href="https://docs.
 <ul class="list">
 <li><p>Endast legitimeringstjänster som i <code>assurance-certification</code>-attributet 
 (se kapitel <a href="#registrering-av-tillitsnivaer">3.3</a> ovan) deklarerar <code>http://id.elegnamnden.se/loa/1.0/loa4</code>
-eller  <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> får deklarera entitetskategorin <code>loa4-name</code>.</p>
+eller  <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code> får deklarera entitetskategorin <code>loa4-name</code>.</p>
 </li>
 <li><p>En legitimeringstjänst som deklarerar <code>loa4-pnr</code> (se <a href="#loa4-pnr">3.4.2</a> ovan) eller 
 <code>loa4-orgid</code> (se <a href="#loa4-orgid">3.4.4</a> ovan) måste också deklarera <code>loa4-name</code>.</p>
@@ -815,23 +809,14 @@ För legitimeringstjänster som konsumerar metadata från flera olika federation
 <h4 id="362-bilaterala-avtal">3.6.2. Bilaterala avtal</h4>
 <p>För de förlitande parter som tecknar avtal direkt med leveratörer, t.ex. en leverantör som levererar
 en SAML-IdP för BankID, så skall leverantören definiera en identifierare enligt det format som beskrivs
-i kapitel 5 av <a href="#https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#service-contract-categories">Entity Categories for the Swedish eID Framework</a>. Denna
+i kapitel 5 av <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#service-contract-categories">Entity Categories for the Swedish eID Framework</a>. Denna
 identifierare skall sedan deklareras av både förlitande part och legitimeringstjänst.</p>
 <p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
 <ul class="list">
 <li>Ingen kontroll utförs. Dessa avtal ligger utanför federationsoperatörens (Digg) ansvar.</li>
 </ul>
-<p><a name="eid-choice-2017"></a></p>
-<h4 id="363-valfrihetssystem-2017">3.6.3. Valfrihetssystem 2017</h4>
-<p><strong>Identifierare</strong>: <code>http://id.swedenconnect.se/contract/sc/eid-choice-2017</code></p>
-<p>Skall deklareras av förlitande parter som tecknat avtalet <a href="#valfrihetssystem-2017">Valfrihetssystem 2017</a> och av legitimeringstjänster som levererar enligt detta avtal.</p>
-<p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
-<ul class="list">
-<li>Vid registrering av metadata görs en kontroll mot tecknade avtal för den givna organisationen.</li>
-</ul>
-<p><strong>Notera:</strong> Valfrihetssystem 2017 (och 2018) övergår till <a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a> den 1:a januari 2026. Det går inte längre att ansluta sig till valfrihetssystemen.</p>
 <p><a name="eid-for-medarbetare2"></a></p>
-<h4 id="364-eid-för-medarbetare">3.6.4. eID för medarbetare</h4>
+<h4 id="363-eid-för-medarbetare">3.6.3. eID för medarbetare</h4>
 <p><strong>Identifierare</strong>: <code>http://id.swedenconnect.se/contract/sc/prepaid-auth-2021</code></p>
 <p>Skall deklareras av förlitande parter som tecknat avtalet <a href="#eid-for-medarbetare">Förlitandeavtal - Förbetald e-legitimering</a> och av legitimeringstjänster som levererar enligt <a href="#eid-for-medarbetare">Anslutningsavtal för utfärdare av 
 e-tjänstelegitimationer - Förbetald e-legitimering</a>.</p>
@@ -840,7 +825,7 @@ e-tjänstelegitimationer - Förbetald e-legitimering</a>.</p>
 <li>Vid registrering av metadata görs en kontroll mot tecknade avtal för den givna organisationen.</li>
 </ul>
 <p><a name="eid-authorization-system"></a></p>
-<h4 id="365-auktorisationssystem-för-elektronisk-identifiering">3.6.5. Auktorisationssystem för elektronisk identifiering</h4>
+<h4 id="364-auktorisationssystem-för-elektronisk-identifiering">3.6.4. Auktorisationssystem för elektronisk identifiering</h4>
 <p><strong>Identifierare</strong>: <code>http://id.swedenconnect.se/contract/sc/eid-authorization-system</code></p>
 <p>Skall deklareras av förlitande parter som anslutits till <a href="#auktorisationssystem-for-elektronisk-identifiering">Auktorisationssystem för elektronisk identifiering</a> och av legitimeringstjänster som levererar enligt detta avtal.</p>
 <p><strong>Regler och rutiner vid registrering av metadata</strong>:</p>
@@ -919,6 +904,11 @@ stöd för &quot;Holder-of-key&quot;. </p>
 <p><a name="versioner-av-detta-dokument"></a></p>
 <h2 id="4-versioner-av-detta-dokument">4. Versioner av detta dokument</h2>
 <ul class="list">
+<li><p>2026-10-19:</p>
+<ul class="list">
+<li>Referenser till det gamla avtalet &quot;Valfrihetssystem 2017&quot; togs bort.</li>
+</ul>
+</li>
 <li><p>2025-11-27:</p>
 <ul class="list">
 <li>Kapitel 3.1, &quot;Registrering av organisationsinformation&quot;, uppdaterades med information om inkludering av organisationsnummer.</li>

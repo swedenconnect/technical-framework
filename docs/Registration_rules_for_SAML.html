@@ -1,0 +1,686 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration Rules for the Sweden Connect SAML Federation</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="registration-rules-for-the-sweden-connect-saml-federation">Registration Rules for the Sweden Connect SAML Federation</h1>
+<h3 id="2026-10-19">2026-10-19</h3>
+<p>Specification for parties that connect to Digg&#39;s identity federation Sweden Connect using SAML.</p>
+<hr>
+<p class="copyright-statement">
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2021-2026.
+</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p>1.1. <a href="#agreements">Agreements</a></p>
+<p>1.1.1. <a href="#auktorisationssystem-for-elektronisk-identifiering">Authorization System for Electronic Identification (Auktorisationssystem för elektronisk identifiering)</a></p>
+<p>1.1.2. <a href="#international-authentication-eidas">International Authentication - eIDAS</a></p>
+<p>1.1.3. <a href="#eid-for-medarbetare">eID for Employees (eID för medarbetare)</a></p>
+<p>1.1.4. <a href="#bilateral-agreements-on-authentication">Bilateral Agreements on Authentication</a></p>
+<p>1.2. <a href="#levels-of-assurance">Levels of Assurance and Identifiers for Authentication</a></p>
+<p>1.2.1. <a href="#swedish-levels-of-assurance">Swedish Levels of Assurance</a></p>
+<p>1.2.2. <a href="#levels-of-assurance-according-to-eidas">Levels of Assurance According to eIDAS</a></p>
+<p>1.2.3. <a href="#identifiers-for-levels-of-assurance">Identifiers for Levels of Assurance</a></p>
+<p>1.3. <a href="#identity-providers-within-sweden-connect">Identity Providers within Sweden Connect</a></p>
+<p>1.3.1. <a href="#review-of-compliance-with-the-technical-framework">Review of Compliance with the Technical Framework</a></p>
+<p>1.3.2. <a href="#publishing-instances-to-the-sweden-connect-environments">Publishing Instances to the Sweden Connect Environments</a></p>
+<p>1.3.3. <a href="#party-specific-identity-providers">Specific Requirements for Party-specific Identity Providers</a></p>
+<p>1.3.4. <a href="#compliance-with-the-technical-framework-over-time">Compliance with the Technical Framework over Time</a></p>
+</li>
+<li><p><a href="#authentication-and-delivery-of-assertions"><strong>Authentication and Delivery of Assertions</strong></a></p>
+<p>2.1. <a href="#user-interface">User Interface</a></p>
+<p>2.1.1. <a href="#error-handling-and-reporting">Error Handling and Reporting</a></p>
+<p>2.1.2. <a href="#information-about-identity-attributes">Information about Identity Attributes</a></p>
+<p>2.2. <a href="#requirements-for-single-sign-on">Requirements for Single Sign-On</a></p>
+<p>2.3. <a href="#requirements-for-attribute-release">Requirements for Attribute Release</a></p>
+<p>2.3.1. <a href="#delivery-of-assertions-to-the-swedish-eidas-node">Delivery of Assertions to the Swedish eIDAS Node</a></p>
+<p>2.3.2. <a href="#other-attributes">Other Attributes</a></p>
+<p>2.4. <a href="#specific-requirements-for-loa-4">Specific Requirements for Level of Assurance 4</a></p>
+</li>
+<li><p><a href="#metadata"><strong>Metadata</strong></a></p>
+<p>3.1. <a href="#registration-of-organization-information">Registration of Organization Information</a></p>
+<p>3.2. <a href="#registration-of-display-name-and-logotype">Registration of Display Name and Logotype</a></p>
+<p>3.3. <a href="#registration-of-levels-of-assurance">Registration of Levels of Assurance</a></p>
+<p>3.4. <a href="#registration-of-service-entity-category-values">Registration of Service Entity Category Values</a></p>
+<p>3.4.1. <a href="#loa3-pnr">loa3-pnr</a></p>
+<p>3.4.2. <a href="#loa4-pnr">loa4-pnr</a></p>
+<p>3.4.3. <a href="#loa3-orgid">loa3-orgid</a></p>
+<p>3.4.4. <a href="#loa4-orgid">loa4-orgid</a></p>
+<p>3.4.5. <a href="#loa3-name">loa3-name</a></p>
+<p>3.4.6. <a href="#loa4-name">loa4-name</a></p>
+<p>3.4.7. <a href="#eidas-naturalperson">eidas-naturalperson</a></p>
+<p>3.4.8. <a href="#eidas-pnr-delivery">eidas-pnr-delivery</a></p>
+<p>3.5. <a href="#registration-of-relying-party-type">Registration of Relying Party Type - Service Type Category</a></p>
+<p>3.5.1. <a href="#sigservice">Signature Service Indicator</a></p>
+<p>3.5.2. <a href="#public-or-private-sector-indicator">Public or Private Sector Indicator</a></p>
+<p>3.6. <a href="#registration-of-signed-agreements">Registration of Signed Agreements</a></p>
+<p>3.6.1. <a href="#sweden-connect-agreement">Sweden Connect Agreement</a></p>
+<p>3.6.2. <a href="#other-contracts">Bilateral Agreements</a></p>
+<p>3.6.3. <a href="#eid-for-medarbetare2">eID for Employees (eID för medarbetare)</a></p>
+<p>3.6.4. <a href="#eid-authorization-system">Authorization System for Electronic Identification (Auktorisationssystem för elektronisk identifiering)</a></p>
+<p>3.7. <a href="#metadata-rules-for-organizational-identities">Metadata Rules for Organizational Identities</a></p>
+<p>3.8. <a href="#metadata-rules-for-coordination-numbers">Metadata Rules for Coordination Numbers</a></p>
+<p>3.9. <a href="#metadata-rules-for-loa-4">Metadata Rules for Level of Assurance 4 (LoA 4)</a></p>
+</li>
+<li><p><a href="#document-history"><strong>Document History</strong></a></p>
+</li>
+</ol>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This document is a normative specification for parties that connect to Digg&#39;s identity federation Sweden Connect.</p>
+<p>Based on the different agreements for providers and participants within the federation, this document defines specific requirements derived from the design of the agreements and the technical requirements of the <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect Technical Framework</a>.</p>
+<blockquote>
+<p>Note: This document covers connection using SAML only. The corresponding documents for connection using OpenID Connect are published at <a href="https://docs.swedenconnect.se/technical-framework/#federation-openid-connect">https://docs.swedenconnect.se/technical-framework/#federation-openid-connect</a>.</p>
+</blockquote>
+<p><a name="agreements"></a></p>
+<h3 id="11-agreements">1.1. Agreements</h3>
+<p>Participants in the Sweden Connect federation have signed one or more connection agreements. These agreements define the type of authentication that is delivered or requested, as well as matters such as fees and liability. This specification covers only the technical aspects of the different agreements, that is, how authentication is performed and which requirements apply to a party regarding registration and similar matters.</p>
+<p><a name="auktorisationssystem-for-elektronisk-identifiering"></a></p>
+<h4 id="111-authorization-system-for-electronic-identification-auktorisationssystem-för-elektronisk-identifiering">1.1.1. Authorization System for Electronic Identification (Auktorisationssystem för elektronisk identifiering)</h4>
+<p>The <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-elektronisk-identifiering-inom-auktorisationssystemet">Authorization System for Electronic Identification</a> is an agreement that gives Relying Parties access to approved and reviewed eIDs and the associated Identity Providers.</p>
+<p>The eIDs are issued to persons with a personal identity number or a coordination number and meet Level of Assurance 2, 3 or 4 according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Trust Framework for Swedish e-Identification</a> (Tillitsramverket för Svensk e-legitimation).</p>
+<p>The connected providers offer functions for authentication, identification, electronic signature and delivery of assertions. A provider may also offer identity mapping (id-växling).</p>
+<p>Only public sector Relying Parties can sign this agreement. The agreements take effect, and the services can be used, from January 2026.</p>
+<p>Providers that deliver according to the Authorization System for Electronic Identification have signed the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-elektronisk-identifiering-inom-auktorisationssystemet/auktorisationssystem-for-elektronisk-identifiering---administrativa-foreskrifter/anslutningsavtal-for-auktorisationssystem-for-elektronisk-identifiering---leverantor">Connection Agreement for the Authorization System for Electronic Identification - Provider</a> (Anslutningsavtal för Auktorisationssystem för elektronisk identifiering – leverantör).</p>
+<p><a name="international-authentication-eidas"></a></p>
+<h4 id="112-international-authentication---eidas">1.1.2. International Authentication - eIDAS</h4>
+<p>For a Swedish Relying Party to get access to eIDAS authentication, the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-utlandska-e-legitimationer/anslut-till-den-svenska-eidas-noden/teckna-avtal-gallande-eidas-noden">Connection Agreement for Sweden Connect - Public Sector Party</a> (Anslutningsavtal till Sweden Connect – offentlig aktör) is signed.</p>
+<p>This agreement gives a Relying Party the right to use the Swedish eIDAS node for authentication of persons who hold a foreign eID.</p>
+<blockquote>
+<p>Both public and private sector parties can sign this agreement. Note, however, that eIDAS authentication for &quot;private sector&quot; currently has poor or no support among the connected countries.</p>
+</blockquote>
+<p><a name="eid-for-medarbetare"></a></p>
+<h4 id="113-eid-for-employees-eid-för-medarbetare">1.1.3. eID for Employees (eID för medarbetare)</h4>
+<p>The <a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-e-tjanstelegitimationer">Relying Party Agreement - Prepaid Electronic Identification</a> (Förlitandeavtal - Förbetald e-legitimering) gives a Relying Party the right to use the Identity Providers within Sweden Connect that issue assertions based on authentication with an eID provided by an employer (e-tjänstelegitimation). These Identity Providers must also have passed an assurance review at level 2, 3 or 4 and deliver according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Connection Agreement for Issuers of Employee eIDs - Prepaid Electronic Identification</a> (Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering).</p>
+<blockquote>
+<p>Both public and private sector Relying Parties can sign the Relying Party Agreement - Prepaid Electronic Identification.</p>
+</blockquote>
+<p><a name="bilateral-agreements-on-authentication"></a></p>
+<h4 id="114-bilateral-agreements-on-authentication">1.1.4. Bilateral Agreements on Authentication</h4>
+<p>A Relying Party that has signed the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/erbjud-inloggning-med-utlandska-e-legitimationer/anslut-till-den-svenska-eidas-noden/teckna-avtal-gallande-eidas-noden">Connection Agreement for Sweden Connect - Public Sector Party</a> (Anslutningsavtal till Sweden Connect – offentlig aktör) may also sign bilateral agreements with providers of Identity Providers that are not offered through the existing Digg agreements. One example is a third-party Identity Provider for BankID (which is not available as an official Identity Provider in Sweden Connect).</p>
+<p>In these cases, the party has the right to request that the federation operator (Digg) publishes the metadata of these &quot;party-specific&quot; Identity Providers in the Sweden Connect federation (under the party&#39;s responsibility). See Section <a href="#party-specific-identity-providers">1.3.3</a> below.</p>
+<blockquote>
+<p>Note: Providers that deliver, for example, BankID services within Sweden Connect may have agreements with several different Relying Parties. The provider may then have <strong>one</strong> instance of an Identity Provider in Sweden Connect that is shared between the different Relying Parties. The requirement of the federation operator (Digg) is that all Relying Parties that use this instance notify Digg about this.</p>
+</blockquote>
+<p><a name="levels-of-assurance"></a></p>
+<h3 id="12-levels-of-assurance-and-identifiers-for-authentication">1.2. Levels of Assurance and Identifiers for Authentication</h3>
+<p>This section describes the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering">levels of assurance</a> that are used within the Sweden Connect federation and the identifiers that are used to represent different types of authentication.</p>
+<p><a name="swedish-levels-of-assurance"></a></p>
+<h4 id="121-swedish-levels-of-assurance">1.2.1. Swedish Levels of Assurance</h4>
+<p>The <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Trust Framework for Swedish e-Identification</a> (Tillitsramverket för Svensk e-legitimation) defines three levels of assurance, 2, 3 and 4, of which Level of Assurance 3 and 4 are currently used within Sweden Connect.</p>
+<p>For an Identity Provider to be allowed to authenticate users and issue assertions according to any of these levels, the eID issuer <strong>and</strong> the Identity Provider must have been reviewed and approved by Digg.</p>
+<p>See <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation">Becoming an Approved Issuer of Swedish eIDs</a> (Bli godkänd utfärdare av svensk e-legitimation) and <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-leverantor-av-intygsfunktion">Becoming an Approved Provider of an Assertion Service</a> (Bli godkänd leverantör av intygsfunktion) for more information about applying for a review.</p>
+<p><a name="levels-of-assurance-according-to-eidas"></a></p>
+<h4 id="122-levels-of-assurance-according-to-eidas">1.2.2. Levels of Assurance According to eIDAS</h4>
+<p>The EU eIDAS Regulation, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32014R0910">No 910/2014</a>, defines three levels of assurance: &quot;low&quot;, &quot;substantial&quot; and &quot;high&quot;. These roughly correspond to the Swedish levels 2, 3 and 4, but there are differences that make a direct mapping between the levels impossible.</p>
+<p>Swedish Relying Parties that authenticate individuals using eIDAS authentication, via the Swedish eIDAS node, must therefore be able to handle the assurance identifiers for eIDAS (see below).</p>
+<p><a name="identifiers-for-levels-of-assurance"></a></p>
+<h4 id="123-identifiers-for-levels-of-assurance">1.2.3. Identifiers for Levels of Assurance</h4>
+<p>Within Sweden Connect, an authentication operation is represented by &quot;Authentication Context URIs&quot;. These are described in Section 3.1.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris">Sweden Connect – Registry for Identifiers</a>.</p>
+<p>This section lists these identifiers and the rules that apply to their use.</p>
+<ul class="list">
+<li><p><code>http://id.elegnamnden.se/loa/1.0/loa3</code> - Level of Assurance 3 - Only Identity Providers approved according to level 3 (or 4) of the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Trust Framework for Swedish e-Identification</a> (Tillitsramverket för Svensk e-legitimation) may issue assertions containing this identifier.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/loa4</code> - Level of Assurance 4 - Only Identity Providers approved according to level 4 of the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Trust Framework for Swedish e-Identification</a> may issue assertions containing this identifier. It is also recommended that the SAML profile &quot;Holder-of-key&quot; is used.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low</code> - eIDAS &quot;low&quot; issued by an eID notified to the EU according to the eIDAS Regulation - Issued by the Swedish eIDAS node when the authentication was performed according to the eIDAS level <code>http://eidas.europa.eu/LoA/low</code>.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/eidas-low</code> - eIDAS &quot;low&quot; issued by a notified or a non-notified<sup>*</sup> eID - Issued by the Swedish eIDAS node when the authentication was performed according to the eIDAS level <code>http://eidas.europa.eu/NotNotified/LoA/low</code>.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</code> - eIDAS &quot;substantial&quot; issued by an eID notified to the EU according to the eIDAS Regulation - Issued by the Swedish eIDAS node when the authentication was performed according to the eIDAS level <code>http://eidas.europa.eu/LoA/substantial</code>.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/eidas-sub</code> - eIDAS &quot;substantial&quot; issued by a notified or a non-notified<sup>*</sup> eID - Issued by the Swedish eIDAS node when the authentication was performed according to the eIDAS level <code>http://eidas.europa.eu/NotNotified/LoA/substantial</code>.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/eidas-nf-high</code> - eIDAS &quot;high&quot; issued by an eID notified to the EU according to the eIDAS Regulation - Issued by the Swedish eIDAS node when the authentication was performed according to the eIDAS level <code>http://eidas.europa.eu/LoA/high</code>.</p>
+</li>
+<li><p><code>http://id.elegnamnden.se/loa/1.0/eidas-high</code> - eIDAS &quot;high&quot; issued by a notified or a non-notified<sup>*</sup> eID - Issued by the Swedish eIDAS node when the authentication was performed according to the eIDAS level <code>http://eidas.europa.eu/NotNotified/LoA/high</code>.</p>
+</li>
+</ul>
+<p>[*]: Currently, the Swedish eIDAS node is only connected to notified eIDs according to the EU eIDAS Regulation.</p>
+<p>The <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Trust Framework for Swedish e-Identification</a> requires that an individual who receives an eID holds a Swedish personal identity number (or a verified coordination number). When eIDs are acquired by employers according to <a href="https://www.digg.se/digitala-tjanster/e-legitimering/skaffa-losningar-for-inloggning-med-e-legitimationer/erbjud-inloggning-med-e-tjanstelegitimationer">Electronic Identification for Employees</a> (E-legitimering för medarbetare), and assertions are issued by an Identity Provider that delivers according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Connection Agreement for Issuers of Employee eIDs - Prepaid Electronic Identification</a> (Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering), individuals who do not hold a Swedish personal identity number or coordination number may be issued an eID. When such eIDs are used for authentication within Sweden Connect, the ordinary identifiers for level 2, 3 or 4 must not be used. An Identity Provider that is approved for level 2, 3 or 4, and that issues assertions for these types of eIDs, shall instead use the following identifiers:</p>
+<ul class="list">
+<li><p><code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code> - Authentication according to Level of Assurance 2 where the presented eID has been issued to an individual who does not hold a Swedish personal identity number (or coordination number).</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> - Authentication according to Level of Assurance 3 where the presented eID has been issued to an individual who does not hold a Swedish personal identity number (or coordination number).</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code> - Authentication according to Level of Assurance 4 where the presented eID has been issued to an individual who does not hold a Swedish personal identity number (or coordination number).</p>
+</li>
+</ul>
+<p>In all cases above, the issuance of the eID must follow the Trust Framework for Swedish e-Identification, with the exception of the requirement for a personal identity number or coordination number, and with the additional requirements for &quot;non-resident&quot;.</p>
+<p>Sections <a href="#bilateral-agreements-on-authentication">1.1.4</a> and <a href="#party-specific-identity-providers">1.3.3</a> describe how Identity Providers that have not passed an assurance review can be used within the Sweden Connect federation. Since these Identity Providers are not approved according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/tillitsnivaer-for-e-legitimering/tillitsramverk-for-svensk-e-legitimation">Trust Framework for Swedish e-Identification</a>, they must not include any of the identifiers above in assertions. A third-party Identity Provider is free to define its own identifiers, but to support interoperability a number of identifiers are defined in Section 3.1.1.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris-for-uncertified-providers">Sweden Connect – Registry for Identifiers</a>.</p>
+<p>These are:</p>
+<ul class="list">
+<li><p><code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> - Shall be used by an Identity Provider that has not been reviewed and approved according to level 3 of the Trust Framework for Swedish e-Identification, but that delivers services claimed to correspond to level 3 (by self-declaration). This also applies to Identity Providers that have not been reviewed and that deliver authentication for an issuer approved according to level 3 (for example BankID).</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/uncertified-eidas-low</code> - Shall be used by a Proxy-IdP that offers eIDAS authentication and receives <code>http://id.elegnamnden.se/loa/1.0/eidas-low</code> or <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low</code> from the official Swedish eIDAS node.</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/uncertified-eidas-sub</code> - Shall be used by a Proxy-IdP that offers eIDAS authentication and receives <code>http://id.elegnamnden.se/loa/1.0/eidas-sub</code> or <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</code> from the official Swedish eIDAS node.</p>
+</li>
+<li><p><code>http://id.swedenconnect.se/loa/1.0/uncertified-eidas-high</code> - Shall be used by a Proxy-IdP that offers eIDAS authentication and receives <code>http://id.elegnamnden.se/loa/1.0/eidas-high</code> or <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-high</code> from the official Swedish eIDAS node.</p>
+</li>
+</ul>
+<p>Note that it is not possible to request a review of a proxy service so that it can deliver the official identifiers for eIDAS. Only the official Swedish eIDAS node can do this.</p>
+<p><a name="identity-providers-within-sweden-connect"></a></p>
+<h3 id="13-identity-providers-within-sweden-connect">1.3. Identity Providers within Sweden Connect</h3>
+<p>The following sections describe requirements and rules for authentication and metadata registration for Identity Providers and Relying Parties within the Sweden Connect federation. This section describes the specific rules that apply for an Identity Provider to be allowed to connect to Sweden Connect.</p>
+<p><a name="review-of-compliance-with-the-technical-framework"></a></p>
+<h4 id="131-review-of-compliance-with-the-technical-framework">1.3.1. Review of Compliance with the Technical Framework</h4>
+<p>All Identity Providers, whether or not they have passed an assurance review, must be reviewed and approved with regard to compliance with the <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect Technical Framework</a> before they can connect.</p>
+<p>Such a review is requested through a dialogue with Digg.</p>
+<p>The following steps shall be performed:</p>
+<ul class="list">
+<li><p>Before the review, the provider shall perform its own tests and verify support for the requirements of the <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect Technical Framework</a>.</p>
+</li>
+<li><p>The provider shall supply an IdP instance that, as far as possible, is configured and set up as a &quot;real&quot; production service (except that test users instead of real individuals shall be used for testing authentication). This instance shall be published to the Sweden Connect Sandbox federation (<a href="https://sandbox.swedenconnect.se">https://sandbox.swedenconnect.se</a>), and it shall consume all SAML metadata for all Relying Parties in that federation.</p>
+</li>
+<li><p>During testing, the provider shall provide resources to handle any questions that arise.</p>
+</li>
+</ul>
+<p>When the review has been completed and the results are approved, the provider may proceed to publish its IdP instance in Sweden Connect QA (see below).</p>
+<p><a name="publishing-instances-to-the-sweden-connect-environments"></a></p>
+<h4 id="132-publishing-instances-to-the-sweden-connect-environments">1.3.2. Publishing Instances to the Sweden Connect Environments</h4>
+<p>Sweden Connect has three environments:</p>
+<ul class="list">
+<li><p>Sweden Connect Sandbox - A test environment for initial testing. All parties, regardless of agreement, have the right to connect to this environment. See <a href="https://sandbox.swedenconnect.se">https://sandbox.swedenconnect.se</a>.</p>
+</li>
+<li><p>Sweden Connect QA - The official test environment of Sweden Connect. Only parties that have an agreement with Digg have the right to publish metadata to this environment. This environment shall mirror the production environment, with the important exception that only test users may occur (that is, no real personal identity numbers or similar are allowed).</p>
+</li>
+<li><p>Sweden Connect Production - The production environment.</p>
+</li>
+</ul>
+<p>An Identity Provider that connects to the Sweden Connect federation commits to publishing an instance in the Sweden Connect QA federation. This instance shall offer the same functionality as the corresponding instance in the production federation, with the exception that only test identities may be used.</p>
+<blockquote>
+<p>It is therefore not allowed to test &quot;the next version of the IdP&quot; in Sweden Connect QA. The functionality must correspond to the production federation. Testing of upcoming versions can instead be performed in Sweden Connect Sandbox.</p>
+</blockquote>
+<p>Only after the service has been successfully published in Sweden Connect QA is the provider allowed to connect to Sweden Connect Production.</p>
+<p><a name="party-specific-identity-providers"></a></p>
+<h4 id="133-specific-requirements-for-party-specific-identity-providers">1.3.3. Specific Requirements for Party-specific Identity Providers</h4>
+<p>A &quot;party-specific&quot; Identity Provider is a service that is not a provider under any of the agreements offered by Digg, but an Identity Provider that is added to Sweden Connect under the responsibility (and agreement) of a Relying Party.</p>
+<p>These Identity Providers must also comply with the <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect Technical Framework</a> and the other rules that apply to Identity Providers within the federation.</p>
+<p>Third-party Identity Providers that deliver BankID authentication should comply with the requirements in <a href="https://docs.swedenconnect.se/technical-framework/latest/12_-_BankID_Profile_for_the_Swedish_eID_Framework.html">Implementation Profile for BankID Identity Providers within the Swedish eID Framework</a>.</p>
+<p><a name="compliance-with-the-technical-framework-over-time"></a></p>
+<h4 id="134-compliance-with-the-technical-framework-over-time">1.3.4. Compliance with the Technical Framework over Time</h4>
+<p>New versions of the specifications in the <a href="https://docs.swedenconnect.se/technical-framework/">Sweden Connect Technical Framework</a> are published periodically by Digg. An Identity Provider within Sweden Connect must support the latest published version no later than 180 days after the version was published.</p>
+<blockquote>
+<p>Digg may request a new review of an Identity Provider after a new version of a specification in the Technical Framework has been published (if the specification is relevant to the Identity Provider&#39;s connection agreement).</p>
+</blockquote>
+<p><a name="authentication-and-delivery-of-assertions"></a></p>
+<h2 id="2-authentication-and-delivery-of-assertions">2. Authentication and Delivery of Assertions</h2>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a> defines how an authentication request shall be built and how assertions shall be delivered. This section complements and clarifies that specification.</p>
+<p><a name="user-interface"></a></p>
+<h3 id="21-user-interface">2.1. User Interface</h3>
+<p>The user interface of the Identity Provider must be designed so that it is clear which Relying Party has requested authentication. The display name and logotype of the Relying Party shall be obtained from the Relying Party&#39;s metadata entry, see Section <a href="#registration-of-display-name-and-logotype">3.2</a> below.</p>
+<p><a name="error-handling-and-reporting"></a></p>
+<h4 id="211-error-handling-and-reporting">2.1.1. Error Handling and Reporting</h4>
+<p>Any errors that occur during an authentication process shall be clearly described to the user, and the user shall always be able to confirm that they have read the error message. When the user confirms, that is, clicks the &quot;OK&quot; or &quot;I understand&quot; button, a SAML response message indicating failed authentication shall be posted back to the Relying Party. See Section 6.4 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#error-responses">Deployment Profile for the Swedish eID Framework</a>.</p>
+<p><a name="information-about-identity-attributes"></a></p>
+<h4 id="212-information-about-identity-attributes">2.1.2. Information about Identity Attributes</h4>
+<p>An Identity Provider should inform the user in its user interface about which identity attributes are delivered for a given authentication. When authentication is performed according to the agreement <a href="#auktorisationssystem-for-elektronisk-identifiering">Authorization System for Electronic Identification</a> (Auktorisationssystem för elektronisk identifiering), or a corresponding bilateral agreement, this is not a strict requirement, since the user in these cases is expected to understand that the personal identity number is delivered.</p>
+<p>If the Identity Provider delivers according to <a href="#eid-for-medarbetare">eID for Employees</a> (eID för medarbetare), that is, the eID used has been acquired through the employer, the Identity Provider shall always inform the user about which identity information is delivered in an assertion before it is sent back to the Relying Party. The Identity Provider shall also offer the user a way to cancel the authentication after this information has been displayed.</p>
+<p>The reason for this requirement is that, depending on the Relying Party&#39;s requirements for attribute release, the assertion may contain only an organizational identity, both an organizational identity and personal identity number information, or only personal identity number information. Since some users may be unwilling to use their personal identity number in their work, the Identity Provider shall inform them about which attributes are requested and included in the assertion.</p>
+<p>The Identity Provider is allowed to &quot;remember&quot; the user&#39;s approval of attribute release and not display this information again if the user has previously approved the attribute release. However, this must be implemented per Relying Party, that is, per e-service the user logs in to.</p>
+<p><a name="requirements-for-single-sign-on"></a></p>
+<h3 id="22-requirements-for-single-sign-on">2.2. Requirements for Single Sign-On</h3>
+<p>An Identity Provider in Sweden Connect may choose to support Single Sign-On, that is, issuing assertions based on a previously performed authentication. This is allowed if an authentication request is received within 60 minutes from when the original authentication was performed. An Identity Provider may choose a shorter session time, but the limit of 60 minutes must not be exceeded.</p>
+<p>Each time a user performs a full authentication at the Identity Provider, the time of the &quot;original authentication&quot; is moved.</p>
+<p>Section 5.4.5 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#single-sign-on-processing">Deployment Profile for the Swedish eID Framework</a> describes requirements for reused authentication. This section extends those requirements with the following:</p>
+<p>If a requirement to display which identity attributes are delivered (see <a href="#information-about-identity-attributes">2.1.2</a> above) applies to a given authentication request, it also applies if the assertion is issued based on a previously performed authentication, that is, the user must be informed about the delivered identity attributes even if no actual authentication is performed.</p>
+<p><a name="requirements-for-attribute-release"></a></p>
+<h3 id="23-requirements-for-attribute-release">2.3. Requirements for Attribute Release</h3>
+<p>The specification <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a> declares a number of attribute sets. The attributes referenced in these sets are also linked to the level of assurance according to which an Identity Provider has been reviewed and approved. In addition to these attributes, a number of other attributes are defined in <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a>. How these may be used within the Sweden Connect federation is described in Section <a href="#other-attributes">2.3.2</a> below.</p>
+<p>The requirements for attribute release based on Digg&#39;s delivery agreements are as follows:</p>
+<p><a href="#auktorisationssystem-for-elektronisk-identifiering">Authorization System for Electronic Identification</a> (Auktorisationssystem för elektronisk identifiering)</p>
+<blockquote>
+<p>An Identity Provider that delivers authentication for Relying Parties that have joined the <a href="#auktorisationssystem-for-elektronisk-identifiering">Authorization System for Electronic Identification</a> shall support the following attribute sets:</p>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a> - Personal identity number or coordination number, given name and surname, and the user&#39;s &quot;display name&quot;.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a> - The user&#39;s given name and surname, and &quot;display name&quot;.</li>
+</ul>
+</blockquote>
+<p><a href="#eid-for-medarbetare">eID for Employees</a> (eID för medarbetare)</p>
+<blockquote>
+<p>An Identity Provider that delivers authentication for Relying Parties that have signed the <a href="https://www.digg.se/download/18.129a4fef1939e2e1c1f162ca/1650447908281/forlitandeavtal-forbetald-e-legitimering.docx">Relying Party Agreement - Prepaid Electronic Identification</a> (Förlitandeavtal - Förbetald e-legitimering) shall support the following attribute sets:</p>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a> - Organizational identity, organization name and the user&#39;s &quot;display name&quot;.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a> - Personal identity number or coordination number, given name and surname, and the user&#39;s &quot;display name&quot;.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a> - The user&#39;s given name and surname, and &quot;display name&quot;.</li>
+</ul>
+</blockquote>
+<p>The Swedish eIDAS connector</p>
+<blockquote>
+<p>The Swedish eIDAS connector (eIDAS node) delivers according to the following attribute set:</p>
+</blockquote>
+<blockquote>
+<ul class="list">
+<li><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#eidas-natural-person-attribute-set">eIDAS Natural Person Attribute Set</a></li>
+</ul>
+</blockquote>
+<p><a name="delivery-of-assertions-to-the-swedish-eidas-node"></a></p>
+<h4 id="231-delivery-of-assertions-to-the-swedish-eidas-node">2.3.1. Delivery of Assertions to the Swedish eIDAS Node</h4>
+<p>Identity Providers that have a supplementary agreement with Digg to deliver assertions to the Swedish eIDAS Proxy Service node (that is, the eIDAS node that authenticates holders of Swedish eIDs for login to foreign e-services) shall deliver according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a>, with the addition that the date of birth is also required.</p>
+<p>The Identity Provider may also choose to inform the user that identity information will be sent to the country and the e-service that requests authentication, and obtain the user&#39;s consent to this. Whether or not an Identity Provider implements this &quot;consent&quot; dialogue shall be agreed with Digg.</p>
+<p>An Identity Provider that delivers assertions to the Swedish eIDAS node may choose to accept authentication requests from other countries that have been requested by a private sector party, or to refuse such requests. If the Identity Provider chooses to support authentication for private sector parties from other countries, it is the responsibility of the Identity Provider to decide which private sector parties are accepted and how compensation for performed authentications is handled. The Identity Provider&#39;s choice to accept requests from private sector parties is agreed directly with Digg, since it is not specified through the Identity Provider&#39;s metadata.</p>
+<p><a name="other-attributes"></a></p>
+<h4 id="232-other-attributes">2.3.2. Other Attributes</h4>
+<p>Section 3 of <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#attribute-definitions">Attribute Specification for the Swedish eID Framework</a> defines more attributes than those included in the attribute sets referenced earlier in this section. An Identity Provider in Sweden Connect has the right to deliver attributes other than those included in the attribute sets referenced above, under the following conditions:</p>
+<ul class="list">
+<li><p>There is a bilateral agreement between the Identity Provider and the Relying Party regarding delivery of additional attributes.</p>
+</li>
+<li><p>A Relying Party includes one or more <code>RequestedAttribute</code> elements in its metadata, requesting delivery of attributes in addition to the attribute sets (which are governed by declared entity categories, see below). See the example below.</p>
+</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">md:AttributeConsumingService</span> <span class="hljs-attr">index</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">isDefault</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+  ...
+  <span class="hljs-tag">&lt;<span class="hljs-name">md:RequestedAttribute</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">&quot;urn:oid:0.9.2342.19200300.100.1.3&quot;</span> <span class="hljs-attr">isRequired</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">md:RequestedAttribute</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">&quot;urn:oid:2.5.4.20&quot;</span> <span class="hljs-attr">isRequired</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">md:AttributeConsumingService</span>&gt;</span></code></pre><p><em>Example of how a Relying Party requests delivery of the attributes <code>mail</code> and <code>telephoneNumber</code>. Note that <code>isRequired</code> is set to <code>false</code>, which means that the Relying Party also accepts assertions that do not include the requested attributes.</em></p>
+<p><a name="specific-requirements-for-loa-4"></a></p>
+<h3 id="24-specific-requirements-for-level-of-assurance-4">2.4. Specific Requirements for Level of Assurance 4</h3>
+<p>An Identity Provider that is approved for authentication and assertion delivery at Level of Assurance 4 according to the Trust Framework for Swedish e-Identification (Tillitsramverket för Svensk e-legitimation) may choose to support the SAML profile <a href="https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf">SAML V2.0 Holder-of-key Web Browser SSO Profile</a>. The use of &quot;Holder-of-key&quot; according to the Sweden Connect Technical Framework is specified in <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+<p>An Identity Provider that is approved for authentication and assertion delivery according to Level of Assurance 4 and that supports the &quot;Holder-of-key&quot; profile shall also accept authentication requests according to the ordinary Web SSO profile (that is, a request according to <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a> that does not use &quot;Holder-of-key&quot;).</p>
+<p>A Relying Party may choose to require authentication according to the &quot;Holder-of-key&quot; profile for Identity Providers that have announced support for it.</p>
+<p>To maintain the increased security of &quot;Holder-of-key&quot;, it is important that both the Identity Provider (at request) and the Relying Party (at assertion delivery) require that a TLS client certificate is presented. See Section <a href="#metadata-rules-for-loa-4">3.9</a> below.</p>
+<p><a name="metadata"></a></p>
+<h2 id="3-metadata">3. Metadata</h2>
+<p>This section describes rules for registration of SAML metadata and how the different elements shall be interpreted.</p>
+<p>Relevant specifications:</p>
+<ul class="list">
+<li><p>Section 2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#metadata-and-trust-management">Deployment Profile for the Swedish eID Framework</a></p>
+</li>
+<li><p><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework</a></p>
+</li>
+<li><p><a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html">Entity Categories for the Swedish eID Framework</a></p>
+</li>
+</ul>
+<p><a name="registration-of-organization-information"></a></p>
+<h3 id="31-registration-of-organization-information">3.1. Registration of Organization Information</h3>
+<p>All parties, that is, both Identity Providers and Relying Parties, shall include organization information in each registered metadata entry.</p>
+<p>Such an element looks as follows:</p>
+<pre class="hljs"><code>&lt;md:Organization&gt;
+  &lt;md:Extensions&gt;
+    &lt;mdorgex<span class="hljs-variable">t:OrganizationNumber</span> xmln<span class="hljs-variable">s:mdorgext</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/authn/1.0/md-org-ext/ns&quot;</span>&gt;
+      <span class="hljs-number">2021006883</span>
+    &lt;/mdorgex<span class="hljs-variable">t:OrganizationNumber</span>&gt;
+  &lt;/md:Extensions&gt;
+  &lt;md:OrganizationName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;Myndigheten <span class="hljs-keyword">f</span>ör digital <span class="hljs-keyword">f</span>örvaltning&lt;/md:OrganizationName&gt;
+  &lt;md:OrganizationName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;Agency <span class="hljs-keyword">for</span> digital government&lt;/md:OrganizationName&gt;
+  &lt;md:OrganizationDisplayName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;Myndigheten <span class="hljs-keyword">f</span>ör digital <span class="hljs-keyword">f</span>örvaltning - Digg&lt;/md:OrganizationDisplayName&gt;
+  &lt;md:OrganizationDisplayName <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;Agency <span class="hljs-keyword">for</span> digital government - Digg&lt;/md:OrganizationDisplayName&gt;
+  &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/&lt;/md:OrganizationURL&gt;
+  &lt;md:OrganizationURL <span class="hljs-keyword">xm</span><span class="hljs-variable">l:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;http<span class="hljs-variable">s:</span>//www.digg.<span class="hljs-keyword">se</span>/<span class="hljs-keyword">en</span>&lt;/md:OrganizationURL&gt;
+&lt;/md:Organization&gt;</code></pre><p><em>Example of how the organization Digg has registered organization information in metadata.</em></p>
+<p><strong>Note:</strong> The extension representing the organization number is created by the Sweden Connect connection processes (if it is not set when the metadata is submitted). This element contains the organization number of the given organization, formatted as 10 digits without a hyphen.</p>
+<p>For more information about the XML format of this element, see <a href="https://docs.swedenconnect.se/schemas/authn/1.0/OrganizationNumber-1.0.xsd">OrganizationNumber-1.0.xsd</a>.</p>
+<p>In the aggregated metadata for the federation, the <code>OrganizationNumber</code> element is included for all parties.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>The name given in Swedish in the <code>OrganizationName</code> element shall match the name given when the organization signed the agreement with Digg regarding participation in the federation (except as stated in the item below).</p>
+<ul class="list">
+<li>In cases where a public sector party that has signed any kind of Sweden Connect agreement has requested that a third-party Identity Provider is registered in metadata under the party&#39;s agreement, <code>OrganizationName</code> does not need to state the registered name of the public sector party. The reason for this is that in many cases several public sector parties use the same third-party Identity Provider. However, the party shall notify Digg of the link between the party and the Identity Provider.</li>
+</ul>
+</li>
+<li><p>If the <code>OrganizationNumber</code> element is given in the registered metadata, it is checked that this number matches the organization that has signed the agreement with Digg. If the element is missing in the submitted metadata, an element containing the organization number of the connecting party is created.<br /><br />The same exception as for the organization name regarding third-party Identity Providers also applies to the organization number.</p>
+</li>
+</ul>
+<p><a name="registration-of-display-name-and-logotype"></a></p>
+<h3 id="32-registration-of-display-name-and-logotype">3.2. Registration of Display Name and Logotype</h3>
+<p>All parties, that is, both Identity Providers and Relying Parties, shall include the display name and logotype of the service in each registered metadata entry. The display name shall be given in Swedish and should also be given in English.</p>
+<p>Note that the logotype should have a format and design that allows it to be used on most web pages. For example, it is not suitable to assume that the logotype will be displayed using a specific color scheme.</p>
+<p>The logotype of a Relying Party will be displayed in the user interface of an Identity Provider, and the logotype of an Identity Provider may be displayed on &quot;choose how to log in&quot; pages of Relying Parties.</p>
+<p>Example:</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">mdui:UIInfo</span> <span class="hljs-attr">xmlns:mdui</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:metadata:ui&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mdui:DisplayName</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;</span>Testa ditt eID<span class="hljs-tag">&lt;/<span class="hljs-name">mdui:DisplayName</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mdui:DisplayName</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>Test your eID<span class="hljs-tag">&lt;/<span class="hljs-name">mdui:DisplayName</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mdui:Description</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">&quot;sv&quot;</span>&gt;</span>Applikation för att testa ditt eID<span class="hljs-tag">&lt;/<span class="hljs-name">mdui:Description</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mdui:Description</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>Application for testing your eID<span class="hljs-tag">&lt;/<span class="hljs-name">mdui:Description</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mdui:Logo</span> <span class="hljs-attr">xmlns:mdui</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:metadata:ui&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;80&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;228&quot;</span>&gt;</span>
+    https://test.swedenconnect.se/images/sc-logo.svg
+  <span class="hljs-tag">&lt;/<span class="hljs-name">mdui:Logo</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">mdui:UIInfo</span>&gt;</span></code></pre><p><em>Example of how Digg&#39;s service &quot;Testa ditt eID&quot; registers display information.</em></p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>At registration, it is checked that the element is present in the metadata and that a logotype and display information in Swedish are included.</p>
+</li>
+<li><p>The address of the logotype must be reachable.</p>
+</li>
+<li><p>In addition, a visual inspection is made to ensure that the given information appears to match the party&#39;s organization.</p>
+</li>
+</ul>
+<p><a name="registration-of-levels-of-assurance"></a></p>
+<h3 id="33-registration-of-levels-of-assurance">3.3. Registration of Levels of Assurance</h3>
+<p>Identity Providers shall declare all supported levels of assurance, and variants thereof (see <a href="#levels-of-assurance">1.2</a> above), in metadata. This is done using the &quot;assurance certification&quot; attribute.</p>
+<p>Example:</p>
+<pre class="hljs"><code>&lt;md:Extensions&gt;
+  &lt;mdattr:EntityAttributes&gt;
+    &lt;saml:Attribute Name=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:attribute:assurance-certification&quot;</span>
+                    NameFormat=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;
+      &lt;saml:AttributeValue&gt;http:<span class="hljs-regexp">//i</span>d.elegnamnden.se<span class="hljs-regexp">/loa/</span><span class="hljs-number">1.0</span><span class="hljs-regexp">/loa3&lt;/</span>saml:AttributeValue&gt;
+      &lt;saml:AttributeValue&gt;http:<span class="hljs-regexp">//i</span>d.elegnamnden.se<span class="hljs-regexp">/loa/</span><span class="hljs-number">1.0</span><span class="hljs-regexp">/loa4&lt;/</span>saml:AttributeValue&gt;
+    &lt;/saml:Attribute&gt;
+    ...</code></pre><p><em>Metadata example for an Identity Provider that is approved to deliver assertions according to Level of Assurance 3 and 4.</em></p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that have been reviewed and approved according to Level of Assurance 3 or 4 may declare <code>http://id.elegnamnden.se/loa/1.0/loa3</code>.</p>
+</li>
+<li><p>Only Identity Providers that have been reviewed and approved according to Level of Assurance 4 may declare <code>http://id.elegnamnden.se/loa/1.0/loa4</code>.</p>
+</li>
+<li><p>Only Identity Providers that deliver according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Connection Agreement for Issuers of Employee eIDs - Prepaid Electronic Identification</a> (Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering) and that have been reviewed and approved according to Level of Assurance 3 may declare <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code>.</p>
+</li>
+<li><p>Only Identity Providers that deliver according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Connection Agreement for Issuers of Employee eIDs - Prepaid Electronic Identification</a> and that have been reviewed and approved according to Level of Assurance 4 may declare <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>.</p>
+</li>
+<li><p>Only Identity Providers that deliver according to the <a href="https://www.digg.se/digitala-tjanster/e-legitimering/bli-godkand-utfardare-av-svensk-e-legitimation/leverera-e-tjanstelegitimationer">Connection Agreement for Issuers of Employee eIDs - Prepaid Electronic Identification</a> and that have been reviewed and approved according to Level of Assurance 2 may declare <code>http://id.swedenconnect.se/loa/1.0/loa2-nonresident</code>.</p>
+</li>
+<li><p>Only the Swedish eIDAS node may declare any of the following identifiers:</p>
+<ul class="list">
+<li><code>http://id.elegnamnden.se/loa/1.0/eidas-low</code>, <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-low</code>,</li>
+<li><code>http://id.elegnamnden.se/loa/1.0/eidas-sub</code>, <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-sub</code>,</li>
+<li><code>http://id.elegnamnden.se/loa/1.0/eidas-high</code>, <code>http://id.elegnamnden.se/loa/1.0/eidas-nf-high</code>.</li>
+</ul>
+</li>
+<li><p>Third-party Identity Providers that declare <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> shall explain to the federation operator (Digg) how the authentication is performed. For example, &quot;delivers a SAML IdP for BankID&quot;.</p>
+</li>
+<li><p>The previously used identifier <code>http://id.elegnamnden.se/loa/1.0/loa3-sigmessage</code> must no longer be used.</p>
+</li>
+</ul>
+<p><a name="registration-of-service-entity-category-values"></a></p>
+<h3 id="34-registration-of-service-entity-category-values">3.4. Registration of Service Entity Category Values</h3>
+<p>An entity category is an attribute value that is declared in metadata to describe a certain property of a party within the federation. A &quot;Service Entity Category&quot; is used by both Relying Parties (SP) and Identity Providers (IdP) to declare which combinations of levels of assurance and attributes are supported or required.</p>
+<p>See Section 2 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#definitions-for-service-entity-categories">Entity Categories for the Swedish eID Framework</a> for details.</p>
+<p>The &quot;Service Entity Category&quot; type was originally introduced to make it possible to derive which Identity Providers within the federation could deliver assertions to a given Relying Party. The idea was to dynamically build a discovery page listing all Identity Providers offering authentication that the Relying Party can use. There is currently no central Discovery Service, and the main use of this type of entity category is for an Identity Provider to derive which attributes a given Relying Party requests at authentication.</p>
+<p>A Relying Party may declare one or more &quot;Service Entity Category&quot; values in its metadata. Based on the declared values, an Identity Provider tries to derive which attributes shall be included in an issued assertion. This simple rule may, however, cause problems. SAML offers no standardized way for a Relying Party to dynamically (that is, per request) tell an Identity Provider which attributes are requested. The only available tool is the data declared in the Relying Party&#39;s metadata.</p>
+<p>Suppose that a Relying Party wants the personal identity number and the organizational identity in assertions. It may then, for example, declare both <code>loa3-pnr</code> and <code>loa3-orgid</code> (see below) in its metadata. But what happens if it is in some cases interested in receiving the personal identity number, and in other cases the organizational identity, but not both attributes in the same assertion?</p>
+<p>The solution in this case is that the organization creates two Relying Parties (SAML SPs) and declares <code>loa3-pnr</code> in the metadata for one SP and <code>loa3-orgid</code> in the metadata for the other. Depending on which type of assertion is wanted in each case, the correct SP is used.</p>
+<blockquote>
+<p>This is far from a perfect solution, but unfortunately a necessity. With the introduction of OpenID Connect this problem will disappear, since that technology is more dynamic and each individual request can contain information about the requested attributes.</p>
+</blockquote>
+<p>Below follow descriptions and rules for both Identity Providers and Relying Parties for relevant &quot;Service Entity Category&quot; values defined in Section 2 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#definitions-for-service-entity-categories">Entity Categories for the Swedish eID Framework</a>:</p>
+<p><a name="loa3-pnr"></a></p>
+<h4 id="341-loa3-pnr">3.4.1. loa3-pnr</h4>
+<p><strong>Definition</strong>: Section 2.1.2 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa3-pnr">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A declaration of the entity category <code>http://id.elegnamnden.se/ec/1.0/loa3-pnr</code> means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it can authenticate users according to Level of Assurance 3<sup>*</sup> and deliver assertions with attributes from the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request authentication according to Level of Assurance 3<sup>*</sup> and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a>.</p>
+</blockquote>
+<p>[*]: Previously, the entity category <code>http://id.swedenconnect.se/ec/sc/uncertified-loa3-pnr</code> was used for delivery of the personal identity number after a &quot;loa3-uncertified&quot; authentication (see Section <a href="#levels-of-assurance">1.2</a> above). In the latest version of the Technical Framework this category is deprecated, and the official &quot;loa3-pnr&quot; category also covers these cases.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that declare <code>http://id.elegnamnden.se/loa/1.0/loa3</code> or <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> in the <code>assurance-certification</code> attribute (see Section <a href="#registration-of-levels-of-assurance">3.3</a> above) may declare the entity category <code>loa3-pnr</code>.</p>
+</li>
+<li><p>An Identity Provider that declares <code>loa3-pnr</code> shall also declare the category <code>loa3-name</code> (that is, attribute release with name only and no personal identity number or coordination number). See Section 2.4.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa3-name">Entity Categories for the Swedish eID Framework</a>.</p>
+</li>
+</ul>
+<p><a name="loa4-pnr"></a></p>
+<h4 id="342-loa4-pnr">3.4.2. loa4-pnr</h4>
+<p><strong>Definition</strong>: Section 2.1.3 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-pnr">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A declaration of the entity category <code>http://id.elegnamnden.se/ec/1.0/loa4-pnr</code> means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it can authenticate users according to Level of Assurance 4 and deliver assertions with attributes from the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request authentication according to Level of Assurance 4 and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a>.</p>
+</blockquote>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that declare <code>http://id.elegnamnden.se/loa/1.0/loa4</code> in the <code>assurance-certification</code> attribute (see Section <a href="#registration-of-levels-of-assurance">3.3</a> above) may declare the entity category <code>loa4-pnr</code>.</p>
+</li>
+<li><p>An Identity Provider that declares <code>loa4-pnr</code> shall also declare the category <code>loa4-name</code> (that is, attribute release with name only and no personal identity number or coordination number). See Section 2.4.3 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-name">Entity Categories for the Swedish eID Framework</a>.</p>
+</li>
+</ul>
+<p><a name="loa3-orgid"></a></p>
+<h4 id="343-loa3-orgid">3.4.3. loa3-orgid</h4>
+<p><strong>Definition</strong>: Section 2.3.2 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa3-orgid">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A declaration of the entity category <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it can authenticate users according to Level of Assurance 3<sup>*</sup> and deliver assertions with attributes from the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request authentication according to Level of Assurance 3<sup>*</sup> and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
+</blockquote>
+<p>[*]: This entity category applies to authentication according to <code>http://id.elegnamnden.se/loa/1.0/loa3</code>, <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> or <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code>.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that declare <code>http://id.elegnamnden.se/loa/1.0/loa3</code>, <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> or <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> in the <code>assurance-certification</code> attribute (see Section <a href="#registration-of-levels-of-assurance">3.3</a> above) may declare the entity category <code>loa3-orgid</code>.</p>
+</li>
+<li><p>An Identity Provider that declares <code>loa3-orgid</code> shall also declare the category <code>loa3-name</code> (that is, release of given name and surname). See Section 2.4.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa3-name">Entity Categories for the Swedish eID Framework</a>.</p>
+</li>
+</ul>
+<p><a name="loa4-orgid"></a></p>
+<h4 id="344-loa4-orgid">3.4.4. loa4-orgid</h4>
+<p><strong>Definition</strong>: Section 2.3.3 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-orgid">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A declaration of the entity category <code>http://id.swedenconnect.se/ec/1.0/loa4-orgid</code> means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it can authenticate users according to Level of Assurance 4 and deliver assertions with attributes from the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request authentication according to Level of Assurance 4 and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a>.</p>
+</blockquote>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that declare <code>http://id.elegnamnden.se/loa/1.0/loa4</code> in the <code>assurance-certification</code> attribute (see Section <a href="#registration-of-levels-of-assurance">3.3</a> above) may declare the entity category <code>loa4-orgid</code>.</p>
+</li>
+<li><p>An Identity Provider that declares <code>loa4-orgid</code> shall also declare the category <code>loa4-name</code> (that is, release of given name and surname). See Section 2.4.3 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-name">Entity Categories for the Swedish eID Framework</a>.</p>
+</li>
+</ul>
+<p><a name="loa3-name"></a></p>
+<h4 id="345-loa3-name">3.4.5. loa3-name</h4>
+<p><strong>Definition</strong>: Section 2.4.2 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa3-name">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>The entity category <code>http://id.swedenconnect.se/ec/1.0/loa3-name</code> is mainly intended to complement <code>http://id.swedenconnect.se/ec/1.0/loa3-orgid</code> (see Section <a href="#loa3-orgid">3.4.3</a> above) with the possibility to also receive the given name and surname of the authenticated user. In these cases, a Relying Party declares both <code>loa3-orgid</code> and <code>loa3-name</code>.</p>
+<p>A declaration of the entity category means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it can authenticate users according to Level of Assurance 3<sup>*</sup> and deliver assertions with attributes from the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request authentication according to Level of Assurance 3<sup>*</sup> and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a>.</p>
+</blockquote>
+<p>[*]: This entity category applies to authentication according to <code>http://id.elegnamnden.se/loa/1.0/loa3</code>, <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> or <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code>.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that declare <code>http://id.elegnamnden.se/loa/1.0/loa3</code>, <code>http://id.swedenconnect.se/loa/1.0/loa3-nonresident</code> or <code>http://id.swedenconnect.se/loa/1.0/uncertified-loa3</code> in the <code>assurance-certification</code> attribute (see Section <a href="#registration-of-levels-of-assurance">3.3</a> above) may declare the entity category <code>loa3-name</code>.</p>
+</li>
+<li><p>An Identity Provider that declares <code>loa3-pnr</code> (see <a href="#loa3-pnr">3.4.1</a> above) or <code>loa3-orgid</code> (see <a href="#loa3-orgid">3.4.3</a> above) must also declare <code>loa3-name</code>.</p>
+</li>
+</ul>
+<p><a name="loa4-name"></a></p>
+<h4 id="346-loa4-name">3.4.6. loa4-name</h4>
+<p><strong>Definition</strong>: Section 2.4.3 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#loa4-name">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>The entity category <code>http://id.swedenconnect.se/ec/1.0/loa4-name</code> is mainly intended to complement <code>http://id.swedenconnect.se/ec/1.0/loa4-orgid</code> (see Section <a href="#loa4-orgid">3.4.4</a> above) with the possibility to also receive the given name and surname of the authenticated user. In these cases, a Relying Party declares both <code>loa4-orgid</code> and <code>loa4-name</code>.</p>
+<p>A declaration of the entity category means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it can authenticate users according to Level of Assurance 4<sup>*</sup> and deliver assertions with attributes from the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request authentication according to Level of Assurance 4<sup>*</sup> and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-without-civic-registration-number">Natural Personal Identity without Civic Registration Number</a>.</p>
+</blockquote>
+<p>[*]: This entity category applies to authentication according to <code>http://id.elegnamnden.se/loa/1.0/loa4</code> and <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code>.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li><p>Only Identity Providers that declare <code>http://id.elegnamnden.se/loa/1.0/loa4</code> or <code>http://id.swedenconnect.se/loa/1.0/loa4-nonresident</code> in the <code>assurance-certification</code> attribute (see Section <a href="#registration-of-levels-of-assurance">3.3</a> above) may declare the entity category <code>loa4-name</code>.</p>
+</li>
+<li><p>An Identity Provider that declares <code>loa4-pnr</code> (see <a href="#loa4-pnr">3.4.2</a> above) or <code>loa4-orgid</code> (see <a href="#loa4-orgid">3.4.4</a> above) must also declare <code>loa4-name</code>.</p>
+</li>
+</ul>
+<p><a name="eidas-naturalperson"></a></p>
+<h4 id="347-eidas-naturalperson">3.4.7. eidas-naturalperson</h4>
+<p><strong>Definition</strong>: Section 2.1.1 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#eidas-naturalperson">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A declaration of the entity category <code>http://id.elegnamnden.se/ec/1.0/eidas-naturalperson</code> means the following:</p>
+<p><strong>For an Identity Provider</strong>:</p>
+<blockquote>
+<p>The Identity Provider declares that it is an eIDAS node acting as &quot;Identity Provider&quot; towards the Sweden Connect federation and as &quot;Service Provider&quot; towards the eIDAS federation<sup>*</sup>. Users are authenticated according to any of the defined levels of assurance for eIDAS (see Section 3.1.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html#authentication-context-uris">Sweden Connect – Registry for Identifiers</a>), and the attributes included in issued assertions follow the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#eidas-natural-person-attribute-set">eIDAS Natural Person Attribute Set</a>.</p>
+</blockquote>
+<p><strong>For a Relying Party</strong>:</p>
+<blockquote>
+<p>The Relying Party declares that it will request eIDAS authentication and that it requests delivery of attributes according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#eidas-natural-person-attribute-set">eIDAS Natural Person Attribute Set</a>.</p>
+</blockquote>
+<p>[*]: In principle, only the official Swedish eIDAS node shall declare this category among Identity Providers, but there are cases where providers offer a Proxy-IdP that includes eIDAS authentication as one authentication option. The Proxy-IdP then acts as a Relying Party towards the official eIDAS node and as an IdP towards its Relying Parties. These Proxy-IdPs are also allowed to declare this category.</p>
+<p><a name="eidas-pnr-delivery"></a></p>
+<h4 id="348-eidas-pnr-delivery">3.4.8. eidas-pnr-delivery</h4>
+<p><strong>Definition</strong>: Section 2.1.4 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#eidas-pnr-delivery">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A special category that is only used by the Identity Providers that deliver assertions to the Swedish eIDAS node (connector), and by the official eIDAS proxy service that acts as a Relying Party towards Sweden Connect. See Section <a href="#delivery-of-assertions-to-the-swedish-eidas-node">2.3.1</a>.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>Only the Identity Providers that have an agreement with Digg to deliver assertions to the Swedish eIDAS Proxy Service node shall declare the category.</li>
+</ul>
+<p><a name="registration-of-relying-party-type"></a></p>
+<h3 id="35-registration-of-relying-party-type---service-type-category">3.5. Registration of Relying Party Type - Service Type Category</h3>
+<p>An entity category is an attribute value that is declared in metadata to describe a certain property of a party within the federation. A &quot;Service Type Category&quot; is declared by Relying Parties to indicate that the party is of a certain &quot;type&quot;.</p>
+<p>Below follow descriptions and rules for Relying Parties for relevant &quot;Service Type Category&quot; values defined in Section 4 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#definitions-for-service-type-entity-categories">Entity Categories for the Swedish eID Framework</a>:</p>
+<p><a name="sigservice"></a></p>
+<h4 id="351-signature-service-indicator">3.5.1. Signature Service Indicator</h4>
+<p><strong>Definition</strong>: Section 4.1 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#sigservice">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>A declaration of the entity category <code>http://id.elegnamnden.se/st/1.0/sigservice</code> means that the Relying Party indicates that it is a signature service.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>The registering organization shall explicitly notify the federation operator (Digg) that the service is a signature service.</li>
+</ul>
+<p><a name="public-or-private-sector-indicator"></a></p>
+<h4 id="352-public-or-private-sector-indicator">3.5.2. Public or Private Sector Indicator</h4>
+<p><strong>Definition</strong>: Sections 4.2 and 4.3 of the specification <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#definitions-for-service-type-entity-categories">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>Public sector Relying Parties within Sweden Connect must declare the category <code>http://id.elegnamnden.se/st/1.0/public-sector-sp</code>, and Relying Parties from the private sector must declare <code>http://id.elegnamnden.se/st/1.0/private-sector-sp</code>.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>At metadata registration, it is checked that either <code>public-sector-sp</code> or <code>private-sector-sp</code> is declared, and that this declaration matches the agreement signed by the party.</li>
+</ul>
+<p><a name="registration-of-signed-agreements"></a></p>
+<h3 id="36-registration-of-signed-agreements">3.6. Registration of Signed Agreements</h3>
+<p>Participation in the Sweden Connect federation is governed by agreements, for both Relying Parties and Identity Providers. For an Identity Provider to accept an authentication request from a Relying Party, it must be able to determine whether the Relying Party has the right to use the service. This is achieved by Relying Parties declaring &quot;Service Contract Category&quot; values that indicate which agreements apply to the party. See Section 5 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#service-contract-categories">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>Below follow the identifiers that map to the agreements listed in Section <a href="#agreements">1.1</a>.</p>
+<p><a name="sweden-connect-agreement"></a></p>
+<h4 id="361-sweden-connect-agreement">3.6.1. Sweden Connect Agreement</h4>
+<p><strong>Identifier</strong>: <code>http://id.swedenconnect.se/contract/sc/sweden-connect</code></p>
+<p>Indicates that the organization of the Relying Party has signed one of Digg&#39;s connection agreements.</p>
+<p>Note: For an Identity Provider that only consumes metadata from the Sweden Connect federation, this category means practically nothing, since it only marks &quot;participant in the Sweden Connect federation&quot;. For Identity Providers that consume metadata from several different federations, it may however be significant.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>At metadata registration, it is checked that the organization has signed a connection agreement.</li>
+</ul>
+<p><a name="other-contracts"></a></p>
+<h4 id="362-bilateral-agreements">3.6.2. Bilateral Agreements</h4>
+<p>For Relying Parties that sign agreements directly with providers, for example a provider of a SAML IdP for BankID, the provider shall define an identifier according to the format described in Section 5 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#service-contract-categories">Entity Categories for the Swedish eID Framework</a>. This identifier shall then be declared by both the Relying Party and the Identity Provider.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>No check is performed. These agreements are outside the responsibility of the federation operator (Digg).</li>
+</ul>
+<p><a name="eid-for-medarbetare2"></a></p>
+<h4 id="363-eid-for-employees-eid-för-medarbetare">3.6.3. eID for Employees (eID för medarbetare)</h4>
+<p><strong>Identifier</strong>: <code>http://id.swedenconnect.se/contract/sc/prepaid-auth-2021</code></p>
+<p>Shall be declared by Relying Parties that have signed the <a href="#eid-for-medarbetare">Relying Party Agreement - Prepaid Electronic Identification</a> (Förlitandeavtal - Förbetald e-legitimering), and by Identity Providers that deliver according to the <a href="#eid-for-medarbetare">Connection Agreement for Issuers of Employee eIDs - Prepaid Electronic Identification</a> (Anslutningsavtal för utfärdare av e-tjänstelegitimationer - Förbetald e-legitimering).</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>At metadata registration, a check is made against the agreements signed by the organization.</li>
+</ul>
+<p><a name="eid-authorization-system"></a></p>
+<h4 id="364-authorization-system-for-electronic-identification-auktorisationssystem-för-elektronisk-identifiering">3.6.4. Authorization System for Electronic Identification (Auktorisationssystem för elektronisk identifiering)</h4>
+<p><strong>Identifier</strong>: <code>http://id.swedenconnect.se/contract/sc/eid-authorization-system</code></p>
+<p>Shall be declared by Relying Parties that have joined the <a href="#auktorisationssystem-for-elektronisk-identifiering">Authorization System for Electronic Identification</a>, and by Identity Providers that deliver according to this agreement.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>At metadata registration, a check is made against the agreements signed by the organization.</li>
+</ul>
+<p><a name="metadata-rules-for-organizational-identities"></a></p>
+<h3 id="37-metadata-rules-for-organizational-identities">3.7. Metadata Rules for Organizational Identities</h3>
+<p>Identity Providers that deliver according to the agreements for <a href="#eid-for-medarbetare">eID for Employees</a> (eID för medarbetare) and support delivery of assertions according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#organizational-identity-for-natural-persons">Organizational Identity for Natural Persons</a> must notify the federation operator (Digg) of which organizations are handled by the Identity Provider.</p>
+<p>This information will be published in the SAML metadata of the Identity Provider as described in Section 2.1.3.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+<blockquote>
+<p>Note: This information shall be kept up to date continuously, which means that the Identity Provider is responsible for notifying the federation operator (Digg) of connecting organizations in good time and requesting a metadata update.</p>
+</blockquote>
+<p>Below is an example of the <code>Scope</code> elements included in the metadata of an Identity Provider that is approved to deliver to the organizations Digg (202100-6883), Försäkringskassan (202100‑5521) and Pensionsmyndigheten (202100-6255).</p>
+<pre class="hljs"><code><span class="hljs-attribute">&lt;md:IDPSSODescriptor ...&gt;</span>
+  <span class="hljs-attribute">&lt;md:Extensions&gt;</span>
+    <span class="hljs-attribute">&lt;shibmd:Scope xmlns:shibmd=&quot;urn:mace:shibboleth:metadata:1.0&gt;</span>2021006883<span class="hljs-attribute">&lt;/shibmd:Scope&gt;</span>
+    <span class="hljs-attribute">&lt;shibmd:Scope xmlns:shibmd=&quot;urn:mace:shibboleth:metadata:1.0&gt;</span>2021005521<span class="hljs-attribute">&lt;/shibmd:Scope&gt;</span>
+    <span class="hljs-attribute">&lt;shibmd:Scope xmlns:shibmd=&quot;urn:mace:shibboleth:metadata:1.0&gt;</span>2021006255<span class="hljs-attribute">&lt;/shibmd:Scope&gt;</span>
+    ...</code></pre><p><em>Note that the organization number shall be represented without a hyphen in the metadata file.</em></p>
+<p>A Relying Party that consumes organizational identities (the <code>orgAffliation</code> attribute) is expected to verify the content of the attribute against the metadata entry of the issuing Identity Provider according to Section 6.2.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#attribute-release-and-consuming-rules">Deployment Profile for the Swedish eID Framework</a>.</p>
+<p><strong>Rules and routines for metadata registration</strong>:</p>
+<ul class="list">
+<li>The federation operator (Digg) checks that the notified list of connected organizations matches the content of the metadata (that is, verifies that the <code>Scope</code> elements are correct).</li>
+</ul>
+<p><a name="metadata-rules-for-coordination-numbers"></a></p>
+<h3 id="38-metadata-rules-for-coordination-numbers">3.8. Metadata Rules for Coordination Numbers</h3>
+<p>An Identity Provider that delivers according to the attribute set <a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html#natural-personal-identity-with-civic-registration-number">Natural Personal Identity with Civic Registration Number</a> delivers the individual&#39;s personal identity number <strong>or</strong> coordination number in the <code>personalIdentityNumber</code> attribute.</p>
+<p>Previously, Digg did not approve the use of coordination numbers in assertions, which means that some Relying Parties that only expect a personal identity number in the <code>personalIdentityNumber</code> attribute may have problems processing the assertion.</p>
+<p>Therefore, an &quot;opt-in&quot; from the Relying Party is required before the Identity Provider may deliver a coordination number to that Relying Party. This is described in Section 6.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html#accepts-coordination-number">Entity Categories for the Swedish eID Framework</a>.</p>
+<p>Example of metadata for a SAML SP that accepts delivery of coordination numbers:</p>
+<pre class="hljs"><code><span class="hljs-string">...</span>
+&lt;md<span class="hljs-function">:Extensions</span>&gt;
+  &lt;mdattr<span class="hljs-function">:EntityAttributes</span> xmlns<span class="hljs-function">:mdattr</span>=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:metadata:attribute&quot;</span>&gt;
+    &lt;saml2<span class="hljs-function">:Attribute</span> Name=<span class="hljs-string">&quot;http://macedir.org/entity-category&quot;</span>
+                     NameFormat=<span class="hljs-string">&quot;urn:oasis:names:tc:SAML:2.0:attrname-format:uri&quot;</span>&gt;
+      &lt;saml2<span class="hljs-function">:AttributeValue</span>&gt;
+        http:<span class="hljs-string">//id.elegnamnden.se/ec/1.0/loa3-pnr</span>
+      &lt;<span class="hljs-string">/saml2</span><span class="hljs-function">:AttributeValue</span>&gt;
+      <span class="hljs-string">...</span>
+      &lt;saml2<span class="hljs-function">:AttributeValue</span>&gt;
+! -&gt;    http:<span class="hljs-string">//id.swedenconnect.se/general-ec/1.0/accepts-coordination-number</span>
+      &lt;<span class="hljs-string">/saml2</span><span class="hljs-function">:AttributeValue</span>&gt;
+      <span class="hljs-string">...</span>            
+    &lt;<span class="hljs-string">/saml2</span><span class="hljs-function">:Attribute</span>&gt;        
+  &lt;<span class="hljs-string">/mdattr</span><span class="hljs-function">:EntityAttributes</span>&gt;
+&lt;<span class="hljs-string">/md</span><span class="hljs-function">:Extensions</span>&gt;
+<span class="hljs-string">...</span></code></pre><p>By declaring the entity category <code>http://id.swedenconnect.se/general-ec/1.0/accepts-coordination-number</code>, the SAML SP informs Identity Providers that the Relying Party allows delivery of coordination numbers in the <code>personalIdentityNumber</code> attribute.</p>
+<p>An Identity Provider must <strong>not</strong> deliver an assertion containing a coordination number to a Relying Party that has not declared the above. In these cases, the Identity Provider shall instead inform the user that a personal identity number is required to authenticate, and not issue an assertion.</p>
+<p><a name="metadata-rules-for-loa-4"></a></p>
+<h3 id="39-metadata-rules-for-level-of-assurance-4-loa-4">3.9. Metadata Rules for Level of Assurance 4 (LoA 4)</h3>
+<p>For authentication and delivery of assertions according to Level of Assurance 4, the Sweden Connect federation recommends that the SAML profile <a href="https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-holder-of-key-browser-sso.pdf">SAML V2.0 Holder-of-key Web Browser SSO Profile</a> is used. The use of &quot;Holder-of-key&quot; according to the Sweden Connect Technical Framework is specified in <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html">Deployment Profile for the Swedish eID Framework</a>.</p>
+<blockquote>
+<p>Note that Identity Providers that do not deliver according to Level of Assurance 4 may also choose to offer support for &quot;Holder-of-key&quot;.</p>
+</blockquote>
+<p>The following metadata rules apply to Holder-of-key:</p>
+<p>An Identity Provider that offers &quot;Holder-of-key&quot; support shall declare dedicated <code>SingleSignOnService</code> elements for &quot;Holder-of-key&quot; in its metadata entry according to Section 2.1.3.2 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#idp-holder-of-key-support">Deployment Profile for the Swedish eID Framework</a>. The addresses given in these elements must be configured for mutual TLS, that is, TLS where a client certificate is required.</p>
+<p>A Relying Party that wants to use &quot;Holder-of-key&quot; at authentication shall declare an <code>AssertionConsumerService</code> element for &quot;Holder-of-key&quot; according to Section 2.1.2.1 of <a href="https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html#sp-holder-of-key-support">Deployment Profile for the Swedish eID Framework</a>. The address given in this element must be configured for mutual TLS, that is, TLS where a client certificate is required.</p>
+<p><a name="document-history"></a></p>
+<h2 id="4-document-history">4. Document History</h2>
+<ul class="list">
+<li>2026-10-19: First English version, translated from &quot;Tekniska anslutningsregler för Sweden Connects SAML-federation&quot; of the same date.</li>
+</ul>
+    </article>
+  </body>
+</html>
