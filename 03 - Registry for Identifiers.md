@@ -191,11 +191,11 @@ The following category codes are defined:
 | **regpolicy** | Registration policy. For representing policies describing how an entity joined the federation. |
 | **csig** | Central Signing Service – Identifiers used by the central signing service infrastructure. |
 | **auth-cont** | Authentication context information schema. |
+| **cert** | Certificate identifiers |
 | **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
 | **eidas** | Identifiers used for integration with the eIDAS Framework. |
 | **ns** | XML Schema namespaces. |
-| **cert** | Certificate identifiers |
 
 <a name="authentication-context-uris"></a>
 #### 3.1.1. Authentication Context URIs
