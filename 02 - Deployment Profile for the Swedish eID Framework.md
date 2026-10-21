@@ -8,14 +8,14 @@
 
 # Deployment Profile for the Swedish eID Framework
 
-### Version 1.9 - 2025-10-16 - Draft
+### Version 1.9 – 2026-10-21
 
 Registration number: **2019-308**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2025. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -177,7 +177,7 @@ the following syntax is used:
 
 -  `<alg:Element>` – for elements defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\].
 
-When referring to elements from the SAML V2.0 Holder-of-key Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)], the following syntax is used:
+When referring to elements from the SAML V2.0 Holder-of-key Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\], the following syntax is used:
 
 - `<hoksso:ProtocolBinding>` - for elements from the SAML V2.0 Web Browser Holder-of-key namespace.
 
@@ -232,7 +232,7 @@ extension, extending the `<md:SPSSODescriptor>` or `<md:IDPSSODescriptor>` eleme
 `<mdui:DisplayName>` element with the language attribute `sv`
 (Swedish), representing the entity name that has been approved
 by the federation operator. The `<mdui:UIInfo>` element SHALL also
-contain a reference to one, or more, logotype images (`<mdui:Logo>`) as described in section 2.1.5
+contain a reference to one, or more, logotype images (`<mdui:Logo>`) as described in Section 2.1.5
 of \[[SAML2MetaUI](#saml2metaui)\] and SHOULD
 contain a `<mdui:Description>` element with the language attribute
 `sv` (Swedish).
@@ -247,25 +247,25 @@ A federation operator may impose further requirements regarding the `<mdui:UIInf
 
 Public keys used for signature validation and encryption MUST be expressed via X.509
 certificates included in metadata as `<ds:X509Certificate>` child elements to
-`<md:KeyDescriptor>` elements. These certificates merely acts as containers for the public keys 
+`<md:KeyDescriptor>` elements. These certificates merely act as containers for the public keys 
 needed for signature validation and encryption and the consumer of a metadata entry cannot
 expect to be able to execute a successful certificate path validation of such certificates.
-A metadata consumer MUST NOT reject a metadata entry due to that certificate trust is missing,
+A metadata consumer MUST NOT reject a metadata entry because certificate trust is missing,
 the certificate is expired, or certificate revocation information is missing.
 
 However, for interoperability reasons it is RECOMMENDED that:
 
 * self-signed certificates are used,
 * non-expired certificates (with a long validity time) are used,
-* certificates are not signed with MD5- och SHA1-based signature algorithms. 
+* certificates are not signed with MD5- and SHA1-based signature algorithms. 
 
 All services represented in metadata SHOULD include at least one `<md:KeyDescriptor>` 
-element holding a certificate to be used for signature validation (with the `use`-attribute
+element holding a certificate to be used for signature validation (with the `use` attribute
 set to `signing`), and one `<md:KeyDescriptor>` element containing a certificate 
-to be used for message encryption (with the `use`-attribute set to `encryption`).
+to be used for message encryption (with the `use` attribute set to `encryption`).
 It is allowed to use the same key and certificate for both usages, but in order to enable
 a future key rollover it is RECOMMENDED to avoid using only one `<md:KeyDescriptor>` element
-for both usages (i.e., with an absent `use`-attribute).
+for both usages (i.e., with an absent `use` attribute).
 
 In order to facilitate key rollover of a signing key, a service MUST support multiple signing 
 certificates found in peer metadata and MUST support signature validation using a key from 
@@ -279,14 +279,14 @@ messages using both the old and new key.
 <a name="declaring-algorithm-support"></a>
 ##### 2.1.1.3. Declaring Algorithm Support
 
-Services MAY declare encryption and signature capabilities as defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Sweden Connect Framework or by the federation operator . Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
+Services MAY declare encryption and signature capabilities as defined in \[[SAML2MetaAlgSupport](#saml2metaalg)\]. The declared algorithms MUST meet the algorithm requirements defined by the Sweden Connect Framework or by the federation operator. Thus, it is not allowed to declare an algorithm, or key size, that is prohibited from use. 
 
 All services conformant with this specification MUST support the mandatory algorithms defined by the Sweden Connect Framework, meaning that a service has no possibility to opt-out from a certain mandatory algorithm by excluding it from the declared capabilities. The main purpose of declaring an algorithm using any of the elements `<md:EncryptionMethod>`, `<alg:SigningMethod>` or `<alg:DigestMethod>` is to declare which algorithm the service prefers.
 
 <a name="service-providers"></a>
 #### 2.1.2. Service Providers
 
-The `<mdattr:EntityAttributes>` element of a Service Provider’s
+The `<mdattr:EntityAttributes>` element of a Service Provider's
 entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
@@ -317,7 +317,7 @@ metadata entry of the Service Provider SHOULD NOT include a
 `<md:AttributeConsumingService>` element (with `<md:RequestedAttribute>` 
 elements). 
 
-Any needs for particular attributes from Identify Providers, when
+Any needs for particular attributes from Identity Providers, when
 present, MUST be expressed through present service entity categories in
 combination with `<md:RequestedAttribute>` elements under the
 `<md:AttributeConsumingService>` element in the Service
@@ -331,12 +331,12 @@ service entity category need to be expressed as `<md:RequestedAttribute>` elemen
 
 A Service Provider MAY sign authentication request messages sent to
 Identity Providers. A Service Provider that signs authentication
-requests messages MAY also ensure that a receiving Identity Provider
+request messages MAY also ensure that a receiving Identity Provider
 will only accept valid signed requests from this Service Provider by
 assigning the `AuthnRequestsSigned` attribute of the
 `<md:SPSSODescriptor>` to a value of `true`.
 
-Section E7, “Metadata for Agreeing to Sign Authentication Requests”, of
+Section E7, "Metadata for Agreeing to Sign Authentication Requests", of
 \[[SAML v2.0 Errata 05](#saml2errata05)\]
 specifies the following concerning the `AuthnRequestsSigned` attribute:
 
@@ -365,11 +365,11 @@ A Service Provider wishing to make use of a central discovery service as specifi
 <a name="sp-holder-of-key-support"></a>
 ##### 2.1.2.1. Holder of Key Support
 
-A Service Provider that sends authentication requests using the Holder-of-key Web Browser SSO Profile MUST include a `<md:AssertionConsumerService>` element in its metadata according to section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
+A Service Provider that sends authentication requests using the Holder-of-key Web Browser SSO Profile MUST include a `<md:AssertionConsumerService>` element in its metadata according to Section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
 
-If the Service Provider also makes use of the ordinary Web Browser SSO Profile at least one `<md:AssertionConsumerService>` element according to section 2.4.4 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Service Provider metadata. 
+If the Service Provider also makes use of the ordinary Web Browser SSO Profile, at least one `<md:AssertionConsumerService>` element according to Section 2.4.4 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Service Provider metadata. 
 
-In those cases, where a Service Provider supports both profiles, it is RECOMMENDED that the a `<md:AssertionConsumerService>` element for ordinary Web Browser SSO Profile is marked as default.
+In those cases where a Service Provider supports both profiles, it is RECOMMENDED that the `<md:AssertionConsumerService>` element for the ordinary Web Browser SSO Profile is marked as default.
 
 ```
 <md:AssertionConsumerService index="0" isDefault="true"
@@ -385,16 +385,16 @@ In those cases, where a Service Provider supports both profiles, it is RECOMMEND
   Location="https://sp.example.org/path2" />
 ```
 
-*Example of a Service Provider's declared AssertionConsumerService elements; one for receiving assertions according the Web Browser SSO Profile and one for receiving assertions according to the Holder-of-key Web Browser SSO Profile.*
+*Example of a Service Provider's declared AssertionConsumerService elements: one for receiving assertions according to the Web Browser SSO Profile and one for receiving assertions according to the Holder-of-key Web Browser SSO Profile.*
 
 <a name="identity-providers"></a>
 #### 2.1.3. Identity Providers
 
-The `<mdattr:EntityAttributes>` element of an Identity Provider’s
+The `<mdattr:EntityAttributes>` element of an Identity Provider's
 entity descriptor SHOULD contain one entity category attribute
 \[[EntCat](#entcat)\] that holds at least
 one attribute value representing a service entity category as defined in
-\[[SC.EntCat](#sc-entcat)\], defining the Identity Provider ability to deliver
+\[[SC.EntCat](#sc-entcat)\], defining the Identity Provider's ability to deliver
 assertions (defining the level of assurance and attribute release).
 
 If an Identity Provider has the ability to release attributes, other than those
@@ -402,13 +402,13 @@ implicitly given by the declared service entity categories, it is RECOMMENDED th
 those attributes are declared as `<saml:Attribute>` elements under the 
 `<md:IDPSSODescriptor>` element. 
 
-The `<mdattr:EntityAttributes>` element of an Identity Provider’s
+The `<mdattr:EntityAttributes>` element of an Identity Provider's
 metadata SHALL contain an attribute according to
 \[[SAML2IAP](#saml2iap)\] with its `Name` attribute set to 
 `urn:oasis:names:tc:SAML:attribute:assurance-certification`
 and holding at least one attribute value identifying a Level of Assurance
 (LoA) for which the Identity Provider has been approved. 
-The Sweden Connect Framework defines such identifier values in section 3.1.1 of
+The Sweden Connect Framework defines such identifier values in Section 3.1.1 of
 \[[SC.Registry](#sc-registry)\] and their meanings are defined in \[[SE.Trust](#se-trust)\].
 
 ```
@@ -429,9 +429,9 @@ the `http://id.elegnamnden.se/loa/1.0/loa3` level of assurance.*
 
 An Identity Provider MAY require authentication request messages to be
 signed. This is indicated by assigning the
-`WantAuthnRequestsSigned` attribute of the `<md:IDPSSPDescriptor>`
-element to a value of `true`. See further section E7, “Metadata for
-Agreeing to Sign Authentication Requests”, of \[[SAML v2.0 Errata
+`WantAuthnRequestsSigned` attribute of the `<md:IDPSSODescriptor>`
+element to a value of `true`. See further Section E7, "Metadata for
+Agreeing to Sign Authentication Requests", of \[[SAML v2.0 Errata
 05](#saml2errata05)\].
 
 Identity Providers SHALL advertise support for the SAP protocol according to \[[SC.SAP](#sc-sap)\], by including the service property entity category URI
@@ -451,20 +451,20 @@ Identity Providers SHALL advertise support for the SAP protocol according to \[[
 ```
 *Example of how an Identity Provider advertises its support for SCAL2 authentication.*
 
-An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension in authentication requests SHOULD include the `<psc:RequestedPrincipalSelection>` extension extending the `<md:IDPSSODescriptor>` element. In this extension the Identity Provider declares which attribute value(s) it wants to receive in authentication requests from requestors using the `<psc:PrincipalSelection>` authentication request extension. See [section 5.3.3](#principal-selection) and \[[SC.Principal](#sc-principal)\].
+An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension in authentication requests SHOULD include the `<psc:RequestedPrincipalSelection>` extension extending the `<md:IDPSSODescriptor>` element. In this extension the Identity Provider declares which attribute value(s) it wants to receive in authentication requests from requestors using the `<psc:PrincipalSelection>` authentication request extension. See [Section 5.3.3](#principal-selection) and \[[SC.Principal](#sc-principal)\].
 
 <a name="declaring-authorized-scopes"></a>
 ##### 2.1.3.1. Declaring Authorized Scopes
 
-An Identity Provider that releases "scoped attributes", see section 3.1.3 of \[[SC.Attributes](#sc-attributes)\],
-MUST be authorized to do so by the federation operator. Each authorized scope MUST be declared in the Identity Provider metadata entry using a `<shibmd:Scope>` element, see section 3.5.2, "Scope Filtering", in \[[SAML2SubjIdAttr](#saml2subjidattr)\]. The `<shibmd:Scope>` elements MUST appear within the `<md:Extensions>` element of the `<md:IDPSSODescriptor>`.
+An Identity Provider that releases "scoped attributes", see Section 3.1.3 of \[[SC.Attributes](#sc-attributes)\],
+MUST be authorized to do so by the federation operator. Each authorized scope MUST be declared in the Identity Provider metadata entry using a `<shibmd:Scope>` element, see Section 3.5.2, "Scope Filtering", in \[[SAML2SubjIdAttr](#saml2subjidattr)\]. The `<shibmd:Scope>` elements MUST appear within the `<md:Extensions>` element of the `<md:IDPSSODescriptor>`.
 
 ```
 <md:IDPSSODescriptor ...>
   <md:Extensions>
-    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0>2021006883</shibmd:Scope>
-    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0>2021006255</shibmd:Scope>
-    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0>example.com</shibmd:Scope>
+    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0">2021006883</shibmd:Scope>
+    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0">2021006255</shibmd:Scope>
+    <shibmd:Scope regexp="false" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0">example.com</shibmd:Scope>
     ...
 ```
 
@@ -473,9 +473,9 @@ MUST be authorized to do so by the federation operator. Each authorized scope MU
 <a name="idp-holder-of-key-support"></a>
 ##### 2.1.3.2. Holder of Key Support
 
-An Identity Provider that supports the Holder-of-key Web Browser SSO Profile MUST declare `<md:SingleSignOnService>` elements<sup>\*</sup> in its metadata according to section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
+An Identity Provider that supports the Holder-of-key Web Browser SSO Profile MUST declare `<md:SingleSignOnService>` elements<sup>\*</sup> in its metadata according to Section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
 
-If the Identity Provider also supports authentication according the ordinary Web Browser SSO Profile `<md:SingleSignOnService>` elements<sup>\*</sup> according to section 2.4.3 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Identity Provider metadata.
+If the Identity Provider also supports authentication according to the ordinary Web Browser SSO Profile, `<md:SingleSignOnService>` elements<sup>\*</sup> according to Section 2.4.3 of \[[SAML2Meta](#saml2meta)\] MUST also be included in the Identity Provider metadata.
 
 ```
 <md:SingleSignOnService
@@ -503,9 +503,9 @@ If the Identity Provider also supports authentication according the ordinary Web
   Location="https://idp.example.org/path2" />
 ```
 
-*Example of an Identity Provider's declared SingleSignOnService elements; two for receiving requests according to the Web Browser SSO Profile and two for receiving requests according to the Holder-of-key Web Browser SSO Profile.*
+*Example of an Identity Provider's declared SingleSignOnService elements: two for receiving requests according to the Web Browser SSO Profile and two for receiving requests according to the Holder-of-key Web Browser SSO Profile.*
 
-> \[\*\]: This profile requires an Identity Provider to support both the POST and Redirect bindings, see section [5.2](#binding-and-security-requirements) below.
+> \[\*\]: This profile requires an Identity Provider to support both the POST and Redirect bindings, see Section [5.2](#binding-and-security-requirements) below.
 
 <a name="signature-service"></a>
 #### 2.1.4. Signature Service
@@ -520,7 +520,7 @@ identifier **`http://id.elegnamnden.se/st/1.0/sigservice`** (\[[SC.EntCat](#sc-e
 as a value to the entity category attribute \[[EntCat](#entcat)\].
 
 ```
-<mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">`
+<mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
   <saml2:Attribute Name="http://macedir.org/entity-category"
                    NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
                    xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
@@ -566,76 +566,76 @@ SAML 2.0 messages or assertions SHOULD be limited to a single child text
 node.
 
 For requirements regarding attribute inclusion in SAML assertions, see
-section [6.2.1](#attribute-release-and-consuming-rules), “[Attribute Release and Consuming Rules](#attribute-release-and-consuming-rules)”, below.
+Section [6.2.1](#attribute-release-and-consuming-rules), "[Attribute Release and Consuming Rules](#attribute-release-and-consuming-rules)", below.
 
 <a name="authentication-requests"></a>
 ## 5. Authentication Requests
 
-This profile supports two different SSO profiles; the Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)], and the Holder-of-key Web Browser Profile, \[[SAML2HokProf](#saml2hokprof)]. 
+This profile supports two different SSO profiles: the Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)\], and the Holder-of-key Web Browser Profile, \[[SAML2HokProf](#saml2hokprof)\]. 
 
-The profile in use is determined by how an authentication process is initiated, meaning to which Identity Provider endpoint an `<saml2p:AuthnRequest>` message is sent, see [2.1.3.2](#idp-holder-of-key-support).
+The profile in use is determined by how an authentication process is initiated, meaning to which Identity Provider endpoint a `<saml2p:AuthnRequest>` message is sent, see Section [2.1.3.2](#idp-holder-of-key-support).
 
 <a name="discovery"></a>
 ### 5.1. Discovery
 
-This profile does not impose any requirements of
+This profile does not impose any requirements on
 how the process of discovery is implemented by Service Providers wishing
 to display user interfaces for selection of Identity Providers for end
 users. However, Service Providers making use of a centralized
 discovery service as defined in \[[IdpDisco](#idpdisco)\] MUST follow the requirements
 stated for discovery responses in 
-section [2.1.2](##service-providers), "[Service Providers](#service-providers)".
+Section [2.1.2](#service-providers), "[Service Providers](#service-providers)".
 
 <a name="binding-and-security-requirements"></a>
 ### 5.2. Binding and Security Requirements
 
-The endpoints, at which an Identity Provider receives a
+The endpoints at which an Identity Provider receives a
 `<saml2p:AuthnRequest>` message, and all subsequent exchanges with
 the user agent, MUST be protected by TLS. 
 
 If the Identity Provider supports the Holder-of-key Web Browser SSO Profile, the
-dedicated endpoints for this profile (see section [2.1.3.2](#idp-holder-of-key-support))
+dedicated endpoints for this profile (see Section [2.1.3.2](#idp-holder-of-key-support))
 MUST be configured to require a 
 client X.509 certificate being presented as part of the TLS handshake (mTLS, mutual TLS), 
-see section 2.4 of \[[SAML2HokProf](#saml2hokprof)\]. If the Identity Provider receives
+see Section 2.4 of \[[SAML2HokProf](#saml2hokprof)\]. If the Identity Provider receives
 a request on a Holder-of-key endpoint and is unable to retrieve the client X.509
-certificate it MUST respond with an error, see section 2.6.4 of \[[SAML2HokProf](#saml2hokprof)\].
+certificate, it MUST respond with an error, see Section 2.6.4 of \[[SAML2HokProf](#saml2hokprof)\].
 
-A Service Provider sending an `<saml2p:AuthnRequest>` message to an Identity Provider
+A Service Provider sending a `<saml2p:AuthnRequest>` message to an Identity Provider
 may do so using either the HTTP-Redirect or HTTP-POST binding \[[SAML2Bind](#saml2bind)\]<sup>\*</sup>,
 meaning that Identity Providers conformant with this profile MUST support the
 HTTP-Redirect and the HTTP-POST binding.
 
 An Identity Provider that requires `<saml2p:AuthnRequest>` messages
-to be signed MUST not accept messages that are not signed, or where the
-verification of the signature fails. In these cases the Identity
+to be signed MUST NOT accept messages that are not signed, or where the
+verification of the signature fails. In these cases, the Identity
 Provider MUST respond with an error.
 
 An Identity Provider that itself does not require authentication
 messages to be signed MUST still accept and verify signed request
 messages from Service Providers that indicate, in their metadata, that
-they sign request messages (see [2.1.2](#service-providers) above). If this signature
+they sign request messages (see Section [2.1.2](#service-providers) above). If this signature
 verification fails, the Identity Provider MUST return a SAML error
 response and MUST NOT fulfil the request.
 
 An Identity Provider that receives a request message that is not signed
 from a Service Provider that has indicated, in its metadata, that it
-will only send signed request messages (see [2.1.2](#service-providers) above) MUST respond
+will only send signed request messages (see Section [2.1.2](#service-providers) above) MUST respond
 with an error.
 
 The signature for authentication request messages is applied differently
 depending on the binding. The HTTP-Redirect binding requires the
 signature to be applied to the URL-encoded value rather than being
-placed within the XML-message (see section 3.4.4.1 of
+placed within the XML message (see Section 3.4.4.1 of
 \[[SAML2Bind](#saml2bind)\]).
 For the HTTP-POST binding the `<saml2p:AuthnRequest>` element MUST
 be signed using a `<ds:Signature>` element within the
-`<saml2:AuthnRequest>`.
+`<saml2p:AuthnRequest>`.
 
 Before signing the authentication request, the Service Provider SHOULD consult the Identity Provider's metadata (`<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory signing and digest algorithms defined in the Sweden Connect Framework during the signature operation.
 
 > \[\*\]: A Service Provider should be aware of web browser, or web server, size limitations
-of URL:s, and it is RECOMMENDED that a Service Provider use the HTTP-POST binding in cases where 
+of URLs, and it is RECOMMENDED that a Service Provider use the HTTP-POST binding in cases where 
 the `<saml2p:AuthnRequest>` message becomes very large. This may be the case when a `SignMessage`
 extension containing much data is used, or when a complete certificate chain is attached to the signature 
 of the message.
@@ -643,14 +643,14 @@ of the message.
 <a name="message-content"></a>
 ### 5.3. Message Content
 
-An `<saml2p:AuthnRequest>` message MUST NOT contain a Document Type Definition (DTD).
+A `<saml2p:AuthnRequest>` message MUST NOT contain a Document Type Definition (DTD).
 
 The `<saml2p:AuthnRequest>` message SHOULD contain an
 `AssertionConsumerServiceURL`<sup>\*</sup> attribute identifying the desired response
 location. The Service Provider MUST NOT use any other values for this
 attribute than those listed in its metadata record as
 `<md:AssertionConsumerService>` elements for the HTTP-POST binding
-(see section 4.1.6 of \[[SAML2Prof](#saml2prof)\]), and URL
+(see Section 4.1.6 of \[[SAML2Prof](#saml2prof)\]), and URL
 canonicalization or normalization MUST NOT be required.
 
 The `Destination` attribute of the `<saml2p:AuthnRequest>` message
@@ -668,7 +668,7 @@ Service Providers SHOULD include the `ForceAuthn` attribute in all
 `true` or `false`, and not rely on its default value. The reason for this is
 to avoid accidental SSO.
 
-If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
+If the Service Provider has included more than one `<md:AttributeConsumingService>` element in its metadata, it is RECOMMENDED that the `<saml2p:AuthnRequest>` message contains the `AttributeConsumingServiceIndex` attribute holding the index of the `<md:AttributeConsumingService>` element that the Identity Provider should consider during attribute release.
 
 > \[\*\]: The `AssertionConsumerServiceURL` attribute is mutually exclusive with the `AssertionConsumerServiceIndex` attribute, meaning that a `<saml2p:AuthnRequest>` message MUST NOT contain both attributes. 
 
@@ -678,7 +678,7 @@ If the Service Provider has included more than one `<md:AttributeConsumingServic
 A Service Provider SHOULD explicitly specify a requested
 authentication context element (`<saml2p:RequestedAuthnContext>`),
 containing `<saml2:AuthnContextClassRef>` elements each holding
-a Level of Assurance authentication context URI (see section 3.1.1 of \[[SC.Registry](#sc-registry)\]) 
+a Level of Assurance authentication context URI (see Section 3.1.1 of \[[SC.Registry](#sc-registry)\]) 
 that the Service Provider considers acceptable for the authentication process.
 
 A present `<saml2p:RequestedAuthnContext>` element MUST specify
@@ -693,7 +693,7 @@ all of these URIs MUST be included in the request.
 
 The requested authentication context SHOULD be consistent with at least
 one of the service entity categories \[[SC.EntCat](#sc-entcat)\] declared in the
-Service Provider’s metadata entry. See further [section 5.4.4](#authentication-context-and-level-of-assurance-handling) below.
+Service Provider's metadata entry. See further [Section 5.4.4](#authentication-context-and-level-of-assurance-handling) below.
 
 ```
 <saml2p:RequestedAuthnContext Comparison="exact">
@@ -721,8 +721,8 @@ substantial level for notified eIDs defined within the eIDAS Framework.*
 <a name="scoping"></a>
 #### 5.3.2. Scoping
 
-An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the `<saml2p:Scoping>` element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) that may be used to authenticate the user. A Service Provider that sends authentication requests to a Proxy
-IdP MAY include the `<saml2p:Scoping>` element. See section 3.4.1.5 of \[[SAML2Core](#saml2core)\].
+An Identity Provider that acts as a proxy for other Identity Providers SHOULD support the `<saml2p:Scoping>` element holding one, or more, entries signalling to the Proxy Identity Provider which Identity Provider(s) may be used to authenticate the user. A Service Provider that sends authentication requests to a Proxy
+IdP MAY include the `<saml2p:Scoping>` element. See Section 3.4.1.5 of \[[SAML2Core](#saml2core)\].
 
 ```
 <saml2p:Scoping>
@@ -731,9 +731,9 @@ IdP MAY include the `<saml2p:Scoping>` element. See section 3.4.1.5 of \[[SAML2C
   </saml2p:IDPList>
 </saml2p:Scoping>
 ```
-*Example of how an `AuthnRequest` contains a `Scoping`-element where the requester (Service Provider) signals to the Proxy IdP which Identity Provider that should perform the authentication of the user.*
+*Example of how an `AuthnRequest` contains a `Scoping` element where the requester (Service Provider) signals to the Proxy IdP which Identity Provider should perform the authentication of the user.*
 
-The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country where the user should be directed to for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See section 3.1.9.1 of \[[SC.Registry](#sc-registry)\].
+The Swedish eIDAS Connector is a Proxy IdP that proxies requests to foreign eIDAS Proxy Services. Normally, the eIDAS connector presents a country selection dialogue to the user, prompting for the country to which the user should be directed for authentication. However, a Service Provider MAY include an eIDAS Proxy Service alias URI for a specific country's Proxy Service under the `<saml2p:Scoping>` element of the `<saml2p:AuthnRequest>` in order to bypass the country selection dialogue. See Section 3.1.9.1 of \[[SC.Registry](#sc-registry)\].
 
 ```
 <saml2p:Scoping>
@@ -749,18 +749,18 @@ proxy the request to the Norwegian eIDAS Proxy Service for authentication.*
 
 **Note:** Another method of bypassing the country selection dialogue is to include the `c` (`urn:oid:2.5.4.6`) 
 attribute with the country code for the requested country as its value in a `<psc:PrincipalSelection>`
-extension of the `AuthnRequest` message, see section [5.3.3](#principal-selection) below.
+extension of the `AuthnRequest` message, see Section [5.3.3](#principal-selection) below.
 
 <a name="principal-selection"></a>
 #### 5.3.3. Principal Selection
 
 The specification "Principal Selection in SAML Authentication Requests", \[[SC.Principal](#sc-principal)\], defines the `<psc:PrincipalSelection>` extension that enables a requestor to inform the Identity Provider about known attributes for the principal that is about to be authenticated. 
 
-This may be relevant for Identity Provider services who prompt users for an identifier in order initiate an authentication process with the user's eID. In such cases, this extension can be used to avoid unnecessary prompting when the user's identity is known in advance to the service requesting authentication, such as when a previously authenticated user is requested to sign a document.
+This may be relevant for Identity Provider services that prompt users for an identifier in order to initiate an authentication process with the user's eID. In such cases, this extension can be used to avoid unnecessary prompting when the user's identity is known in advance to the service requesting authentication, such as when a previously authenticated user is requested to sign a document.
 
-An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension SHOULD advertise this in its metadata according to [section 2.1.3](#identity-providers).
+An Identity Provider that wishes to receive the `<psc:PrincipalSelection>` extension SHOULD advertise this in its metadata according to [Section 2.1.3](#identity-providers).
 
-A Service Provider that sends an authentication request  to an Identity Provider that has declared that it wishes to receive certain attribute values MAY include the `<psc:PrincipalSelection>` extension in the `<saml2p:AuthnRequest>` message, provided that the Service Provider has knowledge about this information.
+A Service Provider that sends an authentication request to an Identity Provider that has declared that it wishes to receive certain attribute values MAY include the `<psc:PrincipalSelection>` extension in the `<saml2p:AuthnRequest>` message, provided that the Service Provider has knowledge about this information.
 
 A Service Provider that is a Signature Service SHOULD include the extension for the case described above.
 
@@ -772,7 +772,7 @@ A Service Provider that is a Signature Service SHOULD include the extension for 
 
 An Identity Provider receiving a `<saml2p:AuthnRequest>` message
 MUST verify that the `Destination` attribute is present, and that it is
-consistent with URLs configured in the Identity Provider’s metadata.
+consistent with URLs configured in the Identity Provider's metadata.
 
 <a name="validation-of-assertion-consumer-addresses"></a>
 #### 5.4.2. Validation of Assertion Consumer Addresses
@@ -780,48 +780,48 @@ consistent with URLs configured in the Identity Provider’s metadata.
 If the `AssertionConsumerServiceURL` attribute is present in the
 `<saml2p:AuthnRequest>` message, its value MUST be verified to be
 consistent with one of the `<md:AssertionConsumerService>` elements
-having the HTTP-POST binding<sup>\*</sup> found in the Service Provider’s metadata
+having the HTTP-POST binding<sup>\*</sup> found in the Service Provider's metadata
 entry and matching the SSO profile<sup>\*\*</sup> in use 
-(see [section 2.1.2.1](#sp-holder-of-key-support)). If this is not the case, 
+(see [Section 2.1.2.1](#sp-holder-of-key-support)). If this is not the case, 
 the request must be rejected.
 
 If the `AssertionConsumerServiceIndex` attribute is present in the
 `<saml2p:AuthnRequest>` message, a `<md:AssertionConsumerService>` matching this
-index MUST be present in the Service Provider’s metadata. This
+index MUST be present in the Service Provider's metadata. This
 `<md:AssertionConsumerService>` element MUST also match the binding and SSO
 profile in use as defined above. If this is not the case, 
 the request must be rejected.
 
 > This means that an Identity Provider that services an authentication request
-received on an `SingleSignOnService` endpoint dedicated for the Holder-of-key
+received on a `SingleSignOnService` endpoint dedicated for the Holder-of-key
 Web Browser Profile MUST NOT allow an `<md:AssertionConsumerService>` element
-that is not intended for the Holder-of-key profile, see section 2.8 of 
+that is not intended for the Holder-of-key profile, see Section 2.8 of 
 \[[SAML2HokProf](#saml2hokprof)\].
 
 If the attribute is not present in the `<saml2p:AuthnRequest>`
 message, the Identity Provider MUST obtain the desired response location
-from the Service Provider’s metadata entry.  This location is determined by first 
+from the Service Provider's metadata entry. This location is determined by first 
 finding all the `<md:AssertionConsumerService>` 
-elements that matches the SSO profile<sup>\*\*</sup> in use (see 
-[section 2.1.2.1](#sp-holder-of-key-support)) and the binding<sup>\*</sup> (HTTP-POST), 
+elements that match the SSO profile<sup>\*\*</sup> in use (see 
+[Section 2.1.2.1](#sp-holder-of-key-support)) and the binding<sup>\*</sup> (HTTP-POST), 
 and then selecting the element that is marked as default (has the `isDefault` attribute set), 
 or if no matching element is marked as default, the one with the lowest index value (see 
-section 2.4.4.1 of \[[SAML2Meta](#saml2meta)\] and section 2.8 of 
+Section 2.4.4.1 of \[[SAML2Meta](#saml2meta)\] and Section 2.8 of 
 \[[SAML2HokProf](#saml2hokprof)\]). If no matching `<md:AssertionConsumerService>`
-element is found the request must be rejected.
+element is found, the request must be rejected.
 
 > \[\*\]: For Holder-of-key `<md:AssertionConsumerService>` elements the actual binding
-is given by the `hoksso:ProtocolBinding` attribute, see section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
+is given by the `hoksso:ProtocolBinding` attribute, see Section 2.8 of \[[SAML2HokProf](#saml2hokprof)\].
 
-> \[\*\*\]: The Web Browser SSO Profile or the Holder-of-key Web Browser SSO Profile are possible profiles.
+> \[\*\*\]: The possible profiles are the Web Browser SSO Profile and the Holder-of-key Web Browser SSO Profile.
 
 <a name="identity-provider-user-interface"></a>
 #### 5.4.3. Identity Provider User Interface
 
 An Identity Provider presenting information related to a Service Provider
-in its user interface during processing of an `<saml2p:AuthnRequest>` message
+in its user interface during processing of a `<saml2p:AuthnRequest>` message
 MUST obtain this information from the
-`<mdui:UIInfo>` element of the Service Provider’s metadata entry.
+`<mdui:UIInfo>` element of the Service Provider's metadata entry.
 Implementers of this profile MUST be capable of handling display
 information stored in the `<mdui:DisplayName>`, `<mdui:Logo>`
 and the `<mdui:Description>` elements.
@@ -835,10 +835,10 @@ be interpreted as image dimensions and not the actual size.
 #### 5.4.4. Authentication Context and Level of Assurance Handling
 
 This framework defines a number of authentication context identifiers
-(URI), where each such identifier specifies a defined Level of Assertion
+(URIs), where each such identifier specifies a defined Level of Assurance
 and may define specific requirements on the authentication process.
 There can be multiple authentication context URIs representing the same
-Level of Assertion, but one authentication context URI always identifies
+Level of Assurance, but one authentication context URI always identifies
 one defined Level of Assurance. 
 
 Identity Providers SHALL exclusively use one of the requested
@@ -852,10 +852,10 @@ with the value `urn:oasis:names:tc:SAML:2.0:status:Requester`
 if no requested authentication context is supported. If no requested
 authentication context is present in the `<saml2p:AuthnRequest>`,
 the Identity Provider MAY return the result of a default authentication
-process that is consistent with the Identity Providers metadata.
+process that is consistent with the Identity Provider's metadata.
 
 **Note**: The Identity Provider does not have to consider the service
-entity categories (\[[SC.EntCat](#sc-entcat)\]) declared in the Service Provider’s
+entity categories (\[[SC.EntCat](#sc-entcat)\]) declared in the Service Provider's
 metadata entry when determining the requested authentication context
 under which the authentication should be performed. The purpose of the
 service entity categories is primarily to support service matching in
@@ -874,32 +874,32 @@ NOT re-use an already existing security context in the following cases:
 
 -   When the security context has expired, i.e., the time elapsed since
     the security context was established is too long given the
-    SSO-policy stipulated by the federation or Identity Provider itself.
+    SSO policy stipulated by the federation or Identity Provider itself.
 
 -   When the `<saml2p:AuthnRequest>` contains a `ForceAuthn` attribute
     with the value of `true`.
 
 -   If the original authentication process, which led to the
-    establishment of the security context, was performed using another
-    Level of Assurance that what is requested in the current
+    establishment of the security context, was performed using a
+    Level of Assurance other than the one requested in the current
     `<saml2p:AuthnRequest>` message.
     
 -   If the original authentication was performed according to the Holder-of-key
     Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\], and
     no certificate, or a certificate not matching the certificate included
     in the `<saml2:SubjectConfirmation>` element of the original assertion, 
-    is presented in along with the current `<saml2p:AuthnRequest>` message. 
+    is presented along with the current `<saml2p:AuthnRequest>` message. 
     
 -   If the original authentication was performed according to the Web Browser SSO
-    Profile, \[[SAML2Prof](#saml2prof)\] and the current request is made 
+    Profile, \[[SAML2Prof](#saml2prof)\], and the current request is made 
     according to the Holder-of-key Web Browser SSO Profile, 
     \[[SAML2HokProf](#saml2hokprof)\].
 
 If the Identity Provider user interface contains some sort of user
 consent, or information, concerning which attributes, or any other
-information, that is included in an assertion being issued, the Identity
+information, are included in an assertion being issued, the Identity
 Provider SHOULD preserve this functionality if a
-`<saml2p:AuthnRequest>` message requesting a different set of
+`<saml2p:AuthnRequest>` message requests a different set of
 attributes (or any other information) compared to what was delivered in
 the assertion at the time of establishing the security context. The
 Identity Provider may require re-authentication or display a user
@@ -914,12 +914,12 @@ interface for consent/information in these cases.
 The endpoint(s) at which a Service Provider receives a
 `<saml2p:Response>` message MUST be protected by TLS.
 
-If a Service Provider wants to make use of the Holder-of-key Web Browser SSO Profile
-it needs to provide a dedicated endpoint for this purpose, see section [2.1.2.1](#sp-holder-of-key-support). This endpoint MUST be configured to require a client X.509 certificate
-being presented as part of the TLS handshake (mTLS, mutual TLS), see section 2.4 of 
+If a Service Provider wants to make use of the Holder-of-key Web Browser SSO Profile,
+it needs to provide a dedicated endpoint for this purpose, see Section [2.1.2.1](#sp-holder-of-key-support). This endpoint MUST be configured to require a client X.509 certificate
+being presented as part of the TLS handshake (mTLS, mutual TLS), see Section 2.4 of 
 \[[SAML2HokProf](#saml2hokprof)\]. If the Service Provider receives a `<saml2p:Response>`
-on a Holder-of-key endpoint and is unable to retrieve the client X.509 certificate it MUST 
-reject the message and not create a security context for the principal, see section 2.6.6 of \[[SAML2HokProf](#saml2hokprof)\].
+on a Holder-of-key endpoint and is unable to retrieve the client X.509 certificate, it MUST 
+reject the message and not create a security context for the principal, see Section 2.6.6 of \[[SAML2HokProf](#saml2hokprof)\].
 
 The `<saml2p:Response>` message issued by the Identity Provider MUST
 be signed using a `<ds:Signature>` element within the
@@ -929,14 +929,14 @@ The `<saml2:Assertion>` element issued by the Identity Provider MAY
 be signed using a `<ds:Signature>` element within the
 `<saml2:Assertion>`. If a Service Provider requires signed
 assertions, by assigning the `WantAssertionsSigned` attribute of its
-metadata record (see [chapter 2.1.2](#service-providers)), the Identity Provider MUST sign
+metadata record (see [Section 2.1.2](#service-providers)), the Identity Provider MUST sign
 assertions issued to this Service Provider (as well as the response
 message as stated above).
 
 Identity Providers SHALL utilize XML Encryption and return a
 `<saml2:EncryptedAssertion>` element in the `<saml2p:Response>`
 message. The elements `<saml2:EncryptedID>` and
-`<saml2:EncryptedAttribute>` MUST NOT be used; instead the entire
+`<saml2:EncryptedAttribute>` MUST NOT be used; instead, the entire
 assertion MUST be encrypted.
 
 Before performing encryption and signing, the Identity Provider SHOULD consult the Service Provider's metadata (`<md:EncryptionMethod>`, `<alg:SigningMethod>` and `<alg:DigestMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Service Provider prefers. If the intersection is empty, or if the Service Provider has not declared any algorithms, the Identity Provider MUST use algorithms listed as mandatory by the Sweden Connect Framework. For encryption, the chosen algorithm MUST also be compatible with the Service Provider's encryption key 
@@ -946,17 +946,17 @@ Service Providers SHOULD NOT accept unsolicited `<saml2p:Response>`
 messages (i.e., responses that are not the result of an earlier
 `<saml2p:AuthnRequest>` message). Service Providers that do accept
 unsolicited response messages MUST ensure, by other means, that the
-security and processing requirements of this profile ([section 6.3](#processing-requirements)) can be fully satisfied.
+security and processing requirements of this profile ([Section 6.3](#processing-requirements2)) can be fully satisfied.
 
 <a name="message-content2"></a>
 ### 6.2. Message Content
 
-The `<saml2:Response>` message MUST NOT contain a Document Type Definition (DTD).
+The `<saml2p:Response>` message MUST NOT contain a Document Type Definition (DTD).
 
 Successful response messages MUST contain exactly one `<saml2:AuthnStatement>` element
 and exactly one `<saml2:AttributeStatement>` element.
 
-The `<saml2:Response>` message MUST contain an `<saml2:Issuer>`
+The `<saml2p:Response>` message MUST contain a `<saml2:Issuer>`
 element containing the unique identifier (entityID) of the issuing
 Identity Provider.
 
@@ -988,27 +988,25 @@ and `urn:oasis:names:tc:SAML:2.0:cm:holder-of-key` if the Holder-of-key Web Brow
 SSO Profile was used. This element MUST contain a `<saml2:SubjectConfirmationData>` 
 element that contains at least the following:
 
--   An `InResponseTo` attribute matching the request’s ID.
+-   An `InResponseTo` attribute matching the request's ID.
 
--   A `Recipient` attribute containing the Service Provider’s assertion
-    consumer service URL (see sections [5.3](#message-content) and 
-    [5.4.1](#validation-of-destination)).
+-   A `Recipient` attribute containing the Service Provider's assertion consumer service URL (see Sections [5.3](#message-content) and [5.4.2](#validation-of-assertion-consumer-addresses)).
 
 -   A `NotOnOrAfter` attribute containing a time instant at which the
-    subject no longer can be confirmed.
+    subject can no longer be confirmed.
     
 -   An `Address` attribute containing the network address from which an attesting entity
     (user) can present the assertion.
 
 -   If the Holder-of-key Web Browser SSO Profile was used to authenticate the
-    principal a `<ds:KeyInfo>` element identifying the X.509 certificate presented
-    to the Identity Provider. See section [6.2.2](#message-content-requirements-for-holder-of-key) below.
+    principal, a `<ds:KeyInfo>` element identifying the X.509 certificate presented
+    to the Identity Provider. See Section [6.2.2](#message-content-requirements-for-holder-of-key) below.
 
 The assertion MUST contain a `<saml2:Conditions>` element containing
 the following attributes and elements:
 
 -   A `<saml2:AudienceRestriction>` element including the requesting
-    Service Provider’s unique identifier (entityID) as an
+    Service Provider's unique identifier (entityID) as a
     `<saml2:Audience>` value.
 
 -   A `NotBefore` attribute specifying the earliest time instant at which
@@ -1020,7 +1018,7 @@ the following attributes and elements:
 An Identity Provider conformant to this profile MUST, in its issued
 assertions, include an authentication context URI indicating under which
 Level of Assurance the assertion was issued. This identifier MUST be
-placed under the `<saml2:AuthnStatement>` element as the value of an
+placed under the `<saml2:AuthnStatement>` element as the value of a
 `<saml2:AuthnContextClassRef>` element that is part of the
 `<saml2:AuthnContext>` element.
 
@@ -1067,32 +1065,32 @@ sets. For all declared service entity categories, the Identity Provider
 MUST possess the ability to deliver the mandatory attributes of the
 underlying attribute set. See \[[SC.EntCat](#sc-entcat)\] and \[[SC.Attributes](#sc-attributes)\] for details.
 
-An Identity Provider releasing scoped attributes, see section 3.1.3 of \[[SC.Attributes](#sc-attributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
+An Identity Provider releasing scoped attributes, see Section 3.1.3 of \[[SC.Attributes](#sc-attributes)\], MUST be authorized to release attributes with given scopes by the federation operator. An Identity Provider's authorized scopes are published in its metadata according to Section [2.1.3.1](#declaring-authorized-scopes), "[Declaring Authorized Scopes](#declaring-authorized-scopes)". 
 
-Consequently, a Service Provider consuming a scoped attribute SHOULD verify that the issuing Identity Provider has been authorized to release attributes for the given scope by asserting its presence in the Identity Provider's metadata, see section [2.1.3.1](#declaring-authorized-scopes) and section 3.5.2 of \[[SAML2SubjIdAttr](#saml2subjidattr)\]. A scoped attribute that fails this check MUST NOT be accepted by the Service Provider.
+Consequently, a Service Provider consuming a scoped attribute SHOULD verify that the issuing Identity Provider has been authorized to release attributes for the given scope by asserting its presence in the Identity Provider's metadata, see Section [2.1.3.1](#declaring-authorized-scopes) and Section 3.5.2 of \[[SAML2SubjIdAttr](#saml2subjidattr)\]. A scoped attribute that fails this check MUST NOT be accepted by the Service Provider.
 
 The Service Provider is responsible for checking that an Identity
 Provider is capable of providing necessary attributes before sending a
-request and to verify that it received all attributes necessary for
+request and for verifying that it received all attributes necessary for
 providing a requested service. Checks whether an Identity Provider is
 capable of fulfilling the needs of a Service Provider can be done either
 by relying on a discovery process to filter out non-conformant Identity
-Providers, and/or by examining the metadata of Identity providers. 
+Providers, and/or by examining the metadata of Identity Providers. 
 
 An Identity Provider receiving a request for more attributes than it can
 provide SHOULD return an assertion with the attributes it can provide
 according to its defined attribute release policy if the user has been successfully 
 authenticated, leaving it up to the Service Provider to decide how to proceed, 
-e.g., by denying service to the authenticated user, provide limited services or to use other
+e.g., by denying service to the authenticated user, providing limited services or using other
 resources to collect necessary attributes. However, if a Service Provider
 has expressed a specific attribute requirement using the `<md:RequestedAttribute>`
 element of a matching `<md:AttributeConsumingService>` element in its metadata
-and assigned the `isRequired`-attribute to `true`, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.
+and assigned the `isRequired` attribute to `true`, and the Identity Provider knows that it will not be able to provide this attribute, then the Identity Provider SHOULD reject any request for authentication from that Service Provider and respond with an error.
 
 For privacy reasons, an Identity Provider SHOULD NOT release identity attributes<sup>*</sup> that are not requested by the Service Provider via its metadata declarations
  (service entity categories or `<md:RequestedAttribute>` elements).
 
-> [\*\]: This requirement does not apply to attributes that are not "identity" attributes, for example transaction identifiers or any other attribute that does not directly belong to a user's identity.
+> \[\*\]: This requirement does not apply to attributes that are not "identity" attributes, for example transaction identifiers or any other attribute that does not directly belong to a user's identity.
 
 <a name="message-content-requirements-for-holder-of-key"></a>
 #### 6.2.2. Message Content Requirements for Holder-of-key
@@ -1107,15 +1105,15 @@ The user X.509 certificate SHOULD be represented using a `<ds:X509Certificate>` 
 in all cases, except for the cases when this certificate contains identity information 
 about the subject that is not represented as SAML attributes in the 
 `<saml2:AttributeStatement>` element.
-The reason for this is to ensure the privacy of the user and not release identity information that is not requested by the Service Provider (see section [6.2.1](#attribute-release-and-consuming-rules) above).
+The reason for this is to ensure the privacy of the user and not release identity information that is not requested by the Service Provider (see Section [6.2.1](#attribute-release-and-consuming-rules) above).
 
-In these cases the `<ds:X509Certificate>` MUST NOT be used, and the Identity Provider 
+In these cases, the `<ds:X509Certificate>` MUST NOT be used, and the Identity Provider 
 SHOULD include a `<ds:KeyValue>` representing the public key of the user certificate.
 
 <a name="processing-requirements2"></a>
 ### 6.3. Processing Requirements
 
-This profile mandates a correct processing of a `<saml2p:Response>`
+This profile mandates correct processing of a `<saml2p:Response>`
 message in order to ensure proper protection from the security threats
 described in \[[SAML2Sec](#saml2sec)\].
 Processing requirements are listed in \[[SAML2Core](#saml2core)\],
@@ -1123,19 +1121,19 @@ Processing requirements are listed in \[[SAML2Core](#saml2core)\],
 This document will list the necessary requirements that apply to this
 profile.
 
-After the Service Provider has encrypted the assertion from the received
-response message the following requirements apply. Any verification that
-fails MUST lead to that the Service Provider rejects the response
-message and does not use the assertion.
+After the Service Provider has decrypted the assertion from the received
+response message, the following requirements apply. If any verification
+fails, the Service Provider MUST reject the response
+message and not use the assertion.
 
 Some of the processing requirements below are defined in order to
-protect from MITM- or MITB-attacks<sup>*</sup> were unsigned authentication
+protect from MITM or MITB attacks<sup>*</sup> where unsigned authentication
 requests may be changed before being sent to the Identity Provider.
 However, a Service Provider MUST implement all of the specified
 processing requirements even if it sends signed authentication request
 messages.
 
-> \[*\]: MITM stands for ”man in the middle” and MITB stands for ”man in the browser”.
+> \[*\]: MITM stands for "man in the middle" and MITB stands for "man in the browser".
 
 <a name="signature-validation"></a>
 #### 6.3.1. Signature Validation
@@ -1145,44 +1143,44 @@ optionally on the `<saml2:Assertion>`, MUST be successfully
 verified.
 
 The public key being used to verify the signature MUST appear in the
-issuing Identity Provider’s metadata record (as a
+issuing Identity Provider's metadata record (as a
 `<ds:X509Certificate>` under the `<ds:KeyInfo>` element).
 
 <a name="subject-confirmation"></a>
 #### 6.3.2. Subject Confirmation
 
 Based on the `InResponseTo` attribute of the
-`<saml2:SubjectConfirmationData>` the Service Provider MUST be able
+`<saml2:SubjectConfirmationData>` element, the Service Provider MUST be able
 to obtain the corresponding `<saml2p:AuthnRequest>` message, or a
 secure context containing corresponding information from the request
 (for future processing of the assertion).
 
 The `Recipient` attribute from the `<saml2:SubjectConfirmationData>` element 
 MUST match the location to which the `<saml2p:Response>` message was delivered 
-**and** match the value the `AssertionConsumerServiceURL` attribute included in the
+**and** match the value of the `AssertionConsumerServiceURL` attribute included in the
 request message, or if this attribute was not provided in the request
 message, the default response location specified in the Service
-Provider’s metadata entry, as described in [section 5.4.2](#validation-of-assertion-consumer-addresses).
+Provider's metadata entry, as described in [Section 5.4.2](#validation-of-assertion-consumer-addresses).
 
-The time from the `NotOnOrAfter` attribute from the
+The time from the `NotOnOrAfter` attribute of the
 `<saml2:SubjectConfirmationData>` MUST NOT have passed compared with
 the time instant at which the subject is confirmed (i.e., when the
 assertion is validated). A reasonable allowable clock skew between the
-providers should be taken in account.
+providers should be taken into account.
 
 If the `Address` attribute is assigned to the
 `<saml2:SubjectConfirmationData>` element, the Service Provider MAY
-choose to check the user agent’s client address against it. Practical
-issues regarding the Service Provider’s network setup and the risk of
-introducing false negatives makes this an optional step in the
+choose to check the user agent's client address against it. Practical
+issues regarding the Service Provider's network setup and the risk of
+introducing false negatives make this an optional step in the
 validation phase.
 
 If the `<saml2:SubjectConfirmation>` element has a `Method` set to
-`urn:oasis:names:tc:SAML:2.0:cm:holder-of-key` its containing 
+`urn:oasis:names:tc:SAML:2.0:cm:holder-of-key`, its containing 
 `<saml2:SubjectConfirmationData>` element MUST be processed according to
-section 2.5 of \[[SAML2HokAP](#saml2hokap)\]. The Service Provider MUST also
+Section 2.5 of \[[SAML2HokAP](#saml2hokap)\]. The Service Provider MUST also
 be able to verify the holder-of-key assertion if the `<saml2:SubjectConfirmationData>`
-element contains a `<ds:KeyValue>` element, see [6.2.2](#message-content-requirements-for-holder-of-key).
+element contains a `<ds:KeyValue>` element, see Section [6.2.2](#message-content-requirements-for-holder-of-key).
 
 <a name="conditions"></a>
 #### 6.3.3. Conditions
@@ -1196,7 +1194,7 @@ The Service Provider MUST verify that the time instant at which the
 assertion is validated is within the range given by the `NotBefore` and
 `NotOnOrAfter` attributes of the `<saml2:Conditions>` element
 (allowing for a reasonable clock skew). See also the processing of the
-`NotOnOrAfter` attribute in [section 6.3.2](#subject-confirmation).
+`NotOnOrAfter` attribute in [Section 6.3.2](#subject-confirmation).
 
 <a name="the-authentication-statement"></a>
 #### 6.3.4. The Authentication Statement
@@ -1207,15 +1205,15 @@ contains a `<saml2:AuthnContext>` element that holds a
 authentication context URI indicating under which Level of Assurance the
 authentication was performed. If the Service Provider declared one, or more, 
 `<saml2:AuthnContextClassRef>` elements under the `<saml2p:RequestedAuthnContext>`
-element of the authentication request (see [section 5.4](#message-content)), 
+element of the authentication request (see [Section 5.3](#message-content)), 
 the received authentication context URI MUST match one of the declared 
-authentication context URI:s from the request. If not, the Service Provider 
+authentication context URIs from the request. If not, the Service Provider 
 MUST reject the assertion<sup>*</sup>.
 
 > \[*\]: If the Service Provider does not declare an authentication context URI
-> in the authentication request it should be prepared to receive any of the
-> authentication context URI:s declared by the Identity Provider in its metadata
-> record (see [section 2.1.3](#identity-providers)).
+> in the authentication request, it should be prepared to receive any of the
+> authentication context URIs declared by the Identity Provider in its metadata
+> record (see [Section 2.1.3](#identity-providers)).
 
 <a name="general-security-validation"></a>
 #### 6.3.5. General Security Validation
@@ -1227,7 +1225,7 @@ of the `<saml2:Conditions>` element).
 
 In order to prevent stolen assertions and user impersonation, the
 Service Provider SHOULD implement a validation that rejects an assertion
-if the time given it its `IssueInstant` attribute compared to the time
+if the time given in its `IssueInstant` attribute compared to the time
 when the response message is received is too great. This time is
 typically on the order of seconds, and limits the time window when a
 stolen assertion could be used.
@@ -1248,8 +1246,8 @@ assertions in the `<saml2p:Response>` message.
 
 An Identity Provider conformant with this profile SHOULD NOT make use of
 any other `<saml2p:StatusCode>` values than those specified in
-section 3.2.2.2 of
-\[[SAML2Core](#saml2core)\] or in section 3.1.4 of \[[SC.Registry](#sc-registry)\]. 
+Section 3.2.2.2 of
+\[[SAML2Core](#saml2core)\] or in Section 3.1.4 of \[[SC.Registry](#sc-registry)\]. 
 The top-level `<saml2p:StatusCode>` value may only be one of the following error
 identifiers:
 
@@ -1263,27 +1261,27 @@ identifiers:
     Provider could not process the request because the version of the
     request message was incorrect.
 
-If the user cancels an authentication process the Identity Provider
+If the user cancels an authentication process, the Identity Provider
 SHOULD indicate this by assigning the second-level status code to
 `http://id.elegnamnden.se/status/1.0/cancel`.
 
 If an Identity Provider displays information describing an error in its
-user interface it MUST also offer ways for the end user to confirm this
-information (for example, by including an OK-button). When the end user
-acknowledges taking part of the information (i.e., clicks on the OK-button),
+user interface, it MUST also offer ways for the end user to confirm this
+information (for example, by including an OK button). When the end user
+acknowledges having read the information (i.e., clicks on the OK button),
 the `<saml2p:Response>` message is posted back to the Service
 Provider according to the HTTP POST binding \[[SAML2Bind](#saml2bind)\].
 
-If an Identity Provider detects suspicious fraudulent behaviour or if any of its security checks alerts a (possible) fraud, the Identity Provider MUST NOT issue an assertion but instead display an error message. After the end user confirms this error message, the error message posted back to the Service Provider SHOULD contain a second-level status code set to `http://id.elegnamnden.se/status/1.0/fraud` or `http://id.elegnamnden.se/status/1.0/possibleFraud` (depending on whether the Identity Provider aborted the authentication due to a determined or suspected fraud).
+If an Identity Provider detects suspected fraudulent behaviour, or if any of its security checks indicates a (possible) fraud, the Identity Provider MUST NOT issue an assertion but instead display an error message. After the end user confirms this error message, the error message posted back to the Service Provider SHOULD contain a second-level status code set to `http://id.elegnamnden.se/status/1.0/fraud` or `http://id.elegnamnden.se/status/1.0/possibleFraud` (depending on whether the Identity Provider aborted the authentication due to a determined or suspected fraud).
 
 <a name="authentication-for-signature"></a>
 ## 7. Authentication for Signature
 
-“DSS Extension for Federated Central Signing Services”, \[[SC.DSS.Ext](#sc-dss-ext)\],
+"DSS Extension for Federated Central Signing Services", \[[SC.DSS.Ext](#sc-dss-ext)\],
 defines an extension to the OASIS DSS protocol for providing centralized
 Signature Services within the Sweden Connect Framework. This specification
 defines the communication between a *Signature Requestor*<sup>*</sup> and a
-Signature Service, but does not cover SAML specific requirements
+Signature Service, but does not cover SAML-specific requirements
 regarding the user authentication phase that is part of the signature
 process.
 
@@ -1291,9 +1289,9 @@ This section defines requirements on the SAML authentication process
 when authentication is requested by a Signature Service, acting as a
 SAML Service Provider. All requirements regarding user authentication
 specified earlier in this profile are still valid. This section extends
-these requirements for the “authentication for signature” process.
+these requirements for the "authentication for signature" process.
 
-> \[*\]: A Signature Requestor is a Service Provider within the federation to which the user previously has logged in to and from where the user initiates a signature operation.
+> \[*\]: A Signature Requestor is a Service Provider within the federation to which the user has previously logged in and from which the user initiates a signature operation.
 
 <a name="authentication-requests2"></a>
 ### 7.1. Authentication Requests
@@ -1306,26 +1304,26 @@ following requirements:
 
 -   The `<saml2p:AuthnRequest>` element MUST be signed. This MUST
     also be indicated in the Signature Service metadata record using the
-    `AuthnRequestsSigned` attribute (see [section 2.1.4](#signature-service)).
+    `AuthnRequestsSigned` attribute (see [Section 2.1.4](#signature-service)).
 
-If the receiving Identity Provider has declared that it wishes to receive principal selection information about the signer (see [section 5.3.3](#principal-selection)), and the Signature Service has received any of the requested attribute values in the `Signer` element of the `SignRequest` (\[[SC.DSS.Ext](#sc-dss-ext)\]), the Signature Service SHOULD include those attribute values in a `<psc:PrincipalSelection>` extension of the authentication request. 
+If the receiving Identity Provider has declared that it wishes to receive principal selection information about the signer (see [Section 5.3.3](#principal-selection)), and the Signature Service has received any of the requested attribute values in the `Signer` element of the `SignRequest` (\[[SC.DSS.Ext](#sc-dss-ext)\]), the Signature Service SHOULD include those attribute values in a `<psc:PrincipalSelection>` extension of the authentication request. 
 
-It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:RequesterID>` element holding the entityID of the Service Requestor is included in `<saml2p:AuthnRequest>` messages generated by a Signature Service.
+It is RECOMMENDED that the `<saml2p:Scoping>` element containing a `<saml2p:RequesterID>` element holding the entityID of the Signature Requestor is included in `<saml2p:AuthnRequest>` messages generated by a Signature Service.
 
     <saml2p:Scoping>
-      <saml2p:RequesterID>http://www.origsp.com/sp</saml2:RequesterID>
+      <saml2p:RequesterID>http://www.origsp.com/sp</saml2p:RequesterID>
     </saml2p:Scoping>
 
-*Example when the `<saml2p:RequesterID>` element is used to inform the Identity Provider about which Service Provider that requested the signature associated with this request for authentication.*
+*Example when the `<saml2p:RequesterID>` element is used to inform the Identity Provider about which Service Provider requested the signature associated with this request for authentication.*
 
-> The reason for this recommendation is that an Identity Provider may adapt user interfaces or authentication procedures to different Service Providers based on either static configuration or on information found in the Service Provider's metadata. It can therefore be useful for an Identity Provider to know which Service Provider that requested the signature (*Signature Requestor*) that caused a Signature Service to request authentication. The Identity Provider may use this information to maintain the same user experience and procedures regardless of whether authentication is requested directly by the Service Provider, or by a Signature Service as a result of a signature request from the same Service Provider.
+> The reason for this recommendation is that an Identity Provider may adapt user interfaces or authentication procedures to different Service Providers based on either static configuration or on information found in the Service Provider's metadata. It can therefore be useful for an Identity Provider to know which Service Provider requested the signature (*Signature Requestor*) that caused a Signature Service to request authentication. The Identity Provider may use this information to maintain the same user experience and procedures regardless of whether authentication is requested directly by the Service Provider, or by a Signature Service as a result of a signature request from the same Service Provider.
 
-An Identity Provider that accepts an `<saml2p:AuthnRequest>` message
+An Identity Provider that accepts a `<saml2p:AuthnRequest>` message
 from a Service Provider that has indicated that it is a Signature
-Service<sup>*</sup> MUST provide a user interface that is indicating that the
+Service<sup>*</sup> MUST provide a user interface that indicates that the
 end user is performing a signature.
 
-> \[*\]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the `http://id.elegnamnden.se/st/1.0/sigservice` URI as a service type entity category in its metadata (see [2.1.4](#signature-service)).
+> \[*\]: An Identity Provider identifies a Service Provider as a Signature Service if it declares the `http://id.elegnamnden.se/st/1.0/sigservice` URI as a service type entity category in its metadata (see Section [2.1.4](#signature-service)).
 
 <a name="requesting-display-of-signature-message"></a>
 #### 7.1.1. Requesting Display of Signature Message
@@ -1333,36 +1331,36 @@ end user is performing a signature.
 \[[SC.DSS.Profile](#sc-dss-profile)\] specifies that a Signature Requestor may include a
 `SignMessage` element (as defined by \[[SC.DSS.Ext](#sc-dss-ext)\]) in a signature request.
 This element holds a message that the Identity Provider, which is
-responsible for “authentication for signature”, should present to the
+responsible for "authentication for signature", should present to the
 user that is performing the signature.
 
 A Signature Service MAY request the Identity Provider to show a sign
 message to the user by including the `SignMessage` element from the
-signature request as a child element to an `<saml2p:Extensions>`
-element in the `<saml2p:AuthnRequest>` message (see section 3.2.1 of
+signature request as a child element to a `<saml2p:Extensions>`
+element in the `<saml2p:AuthnRequest>` message (see Section 3.2.1 of
 \[[SAML2Core](#saml2core)\]).
 
 All Identity Providers compliant with this profile MUST be able to parse and understand
 the `SignMessage` extension.
 
-If the `Message`-element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Sweden Connect Framework during the encryption operation, which is compatible with the Identity Provider's encryption key declared in metadata.
+If the `Message` element of the `SignMessage` is to be encrypted, the Service Provider SHOULD consult the Identity Provider's metadata (`<md:EncryptionMethod>` elements) to determine the intersection of algorithms, key sizes and other parameters as defined by particular algorithms that it supports and that the Identity Provider prefers. If the intersection is empty, or if the Identity Provider has not declared any algorithms, the Service Provider MUST use one of the mandatory algorithms defined in the Sweden Connect Framework during the encryption operation, which is compatible with the Identity Provider's encryption key declared in metadata.
 
 If an Identity Provider that has ways of determining the principal's identity before displaying
-a sign message receives a `<psc:PrincipalSelection>` extension in  the authentication request 
-it SHOULD ensure that the contents of the `<psc:PrincipalSelection>` extension matches the 
+a sign message receives a `<psc:PrincipalSelection>` extension in the authentication request,
+it SHOULD ensure that the contents of the `<psc:PrincipalSelection>` extension match the 
 principal identity. If there is a mismatch, the Identity Provider MUST NOT display the
 sign message, and if the request states that the sign message must be displayed, fail with
 an error response where the second-level status code is set to
 `urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal` (\[[SAML2Core](#saml2core)\]).
 
-> Typical scenarios where the above requirement apply is for the Swedish eIDAS connector that first authenticates a principal and then displays the sign message, and for Identity Providers that prompt the user for its user identity as part of its authentication scheme. In those scenarios the Identity Providers must compare the principal identity with the contents of `<psc:PrincipalSelection>`, if received in the authentication request. 
+> Typical scenarios where the above requirement applies are the Swedish eIDAS connector, which first authenticates a principal and then displays the sign message, and Identity Providers that prompt the user for their identity as part of their authentication scheme. In those scenarios, the Identity Providers must compare the principal identity with the contents of `<psc:PrincipalSelection>`, if received in the authentication request. 
 
 Identity Providers processing a request containing a `SignMessage` extension SHALL meet
 the following requirements (in addition to other general requirements associated with requests 
 from signature services):
 
 - If the `MustShow` attribute of the `SignMessage` extension is set, the Identity Provider
-  MUST fail with an error response if the message, for some reason, can not be displayed 
+  MUST fail with an error response if the message, for some reason, cannot be displayed 
   to the user.
   
 - The Identity Provider MUST display the sign message to the user in a manner that is consistent 
@@ -1372,7 +1370,7 @@ from signature services):
   return an error response.
   
 - If authentication and sign message confirmation by the user was successful, the Identity Provider 
-  MUST include the `signMessageDigest` attribute (see section 3.2.4 of \[[SC.Attributes](#sc-attributes)\]) 
+  MUST include the `signMessageDigest` attribute (see Section 3.2.4 of \[[SC.Attributes](#sc-attributes)\]) 
   in the assertion that is issued.
 
 - The Identity Provider MUST NOT return an assertion without performing an authentication process 
@@ -1383,27 +1381,27 @@ from signature services):
 <a name="requesting-scal2-signature-activation-data"></a>
 #### 7.1.2. Requesting SCAL2 Signature Activation Data
 
-The type of signature requested in a signature request is, according to \[[SC.DSS.Profile](#sc-dss-profile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SC.SAP](#sc-sap)\], and MUST include the `SignMessage` extension (as described above).
+The type of signature requested in a signature request is, according to \[[SC.DSS.Profile](#sc-dss-profile)\], specified by the `CertType` attribute of the `<CertRequestProperties>` element. When the value of this attribute is set to `QC/SSCD`, the requested signature is a Qualified Signature created in a Qualified Signature Creation Device (QSCD). To achieve this level of signature, the Authentication Request MUST include a request for Signature Activation Data (SAD) for Sole Control Assurance Level 2 (SCAL2) in accordance with the "Signature Activation Protocol for Federated Signing" \[[SC.SAP](#sc-sap)\], and MUST include the `SignMessage` extension (as described above).
 
-As pointed out in [section 2.1.3](#identity-providers) an Identity Provider that supports processing of SAD requests and issuance of SAD-attributes SHALL advertise this by declaring the service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that has declared this entity category MUST return a SAD attribute in an issued assertion if the corresponding `<saml2p:AuthnRequest>` message contains the `<sap:SADRequest>` extension.
+As pointed out in [Section 2.1.3](#identity-providers), an Identity Provider that supports processing of SAD requests and issuance of SAD attributes SHALL advertise this by declaring the service property entity category `http://id.elegnamnden.se/sprop/1.0/scal2` in its metadata. An Identity Provider that has declared this entity category MUST return a SAD attribute in an issued assertion if the corresponding `<saml2p:AuthnRequest>` message contains the `<sap:SADRequest>` extension.
 
 A SAD returned from the Identity Provider MUST have a signature which can be verified using a certificate from the Identity Provider's metadata entry. The signature algorithm used to sign the SAD MUST be equivalent to the algorithm used to sign the responses and assertions from the Identity Provider.
 
-Verification of a received SAD-attribute MUST follow the verification rules specified in section 3.2.3 of \[[SC.SAP](#sc-sap)\].
+Verification of a received SAD attribute MUST follow the verification rules specified in Section 3.2.3 of \[[SC.SAP](#sc-sap)\].
 
 <a name="authentication-responses2"></a>
 ### 7.2. Authentication Responses
 
-By including the `signMessageDigest` attribute (see section 3.2.4 of \[[SC.Attributes](#sc-attributes)\]) 
+By including the `signMessageDigest` attribute (see Section 3.2.4 of \[[SC.Attributes](#sc-attributes)\]) 
 in the SAML assertion, the Identity Provider asserts that it has successfully displayed the sign message
 received in the request for the user and that the user has accepted to sign under the context of this sign message. This attribute MUST be included in the issued assertion if a sign message was displayed for, and accepted by, the user.
 
 <a name="cryptographic-algorithms"></a>
 ## 8. Cryptographic Algorithms
 
-This section lists the requirements for crypto algorithm support for being compliant with this profile.
+This section lists the requirements on cryptographic algorithms for compliance with this profile.
 
-For signature and encryption keys the following requirements apply:
+For signature and encryption keys, the following requirements apply:
 * RSA public keys MUST be at least 2048 bits in length. 3072 bits or more is RECOMMENDED.
 * EC public keys MUST be at least 256 bits in length (signature only).
   * The curves NIST Curve P-256, NIST Curve P-384 and NIST Curve P-521 MUST be supported (\[[RFC5480](#rfc5480)\]).
@@ -1414,7 +1412,7 @@ The sender of a secure message MUST NOT use an algorithm that is not listed as m
 
 A service processing a message in which an algorithm not listed below has been used MUST refuse to accept the message and respond with an error, unless this algorithm has been declared as preferred or supported by the service in its metadata entry.
 
-> This profile does not specify a complete list of blacklisted algorithms. However, there is a need to explicitly point out that the commonly used algorithms SHA-1 for digests and RSA PKCS#1 v1.5 for key transport are considered broken and SHOULD not be used or accepted.
+> This profile does not specify a complete list of blacklisted algorithms. However, there is a need to explicitly point out that the commonly used algorithms SHA-1 for digests and RSA PKCS#1 v1.5 for key transport are considered broken and SHOULD NOT be used or accepted.
 
 The algorithms below are defined in \[[XMLEnc](#xmlenc)\], \[[XMLDSig](#xmldsig)\] and \[[RFC4051](#rfc4051)\].
 
@@ -1460,9 +1458,9 @@ The algorithms below are defined in \[[XMLEnc](#xmlenc)\], \[[XMLDSig](#xmldsig)
 * AES192-GCM, `http://www.w3.org/2009/xmlenc11#aes192-gcm`
 * AES256-GCM, `http://www.w3.org/2009/xmlenc11#aes256-gcm`
 
-**Note:** The AES-CBC algorithm has been reported to have vulnerabilities, but these weaknesses can not be exploited when using signed SAML messages. Also, the support for AES-GCM in SAML software is not sufficiently spread at the time of writing. Therefore, the current version of this profile specifies AES-CBC as the default block encryption algorithm.
+**Note:** The AES-CBC algorithm has been reported to have vulnerabilities, but these weaknesses cannot be exploited when using signed SAML messages. Also, the support for AES-GCM in SAML software is not sufficiently widespread at the time of writing. Therefore, the current version of this profile specifies AES-CBC as the default block encryption algorithm.
 
-Services supporting the AES-GCM algorithm SHOULD indicate this in its metadata.
+Services supporting the AES-GCM algorithm SHOULD indicate this in their metadata.
 
 ```
 ...
@@ -1487,14 +1485,14 @@ Services supporting the AES-GCM algorithm SHOULD indicate this in its metadata.
 * RSA-OAEP-MGF1P, `http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p`
   * Key transport digest: SHA-1 (`http://www.w3.org/2000/09/xmldsig#sha1`)
 
-For interoperability reasons the current version of this profile specifies the RSA-OAEP-MGF1P algorithm as the default key transport algorithms. This algorithm's padding method defaults to the use of SHA-1 as a digest algorithm and also uses the "MGF1 with SHA-1" mask generation function<sup>*</sup>.
+For interoperability reasons, the current version of this profile specifies the RSA-OAEP-MGF1P algorithm as the default key transport algorithm. This algorithm's padding method defaults to the use of SHA-1 as a digest algorithm and also uses the "MGF1 with SHA-1" mask generation function<sup>*</sup>.
 
 **Optional:**
 
 * RSA-OAEP-MGF1P, `http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p`
-  * Key transport digest: Any of the digest methods listed as mandatory or optional in section [8.1](#digest-algorithms).
+  * Key transport digest: Any of the digest methods listed as mandatory or optional in Section [8.1](#digest-algorithms).
 
-A service wishing to receive encrypted messages where SHA-1 is not used as the key transport digest SHOULD indicate this in its metadata using the `<md:EncryptionMethod>` element as the example below.
+A service wishing to receive encrypted messages where SHA-1 is not used as the key transport digest SHOULD indicate this in its metadata using the `<md:EncryptionMethod>` element as in the example below.
 
 ```
 ...
@@ -1503,9 +1501,9 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 </md:EncryptionMethod>
 ...
 ```
-*Example of how a service announces that it wishes that the peer uses SHA-256 as the key transport digest when encrypting using RSA-OAEP-MGF1P.*
+*Example of how a service announces that it wishes the peer to use SHA-256 as the key transport digest when encrypting using RSA-OAEP-MGF1P.*
 
-> \[*\]: Note that the use if SHA-1 in this context (both as digest algoritm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 are known to be relevant to its use in this context.
+> \[*\]: Note that the use of SHA-1 in this context (both as digest algorithm and as mask generation function) is limited to providing randomness of padding data and as a hash over optional OAEP parameter data which typically is an empty string. It is not used as a hash function to assert the integrity of the encrypted data. No weaknesses of SHA-1 are known to be relevant to its use in this context.
 
 <a name="normative-references"></a>
 ## 9. Normative References
@@ -1610,7 +1608,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 
 <a name="sc-registry"></a>
 **\[SC.Registry\]**
-> [Sweden Connect - Registry for identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
+> [Sweden Connect – Registry for Identifiers](https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html).
 
 <a name="sc-attributes"></a>
 **\[SC.Attributes\]**
@@ -1648,7 +1646,7 @@ A service wishing to receive encrypted messages where SHA-1 is not used as the k
 <a name="changes-between-versions"></a>
 ## 10. Changes between versions
 
-**Changed between version 1.8 and 1.9:**
+**Changes between version 1.8 and 1.9:**
 
 - Section 6.3.5 was updated where the requirement "A reasonable clock skew according to this profile is between 3 and 5 minutes in either direction" was changed to "The clock skew, according to this profile, SHOULD NOT exceed 1 minute in either direction".
 
