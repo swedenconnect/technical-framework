@@ -57,9 +57,7 @@ Registration number: **2019-313** (*previously: ELN-0608*)
 <a name="introduction"></a>
 ## 1. Introduction
 
-This document specifies a certificate profile for certificates issued by
-a signature service based on the OASIS DSS protocol \[[DSS](#dss)\], enhanced by
-the DSS Extensions for Federated Central Signing Services \[[DSS-Ext](#dss-ext)\].
+This document specifies a certificate profile for certificates issued by a signature service based on the OASIS DSS protocol \[[DSS](#dss)\], enhanced by the DSS Extension for Federated Central Signing Services \[[DSS-Ext](#dss-ext)\].
 
 <a name="requirement-key-words"></a>
 ### 1.1. Requirement key words
@@ -100,16 +98,16 @@ This specification uses the following typographical conventions in text:
 <a name="standards"></a>
 ### 2.1. Standards
 
-The following standards provides normative requirements for this
-certificate profile:
+The following standards provide normative requirements for this certificate profile:
 
 Standard | Function | Reference
 --- | --- | ---
 RFC 5280 | Main certificate standard | \[[RFC5280](#rfc5280)\]
+RFC 3739 | Qualified Certificates profile and the QCStatements extension | \[[RFC3739](#rfc3739)\]
 RFC 7773 | Authentication context extension | \[[RFC7773](#rfc7773)\]
 EN 319 411-1 | Policy requirements for PKC certificates | \[[EU-POL-NCP](#eu-pol-ncp)\]
 EN 319 411-2 | Policy requirements for Qualified certificates | \[[EU-POL-QC](#eu-pol-qc)\]
-EN 319 412-1 | Definitions of semantic identifies and formatting rules for identity data | \[[EU-CERT-GEN](#eu-cert-gen)\]
+EN 319 412-1 | Definitions of semantics identifiers and formatting rules for identity data | \[[EU-CERT-GEN](#eu-cert-gen)\]
 EN 319 412-2 | Certificate profile for certificates issued to natural persons | \[[EU-CERT-NP](#eu-cert-np)\]
 EN 319 412-5 | Declaration of qualified certificate properties | \[[EU-CERT-QC](#eu-cert-qc)\]
 
@@ -117,14 +115,14 @@ EN 319 412-5 | Declaration of qualified certificate properties | \[[EU-CERT-QC](
 <a name="qualified-and-pkc-certificates"></a>
 ### 2.2. Qualified and PKC Certificates
 
-This profile supports both Qualified Certificates as well as certificates that are not Qualified Certificates, here named PKC certificates (Public Key Certificates).
+This profile supports both Qualified Certificates, profiled in \[[RFC3739](#rfc3739)\] and \[[EU-CERT-QC](#eu-cert-qc)\], and certificates that are not Qualified Certificates, here named PKC certificates (Public Key Certificates).
 
 All profile requirements apply to both Qualified Certificates and to PKC certificates unless it is explicitly stated that a particular requirement applies only to PKC or Qualified Certificates.
 
 <a name="certificate-content"></a>
 ### 2.3. Certificate Content
 
-All certificates SHALL be fully compliant with  \[[RFC5280](#rfc5280)\] and \[[EU-CERT-NP](#en-cert-np)\]. All Qualified Certificates SHALL also implement mandatory QC statements as defined in \[[EU-CERT-QC](#eu-cert-qc)\].
+All certificates SHALL be fully compliant with \[[RFC5280](#rfc5280)\] and \[[EU-CERT-NP](#eu-cert-np)\]. All Qualified Certificates SHALL also include the QCStatements extension defined in \[[RFC3739](#rfc3739)\], carrying the mandatory QC statements defined in \[[EU-CERT-QC](#eu-cert-qc)\].
 
 <a name="subject-attributes-and-name-forms"></a>
 #### 2.3.1. Subject Attributes and Name Forms
@@ -139,26 +137,30 @@ All certificates SHALL contain a unique person identifier, carried in the `seria
 
 Attribute | Attribute name | Specification
 ---|---|---
-Swedish Personal Identity Number (personnummer) | urn:oid:1.2.752.29.4.13 | \[[AttrSpec](#attrspec)\]
+Swedish Personal Identity Number (personnummer) \[[SKV704](#skv704)\] or Coordination Number (samordningsnummer) \[[SKV707](#skv707)\] | urn:oid:1.2.752.29.4.13 | \[[AttrSpec](#attrspec)\]
 Provisional ID | urn:oid:1.2.752.201.3.4 | \[[AttrSpec](#attrspec)\]
 eIDAS Person Identifier | urn:oid:1.2.752.201.3.7 |\[[AttrSpec](#attrspec)\]
 
 
 <a name="data-format"></a>
-###### 2.3.1.1.1. Data Format
+###### 2.3.1.1.2. Data Format
 
-The identifier data obtained from the SAML assertion SHALL be stored in the `serialNumber` attribute using one of the following formats:
+The identifier obtained from the SAML assertion SHALL be stored in the `serialNumber` attribute using one of the following formats:
 
-- using exactly the same format as it was obtained from the SAML attribute, or,
-- using conventions specified in \[[EU-CERT-GEN](#eu-cert-gen)\] as defined below.
+- exactly the same format as it was obtained from the SAML attribute, or
+- the conventions specified in \[[EU-CERT-GEN](#eu-cert-gen)\], as defined below.
 
-When storing a person identifier in the `serialNumber` attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1 of  \[[EU-CERT-GEN](#eu-cert-gen)\].
+When a person identifier is stored in the `serialNumber` attribute in accordance with \[[EU-CERT-GEN](#eu-cert-gen)\], the certificate SHALL include a semantics identifier as specified in section 5.1 of \[[EU-CERT-GEN](#eu-cert-gen)\].
 
-**Swedish Personal Identity Number (personnummer)**
+**Swedish Personal Identity Number (personnummer) and Coordination Number (samordningsnummer)**
 
-When the identifier is a Swedish personal identity number (personnummer) the semantics identifier SHALL be a natural person semantics identifier using the identity type reference "PNO".
+When the identifier is a Swedish personal identity number (personnummer) \[[SKV704](#skv704)\], the semantics identifier SHALL be a natural person semantics identifier using the identity type reference "PNO".
 
 > Example: PNOSE-194911172296
+
+When the identifier is a Swedish coordination number (samordningsnummer) \[[SKV707](#skv707)\], the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference "CN:SE".
+
+> Example: CN:SE-194911772293
 
 **Provisional ID**
 
@@ -168,13 +170,16 @@ When the identifier is a provisional ID the semantics identifier SHALL be a natu
 
 This identifier illustrates that the identifier is a Provisional ID (PI) as defined in Sweden (SE) followed by a hyphen (-) and the actual provisional ID for a person from Norway (NO:16043700158).
 
-When the identity type reference is "PI:SE", the `nameRegistrationAuthorities` element of SemanticsInformation shall be present and shall contain a `uniformResourceIdentifier` `generalName` with the following value:
+When the identity type reference is "PI:SE" or "CN:SE", the `nameRegistrationAuthorities` element of `SemanticsInformation` SHALL be present and SHALL contain a `GeneralName` of type `uniformResourceIdentifier` with one of the following values:
 
-> `http://id.elegnamnden.se/eln/name-registration-authority`
+> `http://id.elegnamnden.se/eln/name-registration-authority` (Deprecated)
+> `https://id.swedenconnect.se/cert/name-registration-authority`
+
+The deprecated identifier under elegnamnden.se SHALL not be used in new certificates.
 
 **eIDAS Person Identifier**
 
-eIDAS person identifier attributes MAY be stored in the serial number attribute having exactly the same format as received from the SAML attribute listed above, supported by providing a semantics identifier according to \[[EU-CERT-GEN](#eu-cert-gen)\] identified by the OID `0.4.0.194121.1.3`.
+An eIDAS person identifier MAY be stored in the `serialNumber` attribute in exactly the same format as received in the SAML attribute listed above, accompanied by a semantics identifier according to \[[EU-CERT-GEN](#eu-cert-gen)\] identified by the OID `0.4.0.194121.1.3`.
 
 **NOTE:**
 > A new version of the \[[EU-CERT-GEN](#eu-cert-gen)\] is processed for approval at the time of publication of this document. The new version will specify a semantics identifier for storing eIDAS person identifier attributes using the semantics identifier OID `0.4.0.194121.1.3`. This semantics identifier (`id-etsi-qcs-semanticsId-eIDASNatural`) is not yet present in the latest published version of the standard.
@@ -187,26 +192,22 @@ An e-mail address, when present, SHALL be stored in a Subject Alternative Name e
 <a name="authentication-context-and-attribute-mapping"></a>
 #### 2.3.2. Authentication Context and Attribute Mapping
 
-Certificates MUST include an `AuthContextExtension` according to \[[RFC7773](#rfc7773)\]. This extension SHALL include one SAML Authentication Context Information element identified by the XML schema namespace identifier:
+Certificates MUST include an Authentication Context extension according to \[[RFC7773](#rfc7773)\]. This extension SHALL include one SAML Authentication Context Information element identified by the XML schema namespace identifier:
 
 > `http://id.elegnamnden.se/auth-cont/1.0/saci`
 
 The `<saci:SAMLAuthContext>` element SHALL contain both an `<saci:AuthContextInfo>` element as well as an `<saci:IdAttributes>` element.
 
-The `<saci:IdAttributes>` element SHALL contain one `<saci:AttributeMapping>` element for each 
-subject attribute or other name form that was obtained from a SAML attribute in the SAML 
-assertion used to authenticate the signer as part of the signature creation process. Each
-`<saci:AttributeMapping>` element SHALL provide the `<saml:AttributeValue>` that were obtained from
-the SAML assertion.
+The `<saci:IdAttributes>` element SHALL contain one `<saci:AttributeMapping>` element for each subject attribute or other name form that was obtained from a SAML attribute in the SAML assertion used to authenticate the signer as part of the signature creation process. Each `<saci:AttributeMapping>` element SHALL provide the `<saml:AttributeValue>` element(s) that were obtained from the SAML assertion.
 
 <a name="extended-authentication-information"></a>
 ##### 2.3.2.1. Extended Authentication Information
 
-In addition to the attributes of `<saci:AuthContextInfo>` it is possible to provide additional authentication information through the extensibility of the `<saci:AuthContextInfo>` element which allows inclusion of a sequence of any element.
+In addition to the attributes of `<saci:AuthContextInfo>`, additional authentication information can be provided through the extensibility of the `<saci:AuthContextInfo>` element, which allows a sequence of any elements to be included.
 
 One such element is defined in this section, the `<sacex:ExtAuthInfo>` element.
 
-This element MAY be included to provide a name of a parameter and its associated value. 
+This element MAY be included to provide the name of a parameter and its associated value.
 
 This element MAY be used to carry the value of any single valued attribute from the associated SAML assertion as long as the SAML attribute value is not composed of a complex type. When used to carry a SAML attribute value, the value of the `<sacex:ExtAuthInfo>` element SHALL be identical to the content of the SAML attribute value element and the `Name` attribute SHALL hold the same value as the `Name` attribute of the corresponding SAML attribute.
 
@@ -233,18 +234,17 @@ The `<sacex:ExtAuthInfo>` element is defined by the following XML Schema:
 
 **Example:**
 
-The following example illustrates inclusion of the content of a transaction identifier SAML 
-attribute as extended authentication information.
+The following example illustrates inclusion of the content of a transaction identifier SAML attribute as extended authentication information.
 
 ```
 <saci:SAMLAuthContext
     xmlns:saci="http://id.elegnamnden.se/auth-cont/1.0/saci"
-    xmlns:sacext="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info">
+    xmlns:sacex="http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info">
   <saci:AuthContextInfo IdentityProvider="http://eid.example.com/idp"
       AuthenticationInstant="2020-01-10T17:02:46.000Z"
       AuthnContextClassRef="http://id.elegnamnden.se/loa/1.0/loa3"
       AssertionRef="_936e075dc2725b016de57b9a0624c766">
-    <sacext:ExtAuthInfo Name="urn:oid:1.2.752.201.3.2">dc6ac7656H89bfb51</sacext:ExtAuthInfo>
+    <sacex:ExtAuthInfo Name="urn:oid:1.2.752.201.3.2">dc6ac7656H89bfb51</sacex:ExtAuthInfo>
   </saci:AuthContextInfo>
   <saci:IdAttributes>...</saci:IdAttributes>
 </saci:SAMLAuthContext>
@@ -253,7 +253,7 @@ attribute as extended authentication information.
 <a name="certificate-policy"></a>
 #### 2.3.3. Certificate Policy
 
-Certificates SHALL contain at least one referenced certificate policy. PKC certificates SHALL contain at least one reference to a policy identified in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
+Certificates SHALL reference at least one certificate policy. PKC certificates SHALL reference at least one certificate policy identified in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
 
 
 <a name="normative-references"></a>
@@ -273,31 +273,29 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 
 <a name="rfc2119"></a>
 **[RFC2119]**
-> [Bradner, S., Key words for use in RFCs to Indicate Requirement Levels, March 1997](http://www.ietf.org/rfc/rfc2119.txt).
+> [Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997](https://www.rfc-editor.org/rfc/rfc2119).
 
 <a name="rfc3739"></a>
 **[RFC3739]**
-> [Santesson, S., Nystrom, M., and T. Polk, "Internet X.509 Public Key
-> Infrastructure: Qualified Certificates Profile", RFC 3739, March
-> 2004](https://www.ietf.org/rfc/rfc3739.txt).
+> [Santesson, S., Nystrom, M., and T. Polk, "Internet X.509 Public Key Infrastructure: Qualified Certificates Profile", RFC 3739, March 2004](https://www.rfc-editor.org/rfc/rfc3739).
 
 <a name="rfc5280"></a>
 **[RFC5280]**
 > [Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
 > W. Polk, "Internet X.509 Public Key Infrastructure Certificate and
-> Certificate Revocation List (CRL) Profile", RFC 5280, May 2008](https://www.ietf.org/rfc/rfc5280.txt).
+> Certificate Revocation List (CRL) Profile", RFC 5280, May 2008](https://www.rfc-editor.org/rfc/rfc5280).
 
 <a name="rfc7773"></a>
 **[RFC7773]**
-> [RFC-7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773)
+> [Santesson, S., "Authentication Context Certificate Extension", RFC 7773, March 2016](https://www.rfc-editor.org/rfc/rfc7773).
 
 <a name="eu-pol-ncp"></a>
 **[EU-POL-NCP]**
 > ETSI EN 319 411-1, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 1: General requirements.
 
-<a name="eu-pol-ncp"></a>
+<a name="eu-pol-qc"></a>
 **[EU-POL-QC]**
-> ETSI EN 319 411-2, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 2: Requirements for trust service providers issuing EU qualified certificates
+> ETSI EN 319 411-2, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 2: Requirements for trust service providers issuing EU qualified certificates.
 
 <a name="eu-cert-gen"></a>
 **[EU-CERT-GEN]**
@@ -313,21 +311,23 @@ Certificates SHALL contain at least one referenced certificate policy. PKC certi
 
 <a name="skv704"></a>
 **[SKV704]**
-> [Skatteverket, SKV 704 utgåva 8, Personnummer, September
-> 2007](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf).
+> [Skatteverket, SKV 704 utgåva 8, Personnummer, September 2007](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf).
 
 <a name="skv707"></a>
 **[SKV707]**
-> [Skatteverket, SKV 707, Utgåva 2,
-> Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
+> [Skatteverket, SKV 707, Utgåva 2, Samordningsnummer](https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf).
 
 
 <a name="changes-between-versions"></a>
 ## 4. Changes between versions
 
-**Changes between version 1.3 and version 1.3:**
+**Changes between version 1.2 and version 1.3:**
 
-- ...
+- Editorial revision: corrected section numbering, broken reference links and the namespace prefix in the example of section 2.3.2.1; added citations of \[[RFC3739](#rfc3739)\], \[[SKV704](#skv704)\] and \[[SKV707](#skv707)\], which were listed but not cited; updated RFC reference links; language improvements throughout.
+
+- Section 2.3.1.1.2, "Data Format": a Swedish coordination number (samordningsnummer) stored with a semantics identifier now uses the local national identity type reference "CN:SE" instead of "PNO", so that personal identity numbers and coordination numbers can be distinguished without analysing the identifier format. "PNO" is retained for personal identity numbers (personnummer).
+
+- Section 2.3.1.1.2, "Data Format": the name registration authority identifier for the local identity type references "PI:SE" and "CN:SE" is now `https://id.swedenconnect.se/cert/name-registration-authority`. The previous identifier `http://id.elegnamnden.se/eln/name-registration-authority` is deprecated but remains valid.
 
 **Changes between version 1.1 and version 1.2:**
 
