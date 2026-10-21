@@ -690,6 +690,11 @@ below extends the list of second-level status codes defined in section
 <td align="left">[<a href="#rfc7773">RFC7773</a>]</td>
 </tr>
 <tr>
+<td align="left"><code>urn:ietf:params:x509-auth-context:oidc</code></td>
+<td align="left">Context type identifier for an AuthenticationContext carrying OpenID Connect Authentication Context Information.</td>
+<td align="left">[<a href="#ietf-cert-authn-context-for-oidc">OIDC.Authn.Context</a>]</td>
+</tr>
+<tr>
 <td align="left"><code>http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info</code></td>
 <td align="left">XML schema namespace for Extended Authentication Information in the Authentication Context X.509 certificate extension</td>
 <td align="left">[<a href="#sc-cert-profile">SC.Cert.Profile</a>]</td>
@@ -1091,8 +1096,10 @@ Version 1.0.</a></p>
 <p><a href="https://tools.ietf.org/html/rfc7773">RFC7773: Authentication Context Certificate Extension</a>.</p>
 </blockquote>
 <p><a name="ietf-cert-authn-context-for-oidc"></a>
-<strong>[Oidc.Authn.Context]</strong>
-<a href="https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html">Certificate Authentication Context Type for OpenID Connect</a>.</p>
+<strong>[OIDC.Authn.Context]</strong></p>
+<blockquote>
+<p><a href="https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html">Certificate Authentication Context Type for OpenID Connect</a>.</p>
+</blockquote>
 <p><a name="sc-saml-profile"></a>
 <strong>[SC.SAML.Profile]</strong></p>
 <blockquote>
@@ -1171,7 +1178,10 @@ regulation and associated technical specifications.</p>
 <h2 id="5-changes-between-versions">5. Changes between versions</h2>
 <p><strong>Changes between version 1.8 and version 1.9:</strong></p>
 <ul class="list">
-<li>Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.</li>
+<li><p>Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.</p>
+</li>
+<li><p>The <code>urn:ietf:params:x509-auth-context:oidc</code> identifier was added to section 3.1.6.</p>
+</li>
 </ul>
 <p><strong>Changes between version 1.7 and version 1.8:</strong></p>
 <ul class="list">
