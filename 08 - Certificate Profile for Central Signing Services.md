@@ -8,7 +8,7 @@
 
 # Certificate Profile for Certificates Issued by Central Signing Services
 
-### Version 1.3 – 2026-10-19 – Draft
+### Version 1.3 – 2026-10-21 – Draft
 
 Registration number: **2019-313** (*previously: ELN-0608*)
 
@@ -36,17 +36,11 @@ Registration number: **2019-313** (*previously: ELN-0608*)
 
     2.3.1.1. [Person Identifier Attributes](#person-identifier-attributes)
 
-    2.3.1.1.1. [Data Source](#data-source)
-
-    2.3.1.1.2. [Data Format](#data-format)
-
     2.3.1.2. [Other Attribute Requirements](#other-attribute-requirements)
 
     2.3.2. [Authentication Context and Attribute Mapping](#authentication-context-and-attribute-mapping)
 
     2.3.2.1. [SAML Authentication Context Information](#saml-authentication-context-information)
-
-    2.3.2.1.1. [Extended Authentication Information](#extended-authentication-information)
 
     2.3.2.2. [OpenID Connect Authentication Context Information](#openid-connect-authentication-context-information)
 
@@ -113,7 +107,7 @@ Standard | Function | Reference
 RFC 5280 | Main certificate standard | \[[RFC5280](#rfc5280)\]
 RFC 3739 | Qualified Certificates profile and the QCStatements extension | \[[RFC3739](#rfc3739)\]
 RFC 7773 | Authentication context extension | \[[RFC7773](#rfc7773)\]
-draft-santesson-oidc-cert-auth-context | Authentication context extension, context type for OpenID Connect | \[[OIDC.Authn.Context](#oidc-authn-context)\]
+draft-santesson-oidc-<br/>cert-auth-context | Authentication context extension, context type for OpenID Connect | \[[OIDC.Authn.Context](#oidc-authn-context)\]
 RFC 9608 | No Revocation Available extension | \[[RFC9608](#rfc9608)\]
 EN 319 411-1 | Policy requirements for PKC certificates | \[[EU-POL-NCP](#eu-pol-ncp)\]
 EN 319 411-2 | Policy requirements for Qualified certificates | \[[EU-POL-QC](#eu-pol-qc)\]
@@ -145,15 +139,14 @@ All certificates SHALL be fully compliant with \[[RFC5280](#rfc5280)\] and \[[EU
 
 All certificates SHALL contain a unique person identifier, carried in the `serialNumber` attribute (OID 2.5.4.5) in the subject field. The person identifier SHALL be obtained from the Identity Provider in the form of a SAML attribute, or from the OpenID Provider in the form of an OpenID Connect claim, depending on the protocol used to authenticate the signer. The SAML attribute or OpenID Connect claim SHOULD be one of those listed below.
 
-Identifier | SAML attribute | OpenID Connect claim | Specification
----|---|---|---
-Swedish Personal Identity Number (personnummer) \[[SKV704](#skv704)\] | urn:oid:1.2.752.29.4.13 | `https://id.oidc.se/claim/personalIdentityNumber` | \[[AttrSpec](#attrspec)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\]
-Swedish Coordination Number (samordningsnummer) \[[SKV707](#skv707)\] | urn:oid:1.2.752.29.4.13 | `https://id.oidc.se/claim/coordinationNumber` | \[[AttrSpec](#attrspec)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\]
-Provisional ID | urn:oid:1.2.752.201.3.4 | `https://id.swedenconnect.se/claim/prid` | \[[AttrSpec](#attrspec)\], \[[OIDC.Claims](#oidc-claims)\]
-eIDAS Person Identifier | urn:oid:1.2.752.201.3.7 | `http://eidas.europa.eu/attributes/naturalperson/PersonIdentifier` | \[[AttrSpec](#attrspec)\], \[[OIDC.Claims](#oidc-claims)\]
+| Identifier | SAML attribute | OpenID Connect claim | Specification |
+| :--- | :--- | :--- | :--- |
+| Swedish Personal Identity Number (personnummer) \[[SKV704](#skv704)\] | urn:oid:1.2.752.29.4.13 | `https://id.oidc.se/`<br/>`claim/personalIdentityNumber` | \[[AttrSpec](#attrspec)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\] |
+| Swedish Coordination Number (samordningsnummer) \[[SKV707](#skv707)\] | urn:oid:1.2.752.29.4.13 | `https://id.oidc.se/`<br/>`claim/coordinationNumber` | \[[AttrSpec](#attrspec)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\] |
+| Provisional ID | urn:oid:1.2.752.201.3.4 | `https://id.swedenconnect.se/`<br/>`claim/prid` | \[[AttrSpec](#attrspec)\], \[[OIDC.Claims](#oidc-claims)\] |
+| eIDAS Person Identifier | urn:oid:1.2.752.201.3.7 | `http://eidas.europa.eu/attributes/`<br/>`naturalperson/PersonIdentifier` | \[[AttrSpec](#attrspec)\], \[[OIDC.Claims](#oidc-claims)\]
 
-In SAML, personal identity numbers and coordination numbers are carried in the same attribute and are distinguished by their format, see \[[SKV704](#skv704)\] and \[[SKV707](#skv707)\]. In OpenID Connect they are carried in separate claims. A coordination number claim may be accompanied by a companion claim indicating the level of confidence in the binding between the coordination number and the person it was assigned to, as specified in \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\].
-
+In SAML, personal identity numbers and coordination numbers are carried in the same attribute and are distinguished by their format, see \[[SKV704](#skv704)\] and \[[SKV707](#skv707)\]. In OpenID Connect they are carried in separate claims. 
 
 <a name="data-format"></a>
 ###### 2.3.1.1.2. Data Format
@@ -186,6 +179,7 @@ This identifier illustrates that the identifier is a Provisional ID (PI) as defi
 When the identity type reference is "PI:SE" or "CN:SE", the `nameRegistrationAuthorities` element of `SemanticsInformation` SHALL be present and SHALL contain a `GeneralName` of type `uniformResourceIdentifier` with one of the following values:
 
 > `http://id.elegnamnden.se/eln/name-registration-authority` (Deprecated)
+
 > `https://id.swedenconnect.se/cert/name-registration-authority`
 
 The deprecated identifier under elegnamnden.se SHALL not be used in new certificates.
@@ -194,8 +188,7 @@ The deprecated identifier under elegnamnden.se SHALL not be used in new certific
 
 An eIDAS person identifier MAY be stored in the `serialNumber` attribute in exactly the same format as received in the SAML attribute or claim listed above, accompanied by a semantics identifier according to \[[EU-CERT-GEN](#eu-cert-gen)\] identified by the OID `0.4.0.194121.1.3`.
 
-**NOTE:**
-> A new version of the \[[EU-CERT-GEN](#eu-cert-gen)\] is processed for approval at the time of publication of this document. The new version will specify a semantics identifier for storing eIDAS person identifier attributes using the semantics identifier OID `0.4.0.194121.1.3`. This semantics identifier (`id-etsi-qcs-semanticsId-eIDASNatural`) is not yet present in the latest published version of the standard.
+**Note:** A new version of the \[[EU-CERT-GEN](#eu-cert-gen)\] is processed for approval at the time of publication of this document. The new version will specify a semantics identifier for storing eIDAS person identifier attributes using the semantics identifier OID `0.4.0.194121.1.3`. This semantics identifier (`id-etsi-qcs-semanticsId-eIDASNatural`) is not yet present in the latest published version of the standard.
 
 <a name="other-attribute-requirements"></a>
 ##### 2.3.1.2. Other Attribute Requirements
@@ -209,10 +202,10 @@ Certificates MUST include an Authentication Context extension according to \[[RF
 
 The extension SHALL include exactly one `AuthenticationContext` entry. The context type of the entry depends on the protocol that was used to authenticate the signer as part of the signature creation process:
 
-Authentication protocol | Context type | `contextType` identifier | Requirements
----|---|---|---
-SAML – the signer was authenticated by means of a SAML assertion from an Identity Provider | SAML Authentication Context Information (SACI) | `http://id.elegnamnden.se/auth-cont/1.0/saci` | Section [2.3.2.1](#saml-authentication-context-information)
-OpenID Connect – the signer was authenticated by means of an ID Token from an OpenID Provider | OpenID Connect Authentication Context Information (OACI) | `urn:ietf:params:x509-auth-context:oidc` | Section [2.3.2.2](#openid-connect-authentication-context-information)
+| Authentication protocol | Context type | contextType identifier | Requirements |
+| :--- | :--- | :--- | :--- |
+| SAML – the signer was authenticated by means of a SAML assertion from an Identity Provider | SAML Authentication Context Information (SACI) | `http://id.elegnamnden.se/`<br>`auth-cont/1.0/saci` | Section [2.3.2.1](#saml-authentication-context-information) |
+| OpenID Connect – the signer was authenticated by means of an ID Token from an OpenID Provider | OpenID Connect Authentication Context Information (OACI) | `urn:ietf:params:`<br/>`x509-auth-context:oidc` | Section [2.3.2.2](#openid-connect-authentication-context-information) |
 
 Both context types record the authentication event and map the identity data obtained from the authentication to the subject attributes and name forms of the certificate.
 
@@ -296,7 +289,7 @@ The OACI object MAY be extended with additional members to provide further authe
 
 The following example illustrates an OACI object for a signer authenticated at assurance level 3, where the `serialNumber`, `givenName`, `surname` and `commonName` attributes of the certificate subject were obtained from claims in the ID Token. Note that the `/` characters of a claim name that is a URI are escaped as `~1` in the JSON Pointer of the `claim` member, as specified in RFC 6901.
 
-```
+```json
 {
   "iss": "https://op.example.com",
   "auth_time": 1792415045,
@@ -438,8 +431,6 @@ A certificate with no well-defined expiration date does not change how the valid
 - Section 2.3.1.1.1, "Data Source": the requirement that the person identifier of a Qualified Certificate be obtained from one of the listed attributes was relaxed from SHALL to SHOULD, aligning it with PKC certificates. Under eIDAS 2 the personal identifier is no longer a standardized part of the minimum data set and may be any identifier attribute defined by the applicable PID rulebook, so the profile no longer restricts the source of the identifier to the listed attributes and claims.
 
 - Section 2.4, "Revocation and Expiration", was added. It explains why revocation serves no purpose for certificates issued for a single instance of signing, and allows issuers to omit revocation support, indicated by the `id-ce-noRevAvail` extension of \[[RFC9608](#rfc9608)\], and to issue such certificates without a well-defined expiration date.
-
-- References to \[[OIDC.Authn.Context](#oidc-authn-context)\], \[[OpenID.Core](#openid-core)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], \[[OIDC.Claims](#oidc-claims)\] and \[[RFC9608](#rfc9608)\] were added.
 
 **Changes between version 1.1 and version 1.2:**
 
