@@ -486,6 +486,8 @@ Section 5.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] defines a set of Trust Mark T
 | `https://id.swedenconnect.se/loa/`<br/>`nonresident` | A holder of this Trust Mark has been approved to issue ID Tokens containing the special-purpose Authentication Context URIs for Swedish non-residents specified in Section [3.1.1.1](#authentication-context-uris-for-swedish-non-residents). This Trust Mark is always combined with a Trust Mark stating the Level of Assurance approved for the holder (see above). | Section 5.2.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
 | `https://id.swedenconnect.se/contract/`<br/>`sc/eid-authorization-system` | A Trust Mark Type assigned to all Relying Parties that have signed the "Auktorisationssystem för elektronisk identifiering" contract, and the OpenID Providers that deliver authentication services according to this contract. | Section 5.2.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
 | `https://id.swedenconnect.se/contract/`<br/>`sc/prepaid-auth-2021` | A Trust Mark Type assigned to all Relying Parties that have signed the "Förlitandeavtal - Förbetald e-legitimering" contract, and the OpenID Providers that deliver authentication services according to this contract. | Section 5.2.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/`<br/>`tm-prop/public-body` | A Property Trust Mark type assigned to Entities that are public bodies. | Section 5.2.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/`<br/>`tm-prop/eidas-proxy` | A Property Trust Mark type assigned to the eIDAS Proxy Service. | Section 5.2.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
 
 <a name="registration-policy-identifiers"></a>
 ##### 3.1.10.2. Registration Policy Identifiers
