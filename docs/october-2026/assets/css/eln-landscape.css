@@ -1,0 +1,15 @@
+@page {
+    size: landscape;
+    margin-top: 3cm;
+    margin-bottom: 3cm;
+    orphans: 4; 
+    widows: 3;
+}
+
+body {
+  background-color: white;
+  max-width: 860px;
+  margin: 0;
+  padding: 30px 0;
+}
+
