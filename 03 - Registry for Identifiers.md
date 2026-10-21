@@ -421,10 +421,10 @@ Status code identifiers for the DSS Extension for Central Signing services. The 
 
 Some protocols require a URI identifier to uniquely identify the entity responsible for a particular namespace.
 
-| **URL**                                                        | **Object**                                                                                                                                     | **Reference** |
-|:---------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------| :--- |
-| `http://id.elegnamnden.se/eln/name-registration-authority`     | Deprecated: Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
-| `https://id.swedenconnect.se/cert/name-registration-authority` | Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace.             | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+| **URL** | **Object** | **Reference** |
+| :--- | :--- | :--- |
+| `http://id.elegnamnden.se/`<br/>`eln/name-registration-authority` | Deprecated: Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+| `https://id.swedenconnect.se/`<br/>`cert/name-registration-authority` | Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
 
 > \[*\]: This also covers the Swedish Agency for Digital Government (Digg) which has overtaken the Swedish E-identification Board's assignments.
 
