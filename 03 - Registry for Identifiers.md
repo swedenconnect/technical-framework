@@ -421,10 +421,10 @@ Status code identifiers for the DSS Extension for Central Signing services. The 
 
 Some protocols require a URI identifier to uniquely identify the entity responsible for a particular namespace.
 
-| **URL** | **Object** | **Reference** |
-| :--- | :--- | :--- |
+| **URL** | **Object**                                                                                                                                     | **Reference** |
+| :--- |:-----------------------------------------------------------------------------------------------------------------------------------------------| :--- |
 | `http://id.elegnamnden.se/`<br/>`eln/name-registration-authority` | Deprecated: Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
-| `https://id.swedenconnect.se/`<br/>`cert/name-registration-authority` | Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+| `https://id.swedenconnect.se/`<br/>`cert/name-registration-authority` | Identifying Sweden Connect as name registration authority, responsible for a particular namespace.                                 | \[[SC.Cert.Profile](#sc-cert-profile)\] |
 
 > \[*\]: This also covers the Swedish Agency for Digital Government (Digg) which has overtaken the Swedish E-identification Board's assignments.
 
@@ -682,6 +682,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 - Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.
 
 - The `urn:ietf:params:x509-auth-context:oidc` identifier was added to section 3.1.6.
+
+- The URL prefix `cert`, for certificate identifiers, was added to the list of URL prefixes in section 3.1.
+
+- Section 3.1.8, "Name Registration Authorities", was extended with the identifier `https://id.swedenconnect.se/cert/name-registration-authority`, identifying Sweden Connect as name registration authority. It replaces `http://id.elegnamnden.se/eln/name-registration-authority`, which is now deprecated.
 
 **Changes between version 1.7 and version 1.8:**
 
