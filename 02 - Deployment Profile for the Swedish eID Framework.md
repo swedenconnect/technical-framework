@@ -990,9 +990,7 @@ element that contains at least the following:
 
 -   An `InResponseTo` attribute matching the request's ID.
 
--   A `Recipient` attribute containing the Service Provider's assertion
-    consumer service URL (see Sections [5.3](#message-content) and 
-    [5.4.1](#validation-of-destination)).
+-   A `Recipient` attribute containing the Service Provider's assertion consumer service URL (see Sections [5.3](#message-content) and [5.4.2](#validation-of-assertion-consumer-addresses)).
 
 -   A `NotOnOrAfter` attribute containing a time instant at which the
     subject can no longer be confirmed.
