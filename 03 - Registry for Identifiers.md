@@ -396,7 +396,9 @@ Identifiers associated with the Authentication Context X.509 extension
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
 | `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema namespace for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[RFC7773](#rfc7773)\] |
+| `urn:ietf:params:x509-auth-context:oidc` | Context type identifier for an AuthenticationContext carrying OpenID Connect Authentication Context Information. | \[[OIDC.Authn.Context](#ietf-cert-authn-context-for-oidc)\] |
 | `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info` | XML schema namespace for Extended Authentication Information in the Authentication Context X.509 certificate extension | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+
 
 <a name="sign-response-status-codes"></a>
 #### 3.1.7. Sign Response Status Codes
@@ -607,8 +609,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 > [RFC7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
 <a name="ietf-cert-authn-context-for-oidc"></a>
-**\[Oidc.Authn.Context\]**
-[Certificate Authentication Context Type for OpenID Connect](https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html).
+**\[OIDC.Authn.Context\]**
+> [Certificate Authentication Context Type for OpenID Connect](https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html).
 
 <a name="sc-saml-profile"></a>
 **\[SC.SAML.Profile\]**
@@ -676,6 +678,8 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 **Changes between version 1.8 and version 1.9:**
 
 - Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.
+
+- The `urn:ietf:params:x509-auth-context:oidc` identifier was added to section 3.1.6.
 
 **Changes between version 1.7 and version 1.8:**
 
