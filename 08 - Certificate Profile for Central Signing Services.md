@@ -52,6 +52,8 @@ Registration number: **2019-313** (*previously: ELN-0608*)
 
     2.3.3. [Certificate Policy](#certificate-policy)
 
+    2.4. [Revocation and Expiration](#revocation-and-expiration)
+
 3. [**Normative References**](#normative-references)
 
 4. [**Changes between versions**](#changes-between-versions)
@@ -112,6 +114,7 @@ RFC 5280 | Main certificate standard | \[[RFC5280](#rfc5280)\]
 RFC 3739 | Qualified Certificates profile and the QCStatements extension | \[[RFC3739](#rfc3739)\]
 RFC 7773 | Authentication context extension | \[[RFC7773](#rfc7773)\]
 draft-santesson-oidc-cert-auth-context | Authentication context extension, context type for OpenID Connect | \[[OIDC.Authn.Context](#oidc-authn-context)\]
+RFC 9608 | No Revocation Available extension | \[[RFC9608](#rfc9608)\]
 EN 319 411-1 | Policy requirements for PKC certificates | \[[EU-POL-NCP](#eu-pol-ncp)\]
 EN 319 411-2 | Policy requirements for Qualified certificates | \[[EU-POL-QC](#eu-pol-qc)\]
 EN 319 412-1 | Definitions of semantics identifiers and formatting rules for identity data | \[[EU-CERT-GEN](#eu-cert-gen)\]
@@ -316,6 +319,23 @@ The following example illustrates an OACI object for a signer authenticated at a
 Certificates SHALL reference at least one certificate policy. PKC certificates SHALL reference at least one certificate policy identified in \[[EU-POL-NCP](#eu-pol-ncp)\]. Qualified Certificates SHALL reference at least one certificate policy identified in \[[EU-POL-QC](#eu-pol-qc)\].
 
 
+<a name="revocation-and-expiration"></a>
+### 2.4. Revocation and Expiration
+
+Certificates issued in accordance with this profile are issued for a single instance of signing. The signing key is generated for that instance and is destroyed once the signature has been created. This has consequences for revocation and expiration that certificate issuers should consider.
+
+**Revocation**
+
+Revocation serves no purpose for such certificates. The validity of a signature is determined by the status of the certificate at the time of signing, and signing takes place at the time of issuance of the certificate. Any revocation would necessarily take effect after that time and would therefore not affect the validity of the signature. As the private key is destroyed after signing, there is no key that could be compromised and misused to create further signatures. An issuer MAY therefore issue certificates without providing any revocation mechanism.
+
+A certificate for which no revocation information is provided SHALL include the `id-ce-noRevAvail` extension defined in \[[RFC9608](#rfc9608)\], so that relying parties do not attempt to obtain revocation information for the certificate. The extension SHALL NOT be marked critical.
+
+**Expiration**
+
+The `notAfter` field of the certificate validity period indicates the time after which the issuer no longer maintains status information about the certificate. For a certificate that includes the `id-ce-noRevAvail` extension, no status information is maintained at any time, and the `notAfter` field therefore has no function. An issuer of such certificates MAY set the `notAfter` field to the GeneralizedTime value `99991231235959Z`, which, in accordance with section 4.1.2.5 of \[[RFC5280](#rfc5280)\], indicates that the certificate has no well-defined expiration date.
+
+A certificate with no well-defined expiration date does not change how the validity of a signature is determined: the signature is validated with respect to the time of signing, established by the time of issuance of the certificate and any proof of existence, such as a time-stamp, applied to the signature. Nor does it extend the validity period of the issuing CA certificate; the conditions under which a CA certificate is trusted after its own validity period has ended are governed by the applicable certificate policy and validation policy, not by this profile.
+
 <a name="normative-references"></a>
 ## 3. Normative References
 
@@ -344,6 +364,10 @@ Certificates SHALL reference at least one certificate policy. PKC certificates S
 > [Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
 > W. Polk, "Internet X.509 Public Key Infrastructure Certificate and
 > Certificate Revocation List (CRL) Profile", RFC 5280, May 2008](https://www.rfc-editor.org/rfc/rfc5280).
+
+<a name="rfc9608"></a>
+**[RFC9608]**
+> [Housley, R., Hoyland, J. and T. Okubo, "No Revocation Available for X.509 Public Key Certificates", RFC 9608, June 2024](https://www.rfc-editor.org/rfc/rfc9608).
 
 <a name="rfc7773"></a>
 **[RFC7773]**
@@ -413,7 +437,9 @@ Certificates SHALL reference at least one certificate policy. PKC certificates S
 
 - Section 2.3.1.1.1, "Data Source": the requirement that the person identifier of a Qualified Certificate be obtained from one of the listed attributes was relaxed from SHALL to SHOULD, aligning it with PKC certificates. Under eIDAS 2 the personal identifier is no longer a standardized part of the minimum data set and may be any identifier attribute defined by the applicable PID rulebook, so the profile no longer restricts the source of the identifier to the listed attributes and claims.
 
-- References to \[[OIDC.Authn.Context](#oidc-authn-context)\], \[[OpenID.Core](#openid-core)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\] and \[[OIDC.Claims](#oidc-claims)\] were added.
+- Section 2.4, "Revocation and Expiration", was added. It explains why revocation serves no purpose for certificates issued for a single instance of signing, and allows issuers to omit revocation support, indicated by the `id-ce-noRevAvail` extension of \[[RFC9608](#rfc9608)\], and to issue such certificates without a well-defined expiration date.
+
+- References to \[[OIDC.Authn.Context](#oidc-authn-context)\], \[[OpenID.Core](#openid-core)\], \[[OIDC.Sweden.Claims](#oidc-sweden-claims)\], \[[OIDC.Claims](#oidc-claims)\] and \[[RFC9608](#rfc9608)\] were added.
 
 **Changes between version 1.1 and version 1.2:**
 
