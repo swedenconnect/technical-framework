@@ -8,14 +8,14 @@
 
 # Sweden Connect - Registry for identifiers
 
-### Version 1.8 - 2024-12-04
+### Version 1.9 – 2026-10-21 – Draft
 
 Registration number: **2019-309**
 
 ---
 
 <p class="copyright-statement">
-Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2024. All Rights Reserved.
+Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Government (Digg)</a>, 2015-2026. All Rights Reserved.
 </p>
 
 ## Table of Contents
@@ -69,6 +69,12 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
     3.1.9.2. [eIDAS Connector Aliases](#eidas-connector-aliases)
     
     3.1.9.3. [Identity Binding Processes](#identity-binding-processes)
+    
+    3.1.10. [OpenID Federation Identifiers](#openid-federation-identifiers)
+    
+    3.1.10.1. [Trust Mark Type Identifiers](#trust-mark-type-identifiers)
+    
+    3.1.10.2. [Registration Policy Identifiers](#registration-policy-identifiers)
 
     3.2. [OID Identifiers](#oid-identifiers3)
 
@@ -182,6 +188,7 @@ The following category codes are defined:
 | **sprop** | Service Property. Specific entity category identifiers for specific service property. |
 | **st** | Service Type. Specific entity category identifiers for defined types of services in the federation. |
 | **contract** | Service contract. Specific entity category identifiers for declaring contract, or business agreement, affiliation within a federation. |
+| **regpolicy** | Registration policy. For representing policies describing how an entity joined the federation. |
 | **csig** | Central Signing Service – Identifiers used by the central signing service infrastructure. |
 | **auth-cont** | Authentication context information schema. |
 | **status** | SAML Protocol status codes. |
@@ -193,7 +200,7 @@ The following category codes are defined:
 #### 3.1.1. Authentication Context URIs
 
 Authentication Context URIs representing assurance levels (Tillitsnivåer) relevant to
-\[[SE.Trust](#se-trust)\] and \[[SC.SAML.Profile](#sc-saml-profile)\].
+\[[SE.Trust](#se-trust)\], \[[SC.SAML.Profile](#sc-saml-profile)\] and \[[SC.OIDC.Profile](#sc-oidc-profile)\].
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
@@ -227,7 +234,7 @@ following `AuthnContextClassRef` URI:s defined by the EU commission:
 > \[*\]: The authentication context URI:s are intended to be used to represent authentication
 over the eIDAS authentication framework using an official eIDAS-connector. Authorization to 
 issue assertions using these authentication context URI:s is determined by declaration of the
-"assurance certification" for the connector (see section 2.1.3 of \[[SC.SAML.Profile](#sc-saml-profile)\]).
+"assurance certification" for the connector.
 
 <a name="authentication-context-uris-for-swedish-non-residents"></a>
 ##### 3.1.1.1. Authentication Context URIs for Swedish Non-residents
@@ -458,6 +465,36 @@ Section 3.3.2 of \[[SC.SAML.Attrs](#sc-saml-attrs)\] describes how the `personal
 
 The [Binding eIDAS Identities to Records in the Swedish Population Register](#id-binding) (\[[ID-Binding](#id-binding)\]) document defines the above processes in detail. 
 
+<a name="openid-federation-identifiers"></a>
+#### 3.1.10. OpenID Federation Identifiers
+
+This section contains identifiers defined by Sweden Connect for use in OpenID Federation.
+
+<a name="trust-mark-type-identifiers"></a>
+##### 3.1.10.1. Trust Mark Type Identifiers
+
+Section 5.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] defines a set of Trust Mark Types used in the Sweden Connect OpenID Federation deployment.
+
+| **URI** | **Description** | **Reference** |
+| :--- | :--- | :--- |
+| `https://id.swedenconnect.se/loa/loa2` | A holder of this Trust Mark has been approved by the Swedish Agency for Digital Government (Digg) for Level of Assurance 2 (LoA 2). | Section 5.2.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/loa/loa3` | A holder of this Trust Mark has been approved by the Swedish Agency for Digital Government (Digg) for Level of Assurance 3 (LoA 3). | Section 5.2.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/loa/loa4` | A holder of this Trust Mark has been approved by the Swedish Agency for Digital Government (Digg) for Level of Assurance 4 (LoA 4). | Section 5.2.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/loa/eidas` | A holder of this Trust Mark has been approved to act as an official eIDAS Connector towards countries participating in the eIDAS 1 federation. This means that the holder may issue ID Tokens containing any of the eIDAS Authentication Context URIs specified in Section [3.1.1](#authentication-context-uris). | Section 5.2.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/loa/`<br/>`nonresident` | A holder of this Trust Mark has been approved to issue ID Tokens containing the special-purpose Authentication Context URIs for Swedish non-residents specified in Section [3.1.1.1](#authentication-context-uris-for-swedish-non-residents). This Trust Mark is always combined with a Trust Mark stating the Level of Assurance approved for the holder (see above). | Section 5.2.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/contract/`<br/>`sc/eid-authorization-system` | A Trust Mark Type assigned to all Relying Parties that have signed the "Auktorisationssystem för elektronisk identifiering" contract, and the OpenID Providers that deliver authentication services according to this contract. | Section 5.2.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/contract/`<br/>`sc/prepaid-auth-2021` | A Trust Mark Type assigned to all Relying Parties that have signed the "Förlitandeavtal - Förbetald e-legitimering" contract, and the OpenID Providers that deliver authentication services according to this contract. | Section 5.2.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+
+<a name="registration-policy-identifiers"></a>
+##### 3.1.10.2. Registration Policy Identifiers
+
+Section 6 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] defines a set of [Registration Policy](https://www.oidc.se/specifications/openid-federation-registration-policy-1_0.html) identifiers for use in the Sweden Connect OpenID Federation deployment.
+
+| **URI** | **Description** | **Reference** |
+| :--- | :--- | :--- |
+| `https://id.swedenconnect.se/`<br/>`regpolicy/org-affinity` | A policy that asserts the organizational affinity of an Entity. | Section 6.1 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+| `https://id.swedenconnect.se/`<br/>`regpolicy/domain-ownership` | When this policy has been applied, the Registration Intermediate asserts that the organization behind the Entity owns, or has the right to use, the domain of the Entity Identifier, and that the Entity Identifier is not used by another Entity in the federation. | Section 6.2 of \[[SC.OIDF.Rules](#sc-oidf-rules)\] |
+
 <a name="oid-identifiers3"></a>
 ### 3.2. OID Identifiers
 
@@ -569,9 +606,17 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 **\[RFC7773\]**
 > [RFC7773: Authentication Context Certificate Extension](https://tools.ietf.org/html/rfc7773).
 
+<a name="ietf-cert-authn-context-for-oidc"></a>
+**\[Oidc.Authn.Context\]**
+[Certificate Authentication Context Type for OpenID Connect](https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html).
+
 <a name="sc-saml-profile"></a>
 **\[SC.SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
+
+<a name="sc-oidc-profile"></a>
+**\[SC.OIDC.Profile\]**
+> [OpenID Connect Profile for Sweden Connect](https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Profile_for_Sweden_Connect.html).
 
 <a name="sc-saml-entcat"></a>
 **\[SC.SAML.EntCat\]**
@@ -601,6 +646,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 **\[SC.Cert.Profile\]**
 > [Certificate profile for certificates issued by Central Signing services](https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html)
 
+<a name="sc-oidf-rules"></a>
+**\[SC.OIDF.Rules\]**
+> [Sweden Connect – OpenID Federation Rules and Policies 1.0](https://docs.swedenconnect.se/federation/oidf-rules.html).
+
 <a name="id-binding"></a>
 **\[ID-Binding\]**
 > [Binding eIDAS Identities to Records in the Swedish Population Register](https://docs.swedenconnect.se/technical-framework/Identity_Binding.html)
@@ -623,6 +672,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="changes-between-versions"></a>
 ## 5. Changes between versions
+
+**Changes between version 1.8 and version 1.9:**
+
+- Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.
 
 **Changes between version 1.7 and version 1.8:**
 
