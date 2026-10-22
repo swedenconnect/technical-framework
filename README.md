@@ -130,13 +130,11 @@ This document specifies a Signature Activation Protocol (SAP) and its data eleme
 
 #### *Signature Validation Tokens*
 
-The draft specifications "15 - Signature Validation Token", "16 - PDF Profile for Signature Validation Tokens" and "17 - XML Profile for Signature Validation Tokens" are no longer part of the Swedish eID Framework specifications, and have been replaced by the following IETF drafts:
+The draft specifications "15 - Signature Validation Token", "16 - PDF Profile for Signature Validation Tokens" and "17 - XML Profile for Signature Validation Tokens" are no longer part of the Swedish eID Framework specifications, and have been replaced by the following IETF publications:
 
-- [https://datatracker.ietf.org/doc/draft-santesson-svt/](https://datatracker.ietf.org/doc/draft-santesson-svt/)
-- [https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/](https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/)
-- [https://datatracker.ietf.org/doc/draft-santesson-svt-xml/](https://datatracker.ietf.org/doc/draft-santesson-svt-xml/)
-
-See https://github.com/swedenconnect/IETF-SVT for the repository that is hosting this work.
+- [Signature Validation Token – RFC9321](https://datatracker.ietf.org/doc/rfc9321/)
+- [PDF Signature Validation Token – draft-santesson-svt-pdf-03(https://datatracker.ietf.org/doc/draft-santesson-svt-pdf/)
+- [XML Signature Validation Token – draft-santesson-svt-xml-03](https://datatracker.ietf.org/doc/draft-santesson-svt-xml/)
 
 ---
 
@@ -156,13 +154,14 @@ Sweden Connect apply:
 
 Older version of the specifications are stored in the following branches:
 
-+ [november-2021](https://github.com/swedenconnect/technical-framework/tree/november-2021) - For the November 2021 release
-+ [january-2020](https://github.com/swedenconnect/technical-framework/tree/january-2020) - For the January 2020 release
-+ [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) - For the June 2018 release
-+ [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) - For the March 2017 release
-+ [october-2015](https://github.com/swedenconnect/technical-framework/tree/october-2015) - For the October 2015 release
-+ [april-2015](https://github.com/swedenconnect/technical-framework/tree/april-2015) - For the April 2015 release
-+ [june-2014](https://github.com/swedenconnect/technical-framework/tree/june-2014) - For the June 2014 release
++ [december-2024](https://github.com/swedenconnect/technical-framework/tree/december-2024) – For the December 2024 release
++ [november-2021](https://github.com/swedenconnect/technical-framework/tree/november-2021) – For the November 2021 release
++ [january-2020](https://github.com/swedenconnect/technical-framework/tree/january-2020) – For the January 2020 release
++ [june-2018](https://github.com/swedenconnect/technical-framework/tree/june-2018) – For the June 2018 release
++ [march-2017](https://github.com/swedenconnect/technical-framework/tree/march-2017) – For the March 2017 release
++ [october-2015](https://github.com/swedenconnect/technical-framework/tree/october-2015) – For the October 2015 release
++ [april-2015](https://github.com/swedenconnect/technical-framework/tree/april-2015) – For the April 2015 release
++ [june-2014](https://github.com/swedenconnect/technical-framework/tree/june-2014) – For the June 2014 release
 
 ---
 
