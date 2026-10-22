@@ -206,6 +206,10 @@ now uses this OID arc for the Sweden Connect Framework.</p>
 <td>Authentication context information schema.</td>
 </tr>
 <tr>
+<td><strong>cert</strong></td>
+<td>Certificate identifiers.</td>
+</tr>
+<tr>
 <td><strong>status</strong></td>
 <td>SAML Protocol status codes.</td>
 </tr>
@@ -759,8 +763,13 @@ below extends the list of second-level status codes defined in section
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><code>http://id.elegnamnden.se/eln/name-registration-authority</code></td>
-<td align="left">Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace.</td>
+<td align="left"><code>http://id.elegnamnden.se/</code><br/><code>eln/name-registration-authority</code></td>
+<td align="left">Deprecated: Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace.</td>
+<td align="left">[<a href="#sc-cert-profile">SC.Cert.Profile</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/</code><br/><code>cert/name-registration-authority</code></td>
+<td align="left">Identifying Sweden Connect as name registration authority, responsible for a particular namespace.</td>
 <td align="left">[<a href="#sc-cert-profile">SC.Cert.Profile</a>]</td>
 </tr>
 </tbody></table>
@@ -857,6 +866,16 @@ below extends the list of second-level status codes defined in section
 <tr>
 <td align="left"><code>https://id.swedenconnect.se/contract/</code><br/><code>sc/prepaid-auth-2021</code></td>
 <td align="left">A Trust Mark Type assigned to all Relying Parties that have signed the &quot;Förlitandeavtal - Förbetald e-legitimering&quot; contract, and the OpenID Providers that deliver authentication services according to this contract.</td>
+<td align="left">Section 5.2.2 of [<a href="#sc-oidf-rules">SC.OIDF.Rules</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/</code><br/><code>tm-prop/public-body</code></td>
+<td align="left">A Property Trust Mark type assigned to Entities that are public bodies.</td>
+<td align="left">Section 5.2.2 of [<a href="#sc-oidf-rules">SC.OIDF.Rules</a>]</td>
+</tr>
+<tr>
+<td align="left"><code>https://id.swedenconnect.se/</code><br/><code>tm-prop/eidas-proxy</code></td>
+<td align="left">A Property Trust Mark type assigned to the eIDAS Proxy Service.</td>
 <td align="left">Section 5.2.2 of [<a href="#sc-oidf-rules">SC.OIDF.Rules</a>]</td>
 </tr>
 </tbody></table>
@@ -1098,7 +1117,7 @@ Version 1.0.</a></p>
 <p><a name="ietf-cert-authn-context-for-oidc"></a>
 <strong>[OIDC.Authn.Context]</strong></p>
 <blockquote>
-<p><a href="https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html">Certificate Authentication Context Type for OpenID Connect</a>.</p>
+<p><a href="https://datatracker.ietf.org/doc/draft-santesson-oidc-cert-auth-context/">Santesson, S. and M. Lindström, &quot;Certificate Authentication Context Type for OpenID Connect&quot;, Internet-Draft draft-santesson-oidc-cert-auth-context</a>.</p>
 </blockquote>
 <p><a name="sc-saml-profile"></a>
 <strong>[SC.SAML.Profile]</strong></p>
@@ -1181,6 +1200,10 @@ regulation and associated technical specifications.</p>
 <li><p>Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.</p>
 </li>
 <li><p>The <code>urn:ietf:params:x509-auth-context:oidc</code> identifier was added to section 3.1.6.</p>
+</li>
+<li><p>The URL prefix <code>cert</code>, for certificate identifiers, was added to the list of URL prefixes in section 3.1.</p>
+</li>
+<li><p>Section 3.1.8, &quot;Name Registration Authorities&quot;, was extended with the identifier <code>https://id.swedenconnect.se/cert/name-registration-authority</code>, identifying Sweden Connect as name registration authority. It replaces <code>http://id.elegnamnden.se/eln/name-registration-authority</code>, which is now deprecated.</p>
 </li>
 </ul>
 <p><strong>Changes between version 1.7 and version 1.8:</strong></p>
