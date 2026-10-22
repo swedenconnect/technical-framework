@@ -368,7 +368,7 @@ A certificate with no well-defined expiration date does not change how the valid
 
 <a name="oidc-authn-context"></a>
 **[OIDC.Authn.Context]**
-> [Santesson, S. and M. Lindström, "Certificate Authentication Context Type for OpenID Connect", Internet-Draft draft-santesson-oidc-cert-auth-context, work in progress](https://datatracker.ietf.org/doc/draft-santesson-oidc-cert-auth-context/).
+> [Santesson, S. and M. Lindström, "Certificate Authentication Context Type for OpenID Connect", Internet-Draft draft-santesson-oidc-cert-auth-context](https://datatracker.ietf.org/doc/draft-santesson-oidc-cert-auth-context/).
 
 <a name="openid-core"></a>
 **[OpenID.Core]**

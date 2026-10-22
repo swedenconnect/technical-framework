@@ -191,7 +191,7 @@ The following category codes are defined:
 | **regpolicy** | Registration policy. For representing policies describing how an entity joined the federation. |
 | **csig** | Central Signing Service – Identifiers used by the central signing service infrastructure. |
 | **auth-cont** | Authentication context information schema. |
-| **cert** | Certificate identifiers |
+| **cert** | Certificate identifiers. |
 | **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
 | **eidas** | Identifiers used for integration with the eIDAS Framework. |
@@ -612,7 +612,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="ietf-cert-authn-context-for-oidc"></a>
 **\[OIDC.Authn.Context\]**
-> [Certificate Authentication Context Type for OpenID Connect](https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html).
+> [Santesson, S. and M. Lindström, "Certificate Authentication Context Type for OpenID Connect", Internet-Draft draft-santesson-oidc-cert-auth-context](https://datatracker.ietf.org/doc/draft-santesson-oidc-cert-auth-context/).
 
 <a name="sc-saml-profile"></a>
 **\[SC.SAML.Profile\]**
