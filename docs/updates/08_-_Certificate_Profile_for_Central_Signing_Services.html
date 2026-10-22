@@ -1,1 +1,471 @@
-../december-2024/08_-_Certificate_Profile_for_Central_Signing_Services.html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certificate Profile for Certificates Issued by Central Signing Services</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-portrait.css" media="print" >
+    <link type="text/css" rel="stylesheet" href="assets/css/eln-custom.css" media="print" >
+  </head>
+  <body>
+    <article class="markdown-body"><p>
+<img align="left" src="img/sweden-connect.png"></img>
+<img align="right" src="img/digg_centered.png"></img>
+</p>
+<p>
+<img align="center" src="img/transparent.png"></img>
+</p>
+
+<h1 id="certificate-profile-for-certificates-issued-by-central-signing-services">Certificate Profile for Certificates Issued by Central Signing Services</h1>
+<h3 id="version-13--2026-10-21--draft">Version 1.3 – 2026-10-21 – Draft</h3>
+<p>Registration number: <strong>2019-313</strong> (<em>previously: ELN-0608</em>)</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol class="list">
+<li><p><a href="#introduction"><strong>Introduction</strong></a></p>
+<p> 1.1. <a href="#requirement-key-words">Requirement key words</a></p>
+<p> 1.2. <a href="#xml-namespace-references">XML namespace references</a></p>
+<p> 1.3. <a href="#structure">Structure</a></p>
+</li>
+<li><p><a href="#certificate-profile"><strong>Certificate Profile</strong></a></p>
+<p> 2.1. <a href="#standards">Standards</a></p>
+<p> 2.2. <a href="#qualified-and-pkc-certificates">Qualified and PKC Certificates</a></p>
+<p> 2.3. <a href="#certificate-content">Certificate Content</a></p>
+<p> 2.3.1. <a href="#subject-attributes-and-name-forms">Subject Attributes and Name Forms</a></p>
+<p> 2.3.1.1. <a href="#person-identifier-attributes">Person Identifier Attributes</a></p>
+<p> 2.3.1.2. <a href="#other-attribute-requirements">Other Attribute Requirements</a></p>
+<p> 2.3.2. <a href="#authentication-context-and-attribute-mapping">Authentication Context and Attribute Mapping</a></p>
+<p> 2.3.2.1. <a href="#saml-authentication-context-information">SAML Authentication Context Information</a></p>
+<p> 2.3.2.2. <a href="#openid-connect-authentication-context-information">OpenID Connect Authentication Context Information</a></p>
+<p> 2.3.3. <a href="#certificate-policy">Certificate Policy</a></p>
+<p> 2.4. <a href="#revocation-and-expiration">Revocation and Expiration</a></p>
+</li>
+<li><p><a href="#normative-references"><strong>Normative References</strong></a></p>
+</li>
+<li><p><a href="#changes-between-versions"><strong>Changes between versions</strong></a></p>
+</li>
+</ol>
+<hr>
+<p><a name="introduction"></a></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This document specifies a certificate profile for certificates issued by a signature service based on the OASIS DSS protocol [<a href="#dss">DSS</a>], enhanced by the DSS Extension for Federated Central Signing Services [<a href="#dss-ext">DSS-Ext</a>].</p>
+<p><a name="requirement-key-words"></a></p>
+<h3 id="11-requirement-key-words">1.1. Requirement key words</h3>
+<p>The key words <strong>MUST</strong>, <strong>MUST</strong> <strong>NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>,
+<strong>SHALL</strong> <strong>NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD</strong> <strong>NOT</strong>, <strong>RECOMMENDED</strong>,
+<strong>MAY</strong>, and <strong>OPTIONAL</strong> are to be interpreted as described in
+[<a href="#rfc2119">RFC2119</a>].</p>
+<p>These keywords are capitalized when used to unambiguously specify
+requirements over protocol features and behavior that affect the
+interoperability and security of implementations. When these words are
+not capitalized, they are meant in their natural-language sense.</p>
+<p><a name="xml-namespace-references"></a></p>
+<h3 id="12-xml-namespace-references">1.2. XML namespace references</h3>
+<p>The prefix <strong>saci:</strong> stands for the SAML Authentication Context Information XML Schema 
+namespace, <code>http://id.elegnamnden.se/auth-cont/1.0/saci</code>.</p>
+<blockquote>
+<p>Schema location URL: <a href="https://docs.swedenconnect.se/schemas/cert-schemas/1.0/CertAuthContextExtension-SAML-1.0.xsd">https://docs.swedenconnect.se/schemas/cert-schemas/1.0/CertAuthContextExtension-SAML-1.0.xsd</a></p>
+</blockquote>
+<p>The prefix <strong>sacex:</strong> stands for the Extended Authentication Information XML Schema
+namespace, <code>http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info</code>.</p>
+<blockquote>
+<p>Schema location URL: <a href="https://docs.swedenconnect.se/schemas/cert-schemas/1.0/CertAuthContextExtension-ExtAuthInfo-1.0.xsd">https://docs.swedenconnect.se/schemas/cert-schemas/1.0/CertAuthContextExtension-ExtAuthInfo-1.0.xsd</a></p>
+</blockquote>
+<p>The OpenID Connect Authentication Context Information (section <a href="#openid-connect-authentication-context-information">2.3.2.2</a>) is expressed in JSON and does not use an XML namespace.</p>
+<p><a name="structure"></a></p>
+<h3 id="13-structure">1.3. Structure</h3>
+<p>This specification uses the following typographical conventions in text:
+<code>&lt;Eid2Element&gt;</code>, <code>&lt;ns:ForeignElement&gt;</code>, <code>Attribute</code>, <strong>Datatype</strong>,
+<code>OtherCode</code>.</p>
+<p><a name="certificate-profile"></a></p>
+<h2 id="2-certificate-profile">2. Certificate Profile</h2>
+<p><a name="standards"></a></p>
+<h3 id="21-standards">2.1. Standards</h3>
+<p>The following standards provide normative requirements for this certificate profile:</p>
+<table>
+<thead>
+<tr>
+<th>Standard</th>
+<th>Function</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RFC 5280</td>
+<td>Main certificate standard</td>
+<td>[<a href="#rfc5280">RFC5280</a>]</td>
+</tr>
+<tr>
+<td>RFC 3739</td>
+<td>Qualified Certificates profile and the QCStatements extension</td>
+<td>[<a href="#rfc3739">RFC3739</a>]</td>
+</tr>
+<tr>
+<td>RFC 7773</td>
+<td>Authentication context extension</td>
+<td>[<a href="#rfc7773">RFC7773</a>]</td>
+</tr>
+<tr>
+<td>draft-santesson-oidc-<br/>cert-auth-context</td>
+<td>Authentication context extension, context type for OpenID Connect</td>
+<td>[<a href="#oidc-authn-context">OIDC.Authn.Context</a>]</td>
+</tr>
+<tr>
+<td>RFC 9608</td>
+<td>No Revocation Available extension</td>
+<td>[<a href="#rfc9608">RFC9608</a>]</td>
+</tr>
+<tr>
+<td>EN 319 411-1</td>
+<td>Policy requirements for PKC certificates</td>
+<td>[<a href="#eu-pol-ncp">EU-POL-NCP</a>]</td>
+</tr>
+<tr>
+<td>EN 319 411-2</td>
+<td>Policy requirements for Qualified certificates</td>
+<td>[<a href="#eu-pol-qc">EU-POL-QC</a>]</td>
+</tr>
+<tr>
+<td>EN 319 412-1</td>
+<td>Definitions of semantics identifiers and formatting rules for identity data</td>
+<td>[<a href="#eu-cert-gen">EU-CERT-GEN</a>]</td>
+</tr>
+<tr>
+<td>EN 319 412-2</td>
+<td>Certificate profile for certificates issued to natural persons</td>
+<td>[<a href="#eu-cert-np">EU-CERT-NP</a>]</td>
+</tr>
+<tr>
+<td>EN 319 412-5</td>
+<td>Declaration of qualified certificate properties</td>
+<td>[<a href="#eu-cert-qc">EU-CERT-QC</a>]</td>
+</tr>
+</tbody></table>
+<p><a name="qualified-and-pkc-certificates"></a></p>
+<h3 id="22-qualified-and-pkc-certificates">2.2. Qualified and PKC Certificates</h3>
+<p>This profile supports both Qualified Certificates, profiled in [<a href="#rfc3739">RFC3739</a>] and [<a href="#eu-cert-qc">EU-CERT-QC</a>], and certificates that are not Qualified Certificates, here named PKC certificates (Public Key Certificates).</p>
+<p>All profile requirements apply to both Qualified Certificates and to PKC certificates unless it is explicitly stated that a particular requirement applies only to PKC or Qualified Certificates.</p>
+<p><a name="certificate-content"></a></p>
+<h3 id="23-certificate-content">2.3. Certificate Content</h3>
+<p>All certificates SHALL be fully compliant with [<a href="#rfc5280">RFC5280</a>] and [<a href="#eu-cert-np">EU-CERT-NP</a>]. All Qualified Certificates SHALL also include the QCStatements extension defined in [<a href="#rfc3739">RFC3739</a>], carrying the mandatory QC statements defined in [<a href="#eu-cert-qc">EU-CERT-QC</a>].</p>
+<p><a name="subject-attributes-and-name-forms"></a></p>
+<h4 id="231-subject-attributes-and-name-forms">2.3.1. Subject Attributes and Name Forms</h4>
+<p><a name="person-identifier-attributes"></a></p>
+<h5 id="2311-person-identifier-attributes">2.3.1.1. Person Identifier Attributes</h5>
+<p><a name="data-source"></a></p>
+<h6 id="23111-data-source">2.3.1.1.1. Data Source</h6>
+<p>All certificates SHALL contain a unique person identifier, carried in the <code>serialNumber</code> attribute (OID 2.5.4.5) in the subject field. The person identifier SHALL be obtained from the Identity Provider in the form of a SAML attribute, or from the OpenID Provider in the form of an OpenID Connect claim, depending on the protocol used to authenticate the signer. The SAML attribute or OpenID Connect claim SHOULD be one of those listed below.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Identifier</th>
+<th align="left">SAML attribute</th>
+<th align="left">OpenID Connect claim</th>
+<th align="left">Specification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Swedish Personal Identity Number (personnummer) [<a href="#skv704">SKV704</a>]</td>
+<td align="left">urn:oid:1.2.752.29.4.13</td>
+<td align="left"><code>https://id.oidc.se/</code><br/><code>claim/personalIdentityNumber</code></td>
+<td align="left">[<a href="#attrspec">AttrSpec</a>], [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>]</td>
+</tr>
+<tr>
+<td align="left">Swedish Coordination Number (samordningsnummer) [<a href="#skv707">SKV707</a>]</td>
+<td align="left">urn:oid:1.2.752.29.4.13</td>
+<td align="left"><code>https://id.oidc.se/</code><br/><code>claim/coordinationNumber</code></td>
+<td align="left">[<a href="#attrspec">AttrSpec</a>], [<a href="#oidc-sweden-claims">OIDC.Sweden.Claims</a>]</td>
+</tr>
+<tr>
+<td align="left">Provisional ID</td>
+<td align="left">urn:oid:1.2.752.201.3.4</td>
+<td align="left"><code>https://id.swedenconnect.se/</code><br/><code>claim/prid</code></td>
+<td align="left">[<a href="#attrspec">AttrSpec</a>], [<a href="#oidc-claims">OIDC.Claims</a>]</td>
+</tr>
+<tr>
+<td align="left">eIDAS Person Identifier</td>
+<td align="left">urn:oid:1.2.752.201.3.7</td>
+<td align="left"><code>http://eidas.europa.eu/attributes/</code><br/><code>naturalperson/PersonIdentifier</code></td>
+<td align="left">[<a href="#attrspec">AttrSpec</a>], [<a href="#oidc-claims">OIDC.Claims</a>]</td>
+</tr>
+</tbody></table>
+<p>In SAML, personal identity numbers and coordination numbers are carried in the same attribute and are distinguished by their format, see [<a href="#skv704">SKV704</a>] and [<a href="#skv707">SKV707</a>]. In OpenID Connect they are carried in separate claims. </p>
+<p><a name="data-format"></a></p>
+<h6 id="23112-data-format">2.3.1.1.2. Data Format</h6>
+<p>The identifier obtained from the SAML attribute or the OpenID Connect claim SHALL be stored in the <code>serialNumber</code> attribute using one of the following formats:</p>
+<ul class="list">
+<li>exactly the same format as it was obtained from the SAML attribute or claim, or</li>
+<li>the conventions specified in [<a href="#eu-cert-gen">EU-CERT-GEN</a>], as defined below.</li>
+</ul>
+<p>When a person identifier is stored in the <code>serialNumber</code> attribute in accordance with [<a href="#eu-cert-gen">EU-CERT-GEN</a>], the certificate SHALL include a semantics identifier as specified in section 5.1 of [<a href="#eu-cert-gen">EU-CERT-GEN</a>].</p>
+<p><strong>Swedish Personal Identity Number (personnummer) and Coordination Number (samordningsnummer)</strong></p>
+<p>When the identifier is a Swedish personal identity number (personnummer) [<a href="#skv704">SKV704</a>], the semantics identifier SHALL be a natural person semantics identifier using the identity type reference &quot;PNO&quot;.</p>
+<blockquote>
+<p>Example: PNOSE-194911172296</p>
+</blockquote>
+<p>When the identifier is a Swedish coordination number (samordningsnummer) [<a href="#skv707">SKV707</a>], the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference &quot;CN:SE&quot;.</p>
+<blockquote>
+<p>Example: CN:SE-194911772293</p>
+</blockquote>
+<p><strong>Provisional ID</strong></p>
+<p>When the identifier is a provisional ID the semantics identifier SHALL be a natural person semantics identifier using a local national identity type reference &quot;PI:SE&quot;.</p>
+<blockquote>
+<p>Example: PI:SE-NO:16043700158</p>
+</blockquote>
+<p>This identifier illustrates that the identifier is a Provisional ID (PI) as defined in Sweden (SE) followed by a hyphen (-) and the actual provisional ID for a person from Norway (NO:16043700158).</p>
+<p>When the identity type reference is &quot;PI:SE&quot; or &quot;CN:SE&quot;, the <code>nameRegistrationAuthorities</code> element of <code>SemanticsInformation</code> SHALL be present and SHALL contain a <code>GeneralName</code> of type <code>uniformResourceIdentifier</code> with one of the following values:</p>
+<blockquote>
+<p><code>http://id.elegnamnden.se/eln/name-registration-authority</code> (Deprecated)</p>
+</blockquote>
+<blockquote>
+<p><code>https://id.swedenconnect.se/cert/name-registration-authority</code></p>
+</blockquote>
+<p>The deprecated identifier under elegnamnden.se SHALL not be used in new certificates.</p>
+<p><strong>eIDAS Person Identifier</strong></p>
+<p>An eIDAS person identifier MAY be stored in the <code>serialNumber</code> attribute in exactly the same format as received in the SAML attribute or claim listed above, accompanied by a semantics identifier according to [<a href="#eu-cert-gen">EU-CERT-GEN</a>] identified by the OID <code>0.4.0.194121.1.3</code>.</p>
+<p><strong>Note:</strong> A new version of the [<a href="#eu-cert-gen">EU-CERT-GEN</a>] is processed for approval at the time of publication of this document. The new version will specify a semantics identifier for storing eIDAS person identifier attributes using the semantics identifier OID <code>0.4.0.194121.1.3</code>. This semantics identifier (<code>id-etsi-qcs-semanticsId-eIDASNatural</code>) is not yet present in the latest published version of the standard.</p>
+<p><a name="other-attribute-requirements"></a></p>
+<h5 id="2312-other-attribute-requirements">2.3.1.2. Other Attribute Requirements</h5>
+<p>An e-mail address, when present, SHALL be stored in a Subject Alternative Name extension as an rfc822Name.</p>
+<p><a name="authentication-context-and-attribute-mapping"></a></p>
+<h4 id="232-authentication-context-and-attribute-mapping">2.3.2. Authentication Context and Attribute Mapping</h4>
+<p>Certificates MUST include an Authentication Context extension according to [<a href="#rfc7773">RFC7773</a>]. The extension SHALL NOT be marked critical.</p>
+<p>The extension SHALL include exactly one <code>AuthenticationContext</code> entry. The context type of the entry depends on the protocol that was used to authenticate the signer as part of the signature creation process:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Authentication protocol</th>
+<th align="left">Context type</th>
+<th align="left">contextType identifier</th>
+<th align="left">Requirements</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SAML – the signer was authenticated by means of a SAML assertion from an Identity Provider</td>
+<td align="left">SAML Authentication Context Information (SACI)</td>
+<td align="left"><code>http://id.elegnamnden.se/</code><br><code>auth-cont/1.0/saci</code></td>
+<td align="left">Section <a href="#saml-authentication-context-information">2.3.2.1</a></td>
+</tr>
+<tr>
+<td align="left">OpenID Connect – the signer was authenticated by means of an ID Token from an OpenID Provider</td>
+<td align="left">OpenID Connect Authentication Context Information (OACI)</td>
+<td align="left"><code>urn:ietf:params:</code><br/><code>x509-auth-context:oidc</code></td>
+<td align="left">Section <a href="#openid-connect-authentication-context-information">2.3.2.2</a></td>
+</tr>
+</tbody></table>
+<p>Both context types record the authentication event and map the identity data obtained from the authentication to the subject attributes and name forms of the certificate.</p>
+<p><a name="saml-authentication-context-information"></a></p>
+<h5 id="2321-saml-authentication-context-information">2.3.2.1. SAML Authentication Context Information</h5>
+<p>An <code>AuthenticationContext</code> entry of the SACI context type SHALL contain a <code>&lt;saci:SAMLAuthContext&gt;</code> element as specified in section 3 of [<a href="#rfc7773">RFC7773</a>].</p>
+<p>The <code>&lt;saci:SAMLAuthContext&gt;</code> element SHALL contain both an <code>&lt;saci:AuthContextInfo&gt;</code> element as well as an <code>&lt;saci:IdAttributes&gt;</code> element.</p>
+<p>The <code>&lt;saci:IdAttributes&gt;</code> element SHALL contain one <code>&lt;saci:AttributeMapping&gt;</code> element for each subject attribute or other name form that was obtained from a SAML attribute in the SAML assertion used to authenticate the signer as part of the signature creation process. Each <code>&lt;saci:AttributeMapping&gt;</code> element SHALL identify the SAML attribute by its <code>Name</code> attribute, and MAY include the <code>&lt;saml:AttributeValue&gt;</code> element(s) that were obtained from the SAML assertion.</p>
+<p><a name="extended-authentication-information"></a></p>
+<h6 id="23211-extended-authentication-information">2.3.2.1.1. Extended Authentication Information</h6>
+<p>In addition to the attributes of <code>&lt;saci:AuthContextInfo&gt;</code>, additional authentication information can be provided through the extensibility of the <code>&lt;saci:AuthContextInfo&gt;</code> element, which allows a sequence of any elements to be included.</p>
+<p>One such element is defined in this section, the <code>&lt;sacex:ExtAuthInfo&gt;</code> element.</p>
+<p>This element MAY be included to provide the name of a parameter and its associated value.</p>
+<p>This element MAY be used to carry the value of any single valued attribute from the associated SAML assertion as long as the SAML attribute value is not composed of a complex type. When used to carry a SAML attribute value, the value of the <code>&lt;sacex:ExtAuthInfo&gt;</code> element SHALL be identical to the content of the SAML attribute value element and the <code>Name</code> attribute SHALL hold the same value as the <code>Name</code> attribute of the corresponding SAML attribute.</p>
+<p>The <code>&lt;sacex:ExtAuthInfo&gt;</code> element is defined by the following XML Schema:</p>
+<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">xs:schema</span> <span class="hljs-attr">xmlns:xs</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="hljs-attr">elementFormDefault</span>=<span class="hljs-string">&quot;qualified&quot;</span>
+    <span class="hljs-attr">targetNamespace</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info&quot;</span>
+    <span class="hljs-attr">xmlns:sacex</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info&quot;</span>&gt;</span>
+    
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ExtAuthInfo&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;sacex:ExtAuthInfoType&quot;</span> /&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ExtAuthInfoType&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">xs:extension</span> <span class="hljs-attr">base</span>=<span class="hljs-string">&quot;xs:string&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Name&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> <span class="hljs-attr">use</span>=<span class="hljs-string">&quot;required&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">xs:anyAttribute</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;##any&quot;</span> <span class="hljs-attr">processContents</span>=<span class="hljs-string">&quot;lax&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">xs:extension</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">xs:simpleContent</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">xs:schema</span>&gt;</span></code></pre><p><strong>Example:</strong></p>
+<p>The following example illustrates inclusion of the content of a transaction identifier SAML attribute as extended authentication information.</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">saci:SAMLAuthContext</span>
+    <span class="hljs-attr">xmlns:saci</span>=<span class="hljs-string">&quot;http://id.elegnamnden.se/auth-cont/1.0/saci&quot;</span>
+    <span class="hljs-attr">xmlns:sacex</span>=<span class="hljs-string">&quot;http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">saci:AuthContextInfo</span> <span class="hljs-attr">IdentityProvider</span>=<span class="hljs-string">&quot;http://eid.example.com/idp&quot;</span>
+      <span class="hljs-attr">AuthenticationInstant</span>=<span class="hljs-string">&quot;2020-01-10T17:02:46.000Z&quot;</span>
+      <span class="hljs-attr">AuthnContextClassRef</span>=<span class="hljs-string">&quot;http://id.elegnamnden.se/loa/1.0/loa3&quot;</span>
+      <span class="hljs-attr">AssertionRef</span>=<span class="hljs-string">&quot;_936e075dc2725b016de57b9a0624c766&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">sacex:ExtAuthInfo</span> <span class="hljs-attr">Name</span>=<span class="hljs-string">&quot;urn:oid:1.2.752.201.3.2&quot;</span>&gt;</span>dc6ac7656H89bfb51<span class="hljs-tag">&lt;/<span class="hljs-name">sacex:ExtAuthInfo</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">saci:AuthContextInfo</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">saci:IdAttributes</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">saci:IdAttributes</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">saci:SAMLAuthContext</span>&gt;</span></code></pre><p><a name="openid-connect-authentication-context-information"></a></p>
+<h5 id="2322-openid-connect-authentication-context-information">2.3.2.2. OpenID Connect Authentication Context Information</h5>
+<p>An <code>AuthenticationContext</code> entry of the OACI context type SHALL contain a JSON object as specified in [<a href="#oidc-authn-context">OIDC.Authn.Context</a>]. The terms ID Token, UserInfo Response, Claim, Subject Identifier, OpenID Provider and Relying Party are used as defined in [<a href="#openid-core">OpenID.Core</a>].</p>
+<p>The OACI object SHALL contain the members <code>iss</code>, <code>auth_time</code>, <code>acr</code>, <code>client_id</code> and <code>claim_mappings</code>.</p>
+<p>The OACI object MUST contain information that uniquely identifies the authentication event. The combination of the required members <code>iss</code>, <code>auth_time</code> and <code>client_id</code> is normally sufficient for this purpose; where it is not, the object SHALL contain additional information that makes the identification unique, such as the <code>jti</code> member, the <code>sub</code> member, or a custom member defined for this purpose. The <code>jti</code> member SHALL be present when the ID Token contained a <code>jti</code> claim. The <code>sub</code> member MAY be present, but SHOULD NOT be present when the OpenID Provider issues public (non-pairwise) Subject Identifiers, see the privacy considerations of [<a href="#oidc-authn-context">OIDC.Authn.Context</a>].</p>
+<p>The <code>amr</code> member MUST NOT be present. Assurance is evaluated solely by means of the Authentication Context Class Reference carried in the <code>acr</code> member; authentication method references are not part of what the Signature Service verifies against the sign request, and their presence in the certificate could give a false impression of what was verified.</p>
+<p>The <code>client_id</code> member SHALL hold the client identifier under which the Signature Service acted as Relying Party towards the OpenID Provider.</p>
+<p>The <code>claim_mappings</code> member SHALL contain one claim mapping object for each subject attribute or other name form that was obtained from a claim in the ID Token or the UserInfo Response used to authenticate the signer as part of the signature creation process. The <code>source</code> member of a claim mapping object SHALL be present when the claim was obtained from the UserInfo Response. The OACI object does not carry claim values; the value is present in the certificate attribute that the mapping refers to.</p>
+<p>The OACI object MAY be extended with additional members to provide further authentication information. Each member is a name/value pair. Additional member names SHOULD be collision resistant, for example by using a URI as the name. Relying parties ignore members they do not recognize.</p>
+<p><strong>Example:</strong></p>
+<p>The following example illustrates an OACI object for a signer authenticated at assurance level 3, where the <code>serialNumber</code>, <code>givenName</code>, <code>surname</code> and <code>commonName</code> attributes of the certificate subject were obtained from claims in the ID Token. Note that the <code>/</code> characters of a claim name that is a URI are escaped as <code>~1</code> in the JSON Pointer of the <code>claim</code> member, as specified in RFC 6901.</p>
+<pre class="hljs"><code>{
+  <span class="hljs-attr">&quot;iss&quot;</span>: <span class="hljs-string">&quot;https://op.example.com&quot;</span>,
+  <span class="hljs-attr">&quot;auth_time&quot;</span>: <span class="hljs-number">1792415045</span>,
+  <span class="hljs-attr">&quot;acr&quot;</span>: <span class="hljs-string">&quot;http://id.elegnamnden.se/loa/1.0/loa3&quot;</span>,
+  <span class="hljs-attr">&quot;jti&quot;</span>: <span class="hljs-string">&quot;0f3e2c6a-7b1d-4e4c-9a2e-5d1c2b3a4f60&quot;</span>,
+  <span class="hljs-attr">&quot;client_id&quot;</span>: <span class="hljs-string">&quot;https://sign.example.com&quot;</span>,
+  <span class="hljs-attr">&quot;claim_mappings&quot;</span>: [
+    { <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;rdn&quot;</span>, <span class="hljs-attr">&quot;ref&quot;</span>: <span class="hljs-string">&quot;2.5.4.5&quot;</span>,
+      <span class="hljs-attr">&quot;claim&quot;</span>: <span class="hljs-string">&quot;/https:~1~1id.oidc.se~1claim~1personalIdentityNumber&quot;</span> },
+    { <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;rdn&quot;</span>, <span class="hljs-attr">&quot;ref&quot;</span>: <span class="hljs-string">&quot;2.5.4.42&quot;</span>, <span class="hljs-attr">&quot;claim&quot;</span>: <span class="hljs-string">&quot;/given_name&quot;</span> },
+    { <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;rdn&quot;</span>, <span class="hljs-attr">&quot;ref&quot;</span>: <span class="hljs-string">&quot;2.5.4.4&quot;</span>, <span class="hljs-attr">&quot;claim&quot;</span>: <span class="hljs-string">&quot;/family_name&quot;</span> },
+    { <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;rdn&quot;</span>, <span class="hljs-attr">&quot;ref&quot;</span>: <span class="hljs-string">&quot;2.5.4.3&quot;</span>, <span class="hljs-attr">&quot;claim&quot;</span>: <span class="hljs-string">&quot;/name&quot;</span> }
+  ]
+}</code></pre><p><a name="certificate-policy"></a></p>
+<h4 id="233-certificate-policy">2.3.3. Certificate Policy</h4>
+<p>Certificates SHALL reference at least one certificate policy. PKC certificates SHALL reference at least one certificate policy identified in [<a href="#eu-pol-ncp">EU-POL-NCP</a>]. Qualified Certificates SHALL reference at least one certificate policy identified in [<a href="#eu-pol-qc">EU-POL-QC</a>].</p>
+<p><a name="revocation-and-expiration"></a></p>
+<h3 id="24-revocation-and-expiration">2.4. Revocation and Expiration</h3>
+<p>Certificates issued in accordance with this profile are issued for a single instance of signing. The signing key is generated for that instance and is destroyed once the signature has been created. This has consequences for revocation and expiration that certificate issuers should consider.</p>
+<p><strong>Revocation</strong></p>
+<p>Revocation serves no purpose for such certificates. The validity of a signature is determined by the status of the certificate at the time of signing, and signing takes place at the time of issuance of the certificate. Any revocation would necessarily take effect after that time and would therefore not affect the validity of the signature. As the private key is destroyed after signing, there is no key that could be compromised and misused to create further signatures. An issuer MAY therefore issue certificates without providing any revocation mechanism.</p>
+<p>A certificate for which no revocation information is provided SHALL include the <code>id-ce-noRevAvail</code> extension defined in [<a href="#rfc9608">RFC9608</a>], so that relying parties do not attempt to obtain revocation information for the certificate. The extension SHALL NOT be marked critical.</p>
+<p><strong>Expiration</strong></p>
+<p>The <code>notAfter</code> field of the certificate validity period indicates the time after which the issuer no longer maintains status information about the certificate. For a certificate that includes the <code>id-ce-noRevAvail</code> extension, no status information is maintained at any time, and the <code>notAfter</code> field therefore has no function. An issuer of such certificates MAY set the <code>notAfter</code> field to the GeneralizedTime value <code>99991231235959Z</code>, which, in accordance with section 4.1.2.5 of [<a href="#rfc5280">RFC5280</a>], indicates that the certificate has no well-defined expiration date.</p>
+<p>A certificate with no well-defined expiration date does not change how the validity of a signature is determined: the signature is validated with respect to the time of signing, established by the time of issuance of the certificate and any proof of existence, such as a time-stamp, applied to the signature. Nor does it extend the validity period of the issuing CA certificate; the conditions under which a CA certificate is trusted after its own validity period has ended are governed by the applicable certificate policy and validation policy, not by this profile.</p>
+<p><a name="normative-references"></a></p>
+<h2 id="3-normative-references">3. Normative References</h2>
+<p><a name="dss"></a>
+<strong>[DSS]</strong></p>
+<blockquote>
+<p><a href="https://docs.oasis-open.org/dss/v1.0/oasis-dss-core-spec-v1.0-os.html">OASIS Standard - Digital Signature Service Core Protocols, Elements, and Bindings Version 1.0, April 11, 2007</a>.</p>
+</blockquote>
+<p><a name="dss-ext"></a>
+<strong>[DSS-Ext]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>.</p>
+</blockquote>
+<p><a name="attrspec"></a>
+<strong>[AttrSpec]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html">Attribute Specification for the Swedish eID Framework.</a></p>
+</blockquote>
+<p><a name="rfc2119"></a>
+<strong>[RFC2119]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc2119">Bradner, S., &quot;Key words for use in RFCs to Indicate Requirement Levels&quot;, BCP 14, RFC 2119, March 1997</a>.</p>
+</blockquote>
+<p><a name="rfc3739"></a>
+<strong>[RFC3739]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc3739">Santesson, S., Nystrom, M., and T. Polk, &quot;Internet X.509 Public Key Infrastructure: Qualified Certificates Profile&quot;, RFC 3739, March 2004</a>.</p>
+</blockquote>
+<p><a name="rfc5280"></a>
+<strong>[RFC5280]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc5280">Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., and
+W. Polk, &quot;Internet X.509 Public Key Infrastructure Certificate and
+Certificate Revocation List (CRL) Profile&quot;, RFC 5280, May 2008</a>.</p>
+</blockquote>
+<p><a name="rfc9608"></a>
+<strong>[RFC9608]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc9608">Housley, R., Hoyland, J. and T. Okubo, &quot;No Revocation Available for X.509 Public Key Certificates&quot;, RFC 9608, June 2024</a>.</p>
+</blockquote>
+<p><a name="rfc7773"></a>
+<strong>[RFC7773]</strong></p>
+<blockquote>
+<p><a href="https://www.rfc-editor.org/rfc/rfc7773">Santesson, S., &quot;Authentication Context Certificate Extension&quot;, RFC 7773, March 2016</a>.</p>
+</blockquote>
+<p><a name="oidc-authn-context"></a>
+<strong>[OIDC.Authn.Context]</strong></p>
+<blockquote>
+<p><a href="https://datatracker.ietf.org/doc/draft-santesson-oidc-cert-auth-context/">Santesson, S. and M. Lindström, &quot;Certificate Authentication Context Type for OpenID Connect&quot;, Internet-Draft draft-santesson-oidc-cert-auth-context</a>.</p>
+</blockquote>
+<p><a name="openid-core"></a>
+<strong>[OpenID.Core]</strong></p>
+<blockquote>
+<p><a href="https://openid.net/specs/openid-connect-core-1_0.html">Sakimura, N., Bradley, J., Jones, M., de Medeiros, B. and C. Mortimore, &quot;OpenID Connect Core 1.0&quot;, August 2015</a>.</p>
+</blockquote>
+<p><a name="oidc-sweden-claims"></a>
+<strong>[OIDC.Sweden.Claims]</strong></p>
+<blockquote>
+<p><a href="https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html">Claims and Scopes Specification for the Swedish OpenID Connect Profile - Version 1.0</a>.</p>
+</blockquote>
+<p><a name="oidc-claims"></a>
+<strong>[OIDC.Claims]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Claims_and_Scopes_Specification.html">OpenID Connect Claims and Scopes Specification for Sweden Connect</a>.</p>
+</blockquote>
+<p><a name="eu-pol-ncp"></a>
+<strong>[EU-POL-NCP]</strong></p>
+<blockquote>
+<p>ETSI EN 319 411-1, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 1: General requirements.</p>
+</blockquote>
+<p><a name="eu-pol-qc"></a>
+<strong>[EU-POL-QC]</strong></p>
+<blockquote>
+<p>ETSI EN 319 411-2, Electronic Signatures and Infrastructures (ESI); Policy and security requirements for Trust Service Providers issuing certificates; Part 2: Requirements for trust service providers issuing EU qualified certificates.</p>
+</blockquote>
+<p><a name="eu-cert-gen"></a>
+<strong>[EU-CERT-GEN]</strong></p>
+<blockquote>
+<p>ETSI EN 319 412-1, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 1: Overview and common data structures.</p>
+</blockquote>
+<p><a name="eu-cert-np"></a>
+<strong>[EU-CERT-NP]</strong></p>
+<blockquote>
+<p>ETSI EN 319 412-2, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 2: Certificate profile for certificates issued to natural persons.</p>
+</blockquote>
+<p><a name="eu-cert-qc"></a>
+<strong>[EU-CERT-QC]</strong></p>
+<blockquote>
+<p>ETSI EN 319 412-5, Electronic Signatures and Infrastructures (ESI); Certificate Profiles; Part 5: QCStatements.</p>
+</blockquote>
+<p><a name="skv704"></a>
+<strong>[SKV704]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv704-8.pdf">Skatteverket, SKV 704 utgåva 8, Personnummer, September 2007</a>.</p>
+</blockquote>
+<p><a name="skv707"></a>
+<strong>[SKV707]</strong></p>
+<blockquote>
+<p><a href="https://docs.swedenconnect.se/technical-framework/mirror/skv/skv707-2.pdf">Skatteverket, SKV 707, Utgåva 2, Samordningsnummer</a>.</p>
+</blockquote>
+<p><a name="changes-between-versions"></a></p>
+<h2 id="4-changes-between-versions">4. Changes between versions</h2>
+<p><strong>Changes between version 1.2 and version 1.3:</strong></p>
+<ul class="list">
+<li><p>Editorial revision: corrected section numbering, broken reference links and the namespace prefix in the example of section 2.3.2.1; added citations of [<a href="#rfc3739">RFC3739</a>], [<a href="#skv704">SKV704</a>] and [<a href="#skv707">SKV707</a>], which were listed but not cited; updated RFC reference links; language improvements throughout.</p>
+</li>
+<li><p>Section 2.3.1.1.2, &quot;Data Format&quot;: a Swedish coordination number (samordningsnummer) stored with a semantics identifier now uses the local national identity type reference &quot;CN:SE&quot; instead of &quot;PNO&quot;, so that personal identity numbers and coordination numbers can be distinguished without analysing the identifier format. &quot;PNO&quot; is retained for personal identity numbers (personnummer).</p>
+</li>
+<li><p>Section 2.3.1.1.2, &quot;Data Format&quot;: the name registration authority identifier for the local identity type references &quot;PI:SE&quot; and &quot;CN:SE&quot; is now <code>https://id.swedenconnect.se/cert/name-registration-authority</code>. The previous identifier <code>http://id.elegnamnden.se/eln/name-registration-authority</code> is deprecated but remains valid.</p>
+</li>
+<li><p>Support for signers authenticated using OpenID Connect was added. Section 2.3.2 was restructured: the Authentication Context extension now carries either SAML Authentication Context Information (SACI) or OpenID Connect Authentication Context Information (OACI), depending on the protocol used to authenticate the signer, and the extension SHALL NOT be marked critical. The SACI requirements were moved to section 2.3.2.1 (with &quot;Extended Authentication Information&quot; becoming section 2.3.2.1.1) and the OACI requirements were added as section 2.3.2.2.</p>
+</li>
+<li><p>Section 2.3.1.1, &quot;Person Identifier Attributes&quot;, was extended to cover person identifiers obtained from OpenID Connect claims, with the Swedish coordination number listed as a separate identifier.</p>
+</li>
+<li><p>Section 2.3.2.1, &quot;SAML Authentication Context Information&quot;: the requirement that each <code>&lt;saci:AttributeMapping&gt;</code> element include the <code>&lt;saml:AttributeValue&gt;</code> element(s) obtained from the SAML assertion was relaxed from SHALL to MAY, in line with section 3.1.2 of [<a href="#rfc7773">RFC7773</a>], which allows a mapping to identify the SAML attribute by name only without duplicating its value.</p>
+</li>
+<li><p>Section 2.3.1.1.1, &quot;Data Source&quot;: the requirement that the person identifier of a Qualified Certificate be obtained from one of the listed attributes was relaxed from SHALL to SHOULD, aligning it with PKC certificates. Under eIDAS 2 the personal identifier is no longer a standardized part of the minimum data set and may be any identifier attribute defined by the applicable PID rulebook, so the profile no longer restricts the source of the identifier to the listed attributes and claims.</p>
+</li>
+<li><p>Section 2.4, &quot;Revocation and Expiration&quot;, was added. It explains why revocation serves no purpose for certificates issued for a single instance of signing, and allows issuers to omit revocation support, indicated by the <code>id-ce-noRevAvail</code> extension of [<a href="#rfc9608">RFC9608</a>], and to issue such certificates without a well-defined expiration date.</p>
+</li>
+</ul>
+<p><strong>Changes between version 1.1 and version 1.2:</strong></p>
+<ul class="list">
+<li><p>Update of logotype, fixes of typos and reference list.</p>
+</li>
+<li><p>Section 2.3.2.1, &quot;Extended Authentication Information&quot;, was added.</p>
+</li>
+</ul>
+<p><strong>Changes between version 1.0 and version 1.1:</strong></p>
+<ul class="list">
+<li>Removed the requirement to store &quot;personnummer&quot; or &quot;samordningsnummer&quot;.</li>
+<li>Updated standards references to remove old deprecated standards and replace them with the currently published documents.</li>
+<li>Specified optional support for using semantics identifiers in accordance with ETSI EN 319 412-1 to specify that the serialNumber attribute contains a Swedish &quot;personnummer&quot; or &quot;samordningsnummer&quot;, Provisional ID or eIDAS person identifier.</li>
+<li>Added requirement to specify ETSI policy identifiers.</li>
+<li>Fix of invalid links for SKV704 and SKV707.</li>
+</ul>
+    </article>
+  </body>
+</html>

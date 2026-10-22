@@ -191,6 +191,7 @@ The following category codes are defined:
 | **regpolicy** | Registration policy. For representing policies describing how an entity joined the federation. |
 | **csig** | Central Signing Service – Identifiers used by the central signing service infrastructure. |
 | **auth-cont** | Authentication context information schema. |
+| **cert** | Certificate identifiers. |
 | **status** | SAML Protocol status codes. |
 | **sig-status** | Sign response status codes. |
 | **eidas** | Identifiers used for integration with the eIDAS Framework. |
@@ -421,8 +422,9 @@ Status code identifiers for the DSS Extension for Central Signing services. The 
 Some protocols require a URI identifier to uniquely identify the entity responsible for a particular namespace.
 
 | **URL** | **Object** | **Reference** |
-| :--- | :--- | :--- |
-| `http://id.elegnamnden.se/eln/name-registration-authority` | Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+| :--- |:--- |:--- |
+| `http://id.elegnamnden.se/`<br/>`eln/name-registration-authority` | Deprecated: Identifying the Swedish e-Identification Board<sup>*</sup> as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+| `https://id.swedenconnect.se/`<br/>`cert/name-registration-authority` | Identifying Sweden Connect as name registration authority, responsible for a particular namespace. | \[[SC.Cert.Profile](#sc-cert-profile)\] |
 
 > \[*\]: This also covers the Swedish Agency for Digital Government (Digg) which has overtaken the Swedish E-identification Board's assignments.
 
@@ -612,7 +614,7 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="ietf-cert-authn-context-for-oidc"></a>
 **\[OIDC.Authn.Context\]**
-> [Certificate Authentication Context Type for OpenID Connect](https://www.ietf.org/archive/id/draft-santesson-oidc-cert-auth-context-00.html).
+> [Santesson, S. and M. Lindström, "Certificate Authentication Context Type for OpenID Connect", Internet-Draft draft-santesson-oidc-cert-auth-context](https://datatracker.ietf.org/doc/draft-santesson-oidc-cert-auth-context/).
 
 <a name="sc-saml-profile"></a>
 **\[SC.SAML.Profile\]**
@@ -682,6 +684,10 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 - Introduced section 3.1.10, OpenID Federation Identifiers, where identifiers used within Sweden Connect OpenID Federation are defined.
 
 - The `urn:ietf:params:x509-auth-context:oidc` identifier was added to section 3.1.6.
+
+- The URL prefix `cert`, for certificate identifiers, was added to the list of URL prefixes in section 3.1.
+
+- Section 3.1.8, "Name Registration Authorities", was extended with the identifier `https://id.swedenconnect.se/cert/name-registration-authority`, identifying Sweden Connect as name registration authority. It replaces `http://id.elegnamnden.se/eln/name-registration-authority`, which is now deprecated.
 
 **Changes between version 1.7 and version 1.8:**
 
