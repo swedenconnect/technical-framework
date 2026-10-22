@@ -148,7 +148,7 @@ Sweden Connect apply:
 - [Sweden Connect – Security Requirements 1.0](https://docs.swedenconnect.se/federation/security-requirements.html)
 - [Sweden Connect – OpenID Federation Structure](https://docs.swedenconnect.se/federation/oidf-structure.html)
 - [Sweden Connect – OpenID Connect Metadata Requirements 1.0](https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html)
-- [Tekniska anslutningsregler för Sweden Connects SAML-federation](https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html), [Registration Rules for the Sweden Connect SAML Federation](https://docs.swedenconnect.se/technical-framework/Registration_rules_for_SAML.html)  – SAML only.
+- [Tekniska anslutningsregler för Sweden Connects SAML-federation](https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html), [Registration Rules for the Sweden Connect SAML Federation](https://docs.swedenconnect.se/technical-framework/Registration_rules_for_SAML.html).
 
 ---
 
