@@ -6,9 +6,9 @@
 <img align="center" src="img/transparent.png"></img>
 </p>
 
-# Sweden Connect - Registry for identifiers
+# Sweden Connect – Registry for identifiers
 
-### Version 1.9 – 2026-10-21 – Draft
+### Version 1.9 – 2026-10-22
 
 Registration number: **2019-309**
 
@@ -253,9 +253,9 @@ defined below:
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa2-nonresident` | A URI that is indented to be used by a level 2-certified providers that authenticate a non-resident eID holder according to assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa3-nonresident` | A URI that is indented to be used by a level 3-certified providers that authenticate a non-resident eID holder according to assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`loa4-nonresident` | A URI that is indented to be used by a level 4-certified providers that authenticate a non-resident eID holder according to assurance level 4 - `http://id.elegnamnden.se/loa/1.0/loa4`. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/loa2-nonresident` | A URI that is indented to be used by a level 2-certified providers that authenticate a non-resident eID holder according to assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/loa3-nonresident` | A URI that is indented to be used by a level 3-certified providers that authenticate a non-resident eID holder according to assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/loa4-nonresident` | A URI that is indented to be used by a level 4-certified providers that authenticate a non-resident eID holder according to assurance level 4 - `http://id.elegnamnden.se/loa/1.0/loa4`. | This document |
 
 **Note:** An Identity Provider, or OpenID Provider, that includes any of the above URIs in an issued assertion/ID Token, MUST NOT provide the Swedish personal identity number as an identity attribute/claim. 
 This is per definition since these URIs are intended to be used for non-residents (i.e., they do not hold a Swedish identity number).
@@ -267,16 +267,16 @@ The assurance levels defined in section [3.1.1](#authentication-context-uris) ma
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
-| `http://id.swedenconnect.se/loa/1.0/`<br/>`uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/uncertified-loa2` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 2 - `http://id.elegnamnden.se/loa/1.0/loa2`. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/uncertified-loa3` | URI that is indented to be used by uncertified providers that make a self declaration of providing an assurance level comparable to Assurance level 3 - `http://id.elegnamnden.se/loa/1.0/loa3`. | This document |
 
 Proxy providers that have eIDAS authentication as an option MUST NOT use the eIDAS authentication context URIs defined in section [3.1.1](#authentication-context-uris), instead they should use:
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-low` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-low` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` in an assertion from the official Swedish eIDAS-connector. | This document |
-| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-sub` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-sub` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` in an assertion from the official Swedish eIDAS-connector. | This document |
-| `http://id.swedenconnect.se/loa/1.0/`<br />`uncertified-eidas-high` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-high` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/uncertified-eidas-low` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-low` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-low` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/uncertified-eidas-sub` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-sub` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-sub` in an assertion from the official Swedish eIDAS-connector. | This document |
+| `http://id.swedenconnect.se/`<br/>`loa/1.0/uncertified-eidas-high` | Should be used if a proxy IdP receives `http://id.elegnamnden.se/loa/1.0/eidas-high` or `http://id.elegnamnden.se/loa/1.0/eidas-nf-high` in an assertion from the official Swedish eIDAS-connector. | This document |
 
 <a name="attribute-sets"></a>
 #### 3.1.2. Attribute Sets
@@ -285,12 +285,12 @@ Identifiers for attribute sets defined in the Sweden Connect SAML Attribute Spec
 
 | **Identifier** | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- | :--- |
-| ELN-AP-Pseudonym-01  | `http://id.elegnamnden.se/ap/1.0/pseudonym-01` | Pseudonym identity attribute set.  | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
-| ELN-AP-NaturalPerson-01 | `http://id.elegnamnden.se/ap/1.0/natural-person-01` | Personal identity without civic registration number attribute set. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
-| ELN-AP-Pnr-01 | `http://id.elegnamnden.se/ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
-| ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/ap/1.0/org-person-01` | Organizational identity attribute set. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
-| ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
-| DIGG-AP-HSAid-01 | `http://id.swedenconnect.se/ap/1.0/hsaid-01` | Natural Person Identity with HSA-ID | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
+| ELN-AP-Pseudonym-01  | `http://id.elegnamnden.se/`<br/>`ap/1.0/pseudonym-01` | Pseudonym identity attribute set.  | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
+| ELN-AP-NaturalPerson-01 | `http://id.elegnamnden.se/`<br/>`ap/1.0/natural-person-01` | Personal identity without civic registration number attribute set. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
+| ELN-AP-Pnr-01 | `http://id.elegnamnden.se/`<br/>`ap/1.0/pnr-01` | Personal identity with civic registration number attribute set. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
+| ELN-AP-OrgPerson-01 | `http://id.elegnamnden.se/`<br/>`ap/1.0/org-person-01` | Organizational identity attribute set. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
+| ELN-AP-eIDAS-NatPer-01 | `http://id.elegnamnden.se/`<br/>`ap/1.0/eidas-natural-person-01` | Natural person identity for the eIDAS Framework. | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
+| DIGG-AP-HSAid-01 | `http://id.swedenconnect.se/`<br/>`ap/1.0/hsaid-01` | Natural Person Identity with HSA-ID | \[[SC.SAML.Attrs](#sc-saml-attrs)\] |
 
 <a name="entity-category-identifiers"></a>
 #### 3.1.3. Entity Category Identifiers
@@ -383,11 +383,11 @@ Identifiers used in the protocol for requesting services form a central signing 
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/csig/1.0/dss-ext/ns` | **Deprecated**. XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
-| `http://id.elegnamnden.se/csig/1.0/eid2-dss/profile` | **Deprecated**. Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
-| `http://id.elegnamnden.se/csig/1.1/dss-ext/ns` | XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.1). | \[[SC.DSS.Ext](#sc-dss-ext)\] |
-| `http://id.elegnamnden.se/csig/1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.elegnamnden.se/csig/1.1/sap/ns` | XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension | \[[SC.SAP](#sc-sap)\] |
+| `http://id.elegnamnden.se/csig/`<br/>`1.0/dss-ext/ns` | **Deprecated**. XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
+| `http://id.elegnamnden.se/csig/`<br/>`1.0/eid2-dss/profile` | **Deprecated**. Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.0). |  |
+| `http://id.elegnamnden.se/csig/`<br/>`1.1/dss-ext/ns` | XML schema name space for the protocol extensions to the OASIS DSS protocol (version 1.1). | \[[SC.DSS.Ext](#sc-dss-ext)\] |
+| `http://id.elegnamnden.se/csig/`<br/>`1.1/dss-ext/profile` | Implementation profile identifier for the protocol extensions to the OASIS DSS protocol (version 1.1). | \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.elegnamnden.se/csig/`<br/>`1.1/sap/ns` | XML schema name space for the Signature Activation Protocol, extending version 1.1 of the DSS protocol extension | \[[SC.SAP](#sc-sap)\] |
 
 <a name="authentication-context"></a>
 #### 3.1.6. Authentication Context
@@ -396,9 +396,9 @@ Identifiers associated with the Authentication Context X.509 extension
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/auth-cont/1.0/saci` | XML schema namespace for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[RFC7773](#rfc7773)\] |
+| `http://id.elegnamnden.se/`<br/>`auth-cont/1.0/saci` | XML schema namespace for SAML Authentication Context Information in the Authentication Context X.509 certificate extension | \[[RFC7773](#rfc7773)\] |
 | `urn:ietf:params:x509-auth-context:oidc` | Context type identifier for an AuthenticationContext carrying OpenID Connect Authentication Context Information. | \[[OIDC.Authn.Context](#ietf-cert-authn-context-for-oidc)\] |
-| `http://id.swedenconnect.se/auth-cont/1.0/ext-auth-info` | XML schema namespace for Extended Authentication Information in the Authentication Context X.509 certificate extension | \[[SC.Cert.Profile](#sc-cert-profile)\] |
+| `http://id.swedenconnect.se/`<br/>`auth-cont/1.0/ext-auth-info` | XML schema namespace for Extended Authentication Information in the Authentication Context X.509 certificate extension | \[[SC.Cert.Profile](#sc-cert-profile)\] |
 
 
 <a name="sign-response-status-codes"></a>
@@ -408,13 +408,13 @@ Status code identifiers for the DSS Extension for Central Signing services. The 
 
 | **URL** | **Object** | **Reference** |
 | :--- | :--- | :--- |
-| `http://id.elegnamnden.se/sig-status/1.0/req-expired` | The time window for the signature request has expired. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.elegnamnden.se/sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.elegnamnden.se/sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.elegnamnden.se/sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.elegnamnden.se/sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.swedenconnect.se/sig-status/1.1/authn-failed` | The authentication during the signature operation failed. |  \[[SC.DSS.Profile](#sc-dss-profile)\] |
-| `http://id.swedenconnect.se/sig-status/1.1/security-violation` | The Signature Service, or Identity Provider authenticating the end user, has detected a security violation (such as a possible fraud). |  \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.elegnamnden.se/`<br/>`sig-status/1.0/req-expired` | The time window for the signature request has expired. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.elegnamnden.se/`<br/>`sig-status/1.0/user-mismatch` | The authenticated user does not match the signer identity attributes in the request. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.elegnamnden.se/`<br/>`sig-status/1.0/unsupported-loa` | The requested level of assurance for user authentication is not supported. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.elegnamnden.se/`<br/>`sig-status/1.0/sigmessage-error` | A requirement to display sign message was included in the sign request, but the sign service could not establish that the sign message was displayed to the user. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.elegnamnden.se/`<br/>`sig-status/1.0/user-cancel` | The end user cancelled the signature operation. | \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.swedenconnect.se/`<br/>`sig-status/1.1/authn-failed` | The authentication during the signature operation failed. |  \[[SC.DSS.Profile](#sc-dss-profile)\] |
+| `http://id.swedenconnect.se/`<br/>`sig-status/1.1/security-violation` | The Signature Service, or Identity Provider authenticating the end user, has detected a security violation (such as a possible fraud). |  \[[SC.DSS.Profile](#sc-dss-profile)\] |
 
 <a name="name-registration-authorities"></a>
 #### 3.1.8. Name Registration Authorities
@@ -447,7 +447,11 @@ where `{country-code}` is the country identifier in ISO 3166-1 alpha-2 format \[
 <a name="eidas-connector-aliases"></a>
 ##### 3.1.9.2. eIDAS Connector Aliases
 
-A Swedish Identity Provider that delivers authentication services to eIDAS, via the Swedish eIDAS Proxy Service, will receive the entityID of the Service Provider from another country that has requested user authentication in a `<saml2p:RequesterID>` element of the authentication request. Along with this information, the Swedish Proxy Service will also include another `RequesterID` element that holds the "eIDAS Connector alias" URI, telling from which country the requesting Service Provider resides.
+A Swedish SAML Identity Provider, or OpenID Provider, that delivers authentication services to eIDAS, via the Swedish eIDAS Proxy Service, will receive the identifier of the Service Provider from another country that has requested user authentication, along with an "eIDAS Connector alias" URI telling in which country the requesting Service Provider resides.
+
+For SAML, the entityID of the Service Provider is delivered in a `<saml2p:RequesterID>` element of the authentication request, and the eIDAS Connector alias is delivered in another `RequesterID` element.
+
+For OpenID Connect, both identifiers are delivered in the `https://id.oidc.se/param/originalClientId` authentication request parameter, see Section 2.3.1 of \[[OIDC.Sweden.ReqPar](#oidc-sweden-reqpar)\]. The parameter value holds the identifier of the Service Provider followed by the eIDAS Connector alias, separated by a semicolon (`;`).
 
 The format of this alias is as follows:
 
@@ -650,7 +654,11 @@ Object Identifier Registry for Sweden Connect<sup>*</sup>
 
 <a name="sc-cert-profile"></a>
 **\[SC.Cert.Profile\]**
-> [Certificate profile for certificates issued by Central Signing services](https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html)
+> [Certificate profile for certificates issued by Central Signing services](https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html).
+
+<a name="oidc-sweden-reqpar"></a>
+**\[OIDC.Sweden.ReqPar\]**
+> [Authentication Request Parameter Extensions for the Swedish OpenID Connect Profile – Version 1.1](https://www.oidc.se/specifications/request-parameter-extensions-1_1.html).
 
 <a name="sc-oidf-rules"></a>
 **\[SC.OIDF.Rules\]**
