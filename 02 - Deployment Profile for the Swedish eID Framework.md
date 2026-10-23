@@ -121,12 +121,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <a name="introduction"></a>
 ## 1. Introduction
 
-This profile specifies behaviour and options that deployments of the SAML
-V2.0 Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)\], and the SAML V2.0 Holder-of-key
-Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\],
-are required or permitted to rely on. The requirements specified in this profile
-are in addition to the underlying normative requirements of \[[SAML2Prof](#saml2prof)\]
-and \[[SAML2HokProf](#saml2hokprof)\] (including updates to these specifications provided by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
+This profile specifies behaviour and options that deployments of the SAML V2.0 Web Browser SSO Profile, \[[SAML2Prof](#saml2prof)\], and the SAML V2.0 Holder-of-key Web Browser SSO Profile, \[[SAML2HokProf](#saml2hokprof)\], are required or permitted to rely on. The requirements specified in this profile are in addition to the underlying normative requirements of \[[SAML2Prof](#saml2prof)\] and \[[SAML2HokProf](#saml2hokprof)\] (including updates to these specifications provided by \[[SAML v2.0 Errata 05](#saml2errata05)\]).
 
 > Note: The profile is influenced by, but not normatively dependent on, [SAML2Int](https://kantarainitiative.github.io/SAMLprofiles/saml2int.html).
 

@@ -118,7 +118,6 @@ Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvalt
    
 4. [**Versioner av detta dokument**](#versioner-av-detta-dokument)
 
-    
 <a name="introduktion"></a>
 ## 1. Introduktion
 

@@ -8,7 +8,7 @@
 
 # Certificate Profile for Certificates Issued by Central Signing Services
 
-### Version 1.3 – 2026-10-21 – Draft
+### Version 1.3 – 2026-10-21
 
 Registration number: **2019-313** (*previously: ELN-0608*)
 

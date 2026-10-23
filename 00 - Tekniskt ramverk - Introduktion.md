@@ -14,6 +14,7 @@ Diarienummer: **2019-267**
 
 ---
 
+
 <p class="copyright-statement">
 Copyright &copy; <a href="https://www.digg.se">Myndigheten för digital förvaltning (Digg)</a>, 2015-2026.
 </p>
