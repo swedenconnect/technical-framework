@@ -352,6 +352,7 @@ Entities compliant with this profile MUST adhere to \[[SC.Security](#sc-security
 **\[SC.SAML.Profile\]**
 > [Deployment Profile for the Swedish eID Framework](https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html).
 
+
 <a name="changes-between-versions"></a>
 ## 6. Changes between versions
 

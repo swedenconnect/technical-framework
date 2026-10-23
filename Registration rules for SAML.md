@@ -118,7 +118,6 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
    
 4. [**Document History**](#document-history)
 
-    
 <a name="introduction"></a>
 ## 1. Introduction
 

@@ -8,7 +8,7 @@
 
 #  Implementation Profile for using OASIS DSS in Central Signing Services
 
-### Version 1.7 - 2026-09-28 - Draft
+### Version 1.7 – 2026-10-23
 
 Registration number: **2019-312**
 

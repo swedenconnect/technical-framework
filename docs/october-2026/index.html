@@ -28,17 +28,16 @@
   <hr>
   <p>
     This is the October 2026 version of the Sweden Connect Framework. It replaces the previous
-    December 2024 release as the official version for the Sweden Connect Framework.
+    December 2024 release as the official version of the Sweden Connect Framework.
   </p>
-  <h3 id="changes-since-last-version">Changes since last version</h3>
-  <p>Below follows a listing of all significant changes since the December 2024 release of the Sweden Connect
-    Framework.</p>
+  <h3 id="changes-since-last-version">Changes since the last version</h3>
+  <p>Below is a list of significant changes since the December 2024 release of the Sweden Connect Framework.</p>
   <ul class="list">
     <li>
       Changes to <a href="OpenID_Connect_Profile_for_Sweden_Connect.html">OpenID Connect Profile for Sweden Connect</a>:
       <ul class="list">
         <li>
-        Section 2.4, "Signature Extension Support", was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in <a href="https://www.oidc.se/specifications/oidc-signature-extension-1_2.html">Signature Extension for OpenID Connect - Version 1.2</a>.
+        Section 2.4, "Signature Extension Support", was added. It defines the requirements for OpenID Provider support of the Signature Extension specified in <a href="https://www.oidc.se/specifications/oidc-signature-extension-1_2.html">Signature Extension for OpenID Connect – Version 1.2</a>.
         </li>
         <li>
           In Section 2.2.1, the requirement that an OP MUST treat a request without a `prompt` parameter as a request where `login` is supplied was changed to a recommendation. The reason for this is to avoid breaking existing implementations.
@@ -60,6 +59,15 @@
       </ul>
     </li>
     <li>
+      The specification <a href="https://docs.swedenconnect.se/federation/security-requirements.html">Sweden Connect – Security Requirements 1.0</a> was introduced. This specification defines security requirements for participants in the Sweden Connect identity federation. It establishes baseline requirements for transport protection, cryptographic algorithms, key lengths, and key rollover that apply to both the SAML and the OpenID Connect parts of the federation.
+    </li>
+    <li>
+      The specification <a href="https://docs.swedenconnect.se/federation/oidf-rules.html">Sweden Connect – OpenID Federation Rules and Policies 1.0</a> was introduced. This document states the rules and policies of the Sweden Connect OpenID Connect federation.
+    </li>
+    <li>
+      The signature specifications <a href="09_-_DSS_Extension_for_Federated_Signing_Services.html">DSS Extension for Federated Central Signing Services</a>, <a href="07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html">Implementation Profile for using OASIS DSS in Central Signing Services</a> and <a href="08_-_Certificate_Profile_for_Central_Signing_Services.html">Certificate Profile for Certificates Issued by Central Signing Services</a> were updated to support OpenID Connect as an authentication scheme during a signature operation.
+    </li>
+    <li>
       The specification "Implementation Profile for BankID Identity Providers within the Swedish eID Framework" was removed from the Technical Framework.
     </li>
   </ul>
@@ -68,28 +76,28 @@
     that particular specification.
   </p>
   <p>
-    For a detailed list of changes you can view all changes in GitHub using this link: <a
-      href="https://github.com/swedenconnect/technical-framework/compare/january-2020...november-2021">https://github.com/swedenconnect/technical-framework/compare</a>.
+    For a detailed list of changes, see GitHub: <a href="https://github.com/swedenconnect/technical-framework/compare/december-2024...october-2026">https://github.com/swedenconnect/technical-framework/compare</a>.
   </p>
 
-  <h3 id="introduction">Introduction</h3>
-  <p>Overview that describes the different parts of the Sweden Connect Framework.</p>
-  <blockquote>
-    <p>
-      <a href="00_-_Tekniskt_ramverk_-_Introduktion.html">En introduktion till Sweden Connect Tekniskt ramverk</a> – In
-      Swedish
-    </p>
-    <p>
-      <a href="00_-_Swedish_eID_Framework_-_Introduction.html">Introduction to the Sweden Connect Technical
-        Framework</a> – In English
-    </p>
-  </blockquote>
-  <h3 id="specifications">Specifications</h3>
+  <h3 id="overview">Common Publications</h3>
   <ul class="list">
+    <li>
+      <a href="00_-_Tekniskt_ramverk_-_Introduktion.html"><strong>En introduktion till Sweden Connect Tekniskt ramverk</strong></a> – In
+      Swedish
+    </li>
+    <li>
+      <a href="00_-_Swedish_eID_Framework_-_Introduction.html"><strong>Introduction to the Sweden Connect Technical Framework</strong></a> – In English
+    </li>
     <li>
       <a href="03_-_Registry_for_Identifiers.html"><strong>Sweden Connect – Registry for Identifiers</strong></a> –
       version 1.9
     </li>
+    <li>
+      <a href="https://docs.swedenconnect.se/federation/security-requirements.html"><strong>Sweden Connect – Security Requirements 1.0</strong></a>
+    </li>
+  </ul>
+  <h3 id="saml-specifications">SAML Specifications</h3>
+  <ul class="list">
     <li>
       <a href="02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html"><strong>Deployment Profile for the Swedish
         eID Framework</strong></a> – version 1.9
@@ -114,6 +122,9 @@
       <a href="18_-_User_Message_Extension_in_SAML_Authentication_Requests.html"><strong>User Message Extension in SAML
         Authentication Requests</strong></a> – version 1.0
     </li>
+  </ul>
+  <h3 id="oidc-specifications">OpenID Connect Specifications</h3>
+  <ul class="list">
     <li>
       <a href="OpenID_Connect_Profile_for_Sweden_Connect.html"><strong>OpenID Connect Profile for Sweden Connect</strong></a> – version 1.1
     </li>
@@ -121,6 +132,15 @@
       <a href="OpenID_Connect_Claims_and_Scopes_Specification.html"><strong>OpenID Connect Claims and Scopes Specification for
         Sweden Connect</strong></a> – version 1.1
     </li>
+    <li>
+      <a href="https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html"><strong>Sweden Connect – OpenID Connect Metadata Requirements</strong></a> – version 1.0
+    </li>
+    <li>
+      <a href="https://docs.swedenconnect.se/federation/oidf-rules.html"><strong>Sweden Connect – OpenID Federation Rules and Policies 1.0</strong></a> – version 1.0
+    </li>
+  </ul>
+  <h3 id="sig-specifications">Signature Specifications</h3>
+  <ul class="list">
     <li>
       <a href="07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html"><strong>Implementation
         Profile for using DSS in Central Signing Services</strong></a> – version 1.7

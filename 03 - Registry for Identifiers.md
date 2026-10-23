@@ -87,9 +87,7 @@ Copyright &copy; <a href="https://www.digg.se">The Swedish Agency for Digital Go
 <a name="background"></a>
 ## 1. Background
 
-The implementation of a Swedish infrastructure for electronic
-identification and electronic signature requires various types of
-identifiers to represent objects in protocols and data structures.
+The implementation of a Swedish infrastructure for electronic identification and electronic signature requires various types of identifiers to represent objects in protocols and data structures.
 
 This document defines the structure for identifiers assigned by the Sweden Connect Framework and provides a registry for assigned identifiers.
 

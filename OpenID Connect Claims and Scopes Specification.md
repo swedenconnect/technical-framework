@@ -336,6 +336,7 @@ This appendix lists how the eIDAS attributes for natural persons defined in Sect
 > Also see Section 3.3.3 of \[[SAML.SC.Attributes](#saml-sc-attributes)\] where a corresponding mapping between eIDAS attributes and Sweden Connect SAML attributes is presented.
 
 
+
 | eIDAS attribute | Claim | Reference |
 | :--- | :--- | :--- |
 | `http://eidas.europa.eu/attributes/`<br />`naturalperson/PersonIdentifier` - PersonIdentifier | `http://eidas.europa.eu/attributes/`<br />`naturalperson/PersonIdentifier` | Section [2.1.6](#eidas-person-identifier) of this specification and \[[eIDAS.Attributes](#eidas-attr)\] |

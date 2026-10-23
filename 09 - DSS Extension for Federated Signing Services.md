@@ -8,7 +8,7 @@
 
 # DSS Extension for Federated Central Signing Services
 
-### Version 1.6 - 2026-09-28 - Draft
+### Version 1.6 – 2026-10-23
 
 Registration number: **2019-314**
 
@@ -116,7 +116,7 @@ When these words are not capitalized, they are meant in their natural-language s
 <a name="structure"></a>
 #### 1.1.2. Structure
 
-This specification uses the following typographical conventions in text: `<ThisSpecifictionElements>`, `<ns:ForeignElement>`, Attribute, **Datatype**, OtherCode.
+This specification uses the following typographical conventions in text: `<ThisSpecElement>`, `<ns:ForeignElement>`, Attribute, **Datatype**, OtherCode.
 
 Listings of DSS schemas appear like this.
 
@@ -314,13 +314,13 @@ The `<SignRequestExtension>` element allows a requesting service to add essentia
 
 > An identifier of the signature algorithm the requesting service prefers when generating the requested signature.
 
-`<SignMessage>` \[Optional\]
-
-> Optional sign message with information to the Signer about the requested signature.
-
 `<CertRequestProperties>` \[Optional\]
 
 > An optional set of requested properties of the signature certificate that is generated as part of the signature process.
+
+`<SignMessage>` \[Optional\]
+
+> Optional sign message with information to the Signer about the requested signature.
 
 `<OtherRequestInfo>` \[Optional\]
 
@@ -370,6 +370,8 @@ The **CertRequestPropertiesType** complex type has the following attributes and 
 > A Signature Service MUST NOT issue signature certificates or generate the requested signature unless the authentication process used to authenticate the requested Signer meets one of the requested values expressed in this element. 
 >
 > If this element is absent, the locally configured policy of the Signature Service is assumed. This can either mean that the Signature Service includes one or more locally configured identifiers in the authentication request issued to authenticate the user, or that an authentication request with no requirements for requested authentication context class reference is used.
+>
+> Even though this element is a SAML element, it is used for any authentication scheme, including OpenID Connect.
 >
 > **Note:** If more than one identifier is given, the `Version` attribute of the `SignRequestExtension` element MUST be set to "1.4" or higher. Implementations prior to version 1.4 of this specification assume that this element may only contain one identifier.
 
@@ -1010,7 +1012,7 @@ is referenced from the signature and whose content has to be modified as
 part of the certificate and signature generation process. Handling of
 this data in the signature generation process MAY be affected by
 rules identified by the `ProcessingRules`, `SigType` and `AdESType` attributes
-of the parent `<SignatureInputObjects>` element.
+of the parent `<SignTaskData>` element.
 
 This complex type has the following elements:
 
@@ -1089,7 +1091,7 @@ signature and MUST check that the signature covers all data in the
 
 <a name="csig-xsd"></a>
 **\[Csig-XSD\]**
-> This specification's DSS Extensions schema Version 1.1.4, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd, August 2026.
+> This specification's DSS Extensions schema Version 1.1.4, https://docs.swedenconnect.se/schemas/csig/1.1/EidCentralSigDssExt-1.1.4.xsd, October 2026.
 
 <a name="dss"></a>
 **\[OASIS-DSS\]**
@@ -1291,7 +1293,7 @@ documentation.
       <xs:element ref="csig:SignService"/>
       <xs:element ref="csig:RequestedSignatureAlgorithm" minOccurs="0"/>
       <xs:element ref="csig:CertRequestProperties" minOccurs="0"/>
-      <xs:element ref="csig:SignMessage" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="csig:SignMessage" minOccurs="0"/>
       <xs:element ref="csig:OtherRequestInfo" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="Version" type="xs:string" default="1.1"/>

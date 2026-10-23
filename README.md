@@ -12,7 +12,7 @@ This repository comprises the specifications for the Sweden Connect Framework.
 
 ### About
 
-The specifications in this branch are the latest development of the Sweden Connect Framework. The latest official release can be found in the [december-2024 branch](https://github.com/swedenconnect/technical-framework/tree/december-2024).
+The specifications in this branch are the latest development of the Sweden Connect Framework. The latest official release can be found in the [october-2026 branch](https://github.com/swedenconnect/technical-framework/tree/october-2026).
 
 ### Feedback and Questions
 
