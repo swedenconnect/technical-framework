@@ -1,0 +1,244 @@
+{
+  "common": {
+    "title": "Sweden Connect Common Publications",
+    "documents": [
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/00_-_Tekniskt_ramverk_-_Introduktion.html",
+        "title": "En introduktion till Sweden Connect Tekniskt ramverk",
+        "version": null,
+        "date": "2026-10-19",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/00_-_Swedish_eID_Framework_-_Introduction.html",
+        "title": "Introduction to the Sweden Connect Technical Framework",
+        "version": null,
+        "date": "2026-10-19",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/03_-_Registry_for_Identifiers.html",
+        "title": "Sweden Connect – Registry for Identifiers",
+        "version": "1.9",
+        "date": "2026-10-22",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/federation/security-requirements.html",
+        "title": "Sweden Connect – Security Requirements 1.0",
+        "version": "1.0",
+        "date": "2026-09-02",
+        "draft": false
+      }
+    ]
+  },
+  "saml": {
+    "title": "Sweden Connect SAML Specifications",
+    "documents": [
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/02_-_Deployment_Profile_for_the_Swedish_eID_Framework.html",
+        "title": "Deployment Profile for the Swedish eID Framework",
+        "version": "1.9",
+        "date": "2026-10-21",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/04_-_Attribute_Specification_for_the_Swedish_eID_Framework.html",
+        "title": "Attribute Specification for the Swedish eID Framework",
+        "version": "1.8",
+        "date": "2024-12-04",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/06_-_Entity_Categories_for_the_Swedish_eID_Framework.html",
+        "title": "Entity Categories for the Swedish eID Framework",
+        "version": "1.9",
+        "date": "2024-12-04",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/11_-_eIDAS_Constructed_Attributes_Specification_for_the_Swedish_eID_Framework.html",
+        "title": "eIDAS Constructed Attributes Specification for the Swedish eID Framework",
+        "version": "1.2",
+        "date": "2021-11-11",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/14_-_Principal_Selection_in_SAML_Authentication_Requests.html",
+        "title": "Principal Selection in SAML Authentication Requests",
+        "version": "1.0",
+        "date": "2020-01-17",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/18_-_User_Message_Extension_in_SAML_Authentication_Requests.html",
+        "title": "User Message Extension in SAML Authentication Requests",
+        "version": "1.0",
+        "date": "2024-12-04",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/Tekniska_anslutningsregler.html",
+        "title": "Tekniska anslutningsregler för Sweden Connects SAML-federation",
+        "version": null,
+        "date": "2026-10-19",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/Registration_rules_for_SAML.html",
+        "title": "Registration Rules for the Sweden Connect SAML Federation",
+        "version": null,
+        "date": "2026-10-19",
+        "draft": false
+      }
+    ]
+  },
+  "oidc": {
+    "title": "Sweden Connect OpenID Connect Specifications",
+    "documents": [
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Profile_for_Sweden_Connect.html",
+        "title": "OpenID Connect Profile for Sweden Connect",
+        "version": "1.1",
+        "date": "2026-10-21",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/OpenID_Connect_Claims_and_Scopes_Specification.html",
+        "title": "OpenID Connect Claims and Scopes Specification for Sweden Connect",
+        "version": "1.1",
+        "date": "2026-10-21",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/federation/oidc-metadata-requirements.html",
+        "title": "Sweden Connect – OpenID Connect Metadata Requirements 1.0",
+        "version": "1.0",
+        "date": "2026-10-22",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/federation/oidf-rules.html",
+        "title": "Sweden Connect – OpenID Federation Rules and Policies 1.0",
+        "version": "1.0",
+        "date": "2026-10-22",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/federation/oidf-structure.html",
+        "title": "Sweden Connect – OpenID Federation Structure",
+        "version": null,
+        "date": "2026-10-22",
+        "draft": false
+      }
+    ],
+    "reference": {
+      "openid": {
+        "title": "Specifications published by OpenID Foundation",
+        "documents": [
+          {
+            "link": "https://openid.net/specs/openid-federation-1_0.html",
+            "title": "OpenID Federation 1.0",
+            "version": "1.0",
+            "date": "2026-02-17",
+            "draft": false
+          }
+        ]
+      },
+      "oidc-sweden": {
+        "title": "Specifications published by OIDC Sweden",
+        "documents": [
+          {
+            "link": "https://www.oidc.se/specifications/swedish-oidc-profile-1_0.html",
+            "title": "The Swedish OpenID Connect Profile",
+            "version": "1.0",
+            "date": "2023-12-11",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/swedish-oidc-claims-specification-1_0.html",
+            "title": "Claims and Scopes Specification for the Swedish OpenID Connect Profile",
+            "version": "1.0",
+            "date": "2023-12-11",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/request-parameter-extensions-1_1.html",
+            "title": "Authentication Request Parameter Extensions for the Swedish OpenID Connect Profile",
+            "version": "1.1",
+            "date": "2024-11-27",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/oidc-signature-extension-1_2.html",
+            "title": "Signature Extension for OpenID Connect",
+            "version": "1.2",
+            "date": "2026-10-18",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/swedish-openid-federation-profile.html",
+            "title": "Swedish OpenID Federation Deployment and Interoperability Profile 1.0",
+            "version": "1.0",
+            "date": "2026-10-16",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/openid-federation-organization-identifier-1_0.html",
+            "title": "OpenID Federation Organization Identifier Metadata Parameter 1.0",
+            "version": "1.0",
+            "date": "2026-10-14",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/openid-federation-registration-policy-1_0.html",
+            "title": "OpenID Federation Registration Policy 1.0",
+            "version": "1.0",
+            "date": "2026-10-16",
+            "draft": false
+          },
+          {
+            "link": "https://www.oidc.se/specifications/openid-federation-hosting-1_0.html",
+            "title": "OpenID Federation Entity Configuration Hosting 1.0",
+            "version": "1.0",
+            "date": "2026-10-14",
+            "draft": false
+          }
+        ]
+      }
+    }
+  },
+  "signature": {
+    "title": "Sweden Connect Signature Specifications",
+    "documents": [
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/07_-_Implementation_Profile_for_using_DSS_in_Central_Signing_Services.html",
+        "title": "Implementation Profile for using DSS in Central Signing Services",
+        "version": "1.7",
+        "date": "2026-10-23",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/08_-_Certificate_Profile_for_Central_Signing_Services.html",
+        "title": "Certificate Profile for Central Signing Services",
+        "version": "1.3",
+        "date": "2026-10-21",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/09_-_DSS_Extension_for_Federated_Signing_Services.html",
+        "title": "DSS Extension for Federated Signing Services",
+        "version": "1.6",
+        "date": "2026-10-23",
+        "draft": false
+      },
+      {
+        "link": "https://docs.swedenconnect.se/technical-framework/latest/13_-_Signature_Activation_Protocol.html",
+        "title": "Signature Activation Protocol",
+        "version": "1.2",
+        "date": "2024-12-04",
+        "draft": false
+      }
+    ]
+  }
+}
